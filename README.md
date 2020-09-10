@@ -209,7 +209,7 @@ c.Now().IsLeapYear() // true
 // 是否是一月
 c.Now().IsJanuary() // false
 // 是否是二月
-c.Now().IsFebruary() // true
+c.Now().IsFebruary() // false
 // 是否是三月
 c.Now().IsMarch() // false
 // 是否是四月
@@ -256,7 +256,8 @@ c.Now().IsFirstDayInMonth() // false
 c.Now().IsLastDayInMonth() // false
 ```
 #### 特殊用法
-###### 在gorm中的应用(gorm.Open时必须包括parseTime=True参数)
+##### 在gorm中的应用
+gorm.Open时必须包括parseTime=True参数
 >假设数据表为users，字段有id、name、age、birthday、created_at、updated_at、deleted_at
 
 ```go
