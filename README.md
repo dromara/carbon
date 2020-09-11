@@ -1,4 +1,4 @@
-carbon 是一个轻量级、语义化、对IDE友好的日期时间处理库，是PHP Carbon库的Golang实现版本，初衷是为了摆脱Golang反人类的2006-01-02 15:04:05格式化时间设计，支持链式调用和gorm结构体
+carbon 是一个轻量级、语义化、对IDE友好的日期时间处理库，是PHP Carbon库的Golang实现版本，初衷是为了摆脱Golang反人类的2006-01-02 15:04:05格式化时间设计，支持链式调用和gorm、xrom等主流orm
 
 github:[github.com/golang-module/carbon](https://github.com/golang-module/carbon "github.com/golang-module/carbon")
 
@@ -258,12 +258,12 @@ c.Now().IsLastDayInMonth() // false
 #### 特殊用法
 ##### 在gorm中的应用
 gorm.Open时必须包括parseTime=True参数
->假设数据表为users，字段有id、name、age、birthday、created_at、updated_at、deleted_at
+>假设数据表为users，字段有id(int)、name(varchar)、age(int)、birthday(date)、created_at(datetime)、updated_at(datetime)、deleted_at(datetime)
 
 ```go
 // 用法一，使用carbon.Model自动维护id、created_at、updated_at、deleted_at
 type User struct {
-	carbon.Model
+	carbon.GormModel
 	Name string `json:"name"`
 	Age int `json:"age"`
 	Birthday carbon.ToDateTimeString `json:"birthday"`
