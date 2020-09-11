@@ -256,12 +256,13 @@ c.Now().IsFirstDayInMonth() // false
 c.Now().IsLastDayInMonth() // false
 ```
 #### 特殊用法
+假设数据表为users，字段有id(int)、name(varchar)、age(int)、birthday(date)、created_at(datetime)、updated_at(datetime)、deleted_at(datetime)
+
 ##### 在gorm中的应用
 gorm.Open时必须包括parseTime=True参数
->假设数据表为users，字段有id(int)、name(varchar)、age(int)、birthday(date)、created_at(datetime)、updated_at(datetime)、deleted_at(datetime)
 
 ```go
-// 用法一，使用carbon.Model自动维护id、created_at、updated_at、deleted_at
+// 用法一，使用carbon.GormModel自动维护id、created_at、updated_at、deleted_at
 type User struct {
 	carbon.GormModel
 	Name string `json:"name"`
@@ -284,7 +285,60 @@ user := User {
     "deleted_at": null
 }
 
-// 用法二，不使用carbon.Model
+// 用法二，不使用carbon.GormModel
+type User struct {
+	Name string `json:"name"`
+	Age int `json:"age"`
+	Birthday carbon.ToDateString `json:"birthday"`
+	CreatedAt carbon.ToDateTimeString `json:"created_at"`
+	UpdatedAt carbon.ToTimeString `json:"updated_at"`
+	DeletedAt carbon.ToTimestamp `json:"deleted_at"`
+}
+user := User {
+    Name: "勾国印"
+    Age: 18
+    Birthday: "2012-09-09 00:00:00"
+}
+// json.Marshal(user)输出
+{
+    "id": 1, 
+    "name": "勾国印", 
+    "age": 18, 
+    "birthday": "2012-09-09", 
+    "created_at": "2020-09-09 12:13:14", 
+    "updated_at": "12:13:14", 
+    "deleted_at": 1599272433
+}
+```
+
+##### 在xorm中的应用
+xorm.NewEngine时必须包括parseTime=True参数
+
+```go
+// 用法一，使用carbon.XormModel自动维护id、created_at、updated_at、deleted_at
+type User struct {
+	carbon.XormModel
+	Name string `json:"name"`
+	Age int `json:"age"`
+	Birthday carbon.ToDateTimeString `json:"birthday"`
+}
+user := User {
+    Name: "勾国印"
+    Age: 18
+    Birthday: "2012-09-09 00:00:00"
+}
+// json.Marshal(user)输出
+{
+    "id": 1, 
+    "name": "勾国印", 
+    "age": 18, 
+    "birthday": "2012-09-09 00:00:00", 
+    "created_at": "2020-09-09 12:13:14", 
+    "updated_at": "2020-09-09 12:13:14", 
+    "deleted_at": null
+}
+
+// 用法二，不使用carbon.XormModel
 type User struct {
 	Name string `json:"name"`
 	Age int `json:"age"`
@@ -311,6 +365,11 @@ user := User {
 ```
 
 #### 更新日志
+##### 2020-09-12
+* 完善单元测试
+* 优化代码组织结构，精简代码
+* 修复数据库中时间类型字段值为null或0000-00-00 00:00:00时，json格式化后为0001-01-01 00:00:00的BUG
+* 新增对xorm结构体的时间格式化支持，支持输出多种标准时间格式
  
 ##### 2020-09-09
 * 修复readme.md错误描述
