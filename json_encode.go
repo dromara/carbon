@@ -15,8 +15,7 @@ func (t ToDateTimeString) MarshalJSON() ([]byte, error) {
 	if !time.Time(t).IsZero() {
 		format = time.Time(t).Format("2006-01-02 15:04:05")
 	}
-	formatted := fmt.Sprintf("\"%s\"", format)
-	return []byte(formatted), nil
+	return []byte(fmt.Sprintf("\"%s\"", format)), nil
 }
 
 func (t ToDateString) MarshalJSON() ([]byte, error) {
@@ -24,8 +23,7 @@ func (t ToDateString) MarshalJSON() ([]byte, error) {
 	if !time.Time(t).IsZero() {
 		format = time.Time(t).Format("2006-01-02")
 	}
-	formatted := fmt.Sprintf("\"%s\"", format)
-	return []byte(formatted), nil
+	return []byte(fmt.Sprintf("\"%s\"", format)), nil
 }
 
 func (t ToTimeString) MarshalJSON() ([]byte, error) {
@@ -33,8 +31,7 @@ func (t ToTimeString) MarshalJSON() ([]byte, error) {
 	if !time.Time(t).IsZero() {
 		format = time.Time(t).Format("15:04:05")
 	}
-	formatted := fmt.Sprintf("\"%s\"", format)
-	return []byte(formatted), nil
+	return []byte(fmt.Sprintf("\"%s\"", format)), nil
 }
 
 func (t ToTimestamp) MarshalJSON() ([]byte, error) {
@@ -42,6 +39,5 @@ func (t ToTimestamp) MarshalJSON() ([]byte, error) {
 	if !time.Time(t).IsZero() {
 		timestamp = time.Time(t).Unix()
 	}
-	formatted := fmt.Sprintf("%d", timestamp)
-	return []byte(formatted), nil
+	return []byte(fmt.Sprintf("%d", timestamp)), nil
 }

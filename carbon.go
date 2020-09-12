@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type carbon struct {
+type Carbon struct {
 	Time time.Time
 	loc  *time.Location
 }
@@ -28,196 +28,196 @@ func format2layout(format string) string {
 }
 
 // New 初始化,设置默认时区
-func New() *carbon {
-	c := &carbon{}
+func New() *Carbon {
+	c := &Carbon{}
 	loc, _ := time.LoadLocation(Local)
 	c.loc = loc
 	return c
 }
 
 // Timezone 设置时区
-func (c *carbon) Timezone(name string) *carbon {
+func (c *Carbon) Timezone(name string) *Carbon {
 	loc, _ := time.LoadLocation(name)
 	c.loc = loc
 	return c
 }
 
 // CreateFromTimestamp 时间戳转时间对象
-func (c *carbon) CreateFromTimestamp(timestamp int64) *carbon {
+func (c *Carbon) CreateFromTimestamp(timestamp int64) *Carbon {
 	c.Time = time.Unix(timestamp, 0)
 	return c
 }
 
 // CreateFromDateTime 年月日时分秒转时间对象
-func (c *carbon) CreateFromDateTime(year int, month time.Month, day int, hour int, minute int, second int) *carbon {
+func (c *Carbon) CreateFromDateTime(year int, month time.Month, day int, hour int, minute int, second int) *Carbon {
 	c.Time = time.Date(year, month, day, hour, minute, second, 0, c.loc)
 	return c
 }
 
 // CreateFromDate 年月日转时间对象
-func (c *carbon) CreateFromDate(year int, month time.Month, day int) *carbon {
+func (c *Carbon) CreateFromDate(year int, month time.Month, day int) *Carbon {
 	c.Time = time.Date(year, month, day, 0, 0, 0, 0, c.loc)
 	return c
 }
 
 // CreateFromTime 时分秒转时间对象
-func (c *carbon) CreateFromTime(hour int, minute int, second int) *carbon {
+func (c *Carbon) CreateFromTime(hour int, minute int, second int) *Carbon {
 	c.Time = time.Date(time.Now().Year(), time.Now().Month(), time.Now().Day(), hour, minute, second, 0, c.loc)
 	return c
 }
 
 // Now 当前
-func (c *carbon) Now() *carbon {
+func (c *Carbon) Now() *Carbon {
 	c.Time = time.Now()
 	return c
 }
 
 // AddYears N年后
-func (c *carbon) AddYears(years int) *carbon {
+func (c *Carbon) AddYears(years int) *Carbon {
 	c.Time = c.Time.AddDate(years, 0, 0)
 	return c
 }
 
 // AddYear 1年后
-func (c *carbon) AddYear() *carbon {
+func (c *Carbon) AddYear() *Carbon {
 	c.Time = c.Time.AddDate(1, 0, 0)
 	return c
 }
 
 // SubYears N年前
-func (c *carbon) SubYears(years int) *carbon {
+func (c *Carbon) SubYears(years int) *Carbon {
 	c.Time = c.Time.AddDate(-years, 0, 0)
 	return c
 }
 
 // SubYear 1年前
-func (c *carbon) SubYear() *carbon {
+func (c *Carbon) SubYear() *Carbon {
 	c.Time = c.Time.AddDate(-1, 0, 0)
 	return c
 }
 
 // AddMonths N月后
-func (c *carbon) AddMonths(months int) *carbon {
+func (c *Carbon) AddMonths(months int) *Carbon {
 	c.Time = c.Time.AddDate(0, months, 0)
 	return c
 }
 
 // AddMonth 1月后
-func (c *carbon) AddMonth() *carbon {
+func (c *Carbon) AddMonth() *Carbon {
 	c.Time = c.Time.AddDate(0, 1, 0)
 	return c
 }
 
 // SubMonths N月前
-func (c *carbon) SubMonths(months int) *carbon {
+func (c *Carbon) SubMonths(months int) *Carbon {
 	c.Time = c.Time.AddDate(0, -months, 0)
 	return c
 }
 
 // SubMonth 减少1月
-func (c *carbon) SubMonth() *carbon {
+func (c *Carbon) SubMonth() *Carbon {
 	c.Time = c.Time.AddDate(0, -1, 0)
 	return c
 }
 
 // AddDays N天后
-func (c *carbon) AddDays(days int) *carbon {
+func (c *Carbon) AddDays(days int) *Carbon {
 	c.Time = c.Time.AddDate(0, 0, days)
 	return c
 }
 
 // AddDay 1天后
-func (c *carbon) AddDay() *carbon {
+func (c *Carbon) AddDay() *Carbon {
 	c.Time = c.Time.AddDate(0, 0, 1)
 	return c
 }
 
 // SubDays N天前
-func (c *carbon) SubDays(days int) *carbon {
+func (c *Carbon) SubDays(days int) *Carbon {
 	c.Time = c.Time.AddDate(0, 0, -days)
 	return c
 }
 
 // SubDay 1天前
-func (c *carbon) SubDay() *carbon {
+func (c *Carbon) SubDay() *Carbon {
 	c.Time = c.Time.AddDate(0, 0, -1)
 	return c
 }
 
 // AddHours N小时后
-func (c *carbon) AddHours(hours int) *carbon {
+func (c *Carbon) AddHours(hours int) *Carbon {
 	c.Time = c.Time.AddDate(0, 0, hours/24)
 	return c
 }
 
 // AddHour 1小时后
-func (c *carbon) AddHour() *carbon {
+func (c *Carbon) AddHour() *Carbon {
 	c.Time = c.Time.AddDate(0, 0, 1/24)
 	return c
 }
 
 // AddHours N小时前
-func (c *carbon) SubHours(hours int) *carbon {
+func (c *Carbon) SubHours(hours int) *Carbon {
 	c.Time = c.Time.AddDate(0, 0, -hours/24)
 	return c
 }
 
 // AddHour 1小时前
-func (c *carbon) SubHour() *carbon {
+func (c *Carbon) SubHour() *Carbon {
 	c.Time = c.Time.AddDate(0, 0, -1/24)
 	return c
 }
 
 // AddMinutes N分钟后
-func (c *carbon) AddMinutes(minutes int) *carbon {
+func (c *Carbon) AddMinutes(minutes int) *Carbon {
 	c.Time = c.Time.AddDate(0, 0, minutes/1440)
 	return c
 }
 
 // AddMinute 1分钟后
-func (c *carbon) AddMinute() *carbon {
+func (c *Carbon) AddMinute() *Carbon {
 	c.Time = c.Time.AddDate(0, 0, 1/1440)
 	return c
 }
 
 // SubMinutes N分钟前
-func (c *carbon) SubMinutes(minutes int) *carbon {
+func (c *Carbon) SubMinutes(minutes int) *Carbon {
 	c.Time = c.Time.AddDate(0, 0, -minutes/1440)
 	return c
 }
 
 // SubMinute 1分钟前
-func (c *carbon) SubMinute() *carbon {
+func (c *Carbon) SubMinute() *Carbon {
 	c.Time = c.Time.AddDate(0, 0, -1/1440)
 	return c
 }
 
 // AddSeconds N秒钟后
-func (c *carbon) AddSeconds(second int) *carbon {
+func (c *Carbon) AddSeconds(second int) *Carbon {
 	c.Time = c.Time.AddDate(0, 0, second/86400)
 	return c
 }
 
 // AddMinute 1秒钟后
-func (c *carbon) AddSecond() *carbon {
+func (c *Carbon) AddSecond() *Carbon {
 	c.Time = c.Time.AddDate(0, 0, 1/86400)
 	return c
 }
 
 // SubMinutes N秒钟前
-func (c *carbon) SubSeconds(second int) *carbon {
+func (c *Carbon) SubSeconds(second int) *Carbon {
 	c.Time = c.Time.AddDate(0, 0, -second/86400)
 	return c
 }
 
 // SubMinute 1秒钟前
-func (c *carbon) SubSecond() *carbon {
+func (c *Carbon) SubSecond() *Carbon {
 	c.Time = c.Time.AddDate(0, 0, -1/86400)
 	return c
 }
 
 // Parse 解析标准时间格式
-func (c *carbon) Parse(value string) *carbon {
+func (c *Carbon) Parse(value string) *Carbon {
 	value = strings.Trim(value, " ")
 	layout := "2006-01-02 15:04:05"
 
@@ -247,7 +247,7 @@ func (c *carbon) Parse(value string) *carbon {
 }
 
 // ParseByCustom 解析自定义时间格式
-func (c *carbon) ParseByCustom(value string, format string) *carbon {
+func (c *Carbon) ParseByCustom(value string, format string) *Carbon {
 	value = strings.Trim(value, " ")
 	layout := format2layout(format)
 	t, _ := time.ParseInLocation(layout, value, c.loc)
@@ -256,67 +256,67 @@ func (c *carbon) ParseByCustom(value string, format string) *carbon {
 }
 
 // Format 格式化时间
-func (c *carbon) Format(format string) string {
+func (c *Carbon) Format(format string) string {
 	return c.Time.In(c.loc).Format(format2layout(format))
 }
 
 // Today 今天
-func (c *carbon) Today() string {
+func (c *Carbon) Today() string {
 	return time.Now().In(c.loc).Format("2006-01-02 00:00:00")
 }
 
 // Tomorrow 明天
-func (c *carbon) Tomorrow() string {
+func (c *Carbon) Tomorrow() string {
 	return time.Now().AddDate(0, 0, 1).In(c.loc).Format("2006-01-02 00:00:00")
 }
 
 // Yesterday 昨天
-func (c *carbon) Yesterday() string {
+func (c *Carbon) Yesterday() string {
 	return time.Now().AddDate(0, 0, -1).In(c.loc).Format("2006-01-02 00:00:00")
 }
 
 // FirstDayInYear 年初
-func (c *carbon) FirstDayInYear() string {
+func (c *Carbon) FirstDayInYear() string {
 	return c.CreateFromDate(c.Time.Year(), 01, 01).ToDateTimeString()
 }
 
 // LastDayInYear 年末
-func (c *carbon) LastDayInYear() string {
+func (c *Carbon) LastDayInYear() string {
 	return c.CreateFromDate(c.Time.Year(), 12, 31).ToDateTimeString()
 }
 
 // FirstDayInMonth 月初
-func (c *carbon) FirstDayInMonth() string {
+func (c *Carbon) FirstDayInMonth() string {
 	return c.CreateFromDate(c.Time.Year(), c.Time.Month(), 1).ToDateTimeString()
 }
 
 // LastDayInMonth 月末
-func (c *carbon) LastDayInMonth() string {
+func (c *Carbon) LastDayInMonth() string {
 	return c.CreateFromDate(c.Time.Year(), c.Time.Month(), 1).Time.AddDate(0, 1, -1).Format("2006-01-02 00:00:00")
 }
 
 // ToDateTimeString 转日期时间字符串
-func (c *carbon) ToDateTimeString() string {
+func (c *Carbon) ToDateTimeString() string {
 	return c.Time.In(c.loc).Format("2006-01-02 15:04:05")
 }
 
 // ToDateString 转日期字符串
-func (c *carbon) ToDateString() string {
+func (c *Carbon) ToDateString() string {
 	return c.Time.In(c.loc).Format("2006-01-02")
 }
 
 // ToTimeString 转时间字符串
-func (c *carbon) ToTimeString() string {
+func (c *Carbon) ToTimeString() string {
 	return c.Time.In(c.loc).Format("15:04:05")
 }
 
 // ToTimestamp 转时间戳
-func (c *carbon) ToTimestamp() int64 {
+func (c *Carbon) ToTimestamp() int64 {
 	return c.Time.Unix()
 }
 
 // IsLeapYear 是否是闰年
-func (c *carbon) IsLeapYear() bool {
+func (c *Carbon) IsLeapYear() bool {
 	year := c.Time.Year()
 	if year%400 == 0 || (year%4 == 0 && year%100 != 0) {
 		return true
@@ -325,102 +325,102 @@ func (c *carbon) IsLeapYear() bool {
 }
 
 // IsJanuary 是否是一月
-func (c *carbon) IsJanuary() bool {
+func (c *Carbon) IsJanuary() bool {
 	return c.Time.In(c.loc).Month().String() == "January"
 }
 
 // IsMonday 是否是二月
-func (c *carbon) IsFebruary() bool {
+func (c *Carbon) IsFebruary() bool {
 	return c.Time.In(c.loc).Month().String() == "February"
 }
 
 // IsMarch 是否是三月
-func (c *carbon) IsMarch() bool {
+func (c *Carbon) IsMarch() bool {
 	return c.Time.In(c.loc).Month().String() == "March"
 }
 
 // IsApril 是否是四月
-func (c *carbon) IsApril() bool {
+func (c *Carbon) IsApril() bool {
 	return c.Time.In(c.loc).Month().String() == "April"
 }
 
 // IsMay 是否是五月
-func (c *carbon) IsMay() bool {
+func (c *Carbon) IsMay() bool {
 	return c.Time.In(c.loc).Month().String() == "May"
 }
 
 // IsJune 是否是六月
-func (c *carbon) IsJune() bool {
+func (c *Carbon) IsJune() bool {
 	return c.Time.In(c.loc).Month().String() == "June"
 }
 
 // IsJuly 是否是七月
-func (c *carbon) IsJuly() bool {
+func (c *Carbon) IsJuly() bool {
 	return c.Time.In(c.loc).Month().String() == "July"
 }
 
 // IsAugust 是否是八月
-func (c *carbon) IsAugust() bool {
+func (c *Carbon) IsAugust() bool {
 	return c.Time.In(c.loc).Month().String() == "August"
 }
 
 // IsSeptember 是否是九月
-func (c *carbon) IsSeptember() bool {
+func (c *Carbon) IsSeptember() bool {
 	return c.Time.In(c.loc).Month().String() == "September"
 }
 
 // IsOctober 是否是十月
-func (c *carbon) IsOctober() bool {
+func (c *Carbon) IsOctober() bool {
 	return c.Time.In(c.loc).Month().String() == "October"
 }
 
 // IsNovember 是否是十一月
-func (c *carbon) IsNovember() bool {
+func (c *Carbon) IsNovember() bool {
 	return c.Time.In(c.loc).Month().String() == "November"
 }
 
 // IsDecember 是否是十二月
-func (c *carbon) IsDecember() bool {
+func (c *Carbon) IsDecember() bool {
 	return c.Time.In(c.loc).Month().String() == "December"
 }
 
 // IsMonday 是否是周一
-func (c *carbon) IsMonday() bool {
+func (c *Carbon) IsMonday() bool {
 	return c.Time.In(c.loc).Weekday().String() == "Monday"
 }
 
 // IsTuesday 是否是周二
-func (c *carbon) IsTuesday() bool {
+func (c *Carbon) IsTuesday() bool {
 	return c.Time.In(c.loc).Weekday().String() == "Tuesday"
 }
 
 // IsWednesday 是否是周三
-func (c *carbon) IsWednesday() bool {
+func (c *Carbon) IsWednesday() bool {
 	return c.Time.In(c.loc).Weekday().String() == "Wednesday"
 }
 
 // IsThursday 是否是周四
-func (c *carbon) IsThursday() bool {
+func (c *Carbon) IsThursday() bool {
 	return c.Time.In(c.loc).Weekday().String() == "Thursday"
 }
 
 // IsFriday 是否是周五
-func (c *carbon) IsFriday() bool {
+func (c *Carbon) IsFriday() bool {
 	return c.Time.In(c.loc).Weekday().String() == "Friday"
 }
 
 // IsSaturday 是否是周六
-func (c *carbon) IsSaturday() bool {
+func (c *Carbon) IsSaturday() bool {
 	return c.Time.In(c.loc).Weekday().String() == "Saturday"
 }
 
 // IsSunday 是否是周日
-func (c *carbon) IsSunday() bool {
+func (c *Carbon) IsSunday() bool {
 	return c.Time.In(c.loc).Weekday().String() == "Sunday"
 }
 
 // IsFirstDayInYear 是否年初
-func (c *carbon) IsFirstDayInYear() bool {
+func (c *Carbon) IsFirstDayInYear() bool {
 	_, month, day := c.Time.Date()
 	if month.String() == "January" && day == 1 {
 		return true
@@ -430,7 +430,7 @@ func (c *carbon) IsFirstDayInYear() bool {
 }
 
 // IsLastDayInYear 是否是年末
-func (c *carbon) IsLastDayInYear() bool {
+func (c *Carbon) IsLastDayInYear() bool {
 	_, month, day := c.Time.Date()
 	if month.String() == "December" && day == 31 {
 		return true
@@ -440,11 +440,11 @@ func (c *carbon) IsLastDayInYear() bool {
 }
 
 // IsFirstDayInMonth 是否月初
-func (c *carbon) IsFirstDayInMonth() bool {
+func (c *Carbon) IsFirstDayInMonth() bool {
 	return c.Time.In(c.loc).Day() == 1
 }
 
 // IsLastDayInMonth 是否是月末
-func (c *carbon) IsLastDayInMonth() bool {
+func (c *Carbon) IsLastDayInMonth() bool {
 	return c.Time.In(c.loc).Format("2006-01-02 00:00:00") == c.LastDayInMonth()
 }
