@@ -114,7 +114,7 @@ func (c *Carbon) SubMonths(months int) *Carbon {
 	return c
 }
 
-// SubMonth 减少1月
+// SubMonth 1月前
 func (c *Carbon) SubMonth() *Carbon {
 	c.Time = c.Time.AddDate(0, -1, 0)
 	return c
@@ -138,7 +138,7 @@ func (c *Carbon) SubWeeks(weeks int) *Carbon {
 	return c
 }
 
-// SubMonth 减少1月
+// SubMonth 1月前
 func (c *Carbon) SubWeek() *Carbon {
 	c.Time = c.Time.AddDate(0, 0, -7)
 	return c
