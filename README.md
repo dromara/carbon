@@ -164,6 +164,15 @@ c.Now().SubMonths(3).ToDateTimeString() // 2020-06-08 13:00:00
 // 一月前
 c.Now().SubMonth().ToDateTimeString() // 2020-08-08 13:00:00
 
+// 三周后
+c.Now().AddWeeks(3).ToDateTimeString() // 2020-09-29 13:00:00
+// 一周后
+c.Now().AddWeek().ToDateTimeString() // 2020-09-15 13:00:00
+// 三周前
+c.Now().SubWeeks(3).ToDateTimeString() // 2020-08-17 13:00:00
+// 一周前
+c.Now().SubWeek().ToDateTimeString() // 2020-09-01 13:00:00
+
 // 三天后
 c.Now().AddDays(3).ToDateTimeString() // 2020-09-11 13:00:00
 // 一天后
