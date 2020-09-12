@@ -281,6 +281,9 @@ func (c *Carbon) ParseByCustom(value string, format string) *Carbon {
 
 // Format 格式化时间
 func (c *Carbon) Format(format string) string {
+	if c.Time.IsZero() {
+		return ""
+	}
 	return c.Time.In(c.loc).Format(format2layout(format))
 }
 
