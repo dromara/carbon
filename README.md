@@ -588,10 +588,10 @@ user := UserModel {
 user.ID // 18
 user.Name // 勾国印
 user.Birthday.ToDateString() // 2012-08-05
-user.CreatedAt.ToTimestamp() // 1596604455
-user.DeletedAt.ToDateTimeString() // 2012-08-05 13:14:15
+user.CreatedAt.ToDateTimeString() // 2012-08-05 13:14:15
+user.DeletedAt.ToTimestamp() // 1596604455
 user.GraduatedAt.AddDay().ToDateString() // 2012-09-10
-user.UpdatedAt.ToDateString() // 2012-08-05
+user.UpdatedAt.ToTimeString() // 13:14:15
 ```
 
 ###### JSON输出模型
@@ -603,7 +603,7 @@ fmt.Print(string(data))
     "id": 42,
     "name": "勾国印",
     "age": 18,
-    "birthday": "2012-08-05 00:00:00",
+    "birthday": "2012-08-05",
     "created_at": "2020-08-05 13:14:15",
     "deleted_at": 1596604455
     "graduated_at": "2012-09-09",
