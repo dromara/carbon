@@ -318,7 +318,7 @@ func (c Carbon) SubMonthsNoOverflow(months int) Carbon {
 	return c.AddMonthsNoOverflow(-months)
 }
 
-// SubMonthNoOverflow 1个月后，月份不溢出
+// SubMonthNoOverflow 1个月前，月份不溢出
 func (c Carbon) SubMonthNoOverflow() Carbon {
 	return c.AddMonthsNoOverflow(-1)
 }
