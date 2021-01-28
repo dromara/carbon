@@ -2392,3 +2392,77 @@ func TestCarbon_SubSecond(t *testing.T) {
 		}
 	}
 }
+
+func TestCarbon_AddMonthsNoOverflow(t *testing.T) {
+	Tests := []struct {
+		input  string // 输入值
+		months int
+		output string // 期望输出值
+	}{
+		{"2020-01-31", 1, "2020-02-29"},
+		{"2019-12-30", 2, "2020-02-29"},
+	}
+
+	for _, v := range Tests {
+		output := Parse(v.input).AddMonthsNoOverflow(v.months).ToDateString()
+
+		if output != v.output {
+			t.Fatalf("Input %s, expected %s, but got %s\n", v.input, v.output, output)
+		}
+	}
+}
+
+func TestCarbon_AddMonthNoOverflow(t *testing.T) {
+	Tests := []struct {
+		input  string // 输入值
+		output string // 期望输出值
+	}{
+		{"2020-01-30", "2020-02-29"},
+		{"2019-05-31", "2019-06-30"},
+	}
+
+	for _, v := range Tests {
+		output := Parse(v.input).AddMonthNoOverflow().ToDateString()
+
+		if output != v.output {
+			t.Fatalf("Input %s, expected %s, but got %s\n", v.input, v.output, output)
+		}
+	}
+}
+
+func TestCarbon_SubMonthsNoOverflow(t *testing.T) {
+	Tests := []struct {
+		input  string // 输入值
+		months int
+		output string // 期望输出值
+	}{
+		{"2020-03-31", 1, "2020-02-29"},
+		{"2020-10-31", 6, "2020-04-30"},
+	}
+
+	for _, v := range Tests {
+		output := Parse(v.input).SubMonthsNoOverflow(v.months).ToDateString()
+
+		if output != v.output {
+			t.Fatalf("Input %s, expected %s, but got %s\n", v.input, v.output, output)
+		}
+	}
+}
+
+func TestCarbon_SubMonthNoOverflow(t *testing.T) {
+	Tests := []struct {
+		input  string // 输入值
+		output string // 期望输出值
+	}{
+		{"2020-03-30", "2020-02-29"},
+		{"2020-05-31", "2020-04-30"},
+	}
+
+	for _, v := range Tests {
+		output := Parse(v.input).SubMonthNoOverflow().ToDateString()
+
+		if output != v.output {
+			t.Fatalf("Input %s, expected %s, but got %s\n", v.input, v.output, output)
+		}
+	}
+}

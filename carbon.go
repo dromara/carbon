@@ -262,17 +262,17 @@ func (c Carbon) AddQuarters(quarters int) Carbon {
 	return c.AddMonths(quarters * MonthsPerQuarter)
 }
 
-// AddMonth 1季度后
+// AddQuarter 1季度后
 func (c Carbon) AddQuarter() Carbon {
 	return c.AddQuarters(1)
 }
 
-// SubMonths N季度前
+// SubQuarters N季度前
 func (c Carbon) SubQuarters(quarters int) Carbon {
 	return c.SubMonths(quarters * MonthsPerQuarter)
 }
 
-// SubMonth 1季度前
+// SubQuarter 1季度前
 func (c Carbon) SubQuarter() Carbon {
 	return c.SubQuarters(1)
 }
@@ -288,6 +288,20 @@ func (c Carbon) AddMonth() Carbon {
 	return c.AddMonths(1)
 }
 
+// AddMonthsNoOverflow N个月后，月份不溢出
+func (c Carbon) AddMonthsNoOverflow(months int) Carbon {
+	addedCarbon := c.AddMonths(months)
+	if c.Day() != addedCarbon.Day() {
+		return addedCarbon.StartOfMonth().SubDay() // the last day of last month
+	}
+	return addedCarbon
+}
+
+// AddMonthsNoOverflow 1个月后，月份不溢出
+func (c Carbon) AddMonthNoOverflow() Carbon {
+	return c.AddMonthsNoOverflow(1)
+}
+
 // SubMonths N月前
 func (c Carbon) SubMonths(months int) Carbon {
 	c.Time = c.Time.AddDate(0, -months, 0)
@@ -297,6 +311,16 @@ func (c Carbon) SubMonths(months int) Carbon {
 // SubMonth 1月前
 func (c Carbon) SubMonth() Carbon {
 	return c.SubMonths(1)
+}
+
+// SubMonthsNoOverflow N个月前，月份不溢出
+func (c Carbon) SubMonthsNoOverflow(months int) Carbon {
+	return c.AddMonthsNoOverflow(-months)
+}
+
+// SubMonthNoOverflow 1个月后，月份不溢出
+func (c Carbon) SubMonthNoOverflow() Carbon {
+	return c.AddMonthsNoOverflow(-1)
 }
 
 // AddWeeks N周后
