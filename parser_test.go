@@ -111,3 +111,24 @@ func TestCarbon_ParseByLayout2(t *testing.T) {
 		}
 	}
 }
+
+var ParseByInputTests = []struct {
+	input  string
+	format string
+	output string
+}{
+	{"2021年 5月 1日 星期六 15时24分25秒 CST", "Y年 m月 d日 星期六 H时i分s秒 CST", "2021-05-01 15:24:25"},
+	{"2021年5月1日 星期六 农历三月二十 15:26:30", "Y年m月d日 星期六 农历三月二十 H:i:s", "2021-05-01 15:26:30"},
+}
+
+func TestCarbon_ParseByInput(t *testing.T) {
+	for _, v := range ParseByInputTests {
+		output := ParseByInput(v.input, v.format)
+
+		if output.Error != nil {
+			t.Logf("catch an exception in ParseByInput():%v", output.Error)
+		} else if output.ToDateTimeString() != v.output {
+			t.Errorf("Input %s, expected %s, but got %s\n", v.input, v.output, output.ToDateTimeString())
+		}
+	}
+}
