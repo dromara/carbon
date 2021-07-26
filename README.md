@@ -38,7 +38,8 @@ import (
 ##### Yesterday, today and tomorrow
 ```go
 // Datetime of today
-fmt.Sprintf("%s", carbon.Now()) // 2020-08-05 13:14:15
+fmt.Sprintf("%s", carbon.
+w()) // 2020-08-05 13:14:15
 carbon.Now().ToDateTimeString() // 2020-08-05 13:14:15
 // Date of today
 carbon.Now().ToDateString() // 2020-08-05
@@ -526,7 +527,7 @@ carbon.Parse("2020-08-05 13:14:15").Eq(carbon.Parse("2020-08-05 13:14:00")) // f
 carbon.Parse("2020-08-05 13:14:15").Compare("=", carbon.Parse("2020-08-05 13:14:15")) // true
 carbon.Parse("2020-08-05 13:14:15").Compare("=", carbon.Parse("2020-08-05 13:14:00")) // false
 
-// Whether ot equal
+// Whether not equal
 carbon.Parse("2020-08-05 13:14:15").Ne(carbon.Parse("2020-08-06 13:14:15")) // true
 carbon.Parse("2020-08-05 13:14:15").Ne(carbon.Parse("2020-08-05 13:14:15")) // false
 carbon.Parse("2020-08-05 13:14:15").Compare("!=", carbon.Parse("2020-08-06 13:14:15")) // true
