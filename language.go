@@ -3,8 +3,6 @@ package carbon
 import (
 	"strconv"
 	"strings"
-
-	"github.com/golang-module/carbon/lang"
 )
 
 var (
@@ -35,7 +33,7 @@ func (l *Language) SetLocale(locale string) error {
 		return nil
 	}
 	l.locale = locale
-	resources, err := lang.LoadLocale(locale)
+	resources, err := loadLocale(locale)
 	if err != nil {
 		return err
 	}

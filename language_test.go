@@ -26,7 +26,7 @@ func TestLanguage_SetLocale(t *testing.T) {
 
 func TestLangError_SetLocale(t *testing.T) {
 	locale, lang := "xxx", NewLanguage()
-	expected := fmt.Errorf("invalid locale %q, please see the directory %q for all valid locales", locale, "./lang/")
+	expected := fmt.Errorf("invalid locale %q, please see the directory %q for all valid locales", locale, langDir)
 	actual := lang.SetLocale(locale)
 	assert.Equal(t, expected, actual, "It should catch an exception in SetLocale()")
 }
