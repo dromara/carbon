@@ -1278,9 +1278,3 @@ invalid timezone "xxx", please see the file "$GOROOT/lib/time/zoneinfo.zip" for 
 * [arrow-py/arrow](https://github.com/arrow-py/arrow)
 * [moment/moment](https://github.com/moment/moment)
 * [iamkun/dayjs](https://github.com/iamkun/dayjs)
-
-#### 相关链接
-
-* [robeeask社区](https://carbon.robeeask.com/ "robeeask社区")
-* [掘金社区](https://juejin.cn/column/6988159448736858120 "掘金社区")
-* [segmentfault社区](https://segmentfault.com/blog/carbon "segmentfault社区")
