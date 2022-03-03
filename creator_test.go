@@ -49,35 +49,35 @@ func TestCarbon_CreateFromDateTime(t *testing.T) {
 	assert := assert.New(t)
 
 	tests := []struct {
-		year, month, day, hour, minute, second int    // 输入参数
-		expected                               string // 期望值
+		year, month, day, hour, minute, second, nsecond int    // 输入参数
+		expected                                        string // 期望值
 	}{
-		{2020, 1, 1, 13, 14, 15, "2020-01-01 13:14:15"},
-		{2020, 1, 31, 13, 14, 15, "2020-01-31 13:14:15"},
-		{2020, 2, 1, 13, 14, 15, "2020-02-01 13:14:15"},
-		{2020, 2, 28, 13, 14, 15, "2020-02-28 13:14:15"},
-		{2020, 2, 29, 13, 14, 15, "2020-02-29 13:14:15"},
+		{2020, 1, 1, 13, 14, 15, 0, "2020-01-01 13:14:15"},
+		{2020, 1, 31, 13, 14, 15, 0, "2020-01-31 13:14:15"},
+		{2020, 2, 1, 13, 14, 15, 0, "2020-02-01 13:14:15"},
+		{2020, 2, 28, 13, 14, 15, 0, "2020-02-28 13:14:15"},
+		{2020, 2, 29, 13, 14, 15, 0, "2020-02-29 13:14:15"},
 	}
 
 	for index, test := range tests {
-		c := SetTimezone(PRC).CreateFromDateTime(test.year, test.month, test.day, test.hour, test.minute, test.second)
+		c := SetTimezone(PRC).CreateFromDateTime(test.year, test.month, test.day, test.hour, test.minute, test.second, test.nsecond)
 		assert.Nil(c.Error)
 		assert.Equal(test.expected, c.ToDateTimeString(), "Current test index is "+strconv.Itoa(index))
 	}
 
 	for index, test := range tests {
-		c := CreateFromDateTime(test.year, test.month, test.day, test.hour, test.minute, test.second, PRC)
+		c := CreateFromDateTime(test.year, test.month, test.day, test.hour, test.minute, test.second, test.nsecond, PRC)
 		assert.Nil(c.Error)
 		assert.Equal(test.expected, c.ToDateTimeString(), "Current test index is "+strconv.Itoa(index))
 	}
 }
 
 func TestError_CreateFromDateTime(t *testing.T) {
-	year, month, day, hour, minute, second, timezone := 2020, 1, 1, 13, 14, 15, "xxx"
-	c1 := SetTimezone(timezone).CreateFromDateTime(year, month, day, hour, minute, second)
+	year, month, day, hour, minute, second, nsecond, timezone := 2020, 1, 1, 13, 14, 15, 0, "xxx"
+	c1 := SetTimezone(timezone).CreateFromDateTime(year, month, day, hour, minute, second, nsecond)
 	assert.NotNil(t, c1.Error, "It should catch an exception in CreateFromDateTime()")
 
-	c2 := CreateFromDateTime(year, month, day, hour, minute, second, timezone)
+	c2 := CreateFromDateTime(year, month, day, hour, minute, second, nsecond, timezone)
 	assert.NotNil(t, c2.Error, "It should catch an exception in CreateFromDateTime()")
 }
 

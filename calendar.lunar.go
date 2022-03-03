@@ -64,7 +64,7 @@ func (c Carbon) Lunar() (l lunar) {
 		l.Error = invalidYearError(c.Year())
 		return
 	}
-	offset := int(c.DiffInDaysWithAbs(c.CreateFromDateTime(minYear, 1, 31, 0, 0, 0)))
+	offset := int(c.DiffInDaysWithAbs(c.CreateFromDateTime(minYear, 1, 31, 0, 0, 0, 0)))
 	for l.year = minYear; l.year <= maxYear && offset > 0; l.year++ {
 		daysInYear = l.getDaysInYear()
 		offset -= daysInYear
