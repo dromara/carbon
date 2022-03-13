@@ -104,6 +104,15 @@ func (c Carbon) Decade() int {
 	return c.Year() % YearsPerCentury / YearsPerDecade * YearsPerDecade
 }
 
+// Date gets current year, current month and current day.
+// 获取当前年月日
+func (c Carbon) Date() (int, time.Month, int) {
+	if c.IsInvalid() {
+		return 0, 0, 0
+	}
+	return c.time.In(c.loc).Date()
+}
+
 // Year gets current year.
 // 获取当前年
 func (c Carbon) Year() int {
@@ -157,6 +166,15 @@ func (c Carbon) Day() int {
 		return 0
 	}
 	return c.DayOfMonth()
+}
+
+// Hour gets current hour, current minute and current second.
+// 获取当前小时，分钟数，秒数
+func (c Carbon) Clock() (int, int, int) {
+	if c.IsInvalid() {
+		return 0, 0, 0
+	}
+	return c.time.In(c.loc).Clock()
 }
 
 // Hour gets current hour.

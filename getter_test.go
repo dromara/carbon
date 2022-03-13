@@ -313,6 +313,35 @@ func TestCarbon_Decade(t *testing.T) {
 	}
 }
 
+func TestCarbon_Date(t *testing.T) {
+	assert := assert.New(t)
+
+	tests := []struct {
+		input         string // 输入值
+		expectedYear  int    // 期望值
+		expectedMonth int    // 期望值
+		expectedDay   int    // 期望值
+	}{
+		{"", 0, 0, 0},
+		{"0", 0, 0, 0},
+		{"0000-00-00", 0, 0, 0},
+		{"00:00:00", 0, 0, 0},
+		{"0000-00-00 00:00:00", 0, 0, 0},
+
+		{"2020-08-05", 2020, 8, 5},
+		{"2020-08-05 13:14:15", 2020, 8, 5},
+	}
+
+	for index, test := range tests {
+		c := Parse(test.input)
+		assert.Nil(c.Error)
+		year, month, day := c.Date()
+		assert.Equal(test.expectedYear, year, "Current test index is "+strconv.Itoa(index))
+		assert.Equal(test.expectedMonth, int(month), "Current test index is "+strconv.Itoa(index))
+		assert.Equal(test.expectedDay, day, "Current test index is "+strconv.Itoa(index))
+	}
+}
+
 func TestCarbon_Year(t *testing.T) {
 	assert := assert.New(t)
 
@@ -437,6 +466,35 @@ func TestCarbon_Day(t *testing.T) {
 		c := Parse(test.input)
 		assert.Nil(c.Error)
 		assert.Equal(test.expected, c.Day(), "Current test index is "+strconv.Itoa(index))
+	}
+}
+
+func TestCarbon_Clock(t *testing.T) {
+	assert := assert.New(t)
+
+	tests := []struct {
+		input          string // 输入值
+		expectedHour   int    // 期望值
+		expectedMinute int    // 期望值
+		expectedSecond int    // 期望值
+	}{
+		{"", 0, 0, 0},
+		{"0", 0, 0, 0},
+		{"0000-00-00", 0, 0, 0},
+		{"00:00:00", 0, 0, 0},
+		{"0000-00-00 00:00:00", 0, 0, 0},
+
+		{"2020-08-05 13:14:15", 13, 14, 15},
+		{"2020-08-05", 0, 0, 0},
+	}
+
+	for index, test := range tests {
+		c := Parse(test.input)
+		assert.Nil(c.Error)
+		hour, minute, second := c.Clock()
+		assert.Equal(test.expectedHour, hour, "Current test index is "+strconv.Itoa(index))
+		assert.Equal(test.expectedMinute, minute, "Current test index is "+strconv.Itoa(index))
+		assert.Equal(test.expectedSecond, second, "Current test index is "+strconv.Itoa(index))
 	}
 }
 

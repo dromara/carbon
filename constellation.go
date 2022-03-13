@@ -14,30 +14,31 @@ func (c Carbon) Constellation() string {
 		c.lang.SetLocale(defaultLocale)
 	}
 	index := -1
+	_, month, day := c.Date()
 	switch {
-	case c.Month() == 3 && c.Day() >= 21, c.Month() == 4 && c.Day() <= 19:
+	case month == 3 && day >= 21, month == 4 && day <= 19:
 		index = 0 // 白羊座
-	case c.Month() == 4 && c.Day() >= 20, c.Month() == 5 && c.Day() <= 20:
+	case month == 4 && day >= 20, month == 5 && day <= 20:
 		index = 1 // 金牛座
-	case c.Month() == 5 && c.Day() >= 21, c.Month() == 6 && c.Day() <= 21:
+	case month == 5 && day >= 21, month == 6 && day <= 21:
 		index = 2 // 双子座
-	case c.Month() == 6 && c.Day() >= 22, c.Month() == 7 && c.Day() <= 22:
+	case month == 6 && day >= 22, month == 7 && day <= 22:
 		index = 3 // 巨蟹座
-	case c.Month() == 7 && c.Day() >= 23, c.Month() == 8 && c.Day() <= 22:
+	case month == 7 && day >= 23, month == 8 && day <= 22:
 		index = 4 // 狮子座
-	case c.Month() == 8 && c.Day() >= 23, c.Month() == 9 && c.Day() <= 22:
+	case month == 8 && day >= 23, month == 9 && day <= 22:
 		index = 5 // 处女座
-	case c.Month() == 9 && c.Day() >= 23, c.Month() == 10 && c.Day() <= 23:
+	case month == 9 && day >= 23, month == 10 && day <= 23:
 		index = 6 // 天秤座
-	case c.Month() == 10 && c.Day() >= 24, c.Month() == 11 && c.Day() <= 22:
+	case month == 10 && day >= 24, month == 11 && day <= 22:
 		index = 7 // 天蝎座
-	case c.Month() == 11 && c.Day() >= 23, c.Month() == 12 && c.Day() <= 21:
+	case month == 11 && day >= 23, month == 12 && day <= 21:
 		index = 8 // 射手座
-	case c.Month() == 12 && c.Day() >= 22, c.Month() == 1 && c.Day() <= 19:
+	case month == 12 && day >= 22, month == 1 && day <= 19:
 		index = 9 // 摩羯座
-	case c.Month() == 1 && c.Day() >= 20, c.Month() == 2 && c.Day() <= 18:
+	case month == 1 && day >= 20, month == 2 && day <= 18:
 		index = 10 // 水瓶座
-	case c.Month() == 2 && c.Day() >= 19, c.Month() == 3 && c.Day() <= 20:
+	case month == 2 && day >= 19, month == 3 && day <= 20:
 		index = 11 // 双鱼座
 	}
 	if constellations, ok := c.lang.resources["constellations"]; ok {
@@ -55,10 +56,11 @@ func (c Carbon) IsAries() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 3 && c.Day() >= 21 {
+	_, month, day := c.Date()
+	if month == 3 && day >= 21 {
 		return true
 	}
-	if c.Month() == 4 && c.Day() <= 19 {
+	if month == 4 && day <= 19 {
 		return true
 	}
 	return false
@@ -70,10 +72,11 @@ func (c Carbon) IsTaurus() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 4 && c.Day() >= 20 {
+	_, month, day := c.Date()
+	if month == 4 && day >= 20 {
 		return true
 	}
-	if c.Month() == 5 && c.Day() <= 20 {
+	if month == 5 && day <= 20 {
 		return true
 	}
 	return false
@@ -85,10 +88,11 @@ func (c Carbon) IsGemini() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 5 && c.Day() >= 21 {
+	_, month, day := c.Date()
+	if month == 5 && day >= 21 {
 		return true
 	}
-	if c.Month() == 6 && c.Day() <= 21 {
+	if month == 6 && day <= 21 {
 		return true
 	}
 	return false
@@ -100,10 +104,11 @@ func (c Carbon) IsCancer() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 6 && c.Day() >= 22 {
+	_, month, day := c.Date()
+	if month == 6 && day >= 22 {
 		return true
 	}
-	if c.Month() == 7 && c.Day() <= 22 {
+	if month == 7 && day <= 22 {
 		return true
 	}
 	return false
@@ -115,10 +120,11 @@ func (c Carbon) IsLeo() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 7 && c.Day() >= 23 {
+	_, month, day := c.Date()
+	if month == 7 && day >= 23 {
 		return true
 	}
-	if c.Month() == 8 && c.Day() <= 22 {
+	if month == 8 && day <= 22 {
 		return true
 	}
 	return false
@@ -130,10 +136,11 @@ func (c Carbon) IsVirgo() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 8 && c.Day() >= 23 {
+	_, month, day := c.Date()
+	if month == 8 && day >= 23 {
 		return true
 	}
-	if c.Month() == 9 && c.Day() <= 22 {
+	if month == 9 && day <= 22 {
 		return true
 	}
 	return false
@@ -145,10 +152,11 @@ func (c Carbon) IsLibra() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 9 && c.Day() >= 23 {
+	_, month, day := c.Date()
+	if month == 9 && day >= 23 {
 		return true
 	}
-	if c.Month() == 10 && c.Day() <= 23 {
+	if month == 10 && day <= 23 {
 		return true
 	}
 	return false
@@ -160,10 +168,11 @@ func (c Carbon) IsScorpio() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 10 && c.Day() >= 24 {
+	_, month, day := c.Date()
+	if month == 10 && day >= 24 {
 		return true
 	}
-	if c.Month() == 11 && c.Day() <= 22 {
+	if month == 11 && day <= 22 {
 		return true
 	}
 	return false
@@ -175,10 +184,11 @@ func (c Carbon) IsSagittarius() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 11 && c.Day() >= 22 {
+	_, month, day := c.Date()
+	if month == 11 && day >= 22 {
 		return true
 	}
-	if c.Month() == 12 && c.Day() <= 21 {
+	if month == 12 && day <= 21 {
 		return true
 	}
 	return false
@@ -190,10 +200,11 @@ func (c Carbon) IsCapricorn() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 12 && c.Day() >= 22 {
+	_, month, day := c.Date()
+	if month == 12 && day >= 22 {
 		return true
 	}
-	if c.Month() == 1 && c.Day() <= 19 {
+	if month == 1 && day <= 19 {
 		return true
 	}
 	return false
@@ -205,10 +216,11 @@ func (c Carbon) IsAquarius() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 1 && c.Day() >= 20 {
+	_, month, day := c.Date()
+	if month == 1 && day >= 20 {
 		return true
 	}
-	if c.Month() == 2 && c.Day() <= 18 {
+	if month == 2 && day <= 18 {
 		return true
 	}
 	return false
@@ -220,10 +232,11 @@ func (c Carbon) IsPisces() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	if c.Month() == 2 && c.Day() >= 19 {
+	_, month, day := c.Date()
+	if month == 2 && day >= 19 {
 		return true
 	}
-	if c.Month() == 3 && c.Day() <= 20 {
+	if month == 3 && day <= 20 {
 		return true
 	}
 	return false

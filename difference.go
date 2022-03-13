@@ -31,7 +31,9 @@ func (c Carbon) DiffInMonths(carbon ...Carbon) int64 {
 	if len(carbon) > 0 {
 		end = carbon[len(carbon)-1]
 	}
-	dy, dm, dd := end.Year()-c.Year(), end.Month()-c.Month(), end.Day()-c.Day()
+	year, month, day := c.Date()
+	endYear, endMonth, endDay := end.Date()
+	dy, dm, dd := endYear-year, int(endMonth-month), endDay-day
 	if dd < 0 {
 		dm = dm - 1
 	}

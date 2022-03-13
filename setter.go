@@ -65,7 +65,9 @@ func (c Carbon) SetYear(year int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.time = time.Date(year, time.Month(c.Month()), c.Day(), c.Hour(), c.Minute(), c.Second(), c.Nanosecond(), c.loc)
+	_, month, day := c.Date()
+	hour, minute, second := c.Clock()
+	c.time = time.Date(year, month, day, hour, minute, second, c.Nanosecond(), c.loc)
 	return c
 }
 
@@ -84,7 +86,9 @@ func (c Carbon) SetMonth(month int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.time = time.Date(c.Year(), time.Month(month), c.Day(), c.Hour(), c.Minute(), c.Second(), c.Nanosecond(), c.loc)
+	year, _, day := c.Date()
+	hour, minute, second := c.Clock()
+	c.time = time.Date(year, time.Month(month), day, hour, minute, second, c.Nanosecond(), c.loc)
 	return c
 }
 
@@ -128,7 +132,9 @@ func (c Carbon) SetDay(day int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.time = time.Date(c.Year(), time.Month(c.Month()), day, c.Hour(), c.Minute(), c.Second(), c.Nanosecond(), c.loc)
+	year, month, _ := c.Date()
+	hour, minute, second := c.Clock()
+	c.time = time.Date(year, month, day, hour, minute, second, c.Nanosecond(), c.loc)
 	return c
 }
 
@@ -138,7 +144,9 @@ func (c Carbon) SetHour(hour int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.time = time.Date(c.Year(), time.Month(c.Month()), c.Day(), hour, c.Minute(), c.Second(), c.Nanosecond(), c.loc)
+	year, month, day := c.Date()
+	_, minute, second := c.Clock()
+	c.time = time.Date(year, month, day, hour, minute, second, c.Nanosecond(), c.loc)
 	return c
 }
 
@@ -148,7 +156,9 @@ func (c Carbon) SetMinute(minute int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.time = time.Date(c.Year(), time.Month(c.Month()), c.Day(), c.Hour(), minute, c.Second(), c.Nanosecond(), c.loc)
+	year, month, day := c.Date()
+	hour, _, second := c.Clock()
+	c.time = time.Date(year, month, day, hour, minute, second, c.Nanosecond(), c.loc)
 	return c
 }
 
@@ -158,7 +168,9 @@ func (c Carbon) SetSecond(second int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.time = time.Date(c.Year(), time.Month(c.Month()), c.Day(), c.Hour(), c.Minute(), second, c.Nanosecond(), c.loc)
+	year, month, day := c.Date()
+	hour, minute, _ := c.Clock()
+	c.time = time.Date(year, month, day, hour, minute, second, c.Nanosecond(), c.loc)
 	return c
 }
 
@@ -168,7 +180,9 @@ func (c Carbon) SetMillisecond(millisecond int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.time = time.Date(c.Year(), time.Month(c.Month()), c.Day(), c.Hour(), c.Minute(), c.Second(), millisecond*1e6, c.loc)
+	year, month, day := c.Date()
+	hour, minute, second := c.Clock()
+	c.time = time.Date(year, month, day, hour, minute, second, millisecond*1e6, c.loc)
 	return c
 }
 
@@ -178,7 +192,9 @@ func (c Carbon) SetMicrosecond(microsecond int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.time = time.Date(c.Year(), time.Month(c.Month()), c.Day(), c.Hour(), c.Minute(), c.Second(), microsecond*1e3, c.loc)
+	year, month, day := c.Date()
+	hour, minute, second := c.Clock()
+	c.time = time.Date(year, month, day, hour, minute, second, microsecond*1e3, c.loc)
 	return c
 }
 
@@ -188,6 +204,8 @@ func (c Carbon) SetNanosecond(nanosecond int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.time = time.Date(c.Year(), time.Month(c.Month()), c.Day(), c.Hour(), c.Minute(), c.Second(), nanosecond, c.loc)
+	year, month, day := c.Date()
+	hour, minute, second := c.Clock()
+	c.time = time.Date(year, month, day, hour, minute, second, nanosecond, c.loc)
 	return c
 }

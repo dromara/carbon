@@ -135,12 +135,15 @@ func (c Carbon) AddYearsNoOverflow(years int) Carbon {
 		return c
 	}
 	// 获取N年后本月的最后一天
-	last := time.Date(c.Year()+years, time.Month(c.Month()), 1, c.Hour(), c.Minute(), c.Second(), c.Nanosecond(), c.loc).AddDate(0, 1, -1)
-	day := c.Day()
-	if c.Day() > last.Day() {
-		day = last.Day()
+	year, month, day := c.Date()
+	hour, minute, second := c.Clock()
+	ns := c.Nanosecond()
+	last := time.Date(year+years, month+time.Month(1), 0, hour, minute, second, ns, c.loc)
+	lastYear, lastMonth, lastDay := last.Date()
+	if day > lastDay {
+		day = lastDay
 	}
-	c.time = time.Date(last.Year(), last.Month(), day, c.Hour(), c.Minute(), c.Second(), c.Nanosecond(), c.loc)
+	c.time = time.Date(lastYear, lastMonth, day, hour, minute, second, ns, c.loc)
 	return c
 }
 
@@ -247,14 +250,17 @@ func (c Carbon) AddMonthsNoOverflow(months int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	month := c.Month() + months
+
 	// 获取N月后的最后一天
-	last := time.Date(c.Year(), time.Month(month), 1, c.Hour(), c.Minute(), c.Second(), c.Nanosecond(), c.loc).AddDate(0, 1, -1)
-	day := c.Day()
-	if c.Day() > last.Day() {
-		day = last.Day()
+	year, month, day := c.Date()
+	hour, minute, second := c.Clock()
+	ns := c.Nanosecond()
+	last := time.Date(year, month+time.Month(months+1), 0, hour, minute, second, ns, c.loc)
+	lastYear, lastMonth, lastDay := last.Date()
+	if day > lastDay {
+		day = lastDay
 	}
-	c.time = time.Date(last.Year(), last.Month(), day, c.Hour(), c.Minute(), c.Second(), c.Nanosecond(), c.loc)
+	c.time = time.Date(lastYear, lastMonth, day, hour, minute, second, ns, c.loc)
 	return c
 }
 
