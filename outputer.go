@@ -694,6 +694,94 @@ func (c Carbon) ToLayoutString(layout string, timezone ...string) string {
 		return ""
 	}
 
+	// if it has \\ before any word/char, then it should be escaped!
+	// we will not enumerate all the patterns
+	// we will memorize the position of each escape by doing:
+	// replace them in the layout with OTHER SPECIAL IDENTIFIABLE WORDS, and then put them back after formatting!
+
+	type escapeWord struct {
+		ID           string
+		OriginalWord string
+	}
+
+	buffer := bytes.NewBuffer(nil)
+	var escapedWords []escapeWord
+
+	escapePattern := "\\"
+
+	layoutRunes := []rune(layout)
+
+	foundEscapedWord := false
+	escWord := ""
+	escapeID := ""
+	isLastRow := false
+
+	nrOfChars := len(layoutRunes)
+
+	addEscapedWord := func(id, word string) {
+		// reset
+		foundEscapedWord = false
+		escWord = ""
+		escapeID = ""
+		// add
+		escapedWords = append(escapedWords, escapeWord{
+			ID:           id,
+			OriginalWord: word,
+		})
+	}
+
+	for i := 0; i < nrOfChars; i++ {
+		char := string(layoutRunes[i])
+
+		if nrOfChars == i+1 {
+			isLastRow = true
+		}
+
+		switch char {
+		case escapePattern:
+			if foundEscapedWord {
+				// if we had already before an escape pattern, then copy here the word
+				addEscapedWord(escapeID, escWord)
+			}
+
+			// Generate a unique id for later replacement with original content/word
+			escapeID = "#" + randStringRunes(5) + "#"
+			foundEscapedWord = true
+
+			// We have found an escape pattern
+			// also check if multiple times the pattern has been written
+
+			// Write the escape ID to the buffer layout
+			buffer.WriteString(escapeID)
+		case " ":
+			if foundEscapedWord {
+				// there is a space, end of word...
+				addEscapedWord(escapeID, escWord)
+			}
+			// write the space to the buffer
+			buffer.WriteString(char)
+		default:
+			//
+
+			if foundEscapedWord {
+				// add to the word
+				escWord = escWord + char
+				if isLastRow {
+					// last row...end of word...
+					addEscapedWord(escapeID, escWord)
+				}
+			} else {
+				// Write the current char!
+				buffer.WriteString(char)
+			}
+		}
+	}
+
+	nrOfEscapedWords := len(escapedWords)
+	if nrOfEscapedWords > 0 {
+		layout = buffer.String()
+	}
+
 	// go doesn't support at the moment i18n (internalization) for time.Time -> it's in a roadmap
 	// So, a temporary solution would be: "Check some specific patterns, and try replacing them!?"
 
@@ -736,7 +824,16 @@ func (c Carbon) ToLayoutString(layout string, timezone ...string) string {
 		}
 	}
 
-	return c.Carbon2Time().Format(layout)
+	formatted := c.Carbon2Time().Format(layout)
+
+	// now let's put back the escaped words if there are any!
+	if nrOfEscapedWords > 0 {
+		for _, escapedItem := range escapedWords {
+			formatted = strings.ReplaceAll(formatted, escapedItem.ID, escapedItem.OriginalWord)
+		}
+	}
+
+	return formatted
 }
 
 // Layout outputs a string by layout, it is shorthand for ToLayoutString.

@@ -2,6 +2,7 @@ package carbon
 
 import (
 	"bytes"
+	"math/rand"
 	"time"
 )
 
@@ -31,6 +32,8 @@ var formats = map[byte]string{
 	'c': "2006-01-02T15:04:05-07:00",       // Format: ISO 8601 date. Eg: 2004-02-12T15:19:21+00:00.
 	'r': "Thu, 21 Dec 2000 16:01:07 +0200", // Format: RFC 2822 formatted date. Eg: Thu, 21 Dec 2000 16:01:07 +0200.
 }
+
+var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 // converts format to layout.
 // format 转 layout
@@ -77,4 +80,12 @@ func parseByDuration(duration string) (time.Duration, error) {
 // 获取绝对值
 func getAbsValue(value int64) int64 {
 	return (value ^ value>>31) - value>>31
+}
+
+func randStringRunes(n int) string {
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letterRunes[rand.Intn(len(letterRunes))]
+	}
+	return string(b)
 }
