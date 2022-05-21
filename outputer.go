@@ -693,6 +693,49 @@ func (c Carbon) ToLayoutString(layout string, timezone ...string) string {
 	if c.IsInvalid() {
 		return ""
 	}
+
+	// go doesn't support at the moment i18n (internalization) for time.Time -> it's in a roadmap
+	// So, a temporary solution would be: "Check some specific patterns, and try replacing them!?"
+
+	// Usual cases are Month,Short Month, Week, Short Week, Season, Short Season
+	// TODO: these patterns should be moved from here
+	layoutConvPatterns := []struct {
+		pattern     string
+		convHandler func() string
+	}{
+		// The patterns should be in this specific order!
+		{
+			pattern: "January",
+			convHandler: func() string {
+				return c.ToMonthString()
+			},
+		},
+		{
+			pattern: "Jan",
+			convHandler: func() string {
+				return c.ToShortMonthString()
+			},
+		},
+		{
+			pattern: "Monday",
+			convHandler: func() string {
+				return c.ToWeekString()
+			},
+		},
+		{
+			pattern: "Mon",
+			convHandler: func() string {
+				return c.ToShortWeekString()
+			},
+		},
+	}
+
+	for _, patternItem := range layoutConvPatterns {
+		if strings.Contains(layout, patternItem.pattern) {
+			layout = strings.ReplaceAll(layout, patternItem.pattern, patternItem.convHandler())
+		}
+	}
+
 	return c.Carbon2Time().Format(layout)
 }
 
