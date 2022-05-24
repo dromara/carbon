@@ -922,127 +922,127 @@ carbon.Parse("2002-12-31 13:14:15").Age() // 18
 ##### Output
 
 ```go
-// Output a string in date and time format
+// Output string with date and time format
 carbon.Parse("2020-08-05 13:14:15").ToDateTimeString() // 2020-08-05 13:14:15
-// Output a string in date and time with millisecond format
+// Output string with date and time with millisecond format
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToDateTimeMilliString() // 2020-08-05 13:14:15.999
-// Output a string in date and time with microsecond format
+// Output string with date and time with microsecond format
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToDateTimeMicroString() // 2020-08-05 13:14:15.999999
-// Output a string in date and time with nanosecond format
+// Output string with date and time with nanosecond format
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToDateTimeNanoString() // 2020-08-05 13:14:15.999999999
 
-// Output a string in short date and time format
+// Output string with short date and time format
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToShortDateTimeString() // 20200805131415
-// Output a string in short date and time with millisecond format
+// Output string with short date and time with millisecond format
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToShortDateTimeMilliString() // 20200805131415.999
-// Output a string in short date and time with microsecond format
+// Output string with short date and time with microsecond format
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToShortDateTimeMicroString() // 20200805131415.999999
-// Output a string in short date and time with nanosecond format
+// Output string with short date and time with nanosecond format
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToShortDateTimeNanoString() // 20200805131415.999999999
 
-// Output a in date format
+// Output string with date format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToDateString() // 2020-08-05
-// Output a in date with millisecond format
+// Output string with date with millisecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToDateMilliString() // 2020-08-05.999
-// Output a in date with microsecond format
+// Output string with date with microsecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToDateMicroString() // 2020-08-05.999999
-// Output a in date with nanosecond format
+// Output string with date with nanosecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToDateNanoString() // 2020-08-05.999999999
 
-// Output a string in short date format
+// Output string with short date format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortDateString() // 20200805
-// Output a string in short date with millisecond format
+// Output string with short date with millisecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortDateMilliString() // 20200805.999
-// Output a string in short date with microsecond format
+// Output string with short date with microsecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortDateMicroString() // 20200805.999999
-// Output a string in short date with nanosecond format
+// Output string with short date with nanosecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortDateNanoString() // 20200805.999999999
 
-// Output a string in time format
+// Output string with time format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToTimeString() // 13:14:15
-// Output a string in time with millisecond format
+// Output string with time with millisecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToTimeMilliString() // 13:14:15.999
-// Output a string in time with microsecond format
+// Output string with time with microsecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToTimeMicroString() // 13:14:15.999999
-// Output a string in time with nanosecond format
+// Output string with time with nanosecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToTimeNanoString() // 13:14:15.999999999
 
-// Output a string in short time format
+// Output string with short time format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortTimeString() // 131415
-// Output a string in short time with millisecond format
+// Output string with short time with millisecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortTimeMilliString() // 131415.999
-// Output a string in short time with microsecond format
+// Output a string with short time with microsecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortTimeMicroString() // 131415.999999
-// Output a string in short time with nanosecond format
+// Output a string with short time with nanosecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortTimeNanoString() // 131415.999999999
 
-// Output a string in ANSIC format
+// Output string with ANSIC format
 carbon.Parse("2020-08-05 13:14:15").ToANSICString() // Wed Aug  5 13:14:15 2020
-// Output a string in Atom format
+// Output string with Atom format
 carbon.Parse("2020-08-05 13:14:15").ToAtomString() // 2020-08-05T13:14:15+08:00
-// Output a string in unix date format
+// Output string with unix date format
 carbon.Parse("2020-08-05 13:14:15").ToUnixDateString() // Wed Aug  5 13:14:15 CST 2020
-// Output a string in ruby date format
+// Output string with ruby date format
 carbon.Parse("2020-08-05 13:14:15").ToRubyDateString() // Wed Aug 05 13:14:15 +0800 2020
-// Output a string in Kitchen format
+// Output string with Kitchen format
 carbon.Parse("2020-08-05 13:14:15").ToKitchenString() // 1:14PM
-// Output a string in Cookie format
+// Output string with Cookie format
 carbon.Parse("2020-08-05 13:14:15").ToCookieString() // Wednesday, 05-Aug-2020 13:14:15 CST
-// Output a string in day, date and time format
+// Output string with day, date and time format
 carbon.Parse("2020-08-05 13:14:15").ToDayDateTimeString() // Wed, Aug 5, 2020 1:14 PM
-// Output a string in RSS format
+// Output string with RSS format
 carbon.Parse("2020-08-05 13:14:15").ToRssString() // Wed, 05 Aug 2020 13:14:15 +0800
-// Output a string in W3C format
+// Output string with W3C format
 carbon.Parse("2020-08-05 13:14:15").ToW3cString() // 2020-08-05T13:14:15+08:00
 
-// Output a string in ISO8601 format
+// Output string with ISO8601 format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToIso8601String() // 2020-08-05T13:14:15+08:00
-// Output a string in ISO8601 with millisecond format
+// Output string with ISO8601 with millisecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToIso8601MilliString() // 2020-08-05T13:14:15.999+08:00
-// Output a string in ISO8601 with microsecond format
+// Output string with ISO8601 with microsecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToIso8601MicroString() // 2020-08-05T13:14:15.999999+08:00
-// Output a string in ISO8601 with nanosecond format
+// Output string with ISO8601 with nanosecond format
 carbon.Parse("2020-08-05 13:14:15.999999999").ToIso8601NanoString() // 2020-08-05T13:14:15.999999999+08:00
 
-// Output a string in RFC822 format
+// Output string with RFC822 format
 carbon.Parse("2020-08-05 13:14:15").ToRfc822String() // 05 Aug 20 13:14 CST
-// Output a string in RFC822Z format
+// Output string with RFC822Z format
 carbon.Parse("2020-08-05 13:14:15").ToRfc822zString() // 05 Aug 20 13:14 +0800
-// Output a string in RFC850 format
+// Output string with RFC850 format
 carbon.Parse("2020-08-05 13:14:15").ToRfc850String() // Wednesday, 05-Aug-20 13:14:15 CST
-// Output a string in RFC1036 format
+// Output string with RFC1036 format
 carbon.Parse("2020-08-05 13:14:15").ToRfc1036String() // Wed, 05 Aug 20 13:14:15 +0800
-// Output a string in RFC1123 format
+// Output string with RFC1123 format
 carbon.Parse("2020-08-05 13:14:15").ToRfc1123String() // Wed, 05 Aug 2020 13:14:15 CST
-// Output a string in RFC1123Z format
+// Output string with RFC1123Z format
 carbon.Parse("2020-08-05 13:14:15").ToRfc1123zString() // Wed, 05 Aug 2020 13:14:15 +0800
-// Output a string in RFC2822 format
+// Output string with RFC2822 format
 carbon.Parse("2020-08-05 13:14:15").ToRfc2822String() // Wed, 05 Aug 2020 13:14:15 +0800
-// Output a string in RFC7231 format
+// Output string with RFC7231 format
 carbon.Parse("2020-08-05 13:14:15").ToRfc7231String() // Wed, 05 Aug 2020 13:14:15 GMT
 
-// Output a string in RFC3339 format
+// Output string with RFC3339 format
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339String() // 2020-08-05T13:14:15+08:00
-// Output a string in RFC3339 with millisecond format
+// Output string with RFC3339 with millisecond format
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339MilliString() // 2020-08-05T13:14:15.999+08:00
-// Output a string in RFC3339 with microsecond format
+// Output string with RFC3339 with microsecond format
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339MicroString() // 2020-08-05T13:14:15.999999+08:00
-// Output a string in RFC3339 with nanosecond format
+// Output string with RFC3339 with nanosecond format
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339NanoString() // 2020-08-05T13:14:15.999999999+08:00
 
-// Output a string in date and time format
+// Output string with date and time format
 fmt.Sprintf("%s", carbon.Parse("2020-08-05 13:14:15")) // 2020-08-05 13:14:15
 
-// Output a string in "2006-01-02 15:04:05.999999999 -0700 MST" format
+// Output string with "2006-01-02 15:04:05.999999999 -0700 MST" format
 carbon.Parse("2020-08-05 13:14:15").ToString() // 2020-08-05 13:14:15.999999 +0800 CST
 
-// Output a string by layout, Layout() is shorthand for ToLayoutString()
+// Output string by layout, Layout() is shorthand for ToLayoutString()
 carbon.Parse("2020-08-05 13:14:15").Layout(carbon.ISO8601Layout) // 2020-08-05T13:14:15+08:00
 carbon.Parse("2020-08-05 13:14:15").Layout("20060102150405") // 20200805131415
 carbon.Parse("2020-08-05 13:14:15").Layout("2006年01月02日 15时04分05秒") // 2020年08月05日 13时14分15秒
 carbon.Parse("2020-08-05 13:14:15").Layout("It is 2006-01-02 15:04:05") // It is 2020-08-05 13:14:15
 
-// Output a string by format, Format() is shorthand for ToFormatString()
+// Output string by format, Format() is shorthand for ToFormatString()
 carbon.Parse("2020-08-05 13:14:15").Format("YmdHis") // 20200805131415
 carbon.Parse("2020-08-05 13:14:15").Format("Y年m月d日 H时i分s秒") // 2020年08月05日 13时14分15秒
 carbon.Parse("2020-08-05 13:14:15").Format("l jS \\o\\f F Y h:i:s A") // Wednesday 5th of August 2020 01:14:15 PM
@@ -1132,7 +1132,7 @@ carbon.Parse("2020-08-05 13:14:15").Lunar().Month() // 6
 carbon.Parse("2020-08-05 13:14:15").Lunar().LeapMonth() // 4
 // Get Chinese lunar day
 carbon.Parse("2020-08-05 13:14:15").Lunar().Day() // 16
-// Get Chinese lunar date as string in YYYY-MM-DD HH::ii::ss format
+// Get Chinese lunar date as string with YYYY-MM-DD HH::ii::ss format
 fmt.Sprintf("%s", carbon.Parse("2020-08-05 13:14:15").Lunar()) // 2020-06-16 13:14:15
 
 // Get Chinese lunar year as string
@@ -1328,11 +1328,11 @@ The following methods are supported
 
 * `Constellation()`：get constellation name
 * `Season()`：get season name
-* `DiffForHumans()`：get the difference in human-readable format
-* `ToMonthString()`：output a string in month format
-* `ToShortMonthString()`：output a string in short month format
-* `ToWeekString()`：output a string in week format
-* `ToShortWeekString()`：output a string in short week format
+* `DiffForHumans()`：get the difference with human-readable format
+* `ToMonthString()`：output string with month format
+* `ToShortMonthString()`：output string with short month format
+* `ToWeekString()`：output string with week format
+* `ToShortWeekString()`：output string with short week format
 
 ###### Set locale
 
@@ -1438,43 +1438,43 @@ invalid timezone "xxx", please see the file "$GOROOT/lib/time/zoneinfo.zip" for 
 
 ##### <a id="format-sign-table">Format sign table</a>
 
-| sign | desc | length | range | example |
-| :------------: | :------------: | :------------: | :------------: | :------------: |
-| d | Day of the month, padded to 2 | 2 | 01-31 | 02 |
-| D | Day of the week, as an abbreviate localized string | 3 | Mon-Sun | Mon |
-| j | Day of the month, no padding | - |1-31 | 2 |
+| sign |                                                  desc                                                  | length | range | example |
+| :------------: |:------------------------------------------------------------------------------------------------------:| :------------: | :------------: | :------------: |
+| d |                                     Day of the month, padded to 2                                      | 2 | 01-31 | 02 |
+| D |                           Day of the week, as an abbreviate localized string                           | 3 | Mon-Sun | Mon |
+| j |                                      Day of the month, no padding                                      | - |1-31 | 2 |
 | S | English ordinal suffix for the day of the month, 2 characters. Eg: st, nd, rd or th. Works well with j | 2 | st/nd/rd/th | th |
-| l | Day of the week, as an unabbreviated localized string | - | Monday-Sunday | Monday |
-| F | Month as an unabbreviated localized string | - | January-December | January |
-| m | Month, padded to 2 | 2 | 01-12 | 01 |
-| M | Month as an abbreviated localized string | 3 | Jan-Dec | Jan |
-| n | Month, no padding | - | 1-12 | 1 |
-| Y | Four-digit year | 4 | 0000-9999 | 2006 |
-| y | Two-digit year | 2 | 00-99 | 06 |
-| a | Lowercase morning or afternoon sign | 2 | am/pm | pm |
-| A | Uppercase morning or afternoon sign | 2 | AM/PM | PM |
-| g | Hour in 12-hour time, no padding | - | 1-12 | 3 |
-| G | Hour in 24-hour time, no padding | - | 0-23 | 15 |
-| h | Hour in 12-hour time, padded to 2 | 2 | 00-11 | 03 |
-| H | Hour in 24-hour time, padded to 2 | 2 | 00-23 | 15 |
-| i | Minute, padded to 2 | 2 | 01-59 | 04 |
-| s | Second, padded to 2 | 2 | 01-59 | 05 |
-| c | ISO8601 date | - | - | 2006-01-02T15:04:05-07:00 |
-| r | RFC2822 date | - | - | Mon, 02 Jan 2006 15:04:05 -0700 |
-| O | Difference to Greenwich time (GMT) without colon between hours and minutes | - | - | +0700 |
-| P | Difference to Greenwich time (GMT) with colon between hours and minutes | - | - | +07:00 |
-| T | Abbreviated timezone | - | - | MST |
-| W | ISO8601 week of the year | - | 1-52 | 1 |
-| N | ISO8601 day of the week | 1 | 1-7 | 1 |
-| L | Whether it's a leap year | 1 | 0-1 | 0 |
-| U | Unix timestamp in seconds | 10 | - | 1611818268 |
-| u | Millisecond, padded to 3 | 3 | - | 999 |
-| w | Day of the week | 1 | 0-6 | 1 |
-| t | Total days of the month | 2 | 28-31 | 31 |
-| z | Day of the year | - | 0-365 | 2 |
-| e | Location | - | - | America/New_York |
-| Q | Quarter | 1 | 1-4 | 1 |
-| C | Century | - | 0-99 | 21 |
+| l |                         Day of the week, as an unabbreviated localized string                          | - | Monday-Sunday | Monday |
+| F |                               Month as an unabbreviated localized string                               | - | January-December | January |
+| m |                                           Month, padded to 2                                           | 2 | 01-12 | 01 |
+| M |                                Month as an abbreviated localized string                                | 3 | Jan-Dec | Jan |
+| n |                                           Month, no padding                                            | - | 1-12 | 1 |
+| Y |                                            Four-digit year                                             | 4 | 0000-9999 | 2006 |
+| y |                                             Two-digit year                                             | 2 | 00-99 | 06 |
+| a |                                  Lowercase morning or afternoon sign                                   | 2 | am/pm | pm |
+| A |                                  Uppercase morning or afternoon sign                                   | 2 | AM/PM | PM |
+| g |                                     Hour in 12-hour format, no padding                                     | - | 1-12 | 3 |
+| G |                                    Hour in 24-hour format, no padding                                    | - | 0-23 | 15 |
+| h |                                   Hour in 12-hour format, padded to 2                                    | 2 | 00-11 | 03 |
+| H |                                   Hour in 24-hour format, padded to 2                                    | 2 | 00-23 | 15 |
+| i |                                          Minute, padded to 2                                           | 2 | 01-59 | 04 |
+| s |                                          Second, padded to 2                                           | 2 | 01-59 | 05 |
+| c |                                              ISO8601 date                                              | - | - | 2006-01-02T15:04:05-07:00 |
+| r |                                              RFC2822 date                                              | - | - | Mon, 02 Jan 2006 15:04:05 -0700 |
+| O |               Difference to Greenwich time (GMT) without colon between hours and minutes               | - | - | +0700 |
+| P |                Difference to Greenwich time (GMT) with colon between hours and minutes                 | - | - | +07:00 |
+| T |                                          Abbreviated timezone                                          | - | - | MST |
+| W |                                        ISO8601 week of the year                                        | - | 1-52 | 1 |
+| N |                                        ISO8601 day of the week                                         | 1 | 1-7 | 1 |
+| L |                                        Whether it's a leap year                                        | 1 | 0-1 | 0 |
+| U |                                      Unix timestamp with seconds                                       | 10 | - | 1611818268 |
+| u |                                        Millisecond, padded to 3                                        | 3 | - | 999 |
+| w |                                            Day of the week                                             | 1 | 0-6 | 1 |
+| t |                                        Total days of the month                                         | 2 | 28-31 | 31 |
+| z |                                            Day of the year                                             | - | 0-365 | 2 |
+| e |                                                Location                                                | - | - | America/New_York |
+| Q |                                                Quarter                                                 | 1 | 1-4 | 1 |
+| C |                                                Century                                                 | - | 0-99 | 21 |
 
 #### FAQ
 
