@@ -24,7 +24,7 @@ func CreateFromTimestamp(timestamp int64, timezone ...string) Carbon {
 }
 
 // CreateFromTimestampMilli creates a Carbon instance from a given timestamp with millisecond.
-// 从给定的微秒级时间戳创建 Carbon 实例
+// 从给定的毫秒级时间戳创建 Carbon 实例
 func (c Carbon) CreateFromTimestampMilli(timestamp int64, timezone ...string) Carbon {
 	if len(timezone) > 0 {
 		c.loc, c.Error = getLocationByTimezone(timezone[len(timezone)-1])
@@ -37,7 +37,7 @@ func (c Carbon) CreateFromTimestampMilli(timestamp int64, timezone ...string) Ca
 }
 
 // CreateFromTimestampMilli creates a Carbon instance from a given timestamp with millisecond.
-// 从给定的微秒级时间戳创建 Carbon 实例
+// 从给定的毫秒级时间戳创建 Carbon 实例
 func CreateFromTimestampMilli(timestamp int64, timezone ...string) Carbon {
 	return NewCarbon().CreateFromTimestampMilli(timestamp, timezone...)
 }

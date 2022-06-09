@@ -22,7 +22,7 @@ it is helpful, please give me a star
 
 #### Installation
 
-##### Go version >= 1.16
+##### Go version >= 1.16 (recommend)
 
 ```go
 // By github
@@ -40,7 +40,7 @@ import (
 )
 ```
 
-##### Go version < 1.16
+##### Go version < 1.16 (must)
 
 ```go
 // By github
@@ -1342,8 +1342,8 @@ lang.SetLocale("en")
 
 c := carbon.SetLanguage(lang)
 if c.Error != nil {
-    // Error handle...
-    log.Fatal(err)
+// Error handle...
+log.Fatal(err)
 }
 
 c.Now().AddHours(1).DiffForHumans() // 1 hour from now

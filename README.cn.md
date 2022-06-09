@@ -11,7 +11,7 @@
 
 一个轻量级、语义化、对开发者友好的 golang 时间处理库，支持链式调用
 
-Carbon 已被 [awesome-go](https://github.com/avelino/awesome-go#date-and-time "awesome-go") 收录, 如果您觉得不错，请给个 star 吧
+Carbon 已被 [awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 收录, 如果您觉得不错，请给个 star 吧
 
 [github.com/golang-module/carbon](https://github.com/golang-module/carbon "github.com/golang-module/carbon")
 
@@ -19,7 +19,7 @@ Carbon 已被 [awesome-go](https://github.com/avelino/awesome-go#date-and-time "
 
 #### 安装使用
 
-##### Golang 版本大于等于 1.16
+##### Golang 版本大于等于 1.16 (推荐)
 
 ```go
 // 使用 github 库
@@ -37,7 +37,7 @@ import (
 )
 ```
 
-##### Golang 版本小于 1.16
+##### Golang 版本小于 1.16 (必须)
 
 ```go
 // 使用 github 库

@@ -19,7 +19,7 @@ Carbon は [awesome-go](https://github.com/avelino/awesome-go#date-and-time "awe
 
 #### インストール使用
 
-##### Golangバージョンは1.16以上です
+##### Golangバージョンは1.16以上です (推奨)
 
 ```go
 // github倉庫を使う
@@ -37,7 +37,7 @@ import (
 )
 ```
 
-##### Golangバージョンは1.16より小さいです
+##### Golangバージョンは1.16より小さいです (必要)
 
 ```go
 // github倉庫を使う
