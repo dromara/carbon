@@ -421,8 +421,7 @@ func (c Carbon) DayOfTheWeek() string {
 	if day > 0 {
 		index = day % 7
 	}
-	// Sunday, Monday , Tuesday, Wednesday, Thursday, Friday, Saturday
-	// 0		1			2		3			4		5		6
+
 	if daysOfTheWeek, ok := c.lang.resources["weeks"]; ok {
 		slice := strings.Split(daysOfTheWeek, "|")
 		return slice[index]
