@@ -1,6 +1,7 @@
 package carbon
 
 import (
+	"strings"
 	"time"
 )
 
@@ -406,4 +407,25 @@ func (c Carbon) Age() int {
 		return 0
 	}
 	return int(c.DiffInYears(now))
+}
+
+func (c Carbon) DayOfTheWeek() string {
+	if c.IsInvalid() {
+		return ""
+	}
+	if len(c.lang.resources) == 0 {
+		c.lang.SetLocale(defaultLocale)
+	}
+	index := -1
+	day := c.DayOfWeek()
+	if day > 0 {
+		index = day % 7
+	}
+	// Sunday, Monday , Tuesday, Wednesday, Thursday, Friday, Saturday
+	// 0		1			2		3			4		5		6
+	if daysOfTheWeek, ok := c.lang.resources["weeks"]; ok {
+		slice := strings.Split(daysOfTheWeek, "|")
+		return slice[index]
+	}
+	return ""
 }

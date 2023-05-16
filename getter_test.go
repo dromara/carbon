@@ -1132,3 +1132,36 @@ func TestCarbon_Age(t *testing.T) {
 		assert.Equal(test.expected, c.Age(), "Current test index is "+strconv.Itoa(index))
 	}
 }
+
+func TestCarbon_DayOfTheWeek(t *testing.T) {
+	assert := assert.New(t)
+	tests := []struct {
+		input    string
+		expected string
+	}{
+		{"", ""},
+		{"0", ""},
+		{"0000-00-00", ""},
+		{"00:00:00", ""},
+		{"0000-00-00 00:00:00", ""},
+
+		{"2023-04-30", "Sunday"},
+		{"2023-05-01", "Monday"},
+		{"2023-05-02", "Tuesday"},
+		{"2023-05-03", "Wednesday"},
+		{"2023-05-04", "Thursday"},
+		{"2023-05-05", "Friday"},
+		{"2023-05-06", "Saturday"},
+		{"2020-08-05", "Wednesday"},
+		{"2020-09-05", "Saturday"},
+		{"2020-10-05", "Monday"},
+		{"2020-11-05", "Thursday"},
+		{"2020-12-05", "Saturday"},
+	}
+
+	for index, test := range tests {
+		c := SetTimezone(PRC).Parse(test.input)
+		assert.Nil(c.Error)
+		assert.Equal(test.expected, c.DayOfTheWeek(), "Current test index is "+strconv.Itoa(index))
+	}
+}
