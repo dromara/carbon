@@ -1,7 +1,6 @@
 package carbon
 
 import (
-	"fmt"
 	"strconv"
 	"testing"
 
@@ -444,7 +443,7 @@ func TestLunar_String(t *testing.T) {
 	for index, test := range tests {
 		c := Parse(test.input, PRC)
 		assert.Nil(c.Error)
-		assert.Equal(test.expected, fmt.Sprintf("%s", c.Lunar()), "Current test index is "+strconv.Itoa(index))
+		assert.Equal(test.expected, c.Lunar().String(), "Current test index is "+strconv.Itoa(index))
 	}
 }
 

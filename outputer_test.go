@@ -1,7 +1,6 @@
 package carbon
 
 import (
-	"fmt"
 	"strconv"
 	"testing"
 
@@ -27,7 +26,7 @@ func TestCarbon_String(t *testing.T) {
 	for index, test := range tests {
 		c := Parse(test.input, PRC)
 		assert.Nil(c.Error)
-		assert.Equal(test.expected, fmt.Sprintf("%s", Parse(test.input)), "Current test index is "+strconv.Itoa(index))
+		assert.Equal(test.expected, Parse(test.input).String(), "Current test index is "+strconv.Itoa(index))
 	}
 }
 
