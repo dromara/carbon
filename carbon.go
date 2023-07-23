@@ -186,6 +186,13 @@ type Carbon struct {
 	Error        error
 }
 
+// NewCarbonPointer returns a new Carbon instance.
+// 初始化 Carbon 结构体
+func NewCarbonPointer() *Carbon {
+	c := NewCarbon()
+	return &c
+}
+
 // NewCarbon returns a new Carbon instance.
 // 初始化 Carbon 结构体
 func NewCarbon() Carbon {

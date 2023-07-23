@@ -6,50 +6,54 @@ import (
 
 // CreateFromTimeLayoutString creates a Carbon instance from a given time string ("15:04:05").
 // 从给定的秒级时间戳创建 Carbon 实例
-func (Carbon) CreateFromTimeLayoutString(timeString string, timezone ...string) Carbon {
-	return ParseByLayout(timeString, TimeLayout, timezone...)
+func (c *Carbon) CreateFromTimeLayoutString(timeString string, timezone ...string) Carbon {
+	*c = ParseByLayout(timeString, TimeLayout, timezone...)
+	return *c
 }
 
 // CreateFromTimeLayoutString creates a Carbon instance from a given time string ("15:04:05").
 // 从给定的秒级时间戳创建 Carbon 实例
 func CreateFromTimeLayoutString(timeString string, timezone ...string) Carbon {
-	return NewCarbon().CreateFromTimeLayoutString(timeString, timezone...)
+	return NewCarbonPointer().CreateFromTimeLayoutString(timeString, timezone...)
 }
 
 // CreateFromTimeMilliLayoutString creates a Carbon instance from a given timeMilli string ("15:04:05.999").
 // 从给定的秒级时间戳创建 Carbon 实例
-func (Carbon) CreateFromTimeMilliLayoutString(timeMilliString string, timezone ...string) Carbon {
-	return ParseByLayout(timeMilliString, TimeMilliLayout, timezone...)
+func (c *Carbon) CreateFromTimeMilliLayoutString(timeMilliString string, timezone ...string) Carbon {
+	*c = ParseByLayout(timeMilliString, TimeMilliLayout, timezone...)
+	return *c
 }
 
 // CreateFromTimeMilliLayoutString creates a Carbon instance from a given timeMilli string ("15:04:05.999").
 // 从给定的秒级时间戳创建 Carbon 实例
 func CreateFromTimeMilliLayoutString(timeMilliString string, timezone ...string) Carbon {
-	return NewCarbon().CreateFromTimeMilliLayoutString(timeMilliString, timezone...)
+	return NewCarbonPointer().CreateFromTimeMilliLayoutString(timeMilliString, timezone...)
 }
 
 // CreateFromTimeMicroLayoutString creates a Carbon instance from a given timeMicro string ("15:04:05.999999").
 // 从给定的秒级时间戳创建 Carbon 实例
-func (Carbon) CreateFromTimeMicroLayoutString(timeMicroString string, timezone ...string) Carbon {
-	return ParseByLayout(timeMicroString, TimeMicroLayout, timezone...)
+func (c *Carbon) CreateFromTimeMicroLayoutString(timeMicroString string, timezone ...string) Carbon {
+	*c = ParseByLayout(timeMicroString, TimeMicroLayout, timezone...)
+	return *c
 }
 
 // CreateFromTimeMicroLayoutString creates a Carbon instance from a given timeMicro string ("15:04:05.999999").
 // 从给定的秒级时间戳创建 Carbon 实例
 func CreateFromTimeMicroLayoutString(timeMicroString string, timezone ...string) Carbon {
-	return NewCarbon().CreateFromTimeMicroLayoutString(timeMicroString, timezone...)
+	return NewCarbonPointer().CreateFromTimeMicroLayoutString(timeMicroString, timezone...)
 }
 
 // CreateFromTimeNanoLayoutString creates a Carbon instance from a given timeNano string ("15:04:05.999999999").
 // 从给定的秒级时间戳创建 Carbon 实例
-func (Carbon) CreateFromTimeNanoLayoutString(timeNanoString string, timezone ...string) Carbon {
-	return ParseByLayout(timeNanoString, TimeNanoLayout, timezone...)
+func (c *Carbon) CreateFromTimeNanoLayoutString(timeNanoString string, timezone ...string) Carbon {
+	*c = ParseByLayout(timeNanoString, TimeNanoLayout, timezone...)
+	return *c
 }
 
 // CreateFromTimeNanoLayoutString creates a Carbon instance from a given timeNano string ("15:04:05.999999999").
 // 从给定的秒级时间戳创建 Carbon 实例
 func CreateFromTimeNanoLayoutString(timeNanoString string, timezone ...string) Carbon {
-	return NewCarbon().CreateFromTimeNanoLayoutString(timeNanoString, timezone...)
+	return NewCarbonPointer().CreateFromTimeNanoLayoutString(timeNanoString, timezone...)
 }
 
 // CreateFromTimestamp creates a Carbon instance from a given timestamp with second.
