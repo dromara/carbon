@@ -102,13 +102,13 @@ type TimestampNano struct {
 	Carbon
 }
 
-// MarshalJSON implements the interface json.Marshal for Time struct.
+// MarshalJSON implements the interface json.Marshal for Time struct ("15:04:05").
 // 实现 MarshalJSON 接口
 func (t Time) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf(`"%s"`, t.ToTimeString())), nil
+	return []byte(t.ToTimeString()), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for Time struct.
+// UnmarshalJSON implements the interface json.Unmarshal for Time struct ("15:04:05").
 // 实现 UnmarshalJSON 接口
 func (t *Time) UnmarshalJSON(b []byte) error {
 	c := CreateFromTimeLayoutString(string(bytes.Trim(b, `"`)))
@@ -118,19 +118,19 @@ func (t *Time) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for Time struct.
+// String implements the interface Stringer for Time struct ("15:04:05").
 // 实现 Stringer 接口
 func (t Time) String() string {
 	return t.ToTimeString()
 }
 
-// MarshalJSON implements the interface json.Marshal for TimeMilli struct.
+// MarshalJSON implements the interface json.Marshal for TimeMilli struct ("15:04:05.999").
 // 实现 MarshalJSON 接口
 func (t TimeMilli) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf(`"%s"`, t.ToTimeMilliString())), nil
+	return []byte(t.ToTimeMilliString()), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for TimeMilli struct.
+// UnmarshalJSON implements the interface json.Unmarshal for TimeMilli struct ("15:04:05.999").
 // 实现 UnmarshalJSON 接口
 func (t *TimeMilli) UnmarshalJSON(b []byte) error {
 	c := CreateFromTimeMilliLayoutString(string(bytes.Trim(b, `"`)))
@@ -140,19 +140,19 @@ func (t *TimeMilli) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for TimeMilli struct.
+// String implements the interface Stringer for TimeMilli struct ("15:04:05.999").
 // 实现 Stringer 接口
 func (t TimeMilli) String() string {
 	return t.ToTimeMilliString()
 }
 
-// MarshalJSON implements the interface json.Marshal for TimeMicro struct.
+// MarshalJSON implements the interface json.Marshal for TimeMicro struct ("15:04:05.999999").
 // 实现 MarshalJSON 接口
 func (t TimeMicro) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf(`"%s"`, t.ToTimeMicroString())), nil
+	return []byte(t.ToTimeMicroString()), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for TimeMicro struct.
+// UnmarshalJSON implements the interface json.Unmarshal for TimeMicro struct ("15:04:05.999999").
 // 实现 UnmarshalJSON 接口
 func (t *TimeMicro) UnmarshalJSON(b []byte) error {
 	c := CreateFromTimeMicroLayoutString(string(bytes.Trim(b, `"`)))
@@ -162,19 +162,19 @@ func (t *TimeMicro) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for TimeMicro struct.
+// String implements the interface Stringer for TimeMicro struct ("15:04:05.999999").
 // 实现 Stringer 接口
 func (t TimeMicro) String() string {
 	return t.ToTimeMicroString()
 }
 
-// MarshalJSON implements the interface json.Marshal for TimeNano struct.
+// MarshalJSON implements the interface json.Marshal for TimeNano struct ("15:04:05.999999").
 // 实现 MarshalJSON 接口
 func (t TimeNano) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, t.ToTimeNanoString())), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for TimeNano struct.
+// UnmarshalJSON implements the interface json.Unmarshal for TimeNano struct ("15:04:05.999999").
 // 实现 UnmarshalJSON 接口
 func (t *TimeNano) UnmarshalJSON(b []byte) error {
 	c := CreateFromTimeNanoLayoutString(string(bytes.Trim(b, `"`)))
@@ -184,19 +184,19 @@ func (t *TimeNano) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for TimeNano struct.
+// String implements the interface Stringer for TimeNano struct ("15:04:05.999999").
 // 实现 Stringer 接口
 func (t TimeNano) String() string {
 	return t.ToTimeNanoString()
 }
 
-// MarshalJSON implements the interface json.Marshal for DateTime struct.
+// MarshalJSON implements the interface json.Marshal for DateTime struct ("2006-01-02 15:04:05").
 // 实现 MarshalJSON 接口
 func (t DateTime) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, t.ToDateTimeString())), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for DateTime struct.
+// UnmarshalJSON implements the interface json.Unmarshal for DateTime struct ("2006-01-02 15:04:05").
 // 实现 UnmarshalJSON 接口
 func (t *DateTime) UnmarshalJSON(b []byte) error {
 	c := ParseByLayout(string(bytes.Trim(b, `"`)), DateTimeLayout)
@@ -206,19 +206,19 @@ func (t *DateTime) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for DateTime struct.
+// String implements the interface Stringer for DateTime struct ("2006-01-02 15:04:05").
 // 实现 Stringer 接口
 func (t DateTime) String() string {
 	return t.ToDateTimeString()
 }
 
-// MarshalJSON implements the interface json.Marshal for DateTimeMilli struct.
+// MarshalJSON implements the interface json.Marshal for DateTimeMilli struct ("2006-01-02 15:04:05.999").
 // 实现 MarshalJSON 接口
 func (t DateTimeMilli) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, t.ToDateTimeMilliString())), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for DateTimeMilli struct.
+// UnmarshalJSON implements the interface json.Unmarshal for DateTimeMilli struct ("2006-01-02 15:04:05.999").
 // 实现 UnmarshalJSON 接口
 func (t *DateTimeMilli) UnmarshalJSON(b []byte) error {
 	c := ParseByLayout(string(bytes.Trim(b, `"`)), DateTimeMilliLayout)
@@ -228,19 +228,19 @@ func (t *DateTimeMilli) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for DateTimeMilli struct.
+// String implements the interface Stringer for DateTimeMilli struct ("2006-01-02 15:04:05.999").
 // 实现 Stringer 接口
 func (t DateTimeMilli) String() string {
 	return t.ToDateTimeMilliString()
 }
 
-// MarshalJSON implements the interface json.Marshal for DateTimeMicro struct.
+// MarshalJSON implements the interface json.Marshal for DateTimeMicro struct ("2006-01-02 15:04:05.999999").
 // 实现 MarshalJSON 接口
 func (t DateTimeMicro) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, t.ToDateTimeMicroString())), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for DateTimeMicro struct.
+// UnmarshalJSON implements the interface json.Unmarshal for DateTimeMicro struct ("2006-01-02 15:04:05.999999").
 // 实现 UnmarshalJSON 接口
 func (t *DateTimeMicro) UnmarshalJSON(b []byte) error {
 	c := ParseByLayout(string(bytes.Trim(b, `"`)), DateTimeMicroLayout)
@@ -250,19 +250,19 @@ func (t *DateTimeMicro) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for DateTimeMicro struct.
+// String implements the interface Stringer for DateTimeMicro struct ("2006-01-02 15:04:05.999999").
 // 实现 Stringer 接口
 func (t DateTimeMicro) String() string {
 	return t.ToDateTimeMicroString()
 }
 
-// MarshalJSON implements the interface json.Marshal for DateTimeNano struct.
+// MarshalJSON implements the interface json.Marshal for DateTimeNano struct ("2006-01-02 15:04:05.999999999").
 // 实现 MarshalJSON 接口
 func (t DateTimeNano) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, t.ToDateTimeNanoString())), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for DateTimeNano struct.
+// UnmarshalJSON implements the interface json.Unmarshal for DateTimeNano struct ("2006-01-02 15:04:05.999999999").
 // 实现 UnmarshalJSON 接口
 func (t *DateTimeNano) UnmarshalJSON(b []byte) error {
 	c := ParseByLayout(string(bytes.Trim(b, `"`)), DateTimeNanoLayout)
@@ -272,19 +272,19 @@ func (t *DateTimeNano) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for DateTimeNano struct.
+// String implements the interface Stringer for DateTimeNano struct ("2006-01-02 15:04:05.999999999").
 // 实现 Stringer 接口
 func (t DateTimeNano) String() string {
 	return t.ToDateTimeNanoString()
 }
 
-// MarshalJSON implements the interface json.Marshal for Date struct.
+// MarshalJSON implements the interface json.Marshal for Date struct ("2006-01-02").
 // 实现 MarshalJSON 接口
 func (t Date) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, t.ToDateString())), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for Date struct.
+// UnmarshalJSON implements the interface json.Unmarshal for Date struct ("2006-01-02").
 // 实现 UnmarshalJSON 接口
 func (t *Date) UnmarshalJSON(b []byte) error {
 	c := ParseByLayout(string(bytes.Trim(b, `"`)), DateLayout)
@@ -294,19 +294,19 @@ func (t *Date) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for Date struct.
+// String implements the interface Stringer for Date struct ("2006-01-02").
 // 实现 Stringer 接口
 func (t Date) String() string {
 	return t.ToDateString()
 }
 
-// MarshalJSON implements the interface json.Marshal for DateMilli struct.
+// MarshalJSON implements the interface json.Marshal for DateMilli struct ("2006-01-02.999").
 // 实现 MarshalJSON 接口
 func (t DateMilli) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, t.ToDateMilliString())), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for DateMilli struct.
+// UnmarshalJSON implements the interface json.Unmarshal for DateMilli struct ("2006-01-02.999").
 // 实现 UnmarshalJSON 接口
 func (t *DateMilli) UnmarshalJSON(b []byte) error {
 	c := ParseByLayout(string(bytes.Trim(b, `"`)), DateMilliLayout)
@@ -316,19 +316,19 @@ func (t *DateMilli) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for DateMilli struct.
+// String implements the interface Stringer for DateMilli struct ("2006-01-02.999").
 // 实现 Stringer 接口
 func (t DateMilli) String() string {
 	return t.ToDateMilliString()
 }
 
-// MarshalJSON implements the interface json.Marshal for DateMicro struct.
+// MarshalJSON implements the interface json.Marshal for DateMicro struct ("2006-01-02.999999").
 // 实现 MarshalJSON 接口
 func (t DateMicro) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, t.ToDateMicroString())), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for DateMicro struct.
+// UnmarshalJSON implements the interface json.Unmarshal for DateMicro struct ("2006-01-02.999999").
 // 实现 UnmarshalJSON 接口
 func (t *DateMicro) UnmarshalJSON(b []byte) error {
 	c := ParseByLayout(string(bytes.Trim(b, `"`)), DateMicroLayout)
@@ -338,19 +338,19 @@ func (t *DateMicro) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for DateMicro struct.
+// String implements the interface Stringer for DateMicro struct ("2006-01-02.999999").
 // 实现 Stringer 接口
 func (t DateMicro) String() string {
 	return t.ToDateMicroString()
 }
 
-// MarshalJSON implements the interface json.Marshal for DateNano struct.
+// MarshalJSON implements the interface json.Marshal for DateNano struct ("2006-01-02.999999999").
 // 实现 MarshalJSON 接口
 func (t DateNano) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, t.ToDateNanoString())), nil
 }
 
-// UnmarshalJSON implements the interface json.Unmarshal for DateNano struct.
+// UnmarshalJSON implements the interface json.Unmarshal for DateNano struct ("2006-01-02.999999999").
 // 实现 UnmarshalJSON 接口
 func (t *DateNano) UnmarshalJSON(b []byte) error {
 	c := ParseByLayout(string(bytes.Trim(b, `"`)), DateNanoLayout)
@@ -360,7 +360,7 @@ func (t *DateNano) UnmarshalJSON(b []byte) error {
 	return c.Error
 }
 
-// String implements the interface Stringer for DateNano struct.
+// String implements the interface Stringer for DateNano struct ("2006-01-02.999999999").
 // 实现 Stringer 接口
 func (t DateNano) String() string {
 	return t.ToDateNanoString()
