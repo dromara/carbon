@@ -23,6 +23,10 @@ type Person struct {
 	CreatedAt2   TimestampMilli `json:"created_at2"`
 	CreatedAt3   TimestampMicro `json:"created_at3"`
 	CreatedAt4   TimestampNano  `json:"created_at4"`
+	Time1        Time           `json:"time1"`
+	Time2        TimeMilli      `json:"time2"`
+	Time3        TimeMicro      `json:"time3"`
+	Time4        TimeNano       `json:"time4"`
 }
 
 var person Person
@@ -43,6 +47,10 @@ func TestCarbon_MarshalJSON(t *testing.T) {
 		CreatedAt2:   TimestampMilli{Parse("2024-08-05 13:14:15.999")},
 		CreatedAt3:   TimestampMicro{Parse("2025-08-05 13:14:15.999999")},
 		CreatedAt4:   TimestampNano{Parse("2025-08-05 13:14:15.999999999")},
+		Time1:        Time{Parse("15:04:05")},
+		Time2:        TimeMilli{Parse("15:04:05.999")},
+		Time3:        TimeMicro{Parse("15:04:05.999999")},
+		Time4:        TimeNano{Parse("15:04:05.999999999")},
 	}
 	data, err := json.Marshal(&person)
 	assert.Nil(t, err)
@@ -64,7 +72,11 @@ func TestCarbon_UnmarshalJSON(t *testing.T) {
 		"created_at1": 1596604455,
 		"created_at2": 1596604455999,
 		"created_at3": 1596604455999999,
-		"created_at4": 1596604455999999999
+		"created_at4": 1596604455999999999,
+		"time1": "15:04:05",
+		"time2": "15:04:05.999",
+		"time3": "15:04:05.999999",
+		"time4": "15:04:05.999999999",
 	}`
 
 	err := json.Unmarshal([]byte(str), &person)
@@ -87,7 +99,11 @@ func TestError_Json(t *testing.T) {
 		"created_at1": 0,
 		"created_at2": 0,
 		"created_at3": 0,
-		"created_at4": 0
+		"created_at4": 0,
+		"time1": "",
+		"time2": "",
+		"time3": "",
+		"time4": "",
 	}`
 	err := json.Unmarshal([]byte(str), &person)
 	assert.NotNil(t, err)

@@ -8,6 +8,7 @@ import (
 // 将标准格式时间字符串解析成 Carbon 实例
 func (c Carbon) Parse(value string, timezone ...string) Carbon {
 	layouts := []string{
+		TimeLayout, TimeMilliLayout, TimeMicroLayout, TimeNanoLayout,
 		DayDateTimeLayout,
 		DateTimeLayout, DateTimeNanoLayout, ShortDateTimeLayout, ShortDateTimeNanoLayout,
 		DateLayout, DateNanoLayout, ShortDateLayout, ShortDateNanoLayout,

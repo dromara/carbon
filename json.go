@@ -6,6 +6,30 @@ import (
 	"strconv"
 )
 
+// Time defines a Time struct.
+// 定义 Time 结构体
+type Time struct {
+	Carbon
+}
+
+// TimeMilli defines a TimeMilli struct.
+// 定义 TimeMilli 结构体
+type TimeMilli struct {
+	Carbon
+}
+
+// TimeMicro defines a TimeMicro struct.
+// 定义 TimeMicro 结构体
+type TimeMicro struct {
+	Carbon
+}
+
+// TimeNano defines a TimeNano struct.
+// 定义 TimeNano 结构体
+type TimeNano struct {
+	Carbon
+}
+
 // DateTime defines a DateTime struct.
 // 定义 DateTime 结构体
 type DateTime struct {
@@ -76,6 +100,94 @@ type TimestampMicro struct {
 // 定义 TimestampNano 结构体
 type TimestampNano struct {
 	Carbon
+}
+
+// MarshalJSON implements the interface json.Marshal for Time struct ("15:04:05").
+// 实现 MarshalJSON 接口
+func (t Time) MarshalJSON() ([]byte, error) {
+	return []byte(t.String()), nil
+}
+
+// UnmarshalJSON implements the interface json.Unmarshal for Time struct ("15:04:05").
+// 实现 UnmarshalJSON 接口
+func (t *Time) UnmarshalJSON(b []byte) error {
+	c := CreateFromTimeLayoutString(string(b))
+	if c.Error == nil {
+		*t = Time{c}
+	}
+	return c.Error
+}
+
+// String implements the interface Stringer for Time struct ("15:04:05").
+// 实现 Stringer 接口
+func (t Time) String() string {
+	return t.ToTimeString()
+}
+
+// MarshalJSON implements the interface json.Marshal for TimeMilli struct ("15:04:05.999").
+// 实现 MarshalJSON 接口
+func (t TimeMilli) MarshalJSON() ([]byte, error) {
+	return []byte(t.String()), nil
+}
+
+// UnmarshalJSON implements the interface json.Unmarshal for TimeMilli struct ("15:04:05.999").
+// 实现 UnmarshalJSON 接口
+func (t *TimeMilli) UnmarshalJSON(b []byte) error {
+	c := CreateFromTimeMilliLayoutString(string(b))
+	if c.Error == nil {
+		*t = TimeMilli{c}
+	}
+	return c.Error
+}
+
+// String implements the interface Stringer for TimeMilli struct ("15:04:05.999").
+// 实现 Stringer 接口
+func (t TimeMilli) String() string {
+	return t.ToTimeMilliString()
+}
+
+// MarshalJSON implements the interface json.Marshal for TimeMicro struct ("15:04:05.999999").
+// 实现 MarshalJSON 接口
+func (t TimeMicro) MarshalJSON() ([]byte, error) {
+	return []byte(t.String()), nil
+}
+
+// UnmarshalJSON implements the interface json.Unmarshal for TimeMicro struct ("15:04:05.999999").
+// 实现 UnmarshalJSON 接口
+func (t *TimeMicro) UnmarshalJSON(b []byte) error {
+	c := CreateFromTimeMicroLayoutString(string(b))
+	if c.Error == nil {
+		*t = TimeMicro{c}
+	}
+	return c.Error
+}
+
+// String implements the interface Stringer for TimeMicro struct ("15:04:05.999999").
+// 实现 Stringer 接口
+func (t TimeMicro) String() string {
+	return t.ToTimeMicroString()
+}
+
+// MarshalJSON implements the interface json.Marshal for TimeNano struct ("15:04:05.999999").
+// 实现 MarshalJSON 接口
+func (t TimeNano) MarshalJSON() ([]byte, error) {
+	return []byte(t.String()), nil
+}
+
+// UnmarshalJSON implements the interface json.Unmarshal for TimeNano struct ("15:04:05.999999").
+// 实现 UnmarshalJSON 接口
+func (t *TimeNano) UnmarshalJSON(b []byte) error {
+	c := CreateFromTimeNanoLayoutString(string(b))
+	if c.Error == nil {
+		*t = TimeNano{c}
+	}
+	return c.Error
+}
+
+// String implements the interface Stringer for TimeNano struct ("15:04:05.999999").
+// 实现 Stringer 接口
+func (t TimeNano) String() string {
+	return t.ToTimeNanoString()
 }
 
 // MarshalJSON implements the interface json.Marshal for DateTime struct.
