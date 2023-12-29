@@ -1253,6 +1253,108 @@ carbon.Parse("2020-03-21 19:00:00").Lunar().IsEleventhDoubleHour() // true
 carbon.Parse("2020-03-21 21:00:00").Lunar().IsTwelfthDoubleHour() // true
 ```
 
+##### VietNam Lunar
+
+> Currently only `200` years from `1900` to `2100` are supported
+
+```go
+// Get Vietnamese Lunar year of animal
+carbon.Parse("2020-08-05 13:14:15").VLunar().Animal() // Tý
+
+// Get Vietnamese lunar festival
+carbon.Parse("2021-02-12 13:14:15").VLunar().Festival() // Tết Nguyên Đán
+
+// Get Vietnamese lunar year, month, day, hour, minute and second
+carbon.Parse("2020-08-05 13:14:15").VLunar().DateTime() // 2020, 6, 16, 13, 14, 15
+// Get Vietnamese lunar year, month and day
+carbon.Parse("2020-08-05 13:14:15").VLunar().Date() // 2020, 6, 16
+// Get Vietnamese lunar hour, minute and second
+carbon.Parse("2020-08-05 13:14:15").VLunar().Time() // 13, 14, 15
+
+// Get Vietnamese lunar year
+carbon.Parse("2020-08-05 13:14:15").VLunar().Year() // 2020
+// Get Vietnamese lunar month
+carbon.Parse("2020-08-05 13:14:15").VLunar().Month() // 6
+// Get Vietnamese lunar leap month
+carbon.Parse("2020-08-05 13:14:15").VLunar().LeapMonth() // 4
+// Get Vietnamese lunar day
+carbon.Parse("2020-08-05 13:14:15").VLunar().Day() // 16
+// Get Vietnamese lunar date as YYYY-MM-DD HH::ii::ss format string
+fmt.Sprintf("%s", carbon.Parse("2020-08-05 13:14:15").VLunar()) // 2020-06-16 13:14:15
+
+// Get Vietnamese lunar year as string
+carbon.Parse("2020-08-05 13:14:15").VLunar().ToYearString() // 2020
+// Get Vietnamese lunar month as string
+carbon.Parse("2020-08-05 13:14:15").VLunar().ToMonthString() // 08
+// Get Vietnamese lunar day as string
+carbon.Parse("2020-08-05 13:14:15").VLunar().ToDayString() // 05
+// Get Vietnamese lunar date as string
+carbon.Parse("2020-08-05 13:14:15").VLunar().ToDateString() // Ngày 05 tháng 08 năm 2020
+
+// Whether is a leap year
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsLeapYear() // true
+// Whether is a leap month
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsLeapMonth() // false
+
+// Whether is a year of the rat
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsRatYear() // true
+// Whether is a year of the ox
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsOxYear() // false
+// Whether is a year of the tiger
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsTigerYear() // false
+// Whether is a year of the cat
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsCatYear() // false
+// Whether is a year of the dragon
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsDragonYear() // false
+// Whether is a year of the snake
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsSnakeYear() // false
+// Whether is a year of the horse
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsHorseYear() // false
+// Whether is a year of the goat
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsGoatYear() // false
+// Whether is a year of the monkey
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsMonkeyYear() // false
+// Whether is a year of the rooster
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsRoosterYear() // false
+// Whether is a year of the dog
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsDogYear() // false
+// Whether is a year of the dig
+carbon.Parse("2020-08-05 13:14:15").VLunar().IsPigYear() // false
+
+// Get double-hour
+carbon.Parse("2020-02-05 21:00:00").VLunar().DoubleHour() // 亥时
+
+// Whether is FirstDoubleHour
+carbon.Parse("2020-03-21 00:00:00").VLunar().IsFirstDoubleHour() // true
+// Whether is SecondDoubleHour
+carbon.Parse("2020-03-21 01:00:00").VLunar().IsSecondDoubleHour() // true
+// Whether is ThirdDoubleHour
+carbon.Parse("2020-03-21 03:00:00").VLunar().IsThirdDoubleHour() // true
+// Whether is FourthDoubleHour
+carbon.Parse("2020-03-21 05:00:00").VLunar().IsFourthDoubleHour() // true
+// Whether is FifthDoubleHour
+carbon.Parse("2020-03-21 07:00:00").VLunar().IsFifthDoubleHour() // true
+// Whether is SixthDoubleHour
+carbon.Parse("2020-03-21 09:00:00").VLunar().IsSixthDoubleHour() // true
+// Whether is SeventhDoubleHour
+carbon.Parse("2020-03-21 11:00:00").VLunar().IsSeventhDoubleHour() // true
+// Whether is EighthDoubleHour
+carbon.Parse("2020-03-21 13:00:00").VLunar().IsEighthDoubleHour() // true
+// Whether is NinthDoubleHour
+carbon.Parse("2020-03-21 15:00:00").VLunar().IsNinthDoubleHour() // true
+// Whether is TenthDoubleHour
+carbon.Parse("2020-03-21 17:00:00").VLunar().IsTenthDoubleHour() // true
+// Whether is EleventhDoubleHour
+carbon.Parse("2020-03-21 19:00:00").VLunar().IsEleventhDoubleHour() // true
+// Whether is TwelfthDoubleHour
+carbon.Parse("2020-03-21 21:00:00").VLunar().IsTwelfthDoubleHour() // true
+
+// Get solar terms
+carbon.Parse("2020-03-21 21:00:00").VLunar().SolarTerm() // { Longitude: 0, Name:"Xuân phân" }
+// get lucky hour
+carbon.Parse("2020-03-21 21:00:00").VLunar().LuckyHour() // 110100101100
+carbon.Parse("2020-03-21 21:00:00").VLunar().LuckyHourDetail() // {{Chi:  "Tý",From: 23,To:   1}}
+
 ##### JSON
 
 ###### Define model

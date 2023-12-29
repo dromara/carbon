@@ -53,7 +53,7 @@ const (
 	Macao      = "Asia/Macao"          // 澳门
 	Taipei     = "Asia/Taipei"         // 台北
 	Tokyo      = "Asia/Tokyo"          // 东京
-	Saigon     = "Asia/Saigon"         // 西贡
+	HoChiMinh  = "Asia/Ho_Chi_Minh"    // 西贡
 	Seoul      = "Asia/Seoul"          // 首尔
 	Bangkok    = "Asia/Bangkok"        // 曼谷
 	Dubai      = "Asia/Dubai"          // 迪拜

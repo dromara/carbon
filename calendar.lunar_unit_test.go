@@ -100,12 +100,14 @@ func TestLunar_DateTime(t *testing.T) {
 		4: {"0000-00-00 00:00:00", 0, 0, 0, 0, 0, 0},
 
 		5: {"2020-08-05 13:14:15", 2020, 6, 16, 13, 14, 15},
+		6: {"2022-03-19 00:00:00", 2022, 2, 17, 0, 0, 0},
+		7: {"2022-06-19 00:00:00", 2022, 5, 21, 0, 0, 0},
 	}
 
 	for index, test := range tests {
 		c := Parse(test.input, PRC)
 		assert.Nil(c.Error)
-		year, month, day, hour, minute, second := c.Lunar().DateTime()
+		year, month, day, hour, minute, second := c.VLunar().DateTime()
 		assert.Equal(test.year, year, "Current test index is "+strconv.Itoa(index))
 		assert.Equal(test.month, month, "Current test index is "+strconv.Itoa(index))
 		assert.Equal(test.day, day, "Current test index is "+strconv.Itoa(index))
