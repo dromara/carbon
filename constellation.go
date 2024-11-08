@@ -42,8 +42,8 @@ func (c Carbon) Constellation() string {
 			index = i
 		}
 	}
-	c.lang.rw.Lock()
-	defer c.lang.rw.Unlock()
+	c.lang.rw.RLock()
+	defer c.lang.rw.RUnlock()
 	if resources, ok := c.lang.resources["constellations"]; ok {
 		slice := strings.Split(resources, "|")
 		if len(slice) == MonthsPerYear {
