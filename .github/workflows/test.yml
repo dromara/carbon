@@ -2,8 +2,6 @@ name: test
 
 on:
   push
-env:
-  TZ: "PRC"
 jobs:
 
   test:

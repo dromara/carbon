@@ -7,6 +7,8 @@ import (
 )
 
 func TestCarbon_SetDefault(t *testing.T) {
+	prepareTest(t)
+
 	SetDefault(Default{
 		Layout:       DateTimeLayout,
 		Timezone:     PRC,

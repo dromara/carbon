@@ -3,6 +3,8 @@ package carbon
 import "testing"
 
 func BenchmarkCarbon_SetDefault(b *testing.B) {
+	prepareTest(b)
+
 	d := Default{
 		Layout:       DateTimeLayout,
 		Timezone:     Local,

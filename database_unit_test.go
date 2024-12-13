@@ -915,6 +915,8 @@ func TestCarbon_Issue240(t *testing.T) {
 
 // https://github.com/dromara/carbon/issues/243
 func TestCarbon_Issue243(t *testing.T) {
+	prepareTest(t)
+
 	SetDefault(Default{
 		Layout:       DateTimeLayout,
 		Timezone:     PRC,
