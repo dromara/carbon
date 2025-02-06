@@ -18,11 +18,11 @@ var failedScanError = func(src interface{}) error {
 func (c *Carbon) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*c = Parse(string(v))
+		c = Parse(string(v))
 	case string:
-		*c = Parse(v)
+		c = Parse(v)
 	case time.Time:
-		*c = CreateFromStdTime(v)
+		c = CreateFromStdTime(v)
 	}
 	if c.Error == nil {
 		return nil
@@ -31,7 +31,7 @@ func (c *Carbon) Scan(src interface{}) error {
 }
 
 // Value the interface providing the Value method for package database/sql/driver.
-func (c Carbon) Value() (driver.Value, error) {
+func (c *Carbon) Value() (driver.Value, error) {
 	if c.IsZero() {
 		return nil, nil
 	}
@@ -40,7 +40,7 @@ func (c Carbon) Value() (driver.Value, error) {
 
 // MarshalJSON implements the interface json.Marshal for Carbon struct.
 // 实现 json.Marshaler 接口
-func (c Carbon) MarshalJSON() ([]byte, error) {
+func (c *Carbon) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, c.Layout(c.layout))), nil
 }
 
@@ -51,7 +51,7 @@ func (c *Carbon) UnmarshalJSON(b []byte) error {
 	if value == "" || value == "null" {
 		return nil
 	}
-	*c = ParseByLayout(value, c.layout)
+	c = ParseByLayout(value, c.layout)
 	return c.Error
 }
 

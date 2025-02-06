@@ -1,16 +1,17 @@
 package carbon
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCarbon_Closest(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
-		carbon3 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
+		carbon3 *Carbon
 		want    string
 	}{
 		{
@@ -66,9 +67,9 @@ func TestCarbon_Closest(t *testing.T) {
 func TestCarbon_Farthest(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
-		carbon3 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
+		carbon3 *Carbon
 		want    string
 	}{
 		{

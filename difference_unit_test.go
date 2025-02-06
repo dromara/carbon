@@ -9,8 +9,8 @@ import (
 func TestCarbon_DiffInYears(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -55,8 +55,8 @@ func TestCarbon_DiffInYears(t *testing.T) {
 func TestCarbon_DiffAbsInYears(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -101,8 +101,8 @@ func TestCarbon_DiffAbsInYears(t *testing.T) {
 func TestCarbon_DiffInMonths(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -141,8 +141,8 @@ func TestCarbon_DiffInMonths(t *testing.T) {
 func TestCarbon_DiffAbsInMonths(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -181,8 +181,8 @@ func TestCarbon_DiffAbsInMonths(t *testing.T) {
 func TestCarbon_DiffInWeeks(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -221,8 +221,8 @@ func TestCarbon_DiffInWeeks(t *testing.T) {
 func TestCarbon_DiffAbsInWeeks(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -261,8 +261,8 @@ func TestCarbon_DiffAbsInWeeks(t *testing.T) {
 func TestCarbon_DiffInDays(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -307,8 +307,8 @@ func TestCarbon_DiffInDays(t *testing.T) {
 func TestCarbon_DiffAbsInDays(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -353,8 +353,8 @@ func TestCarbon_DiffAbsInDays(t *testing.T) {
 func TestCarbon_DiffInHours(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -393,8 +393,8 @@ func TestCarbon_DiffInHours(t *testing.T) {
 func TestCarbon_DiffAbsInHours(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -433,8 +433,8 @@ func TestCarbon_DiffAbsInHours(t *testing.T) {
 func TestCarbon_DiffInMinutes(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -467,8 +467,8 @@ func TestCarbon_DiffInMinutes(t *testing.T) {
 func TestCarbon_DiffAbsInMinutes(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -501,8 +501,8 @@ func TestCarbon_DiffAbsInMinutes(t *testing.T) {
 func TestCarbon_DiffInSeconds(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -541,8 +541,8 @@ func TestCarbon_DiffInSeconds(t *testing.T) {
 func TestCarbon_DiffAbsInSeconds(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    int64
 	}{
 		{
@@ -582,8 +582,8 @@ func TestCarbon_DiffInString(t *testing.T) {
 	now := Now()
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    string
 	}{
 		{
@@ -708,8 +708,8 @@ func TestCarbon_DiffAbsInString(t *testing.T) {
 	now := Now()
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    string
 	}{
 		{
@@ -834,8 +834,8 @@ func TestCarbon_DiffInDuration(t *testing.T) {
 	now := Parse("2020-08-05 13:14:15")
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    string
 	}{
 		{
@@ -906,8 +906,8 @@ func TestCarbon_DiffAbsInDuration(t *testing.T) {
 	now := Parse("2020-08-05 13:14:15")
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    string
 	}{
 		{
@@ -977,8 +977,8 @@ func TestCarbon_DiffForHumans(t *testing.T) {
 	now := Now()
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    string
 	}{
 		{
@@ -1051,8 +1051,8 @@ func TestCarbon_DiffForHumans(t *testing.T) {
 func TestCarbon_Issue255(t *testing.T) {
 	tests := []struct {
 		name  string
-		start Carbon
-		end   Carbon
+		start *Carbon
+		end   *Carbon
 		want  int64
 	}{
 		{

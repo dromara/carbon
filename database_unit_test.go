@@ -514,7 +514,7 @@ type Person struct {
 	Name string `json:"name"`
 	Age  int    `json:"age"`
 
-	Birthday1 Carbon `json:"birthday1"`
+	Birthday1 *Carbon `json:"birthday1"`
 
 	Birthday2 DateTime      `json:"birthday2"`
 	Birthday3 DateTimeMilli `json:"birthday3"`

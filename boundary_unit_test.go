@@ -9,7 +9,7 @@ import (
 func TestCarbon_StartOfCentury(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -49,7 +49,7 @@ func TestCarbon_StartOfCentury(t *testing.T) {
 func TestCarbon_EndOfCentury(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -89,7 +89,7 @@ func TestCarbon_EndOfCentury(t *testing.T) {
 func TestCarbon_StartOfDecade(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -134,7 +134,7 @@ func TestCarbon_StartOfDecade(t *testing.T) {
 func TestCarbon_EndOfDecade(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -179,7 +179,7 @@ func TestCarbon_EndOfDecade(t *testing.T) {
 func TestCarbon_StartOfYear(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -219,7 +219,7 @@ func TestCarbon_StartOfYear(t *testing.T) {
 func TestCarbon_EndOfYear(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -259,7 +259,7 @@ func TestCarbon_EndOfYear(t *testing.T) {
 func TestCarbon_StartOfQuarter(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -299,7 +299,7 @@ func TestCarbon_StartOfQuarter(t *testing.T) {
 func TestCarbon_EndOfQuarter(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -349,7 +349,7 @@ func TestCarbon_EndOfQuarter(t *testing.T) {
 func TestCarbon_StartOfMonth(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -389,7 +389,7 @@ func TestCarbon_StartOfMonth(t *testing.T) {
 func TestCarbon_EndOfMonth(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -429,7 +429,7 @@ func TestCarbon_EndOfMonth(t *testing.T) {
 func TestCarbon_StartOfWeek(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -469,7 +469,7 @@ func TestCarbon_StartOfWeek(t *testing.T) {
 func TestCarbon_EndOfWeek(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -509,7 +509,7 @@ func TestCarbon_EndOfWeek(t *testing.T) {
 func TestCarbon_StartOfDay(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -549,7 +549,7 @@ func TestCarbon_StartOfDay(t *testing.T) {
 func TestCarbon_EndOfDay(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -589,7 +589,7 @@ func TestCarbon_EndOfDay(t *testing.T) {
 func TestCarbon_StartOfHour(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -629,7 +629,7 @@ func TestCarbon_StartOfHour(t *testing.T) {
 func TestCarbon_EndOfHour(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -679,7 +679,7 @@ func TestCarbon_EndOfHour(t *testing.T) {
 func TestCarbon_StartOfMinute(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -729,7 +729,7 @@ func TestCarbon_StartOfMinute(t *testing.T) {
 func TestCarbon_EndOfMinute(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -769,7 +769,7 @@ func TestCarbon_EndOfMinute(t *testing.T) {
 func TestCarbon_StartOfSecond(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -809,7 +809,7 @@ func TestCarbon_StartOfSecond(t *testing.T) {
 func TestCarbon_EndOfSecond(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{

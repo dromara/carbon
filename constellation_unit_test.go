@@ -9,7 +9,7 @@ import (
 func TestCarbon_Constellation(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -99,7 +99,7 @@ func TestCarbon_Constellation(t *testing.T) {
 func TestCarbon_IsAries(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -134,7 +134,7 @@ func TestCarbon_IsAries(t *testing.T) {
 func TestCarbon_IsTaurus(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -169,7 +169,7 @@ func TestCarbon_IsTaurus(t *testing.T) {
 func TestCarbon_IsGemini(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -204,7 +204,7 @@ func TestCarbon_IsGemini(t *testing.T) {
 func TestCarbon_IsCancer(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -239,7 +239,7 @@ func TestCarbon_IsCancer(t *testing.T) {
 func TestCarbon_IsLeo(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -274,7 +274,7 @@ func TestCarbon_IsLeo(t *testing.T) {
 func TestCarbon_IsVirgo(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -309,7 +309,7 @@ func TestCarbon_IsVirgo(t *testing.T) {
 func TestCarbon_IsLibra(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -344,7 +344,7 @@ func TestCarbon_IsLibra(t *testing.T) {
 func TestCarbon_IsScorpio(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -379,7 +379,7 @@ func TestCarbon_IsScorpio(t *testing.T) {
 func TestCarbon_IsSagittarius(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -414,7 +414,7 @@ func TestCarbon_IsSagittarius(t *testing.T) {
 func TestCarbon_IsCapricorn(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -449,7 +449,7 @@ func TestCarbon_IsCapricorn(t *testing.T) {
 func TestCarbon_IsAquarius(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -484,7 +484,7 @@ func TestCarbon_IsAquarius(t *testing.T) {
 func TestCarbon_IsPisces(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{

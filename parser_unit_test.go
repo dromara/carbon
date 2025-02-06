@@ -9,7 +9,7 @@ import (
 func TestCarbon_Parse(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -79,7 +79,7 @@ func TestCarbon_Parse(t *testing.T) {
 func TestCarbon_ParseByFormat(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -114,7 +114,7 @@ func TestCarbon_ParseByFormat(t *testing.T) {
 func TestCarbon_ParseByLayout(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -160,7 +160,7 @@ func TestError_ParseByFormat(t *testing.T) {
 func TestCarbon_Issue202(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -196,7 +196,7 @@ func TestCarbon_Issue202(t *testing.T) {
 func TestCarbon_Issue206(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -232,7 +232,7 @@ func TestCarbon_Issue206(t *testing.T) {
 func TestCarbon_Issue232(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{

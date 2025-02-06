@@ -9,7 +9,7 @@ import (
 func TestCarbon_Season(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -84,7 +84,7 @@ func TestCarbon_Season(t *testing.T) {
 func TestCarbon_StartOfSeason(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -164,7 +164,7 @@ func TestCarbon_StartOfSeason(t *testing.T) {
 func TestCarbon_EndOfSeason(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -244,7 +244,7 @@ func TestCarbon_EndOfSeason(t *testing.T) {
 func TestCarbon_IsSpring(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -274,7 +274,7 @@ func TestCarbon_IsSpring(t *testing.T) {
 func TestCarbon_IsSummer(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -304,7 +304,7 @@ func TestCarbon_IsSummer(t *testing.T) {
 func TestCarbon_IsAutumn(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -334,7 +334,7 @@ func TestCarbon_IsAutumn(t *testing.T) {
 func TestCarbon_IsWinter(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{

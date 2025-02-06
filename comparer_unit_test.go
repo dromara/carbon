@@ -1,8 +1,9 @@
 package carbon
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCarbon_IsDST(t *testing.T) {
@@ -10,7 +11,7 @@ func TestCarbon_IsDST(t *testing.T) {
 
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -55,7 +56,7 @@ func TestCarbon_IsDST(t *testing.T) {
 func TestCarbon_IsZero(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -115,7 +116,7 @@ func TestCarbon_IsZero(t *testing.T) {
 func TestCarbon_IsValid(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -160,7 +161,7 @@ func TestCarbon_IsValid(t *testing.T) {
 func TestCarbon_IsInvalid(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -200,7 +201,7 @@ func TestCarbon_IsInvalid(t *testing.T) {
 func TestCarbon_IsAM(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -235,7 +236,7 @@ func TestCarbon_IsAM(t *testing.T) {
 func TestCarbon_IsPM(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -270,7 +271,7 @@ func TestCarbon_IsPM(t *testing.T) {
 func TestCarbon_IsNow(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -305,7 +306,7 @@ func TestCarbon_IsNow(t *testing.T) {
 func TestCarbon_IsFuture(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -340,7 +341,7 @@ func TestCarbon_IsFuture(t *testing.T) {
 func TestCarbon_IsPast(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -375,7 +376,7 @@ func TestCarbon_IsPast(t *testing.T) {
 func TestCarbon_IsLeapYear(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -410,7 +411,7 @@ func TestCarbon_IsLeapYear(t *testing.T) {
 func TestCarbon_IsLongYear(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -445,7 +446,7 @@ func TestCarbon_IsLongYear(t *testing.T) {
 func TestCarbon_IsJanuary(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -475,7 +476,7 @@ func TestCarbon_IsJanuary(t *testing.T) {
 func TestCarbon_IsFebruary(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -505,7 +506,7 @@ func TestCarbon_IsFebruary(t *testing.T) {
 func TestCarbon_IsMarch(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -535,7 +536,7 @@ func TestCarbon_IsMarch(t *testing.T) {
 func TestCarbon_IsApril(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -565,7 +566,7 @@ func TestCarbon_IsApril(t *testing.T) {
 func TestCarbon_IsMay(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -595,7 +596,7 @@ func TestCarbon_IsMay(t *testing.T) {
 func TestCarbon_IsJune(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -625,7 +626,7 @@ func TestCarbon_IsJune(t *testing.T) {
 func TestCarbon_IsJuly(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -655,7 +656,7 @@ func TestCarbon_IsJuly(t *testing.T) {
 func TestCarbon_IsAugust(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -685,7 +686,7 @@ func TestCarbon_IsAugust(t *testing.T) {
 func TestCarbon_IsSeptember(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -715,7 +716,7 @@ func TestCarbon_IsSeptember(t *testing.T) {
 func TestCarbon_IsOctober(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -745,7 +746,7 @@ func TestCarbon_IsOctober(t *testing.T) {
 func TestCarbon_IsNovember(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -775,7 +776,7 @@ func TestCarbon_IsNovember(t *testing.T) {
 func TestCarbon_IsDecember(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -805,7 +806,7 @@ func TestCarbon_IsDecember(t *testing.T) {
 func TestCarbon_IsMonday(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -835,7 +836,7 @@ func TestCarbon_IsMonday(t *testing.T) {
 func TestCarbon_IsTuesday(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -865,7 +866,7 @@ func TestCarbon_IsTuesday(t *testing.T) {
 func TestCarbon_IsWednesday(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -895,7 +896,7 @@ func TestCarbon_IsWednesday(t *testing.T) {
 func TestCarbon_IsThursday(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -925,7 +926,7 @@ func TestCarbon_IsThursday(t *testing.T) {
 func TestCarbon_IsFriday(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -955,7 +956,7 @@ func TestCarbon_IsFriday(t *testing.T) {
 func TestCarbon_IsSaturday(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -985,7 +986,7 @@ func TestCarbon_IsSaturday(t *testing.T) {
 func TestCarbon_IsSunday(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -1015,7 +1016,7 @@ func TestCarbon_IsSunday(t *testing.T) {
 func TestCarbon_IsWeekday(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -1045,7 +1046,7 @@ func TestCarbon_IsWeekday(t *testing.T) {
 func TestCarbon_IsWeekend(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -1075,7 +1076,7 @@ func TestCarbon_IsWeekend(t *testing.T) {
 func TestCarbon_IsYesterday(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -1115,7 +1116,7 @@ func TestCarbon_IsYesterday(t *testing.T) {
 func TestCarbon_IsToday(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -1156,7 +1157,7 @@ func TestCarbon_IsTomorrow(t *testing.T) {
 
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   bool
 	}{
 		{
@@ -1196,8 +1197,8 @@ func TestCarbon_IsTomorrow(t *testing.T) {
 func TestCarbon_IsSameCentury(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    bool
 	}{
 		{
@@ -1236,8 +1237,8 @@ func TestCarbon_IsSameCentury(t *testing.T) {
 func TestCarbon_IsSameDecade(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    bool
 	}{
 		{
@@ -1270,8 +1271,8 @@ func TestCarbon_IsSameDecade(t *testing.T) {
 func TestCarbon_IsSameYear(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    bool
 	}{
 		{
@@ -1304,8 +1305,8 @@ func TestCarbon_IsSameYear(t *testing.T) {
 func TestCarbon_IsSameQuarter(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    bool
 	}{
 		{
@@ -1338,8 +1339,8 @@ func TestCarbon_IsSameQuarter(t *testing.T) {
 func TestCarbon_IsSameMonth(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    bool
 	}{
 		{
@@ -1372,8 +1373,8 @@ func TestCarbon_IsSameMonth(t *testing.T) {
 func TestCarbon_IsSameDay(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    bool
 	}{
 		{
@@ -1406,8 +1407,8 @@ func TestCarbon_IsSameDay(t *testing.T) {
 func TestCarbon_IsSameHour(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    bool
 	}{
 		{
@@ -1440,8 +1441,8 @@ func TestCarbon_IsSameHour(t *testing.T) {
 func TestCarbon_IsSameMinute(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    bool
 	}{
 		{
@@ -1474,8 +1475,8 @@ func TestCarbon_IsSameMinute(t *testing.T) {
 func TestCarbon_IsSameSecond(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon1 Carbon
-		carbon2 Carbon
+		carbon1 *Carbon
+		carbon2 *Carbon
 		want    bool
 	}{
 		{

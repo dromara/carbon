@@ -23,7 +23,7 @@ var seasons = []struct {
 
 // Season gets season name according to the meteorological division method like "Spring", i18n is supported.
 // 获取当前季节(以气象划分)，支持i18n
-func (c Carbon) Season() string {
+func (c *Carbon) Season() string {
 	if c.Error != nil {
 		return ""
 	}
@@ -51,7 +51,7 @@ func (c Carbon) Season() string {
 
 // StartOfSeason returns a Carbon instance for start of the season.
 // 本季节开始时间
-func (c Carbon) StartOfSeason() Carbon {
+func (c *Carbon) StartOfSeason() *Carbon {
 	if c.Error != nil {
 		return c
 	}
@@ -64,7 +64,7 @@ func (c Carbon) StartOfSeason() Carbon {
 
 // EndOfSeason returns a Carbon instance for end of the season.
 // 本季节结束时间
-func (c Carbon) EndOfSeason() Carbon {
+func (c *Carbon) EndOfSeason() *Carbon {
 	if c.Error != nil {
 		return c
 	}
@@ -80,7 +80,7 @@ func (c Carbon) EndOfSeason() Carbon {
 
 // IsSpring reports whether is spring.
 // 是否是春季
-func (c Carbon) IsSpring() bool {
+func (c *Carbon) IsSpring() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -93,7 +93,7 @@ func (c Carbon) IsSpring() bool {
 
 // IsSummer reports whether is summer.
 // 是否是夏季
-func (c Carbon) IsSummer() bool {
+func (c *Carbon) IsSummer() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -106,7 +106,7 @@ func (c Carbon) IsSummer() bool {
 
 // IsAutumn reports whether is autumn.
 // 是否是秋季
-func (c Carbon) IsAutumn() bool {
+func (c *Carbon) IsAutumn() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -119,7 +119,7 @@ func (c Carbon) IsAutumn() bool {
 
 // IsWinter reports whether is winter.
 // 是否是冬季
-func (c Carbon) IsWinter() bool {
+func (c *Carbon) IsWinter() bool {
 	if c.Error != nil {
 		return false
 	}

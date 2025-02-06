@@ -6,19 +6,19 @@ import (
 
 // IsDST reports whether is daylight saving time.
 // 是否是夏令时
-func (c Carbon) IsDST() bool {
+func (c *Carbon) IsDST() bool {
 	return c.time.IsDST()
 }
 
 // IsZero reports whether is zero time(0001-01-01 00:00:00 +0000 UTC).
 // 是否是零值时间(0001-01-01 00:00:00 +0000 UTC)
-func (c Carbon) IsZero() bool {
+func (c *Carbon) IsZero() bool {
 	return c.time.IsZero()
 }
 
 // IsValid reports whether is valid time.
 // 是否是有效时间
-func (c Carbon) IsValid() bool {
+func (c *Carbon) IsValid() bool {
 	if c.IsZero() {
 		return false
 	}
@@ -30,25 +30,25 @@ func (c Carbon) IsValid() bool {
 
 // IsInvalid reports whether is invalid time.
 // 是否是无效时间
-func (c Carbon) IsInvalid() bool {
+func (c *Carbon) IsInvalid() bool {
 	return !c.IsValid()
 }
 
 // IsAM reports whether is before noon.
 // 是否是上午
-func (c Carbon) IsAM() bool {
+func (c *Carbon) IsAM() bool {
 	return c.Format("a") == "am"
 }
 
 // IsPM reports whether is after noon.
 // 是否是下午
-func (c Carbon) IsPM() bool {
+func (c *Carbon) IsPM() bool {
 	return c.Format("a") == "pm"
 }
 
 // IsNow reports whether is now time.
 // 是否是当前时间
-func (c Carbon) IsNow() bool {
+func (c *Carbon) IsNow() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -57,7 +57,7 @@ func (c Carbon) IsNow() bool {
 
 // IsFuture reports whether is future time.
 // 是否是未来时间
-func (c Carbon) IsFuture() bool {
+func (c *Carbon) IsFuture() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -66,7 +66,7 @@ func (c Carbon) IsFuture() bool {
 
 // IsPast reports whether is past time.
 // 是否是过去时间
-func (c Carbon) IsPast() bool {
+func (c *Carbon) IsPast() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -75,7 +75,7 @@ func (c Carbon) IsPast() bool {
 
 // IsLeapYear reports whether is a leap year.
 // 是否是闰年
-func (c Carbon) IsLeapYear() bool {
+func (c *Carbon) IsLeapYear() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -88,7 +88,7 @@ func (c Carbon) IsLeapYear() bool {
 
 // IsLongYear reports whether is a long year, see https://en.wikipedia.org/wiki/ISO_8601#Week_dates.
 // 是否是长年
-func (c Carbon) IsLongYear() bool {
+func (c *Carbon) IsLongYear() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -98,7 +98,7 @@ func (c Carbon) IsLongYear() bool {
 
 // IsJanuary reports whether is January.
 // 是否是一月
-func (c Carbon) IsJanuary() bool {
+func (c *Carbon) IsJanuary() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -107,7 +107,7 @@ func (c Carbon) IsJanuary() bool {
 
 // IsFebruary reports whether is February.
 // 是否是二月
-func (c Carbon) IsFebruary() bool {
+func (c *Carbon) IsFebruary() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -116,7 +116,7 @@ func (c Carbon) IsFebruary() bool {
 
 // IsMarch reports whether is March.
 // 是否是三月
-func (c Carbon) IsMarch() bool {
+func (c *Carbon) IsMarch() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -125,7 +125,7 @@ func (c Carbon) IsMarch() bool {
 
 // IsApril reports whether is April.
 // 是否是四月
-func (c Carbon) IsApril() bool {
+func (c *Carbon) IsApril() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -134,7 +134,7 @@ func (c Carbon) IsApril() bool {
 
 // IsMay reports whether is May.
 // 是否是五月
-func (c Carbon) IsMay() bool {
+func (c *Carbon) IsMay() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -143,7 +143,7 @@ func (c Carbon) IsMay() bool {
 
 // IsJune reports whether is June.
 // 是否是六月
-func (c Carbon) IsJune() bool {
+func (c *Carbon) IsJune() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -152,7 +152,7 @@ func (c Carbon) IsJune() bool {
 
 // IsJuly reports whether is July.
 // 是否是七月
-func (c Carbon) IsJuly() bool {
+func (c *Carbon) IsJuly() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -161,7 +161,7 @@ func (c Carbon) IsJuly() bool {
 
 // IsAugust reports whether is August.
 // 是否是八月
-func (c Carbon) IsAugust() bool {
+func (c *Carbon) IsAugust() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -170,7 +170,7 @@ func (c Carbon) IsAugust() bool {
 
 // IsSeptember reports whether is September.
 // 是否是九月
-func (c Carbon) IsSeptember() bool {
+func (c *Carbon) IsSeptember() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -179,7 +179,7 @@ func (c Carbon) IsSeptember() bool {
 
 // IsOctober reports whether is October.
 // 是否是十月
-func (c Carbon) IsOctober() bool {
+func (c *Carbon) IsOctober() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -188,7 +188,7 @@ func (c Carbon) IsOctober() bool {
 
 // IsNovember reports whether is November.
 // 是否是十一月
-func (c Carbon) IsNovember() bool {
+func (c *Carbon) IsNovember() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -197,7 +197,7 @@ func (c Carbon) IsNovember() bool {
 
 // IsDecember reports whether is December.
 // 是否是十二月
-func (c Carbon) IsDecember() bool {
+func (c *Carbon) IsDecember() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -206,7 +206,7 @@ func (c Carbon) IsDecember() bool {
 
 // IsMonday reports whether is Monday.
 // 是否是周一
-func (c Carbon) IsMonday() bool {
+func (c *Carbon) IsMonday() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -215,7 +215,7 @@ func (c Carbon) IsMonday() bool {
 
 // IsTuesday reports whether is Tuesday.
 // 是否是周二
-func (c Carbon) IsTuesday() bool {
+func (c *Carbon) IsTuesday() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -224,7 +224,7 @@ func (c Carbon) IsTuesday() bool {
 
 // IsWednesday reports whether is Wednesday.
 // 是否是周三
-func (c Carbon) IsWednesday() bool {
+func (c *Carbon) IsWednesday() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -233,7 +233,7 @@ func (c Carbon) IsWednesday() bool {
 
 // IsThursday reports whether is Thursday.
 // 是否是周四
-func (c Carbon) IsThursday() bool {
+func (c *Carbon) IsThursday() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -242,7 +242,7 @@ func (c Carbon) IsThursday() bool {
 
 // IsFriday reports whether is Friday.
 // 是否是周五
-func (c Carbon) IsFriday() bool {
+func (c *Carbon) IsFriday() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -251,7 +251,7 @@ func (c Carbon) IsFriday() bool {
 
 // IsSaturday reports whether is Saturday.
 // 是否是周六
-func (c Carbon) IsSaturday() bool {
+func (c *Carbon) IsSaturday() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -260,7 +260,7 @@ func (c Carbon) IsSaturday() bool {
 
 // IsSunday reports whether is Sunday.
 // 是否是周日
-func (c Carbon) IsSunday() bool {
+func (c *Carbon) IsSunday() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -269,7 +269,7 @@ func (c Carbon) IsSunday() bool {
 
 // IsWeekday reports whether is weekday.
 // 是否是工作日
-func (c Carbon) IsWeekday() bool {
+func (c *Carbon) IsWeekday() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -278,7 +278,7 @@ func (c Carbon) IsWeekday() bool {
 
 // IsWeekend reports whether is weekend.
 // 是否是周末
-func (c Carbon) IsWeekend() bool {
+func (c *Carbon) IsWeekend() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -287,7 +287,7 @@ func (c Carbon) IsWeekend() bool {
 
 // IsYesterday reports whether is yesterday.
 // 是否是昨天
-func (c Carbon) IsYesterday() bool {
+func (c *Carbon) IsYesterday() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -296,7 +296,7 @@ func (c Carbon) IsYesterday() bool {
 
 // IsToday reports whether is today.
 // 是否是今天
-func (c Carbon) IsToday() bool {
+func (c *Carbon) IsToday() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -305,7 +305,7 @@ func (c Carbon) IsToday() bool {
 
 // IsTomorrow reports whether is tomorrow.
 // 是否是明天
-func (c Carbon) IsTomorrow() bool {
+func (c *Carbon) IsTomorrow() bool {
 	if c.Error != nil {
 		return false
 	}
@@ -314,7 +314,7 @@ func (c Carbon) IsTomorrow() bool {
 
 // IsSameCentury reports whether is same century.
 // 是否是同一世纪
-func (c Carbon) IsSameCentury(t Carbon) bool {
+func (c *Carbon) IsSameCentury(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -323,7 +323,7 @@ func (c Carbon) IsSameCentury(t Carbon) bool {
 
 // IsSameDecade reports whether is same decade.
 // 是否是同一年代
-func (c Carbon) IsSameDecade(t Carbon) bool {
+func (c *Carbon) IsSameDecade(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -332,7 +332,7 @@ func (c Carbon) IsSameDecade(t Carbon) bool {
 
 // IsSameYear reports whether is same year.
 // 是否是同一年
-func (c Carbon) IsSameYear(t Carbon) bool {
+func (c *Carbon) IsSameYear(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -341,7 +341,7 @@ func (c Carbon) IsSameYear(t Carbon) bool {
 
 // IsSameQuarter reports whether is same quarter.
 // 是否是同一季节
-func (c Carbon) IsSameQuarter(t Carbon) bool {
+func (c *Carbon) IsSameQuarter(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -350,7 +350,7 @@ func (c Carbon) IsSameQuarter(t Carbon) bool {
 
 // IsSameMonth reports whether is same month.
 // 是否是同一月
-func (c Carbon) IsSameMonth(t Carbon) bool {
+func (c *Carbon) IsSameMonth(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -359,7 +359,7 @@ func (c Carbon) IsSameMonth(t Carbon) bool {
 
 // IsSameDay reports whether is same day.
 // 是否是同一天
-func (c Carbon) IsSameDay(t Carbon) bool {
+func (c *Carbon) IsSameDay(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -368,7 +368,7 @@ func (c Carbon) IsSameDay(t Carbon) bool {
 
 // IsSameHour reports whether is same hour.
 // 是否是同一小时
-func (c Carbon) IsSameHour(t Carbon) bool {
+func (c *Carbon) IsSameHour(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -377,7 +377,7 @@ func (c Carbon) IsSameHour(t Carbon) bool {
 
 // IsSameMinute reports whether is same minute.
 // 是否是同一分钟
-func (c Carbon) IsSameMinute(t Carbon) bool {
+func (c *Carbon) IsSameMinute(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -386,17 +386,16 @@ func (c Carbon) IsSameMinute(t Carbon) bool {
 
 // IsSameSecond reports whether is same second.
 // 是否是同一秒
-func (c Carbon) IsSameSecond(t Carbon) bool {
+func (c *Carbon) IsSameSecond(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
 	return c.Format("YmdHis") == t.Format("YmdHis")
-
 }
 
 // Compare compares by an operator.
 // 时间比较
-func (c Carbon) Compare(operator string, t Carbon) bool {
+func (c *Carbon) Compare(operator string, t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -419,7 +418,7 @@ func (c Carbon) Compare(operator string, t Carbon) bool {
 
 // Gt reports whether greater than.
 // 是否大于
-func (c Carbon) Gt(t Carbon) bool {
+func (c *Carbon) Gt(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -428,7 +427,7 @@ func (c Carbon) Gt(t Carbon) bool {
 
 // Lt reports whether less than.
 // 是否小于
-func (c Carbon) Lt(t Carbon) bool {
+func (c *Carbon) Lt(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -437,7 +436,7 @@ func (c Carbon) Lt(t Carbon) bool {
 
 // Eq reports whether equal.
 // 是否等于
-func (c Carbon) Eq(t Carbon) bool {
+func (c *Carbon) Eq(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -446,13 +445,13 @@ func (c Carbon) Eq(t Carbon) bool {
 
 // Ne reports whether not equal.
 // 是否不等于
-func (c Carbon) Ne(t Carbon) bool {
+func (c *Carbon) Ne(t *Carbon) bool {
 	return !c.Eq(t)
 }
 
 // Gte reports whether greater than or equal.
 // 是否大于等于
-func (c Carbon) Gte(t Carbon) bool {
+func (c *Carbon) Gte(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -461,7 +460,7 @@ func (c Carbon) Gte(t Carbon) bool {
 
 // Lte reports whether less than or equal.
 // 是否小于等于
-func (c Carbon) Lte(t Carbon) bool {
+func (c *Carbon) Lte(t *Carbon) bool {
 	if c.Error != nil || t.Error != nil {
 		return false
 	}
@@ -470,7 +469,7 @@ func (c Carbon) Lte(t Carbon) bool {
 
 // Between reports whether between two times, excluded the start and end time.
 // 是否在两个时间之间(不包括这两个时间)
-func (c Carbon) Between(start Carbon, end Carbon) bool {
+func (c *Carbon) Between(start *Carbon, end *Carbon) bool {
 	if c.Error != nil || start.Error != nil || end.Error != nil {
 		return false
 	}
@@ -482,7 +481,7 @@ func (c Carbon) Between(start Carbon, end Carbon) bool {
 
 // BetweenIncludedStart reports whether between two times, included the start time.
 // 是否在两个时间之间(包括开始时间)
-func (c Carbon) BetweenIncludedStart(start Carbon, end Carbon) bool {
+func (c *Carbon) BetweenIncludedStart(start *Carbon, end *Carbon) bool {
 	if c.Error != nil || start.Error != nil || end.Error != nil {
 		return false
 	}
@@ -494,7 +493,7 @@ func (c Carbon) BetweenIncludedStart(start Carbon, end Carbon) bool {
 
 // BetweenIncludedEnd reports whether between two times, included the end time.
 // 是否在两个时间之间(包括结束时间)
-func (c Carbon) BetweenIncludedEnd(start Carbon, end Carbon) bool {
+func (c *Carbon) BetweenIncludedEnd(start *Carbon, end *Carbon) bool {
 	if c.Error != nil || start.Error != nil || end.Error != nil {
 		return false
 	}
@@ -506,7 +505,7 @@ func (c Carbon) BetweenIncludedEnd(start Carbon, end Carbon) bool {
 
 // BetweenIncludedBoth reports whether between two times, included the start and end time.
 // 是否在两个时间之间(包括这两个时间)
-func (c Carbon) BetweenIncludedBoth(start Carbon, end Carbon) bool {
+func (c *Carbon) BetweenIncludedBoth(start *Carbon, end *Carbon) bool {
 	if c.Error != nil || start.Error != nil || end.Error != nil {
 		return false
 	}

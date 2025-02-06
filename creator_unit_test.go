@@ -10,7 +10,7 @@ import (
 func TestCarbon_CreateFromStdTime(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -35,7 +35,7 @@ func TestCarbon_CreateFromStdTime(t *testing.T) {
 func TestCarbon_CreateFromTimestamp(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -75,7 +75,7 @@ func TestCarbon_CreateFromTimestamp(t *testing.T) {
 func TestCarbon_CreateFromTimestampMilli(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -115,7 +115,7 @@ func TestCarbon_CreateFromTimestampMilli(t *testing.T) {
 func TestCarbon_CreateFromTimestampMicro(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -155,7 +155,7 @@ func TestCarbon_CreateFromTimestampMicro(t *testing.T) {
 func TestCarbon_CreateFromTimestampNano(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -190,7 +190,7 @@ func TestCarbon_CreateFromTimestampNano(t *testing.T) {
 func TestCarbon_CreateFromDateTime(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -225,7 +225,7 @@ func TestCarbon_CreateFromDateTime(t *testing.T) {
 func TestCarbon_CreateFromDateTimeMilli(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -260,7 +260,7 @@ func TestCarbon_CreateFromDateTimeMilli(t *testing.T) {
 func TestCarbon_CreateFromDateTimeMicro(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -295,7 +295,7 @@ func TestCarbon_CreateFromDateTimeMicro(t *testing.T) {
 func TestCarbon_CreateFromDateTimeNano(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -330,7 +330,7 @@ func TestCarbon_CreateFromDateTimeNano(t *testing.T) {
 func TestCarbon_CreateFromDate(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -365,7 +365,7 @@ func TestCarbon_CreateFromDate(t *testing.T) {
 func TestCarbon_CreateFromDateMilli(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -400,7 +400,7 @@ func TestCarbon_CreateFromDateMilli(t *testing.T) {
 func TestCarbon_CreateFromDateMicro(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -435,7 +435,7 @@ func TestCarbon_CreateFromDateMicro(t *testing.T) {
 func TestCarbon_CreateFromDateNano(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -470,8 +470,8 @@ func TestCarbon_CreateFromDateNano(t *testing.T) {
 func TestCarbon_CreateFromTime(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
-		want   Carbon
+		carbon *Carbon
+		want   *Carbon
 	}{
 		{
 			name:   "case1",
@@ -505,8 +505,8 @@ func TestCarbon_CreateFromTime(t *testing.T) {
 func TestCarbon_CreateFromTimeMilli(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
-		want   Carbon
+		carbon *Carbon
+		want   *Carbon
 	}{
 		{
 			name:   "case1",
@@ -540,8 +540,8 @@ func TestCarbon_CreateFromTimeMilli(t *testing.T) {
 func TestCarbon_CreateFromTimeMicro(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
-		want   Carbon
+		carbon *Carbon
+		want   *Carbon
 	}{
 		{
 			name:   "case1",
@@ -575,8 +575,8 @@ func TestCarbon_CreateFromTimeMicro(t *testing.T) {
 func TestCarbon_CreateFromTimeNano(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
-		want   Carbon
+		carbon *Carbon
+		want   *Carbon
 	}{
 		{
 			name:   "case1",

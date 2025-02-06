@@ -9,7 +9,7 @@ import (
 func TestCarbon_Lunar(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -44,7 +44,7 @@ func TestCarbon_Lunar(t *testing.T) {
 func TestCreateFromLunar(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -79,7 +79,7 @@ func TestCreateFromLunar(t *testing.T) {
 func TestCarbon_Julian(t *testing.T) {
 	tests := []struct {
 		name    string
-		carbon  Carbon
+		carbon  *Carbon
 		wantJD  float64
 		wantMJD float64
 	}{
@@ -120,7 +120,7 @@ func TestCarbon_Julian(t *testing.T) {
 func TestCarbon_CreateFromJulian(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -145,7 +145,7 @@ func TestCarbon_CreateFromJulian(t *testing.T) {
 func TestCarbon_Persian(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -180,7 +180,7 @@ func TestCarbon_Persian(t *testing.T) {
 func TestCarbon_CreateFromPersian(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -216,7 +216,7 @@ func TestCarbon_CreateFromPersian(t *testing.T) {
 func TestCarbon_Issue246(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{

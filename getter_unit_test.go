@@ -16,7 +16,7 @@ func TestCarbon_StdTime(t *testing.T) {
 func TestCarbon_DaysInYear(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -46,7 +46,7 @@ func TestCarbon_DaysInYear(t *testing.T) {
 func TestCarbon_DaysInMonth(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -86,7 +86,7 @@ func TestCarbon_DaysInMonth(t *testing.T) {
 func TestCarbon_MonthOfYear(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -126,7 +126,7 @@ func TestCarbon_MonthOfYear(t *testing.T) {
 func TestCarbon_DayOfYear(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -166,7 +166,7 @@ func TestCarbon_DayOfYear(t *testing.T) {
 func TestCarbon_DayOfMonth(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -206,7 +206,7 @@ func TestCarbon_DayOfMonth(t *testing.T) {
 func TestCarbon_DayOfWeek(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -246,7 +246,7 @@ func TestCarbon_DayOfWeek(t *testing.T) {
 func TestCarbon_WeekOfYear(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -291,7 +291,7 @@ func TestCarbon_WeekOfYear(t *testing.T) {
 func TestCarbon_WeekOfMonth(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -346,7 +346,7 @@ func TestCarbon_WeekOfMonth(t *testing.T) {
 func TestCarbon_DateTime(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			year, month, day, hour, minute, second int
 		}
@@ -389,7 +389,7 @@ func TestCarbon_DateTime(t *testing.T) {
 func TestCarbon_DateTimeMilli(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			year, month, day, hour, minute, second, millisecond int
 		}
@@ -438,7 +438,7 @@ func TestCarbon_DateTimeMilli(t *testing.T) {
 func TestCarbon_DateTimeMicro(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			year, month, day, hour, minute, second, microsecond int
 		}
@@ -482,7 +482,7 @@ func TestCarbon_DateTimeMicro(t *testing.T) {
 func TestCarbon_DateTimeNano(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			year, month, day, hour, minute, second, nanosecond int
 		}
@@ -526,7 +526,7 @@ func TestCarbon_DateTimeNano(t *testing.T) {
 func TestCarbon_Date(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			year, month, day int
 		}
@@ -561,7 +561,7 @@ func TestCarbon_Date(t *testing.T) {
 func TestCarbon_DateMilli(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			year, month, day, millisecond int
 		}
@@ -597,7 +597,7 @@ func TestCarbon_DateMilli(t *testing.T) {
 func TestCarbon_DateMicro(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			year, month, day, microsecond int
 		}
@@ -633,7 +633,7 @@ func TestCarbon_DateMicro(t *testing.T) {
 func TestCarbon_DateNano(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			year, month, day, nanosecond int
 		}
@@ -669,7 +669,7 @@ func TestCarbon_DateNano(t *testing.T) {
 func TestCarbon_Time(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			hour, minute, second int
 		}
@@ -704,7 +704,7 @@ func TestCarbon_Time(t *testing.T) {
 func TestCarbon_TimeMilli(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			hour, minute, second, millisecond int
 		}
@@ -740,7 +740,7 @@ func TestCarbon_TimeMilli(t *testing.T) {
 func TestCarbon_TimeMicro(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			hour, minute, second, microsecond int
 		}
@@ -776,7 +776,7 @@ func TestCarbon_TimeMicro(t *testing.T) {
 func TestCarbon_TimeNano(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   struct {
 			hour, minute, second, nanosecond int
 		}
@@ -812,7 +812,7 @@ func TestCarbon_TimeNano(t *testing.T) {
 func TestCarbon_Century(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -842,7 +842,7 @@ func TestCarbon_Century(t *testing.T) {
 func TestCarbon_Decade(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -882,7 +882,7 @@ func TestCarbon_Decade(t *testing.T) {
 func TestCarbon_Year(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -912,7 +912,7 @@ func TestCarbon_Year(t *testing.T) {
 func TestCarbon_Quarter(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -952,7 +952,7 @@ func TestCarbon_Quarter(t *testing.T) {
 func TestCarbon_Month(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -982,7 +982,7 @@ func TestCarbon_Month(t *testing.T) {
 func TestCarbon_Week(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -1027,7 +1027,7 @@ func TestCarbon_Week(t *testing.T) {
 func TestCarbon_Day(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -1062,7 +1062,7 @@ func TestCarbon_Day(t *testing.T) {
 func TestCarbon_Hour(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -1097,7 +1097,7 @@ func TestCarbon_Hour(t *testing.T) {
 func TestCarbon_Minute(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -1132,7 +1132,7 @@ func TestCarbon_Minute(t *testing.T) {
 func TestCarbon_Second(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -1167,7 +1167,7 @@ func TestCarbon_Second(t *testing.T) {
 func TestCarbon_Millisecond(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -1212,7 +1212,7 @@ func TestCarbon_Millisecond(t *testing.T) {
 func TestCarbon_Microsecond(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -1257,7 +1257,7 @@ func TestCarbon_Microsecond(t *testing.T) {
 func TestCarbon_Nanosecond(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -1302,7 +1302,7 @@ func TestCarbon_Nanosecond(t *testing.T) {
 func TestCarbon_Timestamp(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int64
 	}{
 		{
@@ -1347,7 +1347,7 @@ func TestCarbon_Timestamp(t *testing.T) {
 func TestCarbon_TimestampMilli(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int64
 	}{
 		{
@@ -1392,7 +1392,7 @@ func TestCarbon_TimestampMilli(t *testing.T) {
 func TestCarbon_TimestampMicro(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int64
 	}{
 		{
@@ -1437,7 +1437,7 @@ func TestCarbon_TimestampMicro(t *testing.T) {
 func TestCarbon_TimestampNano(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int64
 	}{
 		{
@@ -1482,7 +1482,7 @@ func TestCarbon_TimestampNano(t *testing.T) {
 func TestCarbon_Timezone(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -1517,7 +1517,7 @@ func TestCarbon_Timezone(t *testing.T) {
 func TestCarbon_Location(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -1552,7 +1552,7 @@ func TestCarbon_Location(t *testing.T) {
 func TestCarbon_Offset(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
@@ -1587,7 +1587,7 @@ func TestCarbon_Offset(t *testing.T) {
 func TestCarbon_Locale(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   string
 	}{
 		{
@@ -1617,7 +1617,7 @@ func TestCarbon_Locale(t *testing.T) {
 func TestCarbon_Age(t *testing.T) {
 	tests := []struct {
 		name   string
-		carbon Carbon
+		carbon *Carbon
 		want   int
 	}{
 		{
