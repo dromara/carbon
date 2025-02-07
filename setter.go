@@ -83,7 +83,7 @@ func (c *Carbon) SetDateTime(year, month, day, hour, minute, second int) *Carbon
 	if c.Error != nil {
 		return c
 	}
-	return c.create(year, month, day, hour, minute, second, 0)
+	return c.create(year, month, day, hour, minute, second, c.Nanosecond())
 }
 
 // SetDateTimeMilli sets year, month, day, hour, minute, second and millisecond.
@@ -120,7 +120,7 @@ func (c *Carbon) SetDate(year, month, day int) *Carbon {
 		return c
 	}
 	hour, minute, second := c.Time()
-	return c.create(year, month, day, hour, minute, second, 0)
+	return c.create(year, month, day, hour, minute, second, c.Nanosecond())
 }
 
 // SetDateMilli sets year, month, day and millisecond.
@@ -160,7 +160,7 @@ func (c *Carbon) SetTime(hour, minute, second int) *Carbon {
 		return c
 	}
 	year, month, day := c.Date()
-	return c.create(year, month, day, hour, minute, second, 0)
+	return c.create(year, month, day, hour, minute, second, c.Nanosecond())
 }
 
 // SetTimeMilli sets hour, minute, second and millisecond.
@@ -200,7 +200,7 @@ func (c *Carbon) SetYear(year int) *Carbon {
 		return c
 	}
 	_, month, day, hour, minute, second := c.DateTime()
-	return c.create(year, month, day, hour, minute, second, 0)
+	return c.create(year, month, day, hour, minute, second, c.Nanosecond())
 }
 
 // SetYearNoOverflow sets year without overflowing month.
