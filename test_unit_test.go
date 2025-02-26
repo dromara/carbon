@@ -43,8 +43,8 @@ func TestCarbon_UnSetTestNow(t *testing.T) {
 
 func TestCarbon_IsSetTestNow(t *testing.T) {
 	carbon := NewCarbon()
-	assert.False(t, Now().IsSetTestNow(), "It should be equal to false")
+	assert.Equal(t, false, Now().IsSetTestNow(), "It should be equal to false")
 
 	carbon.SetTestNow(Parse("2020-08-05"))
-	assert.True(t, carbon.IsSetTestNow(), "It should be equal to true")
+	assert.Equal(t, true, carbon.IsSetTestNow(), "It should be equal to true")
 }

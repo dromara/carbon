@@ -1648,3 +1648,28 @@ func TestCarbon_Age(t *testing.T) {
 		})
 	}
 }
+
+func TestCarbon_CurrentLayout(t *testing.T) {
+	tests := []struct {
+		name   string
+		carbon Carbon
+		want   string
+	}{
+		{
+			name:   "case1",
+			carbon: ParseByLayout("now", DateTimeLayout),
+			want:   DateTimeLayout,
+		},
+		{
+			name:   "case2",
+			carbon: ParseByLayout("2025-02-26", DateLayout),
+			want:   DateLayout,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, tt.carbon.CurrentLayout(), "CurrentLayout()")
+		})
+	}
+}

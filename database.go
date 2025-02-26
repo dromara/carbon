@@ -59,9 +59,13 @@ func (c *Carbon) UnmarshalJSON(b []byte) error {
 func (t *DateTime) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewDateTime(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewDateTime(Parse(string(v)))
+		}
 	case string:
-		*t = NewDateTime(Parse(v))
+		if len(v) > 0 {
+			*t = NewDateTime(Parse(v))
+		}
 	case time.Time:
 		*t = NewDateTime(CreateFromStdTime(v))
 	}
@@ -103,9 +107,13 @@ func (t *DateTime) UnmarshalJSON(b []byte) error {
 func (t *DateTimeMilli) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewDateTimeMilli(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewDateTimeMilli(Parse(string(v)))
+		}
 	case string:
-		*t = NewDateTimeMilli(Parse(v))
+		if len(v) > 0 {
+			*t = NewDateTimeMilli(Parse(v))
+		}
 	case time.Time:
 		*t = NewDateTimeMilli(CreateFromStdTime(v))
 	}
@@ -147,9 +155,13 @@ func (t *DateTimeMilli) UnmarshalJSON(b []byte) error {
 func (t *DateTimeMicro) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewDateTimeMicro(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewDateTimeMicro(Parse(string(v)))
+		}
 	case string:
-		*t = NewDateTimeMicro(Parse(v))
+		if len(v) > 0 {
+			*t = NewDateTimeMicro(Parse(v))
+		}
 	case time.Time:
 		*t = NewDateTimeMicro(CreateFromStdTime(v))
 	}
@@ -191,9 +203,13 @@ func (t *DateTimeMicro) UnmarshalJSON(b []byte) error {
 func (t *DateTimeNano) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewDateTimeNano(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewDateTimeNano(Parse(string(v)))
+		}
 	case string:
-		*t = NewDateTimeNano(Parse(v))
+		if len(v) > 0 {
+			*t = NewDateTimeNano(Parse(v))
+		}
 	case time.Time:
 		*t = NewDateTimeNano(CreateFromStdTime(v))
 	}
@@ -235,9 +251,13 @@ func (t *DateTimeNano) UnmarshalJSON(b []byte) error {
 func (t *Date) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewDate(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewDate(Parse(string(v)))
+		}
 	case string:
-		*t = NewDate(Parse(v))
+		if len(v) > 0 {
+			*t = NewDate(Parse(v))
+		}
 	case time.Time:
 		*t = NewDate(CreateFromStdTime(v))
 	}
@@ -279,9 +299,13 @@ func (t *Date) UnmarshalJSON(b []byte) error {
 func (t *DateMilli) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewDateMilli(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewDateMilli(Parse(string(v)))
+		}
 	case string:
-		*t = NewDateMilli(Parse(v))
+		if len(v) > 0 {
+			*t = NewDateMilli(Parse(v))
+		}
 	case time.Time:
 		*t = NewDateMilli(CreateFromStdTime(v))
 	}
@@ -323,9 +347,13 @@ func (t *DateMilli) UnmarshalJSON(b []byte) error {
 func (t *DateMicro) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewDateMicro(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewDateMicro(Parse(string(v)))
+		}
 	case string:
-		*t = NewDateMicro(Parse(v))
+		if len(v) > 0 {
+			*t = NewDateMicro(Parse(v))
+		}
 	case time.Time:
 		*t = NewDateMicro(CreateFromStdTime(v))
 	}
@@ -367,9 +395,13 @@ func (t *DateMicro) UnmarshalJSON(b []byte) error {
 func (t *DateNano) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewDateNano(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewDateNano(Parse(string(v)))
+		}
 	case string:
-		*t = NewDateNano(Parse(v))
+		if len(v) > 0 {
+			*t = NewDateNano(Parse(v))
+		}
 	case time.Time:
 		*t = NewDateNano(CreateFromStdTime(v))
 	}
@@ -411,9 +443,13 @@ func (t *DateNano) UnmarshalJSON(b []byte) error {
 func (t *Time) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewTime(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewTime(Parse(string(v)))
+		}
 	case string:
-		*t = NewTime(Parse(v))
+		if len(v) > 0 {
+			*t = NewTime(Parse(v))
+		}
 	case time.Time:
 		*t = NewTime(CreateFromStdTime(v))
 	}
@@ -457,9 +493,13 @@ func (t *Time) UnmarshalJSON(b []byte) error {
 func (t *TimeMilli) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewTimeMilli(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewTimeMilli(Parse(string(v)))
+		}
 	case string:
-		*t = NewTimeMilli(Parse(v))
+		if len(v) > 0 {
+			*t = NewTimeMilli(Parse(v))
+		}
 	case time.Time:
 		*t = NewTimeMilli(CreateFromStdTime(v))
 	}
@@ -502,9 +542,13 @@ func (t *TimeMilli) UnmarshalJSON(b []byte) error {
 func (t *TimeMicro) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewTimeMicro(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewTimeMicro(Parse(string(v)))
+		}
 	case string:
-		*t = NewTimeMicro(Parse(v))
+		if len(v) > 0 {
+			*t = NewTimeMicro(Parse(v))
+		}
 	case time.Time:
 		*t = NewTimeMicro(CreateFromStdTime(v))
 	}
@@ -547,9 +591,13 @@ func (t *TimeMicro) UnmarshalJSON(b []byte) error {
 func (t *TimeNano) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewTimeNano(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewTimeNano(Parse(string(v)))
+		}
 	case string:
-		*t = NewTimeNano(Parse(v))
+		if len(v) > 0 {
+			*t = NewTimeNano(Parse(v))
+		}
 	case time.Time:
 		*t = NewTimeNano(CreateFromStdTime(v))
 	}
@@ -592,9 +640,13 @@ func (t *TimeNano) UnmarshalJSON(b []byte) error {
 func (t *Timestamp) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewTimestamp(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewTimestamp(Parse(string(v)))
+		}
 	case string:
-		*t = NewTimestamp(Parse(v))
+		if len(v) > 0 {
+			*t = NewTimestamp(Parse(v))
+		}
 	case time.Time:
 		*t = NewTimestamp(CreateFromStdTime(v))
 	}
@@ -637,9 +689,13 @@ func (t *Timestamp) UnmarshalJSON(b []byte) error {
 func (t *TimestampMilli) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewTimestampMilli(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewTimestampMilli(Parse(string(v)))
+		}
 	case string:
-		*t = NewTimestampMilli(Parse(v))
+		if len(v) > 0 {
+			*t = NewTimestampMilli(Parse(v))
+		}
 	case time.Time:
 		*t = NewTimestampMilli(CreateFromStdTime(v))
 	}
@@ -682,9 +738,13 @@ func (t *TimestampMilli) UnmarshalJSON(b []byte) error {
 func (t *TimestampMicro) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewTimestampMicro(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewTimestampMicro(Parse(string(v)))
+		}
 	case string:
-		*t = NewTimestampMicro(Parse(v))
+		if len(v) > 0 {
+			*t = NewTimestampMicro(Parse(v))
+		}
 	case time.Time:
 		*t = NewTimestampMicro(CreateFromStdTime(v))
 	}
@@ -727,9 +787,13 @@ func (t *TimestampMicro) UnmarshalJSON(b []byte) error {
 func (t *TimestampNano) Scan(src interface{}) error {
 	switch v := src.(type) {
 	case []byte:
-		*t = NewTimestampNano(Parse(string(v)))
+		if len(v) > 0 {
+			*t = NewTimestampNano(Parse(string(v)))
+		}
 	case string:
-		*t = NewTimestampNano(Parse(v))
+		if len(v) > 0 {
+			*t = NewTimestampNano(Parse(v))
+		}
 	case time.Time:
 		*t = NewTimestampNano(CreateFromStdTime(v))
 	}

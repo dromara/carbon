@@ -27,6 +27,7 @@ func (c *Carbon) Parse(value string, timezone ...string) *Carbon {
 		t, err := time.ParseInLocation(layout, value, c.loc)
 		if err == nil {
 			c.time = t
+			c.layout = layout
 			return c
 		}
 	}
@@ -94,6 +95,7 @@ func (c *Carbon) ParseByLayout(value, layout string, timezone ...string) *Carbon
 		return c
 	}
 	c.time = tt
+	c.layout = layout
 	return c
 }
 

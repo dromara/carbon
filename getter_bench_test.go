@@ -517,3 +517,15 @@ func BenchmarkCarbon_Age(b *testing.B) {
 		c.Age()
 	}
 }
+
+func BenchmarkCarbon_CurrentLayout(b *testing.B) {
+	now := Now()
+	for n := 0; n < b.N; n++ {
+		now.Age()
+	}
+
+	c := NewCarbon()
+	for n := 0; n < b.N; n++ {
+		c.CurrentLayout()
+	}
+}

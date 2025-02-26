@@ -43,3 +43,14 @@ func SetDefault(d Default) {
 		defaultLocale = d.Locale
 	}
 }
+
+// getDefault gets default.
+// 获取全局默认值
+func getDefault() Default {
+	return Default{
+		Layout:       defaultLayout,
+		Timezone:     defaultTimezone,
+		Locale:       defaultLocale,
+		WeekStartsAt: defaultWeekStartsAt,
+	}
+}
