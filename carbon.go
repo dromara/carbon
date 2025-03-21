@@ -22,6 +22,7 @@ type Carbon struct {
 	loc          *time.Location
 	lang         *Language
 	Error        error
+	formatter    *formatter
 }
 
 // NewCarbon returns a new Carbon instance.
