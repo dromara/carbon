@@ -11,46 +11,81 @@ type (
 	jsonUnmarshalerFunc = func(data []byte, c *Carbon) error
 )
 
-type formatter struct {
+type Formatter struct {
 	sqlScanner      sqlScannerFunc
 	sqlValuer       sqlValuerFunc
 	jsonMarshaler   jsonMarshalerFunc
 	jsonUnmarshaler jsonUnmarshalerFunc
 }
 
-func (c *Carbon) lazyInitFormatter() {
-	if c.formatter == nil {
-		c.formatter = &formatter{}
+func NewFormatter() *Formatter {
+	return &Formatter{}
+}
+
+func (f *Formatter) isDefaultFormatter() bool {
+	return f == defaultFormatter
+}
+
+func (f *Formatter) clone() Formatter {
+	return Formatter{
+		sqlScanner:      f.sqlScanner,
+		sqlValuer:       f.sqlValuer,
+		jsonMarshaler:   f.jsonMarshaler,
+		jsonUnmarshaler: f.jsonUnmarshaler,
 	}
 }
 
-func (c *Carbon) SetSqlScannerFunc(f sqlScannerFunc) {
-	if f == nil {
-		return
+func (f *Formatter) init() {
+	// If it is the default formatter, then it needs to be cloned to
+	// avoid affecting the global when setting functions
+	if f.isDefaultFormatter() {
+		*f = defaultFormatter.clone()
 	}
-	c.lazyInitFormatter()
-	c.formatter.sqlScanner = f
 }
 
-func (c *Carbon) SetSqlValuerFunc(f sqlValuerFunc) {
+func (f *Formatter) SetSqlScannerFunc(fn sqlScannerFunc) {
 	if f == nil {
 		return
 	}
-	c.lazyInitFormatter()
-	c.formatter.sqlValuer = f
+	f.init()
+	f.sqlScanner = fn
 }
 
-func (c *Carbon) SetJsonMarshalerFunc(f jsonMarshalerFunc) {
+func (f *Formatter) SetSqlValuerFunc(fn sqlValuerFunc) {
 	if f == nil {
 		return
 	}
-	c.lazyInitFormatter()
-	c.formatter.jsonMarshaler = f
+	f.init()
+	f.sqlValuer = fn
 }
-func (c *Carbon) SetJsonUnmarshalerFunc(f jsonUnmarshalerFunc) {
+
+func (f *Formatter) SetJsonMarshalerFunc(fn jsonMarshalerFunc) {
 	if f == nil {
 		return
 	}
-	c.lazyInitFormatter()
-	c.formatter.jsonUnmarshaler = f
+	f.init()
+	f.jsonMarshaler = fn
+}
+func (f *Formatter) SetJsonUnmarshalerFunc(fn jsonUnmarshalerFunc) {
+	if f == nil {
+		return
+	}
+	f.init()
+	f.jsonUnmarshaler = fn
+}
+
+func (f *Formatter) sqlScannerIsNil() bool {
+	return f == nil || f.sqlScanner == nil
+}
+
+func (f *Formatter) sqlValuerIsNil() bool {
+	return f == nil || f.sqlValuer == nil
+}
+
+func (f *Formatter) jsonMarshalerIsNil() bool {
+	return f == nil || f.jsonMarshaler == nil
+}
+
+func (f *Formatter) jsonUnmarshalerIsNil() bool {
+	return f == nil || f.jsonUnmarshaler == nil
 }

@@ -22,7 +22,7 @@ type Carbon struct {
 	loc          *time.Location
 	lang         *Language
 	Error        error
-	formatter    *formatter
+	formatter    *Formatter
 }
 
 // NewCarbon returns a new Carbon instance.
@@ -38,6 +38,7 @@ func NewCarbon(time ...time.Time) Carbon {
 		c.loc = time[0].Location()
 	}
 	c.layout = defaultLayout
+	c.formatter = defaultFormatter
 	return c
 }
 

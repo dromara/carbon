@@ -16,6 +16,9 @@ var (
 	// default language locale
 	// 默认语言区域
 	defaultLocale = "en"
+	// default formatter
+	// 默认格式化器
+	defaultFormatter = NewFormatter()
 )
 
 // Default defines a Default struct.
@@ -25,6 +28,7 @@ type Default struct {
 	Timezone     string
 	WeekStartsAt string
 	Locale       string
+	Formatter    *Formatter
 }
 
 // SetDefault sets default.
@@ -42,6 +46,9 @@ func SetDefault(d Default) {
 	if d.Locale != "" {
 		defaultLocale = d.Locale
 	}
+	if d.Formatter != nil {
+		defaultFormatter = d.Formatter
+	}
 }
 
 // getDefault gets default.
@@ -52,5 +59,6 @@ func getDefault() Default {
 		Timezone:     defaultTimezone,
 		Locale:       defaultLocale,
 		WeekStartsAt: defaultWeekStartsAt,
+		Formatter:    defaultFormatter,
 	}
 }

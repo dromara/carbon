@@ -16,7 +16,7 @@ var failedScanError = func(src interface{}) error {
 
 // Scan an interface used by Scan in package database/sql for Scanning value from database to local golang variable.
 func (c *Carbon) Scan(src interface{}) error {
-	if c.formatter == nil {
+	if c.formatter.sqlScannerIsNil() {
 		switch v := src.(type) {
 		case []byte:
 			if len(v) > 0 {
@@ -39,7 +39,7 @@ func (c *Carbon) Scan(src interface{}) error {
 
 // Value the interface providing the Value method for package database/sql/driver.
 func (c Carbon) Value() (driver.Value, error) {
-	if c.formatter == nil {
+	if c.formatter.sqlValuerIsNil() {
 		if c.IsZero() {
 			return nil, nil
 		}
@@ -51,7 +51,7 @@ func (c Carbon) Value() (driver.Value, error) {
 // MarshalJSON implements the interface json.Marshal for Carbon struct.
 // 实现 json.Marshaler 接口
 func (c Carbon) MarshalJSON() ([]byte, error) {
-	if c.formatter == nil {
+	if c.formatter.jsonMarshalerIsNil() {
 		return []byte(fmt.Sprintf(`"%s"`, c.Layout(c.layout))), nil
 	}
 	return c.formatter.jsonMarshaler(&c)
@@ -60,7 +60,7 @@ func (c Carbon) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON implements the interface json.Unmarshal for Carbon struct.
 // 实现 json.Unmarshaler 接口
 func (c *Carbon) UnmarshalJSON(b []byte) error {
-	if c.formatter == nil {
+	if c.formatter.jsonUnmarshalerIsNil() {
 		value := string(bytes.Trim(b, `"`))
 		if value == "" || value == "null" {
 			return nil
@@ -73,7 +73,7 @@ func (c *Carbon) UnmarshalJSON(b []byte) error {
 
 // Scan an interface used by Scan in package database/sql for Scanning value from database to local golang variable.
 func (t *DateTime) Scan(src interface{}) error {
-	if t.formatter == nil {
+	if t.formatter.sqlScannerIsNil() {
 		switch v := src.(type) {
 		case []byte:
 			if len(v) > 0 {
@@ -96,7 +96,7 @@ func (t *DateTime) Scan(src interface{}) error {
 
 // Value the interface providing the Value method for package database/sql/driver.
 func (t DateTime) Value() (driver.Value, error) {
-	if t.formatter == nil {
+	if t.formatter.sqlValuerIsNil() {
 		if t.IsZero() {
 			return nil, nil
 		}
@@ -108,7 +108,7 @@ func (t DateTime) Value() (driver.Value, error) {
 // MarshalJSON implements the interface json.Marshal for DateTime struct.
 // 实现 MarshalJSON 接口
 func (t DateTime) MarshalJSON() ([]byte, error) {
-	if t.formatter == nil {
+	if t.formatter.jsonMarshalerIsNil() {
 		return []byte(fmt.Sprintf(`"%s"`, t.ToDateTimeString())), nil
 	}
 	return t.formatter.jsonMarshaler(&t.Carbon)
@@ -117,7 +117,7 @@ func (t DateTime) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON implements the interface json.Unmarshal for DateTime struct.
 // 实现 UnmarshalJSON 接口
 func (t *DateTime) UnmarshalJSON(b []byte) error {
-	if t.formatter == nil {
+	if t.formatter.jsonUnmarshalerIsNil() {
 		value := string(bytes.Trim(b, `"`))
 		if value == "" || value == "null" {
 			return nil
@@ -469,7 +469,7 @@ func (t *DateNano) UnmarshalJSON(b []byte) error {
 
 // Scan an interface used by Scan in package database/sql for Scanning value from database to local golang variable.
 func (t *Time) Scan(src interface{}) error {
-	if t.formatter == nil {
+	if t.formatter.sqlScannerIsNil() {
 		switch v := src.(type) {
 		case []byte:
 			if len(v) > 0 {
@@ -492,7 +492,7 @@ func (t *Time) Scan(src interface{}) error {
 
 // Value the interface providing the Value method for package database/sql/driver.
 func (t Time) Value() (driver.Value, error) {
-	if t.formatter == nil {
+	if t.formatter.sqlValuerIsNil() {
 		if t.IsZero() {
 			return nil, nil
 		}
@@ -504,7 +504,7 @@ func (t Time) Value() (driver.Value, error) {
 // MarshalJSON implements the interface json.Marshal for Time struct.
 // 实现 MarshalJSON 接口
 func (t Time) MarshalJSON() ([]byte, error) {
-	if t.formatter == nil {
+	if t.formatter.jsonMarshalerIsNil() {
 		return []byte(fmt.Sprintf(`"%s"`, t.ToTimeString())), nil
 	}
 	return t.formatter.jsonMarshaler(&t.Carbon)
@@ -513,7 +513,7 @@ func (t Time) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON implements the interface json.Unmarshal for Time struct.
 // 实现 UnmarshalJSON 接口
 func (t *Time) UnmarshalJSON(b []byte) error {
-	if t.formatter == nil {
+	if t.formatter.jsonUnmarshalerIsNil() {
 		value := string(bytes.Trim(b, `"`))
 		if value == "" || value == "null" {
 			return nil
