@@ -16,95 +16,119 @@ var failedScanError = func(src interface{}) error {
 
 // Scan an interface used by Scan in package database/sql for Scanning value from database to local golang variable.
 func (c *Carbon) Scan(src interface{}) error {
-	switch v := src.(type) {
-	case []byte:
-		if len(v) > 0 {
-			*c = Parse(string(v))
+	if c.formatter == nil {
+		switch v := src.(type) {
+		case []byte:
+			if len(v) > 0 {
+				*c = Parse(string(v))
+			}
+		case string:
+			if len(v) > 0 {
+				*c = Parse(v)
+			}
+		case time.Time:
+			*c = CreateFromStdTime(v)
 		}
-	case string:
-		if len(v) > 0 {
-			*c = Parse(v)
+		if c.Error == nil {
+			return nil
 		}
-	case time.Time:
-		*c = CreateFromStdTime(v)
+		return failedScanError(src)
 	}
-	if c.Error == nil {
-		return nil
-	}
-	return failedScanError(src)
+	return c.formatter.sqlScanner(c, src)
 }
 
 // Value the interface providing the Value method for package database/sql/driver.
 func (c Carbon) Value() (driver.Value, error) {
-	if c.IsZero() {
-		return nil, nil
+	if c.formatter == nil {
+		if c.IsZero() {
+			return nil, nil
+		}
+		return c.StdTime(), nil
 	}
-	return c.StdTime(), nil
+	return c.formatter.sqlValuer(&c)
 }
 
 // MarshalJSON implements the interface json.Marshal for Carbon struct.
 // 实现 json.Marshaler 接口
 func (c Carbon) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf(`"%s"`, c.Layout(c.layout))), nil
+	if c.formatter == nil {
+		return []byte(fmt.Sprintf(`"%s"`, c.Layout(c.layout))), nil
+	}
+	return c.formatter.jsonMarshaler(&c)
 }
 
 // UnmarshalJSON implements the interface json.Unmarshal for Carbon struct.
 // 实现 json.Unmarshaler 接口
 func (c *Carbon) UnmarshalJSON(b []byte) error {
-	value := string(bytes.Trim(b, `"`))
-	if value == "" || value == "null" {
-		return nil
+	if c.formatter == nil {
+		value := string(bytes.Trim(b, `"`))
+		if value == "" || value == "null" {
+			return nil
+		}
+		*c = ParseByLayout(value, c.layout)
+		return c.Error
 	}
-	*c = ParseByLayout(value, c.layout)
-	return c.Error
+	return c.formatter.jsonUnmarshaler(b, c)
 }
 
 // Scan an interface used by Scan in package database/sql for Scanning value from database to local golang variable.
 func (t *DateTime) Scan(src interface{}) error {
-	switch v := src.(type) {
-	case []byte:
-		if len(v) > 0 {
-			*t = NewDateTime(Parse(string(v)))
+	if t.formatter == nil {
+		switch v := src.(type) {
+		case []byte:
+			if len(v) > 0 {
+				*t = NewDateTime(Parse(string(v)))
+			}
+		case string:
+			if len(v) > 0 {
+				*t = NewDateTime(Parse(v))
+			}
+		case time.Time:
+			*t = NewDateTime(CreateFromStdTime(v))
 		}
-	case string:
-		if len(v) > 0 {
-			*t = NewDateTime(Parse(v))
+		if t.Error == nil {
+			return nil
 		}
-	case time.Time:
-		*t = NewDateTime(CreateFromStdTime(v))
+		return failedScanError(src)
 	}
-	if t.Error == nil {
-		return nil
-	}
-	return failedScanError(src)
+	return t.formatter.sqlScanner(&t.Carbon, src)
 }
 
 // Value the interface providing the Value method for package database/sql/driver.
 func (t DateTime) Value() (driver.Value, error) {
-	if t.IsZero() {
-		return nil, nil
+	if t.formatter == nil {
+		if t.IsZero() {
+			return nil, nil
+		}
+		return t.StdTime(), nil
 	}
-	return t.StdTime(), nil
+	return t.formatter.sqlValuer(&t.Carbon)
 }
 
 // MarshalJSON implements the interface json.Marshal for DateTime struct.
 // 实现 MarshalJSON 接口
 func (t DateTime) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf(`"%s"`, t.ToDateTimeString())), nil
+	if t.formatter == nil {
+		return []byte(fmt.Sprintf(`"%s"`, t.ToDateTimeString())), nil
+	}
+	return t.formatter.jsonMarshaler(&t.Carbon)
 }
 
 // UnmarshalJSON implements the interface json.Unmarshal for DateTime struct.
 // 实现 UnmarshalJSON 接口
 func (t *DateTime) UnmarshalJSON(b []byte) error {
-	value := string(bytes.Trim(b, `"`))
-	if value == "" || value == "null" {
-		return nil
+	if t.formatter == nil {
+		value := string(bytes.Trim(b, `"`))
+		if value == "" || value == "null" {
+			return nil
+		}
+		c := ParseByLayout(value, DateTimeLayout)
+		if c.Error == nil {
+			*t = NewDateTime(c)
+		}
+		return c.Error
 	}
-	c := ParseByLayout(value, DateTimeLayout)
-	if c.Error == nil {
-		*t = NewDateTime(c)
-	}
-	return c.Error
+	return t.formatter.jsonUnmarshaler(b, &t.Carbon)
 }
 
 // Scan an interface used by Scan in package database/sql for Scanning value from database to local golang variable.
@@ -445,52 +469,64 @@ func (t *DateNano) UnmarshalJSON(b []byte) error {
 
 // Scan an interface used by Scan in package database/sql for Scanning value from database to local golang variable.
 func (t *Time) Scan(src interface{}) error {
-	switch v := src.(type) {
-	case []byte:
-		if len(v) > 0 {
-			*t = NewTime(Parse(string(v)))
+	if t.formatter == nil {
+		switch v := src.(type) {
+		case []byte:
+			if len(v) > 0 {
+				*t = NewTime(Parse(string(v)))
+			}
+		case string:
+			if len(v) > 0 {
+				*t = NewTime(Parse(v))
+			}
+		case time.Time:
+			*t = NewTime(CreateFromStdTime(v))
 		}
-	case string:
-		if len(v) > 0 {
-			*t = NewTime(Parse(v))
+		if t.Error == nil {
+			return nil
 		}
-	case time.Time:
-		*t = NewTime(CreateFromStdTime(v))
+		return failedScanError(src)
 	}
-	if t.Error == nil {
-		return nil
-	}
-	return failedScanError(src)
+	return t.formatter.sqlScanner(&t.Carbon, src)
 }
 
 // Value the interface providing the Value method for package database/sql/driver.
 func (t Time) Value() (driver.Value, error) {
-	if t.IsZero() {
-		return nil, nil
+	if t.formatter == nil {
+		if t.IsZero() {
+			return nil, nil
+		}
+		return t.StdTime(), nil
 	}
-	return t.StdTime(), nil
+	return t.formatter.sqlValuer(&t.Carbon)
 }
 
 // MarshalJSON implements the interface json.Marshal for Time struct.
 // 实现 MarshalJSON 接口
 func (t Time) MarshalJSON() ([]byte, error) {
-	return []byte(fmt.Sprintf(`"%s"`, t.ToTimeString())), nil
+	if t.formatter == nil {
+		return []byte(fmt.Sprintf(`"%s"`, t.ToTimeString())), nil
+	}
+	return t.formatter.jsonMarshaler(&t.Carbon)
 }
 
 // UnmarshalJSON implements the interface json.Unmarshal for Time struct.
 // 实现 UnmarshalJSON 接口
 func (t *Time) UnmarshalJSON(b []byte) error {
-	value := string(bytes.Trim(b, `"`))
-	if value == "" || value == "null" {
-		return nil
+	if t.formatter == nil {
+		value := string(bytes.Trim(b, `"`))
+		if value == "" || value == "null" {
+			return nil
+		}
+		year, month, day := Now().Date()
+		c := ParseByLayout(fmt.Sprintf("%04d-%02d-%02d %s", year, month, day, value), DateTimeLayout)
+		fmt.Println("c", c)
+		if c.Error == nil {
+			*t = NewTime(c)
+		}
+		return c.Error
 	}
-	year, month, day := Now().Date()
-	c := ParseByLayout(fmt.Sprintf("%04d-%02d-%02d %s", year, month, day, value), DateTimeLayout)
-	fmt.Println("c", c)
-	if c.Error == nil {
-		*t = NewTime(c)
-	}
-	return c.Error
+	return t.formatter.jsonUnmarshaler(b, &t.Carbon)
 }
 
 // Scan an interface used by Scan in package database/sql for Scanning value from database to local golang variable.
