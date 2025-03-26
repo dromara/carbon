@@ -1630,6 +1630,11 @@ func TestCarbon_WeekStartsAt(t *testing.T) {
 			carbon: Now().SetWeekStartsAt(Monday),
 			want:   Monday,
 		},
+		{
+			name:   "case3",
+			carbon: NewCarbon().SetWeekStartsAt(Monday),
+			want:   "",
+		},
 	}
 
 	for _, tt := range tests {
