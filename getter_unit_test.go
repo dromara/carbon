@@ -1498,12 +1498,12 @@ func TestCarbon_Timezone(t *testing.T) {
 		{
 			name:   "case3",
 			carbon: Now(PRC),
-			want:   "CST",
+			want:   PRC,
 		},
 		{
 			name:   "case4",
 			carbon: Now(Tokyo),
-			want:   "JST",
+			want:   Tokyo,
 		},
 	}
 
@@ -1514,7 +1514,10 @@ func TestCarbon_Timezone(t *testing.T) {
 	}
 }
 
-func TestCarbon_Location(t *testing.T) {
+func TestCarbon_ZoneName(t *testing.T) {
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "CST", NewCarbon().ZoneName())
+	})
 	tests := []struct {
 		name   string
 		carbon Carbon
@@ -1533,23 +1536,23 @@ func TestCarbon_Location(t *testing.T) {
 		{
 			name:   "case3",
 			carbon: Now(PRC),
-			want:   PRC,
+			want:   "CST",
 		},
 		{
 			name:   "case4",
 			carbon: Now(Tokyo),
-			want:   Tokyo,
+			want:   "JST",
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.Location(), "Location()")
+			assert.Equalf(t, tt.want, tt.carbon.ZoneName(), "ZoneName()")
 		})
 	}
 }
 
-func TestCarbon_Offset(t *testing.T) {
+func TestCarbon_ZoneOffset(t *testing.T) {
 	tests := []struct {
 		name   string
 		carbon Carbon
@@ -1579,7 +1582,7 @@ func TestCarbon_Offset(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.Offset(), "Offset()")
+			assert.Equalf(t, tt.want, tt.carbon.ZoneOffset(), "ZoneOffset()")
 		})
 	}
 }
