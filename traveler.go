@@ -13,10 +13,8 @@ func (c Carbon) Now(timezone ...string) Carbon {
 	if c.Error != nil {
 		return c
 	}
-	if c.IsSetTestNow() {
-		now := CreateFromTimestampNano(c.testNow, c.Timezone())
-		now.testNow = c.testNow
-		return now
+	if IsTestNow() {
+		return testNow.frozenNow
 	}
 	c.time = time.Now().In(c.loc)
 	return c
