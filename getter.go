@@ -387,9 +387,19 @@ func (c Carbon) Timezone() string {
 	return c.loc.String()
 }
 
-// Offset gets offset seconds from the UTC timezone like 28800.
-// 获取距离UTC时区的偏移量，单位秒
-func (c Carbon) Offset() int {
+// ZoneName gets timezone name like "CST".
+// 获取时区名称
+func (c Carbon) ZoneName() string {
+	if c.Error != nil {
+		return ""
+	}
+	name, _ := c.StdTime().Zone()
+	return name
+}
+
+// ZoneOffset gets offset seconds from the UTC timezone like 28800.
+// 获取时区偏移量，单位秒
+func (c Carbon) ZoneOffset() int {
 	if c.Error != nil {
 		return 0
 	}

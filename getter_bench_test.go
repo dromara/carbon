@@ -470,15 +470,27 @@ func BenchmarkCarbon_Timezone(b *testing.B) {
 	}
 }
 
-func BenchmarkCarbon_Offset(b *testing.B) {
+func BenchmarkCarbon_ZoneName(b *testing.B) {
 	now := Now()
 	for n := 0; n < b.N; n++ {
-		now.Offset()
+		now.ZoneName()
 	}
 
 	c := NewCarbon()
 	for n := 0; n < b.N; n++ {
-		c.Offset()
+		c.ZoneName()
+	}
+}
+
+func BenchmarkCarbon_ZoneOffset(b *testing.B) {
+	now := Now()
+	for n := 0; n < b.N; n++ {
+		now.ZoneOffset()
+	}
+
+	c := NewCarbon()
+	for n := 0; n < b.N; n++ {
+		c.ZoneOffset()
 	}
 }
 
