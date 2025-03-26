@@ -249,6 +249,26 @@ carbon.ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 20
 carbon.ParseByLayout("2020-08-05 13:14:15", "2006-01-02 15:04:05", carbon.Tokyo).ToDateTimeString() // 2020-08-05 14:14:15
 ```
 
+##### 时间冻结
+
+```go
+now := carbon.Parse("2020-08-05")
+carbon.SetTestNow(now)
+
+carbon.IsTestNow() // true
+carbon.Now().ToDateString() // 2020-08-05
+carbon.Yesterday().ToDateString() // 2020-08-04
+carbon.Tomorrow().ToDateString() // 2020-08-05
+carbon.Now().DiffForHumans() // just now
+carbon.Yesterday().DiffForHumans() // 1 day ago
+carbon.Tomorrow().DiffForHumans() // 1 day from now
+carbon.Parse("2020-10-05").DiffForHumans() // 2 months from now
+now.DiffForHumans(carbon.Parse("2020-10-05")) // 2 months before
+
+carbon.CleanTestNow()
+carbon.IsTestNow() // false
+```
+
 ##### 时间边界
 
 ```go
@@ -978,17 +998,17 @@ carbon.Parse("2020-08-05 13:14:15").TimestampMicro() // 1596604455000000
 // 获取纳秒级时间戳
 carbon.Parse("2020-08-05 13:14:15").TimestampNano() // 1596604455000000000
 
-// 获取时区
-carbon.SetTimezone(carbon.PRC).Timezone() // CST
-carbon.SetTimezone(carbon.Tokyo).Timezone() // JST
+// 获取时区位置
+carbon.SetTimezone(carbon.PRC).Timezone() // PRC
+carbon.SetTimezone(carbon.Tokyo).Timezone() // Asia/Tokyo
 
-// 获取位置
-carbon.SetTimezone(carbon.PRC).Location() // PRC
-carbon.SetTimezone(carbon.Tokyo).Location() // Asia/Tokyo
+// 获取时区名称
+carbon.SetTimezone(carbon.PRC).ZoneName() // CST
+carbon.SetTimezone(carbon.Tokyo).ZoneName() // JST
 
-// 获取距离UTC时区的偏移量，单位秒
-carbon.SetTimezone(carbon.PRC).Offset() // 28800
-carbon.SetTimezone(carbon.Tokyo).Offset() // 32400
+// 获取时区偏移量，单位秒
+carbon.SetTimezone(carbon.PRC).ZoneOffset() // 28800
+carbon.SetTimezone(carbon.Tokyo).ZoneOffset() // 32400
 
 // 获取当前区域
 carbon.Now().Locale() // en
@@ -1003,6 +1023,14 @@ carbon.Now().SetLocale("zh-CN").Constellation() // 狮子座
 carbon.Now().Season() // Summer
 carbon.Now().SetLocale("en").Season() // Summer
 carbon.Now().SetLocale("zh-CN").Season() // 夏季
+
+// 获取一周的开始日期
+carbon.SetWeekStartsAt(carbon.Sunday).WeekStartsAt() // Sunday
+carbon.SetWeekStartsAt(carbon.Monday).WeekStartsAt() // Monday
+
+// 获取当前布局模板
+carbon.Parse("now").CurrentLayout() // "2006-01-02 15:04:05"
+carbon.ParseByLayout("2020-08-05", DateLayout).CurrentLayout() // "2006-01-02"
 
 // 获取年龄
 carbon.Parse("2002-01-01 13:14:15").Age() // 17
@@ -1452,26 +1480,7 @@ c.Now().Constellation() // leo
 c.Now().Season() // summer
 ```
 
-##### 模拟测试
-
-```go
-c := carbon.SetTimezone(carbon.UTC)
-
-c.Now().ToDateString() // 2023-12-27
-c.Now().IsSetTestNow() // false
-
-c.SetTestNow(carbon.Parse("2020-08-05"))
-c.Now().ToDateString() // 2020-08-05
-c.Now().IsSetTestNow() // true
-
-c.UnSetTestNow()
-c.Now().ToDateString() // 2023-12-27
-c.Now().IsSetTestNow() // false
-```
-
 ##### 错误处理
-
-> 如果有多个错误发生，只返回第一个错误，前一个错误排除后才返回下一个错误
 
 ```go
 c := carbon.SetTimezone("xxx").Parse("2020-08-05")
