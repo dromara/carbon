@@ -28,10 +28,22 @@ var invalidValueError = func(value string) error {
 	return fmt.Errorf("cannot parse string %q as carbon, please make sure the value is valid", value)
 }
 
+// returns an empty layout error.
+// 空的布局模板错误
+var emptyLayoutError = func() error {
+	return fmt.Errorf("layout cannot be empty")
+}
+
 // returns an invalid layout error.
 // 无效的布局模板错误
 var invalidLayoutError = func(value, layout string) error {
 	return fmt.Errorf("cannot parse string %q as carbon by layout %q, please make sure the value and layout match", value, layout)
+}
+
+// returns an empty format error.
+// 空的格式模板错误
+var emptyFormatError = func() error {
+	return fmt.Errorf("format cannot be empty")
 }
 
 // returns an invalid format error.
