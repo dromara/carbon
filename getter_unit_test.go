@@ -1614,6 +1614,56 @@ func TestCarbon_Locale(t *testing.T) {
 	}
 }
 
+func TestCarbon_WeekStartsAt(t *testing.T) {
+	tests := []struct {
+		name   string
+		carbon Carbon
+		want   string
+	}{
+		{
+			name:   "case1",
+			carbon: Now().SetWeekStartsAt(Sunday),
+			want:   Sunday,
+		},
+		{
+			name:   "case2",
+			carbon: Now().SetWeekStartsAt(Monday),
+			want:   Monday,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, tt.carbon.WeekStartsAt(), "weekStartsAt()")
+		})
+	}
+}
+
+func TestCarbon_CurrentLayout(t *testing.T) {
+	tests := []struct {
+		name   string
+		carbon Carbon
+		want   string
+	}{
+		{
+			name:   "case1",
+			carbon: ParseByLayout("now", DateTimeLayout),
+			want:   DateTimeLayout,
+		},
+		{
+			name:   "case2",
+			carbon: ParseByLayout("2025-02-26", DateLayout),
+			want:   DateLayout,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equalf(t, tt.want, tt.carbon.CurrentLayout(), "CurrentLayout()")
+		})
+	}
+}
+
 func TestCarbon_Age(t *testing.T) {
 	tests := []struct {
 		name   string
@@ -1645,31 +1695,6 @@ func TestCarbon_Age(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			assert.Equalf(t, tt.want, tt.carbon.Age(), "Age()")
-		})
-	}
-}
-
-func TestCarbon_CurrentLayout(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: ParseByLayout("now", DateTimeLayout),
-			want:   DateTimeLayout,
-		},
-		{
-			name:   "case2",
-			carbon: ParseByLayout("2025-02-26", DateLayout),
-			want:   DateLayout,
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.CurrentLayout(), "CurrentLayout()")
 		})
 	}
 }
