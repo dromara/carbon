@@ -14,7 +14,7 @@ func (c Carbon) Now(timezone ...string) Carbon {
 		return c
 	}
 	if c.IsSetTestNow() {
-		now := CreateFromTimestampNano(c.testNow, c.Location())
+		now := CreateFromTimestampNano(c.testNow, c.Timezone())
 		now.testNow = c.testNow
 		return now
 	}
