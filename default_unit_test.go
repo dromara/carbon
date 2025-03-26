@@ -7,7 +7,7 @@ import (
 )
 
 func TestCarbon_SetDefault(t *testing.T) {
-	defer SetDefault(getDefault())
+	defer ResetDefault()
 
 	SetDefault(Default{
 		Layout:       DateTimeLayout,

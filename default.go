@@ -7,9 +7,9 @@ var (
 
 	// DefaultTimezone default timezone
 	// 默认时区
-	DefaultTimezone = UTC
+	DefaultTimezone = Local
 
-	// DefaultWeekStartsAt default default week start date
+	// DefaultWeekStartsAt default week start date
 	// 默认一周开始日期
 	DefaultWeekStartsAt = Sunday
 
@@ -44,13 +44,11 @@ func SetDefault(d Default) {
 	}
 }
 
-// getDefault gets default.
-// 获取全局默认值
-func getDefault() Default {
-	return Default{
-		Layout:       DefaultLayout,
-		Timezone:     DefaultTimezone,
-		Locale:       DefaultLocale,
-		WeekStartsAt: DefaultWeekStartsAt,
-	}
+// ResetDefault resets default.
+// 重置全局默认值
+func ResetDefault() {
+	DefaultLayout = DateTimeLayout
+	DefaultTimezone = Local
+	DefaultWeekStartsAt = Sunday
+	DefaultLocale = "en"
 }
