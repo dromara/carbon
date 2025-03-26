@@ -458,18 +458,6 @@ func BenchmarkCarbon_TimestampNano(b *testing.B) {
 	}
 }
 
-func BenchmarkCarbon_Location(b *testing.B) {
-	now := Now()
-	for n := 0; n < b.N; n++ {
-		now.Location()
-	}
-
-	c := NewCarbon()
-	for n := 0; n < b.N; n++ {
-		c.Location()
-	}
-}
-
 func BenchmarkCarbon_Timezone(b *testing.B) {
 	now := Now()
 	for n := 0; n < b.N; n++ {

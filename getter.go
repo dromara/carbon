@@ -378,23 +378,13 @@ func (c Carbon) TimestampNano() int64 {
 	return c.StdTime().UnixNano()
 }
 
-// Location gets location name like "PRC".
-// 获取位置
-func (c Carbon) Location() string {
-	if c.Error != nil {
-		return ""
-	}
-	return c.loc.String()
-}
-
-// Timezone gets timezone name like "CST".
-// 获取时区
+// Timezone gets timezone location like "Asia/Shanghai".
+// 获取时区位置
 func (c Carbon) Timezone() string {
 	if c.Error != nil {
 		return ""
 	}
-	name, _ := c.StdTime().Zone()
-	return name
+	return c.loc.String()
 }
 
 // Offset gets offset seconds from the UTC timezone like 28800.
@@ -439,7 +429,7 @@ func (c Carbon) Age() int {
 	}
 	now := c.Now()
 	if c.IsSetTestNow() {
-		now = CreateFromTimestampNano(c.testNow, c.Location())
+		now = CreateFromTimestampNano(c.testNow, c.Timezone())
 	}
 	if c.TimestampNano() > now.TimestampNano() {
 		return 0

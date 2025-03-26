@@ -10,7 +10,7 @@ import (
 // String implements the interface Stringer for Carbon struct.
 // 实现 Stringer 接口
 func (c Carbon) String() string {
-	return c.Layout(c.layout, c.Location())
+	return c.Layout(c.layout, c.Timezone())
 }
 
 // GoString implements fmt.GoStringer and formats c to be printed in Go source code.
@@ -878,7 +878,7 @@ func (c Carbon) Format(format string, timezone ...string) string {
 			case 'z': // day of the year, ranging from 0-365
 				buffer.WriteString(strconv.Itoa(c.DayOfYear() - 1))
 			case 'e': // current location, such as UTC，GMT，Atlantic/Azores
-				buffer.WriteString(c.Location())
+				buffer.WriteString(c.Timezone())
 			case 'Q': // current quarter, ranging from 1-4
 				buffer.WriteString(strconv.Itoa(c.Quarter()))
 			case 'C': // current century, ranging from 0-99

@@ -1498,41 +1498,6 @@ func TestCarbon_Timezone(t *testing.T) {
 		{
 			name:   "case3",
 			carbon: Now(PRC),
-			want:   "CST",
-		},
-		{
-			name:   "case4",
-			carbon: Now(Tokyo),
-			want:   "JST",
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.Timezone(), "Timezone()")
-		})
-	}
-}
-
-func TestCarbon_Location(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: Parse("xxx"),
-			want:   "",
-		},
-		{
-			name:   "case3",
-			carbon: Now(PRC),
 			want:   PRC,
 		},
 		{
@@ -1544,7 +1509,7 @@ func TestCarbon_Location(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.Location(), "Location()")
+			assert.Equalf(t, tt.want, tt.carbon.Timezone(), "Timezone()")
 		})
 	}
 }
