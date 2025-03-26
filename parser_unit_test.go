@@ -107,6 +107,16 @@ func TestCarbon_ParseByFormat(t *testing.T) {
 			carbon: ParseByFormat("今天是 2020年08月05日13时14分15秒", "今天是 Y年m月d日H时i分s秒"),
 			want:   "2020-08-05 13:14:15",
 		},
+		{
+			name:   "case5",
+			carbon: NewCarbon().ParseByFormat("2020-08-05", ""),
+			want:   "",
+		},
+		{
+			name:   "case6",
+			carbon: NewCarbon().ParseByFormat("", ""),
+			want:   "",
+		},
 	}
 
 	for _, tt := range tests {
@@ -141,6 +151,16 @@ func TestCarbon_ParseByLayout(t *testing.T) {
 			name:   "case4",
 			carbon: ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 2006年01月02日15时04分05秒"),
 			want:   "2020-08-05 13:14:15",
+		},
+		{
+			name:   "case5",
+			carbon: NewCarbon().ParseByLayout("2020-08-05", ""),
+			want:   "",
+		},
+		{
+			name:   "case6",
+			carbon: NewCarbon().ParseByLayout("", ""),
+			want:   "",
 		},
 	}
 

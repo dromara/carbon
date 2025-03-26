@@ -103,6 +103,16 @@ func TestCarbon_SetTimezone(t *testing.T) {
 			carbon: SetTimezone(London).Parse("2020-08-05 13:14:15"),
 			want:   "2020-08-05 20:14:15",
 		},
+		{
+			name:   "case6",
+			carbon: SetTimezone("").Parse("2020-08-05 13:14:15"),
+			want:   "",
+		},
+		{
+			name:   "case7",
+			carbon: SetTimezone("xxx").Parse("2020-08-05 13:14:15"),
+			want:   "",
+		},
 	}
 
 	for _, tt := range tests {
