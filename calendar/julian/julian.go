@@ -129,19 +129,21 @@ func (j Julian) ToGregorian() (g Gregorian) {
 // JD gets julian day like 2460332.5
 // 获取儒略日
 func (j Julian) JD(precision ...int) float64 {
+	p := decimalPrecision
 	if len(precision) > 0 {
-		decimalPrecision = precision[0]
+		p = precision[0]
 	}
-	return parseFloat64(j.jd, decimalPrecision)
+	return parseFloat64(j.jd, p)
 }
 
 // MJD gets modified julian day like 60332
 // 获取简化儒略日
 func (j Julian) MJD(precision ...int) float64 {
+	p := decimalPrecision
 	if len(precision) > 0 {
-		decimalPrecision = precision[0]
+		p = precision[0]
 	}
-	return parseFloat64(j.mjd, decimalPrecision)
+	return parseFloat64(j.mjd, p)
 }
 
 // IsZero reports whether is zero time.
