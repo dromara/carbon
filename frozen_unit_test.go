@@ -24,9 +24,9 @@ func TestSetTestNow(t *testing.T) {
 
 	CleanTestNow()
 	UnSetTestNow()
-	assert.Equal(t, time.Now().In(time.UTC).Format(DateLayout), Now().ToDateString())
-	assert.Equal(t, time.Now().In(time.UTC).Add(time.Hour*-24).Format(DateLayout), Yesterday().ToDateString())
-	assert.Equal(t, time.Now().In(time.UTC).Add(time.Hour*24).Format(DateLayout), Tomorrow().ToDateString())
+	assert.Equal(t, time.Now().In(time.UTC).Format(DateLayout), Now(UTC).ToDateString())
+	assert.Equal(t, time.Now().In(time.UTC).Add(time.Hour*-24).Format(DateLayout), Yesterday(UTC).ToDateString())
+	assert.Equal(t, time.Now().In(time.UTC).Add(time.Hour*24).Format(DateLayout), Tomorrow(UTC).ToDateString())
 	assert.False(t, IsTestNow())
 	assert.False(t, IsSetTestNow())
 }
