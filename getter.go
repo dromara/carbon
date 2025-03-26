@@ -434,14 +434,11 @@ func (c Carbon) CurrentLayout() string {
 // Age gets age like 18.
 // 获取年龄
 func (c Carbon) Age() int {
-	if c.Error != nil {
+	if c.IsInvalid() {
 		return 0
 	}
-	now := c.Now()
-	if c.IsSetTestNow() {
-		now = CreateFromTimestampNano(c.testNow, c.Timezone())
-	}
-	if c.TimestampNano() > now.TimestampNano() {
+	now := Now(c.Timezone())
+	if c.Gte(now) {
 		return 0
 	}
 	return int(c.DiffInYears(now))
