@@ -71,7 +71,7 @@ func (c Carbon) ParseByLayout(value, layout string, timezone ...string) Carbon {
 		return c
 	}
 	if len(layout) == 0 {
-		layout = defaultLayout
+		layout = DefaultLayout
 	}
 	if layout == "timestamp" {
 		timestamp, _ := strconv.ParseInt(value, 10, 64)

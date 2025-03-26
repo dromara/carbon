@@ -35,7 +35,7 @@ type Language struct {
 func NewLanguage() *Language {
 	return &Language{
 		dir:       "lang/",
-		locale:    defaultLocale,
+		locale:    DefaultLocale,
 		resources: make(map[string]string),
 		rw:        new(sync.RWMutex),
 	}
@@ -92,7 +92,7 @@ func (lang *Language) SetResources(resources map[string]string) *Language {
 // 翻译转换
 func (lang *Language) translate(unit string, value int64) string {
 	if len(lang.resources) == 0 {
-		lang.SetLocale(defaultLocale)
+		lang.SetLocale(DefaultLocale)
 	}
 	slice := strings.Split(lang.resources[unit], "|")
 	number := getAbsValue(value)

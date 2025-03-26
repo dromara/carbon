@@ -44,7 +44,7 @@ func (c Carbon) ToMonthString(timezone ...string) string {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
 	}
 	if len(c.lang.resources) == 0 {
-		c.lang.SetLocale(defaultLocale)
+		c.lang.SetLocale(DefaultLocale)
 	}
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
@@ -67,7 +67,7 @@ func (c Carbon) ToShortMonthString(timezone ...string) string {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
 	}
 	if len(c.lang.resources) == 0 {
-		c.lang.SetLocale(defaultLocale)
+		c.lang.SetLocale(DefaultLocale)
 	}
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
@@ -90,7 +90,7 @@ func (c Carbon) ToWeekString(timezone ...string) string {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
 	}
 	if len(c.lang.resources) == 0 {
-		c.lang.SetLocale(defaultLocale)
+		c.lang.SetLocale(DefaultLocale)
 	}
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
@@ -113,7 +113,7 @@ func (c Carbon) ToShortWeekString(timezone ...string) string {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
 	}
 	if len(c.lang.resources) == 0 {
-		c.lang.SetLocale(defaultLocale)
+		c.lang.SetLocale(DefaultLocale)
 	}
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
