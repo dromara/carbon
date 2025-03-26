@@ -59,7 +59,6 @@ carbon.SetDefault(carbon.Default{
   Locale: "zh-CN", // 取值范围：lang 目录下翻译文件名，不包含文件后缀
 })
 ```
-> 建议在入口文件如 `main.go` 中设置
 
 ##### `Carbon` 和 `time.Time` 互转
 
@@ -1354,7 +1353,7 @@ person.CreatedAt4.Int64() // 1596604455999999999
 * [印地语(hi)](./lang/hi.json "印地语"): 由 [chauhan17nitin](https://github.com/chauhan17nitin "chauhan17nitin") 翻译
 * [波兰语(pl)](./lang/pl.json "波兰语"): 由 [gouguoyin](https://github.com/gouguoyin "gouguoyin") 翻译
 * [保加利亚语(bg)](./lang/bg.json "保加利亚语"): 由 [yuksbg](https://github.com/yuksbg "yuksbg") 翻译
-* [阿拉伯语(ar)](./lang/bg.json "阿拉伯语"): 由 [zumoshi](https://github.com/yuksbg "zumoshi") 翻译
+* [阿拉伯语(ar)](./lang/bg.json "阿拉伯语"): 由 [zumoshi](https://github.com/zumoshi "zumoshi") 翻译
 * [匈牙利语(hu)](./lang/hu.json "匈牙利语"): 由 [kenlas](https://github.com/kenlas "kenlas") 翻译
 * [丹麦语(dk)](./lang/dk.json "丹麦语"): 由 [Munk91](https://github.com/Munk91 "Munk91") 翻译
 * [挪威语(dk)](./lang/nb.json "挪威语"): 由 [bendikrb](https://github.com/bendikrb "bendikrb") 翻译
