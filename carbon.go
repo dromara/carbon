@@ -16,7 +16,6 @@ import (
 // 定义 Carbon 结构体
 type Carbon struct {
 	time         time.Time
-	testNow      int64 // nanosecond timestamp of test now time
 	layout       string
 	weekStartsAt time.Weekday
 	loc          *time.Location
