@@ -23,6 +23,11 @@ func TestCarbon_CreateFromStdTime(t *testing.T) {
 			carbon: CreateFromStdTime(time.Now(), PRC),
 			want:   time.Now().Format(DateTimeLayout),
 		},
+		{
+			name:   "case3",
+			carbon: CreateFromStdTime(time.Now(), "xxx"),
+			want:   "",
+		},
 	}
 
 	for _, tt := range tests {
