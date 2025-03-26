@@ -67,6 +67,11 @@ func TestCarbon_Parse(t *testing.T) {
 			carbon: Parse("2020-08-05 01:02:03"),
 			want:   "2020-08-05 01:02:03",
 		},
+		{
+			name:   "case12",
+			carbon: Parse("xxx"),
+			want:   "",
+		},
 	}
 
 	for _, tt := range tests {
