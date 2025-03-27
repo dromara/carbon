@@ -1,5 +1,6 @@
 {
 	"name": "Romanian",
+	"author": "DrOctavius",
 	"months": "Ianuarie|Februarie|Martie|Aprilie|Mai|Iunie|Iulie|August|Septembrie|Octombrie|Noiembrie|Decembrie",
 	"short_months": "Ian|Feb|Mar|Apr|Mai|Iun|Iul|Aug|Sep|Oct|Noi|Dec",
 	"weeks": "Duminică|Luni|Marți|Miercuri|Joi|Vineri|Sîmbătă",

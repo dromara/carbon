@@ -1,5 +1,6 @@
 {
 	"name": "Polish",
+	"author": "gouguoyin",
 	"months": "stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia",
 	"short_months": "sty|lut|mar|kwi|maj|cze|lip|sie|wrz|paź|lis|gru",
 	"weeks": "niedziela|poniedziałek|wtorek|środa|czwartek|piątek|sobota",

@@ -1,5 +1,6 @@
 {
 	"name": "Turkish",
+	"author": "emresenyuva",
 	"months": "Ocak|Şubat|Mart|Nisan|Mayıs|Haziran|Temmuz|Ağustos|Eylül|Ekim|Kasım|Aralık",
 	"short_months": "Oca|Şub|Mar|Nis|May|Haz|Tem|Ağu|Eyl|Eki|Kas|Ara",
 	"weeks": "Pazar|Pazartesi|Salı|Çarşamba|Perşembe|Cuma|Cumartesi",

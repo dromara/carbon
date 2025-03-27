@@ -1,5 +1,6 @@
 {
 	"name": "Hungarian",
+	"author": "kenlas",
 	"months": "január|február|március|április|május|június|július|augusztus|szeptember|október|november|december",
 	"short_months": "jan.|febr.|márc.|ápr.|máj.|jún.|júl.|aug.|szept.|okt.|nov.|dec.",
 	"weeks": "Vasárnap|Hétfő|Kedd|Szerda|Csütörtök|Péntek|Szombat",
