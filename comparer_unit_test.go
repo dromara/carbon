@@ -1,1936 +1,1128 @@
 package carbon
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+	"time"
+
+	"github.com/stretchr/testify/assert"
 )
 
-func TestCarbon_IsDST(t *testing.T) {
-	tzWithDST, tzWithoutDST := "Australia/Sydney", "Australia/Brisbane"
+func TestCarbon_HasError(t *testing.T) {
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().HasError())
+	})
 
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: NewCarbon(),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("0000-01-01 00:00:00 +0000 UTC", tzWithDST),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			carbon: Parse("0001-01-01 00:00:00 +0000 UTC", tzWithDST),
-			want:   false,
-		},
-		{
-			name:   "case5",
-			carbon: Parse("2009-01-01", tzWithDST),
-			want:   true,
-		},
-		{
-			name:   "case6",
-			carbon: Parse("2009-01-01", tzWithoutDST),
-			want:   false,
-		},
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").HasError())
+		assert.True(t, Parse("0").HasError())
+		assert.True(t, Parse("xxx").HasError())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsDST(), "IsDST()")
-		})
-	}
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Now().HasError())
+	})
+}
+
+func TestCarbon_IsNil(t *testing.T) {
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsNil())
+	})
+
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("0").IsNil())
+		assert.False(t, Parse("xxx").IsNil())
+		assert.True(t, Parse("").IsNil())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-08-05").IsNil())
+	})
 }
 
 func TestCarbon_IsZero(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   true,
-		},
-		{
-			name:   "case2",
-			carbon: NewCarbon(),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("0000-01-01 00:00:00 +0000 UTC"),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			carbon: Parse("0001-01-01 00:00:00 +0000 UTC"),
-			want:   true,
-		},
-		{
-			name:   "case5",
-			carbon: Parse("2020-08-00 00:00:00"),
-			want:   true,
-		},
-		{
-			name:   "case6",
-			carbon: Parse("2020-00-05 00:00:00"),
-			want:   true,
-		},
-		{
-			name:   "case7",
-			carbon: Parse("2020-00-00 00:00:00"),
-			want:   true,
-		},
-		{
-			name:   "case8",
-			carbon: Parse("2020-08-05 00:00:00"),
-			want:   false,
-		},
-		{
-			name:   "case9",
-			carbon: Parse("0000-01-01 13:14:15"),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		stdTime1 := time.Date(0001, 1, 1, 00, 00, 00, 00, time.UTC)
+		carbon1 := CreateFromDateTimeNano(0001, 1, 1, 00, 00, 00, 00, UTC)
+		assert.True(t, carbon1.IsZero())
+		assert.Equal(t, stdTime1.IsZero(), carbon1.IsZero())
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsZero(), "IsZero()")
-		})
-	}
+		stdTime2 := time.Time{}
+		carbon2 := NewCarbon()
+		assert.True(t, carbon2.IsZero())
+		assert.Equal(t, stdTime2.IsZero(), carbon2.IsZero())
+	})
+
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsZero())
+		assert.False(t, Parse("0").IsZero())
+		assert.False(t, Parse("xxx").IsZero())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("0000-00-00 00:00:00").IsZero())
+		assert.False(t, Parse("2020-08-05").IsZero())
+		assert.False(t, Parse("0000-00-00").IsZero())
+	})
 }
 
 func TestCarbon_IsValid(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: NewCarbon(),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2024-00-00 00:00:00 +0000 UTC"),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			carbon: Parse("0000-01-01 00:00:00 +0000 UTC"),
-			want:   true,
-		},
-		{
-			name:   "case5",
-			carbon: Parse("0001-01-01 13:14:15 +0000 UTC"),
-			want:   true,
-		},
-		{
-			name:   "case6",
-			carbon: Parse("2020-08-05"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsValid())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsValid(), "IsValid()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsValid())
+		assert.False(t, Parse("0").IsValid())
+		assert.False(t, Parse("xxx").IsValid())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-08").IsValid())
+	})
 }
 
 func TestCarbon_IsInvalid(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   true,
-		},
-		{
-			name:   "case2",
-			carbon: NewCarbon(),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("0000-01-01 00:00:00 +0000 UTC"),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			carbon: Parse("0001-01-01 13:14:15 +0000 UTC"),
-			want:   false,
-		},
-		{
-			name:   "case5",
-			carbon: Parse("2020-08-05"),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsInvalid())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsInvalid(), "IsInvalid()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.True(t, Parse("").IsInvalid())
+		assert.True(t, Parse("0").IsInvalid())
+		assert.True(t, Parse("xxx").IsInvalid())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-08-08").IsInvalid())
+	})
+}
+
+func TestCarbon_IsDST(t *testing.T) {
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsDST())
+	})
+
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsDST())
+		assert.False(t, Parse("0").IsDST())
+		assert.False(t, Parse("xxx").IsDST())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		tzWithDST, tzWithoutDST := "Australia/Sydney", "Australia/Brisbane"
+		assert.True(t, Parse("2009-01-01", tzWithDST).IsDST())
+		assert.False(t, Parse("2009-01-01", tzWithoutDST).IsDST())
+	})
 }
 
 func TestCarbon_IsAM(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-08-05 00:00:00"),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-08-05 08:00:00"),
-			want:   true,
-		},
-		{
-			name:   "case4",
-			carbon: Parse("2020-08-05 12:00:00"),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsAM())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsAM(), "IsAM()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsAM())
+		assert.False(t, Parse("0").IsAM())
+		assert.False(t, Parse("xxx").IsAM())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-08 00:00:00").IsAM())
+		assert.False(t, Parse("2020-08-08 12:00:00").IsAM())
+		assert.False(t, Parse("2020-08-08 23:59:59").IsAM())
+	})
 }
 
 func TestCarbon_IsPM(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-08-05 00:00:00"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-08-05 08:00:00"),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			carbon: Parse("2020-08-05 12:00:00"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsPM())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsPM(), "IsPM()")
-		})
-	}
-}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsPM())
+		assert.False(t, Parse("0").IsPM())
+		assert.False(t, Parse("xxx").IsPM())
+	})
 
-func TestCarbon_IsNow(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Tomorrow(),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Yesterday(),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			carbon: Now(),
-			want:   true,
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsNow(), "IsNow()")
-		})
-	}
-}
-
-func TestCarbon_IsFuture(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Tomorrow(),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			carbon: Yesterday(),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			carbon: Now(),
-			want:   false,
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsFuture(), "IsFuture()")
-		})
-	}
-}
-
-func TestCarbon_IsPast(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Tomorrow(),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Yesterday(),
-			want:   true,
-		},
-		{
-			name:   "case4",
-			carbon: Now(),
-			want:   false,
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsPast(), "IsPast()")
-		})
-	}
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-08-08 00:00:00").IsPM())
+		assert.True(t, Parse("2020-08-08 12:00:00").IsPM())
+		assert.True(t, Parse("2020-08-08 23:59:59").IsPM())
+	})
 }
 
 func TestCarbon_IsLeapYear(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2015-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2016-01-01"),
-			want:   true,
-		},
-		{
-			name:   "case4",
-			carbon: Parse("2017-01-01"),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsLeapYear())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsLeapYear(), "IsLeapYear()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsLeapYear())
+		assert.False(t, Parse("0").IsLeapYear())
+		assert.False(t, Parse("xxx").IsLeapYear())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2015-01-01").IsLeapYear())
+		assert.True(t, Parse("2016-01-01").IsLeapYear())
+	})
 }
 
 func TestCarbon_IsLongYear(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2015-01-01"),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2016-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			carbon: Parse("2017-01-01"),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsLongYear())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsLongYear(), "IsLongYear()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsLongYear())
+		assert.False(t, Parse("0").IsLongYear())
+		assert.False(t, Parse("xxx").IsLongYear())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2015-01-01").IsLongYear())
+		assert.False(t, Parse("2016-01-01").IsLongYear())
+	})
 }
 
 func TestCarbon_IsJanuary(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-02-01"),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsJanuary())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsJanuary(), "IsJanuary()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsJanuary())
+		assert.False(t, Parse("0").IsJanuary())
+		assert.False(t, Parse("xxx").IsJanuary())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-01-01").IsJanuary())
+		assert.False(t, Parse("2020-02-01").IsJanuary())
+	})
 }
 
 func TestCarbon_IsFebruary(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-02-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsFebruary())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsFebruary(), "IsFebruary()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsFebruary())
+		assert.False(t, Parse("0").IsFebruary())
+		assert.False(t, Parse("xxx").IsFebruary())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-02-01").IsFebruary())
+		assert.False(t, Parse("2020-03-01").IsFebruary())
+	})
 }
 
 func TestCarbon_IsMarch(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-03-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsMarch())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsMarch(), "IsMarch()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsMarch())
+		assert.False(t, Parse("0").IsMarch())
+		assert.False(t, Parse("xxx").IsMarch())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-03-01").IsMarch())
+		assert.False(t, Parse("2020-04-01").IsMarch())
+	})
 }
 
 func TestCarbon_IsApril(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-04-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsApril())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsApril(), "IsApril()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsApril())
+		assert.False(t, Parse("0").IsApril())
+		assert.False(t, Parse("xxx").IsApril())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-04-01").IsApril())
+		assert.False(t, Parse("2020-05-01").IsApril())
+	})
 }
 
 func TestCarbon_IsMay(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-05-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsMay())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsMay(), "IsMay()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsMay())
+		assert.False(t, Parse("0").IsMay())
+		assert.False(t, Parse("xxx").IsMay())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-05-01").IsMay())
+		assert.False(t, Parse("2020-06-01").IsMay())
+	})
 }
 
 func TestCarbon_IsJune(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-06-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsJune())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsJune(), "IsJune()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsJune())
+		assert.False(t, Parse("0").IsJune())
+		assert.False(t, Parse("xxx").IsJune())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-06-01").IsJune())
+		assert.False(t, Parse("2020-07-01").IsJune())
+	})
 }
 
 func TestCarbon_IsJuly(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-07-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsJuly())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsJuly(), "IsJuly()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsJuly())
+		assert.False(t, Parse("0").IsJuly())
+		assert.False(t, Parse("xxx").IsJuly())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-07-01").IsJuly())
+		assert.False(t, Parse("2020-08-01").IsJuly())
+	})
 }
 
 func TestCarbon_IsAugust(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-08-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsAugust())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsAugust(), "IsAugust()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsAugust())
+		assert.False(t, Parse("0").IsAugust())
+		assert.False(t, Parse("xxx").IsAugust())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-01").IsAugust())
+		assert.False(t, Parse("2020-09-01").IsAugust())
+	})
 }
 
 func TestCarbon_IsSeptember(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-09-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsSeptember())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsSeptember(), "IsSeptember()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsSeptember())
+		assert.False(t, Parse("0").IsSeptember())
+		assert.False(t, Parse("xxx").IsSeptember())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-09-01").IsSeptember())
+		assert.False(t, Parse("2020-10-01").IsSeptember())
+	})
 }
 
 func TestCarbon_IsOctober(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-10-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsOctober())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsOctober(), "IsOctober()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsOctober())
+		assert.False(t, Parse("0").IsOctober())
+		assert.False(t, Parse("xxx").IsOctober())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-10-01").IsOctober())
+		assert.False(t, Parse("2020-11-01").IsOctober())
+	})
 }
 
 func TestCarbon_IsNovember(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-11-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsNovember())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsNovember(), "IsNovember()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsNovember())
+		assert.False(t, Parse("0").IsNovember())
+		assert.False(t, Parse("xxx").IsNovember())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-11-01").IsNovember())
+		assert.False(t, Parse("2020-12-01").IsNovember())
+	})
 }
 
 func TestCarbon_IsDecember(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-12-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsDecember())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsDecember(), "IsDecember()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsDecember())
+		assert.False(t, Parse("0").IsDecember())
+		assert.False(t, Parse("xxx").IsDecember())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-12-01").IsDecember())
+		assert.False(t, Parse("2020-01-01").IsDecember())
+	})
 }
 
 func TestCarbon_IsMonday(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-10-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-10-05"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsMonday())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsMonday(), "IsMonday()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsMonday())
+		assert.False(t, Parse("0").IsMonday())
+		assert.False(t, Parse("xxx").IsMonday())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2025-03-03").IsMonday())
+		assert.False(t, Parse("2025-03-04").IsMonday())
+	})
 }
 
 func TestCarbon_IsTuesday(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-10-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-10-06"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsTuesday())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsTuesday(), "IsTuesday()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsTuesday())
+		assert.False(t, Parse("0").IsTuesday())
+		assert.False(t, Parse("xxx").IsTuesday())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2025-03-04").IsTuesday())
+		assert.False(t, Parse("2025-03-05").IsTuesday())
+	})
 }
 
 func TestCarbon_IsWednesday(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-10-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-10-07"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsWednesday())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsWednesday(), "IsWednesday()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsWednesday())
+		assert.False(t, Parse("0").IsWednesday())
+		assert.False(t, Parse("xxx").IsWednesday())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2025-03-05").IsWednesday())
+		assert.False(t, Parse("2025-03-06").IsWednesday())
+	})
 }
 
 func TestCarbon_IsThursday(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-10-05"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-10-08"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsThursday())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsThursday(), "IsThursday()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsThursday())
+		assert.False(t, Parse("0").IsThursday())
+		assert.False(t, Parse("xxx").IsThursday())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2025-03-06").IsThursday())
+		assert.False(t, Parse("2025-03-07").IsThursday())
+	})
 }
 
 func TestCarbon_IsFriday(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-10-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-10-09"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsFriday())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsFriday(), "IsFriday()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsFriday())
+		assert.False(t, Parse("0").IsFriday())
+		assert.False(t, Parse("xxx").IsFriday())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2025-03-07").IsFriday())
+		assert.False(t, Parse("2025-03-08").IsFriday())
+	})
 }
 
 func TestCarbon_IsSaturday(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-10-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-10-10"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsSaturday())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsSaturday(), "IsSaturday()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsSaturday())
+		assert.False(t, Parse("0").IsSaturday())
+		assert.False(t, Parse("xxx").IsSaturday())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2025-03-08").IsSaturday())
+		assert.False(t, Parse("2025-03-09").IsSaturday())
+	})
 }
 
 func TestCarbon_IsSunday(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-10-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-10-11"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsSunday())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsSunday(), "IsSunday()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsSunday())
+		assert.False(t, Parse("0").IsSunday())
+		assert.False(t, Parse("xxx").IsSunday())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2025-03-09").IsSunday())
+		assert.False(t, Parse("2025-03-10").IsSunday())
+	})
 }
 
 func TestCarbon_IsWeekday(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-10-05"),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-10-10"),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsWeekday())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsWeekday(), "IsWeekday()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsWeekday())
+		assert.False(t, Parse("0").IsWeekday())
+		assert.False(t, Parse("xxx").IsWeekday())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2025-03-01").IsWeekday())
+		assert.False(t, Parse("2025-03-02").IsWeekday())
+		assert.True(t, Parse("2025-03-03").IsWeekday())
+	})
 }
 
 func TestCarbon_IsWeekend(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-10-05"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-10-10"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsWeekend())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsWeekend(), "IsWeekend()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsWeekend())
+		assert.False(t, Parse("0").IsWeekend())
+		assert.False(t, Parse("xxx").IsWeekend())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2025-03-01").IsWeekend())
+		assert.True(t, Parse("2025-03-02").IsWeekend())
+		assert.False(t, Parse("2025-03-03").IsWeekend())
+	})
+}
+
+func TestCarbon_IsNow(t *testing.T) {
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsNow())
+	})
+
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsNow())
+		assert.False(t, Parse("0").IsNow())
+		assert.False(t, Parse("xxx").IsNow())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Yesterday().IsNow())
+		assert.True(t, Now().IsNow())
+		assert.False(t, Tomorrow().IsNow())
+		assert.False(t, Parse("2025-03-01").IsNow())
+	})
+}
+
+func TestCarbon_IsFuture(t *testing.T) {
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsFuture())
+	})
+
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsFuture())
+		assert.False(t, Parse("0").IsFuture())
+		assert.False(t, Parse("xxx").IsFuture())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Yesterday().IsFuture())
+		assert.False(t, Now().IsFuture())
+		assert.True(t, Tomorrow().IsFuture())
+		assert.False(t, Parse("2025-03-01").IsFuture())
+	})
+}
+
+func TestCarbon_IsPast(t *testing.T) {
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsPast())
+	})
+
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsPast())
+		assert.False(t, Parse("0").IsPast())
+		assert.False(t, Parse("xxx").IsPast())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Yesterday().IsPast())
+		assert.False(t, Now().IsPast())
+		assert.False(t, Tomorrow().IsPast())
+		assert.True(t, Parse("2025-03-01").IsPast())
+	})
 }
 
 func TestCarbon_IsYesterday(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: NewCarbon(),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Yesterday(),
-			want:   true,
-		},
-		{
-			name:   "case4",
-			carbon: Tomorrow(),
-			want:   false,
-		},
-		{
-			name:   "case5",
-			carbon: Now(),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsYesterday())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsYesterday(), "IsYesterday()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsYesterday())
+		assert.False(t, Parse("0").IsYesterday())
+		assert.False(t, Parse("xxx").IsYesterday())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Yesterday().IsYesterday())
+		assert.False(t, Now().IsYesterday())
+		assert.False(t, Tomorrow().IsYesterday())
+		assert.False(t, Parse("2025-03-01").IsYesterday())
+	})
 }
 
 func TestCarbon_IsToday(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: NewCarbon(),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Yesterday(),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			carbon: Tomorrow(),
-			want:   false,
-		},
-		{
-			name:   "case5",
-			carbon: Now(),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsToday())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsToday(), "IsToday()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsToday())
+		assert.False(t, Parse("0").IsToday())
+		assert.False(t, Parse("xxx").IsToday())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Yesterday().IsToday())
+		assert.True(t, Now().IsToday())
+		assert.False(t, Tomorrow().IsToday())
+		assert.False(t, Parse("2025-03-01").IsToday())
+	})
 }
 
 func TestCarbon_IsTomorrow(t *testing.T) {
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsTomorrow())
+	})
 
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: NewCarbon(),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Yesterday(),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			carbon: Tomorrow(),
-			want:   true,
-		},
-		{
-			name:   "case5",
-			carbon: Now(),
-			want:   false,
-		},
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsTomorrow())
+		assert.False(t, Parse("0").IsTomorrow())
+		assert.False(t, Parse("xxx").IsTomorrow())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsTomorrow(), "IsTomorrow()")
-		})
-	}
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Yesterday().IsTomorrow())
+		assert.False(t, Now().IsTomorrow())
+		assert.True(t, Tomorrow().IsTomorrow())
+		assert.False(t, Parse("2025-03-01").IsTomorrow())
+	})
 }
 
 func TestCarbon_IsSameCentury(t *testing.T) {
-	tests := []struct {
-		name    string
-		carbon1 Carbon
-		carbon2 Carbon
-		want    bool
-	}{
-		{
-			name:    "case1",
-			carbon1: Parse(""),
-			carbon2: Parse(""),
-			want:    false,
-		},
-		{
-			name:    "case2",
-			carbon1: Parse("xxx"),
-			carbon2: Parse("xxx"),
-			want:    false,
-		},
-		{
-			name:    "case2",
-			carbon1: Parse("2020-08-05"),
-			carbon2: Parse("3020-08-05"),
-			want:    false,
-		},
-		{
-			name:    "case3",
-			carbon1: Parse("2020-08-05"),
-			carbon2: Parse("2099-08-05"),
-			want:    true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsSameCentury(NewCarbon()))
+		assert.False(t, Now().IsSameCentury(NewCarbon()))
+		assert.False(t, NewCarbon().IsSameCentury(Now()))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon1.IsSameCentury(tt.carbon2), "IsSameCentury()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").IsSameCentury(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").IsSameCentury(Parse("xxx")))
+		assert.False(t, Parse("xxx").IsSameCentury(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05").IsSameCentury(Parse("2010-01-01")))
+		assert.True(t, Parse("2020-08-05").IsSameCentury(Parse("2030-12-31")))
+		assert.False(t, Parse("2020-08-05").IsSameCentury(Parse("2100-08-05")))
+	})
 }
 
 func TestCarbon_IsSameDecade(t *testing.T) {
-	tests := []struct {
-		name    string
-		carbon1 Carbon
-		carbon2 Carbon
-		want    bool
-	}{
-		{
-			name:    "case1",
-			carbon1: Parse(""),
-			carbon2: Parse(""),
-			want:    false,
-		},
-		{
-			name:    "case2",
-			carbon1: Parse("2020-08-05"),
-			carbon2: Parse("2030-08-05"),
-			want:    false,
-		},
-		{
-			name:    "case3",
-			carbon1: Parse("2020-08-05"),
-			carbon2: Parse("2021-08-05"),
-			want:    true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsSameDecade(NewCarbon()))
+		assert.False(t, Now().IsSameDecade(NewCarbon()))
+		assert.False(t, NewCarbon().IsSameDecade(Now()))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon1.IsSameDecade(tt.carbon2), "IsSameDecade()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").IsSameDecade(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").IsSameDecade(Parse("xxx")))
+		assert.False(t, Parse("xxx").IsSameDecade(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05").IsSameDecade(Parse("2020-01-01")))
+		assert.True(t, Parse("2020-08-05").IsSameDecade(Parse("2020-12-31")))
+		assert.False(t, Parse("2020-08-05").IsSameDecade(Parse("2010-08-05")))
+	})
 }
 
 func TestCarbon_IsSameYear(t *testing.T) {
-	tests := []struct {
-		name    string
-		carbon1 Carbon
-		carbon2 Carbon
-		want    bool
-	}{
-		{
-			name:    "case1",
-			carbon1: Parse(""),
-			carbon2: Parse(""),
-			want:    false,
-		},
-		{
-			name:    "case2",
-			carbon1: Parse("2020-08-05"),
-			carbon2: Parse("2021-08-05"),
-			want:    false,
-		},
-		{
-			name:    "case3",
-			carbon1: Parse("2020-01-01"),
-			carbon2: Parse("2020-12-31"),
-			want:    true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsSameYear(NewCarbon()))
+		assert.False(t, Now().IsSameYear(NewCarbon()))
+		assert.False(t, NewCarbon().IsSameYear(Now()))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon1.IsSameYear(tt.carbon2), "IsSameYear()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").IsSameYear(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").IsSameYear(Parse("xxx")))
+		assert.False(t, Parse("xxx").IsSameYear(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-08-05").IsSameYear(Parse("2010-08-05")))
+		assert.True(t, Parse("2020-08-05").IsSameYear(Parse("2020-01-01")))
+		assert.True(t, Parse("2020-08-05").IsSameYear(Parse("2020-12-31")))
+	})
 }
 
 func TestCarbon_IsSameQuarter(t *testing.T) {
-	tests := []struct {
-		name    string
-		carbon1 Carbon
-		carbon2 Carbon
-		want    bool
-	}{
-		{
-			name:    "case1",
-			carbon1: Parse(""),
-			carbon2: Parse(""),
-			want:    false,
-		},
-		{
-			name:    "case2",
-			carbon1: Parse("2020-08-05"),
-			carbon2: Parse("2020-01-05"),
-			want:    false,
-		},
-		{
-			name:    "case3",
-			carbon1: Parse("2020-01-01"),
-			carbon2: Parse("2020-01-31"),
-			want:    true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsSameQuarter(NewCarbon()))
+		assert.False(t, Parse("2020-08-05").IsSameQuarter(NewCarbon()))
+		assert.False(t, NewCarbon().IsSameQuarter(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon1.IsSameQuarter(tt.carbon2), "IsSameQuarter()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").IsSameQuarter(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").IsSameQuarter(Parse("xxx")))
+		assert.False(t, Parse("xxx").IsSameQuarter(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05").IsSameQuarter(Parse("2020-08-06")))
+		assert.False(t, Parse("2020-08-05").IsSameQuarter(Parse("2010-08-05")))
+		assert.False(t, Parse("2020-08-05").IsSameQuarter(Parse("2010-01-05")))
+	})
 }
 
 func TestCarbon_IsSameMonth(t *testing.T) {
-	tests := []struct {
-		name    string
-		carbon1 Carbon
-		carbon2 Carbon
-		want    bool
-	}{
-		{
-			name:    "case1",
-			carbon1: Parse(""),
-			carbon2: Parse(""),
-			want:    false,
-		},
-		{
-			name:    "case2",
-			carbon1: Parse("2020-08-05"),
-			carbon2: Parse("2021-08-05"),
-			want:    false,
-		},
-		{
-			name:    "case3",
-			carbon1: Parse("2020-01-01"),
-			carbon2: Parse("2020-01-31"),
-			want:    true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsSameMonth(NewCarbon()))
+		assert.False(t, Parse("2020-08-05").IsSameMonth(NewCarbon()))
+		assert.False(t, NewCarbon().IsSameMonth(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon1.IsSameMonth(tt.carbon2), "IsSameMonth()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").IsSameMonth(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").IsSameMonth(Parse("xxx")))
+		assert.False(t, Parse("xxx").IsSameMonth(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05").IsSameMonth(Parse("2020-08-01")))
+		assert.False(t, Parse("2020-08-05").IsSameMonth(Parse("2021-08-05")))
+		assert.False(t, Parse("2020-08-05").IsSameMonth(Parse("2020-09-05")))
+	})
 }
 
 func TestCarbon_IsSameDay(t *testing.T) {
-	tests := []struct {
-		name    string
-		carbon1 Carbon
-		carbon2 Carbon
-		want    bool
-	}{
-		{
-			name:    "case1",
-			carbon1: Parse(""),
-			carbon2: Parse(""),
-			want:    false,
-		},
-		{
-			name:    "case2",
-			carbon1: Parse("2020-08-05 13:14:15"),
-			carbon2: Parse("2021-08-05 13:14:15"),
-			want:    false,
-		},
-		{
-			name:    "case3",
-			carbon1: Parse("2020-08-05 00:00:00"),
-			carbon2: Parse("2020-08-05 13:14:15"),
-			want:    true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsSameDay(NewCarbon()))
+		assert.False(t, Parse("2020-08-05").IsSameDay(NewCarbon()))
+		assert.False(t, NewCarbon().IsSameDay(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon1.IsSameDay(tt.carbon2), "IsSameDay()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").IsSameDay(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").IsSameDay(Parse("xxx")))
+		assert.False(t, Parse("xxx").IsSameDay(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05 00:00:00").IsSameDay(Parse("2020-08-05 23:59:59")))
+		assert.False(t, Parse("2020-08-05 00:00:00").IsSameDay(Parse("2021-08-05 00:00:00")))
+		assert.False(t, Parse("2020-08-05 00:00:00").IsSameDay(Parse("2020-09-05 00:00:00")))
+	})
 }
 
 func TestCarbon_IsSameHour(t *testing.T) {
-	tests := []struct {
-		name    string
-		carbon1 Carbon
-		carbon2 Carbon
-		want    bool
-	}{
-		{
-			name:    "case1",
-			carbon1: Parse(""),
-			carbon2: Parse(""),
-			want:    false,
-		},
-		{
-			name:    "case2",
-			carbon1: Parse("2020-08-05 13:14:15"),
-			carbon2: Parse("2021-08-05 13:14:15"),
-			want:    false,
-		},
-		{
-			name:    "case3",
-			carbon1: Parse("2020-08-05 13:00:00"),
-			carbon2: Parse("2020-08-05 13:14:15"),
-			want:    true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsSameHour(NewCarbon()))
+		assert.False(t, Parse("2020-08-05").IsSameHour(NewCarbon()))
+		assert.False(t, NewCarbon().IsSameHour(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon1.IsSameHour(tt.carbon2), "IsSameDay()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").IsSameHour(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").IsSameHour(Parse("xxx")))
+		assert.False(t, Parse("xxx").IsSameHour(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05 22:00:00").IsSameHour(Parse("2020-08-05 22:59:59")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameHour(Parse("2021-08-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameHour(Parse("2020-09-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameHour(Parse("2020-08-06 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameHour(Parse("2020-08-05 23:00:00")))
+	})
 }
 
 func TestCarbon_IsSameMinute(t *testing.T) {
-	tests := []struct {
-		name    string
-		carbon1 Carbon
-		carbon2 Carbon
-		want    bool
-	}{
-		{
-			name:    "case1",
-			carbon1: Parse(""),
-			carbon2: Parse(""),
-			want:    false,
-		},
-		{
-			name:    "case2",
-			carbon1: Parse("2020-08-05 13:14:15"),
-			carbon2: Parse("2021-08-05 13:14:15"),
-			want:    false,
-		},
-		{
-			name:    "case3",
-			carbon1: Parse("2020-08-05 13:14:00"),
-			carbon2: Parse("2020-08-05 13:14:15"),
-			want:    true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsSameMinute(NewCarbon()))
+		assert.False(t, Parse("2020-08-05").IsSameMinute(NewCarbon()))
+		assert.False(t, NewCarbon().IsSameMinute(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon1.IsSameMinute(tt.carbon2), "IsSameMinute()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").IsSameMinute(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").IsSameMinute(Parse("xxx")))
+		assert.False(t, Parse("xxx").IsSameMinute(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05 22:00:00").IsSameMinute(Parse("2020-08-05 22:00:59")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameMinute(Parse("2021-08-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameMinute(Parse("2020-08-06 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameMinute(Parse("2020-08-05 23:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameMinute(Parse("2020-08-05 22:01:00")))
+	})
 }
 
 func TestCarbon_IsSameSecond(t *testing.T) {
-	tests := []struct {
-		name    string
-		carbon1 Carbon
-		carbon2 Carbon
-		want    bool
-	}{
-		{
-			name:    "case1",
-			carbon1: Parse(""),
-			carbon2: Parse(""),
-			want:    false,
-		},
-		{
-			name:    "case2",
-			carbon1: Parse("2020-08-05 13:14:15"),
-			carbon2: Parse("2021-08-05 13:14:15"),
-			want:    false,
-		},
-		{
-			name:    "case3",
-			carbon1: Parse("2020-08-05 13:14:15"),
-			carbon2: Parse("2020-08-05 13:14:15"),
-			want:    true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsSameSecond(NewCarbon()))
+		assert.False(t, Parse("2020-08-05").IsSameSecond(NewCarbon()))
+		assert.False(t, NewCarbon().IsSameSecond(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon1.IsSameSecond(tt.carbon2), "IsSameSecond()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").IsSameSecond(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").IsSameSecond(Parse("xxx")))
+		assert.False(t, Parse("xxx").IsSameSecond(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05 22:00:00").IsSameSecond(Parse("2020-08-05 22:00:00.999999")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameSecond(Parse("2021-08-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameSecond(Parse("2020-09-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameSecond(Parse("2020-08-06 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameSecond(Parse("2020-08-05 23:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameSecond(Parse("2020-08-05 22:01:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").IsSameSecond(Parse("2020-08-05 22:00:01")))
+	})
 }
 
 func TestCarbon_Compare(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual bool
-		want   bool
-	}{
-		{
-			name:   "case1",
-			actual: Parse("xxx").Compare(">", Parse("2020-08-04")),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05").Compare(">", Parse("2020-08-04")),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05").Compare("<", Parse("2020-08-04")),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05").Compare("<", Parse("2020-08-06")),
-			want:   true,
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05").Compare("=", Parse("2020-08-05")),
-			want:   true,
-		},
-		{
-			name:   "case6",
-			actual: Parse("2020-08-05").Compare(">=", Parse("2020-08-05")),
-			want:   true,
-		},
-		{
-			name:   "case7",
-			actual: Parse("2020-08-05").Compare("<=", Parse("2020-08-05")),
-			want:   true,
-		},
-		{
-			name:   "case8",
-			actual: Parse("2020-08-05").Compare("<>", Parse("2020-08-06")),
-			want:   true,
-		},
-		{
-			name:   "case9",
-			actual: Parse("2020-08-05").Compare("+", Parse("2020-08-06")),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().Compare("=", NewCarbon()))
+		assert.False(t, Parse("2020-08-05").Compare("=", NewCarbon()))
+		assert.False(t, NewCarbon().Compare("=", Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "Compare()")
-		})
-	}
+	t.Run("invalid operator", func(t *testing.T) {
+		assert.False(t, Now().Compare("", Yesterday()))
+		assert.False(t, Now().Compare("%", Yesterday()))
+	})
+
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").Compare("<", Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").Compare(">", Parse("xxx")))
+		assert.False(t, Parse("xxx").Compare("!=", Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05 22:00:00").Compare("=", Parse("2020-08-05 22:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").Compare(">=", Parse("2020-08-05 22:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").Compare("<=", Parse("2020-08-05 22:00:00")))
+
+		assert.True(t, Parse("2020-08-05 22:00:00").Compare(">", Parse("2020-07-05 22:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").Compare(">=", Parse("2020-07-05 22:00:00")))
+
+		assert.True(t, Parse("2020-08-05 22:00:00").Compare("<", Parse("2020-09-05 22:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").Compare("<=", Parse("2020-09-05 22:00:00")))
+
+		assert.True(t, Parse("2020-08-05 22:00:00").Compare("<>", Parse("2020-06-05 22:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").Compare("!=", Parse("2020-06-05 22:00:00")))
+	})
 }
 
 func TestCarbon_Gt(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual bool
-		want   bool
-	}{
-		{
-			name:   "case1",
-			actual: Parse("xxx").Gt(Parse("2020-08-04")),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05").Gt(Parse("2020-08-04")),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05").Gt(Parse("2020-08-04")),
-			want:   true,
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05").Gt(Parse("2020-08-06")),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().Gt(NewCarbon()))
+		assert.True(t, Parse("2020-08-05").Gt(NewCarbon()))
+		assert.False(t, NewCarbon().Gt(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "Gt()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").Gt(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").Gt(Parse("xxx")))
+		assert.False(t, Parse("xxx").Gt(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05 22:00:00").Gt(Parse("2020-08-05 21:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").Gt(Parse("2020-08-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").Gt(Parse("2020-08-05 23:00:00")))
+	})
 }
 
 func TestCarbon_Lt(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual bool
-		want   bool
-	}{
-		{
-			name:   "case1",
-			actual: Parse("xxx").Lt(Parse("2020-08-04")),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05").Lt(Parse("2020-08-04")),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05").Lt(Parse("2020-08-04")),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05").Lt(Parse("2020-08-06")),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().Lt(NewCarbon()))
+		assert.False(t, Parse("2020-08-05").Lt(NewCarbon()))
+		assert.True(t, NewCarbon().Lt(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "Lt()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").Lt(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").Lt(Parse("xxx")))
+		assert.False(t, Parse("xxx").Lt(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-08-05 22:00:00").Lt(Parse("2020-08-05 21:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").Lt(Parse("2020-08-05 22:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").Lt(Parse("2020-08-05 23:00:00")))
+	})
 }
 
 func TestCarbon_Eq(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual bool
-		want   bool
-	}{
-		{
-			name:   "case1",
-			actual: Parse("xxx").Eq(Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05").Eq(Parse("2020-08-05")),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05").Eq(Parse("2020-08-04")),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05").Eq(Parse("2020-08-06")),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().Eq(NewCarbon()))
+		assert.False(t, Parse("2020-08-05").Eq(NewCarbon()))
+		assert.False(t, NewCarbon().Eq(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "Eq()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").Eq(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").Eq(Parse("xxx")))
+		assert.False(t, Parse("xxx").Eq(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-08-05 22:00:00").Eq(Parse("2020-08-05 21:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").Eq(Parse("2020-08-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").Eq(Parse("2020-08-05 23:00:00")))
+	})
 }
 
 func TestCarbon_Ne(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual bool
-		want   bool
-	}{
-		{
-			name:   "case1",
-			actual: Parse("xxx").Ne(Parse("2020-08-05")),
-			want:   true,
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05").Ne(Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05").Ne(Parse("2020-08-04")),
-			want:   true,
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05").Ne(Parse("2020-08-06")),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().Ne(NewCarbon()))
+		assert.True(t, Parse("2020-08-05").Ne(NewCarbon()))
+		assert.True(t, NewCarbon().Ne(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "Ne()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").Ne(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").Ne(Parse("xxx")))
+		assert.False(t, Parse("xxx").Ne(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05 22:00:00").Ne(Parse("2020-08-05 21:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").Ne(Parse("2020-08-05 22:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").Ne(Parse("2020-08-05 23:00:00")))
+	})
 }
 
 func TestCarbon_Gte(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual bool
-		want   bool
-	}{
-		{
-			name:   "case1",
-			actual: Parse("xxx").Gte(Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05").Gte(Parse("2020-08-05")),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05").Gte(Parse("2020-08-04")),
-			want:   true,
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05").Gte(Parse("2020-08-06")),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().Gte(NewCarbon()))
+		assert.True(t, Parse("2020-08-05").Gte(NewCarbon()))
+		assert.False(t, NewCarbon().Gte(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "Gte()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").Gte(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").Gte(Parse("xxx")))
+		assert.False(t, Parse("xxx").Gte(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05 22:00:00").Gte(Parse("2020-08-05 21:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").Gte(Parse("2020-08-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").Gte(Parse("2020-08-05 23:00:00")))
+	})
 }
 
 func TestCarbon_Lte(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual bool
-		want   bool
-	}{
-		{
-			name:   "case1",
-			actual: Parse("xxx").Lte(Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05").Lte(Parse("2020-08-05")),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05").Lte(Parse("2020-08-04")),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05").Lte(Parse("2020-08-06")),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().Lte(NewCarbon()))
+		assert.False(t, Parse("2020-08-05").Lte(NewCarbon()))
+		assert.True(t, NewCarbon().Lte(Parse("2020-08-05")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "Lte()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").Lte(Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").Lte(Parse("xxx")))
+		assert.False(t, Parse("xxx").Lte(Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-08-05 22:00:00").Lte(Parse("2020-08-05 21:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").Lte(Parse("2020-08-05 22:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").Lte(Parse("2020-08-05 23:00:00")))
+	})
 }
 
 func TestCarbon_Between(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual bool
-		want   bool
-	}{
-		{
-			name:   "case1",
-			actual: Parse("xxx").Between(Parse("2020-08-05"), Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05").Between(Parse("2020-08-05"), Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05").Between(Parse("2020-08-05"), Parse("2020-08-06")),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05").Between(Parse("2020-08-05"), Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05").Between(Parse("2020-08-04"), Parse("2020-08-06")),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().Between(NewCarbon(), NewCarbon()))
+		assert.False(t, Parse("2020-08-05").Between(NewCarbon(), NewCarbon()))
+		assert.False(t, NewCarbon().Between(NewCarbon(), Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").Between(NewCarbon(), Parse("2020-08-05")))
+		assert.True(t, Parse("2020-08-05").Between(NewCarbon(), Parse("2020-08-06")))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "Between()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").Between(Parse("xxx"), Parse("xxx")))
+
+		assert.False(t, Parse("xxx").Between(Parse("xxx"), Parse("2020-08-05")))
+		assert.False(t, Parse("xxx").Between(Parse("2020-08-05"), Parse("2020-08-05")))
+
+		assert.False(t, Parse("2020-08-05").Between(Parse("xxx"), Parse("xxx")))
+		assert.False(t, Parse("2020-08-05").Between(Parse("xxx"), Parse("2020-08-05")))
+
+		assert.False(t, Parse("2020-08-05").Between(Parse("2020-08-05"), Parse("xxx")))
+		assert.False(t, Parse("xxx").Between(Parse("2020-08-05"), Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05 22:00:00").Between(Parse("2020-08-05 21:00:00"), Parse("2020-08-05 23:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").Between(Parse("2020-08-05 22:00:00"), Parse("2020-08-05 23:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").Between(Parse("2020-08-05 21:00:00"), Parse("2020-08-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").Between(Parse("2020-08-05 22:00:00"), Parse("2020-08-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").Between(Parse("2021-08-05 22:00:00"), Parse("2019-08-05 22:00:00")))
+	})
 }
 
 func TestCarbon_BetweenIncludedStart(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual bool
-		want   bool
-	}{
-		{
-			name:   "case1",
-			actual: Parse("xxx").BetweenIncludedStart(Parse("2020-08-05"), Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05").BetweenIncludedStart(Parse("2020-08-05"), Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05").BetweenIncludedStart(Parse("2020-08-05"), Parse("2020-08-06")),
-			want:   true,
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05").BetweenIncludedStart(Parse("2020-08-04"), Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05").BetweenIncludedStart(Parse("2020-08-04"), Parse("2020-08-06")),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().BetweenIncludedStart(NewCarbon(), NewCarbon()))
+		assert.False(t, Parse("2020-08-05").BetweenIncludedStart(NewCarbon(), NewCarbon()))
+		assert.True(t, NewCarbon().BetweenIncludedStart(NewCarbon(), Parse("2020-08-05")))
+		assert.False(t, Parse("2020-08-05").BetweenIncludedStart(NewCarbon(), Parse("2020-08-05")))
+		assert.True(t, Parse("2020-08-05").BetweenIncludedStart(NewCarbon(), Parse("2020-08-06")))
+		assert.False(t, Parse("2020-08-05").BetweenIncludedStart(Parse("2020-08-05"), NewCarbon()))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "BetweenIncludedStart()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").BetweenIncludedStart(Parse("xxx"), Parse("xxx")))
+
+		assert.False(t, Parse("xxx").BetweenIncludedStart(Parse("xxx"), Parse("2020-08-05")))
+		assert.False(t, Parse("xxx").BetweenIncludedStart(Parse("2020-08-05"), Parse("2020-08-05")))
+
+		assert.False(t, Parse("2020-08-05").BetweenIncludedStart(Parse("xxx"), Parse("xxx")))
+		assert.False(t, Parse("2020-08-05").BetweenIncludedStart(Parse("xxx"), Parse("2020-08-05")))
+
+		assert.False(t, Parse("2020-08-05").BetweenIncludedStart(Parse("2020-08-05"), Parse("xxx")))
+		assert.False(t, Parse("xxx").BetweenIncludedStart(Parse("2020-08-05"), Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-08-05 22:00:00").BetweenIncludedStart(Parse("2020-08-05 22:00:00"), Parse("2020-08-05 22:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").BetweenIncludedStart(Parse("2020-08-05 21:00:00"), Parse("2020-08-05 23:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").BetweenIncludedStart(Parse("2020-08-05 22:00:00"), Parse("2020-08-05 23:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").BetweenIncludedStart(Parse("2020-08-05 21:00:00"), Parse("2020-08-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").BetweenIncludedStart(Parse("2022-08-05 22:00:00"), Parse("2021-08-05 22:00:00")))
+	})
 }
 
 func TestCarbon_BetweenIncludedEnd(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual bool
-		want   bool
-	}{
-		{
-			name:   "case1",
-			actual: Parse("xxx").BetweenIncludedEnd(Parse("2020-08-05"), Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05").BetweenIncludedEnd(Parse("2020-08-05"), Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05").BetweenIncludedEnd(Parse("2020-08-05"), Parse("2020-08-06")),
-			want:   false,
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05").BetweenIncludedEnd(Parse("2020-08-04"), Parse("2020-08-05")),
-			want:   true,
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05").BetweenIncludedEnd(Parse("2020-08-04"), Parse("2020-08-06")),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().BetweenIncludedEnd(NewCarbon(), NewCarbon()))
+		assert.False(t, Parse("2020-08-05").BetweenIncludedEnd(NewCarbon(), NewCarbon()))
+		assert.False(t, NewCarbon().BetweenIncludedEnd(NewCarbon(), Parse("2020-08-05")))
+		assert.True(t, Parse("2020-08-05").BetweenIncludedEnd(NewCarbon(), Parse("2020-08-05")))
+		assert.True(t, Parse("2020-08-05").BetweenIncludedEnd(NewCarbon(), Parse("2020-08-06")))
+		assert.False(t, Parse("2020-08-05").BetweenIncludedEnd(Parse("2020-08-05"), NewCarbon()))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "BetweenIncludedEnd()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").BetweenIncludedEnd(Parse("xxx"), Parse("xxx")))
+
+		assert.False(t, Parse("xxx").BetweenIncludedEnd(Parse("xxx"), Parse("2020-08-05")))
+		assert.False(t, Parse("xxx").BetweenIncludedEnd(Parse("2020-08-05"), Parse("2020-08-05")))
+
+		assert.False(t, Parse("2020-08-05").BetweenIncludedEnd(Parse("xxx"), Parse("xxx")))
+		assert.False(t, Parse("2020-08-05").BetweenIncludedEnd(Parse("xxx"), Parse("2020-08-05")))
+
+		assert.False(t, Parse("2020-08-05").BetweenIncludedEnd(Parse("2020-08-05"), Parse("xxx")))
+		assert.False(t, Parse("xxx").BetweenIncludedEnd(Parse("2020-08-05"), Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-08-05 22:00:00").BetweenIncludedEnd(Parse("2020-08-05 22:00:00"), Parse("2020-08-05 22:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").BetweenIncludedEnd(Parse("2020-08-05 21:00:00"), Parse("2020-08-05 23:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").BetweenIncludedEnd(Parse("2020-08-05 22:00:00"), Parse("2020-08-05 23:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").BetweenIncludedEnd(Parse("2020-08-05 21:00:00"), Parse("2020-08-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").BetweenIncludedEnd(Parse("2022-08-05 22:00:00"), Parse("2021-08-05 22:00:00")))
+	})
 }
 
 func TestCarbon_BetweenIncludedBoth(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual bool
-		want   bool
-	}{
-		{
-			name:   "case1",
-			actual: Parse("xxx").BetweenIncludedBoth(Parse("2020-08-05"), Parse("2020-08-05")),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05").BetweenIncludedBoth(Parse("2020-08-05"), Parse("2020-08-05")),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05").BetweenIncludedBoth(Parse("2020-08-05"), Parse("2020-08-06")),
-			want:   true,
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05").BetweenIncludedBoth(Parse("2020-08-04"), Parse("2020-08-05")),
-			want:   true,
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05").BetweenIncludedBoth(Parse("2020-08-06"), Parse("2020-08-06")),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().BetweenIncludedBoth(NewCarbon(), NewCarbon()))
+		assert.False(t, Parse("2020-08-05").BetweenIncludedBoth(NewCarbon(), NewCarbon()))
+		assert.True(t, NewCarbon().BetweenIncludedBoth(NewCarbon(), Parse("2020-08-05")))
+		assert.True(t, Parse("2020-08-05").BetweenIncludedBoth(NewCarbon(), Parse("2020-08-05")))
+		assert.True(t, Parse("2020-08-05").BetweenIncludedBoth(NewCarbon(), Parse("2020-08-06")))
+		assert.False(t, Parse("2020-08-05").BetweenIncludedBoth(Parse("2020-08-05"), NewCarbon()))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "BetweenIncludedBoth()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("xxx").BetweenIncludedBoth(Parse("xxx"), Parse("xxx")))
+
+		assert.False(t, Parse("xxx").BetweenIncludedBoth(Parse("xxx"), Parse("2020-08-05")))
+		assert.False(t, Parse("xxx").BetweenIncludedBoth(Parse("2020-08-05"), Parse("2020-08-05")))
+
+		assert.False(t, Parse("2020-08-05").BetweenIncludedBoth(Parse("xxx"), Parse("xxx")))
+		assert.False(t, Parse("2020-08-05").BetweenIncludedBoth(Parse("xxx"), Parse("2020-08-05")))
+
+		assert.False(t, Parse("2020-08-05").BetweenIncludedBoth(Parse("2020-08-05"), Parse("xxx")))
+		assert.False(t, Parse("xxx").BetweenIncludedBoth(Parse("2020-08-05"), Parse("xxx")))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-08-05 22:00:00").BetweenIncludedBoth(Parse("2020-08-05 22:00:00"), Parse("2020-08-05 22:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").BetweenIncludedBoth(Parse("2020-08-05 21:00:00"), Parse("2020-08-05 23:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").BetweenIncludedBoth(Parse("2020-08-05 22:00:00"), Parse("2020-08-05 23:00:00")))
+		assert.True(t, Parse("2020-08-05 22:00:00").BetweenIncludedBoth(Parse("2020-08-05 21:00:00"), Parse("2020-08-05 22:00:00")))
+		assert.False(t, Parse("2020-08-05 22:00:00").BetweenIncludedBoth(Parse("2022-08-05 22:00:00"), Parse("2021-08-05 22:00:00")))
+	})
 }
