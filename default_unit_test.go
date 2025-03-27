@@ -7,7 +7,7 @@ import (
 )
 
 func TestCarbon_SetDefault(t *testing.T) {
-	defer SetDefault(getDefault())
+	defer ResetDefault()
 
 	SetDefault(Default{
 		Layout:       DateTimeLayout,
@@ -16,8 +16,8 @@ func TestCarbon_SetDefault(t *testing.T) {
 		WeekStartsAt: Sunday,
 	})
 
-	assert.Equal(t, DateTimeLayout, defaultLayout)
-	assert.Equal(t, UTC, defaultTimezone)
-	assert.Equal(t, "en", defaultLocale)
-	assert.Equal(t, "Sunday", defaultWeekStartsAt)
+	assert.Equal(t, DateTimeLayout, DefaultLayout)
+	assert.Equal(t, UTC, DefaultTimezone)
+	assert.Equal(t, "en", DefaultLocale)
+	assert.Equal(t, "Sunday", DefaultWeekStartsAt)
 }

@@ -12,6 +12,9 @@ func CreateFromStdTime(tt time.Time, timezone ...string) Carbon {
 	if len(timezone) > 0 {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
 	}
+	if c.Error != nil {
+		return c
+	}
 	c.time = tt
 	return c
 }

@@ -15,6 +15,9 @@ func (c Carbon) Parse(value string, timezone ...string) Carbon {
 	if len(timezone) > 0 {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
 	}
+	if c.Error != nil {
+		return c
+	}
 	switch value {
 	case "now":
 		return c.Now(timezone...)
@@ -44,6 +47,14 @@ func Parse(value string, timezone ...string) Carbon {
 // ParseByFormat parses a time string as a Carbon instance by format.
 // 通过格式模板将时间字符串解析成 Carbon 实例
 func (c Carbon) ParseByFormat(value, format string, timezone ...string) Carbon {
+	if len(value) == 0 {
+		c.Error = invalidValueError(value)
+		return c
+	}
+	if format == "" {
+		c.Error = emptyFormatError()
+		return c
+	}
 	carbon := c.ParseByLayout(value, format2layout(format), timezone...)
 	if carbon.Error != nil {
 		carbon.Error = invalidFormatError(value, format)
@@ -64,14 +75,15 @@ func (c Carbon) ParseByLayout(value, layout string, timezone ...string) Carbon {
 		c.Error = invalidValueError(value)
 		return c
 	}
+	if layout == "" {
+		c.Error = emptyLayoutError()
+		return c
+	}
 	if len(timezone) > 0 {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
 	}
 	if c.Error != nil {
 		return c
-	}
-	if len(layout) == 0 {
-		layout = defaultLayout
 	}
 	if layout == "timestamp" {
 		timestamp, _ := strconv.ParseInt(value, 10, 64)

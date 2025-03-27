@@ -60,7 +60,6 @@ carbon.SetDefault(carbon.Default{
   Locale: "en", // value range: translate file name in the lang directory, excluding file suffix
 })
 ```
-> Suggest setting in the entry file such as `main.go`
 
 ##### Convert between `Carbon` and `time.Time`
 
@@ -244,6 +243,26 @@ carbon.ParseByFormat("今天是 2020年08月05日13时14分15秒", "今天是 Y�
 carbon.ParseByLayout("2020|08|05 13|14|15", "2006|01|02 15|04|05").ToDateTimeString() // 2020-08-05 13:14:15
 carbon.ParseByLayout("It is 2020-08-05 13:14:15", "It is 2006-01-02 15:04:05").ToDateTimeString() // 2020-08-05 13:14:15
 carbon.ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 2006年01月02日15时04分05秒").ToDateTimeString() // 2020-08-05 13:14:15
+```
+
+##### Freeze
+
+```go
+now := carbon.Parse("2020-08-05")
+carbon.SetTestNow(now)
+
+carbon.IsTestNow() // true
+carbon.Now().ToDateString() // 2020-08-05
+carbon.Yesterday().ToDateString() // 2020-08-04
+carbon.Tomorrow().ToDateString() // 2020-08-05
+carbon.Now().DiffForHumans() // just now
+carbon.Yesterday().DiffForHumans() // 1 day ago
+carbon.Tomorrow().DiffForHumans() // 1 day from now
+carbon.Parse("2020-10-05").DiffForHumans() // 2 months from now
+now.DiffForHumans(carbon.Parse("2020-10-05")) // 2 months before
+
+carbon.CleanTestNow()
+carbon.IsTestNow() // false
 ```
 
 ##### Boundary
@@ -972,17 +991,17 @@ carbon.Parse("2020-08-05 13:14:15").TimestampMicro() // 1596604455000000
 // Get timestamp with nanosecond
 carbon.Parse("2020-08-05 13:14:15").TimestampNano() // 1596604455000000000
 
+// Get timezone location
+carbon.SetTimezone(carbon.PRC).Timezone() // PRC
+carbon.SetTimezone(carbon.Tokyo).Timezone() // Asia/Tokyo
+
 // Get timezone name
-carbon.SetTimezone(carbon.PRC).Timezone() // CST
-carbon.SetTimezone(carbon.Tokyo).Timezone() // JST
+carbon.SetTimezone(carbon.PRC).ZoneName() // CST
+carbon.SetTimezone(carbon.Tokyo).ZoneName() // JST
 
-// Get location name
-carbon.SetTimezone(carbon.PRC).Location() // PRC
-carbon.SetTimezone(carbon.Tokyo).Location() // Asia/Tokyo
-
-// Get offset seconds from the UTC timezone
-carbon.SetTimezone(carbon.PRC).Offset() // 28800
-carbon.SetTimezone(carbon.Tokyo).Offset() // 32400
+// Get timezone offset seconds from the UTC timezone
+carbon.SetTimezone(carbon.PRC).ZoneOffset() // 28800
+carbon.SetTimezone(carbon.Tokyo).ZoneOffset() // 32400
 
 // Get locale name
 carbon.Now().SetLocale("en").Locale() // en
@@ -997,6 +1016,14 @@ carbon.Now().SetLocale("zh-CN").Constellation() // 狮子座
 carbon.Now().Season() // Summer
 carbon.Now().SetLocale("en").Season() // Summer
 carbon.Now().SetLocale("zh-CN").Season() // 夏季
+
+// Get start day of the week
+carbon.SetWeekStartsAt(carbon.Sunday).WeekStartsAt() // Sunday
+carbon.SetWeekStartsAt(carbon.Monday).WeekStartsAt() // Monday
+
+// Get current layout
+carbon.Parse("now").CurrentLayout() // "2006-01-02 15:04:05"
+carbon.ParseByLayout("2020-08-05", DateLayout).CurrentLayout() // "2006-01-02"
 
 // Get current age
 carbon.Parse("2002-01-01 13:14:15").Age() // 17
@@ -1453,26 +1480,8 @@ c.Now().Constellation() // leo
 c.Now().Season() // summer
 ```
 
-##### Testing
-
-```go
-c := carbon.SetTimezone(carbon.UTC)
-
-c.Now().ToDateString() // 2023-12-27
-c.Now().IsSetTestNow() // false
-
-c.SetTestNow(carbon.Parse("2020-08-05"))
-c.Now().ToDateString() // 2020-08-05
-c.Now().IsSetTestNow() // true
-
-c.UnSetTestNow()
-c.Now().ToDateString() // 2023-12-27
-c.Now().IsSetTestNow() // false
-```
-
 ##### Error
 
-> If more than one error occurs, only the first error is returned
 
 ```go
 c := carbon.SetTimezone("xxx").Parse("2020-08-05")

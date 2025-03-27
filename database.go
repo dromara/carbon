@@ -51,6 +51,9 @@ func (c Carbon) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON implements the interface json.Unmarshal for Carbon struct.
 // 实现 json.Unmarshaler 接口
 func (c *Carbon) UnmarshalJSON(b []byte) error {
+	if c.layout == "" {
+		c.layout = DefaultLayout
+	}
 	value := string(bytes.Trim(b, `"`))
 	if value == "" || value == "null" {
 		return nil

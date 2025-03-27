@@ -4,6 +4,12 @@ import (
 	"fmt"
 )
 
+// returns an empty timezone error.
+// 空的时区错误
+var emptyTimezoneError = func() error {
+	return fmt.Errorf("timezone cannot be empty")
+}
+
 // returns an invalid timezone error.
 // 无效的时区错误
 var invalidTimezoneError = func(timezone string) error {
@@ -14,6 +20,12 @@ var invalidTimezoneError = func(timezone string) error {
 // 无效的地区错误
 var invalidLocationError = func() error {
 	return fmt.Errorf("invalid location, please make sure the location is valid")
+}
+
+// returns an empty duration error.
+// 空的时长错误
+var emptyDurationError = func() error {
+	return fmt.Errorf("duration cannot be empty")
 }
 
 // returns an invalid duration error.
@@ -28,10 +40,22 @@ var invalidValueError = func(value string) error {
 	return fmt.Errorf("cannot parse string %q as carbon, please make sure the value is valid", value)
 }
 
+// returns an empty layout error.
+// 空的布局模板错误
+var emptyLayoutError = func() error {
+	return fmt.Errorf("layout cannot be empty")
+}
+
 // returns an invalid layout error.
 // 无效的布局模板错误
 var invalidLayoutError = func(value, layout string) error {
 	return fmt.Errorf("cannot parse string %q as carbon by layout %q, please make sure the value and layout match", value, layout)
+}
+
+// returns an empty format error.
+// 空的格式模板错误
+var emptyFormatError = func() error {
+	return fmt.Errorf("format cannot be empty")
 }
 
 // returns an invalid format error.

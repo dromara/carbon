@@ -143,6 +143,11 @@ func TestCarbon_AddDuration(t *testing.T) {
 			carbon: Parse("2020-01-01 13:14:15").AddDuration("10.5m"),
 			want:   "2020-01-01 13:24:45",
 		},
+		{
+			name:   "case7",
+			carbon: Parse("2020-01-01 13:14:15").AddDuration(""),
+			want:   "",
+		},
 	}
 
 	for _, tt := range tests {

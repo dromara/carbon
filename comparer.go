@@ -4,12 +4,6 @@ import (
 	"time"
 )
 
-// IsDST reports whether is daylight saving time.
-// 是否是夏令时
-func (c Carbon) IsDST() bool {
-	return c.time.IsDST()
-}
-
 // IsZero reports whether is zero time(0001-01-01 00:00:00 +0000 UTC).
 // 是否是零值时间(0001-01-01 00:00:00 +0000 UTC)
 func (c Carbon) IsZero() bool {
@@ -32,6 +26,12 @@ func (c Carbon) IsValid() bool {
 // 是否是无效时间
 func (c Carbon) IsInvalid() bool {
 	return !c.IsValid()
+}
+
+// IsDST reports whether is daylight saving time.
+// 是否是夏令时
+func (c Carbon) IsDST() bool {
+	return c.time.IsDST()
 }
 
 // IsAM reports whether is before noon.
