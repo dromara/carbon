@@ -39,12 +39,12 @@ var formats = map[byte]string{
 	's': "05",      // Time:   Seconds with leading zeros. Eg: 00 through 59.
 	'O': "-0700",   // Zone:   Difference to Greenwich time (GMT) in hours. Eg: +0200.
 	'P': "-07:00",  // Zone:   Difference to Greenwich time (GMT) with colon between hours and minutes. Eg: +02:00.
-	'T': "MST",     // Zone:   Timezone abbreviation. Eg: UTC, EST, MDT ...
+	'T': "MST",     // Zone:   Zone name. Eg: UTC, EST, MDT ...
 
 	'U': "timestamp",      // Timestamp with second. Eg: 1699677240.
-	'V': "timestampMilli", // TimestampMilli with second. Eg: 1596604455666.
-	'X': "timestampMicro", // TimestampMicro with second. Eg: 1596604455666666.
-	'Z': "timestampNano",  // TimestampNano with second. Eg: 1596604455666666666.
+	'V': "timestampMilli", // Timestamp with millisecond. Eg: 1596604455666.
+	'X': "timestampMicro", // Timestamp with microsecond. Eg: 1596604455666666.
+	'Z': "timestampNano",  // Timestamp with nanosecond. Eg: 1596604455666666666.
 
 	'v': "999",       // Millisecond. Eg: 999.
 	'x': "999999",    // Microsecond. Eg: 999999.
@@ -57,7 +57,7 @@ var layouts = []string{
 	DayDateTimeLayout,
 	DateTimeLayout, DateTimeNanoLayout, ShortDateTimeLayout, ShortDateTimeNanoLayout,
 	DateLayout, DateNanoLayout, ShortDateLayout, ShortDateNanoLayout,
-	ISO8601Layout, ISO8601NanoLayout,
+	TimeMicroLayout, TimeMilliLayout, TimeNanoLayout,
 	RFC822Layout, RFC822ZLayout, RFC850Layout, RFC1123Layout, RFC1123ZLayout, RFC3339Layout, RFC3339NanoLayout, RFC1036Layout, RFC7231Layout,
 	KitchenLayout,
 	CookieLayout,
