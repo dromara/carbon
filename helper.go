@@ -45,6 +45,10 @@ var formats = map[byte]string{
 	'V': "timestampMilli", // TimestampMilli with second. Eg: 1596604455666.
 	'X': "timestampMicro", // TimestampMicro with second. Eg: 1596604455666666.
 	'Z': "timestampNano",  // TimestampNano with second. Eg: 1596604455666666666.
+
+	'v': "999",       // Millisecond. Eg: 999.
+	'x': "999999",    // Microsecond. Eg: 999999.
+	'z': "999999999", // Nanosecond. Eg: 999999999.
 }
 
 // common layout symbols
@@ -92,6 +96,8 @@ func format2layout(format string) string {
 				buffer.WriteByte(format[i+1])
 				i++
 				continue
+			case 'R':
+				buffer.WriteByte('Z')
 			default:
 				buffer.WriteByte(format[i])
 			}
