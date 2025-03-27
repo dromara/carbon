@@ -8,8 +8,8 @@ import (
 // Parse parses a standard time string as a Carbon instance.
 // 将标准格式时间字符串解析成 Carbon 实例
 func (c Carbon) Parse(value string, timezone ...string) Carbon {
-	if len(value) == 0 {
-		c.Error = invalidValueError(value)
+	if value == "" {
+		c.isNil = true
 		return c
 	}
 	if len(timezone) > 0 {
@@ -34,7 +34,7 @@ func (c Carbon) Parse(value string, timezone ...string) Carbon {
 			return c
 		}
 	}
-	c.Error = invalidValueError(value)
+	c.Error = failedParseError(value)
 	return c
 }
 
@@ -47,8 +47,8 @@ func Parse(value string, timezone ...string) Carbon {
 // ParseByFormat parses a time string as a Carbon instance by format.
 // 通过格式模板将时间字符串解析成 Carbon 实例
 func (c Carbon) ParseByFormat(value, format string, timezone ...string) Carbon {
-	if len(value) == 0 {
-		c.Error = invalidValueError(value)
+	if value == "" {
+		c.isNil = true
 		return c
 	}
 	if format == "" {
@@ -71,8 +71,8 @@ func ParseByFormat(value, format string, timezone ...string) Carbon {
 // ParseByLayout parses a time string as a Carbon instance by layout.
 // 通过布局模板将时间字符串解析成 Carbon 实例
 func (c Carbon) ParseByLayout(value, layout string, timezone ...string) Carbon {
-	if len(value) == 0 {
-		c.Error = invalidValueError(value)
+	if value == "" {
+		c.isNil = true
 		return c
 	}
 	if layout == "" {
@@ -86,20 +86,36 @@ func (c Carbon) ParseByLayout(value, layout string, timezone ...string) Carbon {
 		return c
 	}
 	if layout == "timestamp" {
-		timestamp, _ := strconv.ParseInt(value, 10, 64)
-		return c.CreateFromTimestamp(timestamp)
+		ts, err := strconv.ParseInt(value, 10, 64)
+		if err != nil {
+			c.Error = invalidTimestampError(value)
+			return c
+		}
+		return CreateFromTimestamp(ts, c.Timezone())
 	}
 	if layout == "timestampMilli" {
-		timestamp, _ := strconv.ParseInt(value, 10, 64)
-		return c.CreateFromTimestampMilli(timestamp)
+		ts, err := strconv.ParseInt(value, 10, 64)
+		if err != nil {
+			c.Error = invalidTimestampError(value)
+			return c
+		}
+		return CreateFromTimestampMilli(ts, c.Timezone())
 	}
 	if layout == "timestampMicro" {
-		timestamp, _ := strconv.ParseInt(value, 10, 64)
-		return c.CreateFromTimestampMicro(timestamp)
+		ts, err := strconv.ParseInt(value, 10, 64)
+		if err != nil {
+			c.Error = invalidTimestampError(value)
+			return c
+		}
+		return CreateFromTimestampMicro(ts, c.Timezone())
 	}
 	if layout == "timestampNano" {
-		timestamp, _ := strconv.ParseInt(value, 10, 64)
-		return c.CreateFromTimestampNano(timestamp)
+		ts, err := strconv.ParseInt(value, 10, 64)
+		if err != nil {
+			c.Error = invalidTimestampError(value)
+			return c
+		}
+		return CreateFromTimestampNano(ts, c.Timezone())
 	}
 	tt, err := time.ParseInLocation(layout, value, c.loc)
 	if err != nil {
