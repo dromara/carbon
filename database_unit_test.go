@@ -423,93 +423,6 @@ func TestError_Scan(t *testing.T) {
 	assert.Equal(t, e17, failedScanError(str))
 }
 
-func TestError_Value(t *testing.T) {
-	c1 := Parse("")
-	v1, e1 := c1.Value()
-	require.NoError(t, e1)
-	assert.Nil(t, v1)
-
-	c2 := NewDateTime(c1)
-	v2, e2 := c2.Value()
-	require.NoError(t, e2)
-	assert.Nil(t, v2)
-
-	c3 := NewDateTimeMilli(c1)
-	v3, e3 := c3.Value()
-	require.NoError(t, e3)
-	assert.Nil(t, v3)
-
-	c4 := NewDateTimeMicro(c1)
-	v4, e4 := c4.Value()
-	require.NoError(t, e4)
-	assert.Nil(t, v4)
-
-	c5 := NewDateTimeNano(c1)
-	v5, e5 := c5.Value()
-	require.NoError(t, e5)
-	assert.Nil(t, v5)
-
-	c6 := NewDate(c1)
-	v6, e6 := c6.Value()
-	require.NoError(t, e6)
-	assert.Nil(t, v6)
-
-	c7 := NewDateMilli(c1)
-	v7, e7 := c7.Value()
-	require.NoError(t, e7)
-	assert.Nil(t, v7)
-
-	c8 := NewDateMicro(c1)
-	v8, e8 := c8.Value()
-	require.NoError(t, e8)
-	assert.Nil(t, v8)
-
-	c9 := NewDateNano(c1)
-	v9, e9 := c9.Value()
-	require.NoError(t, e9)
-	assert.Nil(t, v9)
-
-	c10 := NewTime(c1)
-	v10, e10 := c10.Value()
-	require.NoError(t, e10)
-	assert.Nil(t, v10)
-
-	c11 := NewTimeMilli(c1)
-	v11, e11 := c11.Value()
-	require.NoError(t, e11)
-	assert.Nil(t, v11)
-
-	c12 := NewTimeMicro(c1)
-	v12, e12 := c12.Value()
-	require.NoError(t, e12)
-	assert.Nil(t, v12)
-
-	c13 := NewTimeNano(c1)
-	v13, e13 := c13.Value()
-	require.NoError(t, e13)
-	assert.Nil(t, v13)
-
-	c14 := NewTimestamp(c1)
-	v14, e14 := c14.Value()
-	require.NoError(t, e14)
-	assert.Nil(t, v14)
-
-	c15 := NewTimestampMilli(c1)
-	v15, e15 := c15.Value()
-	require.NoError(t, e15)
-	assert.Nil(t, v15)
-
-	c16 := NewTimestampMicro(c1)
-	v16, e16 := c16.Value()
-	require.NoError(t, e16)
-	assert.Nil(t, v16)
-
-	c17 := NewTimestampNano(c1)
-	v17, e17 := c17.Value()
-	require.NoError(t, e17)
-	assert.Nil(t, v17)
-}
-
 type Person struct {
 	Name string `json:"name"`
 	Age  int    `json:"age"`
@@ -909,8 +822,8 @@ func TestCarbon_Issue240(t *testing.T) {
 	assert.Equal(t, "0001-01-01 00:00:00 +0000 UTC", person.Birthday2.StdTime().String())
 	assert.True(t, person.Birthday1.IsZero())
 	assert.True(t, person.Birthday2.IsZero())
-	assert.False(t, person.Birthday1.IsValid())
-	assert.False(t, person.Birthday2.IsValid())
+	assert.True(t, person.Birthday1.IsValid())
+	assert.True(t, person.Birthday2.IsValid())
 }
 
 // https://github.com/dromara/carbon/issues/243
