@@ -15,11 +15,9 @@ func MinValue() Carbon {
 // Closest returns the closest Carbon instance from the given Carbon instance.
 // 返回离给定 carbon 实例最近的 Carbon 实例
 func (c Carbon) Closest(c1 Carbon, c2 Carbon) Carbon {
-	if c1.Error != nil {
-		return c2
-	}
-	if c2.Error != nil {
-		return c1
+	if c.IsInvalid() || c1.IsInvalid() || c2.IsInvalid() {
+		c.isNil = true
+		return c
 	}
 	if c.DiffAbsInSeconds(c1) < c.DiffAbsInSeconds(c2) {
 		return c1
@@ -30,11 +28,9 @@ func (c Carbon) Closest(c1 Carbon, c2 Carbon) Carbon {
 // Farthest returns the farthest Carbon instance from the given Carbon instance.
 // 返回离给定 carbon 实例最远的 Carbon 实例
 func (c Carbon) Farthest(c1 Carbon, c2 Carbon) Carbon {
-	if c1.IsZero() || c1.IsInvalid() {
-		return c2
-	}
-	if c2.IsZero() || c2.IsInvalid() {
-		return c1
+	if c.IsInvalid() || c1.IsInvalid() || c2.IsInvalid() {
+		c.isNil = true
+		return c
 	}
 	if c.DiffAbsInSeconds(c1) > c.DiffAbsInSeconds(c2) {
 		return c1
@@ -47,6 +43,10 @@ func (c Carbon) Farthest(c1 Carbon, c2 Carbon) Carbon {
 func Max(c1 Carbon, c2 ...Carbon) (c Carbon) {
 	c = c1
 	for i := range c2 {
+		if c.IsInvalid() || c2[i].IsInvalid() {
+			c.isNil = true
+			return c
+		}
 		if c2[i].Gte(c) {
 			c = c2[i]
 		}
@@ -59,6 +59,10 @@ func Max(c1 Carbon, c2 ...Carbon) (c Carbon) {
 func Min(c1 Carbon, c2 ...Carbon) (c Carbon) {
 	c = c1
 	for i := range c2 {
+		if c.IsInvalid() || c2[i].IsInvalid() {
+			c.isNil = true
+			return c
+		}
 		if c2[i].Lte(c) {
 			c = c2[i]
 		}
