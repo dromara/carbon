@@ -18,8 +18,13 @@ func (c Carbon) Lunar() (l lunar.Lunar) {
 
 // CreateFromLunar creates a Carbon instance from Lunar date and time.
 // 从 农历日期 创建 Carbon 实例
-func CreateFromLunar(year, month, day, hour, minute, second int, isLeapMonth bool) Carbon {
-	t := lunar.FromLunar(year, month, day, hour, minute, second, isLeapMonth).ToGregorian().Time
+func CreateFromLunar(year, month, day, hour, minute, second int, isLeapMonth bool) (c Carbon) {
+	l := lunar.FromLunar(year, month, day, hour, minute, second, isLeapMonth)
+	if !l.IsValid() {
+		c.isNil = true
+		return c
+	}
+	t := l.ToGregorian().Time
 	return CreateFromStdTime(t)
 }
 
