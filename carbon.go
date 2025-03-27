@@ -17,6 +17,7 @@ import (
 type Carbon struct {
 	time         time.Time
 	layout       string
+	isNil        bool
 	weekStartsAt time.Weekday
 	loc          *time.Location
 	lang         *Language
