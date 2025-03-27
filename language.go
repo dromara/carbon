@@ -41,15 +41,6 @@ func NewLanguage() *Language {
 	}
 }
 
-// SetLanguage sets language.
-// 设置语言对象
-func SetLanguage(lang *Language) Carbon {
-	c := NewCarbon()
-	lang.SetLocale(lang.locale)
-	c.lang, c.Error = lang, lang.Error
-	return c
-}
-
 // SetLocale sets language locale.
 // 设置区域
 func (lang *Language) SetLocale(locale string) *Language {

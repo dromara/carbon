@@ -45,7 +45,7 @@ func (c Carbon) SetLocation(loc *time.Location) Carbon {
 		return c
 	}
 	if loc == nil {
-		c.Error = invalidLocationError()
+		c.Error = nilLocationError()
 	}
 	c.loc = loc
 	return c
@@ -74,6 +74,29 @@ func SetLocale(locale string) Carbon {
 	c := NewCarbon()
 	c.lang.SetLocale(locale)
 	c.Error = c.lang.Error
+	return c
+}
+
+// SetLanguage sets language.
+// 设置语言对象
+func SetLanguage(lang *Language) Carbon {
+	return NewCarbon().SetLanguage(lang)
+}
+
+// SetLanguage sets language.
+// 设置语言对象
+func (c Carbon) SetLanguage(lang *Language) Carbon {
+	if c.IsInvalid() {
+		return c
+	}
+	if lang == nil {
+		c.Error = nilLanguageError()
+		return c
+	}
+	c.lang.dir = lang.dir
+	c.lang.locale = lang.locale
+	c.lang.resources = lang.resources
+	c.lang.Error = lang.Error
 	return c
 }
 
