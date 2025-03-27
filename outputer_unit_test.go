@@ -2563,12 +2563,12 @@ func TestCarbon_Format(t *testing.T) {
 		},
 		{
 			name:   "case20",
-			actual: Parse("2020-08-05 13:14:15.999999").Format("u"),
+			actual: Parse("2020-08-05 13:14:15.999999").Format("x"),
 			want:   "999999",
 		},
 		{
 			name:   "case21",
-			actual: Parse("2020-08-05 13:14:15.999999999").Format("x"),
+			actual: Parse("2020-08-05 13:14:15.999999999").Format("z"),
 			want:   "999999999",
 		},
 		{
@@ -2582,23 +2582,18 @@ func TestCarbon_Format(t *testing.T) {
 			want:   "31",
 		},
 		{
-			name:   "case24",
-			actual: Parse("2020-08-05 13:14:15").Format("z"),
-			want:   "217",
-		},
-		{
 			name:   "case25",
 			actual: Parse("2020-08-05 13:14:15", PRC).Format("e"),
 			want:   "PRC",
 		},
 		{
 			name:   "case26",
-			actual: Parse("2020-08-05 13:14:15").Format("Q"),
+			actual: Parse("2020-08-05 13:14:15").Format("q"),
 			want:   "3",
 		},
 		{
 			name:   "case27",
-			actual: Parse("2020-08-05 13:14:15").Format("C"),
+			actual: Parse("2020-08-05 13:14:15").Format("c"),
 			want:   "21",
 		},
 		{
@@ -2635,6 +2630,11 @@ func TestCarbon_Format(t *testing.T) {
 			name:   "case34",
 			actual: Parse("2020-08-05 01:14:15").Format(DateTimeFormat, PRC),
 			want:   "2020-08-05 01:14:15",
+		},
+		{
+			name:   "case35",
+			actual: Parse("2020-08-05 01:14:15").Format(AtomFormat, PRC),
+			want:   "2020-08-05T01:14:15+08:00",
 		},
 	}
 

@@ -862,27 +862,22 @@ func (c Carbon) Format(format string, timezone ...string) string {
 				}
 			case 'G': // 24-hour format, no padding, ranging from 0-23
 				buffer.WriteString(strconv.Itoa(c.Hour()))
-			case 'v': // current millisecond, such as 999
-				s := c.Layout(".999")
-				buffer.WriteString(strings.Trim(s, "."))
-			case 'u': // current microsecond, such as 999999
-				s := c.Layout(".999999")
-				buffer.WriteString(strings.Trim(s, "."))
-			case 'x': // current nanosecond, such as 999999999
-				s := c.Layout(".999999999")
-				buffer.WriteString(strings.Trim(s, "."))
 			case 'w': // day of the week represented by the number, ranging from 0-6
 				buffer.WriteString(strconv.Itoa(c.DayOfWeek() - 1))
 			case 't': // number of days in the month, ranging from 28-31
 				buffer.WriteString(strconv.Itoa(c.DaysInMonth()))
-			case 'z': // day of the year, ranging from 0-365
-				buffer.WriteString(strconv.Itoa(c.DayOfYear() - 1))
 			case 'e': // current location, such as UTC，GMT，Atlantic/Azores
 				buffer.WriteString(c.Timezone())
-			case 'Q': // current quarter, ranging from 1-4
+			case 'q': // current quarter, ranging from 1-4
 				buffer.WriteString(strconv.Itoa(c.Quarter()))
-			case 'C': // current century, ranging from 0-99
+			case 'c': // current century, ranging from 0-99
 				buffer.WriteString(strconv.Itoa(c.Century()))
+			case 'R':
+				if c.ZoneOffset() == 0 {
+					buffer.WriteString("Z")
+				} else {
+					buffer.WriteString(c.Layout("-07:00"))
+				}
 			default:
 				buffer.WriteByte(format[i])
 			}
