@@ -7,7 +7,7 @@ var (
 
 	// DefaultTimezone default timezone
 	// 默认时区
-	DefaultTimezone = Local
+	DefaultTimezone = UTC
 
 	// DefaultWeekStartsAt default week start date
 	// 默认一周开始日期
