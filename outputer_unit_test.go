@@ -1,2705 +1,1254 @@
 package carbon
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCarbon_String(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").String(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15", UTC).String(),
-			want:   "0000-01-01 13:14:15",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15", UTC).String(),
-			want:   "0001-01-01 13:14:15",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15", UTC).String(),
-			want:   "2020-08-05 13:14:15",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01 00:00:00", NewCarbon().String())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "String()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").String())
+		assert.Empty(t, Parse("0").String())
+		assert.Empty(t, Parse("xxx").String())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05 13:14:15", Parse("2020-08-05 13:14:15").String())
+		assert.Equal(t, "2020-08-05", Parse("2020-08-05 13:14:15").SetLayout(DateLayout).String())
+	})
 }
 
 func TestCarbon_GoString(t *testing.T) {
-	tests := []struct {
-		name   string
-		want   string
-		actual string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").GoString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15", UTC).GoString(),
-			want:   "time.Date(0, time.January, 1, 13, 14, 15, 0, time.UTC)",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15", UTC).GoString(),
-			want:   "time.Date(1, time.January, 1, 13, 14, 15, 0, time.UTC)",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15", UTC).GoString(),
-			want:   "time.Date(2020, time.August, 5, 13, 14, 15, 0, time.UTC)",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "time.Date(1, time.January, 1, 0, 0, 0, 0, time.UTC)", NewCarbon().GoString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "GoString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").GoString())
+		assert.Empty(t, Parse("0").GoString())
+		assert.Empty(t, Parse("xxx").GoString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "time.Date(2020, time.August, 5, 13, 14, 15, 0, time.UTC)", Parse("2020-08-05 13:14:15").GoString())
+		assert.Equal(t, "time.Date(2020, time.August, 5, 13, 14, 15, 0, time.Location(\"PRC\"))", Parse("2020-08-05 13:14:15", PRC).GoString())
+	})
 }
 
 func TestCarbon_ToString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15", UTC).ToString(),
-			want:   "0000-01-01 13:14:15 +0000 UTC",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15", UTC).ToString(),
-			want:   "0001-01-01 13:14:15 +0000 UTC",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15", UTC).ToString(PRC),
-			want:   "2020-08-05 21:14:15 +0800 CST",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01 00:00:00 +0000 UTC", NewCarbon().ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToString())
+		assert.Empty(t, Parse("0").ToString())
+		assert.Empty(t, Parse("xxx").ToString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", Parse("2020-08-05 13:14:15").ToString())
+		assert.Equal(t, "2020-08-05 13:14:15 +0800 CST", Parse("2020-08-05 13:14:15", PRC).ToString())
+		assert.Equal(t, "2020-08-05 21:14:15 +0800 CST", Parse("2020-08-05 13:14:15").ToString(PRC))
+	})
 }
 
 func TestCarbon_ToMonthString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToMonthString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-01-05", UTC).ToMonthString(),
-			want:   "January",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-02-05", UTC).ToMonthString(),
-			want:   "February",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-03-05", UTC).ToMonthString(),
-			want:   "March",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-04-05", UTC).ToMonthString(),
-			want:   "April",
-		},
-		{
-			name:   "case6",
-			actual: Parse("2020-05-05", UTC).ToMonthString(),
-			want:   "May",
-		},
-		{
-			name:   "case7",
-			actual: Parse("2020-06-05").ToMonthString(),
-			want:   "June",
-		},
-		{
-			name:   "case8",
-			actual: Parse("2020-07-05", UTC).ToMonthString(),
-			want:   "July",
-		},
-		{
-			name:   "case9",
-			actual: Parse("2020-08-05", UTC).ToMonthString(),
-			want:   "August",
-		},
-		{
-			name:   "case10",
-			actual: Parse("2020-09-05", UTC).ToMonthString(),
-			want:   "September",
-		},
-		{
-			name:   "case11",
-			actual: Parse("2020-10-05", UTC).ToMonthString(),
-			want:   "October",
-		},
-		{
-			name:   "case12",
-			actual: Parse("2020-11-05", UTC).ToMonthString(),
-			want:   "November",
-		},
-		{
-			name:   "case13",
-			actual: Parse("2020-12-05", UTC).ToMonthString(PRC),
-			want:   "December",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, January, NewCarbon().ToMonthString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToMonthString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToMonthString())
+		assert.Empty(t, Parse("0").ToMonthString())
+		assert.Empty(t, Parse("xxx").ToMonthString())
+	})
+
+	t.Run("invalid resources", func(t *testing.T) {
+		lang := NewLanguage()
+		resources := map[string]string{
+			"months": "xxx",
+		}
+		lang.SetResources(resources)
+		c := Parse("2020-01-05").SetLanguage(lang)
+		assert.Empty(t, c.ToMonthString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, January, Parse("2020-01-05").ToMonthString())
+		assert.Equal(t, February, Parse("2020-02-05").ToMonthString())
+		assert.Equal(t, March, Parse("2020-03-05").ToMonthString())
+		assert.Equal(t, April, Parse("2020-04-05").ToMonthString())
+		assert.Equal(t, May, Parse("2020-05-05").ToMonthString())
+		assert.Equal(t, June, Parse("2020-06-05").ToMonthString())
+		assert.Equal(t, July, Parse("2020-07-05").ToMonthString())
+		assert.Equal(t, August, Parse("2020-08-05").ToMonthString())
+		assert.Equal(t, September, Parse("2020-09-05").ToMonthString())
+		assert.Equal(t, October, Parse("2020-10-05").ToMonthString())
+		assert.Equal(t, November, Parse("2020-11-05").ToMonthString())
+		assert.Equal(t, December, Parse("2020-12-05").ToMonthString(PRC))
+	})
 }
 
 func TestCarbon_ToShortMonthString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortMonthString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-01-05", UTC).ToShortMonthString(),
-			want:   "Jan",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-02-05", UTC).ToShortMonthString(),
-			want:   "Feb",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-03-05", UTC).ToShortMonthString(),
-			want:   "Mar",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-04-05", UTC).ToShortMonthString(),
-			want:   "Apr",
-		},
-		{
-			name:   "case6",
-			actual: Parse("2020-05-05", UTC).ToShortMonthString(),
-			want:   "May",
-		},
-		{
-			name:   "case7",
-			actual: Parse("2020-06-05", UTC).ToShortMonthString(),
-			want:   "Jun",
-		},
-		{
-			name:   "case8",
-			actual: Parse("2020-07-05", UTC).ToShortMonthString(),
-			want:   "Jul",
-		},
-		{
-			name:   "case9",
-			actual: Parse("2020-08-05", UTC).ToShortMonthString(),
-			want:   "Aug",
-		},
-		{
-			name:   "case10",
-			actual: Parse("2020-09-05", UTC).ToShortMonthString(),
-			want:   "Sep",
-		},
-		{
-			name:   "case11",
-			actual: Parse("2020-10-05", UTC).ToShortMonthString(),
-			want:   "Oct",
-		},
-		{
-			name:   "case12",
-			actual: Parse("2020-11-05", UTC).ToShortMonthString(),
-			want:   "Nov",
-		},
-		{
-			name:   "case13",
-			actual: Parse("2020-12-05", UTC).ToShortMonthString(PRC),
-			want:   "Dec",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Jan", NewCarbon().ToShortMonthString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortMonthString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortMonthString())
+		assert.Empty(t, Parse("0").ToShortMonthString())
+		assert.Empty(t, Parse("xxx").ToShortMonthString())
+	})
+
+	t.Run("invalid resources", func(t *testing.T) {
+		lang := NewLanguage()
+		resources := map[string]string{
+			"months": "",
+		}
+		lang.SetResources(resources)
+		c := Parse("2020-01-05").SetLanguage(lang)
+		assert.Empty(t, c.ToShortMonthString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Jan", Parse("2020-01-05").ToShortMonthString())
+		assert.Equal(t, "Feb", Parse("2020-02-05").ToShortMonthString())
+		assert.Equal(t, "Mar", Parse("2020-03-05").ToShortMonthString())
+		assert.Equal(t, "Apr", Parse("2020-04-05").ToShortMonthString())
+		assert.Equal(t, "May", Parse("2020-05-05").ToShortMonthString())
+		assert.Equal(t, "Jun", Parse("2020-06-05").ToShortMonthString())
+		assert.Equal(t, "Jul", Parse("2020-07-05").ToShortMonthString())
+		assert.Equal(t, "Aug", Parse("2020-08-05").ToShortMonthString())
+		assert.Equal(t, "Sep", Parse("2020-09-05").ToShortMonthString())
+		assert.Equal(t, "Oct", Parse("2020-10-05").ToShortMonthString())
+		assert.Equal(t, "Nov", Parse("2020-11-05").ToShortMonthString())
+		assert.Equal(t, "Dec", Parse("2020-12-05").ToShortMonthString(PRC))
+	})
 }
 
 func TestCarbon_ToWeekString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToWeekString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-01", UTC).ToWeekString(),
-			want:   "Saturday",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-02", UTC).ToWeekString(),
-			want:   "Sunday",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-03", UTC).ToWeekString(),
-			want:   "Monday",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-04", UTC).ToWeekString(),
-			want:   "Tuesday",
-		},
-		{
-			name:   "case6",
-			actual: Parse("2020-08-05", UTC).ToWeekString(),
-			want:   "Wednesday",
-		},
-		{
-			name:   "case7",
-			actual: Parse("2020-08-06", UTC).ToWeekString(),
-			want:   "Thursday",
-		},
-		{
-			name:   "case8",
-			actual: Parse("2020-08-07", UTC).ToWeekString(PRC),
-			want:   "Friday",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, Monday, NewCarbon().ToWeekString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToWeekString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToWeekString())
+		assert.Empty(t, Parse("0").ToWeekString())
+		assert.Empty(t, Parse("xxx").ToWeekString())
+	})
+
+	t.Run("invalid resources", func(t *testing.T) {
+		lang := NewLanguage()
+		resources := map[string]string{
+			"weeks": "xxx",
+		}
+		lang.SetResources(resources)
+		c := Parse("2020-01-05").SetLanguage(lang)
+		assert.Empty(t, c.ToWeekString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, Saturday, Parse("2020-08-01").ToWeekString())
+		assert.Equal(t, Sunday, Parse("2020-08-02").ToWeekString())
+		assert.Equal(t, Monday, Parse("2020-08-03").ToWeekString())
+		assert.Equal(t, Tuesday, Parse("2020-08-04").ToWeekString())
+		assert.Equal(t, Wednesday, Parse("2020-08-05").ToWeekString())
+		assert.Equal(t, Thursday, Parse("2020-08-06").ToWeekString())
+		assert.Equal(t, Friday, Parse("2020-08-07").ToWeekString(PRC))
+	})
 }
 
 func TestCarbon_ToShortWeekString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortWeekString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-01", UTC).ToShortWeekString(),
-			want:   "Sat",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-02", UTC).ToShortWeekString(),
-			want:   "Sun",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-03", UTC).ToShortWeekString(),
-			want:   "Mon",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-04", UTC).ToShortWeekString(),
-			want:   "Tue",
-		},
-		{
-			name:   "case6",
-			actual: Parse("2020-08-05", UTC).ToShortWeekString(),
-			want:   "Wed",
-		},
-		{
-			name:   "case7",
-			actual: Parse("2020-08-06", UTC).ToShortWeekString(),
-			want:   "Thu",
-		},
-		{
-			name:   "case8",
-			actual: Parse("2020-08-07", UTC).ToShortWeekString(PRC),
-			want:   "Fri",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon", NewCarbon().ToShortWeekString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortWeekString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortWeekString())
+		assert.Empty(t, Parse("0").ToShortWeekString())
+		assert.Empty(t, Parse("xxx").ToShortWeekString())
+	})
+
+	t.Run("invalid resources", func(t *testing.T) {
+		lang := NewLanguage()
+		resources := map[string]string{
+			"short_weeks": "xxx",
+		}
+		lang.SetResources(resources)
+		c := Parse("2020-01-05").SetLanguage(lang)
+		assert.Empty(t, c.ToShortWeekString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Sat", Parse("2020-08-01").ToShortWeekString())
+		assert.Equal(t, "Sun", Parse("2020-08-02").ToShortWeekString())
+		assert.Equal(t, "Mon", Parse("2020-08-03").ToShortWeekString())
+		assert.Equal(t, "Tue", Parse("2020-08-04").ToShortWeekString())
+		assert.Equal(t, "Wed", Parse("2020-08-05").ToShortWeekString())
+		assert.Equal(t, "Thu", Parse("2020-08-06").ToShortWeekString())
+		assert.Equal(t, "Fri", Parse("2020-08-07").ToShortWeekString(PRC))
+	})
 }
 
 func TestCarbon_ToDayDateTimeString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToDayDateTimeString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05 13:14:15", UTC).ToDayDateTimeString(),
-			want:   "Wed, Aug 5, 2020 1:14 PM",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToDayDateTimeString(PRC),
-			want:   "Wed, Aug 5, 2020 8:00 AM",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon, Jan 1, 0001 12:00 AM", NewCarbon().ToDayDateTimeString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToDayDateTimeString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToDayDateTimeString())
+		assert.Empty(t, Parse("0").ToDayDateTimeString())
+		assert.Empty(t, Parse("xxx").ToDayDateTimeString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wed, Aug 5, 2020 1:14 PM", Parse("2020-08-05 13:14:15").ToDayDateTimeString())
+		assert.Equal(t, "Wed, Aug 5, 2020 12:00 AM", Parse("2020-08-05", PRC).ToDayDateTimeString(PRC))
+	})
 }
 
 func TestCarbon_ToDateTimeString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToDateTimeString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05 13:14:15", UTC).ToDateTimeString(),
-			want:   "2020-08-05 13:14:15",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToDateTimeString(PRC),
-			want:   "2020-08-05 08:00:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01 00:00:00", NewCarbon().ToDateTimeString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToDateTimeString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToDateTimeString())
+		assert.Empty(t, Parse("0").ToDateTimeString())
+		assert.Empty(t, Parse("xxx").ToDateTimeString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05 13:14:15", Parse("2020-08-05 13:14:15").ToDateTimeString())
+		assert.Equal(t, "2020-08-05 13:14:15", Parse("2020-08-05T13:14:15.999999999+00:00").ToDateTimeString())
+		assert.Equal(t, "2020-08-05 00:00:00", Parse("2020-08-05", PRC).ToDateTimeString(PRC))
+	})
 }
 
 func TestCarbon_ToDateTimeMilliString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToDateTimeMilliString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToDateTimeMilliString(),
-			want:   "2020-08-05 05:14:15.999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToDateTimeMilliString(PRC),
-			want:   "2020-08-05 08:00:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01 00:00:00", NewCarbon().ToDateTimeMilliString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToDateTimeMilliString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToDateTimeMilliString())
+		assert.Empty(t, Parse("0").ToDateTimeMilliString())
+		assert.Empty(t, Parse("xxx").ToDateTimeMilliString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05 13:14:15", Parse("2020-08-05 13:14:15").ToDateTimeMilliString())
+		assert.Equal(t, "2020-08-05 13:14:15.999", Parse("2020-08-05T13:14:15.999999999+00:00").ToDateTimeMilliString())
+		assert.Equal(t, "2020-08-05 00:00:00", Parse("2020-08-05", PRC).ToDateTimeMilliString(PRC))
+	})
 }
 
 func TestCarbon_ToDateTimeMicroString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToDateTimeMicroString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToDateTimeMicroString(),
-			want:   "2020-08-05 05:14:15.999999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToDateTimeMicroString(PRC),
-			want:   "2020-08-05 08:00:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01 00:00:00", NewCarbon().ToDateTimeMicroString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToDateTimeMicroString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToDateTimeMicroString())
+		assert.Empty(t, Parse("0").ToDateTimeMicroString())
+		assert.Empty(t, Parse("xxx").ToDateTimeMicroString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05 13:14:15", Parse("2020-08-05 13:14:15").ToDateTimeMicroString())
+		assert.Equal(t, "2020-08-05 13:14:15.999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToDateTimeMicroString())
+		assert.Equal(t, "2020-08-05 00:00:00", Parse("2020-08-05", PRC).ToDateTimeMicroString(PRC))
+	})
 }
 
 func TestCarbon_ToDateTimeNanoString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToDateTimeNanoString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToDateTimeNanoString(),
-			want:   "2020-08-05 05:14:15.999999999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToDateTimeNanoString(PRC),
-			want:   "2020-08-05 08:00:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01 00:00:00", NewCarbon().ToDateTimeNanoString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToDateTimeNanoString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToDateTimeNanoString())
+		assert.Empty(t, Parse("0").ToDateTimeNanoString())
+		assert.Empty(t, Parse("xxx").ToDateTimeNanoString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05 13:14:15", Parse("2020-08-05 13:14:15").ToDateTimeNanoString())
+		assert.Equal(t, "2020-08-05 13:14:15.999999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToDateTimeNanoString())
+		assert.Equal(t, "2020-08-05 00:00:00", Parse("2020-08-05", PRC).ToDateTimeNanoString(PRC))
+	})
 }
 
 func TestCarbon_ToShortDateTimeString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortDateTimeString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("xxx").ToShortDateTimeString(),
-			want:   "",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToShortDateTimeString(),
-			want:   "20200805051415",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05", UTC).ToShortDateTimeString(PRC),
-			want:   "20200805080000",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00010101000000", NewCarbon().ToShortDateTimeString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortDateTimeString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortDateTimeString())
+		assert.Empty(t, Parse("0").ToShortDateTimeString())
+		assert.Empty(t, Parse("xxx").ToShortDateTimeString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "20200805131415", Parse("2020-08-05 13:14:15").ToShortDateTimeString())
+		assert.Equal(t, "20200805131415", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortDateTimeString())
+		assert.Equal(t, "20200805000000", Parse("2020-08-05", PRC).ToShortDateTimeString(PRC))
+	})
 }
 
 func TestCarbon_ToShortDateTimeMilliString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortDateTimeMilliString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToShortDateTimeMilliString(),
-			want:   "20200805051415.999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToShortDateTimeMilliString(PRC),
-			want:   "20200805080000",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00010101000000", NewCarbon().ToShortDateTimeMilliString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortDateTimeMilliString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortDateTimeMilliString())
+		assert.Empty(t, Parse("0").ToShortDateTimeMilliString())
+		assert.Empty(t, Parse("xxx").ToShortDateTimeMilliString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "20200805131415", Parse("2020-08-05 13:14:15").ToShortDateTimeMilliString())
+		assert.Equal(t, "20200805131415.999", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortDateTimeMilliString())
+		assert.Equal(t, "20200805000000", Parse("2020-08-05", PRC).ToShortDateTimeMilliString(PRC))
+	})
 }
 
 func TestCarbon_ToShortDateTimeMicroString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortDateTimeMicroString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToShortDateTimeMicroString(),
-			want:   "20200805051415.999999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToShortDateTimeMicroString(PRC),
-			want:   "20200805080000",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00010101000000", NewCarbon().ToShortDateTimeMicroString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortDateTimeMicroString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortDateTimeMicroString())
+		assert.Empty(t, Parse("0").ToShortDateTimeMicroString())
+		assert.Empty(t, Parse("xxx").ToShortDateTimeMicroString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "20200805131415", Parse("2020-08-05 13:14:15").ToShortDateTimeMicroString())
+		assert.Equal(t, "20200805131415.999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortDateTimeMicroString())
+		assert.Equal(t, "20200805000000", Parse("2020-08-05", PRC).ToShortDateTimeMicroString(PRC))
+	})
 }
 
 func TestCarbon_ToShortDateTimeNanoString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortDateTimeNanoString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToShortDateTimeNanoString(),
-			want:   "20200805051415.999999999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToShortDateTimeNanoString(PRC),
-			want:   "20200805080000",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00010101000000", NewCarbon().ToShortDateTimeNanoString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortDateTimeNanoString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortDateTimeNanoString())
+		assert.Empty(t, Parse("0").ToShortDateTimeNanoString())
+		assert.Empty(t, Parse("xxx").ToShortDateTimeNanoString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "20200805131415", Parse("2020-08-05 13:14:15").ToShortDateTimeNanoString())
+		assert.Equal(t, "20200805131415.999999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortDateTimeNanoString())
+		assert.Equal(t, "20200805000000", Parse("2020-08-05", PRC).ToShortDateTimeNanoString(PRC))
+	})
 }
 
 func TestCarbon_ToDateString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToDateString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToDateString(),
-			want:   "2020-08-05",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToDateString(PRC),
-			want:   "2020-08-05",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01", NewCarbon().ToDateString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToDateString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToDateString())
+		assert.Empty(t, Parse("0").ToDateString())
+		assert.Empty(t, Parse("xxx").ToDateString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05", Parse("2020-08-05 13:14:15").ToDateString())
+		assert.Equal(t, "2020-08-05", Parse("2020-08-05T13:14:15.999999999+00:00").ToDateString())
+		assert.Equal(t, "2020-08-05", Parse("2020-08-05", PRC).ToDateString(PRC))
+	})
 }
 
 func TestCarbon_ToDateMilliString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToDateMilliString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToDateMilliString(),
-			want:   "2020-08-05.999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToDateMilliString(PRC),
-			want:   "2020-08-05",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01", NewCarbon().ToDateMilliString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToDateMilliString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToDateMilliString())
+		assert.Empty(t, Parse("0").ToDateMilliString())
+		assert.Empty(t, Parse("xxx").ToDateMilliString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05", Parse("2020-08-05 13:14:15").ToDateMilliString())
+		assert.Equal(t, "2020-08-05.999", Parse("2020-08-05T13:14:15.999999999+00:00").ToDateMilliString())
+		assert.Equal(t, "2020-08-05", Parse("2020-08-05", PRC).ToDateMilliString(PRC))
+	})
 }
 
 func TestCarbon_ToDateMicroString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToDateMicroString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToDateMicroString(),
-			want:   "2020-08-05.999999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToDateMicroString(PRC),
-			want:   "2020-08-05",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01", NewCarbon().ToDateMicroString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToDateMicroString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToDateMicroString())
+		assert.Empty(t, Parse("0").ToDateMicroString())
+		assert.Empty(t, Parse("xxx").ToDateMicroString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05", Parse("2020-08-05 13:14:15").ToDateMicroString())
+		assert.Equal(t, "2020-08-05.999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToDateMicroString())
+		assert.Equal(t, "2020-08-05", Parse("2020-08-05", PRC).ToDateMicroString(PRC))
+	})
 }
 
 func TestCarbon_ToDateNanoString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToDateNanoString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToDateNanoString(),
-			want:   "2020-08-05.999999999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToDateNanoString(PRC),
-			want:   "2020-08-05",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01", NewCarbon().ToDateNanoString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToDateNanoString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToDateNanoString())
+		assert.Empty(t, Parse("0").ToDateNanoString())
+		assert.Empty(t, Parse("xxx").ToDateNanoString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05", Parse("2020-08-05 13:14:15").ToDateNanoString())
+		assert.Equal(t, "2020-08-05.999999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToDateNanoString())
+		assert.Equal(t, "2020-08-05", Parse("2020-08-05", PRC).ToDateNanoString(PRC))
+	})
 }
 
 func TestCarbon_ToShortDateString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortDateString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToShortDateString(),
-			want:   "20200805",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToShortDateString(PRC),
-			want:   "20200805",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00010101", NewCarbon().ToShortDateString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortDateString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortDateString())
+		assert.Empty(t, Parse("0").ToShortDateString())
+		assert.Empty(t, Parse("xxx").ToShortDateString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "20200805", Parse("2020-08-05 13:14:15").ToShortDateString())
+		assert.Equal(t, "20200805", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortDateString())
+		assert.Equal(t, "20200805", Parse("2020-08-05", PRC).ToShortDateString(PRC))
+	})
 }
 
 func TestCarbon_ToShortDateMilliString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortDateMilliString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToShortDateMilliString(),
-			want:   "20200805.999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToShortDateMilliString(PRC),
-			want:   "20200805",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00010101", NewCarbon().ToShortDateMilliString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortDateMilliString()")
-		})
-	}
-}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortDateMilliString())
+		assert.Empty(t, Parse("0").ToShortDateMilliString())
+		assert.Empty(t, Parse("xxx").ToShortDateMilliString())
+	})
 
-func TestCarbon_ToShortDateNanoString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortDateNanoString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToShortDateNanoString(),
-			want:   "20200805.999999999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05", UTC).ToShortDateNanoString(PRC),
-			want:   "20200805",
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortDateNanoString()")
-		})
-	}
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "20200805", Parse("2020-08-05 13:14:15").ToShortDateMilliString())
+		assert.Equal(t, "20200805.999", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortDateMilliString())
+		assert.Equal(t, "20200805", Parse("2020-08-05", PRC).ToShortDateMilliString(PRC))
+	})
 }
 
 func TestCarbon_ToShortDateMicroString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortDateMicroString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15", UTC).ToShortDateMicroString(),
-			want:   "00000101",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15", UTC).ToShortDateMicroString(),
-			want:   "00010101",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05T13:14:15.999999999+08:00", UTC).ToShortDateMicroString(),
-			want:   "20200805.999999",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToShortDateMicroString(PRC),
-			want:   "20200805",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00010101", NewCarbon().ToShortDateMicroString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortDateMicroString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortDateMicroString())
+		assert.Empty(t, Parse("0").ToShortDateMicroString())
+		assert.Empty(t, Parse("xxx").ToShortDateMicroString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "20200805", Parse("2020-08-05 13:14:15").ToShortDateMicroString())
+		assert.Equal(t, "20200805.999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortDateMicroString())
+		assert.Equal(t, "20200805", Parse("2020-08-05", PRC).ToShortDateMicroString(PRC))
+	})
+}
+
+func TestCarbon_ToShortDateNanoString(t *testing.T) {
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00010101", NewCarbon().ToShortDateNanoString())
+	})
+
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortDateNanoString())
+		assert.Empty(t, Parse("0").ToShortDateNanoString())
+		assert.Empty(t, Parse("xxx").ToShortDateNanoString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "20200805", Parse("2020-08-05 13:14:15").ToShortDateNanoString())
+		assert.Equal(t, "20200805.999999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortDateNanoString())
+		assert.Equal(t, "20200805", Parse("2020-08-05", PRC).ToShortDateNanoString(PRC))
+	})
 }
 
 func TestCarbon_ToTimeString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToTimeString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15", UTC).ToTimeString(),
-			want:   "13:14:15",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15").ToTimeString(),
-			want:   "13:14:15",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15", UTC).ToTimeString(),
-			want:   "13:14:15",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToTimeString(PRC),
-			want:   "08:00:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", NewCarbon().ToTimeString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToTimeString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToTimeString())
+		assert.Empty(t, Parse("0").ToTimeString())
+		assert.Empty(t, Parse("xxx").ToTimeString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "13:14:15", Parse("2020-08-05 13:14:15").ToTimeString())
+		assert.Equal(t, "13:14:15", Parse("2020-08-05T13:14:15.999999999+00:00").ToTimeString())
+		assert.Equal(t, "00:00:00", Parse("2020-08-05", PRC).ToTimeString(PRC))
+	})
 }
 
 func TestCarbon_ToTimeMilliString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToTimeMilliString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToTimeMilliString(),
-			want:   "13:14:15.999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToTimeMilliString(),
-			want:   "13:14:15.999",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToTimeMilliString(),
-			want:   "13:14:15.999",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToTimeMilliString(PRC),
-			want:   "08:00:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", NewCarbon().ToTimeMilliString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToTimeMilliString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToTimeMilliString())
+		assert.Empty(t, Parse("0").ToTimeMilliString())
+		assert.Empty(t, Parse("xxx").ToTimeMilliString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "13:14:15", Parse("2020-08-05 13:14:15").ToTimeMilliString())
+		assert.Equal(t, "13:14:15.999", Parse("2020-08-05T13:14:15.999999999+00:00").ToTimeMilliString())
+		assert.Equal(t, "00:00:00", Parse("2020-08-05", PRC).ToTimeMilliString(PRC))
+	})
 }
 
 func TestCarbon_ToTimeMicroString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToTimeMicroString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToTimeMicroString(),
-			want:   "13:14:15.999999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToTimeMicroString(),
-			want:   "13:14:15.999999",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToTimeMicroString(),
-			want:   "13:14:15.999999",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToTimeMicroString(PRC),
-			want:   "08:00:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", NewCarbon().ToTimeMicroString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToTimeMicroString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToTimeMicroString())
+		assert.Empty(t, Parse("0").ToTimeMicroString())
+		assert.Empty(t, Parse("xxx").ToTimeMicroString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "13:14:15", Parse("2020-08-05 13:14:15").ToTimeMicroString())
+		assert.Equal(t, "13:14:15.999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToTimeMicroString())
+		assert.Equal(t, "00:00:00", Parse("2020-08-05", PRC).ToTimeMicroString(PRC))
+	})
 }
 
 func TestCarbon_ToTimeNanoString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToTimeNanoString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToTimeNanoString(),
-			want:   "13:14:15.999999999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToTimeNanoString(),
-			want:   "13:14:15.999999999",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToTimeNanoString(),
-			want:   "13:14:15.999999999",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToTimeNanoString(PRC),
-			want:   "08:00:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", NewCarbon().ToTimeNanoString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToTimeNanoString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToTimeNanoString())
+		assert.Empty(t, Parse("0").ToTimeNanoString())
+		assert.Empty(t, Parse("xxx").ToTimeNanoString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "13:14:15", Parse("2020-08-05 13:14:15").ToTimeNanoString())
+		assert.Equal(t, "13:14:15.999999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToTimeNanoString())
+		assert.Equal(t, "00:00:00", Parse("2020-08-05", PRC).ToTimeNanoString(PRC))
+	})
 }
 
 func TestCarbon_ToShortTimeString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortTimeString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToShortTimeString(),
-			want:   "131415",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToShortTimeString(),
-			want:   "131415",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToShortTimeString(),
-			want:   "131415",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToShortTimeString(PRC),
-			want:   "080000",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "000000", NewCarbon().ToShortTimeString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortTimeString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortTimeString())
+		assert.Empty(t, Parse("0").ToShortTimeString())
+		assert.Empty(t, Parse("xxx").ToShortTimeString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "131415", Parse("2020-08-05 13:14:15").ToShortTimeString())
+		assert.Equal(t, "131415", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortTimeString())
+		assert.Equal(t, "000000", Parse("2020-08-05", PRC).ToShortTimeString(PRC))
+	})
 }
 
 func TestCarbon_ToShortTimeMilliString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortTimeMilliString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToShortTimeMilliString(),
-			want:   "131415.999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToShortTimeMilliString(),
-			want:   "131415.999",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToShortTimeMilliString(),
-			want:   "131415.999",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToShortTimeMilliString(PRC),
-			want:   "080000",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "000000", NewCarbon().ToShortTimeMilliString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortTimeMilliString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortTimeMilliString())
+		assert.Empty(t, Parse("0").ToShortTimeMilliString())
+		assert.Empty(t, Parse("xxx").ToShortTimeMilliString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "131415", Parse("2020-08-05 13:14:15").ToShortTimeMilliString())
+		assert.Equal(t, "131415.999", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortTimeMilliString())
+		assert.Equal(t, "000000", Parse("2020-08-05", PRC).ToShortTimeMilliString(PRC))
+	})
 }
 
 func TestCarbon_ToShortTimeMicroString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortTimeMicroString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToShortTimeMicroString(),
-			want:   "131415.999999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToShortTimeMicroString(),
-			want:   "131415.999999",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToShortTimeMicroString(),
-			want:   "131415.999999",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToShortTimeMicroString(PRC),
-			want:   "080000",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "000000", NewCarbon().ToShortTimeMicroString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortTimeMicroString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortTimeMicroString())
+		assert.Empty(t, Parse("0").ToShortTimeMicroString())
+		assert.Empty(t, Parse("xxx").ToShortTimeMicroString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "131415", Parse("2020-08-05 13:14:15").ToShortTimeMicroString())
+		assert.Equal(t, "131415.999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortTimeMicroString())
+		assert.Equal(t, "000000", Parse("2020-08-05", PRC).ToShortTimeMicroString(PRC))
+	})
 }
 
 func TestCarbon_ToShortTimeNanoString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToShortTimeNanoString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToShortTimeNanoString(),
-			want:   "131415.999999999",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999").ToShortTimeNanoString(),
-			want:   "131415.999999999",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToShortTimeNanoString(),
-			want:   "131415.999999999",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToShortTimeNanoString(PRC),
-			want:   "080000",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "000000", NewCarbon().ToShortTimeNanoString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortTimeNanoString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToShortTimeNanoString())
+		assert.Empty(t, Parse("0").ToShortTimeNanoString())
+		assert.Empty(t, Parse("xxx").ToShortTimeNanoString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "131415", Parse("2020-08-05 13:14:15").ToShortTimeNanoString())
+		assert.Equal(t, "131415.999999999", Parse("2020-08-05T13:14:15.999999999+00:00").ToShortTimeNanoString())
+		assert.Equal(t, "000000", Parse("2020-08-05", PRC).ToShortTimeNanoString(PRC))
+	})
 }
 
 func TestCarbon_ToAtomString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToAtomString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToAtomString(),
-			want:   "0000-01-01T13:14:15Z",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToAtomString(),
-			want:   "0001-01-01T13:14:15Z",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToAtomString(),
-			want:   "2020-08-05T13:14:15Z",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToAtomString(PRC),
-			want:   "2020-08-05T08:00:00+08:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00Z", NewCarbon().ToAtomString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToAtomString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToAtomString())
+		assert.Empty(t, Parse("0").ToAtomString())
+		assert.Empty(t, Parse("xxx").ToAtomString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05 13:14:15").ToAtomString())
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05T13:14:15.999999999+00:00").ToAtomString())
+		assert.Equal(t, "2020-08-05T00:00:00+08:00", Parse("2020-08-05", PRC).ToAtomString(PRC))
+	})
 }
 
 func TestCarbon_ToAnsicString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToAnsicString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToAnsicString(),
-			want:   "Sat Jan  1 13:14:15 0000",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToAnsicString(),
-			want:   "Mon Jan  1 13:14:15 0001",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToAnsicString(),
-			want:   "Wed Aug  5 13:14:15 2020",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToAnsicString(PRC),
-			want:   "Wed Aug  5 08:00:00 2020",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon Jan  1 00:00:00 0001", NewCarbon().ToAnsicString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToAnsicString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToAnsicString())
+		assert.Empty(t, Parse("0").ToAnsicString())
+		assert.Empty(t, Parse("xxx").ToAnsicString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wed Aug  5 13:14:15 2020", Parse("2020-08-05 13:14:15").ToAnsicString())
+		assert.Equal(t, "Wed Aug  5 13:14:15 2020", Parse("2020-08-05T13:14:15.999999999+00:00").ToAnsicString())
+		assert.Equal(t, "Wed Aug  5 00:00:00 2020", Parse("2020-08-05", PRC).ToAnsicString(PRC))
+	})
 }
 
 func TestCarbon_ToCookieString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToCookieString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToCookieString(),
-			want:   "Saturday, 01-Jan-0000 13:14:15 UTC",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToCookieString(),
-			want:   "Monday, 01-Jan-0001 13:14:15 UTC",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToCookieString(),
-			want:   "Wednesday, 05-Aug-2020 13:14:15 UTC",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToCookieString(PRC),
-			want:   "Wednesday, 05-Aug-2020 08:00:00 CST",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Monday, 01-Jan-0001 00:00:00 UTC", NewCarbon().ToCookieString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToCookieString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToCookieString())
+		assert.Empty(t, Parse("0").ToCookieString())
+		assert.Empty(t, Parse("xxx").ToCookieString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wednesday, 05-Aug-2020 13:14:15 UTC", Parse("2020-08-05 13:14:15").ToCookieString())
+		assert.Equal(t, "Wednesday, 05-Aug-2020 13:14:15 UTC", Parse("2020-08-05T13:14:15.999999999+00:00").ToCookieString())
+		assert.Equal(t, "Wednesday, 05-Aug-2020 00:00:00 CST", Parse("2020-08-05", PRC).ToCookieString(PRC))
+	})
 }
 
 func TestCarbon_ToRssString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRssString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRssString(),
-			want:   "Sat, 01 Jan 0000 13:14:15 +0000",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRssString(),
-			want:   "Mon, 01 Jan 0001 13:14:15 +0000",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRssString(),
-			want:   "Wed, 05 Aug 2020 13:14:15 +0000",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRssString(PRC),
-			want:   "Wed, 05 Aug 2020 08:00:00 +0800",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon, 01 Jan 0001 00:00:00 +0000", NewCarbon().ToRssString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRssString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRssString())
+		assert.Empty(t, Parse("0").ToRssString())
+		assert.Empty(t, Parse("xxx").ToRssString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 +0000", Parse("2020-08-05 13:14:15").ToRssString())
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 +0000", Parse("2020-08-05T13:14:15.999999999+00:00").ToRssString())
+		assert.Equal(t, "Wed, 05 Aug 2020 00:00:00 +0800", Parse("2020-08-05", PRC).ToRssString(PRC))
+	})
 }
 
 func TestCarbon_ToW3cString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToW3cString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToW3cString(),
-			want:   "0000-01-01T13:14:15Z",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToW3cString(),
-			want:   "0001-01-01T13:14:15Z",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToW3cString(),
-			want:   "2020-08-05T13:14:15Z",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToW3cString(PRC),
-			want:   "2020-08-05T08:00:00+08:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00Z", NewCarbon().ToW3cString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToW3cString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToW3cString())
+		assert.Empty(t, Parse("0").ToW3cString())
+		assert.Empty(t, Parse("xxx").ToW3cString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05 13:14:15").ToW3cString())
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05T13:14:15.999999999+00:00").ToW3cString())
+		assert.Equal(t, "2020-08-05T00:00:00+08:00", Parse("2020-08-05", PRC).ToW3cString(PRC))
+	})
 }
 
 func TestCarbon_ToUnixDateString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToUnixDateString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToUnixDateString(),
-			want:   "Sat Jan  1 13:14:15 UTC 0000",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToUnixDateString(),
-			want:   "Mon Jan  1 13:14:15 UTC 0001",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToUnixDateString(),
-			want:   "Wed Aug  5 13:14:15 UTC 2020",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToUnixDateString(PRC),
-			want:   "Wed Aug  5 08:00:00 CST 2020",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon Jan  1 00:00:00 UTC 0001", NewCarbon().ToUnixDateString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToUnixDateString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToUnixDateString())
+		assert.Empty(t, Parse("0").ToUnixDateString())
+		assert.Empty(t, Parse("xxx").ToUnixDateString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wed Aug  5 13:14:15 UTC 2020", Parse("2020-08-05 13:14:15").ToUnixDateString())
+		assert.Equal(t, "Wed Aug  5 13:14:15 UTC 2020", Parse("2020-08-05T13:14:15.999999999+00:00").ToUnixDateString())
+		assert.Equal(t, "Wed Aug  5 00:00:00 CST 2020", Parse("2020-08-05", PRC).ToUnixDateString(PRC))
+	})
 }
 
 func TestCarbon_ToRubyDateString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRubyDateString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRubyDateString(),
-			want:   "Sat Jan 01 13:14:15 +0000 0000",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRubyDateString(),
-			want:   "Mon Jan 01 13:14:15 +0000 0001",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRubyDateString(),
-			want:   "Wed Aug 05 13:14:15 +0000 2020",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRubyDateString(PRC),
-			want:   "Wed Aug 05 08:00:00 +0800 2020",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon Jan 01 00:00:00 +0000 0001", NewCarbon().ToRubyDateString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRubyDateString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRubyDateString())
+		assert.Empty(t, Parse("0").ToRubyDateString())
+		assert.Empty(t, Parse("xxx").ToRubyDateString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wed Aug 05 13:14:15 +0000 2020", Parse("2020-08-05 13:14:15").ToRubyDateString())
+		assert.Equal(t, "Wed Aug 05 13:14:15 +0000 2020", Parse("2020-08-05T13:14:15.999999999+00:00").ToRubyDateString())
+		assert.Equal(t, "Wed Aug 05 00:00:00 +0800 2020", Parse("2020-08-05", PRC).ToRubyDateString(PRC))
+	})
 }
 
 func TestCarbon_ToKitchenString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToKitchenString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToKitchenString(),
-			want:   "1:14PM",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToKitchenString(),
-			want:   "1:14PM",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToKitchenString(),
-			want:   "1:14PM",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToKitchenString(PRC),
-			want:   "8:00AM",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "12:00AM", NewCarbon().ToKitchenString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToKitchenString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToKitchenString())
+		assert.Empty(t, Parse("0").ToKitchenString())
+		assert.Empty(t, Parse("xxx").ToKitchenString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "1:14PM", Parse("2020-08-05 13:14:15").ToKitchenString())
+		assert.Equal(t, "1:14PM", Parse("2020-08-05T13:14:15.999999999+00:00").ToKitchenString())
+		assert.Equal(t, "12:00AM", Parse("2020-08-05", PRC).ToKitchenString(PRC))
+	})
 }
 
 func TestCarbon_ToIso8601String(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToIso8601String(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToIso8601String(),
-			want:   "0000-01-01T13:14:15+00:00",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToIso8601String(),
-			want:   "0001-01-01T13:14:15+00:00",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToIso8601String(),
-			want:   "2020-08-05T13:14:15+00:00",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToIso8601String(PRC),
-			want:   "2020-08-05T08:00:00+08:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00+00:00", NewCarbon().ToIso8601String())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToIso8601String()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToIso8601String())
+		assert.Empty(t, Parse("0").ToIso8601String())
+		assert.Empty(t, Parse("xxx").ToIso8601String())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15+00:00", Parse("2020-08-05 13:14:15").ToIso8601String())
+		assert.Equal(t, "2020-08-05T13:14:15+00:00", Parse("2020-08-05T13:14:15.999999999+00:00").ToIso8601String())
+		assert.Equal(t, "2020-08-05T00:00:00+08:00", Parse("2020-08-05", PRC).ToIso8601String(PRC))
+	})
 }
 
 func TestCarbon_ToIso8601MilliString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToIso8601MilliString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToIso8601MilliString(),
-			want:   "0000-01-01T13:14:15.999+00:00",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999").ToIso8601MilliString(),
-			want:   "0001-01-01T13:14:15.999+08:05",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToIso8601MilliString(),
-			want:   "2020-08-05T13:14:15.999+00:00",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToIso8601MilliString(PRC),
-			want:   "2020-08-05T08:00:00+08:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00+00:00", NewCarbon().ToIso8601MilliString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToIso8601MilliString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToIso8601MilliString())
+		assert.Empty(t, Parse("0").ToIso8601MilliString())
+		assert.Empty(t, Parse("xxx").ToIso8601MilliString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15+00:00", Parse("2020-08-05 13:14:15").ToIso8601MilliString())
+		assert.Equal(t, "2020-08-05T13:14:15.999+00:00", Parse("2020-08-05T13:14:15.999999999+00:00").ToIso8601MilliString())
+		assert.Equal(t, "2020-08-05T00:00:00+08:00", Parse("2020-08-05", PRC).ToIso8601MilliString(PRC))
+	})
 }
 
-func TestCarbon_ToIso8601MicroString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToIso8601MicroString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToIso8601MicroString(),
-			want:   "0000-01-01T13:14:15.999999+00:00",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToIso8601MicroString(),
-			want:   "0001-01-01T13:14:15.999999+00:00",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToIso8601MicroString(),
-			want:   "2020-08-05T13:14:15.999999+00:00",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToIso8601MicroString(PRC),
-			want:   "2020-08-05T08:00:00+08:00",
-		},
-	}
+func TestCarbon_TToIso8601MicroString(t *testing.T) {
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00+00:00", NewCarbon().ToIso8601MicroString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToIso8601MicroString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToIso8601MicroString())
+		assert.Empty(t, Parse("0").ToIso8601MicroString())
+		assert.Empty(t, Parse("xxx").ToIso8601MicroString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15+00:00", Parse("2020-08-05 13:14:15").ToIso8601MicroString())
+		assert.Equal(t, "2020-08-05T13:14:15.999999+00:00", Parse("2020-08-05T13:14:15.999999999+00:00").ToIso8601MicroString())
+		assert.Equal(t, "2020-08-05T00:00:00+08:00", Parse("2020-08-05", PRC).ToIso8601MicroString(PRC))
+	})
 }
 
 func TestCarbon_ToIso8601NanoString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToIso8601NanoString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToIso8601NanoString(),
-			want:   "0000-01-01T13:14:15.999999999+00:00",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToIso8601NanoString(),
-			want:   "0001-01-01T13:14:15.999999999+00:00",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToIso8601NanoString(),
-			want:   "2020-08-05T13:14:15.999999999+00:00",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToIso8601NanoString(PRC),
-			want:   "2020-08-05T08:00:00+08:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00+00:00", NewCarbon().ToIso8601NanoString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToIso8601NanoString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToIso8601NanoString())
+		assert.Empty(t, Parse("0").ToIso8601NanoString())
+		assert.Empty(t, Parse("xxx").ToIso8601NanoString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15+00:00", Parse("2020-08-05 13:14:15").ToIso8601NanoString())
+		assert.Equal(t, "2020-08-05T13:14:15.999999999+00:00", Parse("2020-08-05T13:14:15.999999999+00:00").ToIso8601NanoString())
+		assert.Equal(t, "2020-08-05T00:00:00+08:00", Parse("2020-08-05", PRC).ToIso8601NanoString(PRC))
+	})
 }
 
 func TestCarbon_ToIso8601ZuluString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToIso8601ZuluString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToIso8601ZuluString(),
-			want:   "0000-01-01T13:14:15Z",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToIso8601ZuluString(),
-			want:   "0001-01-01T13:14:15Z",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToIso8601ZuluString(),
-			want:   "2020-08-05T13:14:15Z",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToIso8601ZuluString(PRC),
-			want:   "2020-08-05T08:00:00Z",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00Z", NewCarbon().ToIso8601ZuluString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToIso8601ZuluString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToIso8601ZuluString())
+		assert.Empty(t, Parse("0").ToIso8601ZuluString())
+		assert.Empty(t, Parse("xxx").ToIso8601ZuluString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05 13:14:15").ToIso8601ZuluString())
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05T13:14:15.999999999+00:00").ToIso8601ZuluString())
+		assert.Equal(t, "2020-08-05T00:00:00Z", Parse("2020-08-05", PRC).ToIso8601ZuluString(PRC))
+	})
 }
 
 func TestCarbon_ToIso8601ZuluMilliString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToIso8601ZuluMilliString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999").ToIso8601ZuluMilliString(),
-			want:   "0000-01-01T13:14:15.999Z",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToIso8601ZuluMilliString(),
-			want:   "0001-01-01T13:14:15.999Z",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToIso8601ZuluMilliString(),
-			want:   "2020-08-05T13:14:15.999Z",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToIso8601ZuluMilliString(PRC),
-			want:   "2020-08-05T08:00:00Z",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00Z", NewCarbon().ToIso8601ZuluMilliString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToIso8601ZuluMilliString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToIso8601ZuluMilliString())
+		assert.Empty(t, Parse("0").ToIso8601ZuluMilliString())
+		assert.Empty(t, Parse("xxx").ToIso8601ZuluMilliString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05 13:14:15").ToIso8601ZuluMilliString())
+		assert.Equal(t, "2020-08-05T13:14:15.999Z", Parse("2020-08-05T13:14:15.999999999+00:00").ToIso8601ZuluMilliString())
+		assert.Equal(t, "2020-08-05T00:00:00Z", Parse("2020-08-05", PRC).ToIso8601ZuluMilliString(PRC))
+	})
 }
 
 func TestCarbon_ToIso8601ZuluMicroString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToIso8601ZuluMicroString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToIso8601ZuluMicroString(),
-			want:   "0000-01-01T13:14:15.999999Z",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToIso8601ZuluMicroString(),
-			want:   "0001-01-01T13:14:15.999999Z",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToIso8601ZuluMicroString(),
-			want:   "2020-08-05T13:14:15.999999Z",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToIso8601ZuluMicroString(PRC),
-			want:   "2020-08-05T08:00:00Z",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00Z", NewCarbon().ToIso8601ZuluMicroString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToIso8601ZuluMicroString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToIso8601ZuluMicroString())
+		assert.Empty(t, Parse("0").ToIso8601ZuluMicroString())
+		assert.Empty(t, Parse("xxx").ToIso8601ZuluMicroString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05 13:14:15").ToIso8601ZuluMicroString())
+		assert.Equal(t, "2020-08-05T13:14:15.999999Z", Parse("2020-08-05T13:14:15.999999999+00:00").ToIso8601ZuluMicroString())
+		assert.Equal(t, "2020-08-05T00:00:00Z", Parse("2020-08-05", PRC).ToIso8601ZuluMicroString(PRC))
+	})
 }
 
 func TestCarbon_ToIso8601ZuluNanoString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToIso8601ZuluNanoString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToIso8601ZuluNanoString(),
-			want:   "0000-01-01T13:14:15.999999999Z",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToIso8601ZuluNanoString(),
-			want:   "0001-01-01T13:14:15.999999999Z",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToIso8601ZuluNanoString(),
-			want:   "2020-08-05T13:14:15.999999999Z",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToIso8601ZuluNanoString(PRC),
-			want:   "2020-08-05T08:00:00Z",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00Z", NewCarbon().ToIso8601ZuluNanoString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToIso8601ZuluNanoString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToIso8601ZuluNanoString())
+		assert.Empty(t, Parse("0").ToIso8601ZuluNanoString())
+		assert.Empty(t, Parse("xxx").ToIso8601ZuluNanoString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05 13:14:15").ToIso8601ZuluNanoString())
+		assert.Equal(t, "2020-08-05T13:14:15.999999999Z", Parse("2020-08-05T13:14:15.999999999+00:00").ToIso8601ZuluNanoString())
+		assert.Equal(t, "2020-08-05T00:00:00Z", Parse("2020-08-05", PRC).ToIso8601ZuluNanoString(PRC))
+	})
 }
 
 func TestCarbon_ToRfc822String(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc822String(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc822String(),
-			want:   "01 Jan 00 13:14 UTC",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRfc822String(),
-			want:   "01 Jan 01 13:14 UTC",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc822String(),
-			want:   "05 Aug 20 13:14 UTC",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRfc822String(PRC),
-			want:   "05 Aug 20 08:00 CST",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "01 Jan 01 00:00 UTC", NewCarbon().ToRfc822String())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc822String()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc822String())
+		assert.Empty(t, Parse("0").ToRfc822String())
+		assert.Empty(t, Parse("xxx").ToRfc822String())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "05 Aug 20 13:14 UTC", Parse("2020-08-05 13:14:15").ToRfc822String())
+		assert.Equal(t, "05 Aug 20 13:14 UTC", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc822String())
+		assert.Equal(t, "05 Aug 20 00:00 CST", Parse("2020-08-05", PRC).ToRfc822String(PRC))
+	})
 }
 
 func TestCarbon_ToRfc822zString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc822zString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc822zString(),
-			want:   "01 Jan 00 13:14 +0000",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRfc822zString(),
-			want:   "01 Jan 01 13:14 +0000",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc822zString(),
-			want:   "05 Aug 20 13:14 +0000",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRfc822zString(PRC),
-			want:   "05 Aug 20 08:00 +0800",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "01 Jan 01 00:00 +0000", NewCarbon().ToRfc822zString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc822zString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc822zString())
+		assert.Empty(t, Parse("0").ToRfc822zString())
+		assert.Empty(t, Parse("xxx").ToRfc822zString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "05 Aug 20 13:14 +0000", Parse("2020-08-05 13:14:15").ToRfc822zString())
+		assert.Equal(t, "05 Aug 20 13:14 +0000", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc822zString())
+		assert.Equal(t, "05 Aug 20 00:00 +0800", Parse("2020-08-05", PRC).ToRfc822zString(PRC))
+	})
 }
 
 func TestCarbon_ToRfc850String(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc850String(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc850String(),
-			want:   "Saturday, 01-Jan-00 13:14:15 UTC",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRfc850String(),
-			want:   "Monday, 01-Jan-01 13:14:15 UTC",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc850String(),
-			want:   "Wednesday, 05-Aug-20 13:14:15 UTC",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRfc850String(PRC),
-			want:   "Wednesday, 05-Aug-20 08:00:00 CST",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Monday, 01-Jan-01 00:00:00 UTC", NewCarbon().ToRfc850String())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc850String()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc850String())
+		assert.Empty(t, Parse("0").ToRfc850String())
+		assert.Empty(t, Parse("xxx").ToRfc850String())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wednesday, 05-Aug-20 13:14:15 UTC", Parse("2020-08-05 13:14:15").ToRfc850String())
+		assert.Equal(t, "Wednesday, 05-Aug-20 13:14:15 UTC", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc850String())
+		assert.Equal(t, "Wednesday, 05-Aug-20 00:00:00 CST", Parse("2020-08-05", PRC).ToRfc850String(PRC))
+	})
 }
 
 func TestCarbon_ToRfc1036String(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc1036String(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc1036String(),
-			want:   "Sat, 01 Jan 00 13:14:15 +0000",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRfc1036String(),
-			want:   "Mon, 01 Jan 01 13:14:15 +0000",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc1036String(),
-			want:   "Wed, 05 Aug 20 13:14:15 +0000",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRfc1036String(PRC),
-			want:   "Wed, 05 Aug 20 08:00:00 +0800",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon, 01 Jan 01 00:00:00 +0000", NewCarbon().ToRfc1036String())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc1036String()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc1036String())
+		assert.Empty(t, Parse("0").ToRfc1036String())
+		assert.Empty(t, Parse("xxx").ToRfc1036String())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wed, 05 Aug 20 13:14:15 +0000", Parse("2020-08-05 13:14:15").ToRfc1036String())
+		assert.Equal(t, "Wed, 05 Aug 20 13:14:15 +0000", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc1036String())
+		assert.Equal(t, "Wed, 05 Aug 20 00:00:00 +0800", Parse("2020-08-05", PRC).ToRfc1036String(PRC))
+	})
 }
 
 func TestCarbon_ToRfc1123String(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc1123String(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc1123String(),
-			want:   "Sat, 01 Jan 0000 13:14:15 UTC",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999").ToRfc1123String(),
-			want:   "Mon, 01 Jan 0001 13:14:15 LMT",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc1123String(),
-			want:   "Wed, 05 Aug 2020 13:14:15 UTC",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRfc1123String(PRC),
-			want:   "Wed, 05 Aug 2020 08:00:00 CST",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon, 01 Jan 0001 00:00:00 UTC", NewCarbon().ToRfc1123String())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc1123String()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc1123String())
+		assert.Empty(t, Parse("0").ToRfc1123String())
+		assert.Empty(t, Parse("xxx").ToRfc1123String())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 UTC", Parse("2020-08-05 13:14:15").ToRfc1123String())
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 UTC", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc1123String())
+		assert.Equal(t, "Wed, 05 Aug 2020 00:00:00 CST", Parse("2020-08-05", PRC).ToRfc1123String(PRC))
+	})
 }
 
 func TestCarbon_ToRfc1123zString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc1123zString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc1123zString(),
-			want:   "Sat, 01 Jan 0000 13:14:15 +0000",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRfc1123zString(),
-			want:   "Mon, 01 Jan 0001 13:14:15 +0000",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc1123zString(),
-			want:   "Wed, 05 Aug 2020 13:14:15 +0000",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05").ToRfc1123zString(PRC),
-			want:   "Wed, 05 Aug 2020 00:00:00 +0800",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon, 01 Jan 0001 00:00:00 +0000", NewCarbon().ToRfc1123zString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc1123String()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc1123zString())
+		assert.Empty(t, Parse("0").ToRfc1123zString())
+		assert.Empty(t, Parse("xxx").ToRfc1123zString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 +0000", Parse("2020-08-05 13:14:15").ToRfc1123zString())
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 +0000", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc1123zString())
+		assert.Equal(t, "Wed, 05 Aug 2020 00:00:00 +0800", Parse("2020-08-05", PRC).ToRfc1123zString(PRC))
+	})
 }
 
 func TestCarbon_ToRfc2822String(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc2822String(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc2822String(),
-			want:   "Sat, 01 Jan 0000 13:14:15 +0000",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRfc2822String(),
-			want:   "Mon, 01 Jan 0001 13:14:15 +0000",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc2822String(),
-			want:   "Wed, 05 Aug 2020 13:14:15 +0000",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRfc2822String(PRC),
-			want:   "Wed, 05 Aug 2020 08:00:00 +0800",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon, 01 Jan 0001 00:00:00 +0000", NewCarbon().ToRfc2822String())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc2822String()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc2822String())
+		assert.Empty(t, Parse("0").ToRfc2822String())
+		assert.Empty(t, Parse("xxx").ToRfc2822String())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 +0000", Parse("2020-08-05 13:14:15").ToRfc2822String())
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 +0000", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc2822String())
+		assert.Equal(t, "Wed, 05 Aug 2020 00:00:00 +0800", Parse("2020-08-05", PRC).ToRfc2822String(PRC))
+	})
 }
 
 func TestCarbon_ToRfc3339String(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc3339String(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc3339String(),
-			want:   "0000-01-01T13:14:15Z",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRfc3339String(),
-			want:   "0001-01-01T13:14:15Z",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc3339String(),
-			want:   "2020-08-05T13:14:15Z",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRfc3339String(PRC),
-			want:   "2020-08-05T08:00:00+08:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00Z", NewCarbon().ToRfc3339String())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc3339String()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc3339String())
+		assert.Empty(t, Parse("0").ToRfc3339String())
+		assert.Empty(t, Parse("xxx").ToRfc3339String())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05 13:14:15").ToRfc3339String())
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc3339String())
+		assert.Equal(t, "2020-08-05T00:00:00+08:00", Parse("2020-08-05", PRC).ToRfc3339String(PRC))
+	})
 }
 
 func TestCarbon_ToRfc3339MilliString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc3339MilliString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc3339MilliString(),
-			want:   "0000-01-01T13:14:15.999Z",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRfc3339MilliString(),
-			want:   "0001-01-01T13:14:15.999Z",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc3339MilliString(),
-			want:   "2020-08-05T13:14:15.999Z",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRfc3339MilliString(PRC),
-			want:   "2020-08-05T08:00:00+08:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00Z", NewCarbon().ToRfc3339MilliString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc3339MilliString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc3339MilliString())
+		assert.Empty(t, Parse("0").ToRfc3339MilliString())
+		assert.Empty(t, Parse("xxx").ToRfc3339MilliString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05 13:14:15").ToRfc3339MilliString())
+		assert.Equal(t, "2020-08-05T13:14:15.999Z", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc3339MilliString())
+		assert.Equal(t, "2020-08-05T00:00:00+08:00", Parse("2020-08-05", PRC).ToRfc3339MilliString(PRC))
+	})
 }
 
 func TestCarbon_ToRfc3339MicroString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc3339MicroString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc3339MicroString(),
-			want:   "0000-01-01T13:14:15.999999Z",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRfc3339MicroString(),
-			want:   "0001-01-01T13:14:15.999999Z",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc3339MicroString(),
-			want:   "2020-08-05T13:14:15.999999Z",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRfc3339MicroString(PRC),
-			want:   "2020-08-05T08:00:00+08:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00Z", NewCarbon().ToRfc3339MicroString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc3339MicroString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc3339MicroString())
+		assert.Empty(t, Parse("0").ToRfc3339MicroString())
+		assert.Empty(t, Parse("xxx").ToRfc3339MicroString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05 13:14:15").ToRfc3339MicroString())
+		assert.Equal(t, "2020-08-05T13:14:15.999999Z", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc3339MicroString())
+		assert.Equal(t, "2020-08-05T00:00:00+08:00", Parse("2020-08-05", PRC).ToRfc3339MicroString(PRC))
+	})
 }
 
 func TestCarbon_ToRfc3339NanoString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc3339NanoString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc3339NanoString(),
-			want:   "0000-01-01T13:14:15.999999999Z",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRfc3339NanoString(),
-			want:   "0001-01-01T13:14:15.999999999Z",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc3339NanoString(),
-			want:   "2020-08-05T13:14:15.999999999Z",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRfc3339NanoString(PRC),
-			want:   "2020-08-05T08:00:00+08:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01T00:00:00Z", NewCarbon().ToRfc3339NanoString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc3339NanoString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc3339NanoString())
+		assert.Empty(t, Parse("0").ToRfc3339NanoString())
+		assert.Empty(t, Parse("xxx").ToRfc3339NanoString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05T13:14:15Z", Parse("2020-08-05 13:14:15").ToRfc3339NanoString())
+		assert.Equal(t, "2020-08-05T13:14:15.999999999Z", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc3339NanoString())
+		assert.Equal(t, "2020-08-05T00:00:00+08:00", Parse("2020-08-05", PRC).ToRfc3339NanoString(PRC))
+	})
 }
 
 func TestCarbon_ToRfc7231String(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToRfc7231String(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToRfc7231String(),
-			want:   "Sat, 01 Jan 0000 13:14:15 UTC",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999", UTC).ToRfc7231String(),
-			want:   "Mon, 01 Jan 0001 13:14:15 UTC",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999", UTC).ToRfc7231String(),
-			want:   "Wed, 05 Aug 2020 13:14:15 UTC",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05", UTC).ToRfc7231String(PRC),
-			want:   "Wed, 05 Aug 2020 08:00:00 CST",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon, 01 Jan 0001 00:00:00 UTC", NewCarbon().ToRfc7231String())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToRfc7231String()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToRfc7231String())
+		assert.Empty(t, Parse("0").ToRfc7231String())
+		assert.Empty(t, Parse("xxx").ToRfc7231String())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 UTC", Parse("2020-08-05 13:14:15").ToRfc7231String())
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 UTC", Parse("2020-08-05T13:14:15.999999999+00:00").ToRfc7231String())
+		assert.Equal(t, "Wed, 05 Aug 2020 00:00:00 CST", Parse("2020-08-05", PRC).ToRfc7231String(PRC))
+	})
 }
 
 func TestCarbon_ToFormattedDateString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToFormattedDateString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999").ToFormattedDateString(),
-			want:   "Jan 1, 0000",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999").ToFormattedDateString(),
-			want:   "Jan 1, 0001",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999").ToFormattedDateString(),
-			want:   "Aug 5, 2020",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05").ToFormattedDateString(PRC),
-			want:   "Aug 5, 2020",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Jan 1, 0001", NewCarbon().ToFormattedDateString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToFormattedDateString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToFormattedDateString())
+		assert.Empty(t, Parse("0").ToFormattedDateString())
+		assert.Empty(t, Parse("xxx").ToFormattedDateString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Aug 5, 2020", Parse("2020-08-05 13:14:15").ToFormattedDateString())
+		assert.Equal(t, "Aug 5, 2020", Parse("2020-08-05T13:14:15.999999999+00:00").ToFormattedDateString())
+		assert.Equal(t, "Aug 5, 2020", Parse("2020-08-05", PRC).ToFormattedDateString(PRC))
+	})
 }
 
 func TestCarbon_ToFormattedDayDateString(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").ToFormattedDayDateString(),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("0000-01-01 13:14:15.999999999", UTC).ToFormattedDayDateString(),
-			want:   "Sat, Jan 1, 0000",
-		},
-		{
-			name:   "case3",
-			actual: Parse("0001-01-01 13:14:15.999999999").ToFormattedDayDateString(),
-			want:   "Mon, Jan 1, 0001",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15.999999999").ToFormattedDayDateString(),
-			want:   "Wed, Aug 5, 2020",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05").ToFormattedDayDateString(PRC),
-			want:   "Wed, Aug 5, 2020",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "Mon, Jan 1, 0001", NewCarbon().ToFormattedDayDateString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToFormattedDayDateString()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").ToFormattedDayDateString())
+		assert.Empty(t, Parse("0").ToFormattedDayDateString())
+		assert.Empty(t, Parse("xxx").ToFormattedDayDateString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "Wed, Aug 5, 2020", Parse("2020-08-05 13:14:15").ToFormattedDayDateString())
+		assert.Equal(t, "Wed, Aug 5, 2020", Parse("2020-08-05T13:14:15.999999999+00:00").ToFormattedDayDateString())
+		assert.Equal(t, "Wed, Aug 5, 2020", Parse("2020-08-05", PRC).ToFormattedDayDateString(PRC))
+	})
 }
 
 func TestCarbon_Layout(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").Layout(""),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05 13:14:15").Layout("2006年01月02日"),
-			want:   "2020年08月05日",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05 13:14:15").Layout("Mon, 02 Jan 2006 15:04:05 GMT"),
-			want:   "Wed, 05 Aug 2020 13:14:15 GMT",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 13:14:15").Layout(DateTimeLayout, PRC),
-			want:   "2020-08-05 13:14:15",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01 00:00:00", NewCarbon().Layout(DateTimeLayout))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "Layout()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").Layout(DateTimeLayout))
+		assert.Empty(t, Parse("0").Layout(DateTimeLayout))
+		assert.Empty(t, Parse("xxx").Layout(DateTimeLayout))
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05 13:14:15", Parse("2020-08-05 13:14:15").Layout(DateTimeLayout))
+		assert.Equal(t, "2020-08-05 13:14:15", Parse("2020-08-05T13:14:15.999999999+00:00").Layout(DateTimeLayout))
+		assert.Equal(t, "2020-08-05 00:00:00", Parse("2020-08-05", PRC).Layout(DateTimeLayout, PRC))
+		assert.Equal(t, "2020年08月05日", Parse("2020-08-05 13:14:15").Layout("2006年01月02日"))
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 GMT", Parse("2020-08-05 13:14:15").Layout("Mon, 02 Jan 2006 15:04:05 GMT"))
+	})
 }
 
 func TestCarbon_Format(t *testing.T) {
-	tests := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Parse("").Format(""),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			actual: Parse("2020-08-05 01:14:15").Format("D"),
-			want:   "Wed",
-		},
-		{
-			name:   "case3",
-			actual: Parse("2020-08-05 01:14:15").Format("l"),
-			want:   "Wednesday",
-		},
-		{
-			name:   "case4",
-			actual: Parse("2020-08-05 01:14:15").Format("F"),
-			want:   "August",
-		},
-		{
-			name:   "case5",
-			actual: Parse("2020-08-05 01:14:15").Format("M"),
-			want:   "Aug",
-		},
-		{
-			name:   "case6",
-			actual: Parse("2020-08-05 13:14:15").Format("Y年m月d日"),
-			want:   "2020年08月05日",
-		},
-		{
-			name:   "case7",
-			actual: Parse("2020-08-05 13:14:15").Format("j"),
-			want:   "5",
-		},
-		{
-			name:   "case8",
-			actual: Parse("2020-08-05 13:14:15").Format("W"),
-			want:   "32",
-		},
-		{
-			name:   "case9",
-			actual: Parse("2020-08-05 13:14:15").Format("F"),
-			want:   "August",
-		},
-		{
-			name:   "case10",
-			actual: Parse("2020-08-05 13:14:15").Format("F"),
-			want:   "August",
-		},
-		{
-			name:   "case11",
-			actual: Parse("2020-08-05 13:14:15").Format("N"),
-			want:   "03",
-		},
-		{
-			name:   "case12",
-			actual: Parse("2020-08-05 13:14:15").Format("L"),
-			want:   "1",
-		},
-		{
-			name:   "case13",
-			actual: Parse("2021-08-05 01:14:15").Format("L"),
-			want:   "0",
-		},
-		{
-			name:   "case14",
-			actual: Parse("2020-08-05 01:14:15").Format("G"),
-			want:   "1",
-		},
-		{
-			name:   "case15",
-			actual: Parse("2020-08-05 13:14:15").Format("U"),
-			want:   "1596604455",
-		},
-		{
-			name:   "case16",
-			actual: Parse("2020-08-05 13:14:15").Format("V"),
-			want:   "1596604455000",
-		},
-		{
-			name:   "case17",
-			actual: Parse("2020-08-05 13:14:15").Format("X"),
-			want:   "1596604455000000",
-		},
-		{
-			name:   "case18",
-			actual: Parse("2020-08-05 13:14:15").Format("Z"),
-			want:   "1596604455000000000",
-		},
-		{
-			name:   "case19",
-			actual: Parse("2020-08-05 13:14:15.999").Format("v"),
-			want:   "999",
-		},
-		{
-			name:   "case20",
-			actual: Parse("2020-08-05 13:14:15.999999").Format("x"),
-			want:   "999999",
-		},
-		{
-			name:   "case21",
-			actual: Parse("2020-08-05 13:14:15.999999999").Format("z"),
-			want:   "999999999",
-		},
-		{
-			name:   "case22",
-			actual: Parse("2020-08-05 13:14:15").Format("w"),
-			want:   "2",
-		},
-		{
-			name:   "case23",
-			actual: Parse("2020-08-05 13:14:15").Format("t"),
-			want:   "31",
-		},
-		{
-			name:   "case25",
-			actual: Parse("2020-08-05 13:14:15", PRC).Format("e"),
-			want:   "PRC",
-		},
-		{
-			name:   "case26",
-			actual: Parse("2020-08-05 13:14:15").Format("q"),
-			want:   "3",
-		},
-		{
-			name:   "case27",
-			actual: Parse("2020-08-05 13:14:15").Format("c"),
-			want:   "21",
-		},
-		{
-			name:   "case28",
-			actual: Parse("2020-08-05 13:14:15").Format("jS"),
-			want:   "5th",
-		},
-		{
-			name:   "case29",
-			actual: Parse("2020-08-22 13:14:15").Format("jS"),
-			want:   "22nd",
-		},
-		{
-			name:   "case30",
-			actual: Parse("2020-08-23 13:14:15").Format("jS"),
-			want:   "23rd",
-		},
-		{
-			name:   "case31",
-			actual: Parse("2020-08-31 13:14:15").Format("jS"),
-			want:   "31st",
-		},
-		{
-			name:   "case32",
-			actual: Parse("2020-08-31 13:14:15").Format("I\\t \\i\\s Y-m-d H:i:s"),
-			want:   "It is 2020-08-31 13:14:15",
-		},
-		{
-			name:   "case33",
-			actual: Parse("2020-08-05 13:14:15").Format("上次上报时间:Y-m-d H:i:s，请每日按时打卡"),
-			want:   "上次上报时间:2020-08-05 13:14:15，请每日按时打卡",
-		},
-		{
-			name:   "case34",
-			actual: Parse("2020-08-05 01:14:15").Format(DateTimeFormat, PRC),
-			want:   "2020-08-05 01:14:15",
-		},
-		{
-			name:   "case35",
-			actual: Parse("2020-08-05 01:14:15").Format(AtomFormat, PRC),
-			want:   "2020-08-05T01:14:15+08:00",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-01-01 00:00:00", NewCarbon().Format(DateTimeFormat))
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "Format()")
-		})
-	}
-}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").Format(DateTimeFormat))
+		assert.Empty(t, Parse("0").Format(DateTimeFormat))
+		assert.Empty(t, Parse("xxx").Format(DateTimeFormat))
+	})
 
-// https://github.com/dromara/carbon/issues/200
-func TestCarbon_Issue200(t *testing.T) {
-	tests1 := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case1",
-			actual: Now().StartOfWeek().ToWeekString(),
-			want:   "Sunday",
-		},
-		{
-			name:   "case2",
-			actual: Now().SetWeekStartsAt(Monday).StartOfWeek().ToWeekString(),
-			want:   "Monday",
-		},
-		{
-			name:   "case3",
-			actual: Now().SetWeekStartsAt(Wednesday).StartOfWeek().ToWeekString(PRC),
-			want:   "Wednesday",
-		},
-	}
-
-	for _, tt := range tests1 {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToWeekString()")
-		})
-	}
-
-	tests2 := []struct {
-		name   string
-		actual string
-		want   string
-	}{
-		{
-			name:   "case4",
-			actual: Now().StartOfWeek().ToShortWeekString(),
-			want:   "Sun",
-		},
-		{
-			name:   "case5",
-			actual: Now().SetWeekStartsAt(Monday).StartOfWeek().ToShortWeekString(),
-			want:   "Mon",
-		},
-		{
-			name:   "case6",
-			actual: Now().SetWeekStartsAt(Wednesday).StartOfWeek().ToShortWeekString(PRC),
-			want:   "Wed",
-		},
-	}
-
-	for _, tt := range tests2 {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.actual, "ToShortWeekString()")
-		})
-	}
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-08-05 13:14:15", Parse("2020-08-05 13:14:15").Format(DateTimeFormat))
+		assert.Equal(t, "2020-08-05", Parse("2020-08-05T13:14:15.999999999+00:00").Format(DateFormat))
+		assert.Equal(t, "2020-08-05 00:00:00", Parse("2020-08-05", PRC).Format(DateTimeFormat, PRC))
+		assert.Equal(t, "2020年08月05日", Parse("2020-08-05 13:14:15").Format("Y年m月d日"))
+		assert.Equal(t, "Wed", Parse("2020-08-05 13:14:15").Format("D"))
+		assert.Equal(t, "Wednesday", Parse("2020-08-05 13:14:15").Format("l"))
+		assert.Equal(t, "August", Parse("2020-08-05 13:14:15").Format("F"))
+		assert.Equal(t, "Aug", Parse("2020-08-05 13:14:15").Format("M"))
+		assert.Equal(t, "5", Parse("2020-08-05 13:14:15").Format("j"))
+		assert.Equal(t, "32", Parse("2020-08-05 13:14:15").Format("W"))
+		assert.Equal(t, "August", Parse("2020-08-05 13:14:15").Format("F"))
+		assert.Equal(t, "03", Parse("2020-08-05 13:14:15").Format("N"))
+		assert.Equal(t, "1", Parse("2020-08-05 13:14:15").Format("L"))
+		assert.Equal(t, "0", Parse("2021-08-05 13:14:15").Format("L"))
+		assert.Equal(t, "13", Parse("2020-08-05 13:14:15").Format("G"))
+		assert.Equal(t, "1596633255", Parse("2020-08-05 13:14:15").Format("U"))
+		assert.Equal(t, "1596633255000", Parse("2020-08-05 13:14:15").Format("V"))
+		assert.Equal(t, "1596633255000000", Parse("2020-08-05 13:14:15").Format("X"))
+		assert.Equal(t, "1596633255000000000", Parse("2020-08-05 13:14:15").Format("Z"))
+		assert.Equal(t, "999", Parse("2020-08-05 13:14:15.999999999").Format("v"))
+		assert.Equal(t, "999999", Parse("2020-08-05 13:14:15.999999999").Format("x"))
+		assert.Equal(t, "999999999", Parse("2020-08-05 13:14:15.999999999").Format("z"))
+		assert.Equal(t, "2", Parse("2020-08-05 13:14:15.999999999").Format("w"))
+		assert.Equal(t, "31", Parse("2020-08-05 13:14:15.999999999").Format("t"))
+		assert.Equal(t, "UTC", Parse("2020-08-05 13:14:15.999999999").Format("e"))
+		assert.Equal(t, "3", Parse("2020-08-05 13:14:15.999999999").Format("q"))
+		assert.Equal(t, "21", Parse("2020-08-05 13:14:15.999999999").Format("c"))
+		assert.Equal(t, "5th", Parse("2020-08-05 13:14:15").Format("jS"))
+		assert.Equal(t, "22nd", Parse("2020-08-22 13:14:15").Format("jS"))
+		assert.Equal(t, "23rd", Parse("2020-08-23 13:14:15").Format("jS"))
+		assert.Equal(t, "31st", Parse("2020-08-31 13:14:15").Format("jS"))
+		assert.Equal(t, "It is 2020-08-31 13:14:15", Parse("2020-08-31 13:14:15").Format("I\\t \\i\\s Y-m-d H:i:s"))
+		assert.Equal(t, "上次打卡时间:2020-08-05 13:14:15，请每日按时打卡", Parse("2020-08-05 13:14:15").Format("上次打卡时间:Y-m-d H:i:s，请每日按时打卡"))
+	})
 }
