@@ -17,9 +17,9 @@ var weekdays = map[string]time.Weekday{
 	Sunday:    time.Sunday,
 }
 
-// common formatting symbols
-// 常规格式化符号
-var formats = map[byte]string{
+// format map
+// 格式符号映射表
+var formatMap = map[byte]string{
 	'd': "02",      // Day:    Day of the month, 2 digits with leading zeros. Eg: 01 to 31.
 	'D': "Mon",     // Day:    A textual representation of a day, three letters. Eg: Mon through Sun.
 	'j': "2",       // Day:    Day of the month without leading zeros. Eg: 1 to 31.
@@ -41,21 +41,22 @@ var formats = map[byte]string{
 	'P': "-07:00",  // Zone:   Difference to Greenwich time (GMT) with colon between hours and minutes. Eg: +02:00.
 	'T': "MST",     // Zone:   Zone name. Eg: UTC, EST, MDT ...
 
-	'U': "timestamp",      // Timestamp with second. Eg: 1699677240.
-	'V': "timestampMilli", // Timestamp with millisecond. Eg: 1596604455666.
-	'X': "timestampMicro", // Timestamp with microsecond. Eg: 1596604455666666.
-	'Z': "timestampNano",  // Timestamp with nanosecond. Eg: 1596604455666666666.
-
 	'v': "999",       // Millisecond. Eg: 999.
 	'x': "999999",    // Microsecond. Eg: 999999.
 	'z': "999999999", // Nanosecond. Eg: 999999999.
+
+	'U': TimestampLayout,      // Timestamp with second. Eg: 1699677240.
+	'V': TimestampMilliLayout, // Timestamp with millisecond. Eg: 1596604455666.
+	'X': TimestampMicroLayout, // Timestamp with microsecond. Eg: 1596604455666666.
+	'Z': TimestampNanoLayout,  // Timestamp with nanosecond. Eg: 1596604455666666666.
 }
 
-// common layout symbols
-// 常规布局模板符号
-var layouts = []string{
-	DayDateTimeLayout,
-	DateTimeLayout, DateTimeNanoLayout, ShortDateTimeLayout, ShortDateTimeNanoLayout,
+// default layouts
+// 默认布局模板
+var defaultLayouts = []string{
+	DateTimeLayout, DateLayout, TimeLayout,
+	ISO8601Layout, DayDateTimeLayout, ISO8601NanoLayout,
+	DateTimeNanoLayout, ShortDateTimeLayout, ShortDateTimeNanoLayout,
 	DateLayout, DateNanoLayout, ShortDateLayout, ShortDateNanoLayout,
 	TimeMicroLayout, TimeMilliLayout, TimeNanoLayout,
 	RFC822Layout, RFC822ZLayout, RFC850Layout, RFC1123Layout, RFC1123ZLayout, RFC3339Layout, RFC3339NanoLayout, RFC1036Layout, RFC7231Layout,
@@ -88,7 +89,7 @@ var layouts = []string{
 func format2layout(format string) string {
 	buffer := bytes.NewBuffer(nil)
 	for i := 0; i < len(format); i++ {
-		if layout, ok := formats[format[i]]; ok {
+		if layout, ok := formatMap[format[i]]; ok {
 			buffer.WriteString(layout)
 		} else {
 			switch format[i] {

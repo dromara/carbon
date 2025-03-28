@@ -26,7 +26,7 @@ func (c Carbon) Parse(value string, timezone ...string) Carbon {
 	case "tomorrow":
 		return c.Tomorrow(timezone...)
 	}
-	for _, layout := range layouts {
+	for _, layout := range defaultLayouts {
 		t, err := time.ParseInLocation(layout, value, c.loc)
 		if err == nil {
 			c.time = t

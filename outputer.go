@@ -809,7 +809,7 @@ func (c Carbon) Format(format string, timezone ...string) string {
 	}
 	buffer := bytes.NewBuffer(nil)
 	for i := 0; i < len(format); i++ {
-		if layout, ok := formats[format[i]]; ok {
+		if layout, ok := formatMap[format[i]]; ok {
 			// support for i18n specific symbols
 			switch format[i] {
 			case 'l': // week, such as Monday
