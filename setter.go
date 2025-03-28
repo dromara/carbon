@@ -4,22 +4,78 @@ import (
 	"time"
 )
 
-// SetWeekStartsAt sets start day of the week.
-// 设置一周的开始日期
-func (c Carbon) SetWeekStartsAt(day string) Carbon {
-	if c.Error != nil {
+// SetLayout sets layout.
+// 设置布局模板
+func (c Carbon) SetLayout(layout string) Carbon {
+	if layout == "" {
+		c.Error = emptyLayoutError()
+	}
+	if c.IsInvalid() {
 		return c
 	}
-	if weekday, ok := weekdays[day]; ok {
-		c.weekStartsAt = weekday
+	c.layout = layout
+	return c
+}
+
+// SetLayout sets globally default layout.
+// 设置全局默认布局模板
+func SetLayout(layout string) Carbon {
+	c := NewCarbon().SetLayout(layout)
+	if !c.HasError() {
+		DefaultLayout = layout
+	}
+	return c
+}
+
+// SetFormat sets format.
+// 设置格式模板
+func (c Carbon) SetFormat(format string) Carbon {
+	if format == "" {
+		c.Error = emptyFormatError()
+	}
+	if c.IsInvalid() {
+		return c
+	}
+	c.layout = format2layout(format)
+	return c
+}
+
+// SetFormat sets globally default format.
+// 设置全局默认格式模板
+func SetFormat(format string) Carbon {
+	layout := format2layout(format)
+	c := NewCarbon().SetLayout(layout)
+	if !c.HasError() {
+		DefaultLayout = layout
 	}
 	return c
 }
 
 // SetWeekStartsAt sets start day of the week.
-// 设置一周的开始日期
+// 设置周起始日期
+func (c Carbon) SetWeekStartsAt(day string) Carbon {
+	if day == "" {
+		c.Error = emptyWeekStartsDayError()
+	}
+	if c.IsInvalid() {
+		return c
+	}
+	if weekday, ok := weekdays[day]; ok {
+		c.weekStartsAt = weekday
+	} else {
+		c.Error = invalidWeekStartsAtError(day)
+	}
+	return c
+}
+
+// SetWeekStartsAt sets globally default start day of the week.
+// 设置全局默认周起始日期
 func SetWeekStartsAt(day string) Carbon {
-	return NewCarbon().SetWeekStartsAt(day)
+	c := NewCarbon().SetWeekStartsAt(day)
+	if !c.HasError() {
+		DefaultWeekStartsAt = day
+	}
+	return c
 }
 
 // SetTimezone sets timezone.
