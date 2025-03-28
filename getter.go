@@ -393,11 +393,6 @@ func (c Carbon) ZoneName() string {
 	if c.IsInvalid() {
 		return ""
 	}
-	if c.IsZero() {
-		// prevent returning to LMT timezone before 1901
-		name, _ := time.Now().In(c.loc).Zone()
-		return name
-	}
 	name, _ := c.StdTime().Zone()
 	return name
 }
@@ -421,6 +416,24 @@ func (c Carbon) Locale() string {
 	return c.lang.locale
 }
 
+// WeekStartsAt returns start day of the week.
+// 获取一周的开始日期
+func (c Carbon) WeekStartsAt() string {
+	if c.IsInvalid() {
+		return ""
+	}
+	return c.weekStartsAt.String()
+}
+
+// CurrentLayout returns the layout used for parsing the time string.
+// 获取当前布局模板
+func (c Carbon) CurrentLayout() string {
+	if c.IsInvalid() {
+		return ""
+	}
+	return c.layout
+}
+
 // Age gets age like 18.
 // 获取年龄
 func (c Carbon) Age() int {
@@ -432,10 +445,4 @@ func (c Carbon) Age() int {
 		return 0
 	}
 	return int(c.DiffInYears(now))
-}
-
-// CurrentLayout returns the layout used for parsing the time string.
-// 获取当前布局模板
-func (c Carbon) CurrentLayout() string {
-	return c.layout
 }
