@@ -219,6 +219,11 @@ const (
 	ShortTimeMilliLayout = "150405.999"
 	ShortTimeMicroLayout = "150405.999999"
 	ShortTimeNanoLayout  = "150405.999999999"
+
+	TimestampLayout      = "unix"
+	TimestampMilliLayout = "unixMilli"
+	TimestampMicroLayout = "unixMicro"
+	TimestampNanoLayout  = "unixNano"
 )
 
 // format constants
@@ -285,4 +290,9 @@ const (
 	ShortTimeMilliFormat = "His.v"
 	ShortTimeMicroFormat = "His.x"
 	ShortTimeNanoFormat  = "His.z"
+
+	TimestampFormat      = "U"
+	TimestampMilliFormat = "V"
+	TimestampMicroFormat = "X"
+	TimestampNanoFormat  = "Z"
 )
