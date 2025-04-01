@@ -13,10 +13,22 @@ import (
 var fs embed.FS
 
 var (
+	// empty locale error
+	// 空区域错误
+	emptyLocaleError = func() error {
+		return fmt.Errorf("locale cannot be empty")
+	}
+
 	// invalid locale error
 	// 无效的区域错误
 	invalidLocaleError = func(locale string) error {
 		return fmt.Errorf("invalid locale file %q, please make sure the json file exists and is valid", locale)
+	}
+
+	// invalid resources error
+	// 无效的资源错误
+	invalidResourcesError = func() error {
+		return fmt.Errorf("invalid resources, please make sure the resources exists and is valid")
 	}
 )
 
@@ -44,12 +56,18 @@ func NewLanguage() *Language {
 // SetLocale sets language locale.
 // 设置区域
 func (lang *Language) SetLocale(locale string) *Language {
+	if lang == nil || lang.Error != nil {
+		return lang
+	}
+
+	if locale == "" {
+		lang.Error = emptyLocaleError()
+		return lang
+	}
+
 	lang.rw.Lock()
 	defer lang.rw.Unlock()
 
-	if len(lang.resources) != 0 {
-		return lang
-	}
 	lang.locale = locale
 	fileName := lang.dir + locale + ".json"
 	bytes, err := fs.ReadFile(fileName)
@@ -64,6 +82,15 @@ func (lang *Language) SetLocale(locale string) *Language {
 // SetResources sets language resources.
 // 设置资源
 func (lang *Language) SetResources(resources map[string]string) *Language {
+	if lang == nil || lang.Error != nil {
+		return lang
+	}
+
+	if resources == nil {
+		lang.Error = invalidResourcesError()
+		return lang
+	}
+
 	lang.rw.Lock()
 	defer lang.rw.Unlock()
 
@@ -82,8 +109,17 @@ func (lang *Language) SetResources(resources map[string]string) *Language {
 // returns a translated string.
 // 翻译转换
 func (lang *Language) translate(unit string, value int64) string {
+	if lang == nil || lang.resources == nil {
+		return ""
+	}
+
+	lang.rw.Lock()
+	defer lang.rw.Unlock()
+
 	if len(lang.resources) == 0 {
+		lang.rw.Unlock()
 		lang.SetLocale(DefaultLocale)
+		lang.rw.Lock()
 	}
 	slice := strings.Split(lang.resources[unit], "|")
 	number := getAbsValue(value)
