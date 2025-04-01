@@ -35,7 +35,9 @@ func (t *Date) Scan(src interface{}) error {
 	default:
 		return failedScanError(v)
 	}
-	*t = NewDate(c)
+	if c.Error == nil {
+		*t = NewDate(c)
+	}
 	return t.Error
 }
 
