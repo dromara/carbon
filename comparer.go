@@ -16,13 +16,13 @@ func (c Carbon) HasError() bool {
 // IsNil reports whether is a nil time.
 // 是否是空时间
 func (c Carbon) IsNil() bool {
-	if c.isNil || &c.time == nil {
+	if c.isNil == true || &c.time == nil {
 		return true
 	}
 	return false
 }
 
-// IsZero reports whether is zero time(0001-01-01 00:00:00 +0000 UTC).
+// IsZero reports whether is a zero time(0001-01-01 00:00:00 +0000 UTC).
 // 是否是零值时间(0001-01-01 00:00:00 +0000 UTC)
 func (c Carbon) IsZero() bool {
 	if c.IsNil() || c.HasError() {
@@ -31,7 +31,7 @@ func (c Carbon) IsZero() bool {
 	return c.time.IsZero()
 }
 
-// IsValid reports whether is valid time.
+// IsValid reports whether is a valid time.
 // 是否是有效时间
 func (c Carbon) IsValid() bool {
 	if !c.IsNil() && !c.HasError() {
@@ -40,13 +40,13 @@ func (c Carbon) IsValid() bool {
 	return false
 }
 
-// IsInvalid reports whether is invalid time.
+// IsInvalid reports whether is an invalid time.
 // 是否是无效时间
 func (c Carbon) IsInvalid() bool {
 	return !c.IsValid()
 }
 
-// IsDST reports whether is daylight saving time.
+// IsDST reports whether is a daylight saving time.
 // 是否是夏令时
 func (c Carbon) IsDST() bool {
 	if c.IsInvalid() {
@@ -71,33 +71,6 @@ func (c Carbon) IsPM() bool {
 		return false
 	}
 	return c.Format("a") == "pm"
-}
-
-// IsNow reports whether is now time.
-// 是否是当前时间
-func (c Carbon) IsNow() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Timestamp() == c.Now().Timestamp()
-}
-
-// IsFuture reports whether is future time.
-// 是否是未来时间
-func (c Carbon) IsFuture() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Timestamp() > c.Now().Timestamp()
-}
-
-// IsPast reports whether is past time.
-// 是否是过去时间
-func (c Carbon) IsPast() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Timestamp() < c.Now().Timestamp()
 }
 
 // IsLeapYear reports whether is a leap year.
@@ -312,6 +285,39 @@ func (c Carbon) IsWeekend() bool {
 	return c.IsSaturday() || c.IsSunday()
 }
 
+// IsNow reports whether is now time.
+// 是否是当前时间
+func (c Carbon) IsNow() bool {
+	if c.IsInvalid() {
+		return false
+	}
+	return c.Timestamp() == Now(c.Timezone()).Timestamp()
+}
+
+// IsFuture reports whether is future time.
+// 是否是未来时间
+func (c Carbon) IsFuture() bool {
+	if c.IsInvalid() {
+		return false
+	}
+	if c.IsZero() {
+		return false
+	}
+	return c.Timestamp() > Now(c.Timezone()).Timestamp()
+}
+
+// IsPast reports whether is past time.
+// 是否是过去时间
+func (c Carbon) IsPast() bool {
+	if c.IsInvalid() {
+		return false
+	}
+	if c.IsZero() {
+		return true
+	}
+	return c.Timestamp() < Now(c.Timezone()).Timestamp()
+}
+
 // IsYesterday reports whether is yesterday.
 // 是否是昨天
 func (c Carbon) IsYesterday() bool {
@@ -342,7 +348,7 @@ func (c Carbon) IsTomorrow() bool {
 // IsSameCentury reports whether is same century.
 // 是否是同一世纪
 func (c Carbon) IsSameCentury(t Carbon) bool {
-	if c.Error != nil || t.Error != nil {
+	if c.IsInvalid() || t.IsInvalid() {
 		return false
 	}
 	return c.Century() == t.Century()
@@ -351,7 +357,7 @@ func (c Carbon) IsSameCentury(t Carbon) bool {
 // IsSameDecade reports whether is same decade.
 // 是否是同一年代
 func (c Carbon) IsSameDecade(t Carbon) bool {
-	if c.Error != nil || t.Error != nil {
+	if c.IsInvalid() || t.IsInvalid() {
 		return false
 	}
 	return c.Decade() == t.Decade()
@@ -360,7 +366,7 @@ func (c Carbon) IsSameDecade(t Carbon) bool {
 // IsSameYear reports whether is same year.
 // 是否是同一年
 func (c Carbon) IsSameYear(t Carbon) bool {
-	if c.Error != nil || t.Error != nil {
+	if c.IsInvalid() || t.IsInvalid() {
 		return false
 	}
 	return c.Year() == t.Year()
@@ -504,6 +510,9 @@ func (c Carbon) Between(start Carbon, end Carbon) bool {
 	if c.IsInvalid() || start.IsInvalid() || end.IsInvalid() {
 		return false
 	}
+	if start.Gt(end) {
+		return false
+	}
 	if c.Gt(start) && c.Lt(end) {
 		return true
 	}
@@ -514,6 +523,9 @@ func (c Carbon) Between(start Carbon, end Carbon) bool {
 // 是否在两个时间之间(包括开始时间)
 func (c Carbon) BetweenIncludedStart(start Carbon, end Carbon) bool {
 	if c.IsInvalid() || start.IsInvalid() || end.IsInvalid() {
+		return false
+	}
+	if start.Gt(end) {
 		return false
 	}
 	if c.Gte(start) && c.Lt(end) {
@@ -528,6 +540,9 @@ func (c Carbon) BetweenIncludedEnd(start Carbon, end Carbon) bool {
 	if c.IsInvalid() || start.IsInvalid() || end.IsInvalid() {
 		return false
 	}
+	if start.Gt(end) {
+		return false
+	}
 	if c.Gt(start) && c.Lte(end) {
 		return true
 	}
@@ -538,6 +553,9 @@ func (c Carbon) BetweenIncludedEnd(start Carbon, end Carbon) bool {
 // 是否在两个时间之间(包括这两个时间)
 func (c Carbon) BetweenIncludedBoth(start Carbon, end Carbon) bool {
 	if c.IsInvalid() || start.IsInvalid() || end.IsInvalid() {
+		return false
+	}
+	if start.Gt(end) {
 		return false
 	}
 	if c.Gte(start) && c.Lte(end) {
