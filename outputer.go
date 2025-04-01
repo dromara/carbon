@@ -801,32 +801,29 @@ func (c Carbon) Layout(layout string, timezone ...string) string {
 // Format outputs a string by format.
 // 输出指定格式模板的时间字符串
 func (c Carbon) Format(format string, timezone ...string) string {
-	if c.IsInvalid() {
-		return ""
-	}
 	if len(timezone) > 0 {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
+	}
+	if c.IsInvalid() {
+		return ""
 	}
 	buffer := bytes.NewBuffer(nil)
 	for i := 0; i < len(format); i++ {
 		if layout, ok := formatMap[format[i]]; ok {
-			// support for i18n specific symbols
 			switch format[i] {
-			case 'l': // week, such as Monday
-				buffer.WriteString(c.ToWeekString())
 			case 'D': // short week, such as Mon
 				buffer.WriteString(c.ToShortWeekString())
 			case 'F': // month, such as January
 				buffer.WriteString(c.ToMonthString())
 			case 'M': // short month, such as Jan
 				buffer.WriteString(c.ToShortMonthString())
-			case 'U': // timestamp with second, such as 1596604455
+			case 'S': // timestamp with second, such as 1596604455
 				buffer.WriteString(strconv.FormatInt(c.Timestamp(), 10))
-			case 'V': // timestamp with millisecond, such as 1596604455000
+			case 'U': // timestamp with millisecond, such as 1596604455000
 				buffer.WriteString(strconv.FormatInt(c.TimestampMilli(), 10))
-			case 'X': // timestamp with microsecond, such as 1596604455000000
+			case 'V': // timestamp with microsecond, such as 1596604455000000
 				buffer.WriteString(strconv.FormatInt(c.TimestampMicro(), 10))
-			case 'Z': // timestamp with nanoseconds, such as 1596604455000000000
+			case 'X': // timestamp with nanoseconds, such as 1596604455000000000
 				buffer.WriteString(strconv.FormatInt(c.TimestampNano(), 10))
 			default: // common symbols
 				buffer.WriteString(c.StdTime().Format(layout))
@@ -843,7 +840,7 @@ func (c Carbon) Format(format string, timezone ...string) string {
 			case 'N': // day of the week as a number in ISO-8601 format, ranging from 01-7
 				week := fmt.Sprintf("%02d", c.DayOfWeek())
 				buffer.WriteString(week)
-			case 'S': // abbreviated suffix for the day of the month, such as st, nd, rd, th
+			case 'K': // abbreviated suffix for the day of the month, such as st, nd, rd, th
 				suffix := "th"
 				switch c.Day() {
 				case 1, 21, 31:
@@ -866,18 +863,14 @@ func (c Carbon) Format(format string, timezone ...string) string {
 				buffer.WriteString(strconv.Itoa(c.DayOfWeek() - 1))
 			case 't': // number of days in the month, ranging from 28-31
 				buffer.WriteString(strconv.Itoa(c.DaysInMonth()))
-			case 'e': // current location, such as UTC，GMT，Atlantic/Azores
+			case 'z': // current zone location, such as Asia/Tokyo
 				buffer.WriteString(c.Timezone())
+			case 'o': // current zone offset, such as 28800
+				buffer.WriteString(strconv.Itoa(c.ZoneOffset()))
 			case 'q': // current quarter, ranging from 1-4
 				buffer.WriteString(strconv.Itoa(c.Quarter()))
 			case 'c': // current century, ranging from 0-99
 				buffer.WriteString(strconv.Itoa(c.Century()))
-			case 'R':
-				if c.ZoneOffset() == 0 {
-					buffer.WriteString("Z")
-				} else {
-					buffer.WriteString(c.Layout("-07:00"))
-				}
 			default:
 				buffer.WriteByte(format[i])
 			}

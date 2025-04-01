@@ -39,16 +39,18 @@ var formatMap = map[byte]string{
 	's': "05",      // Time:   Seconds with leading zeros. Eg: 00 through 59.
 	'O': "-0700",   // Zone:   Difference to Greenwich time (GMT) in hours. Eg: +0200.
 	'P': "-07:00",  // Zone:   Difference to Greenwich time (GMT) with colon between hours and minutes. Eg: +02:00.
-	'T': "MST",     // Zone:   Zone name. Eg: UTC, EST, MDT ...
+	'Q': "Z0700",   // Zone:   ISO8601 timezone. Eg: Z, +0200.
+	'R': "Z07:00",  // Zone:   ISO8601 colon timezone. Eg: Z, +02:00.
+	'Z': "MST",     // Zone:   Zone name. Eg: UTC, EST, MDT ...
 
-	'v': "999",       // Millisecond. Eg: 999.
-	'x': "999999",    // Microsecond. Eg: 999999.
-	'z': "999999999", // Nanosecond. Eg: 999999999.
+	'u': "999",       // Millisecond. Eg: 999.
+	'v': "999999",    // Microsecond. Eg: 999999.
+	'x': "999999999", // Nanosecond. Eg: 999999999.
 
-	'U': TimestampLayout,      // Timestamp with second. Eg: 1699677240.
-	'V': TimestampMilliLayout, // Timestamp with millisecond. Eg: 1596604455666.
-	'X': TimestampMicroLayout, // Timestamp with microsecond. Eg: 1596604455666666.
-	'Z': TimestampNanoLayout,  // Timestamp with nanosecond. Eg: 1596604455666666666.
+	'S': TimestampLayout,      // Timestamp with second. Eg: 1699677240.
+	'U': TimestampMilliLayout, // Timestamp with millisecond. Eg: 1596604455666.
+	'V': TimestampMicroLayout, // Timestamp with microsecond. Eg: 1596604455666666.
+	'X': TimestampNanoLayout,  // Timestamp with nanosecond. Eg: 1596604455666666666.
 }
 
 // default layouts
@@ -97,8 +99,6 @@ func format2layout(format string) string {
 				buffer.WriteByte(format[i+1])
 				i++
 				continue
-			case 'R':
-				buffer.WriteByte('Z')
 			default:
 				buffer.WriteByte(format[i])
 			}
