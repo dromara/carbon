@@ -1,41 +1,21 @@
 package carbon
 
+import "time"
+
 // MaxValue returns a Carbon instance for the greatest supported date.
 // 返回 Carbon 的最大值
 func MaxValue() Carbon {
-	return NewCarbon().create(9999, 12, 31, 23, 59, 59, 999999999, UTC)
+	c := NewCarbon()
+	c.time = time.Date(9999, time.December, 31, 23, 59, 59, 999999999, time.UTC)
+	return c
 }
 
 // MinValue returns a Carbon instance for the lowest supported date.
 // 返回 Carbon 的最小值
 func MinValue() Carbon {
-	return NewCarbon().create(-9998, 1, 1, 0, 0, 0, 0, UTC)
-}
-
-// Closest returns the closest Carbon instance from the given Carbon instance.
-// 返回离给定 carbon 实例最近的 Carbon 实例
-func (c Carbon) Closest(c1 Carbon, c2 Carbon) Carbon {
-	if c.IsInvalid() || c1.IsInvalid() || c2.IsInvalid() {
-		c.isNil = true
-		return c
-	}
-	if c.DiffAbsInSeconds(c1) < c.DiffAbsInSeconds(c2) {
-		return c1
-	}
-	return c2
-}
-
-// Farthest returns the farthest Carbon instance from the given Carbon instance.
-// 返回离给定 carbon 实例最远的 Carbon 实例
-func (c Carbon) Farthest(c1 Carbon, c2 Carbon) Carbon {
-	if c.IsInvalid() || c1.IsInvalid() || c2.IsInvalid() {
-		c.isNil = true
-		return c
-	}
-	if c.DiffAbsInSeconds(c1) > c.DiffAbsInSeconds(c2) {
-		return c1
-	}
-	return c2
+	c := NewCarbon()
+	c.time = time.Date(-9998, time.January, 1, 0, 0, 0, 0, time.UTC)
+	return c
 }
 
 // Max returns the maximum Carbon instance from the given Carbon instance (second-precision).
@@ -68,4 +48,30 @@ func Min(c1 Carbon, c2 ...Carbon) (c Carbon) {
 		}
 	}
 	return
+}
+
+// Closest returns the closest Carbon instance from the given Carbon instance.
+// 返回离给定 carbon 实例最近的 Carbon 实例
+func (c Carbon) Closest(c1 Carbon, c2 Carbon) Carbon {
+	if c.IsInvalid() || c1.IsInvalid() || c2.IsInvalid() {
+		c.isNil = true
+		return c
+	}
+	if c.DiffAbsInSeconds(c1) < c.DiffAbsInSeconds(c2) {
+		return c1
+	}
+	return c2
+}
+
+// Farthest returns the farthest Carbon instance from the given Carbon instance.
+// 返回离给定 carbon 实例最远的 Carbon 实例
+func (c Carbon) Farthest(c1 Carbon, c2 Carbon) Carbon {
+	if c.IsInvalid() || c1.IsInvalid() || c2.IsInvalid() {
+		c.isNil = true
+		return c
+	}
+	if c.DiffAbsInSeconds(c1) > c.DiffAbsInSeconds(c2) {
+		return c1
+	}
+	return c2
 }
