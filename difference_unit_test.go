@@ -7,6 +7,10 @@ import (
 )
 
 func TestCarbon_DiffInYears(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffInYears())
 		assert.Zero(t, Now().DiffInYears(Parse("")))
@@ -23,6 +27,10 @@ func TestCarbon_DiffInYears(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInYears(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffAbsInYears())
 		assert.Zero(t, Now().DiffAbsInYears(Parse("")))
@@ -39,6 +47,10 @@ func TestCarbon_DiffAbsInYears(t *testing.T) {
 }
 
 func TestCarbon_DiffInMonths(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffInMonths())
 		assert.Zero(t, Now().DiffInMonths(Parse("")))
@@ -57,6 +69,10 @@ func TestCarbon_DiffInMonths(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInMonths(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffAbsInMonths())
 		assert.Zero(t, Now().DiffAbsInMonths(Parse("")))
@@ -73,6 +89,10 @@ func TestCarbon_DiffAbsInMonths(t *testing.T) {
 }
 
 func TestCarbon_DiffInWeeks(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffInWeeks())
 		assert.Zero(t, Now().DiffInWeeks(Parse("")))
@@ -88,6 +108,10 @@ func TestCarbon_DiffInWeeks(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInWeeks(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffAbsInWeeks())
 		assert.Zero(t, Now().DiffAbsInWeeks(Parse("")))
@@ -103,6 +127,10 @@ func TestCarbon_DiffAbsInWeeks(t *testing.T) {
 }
 
 func TestCarbon_DiffInDays(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffInDays())
 		assert.Zero(t, Now().DiffInDays(Parse("")))
@@ -119,6 +147,10 @@ func TestCarbon_DiffInDays(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInDays(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffAbsInDays())
 		assert.Zero(t, Now().DiffAbsInDays(Parse("")))
@@ -135,6 +167,10 @@ func TestCarbon_DiffAbsInDays(t *testing.T) {
 }
 
 func TestCarbon_DiffInHours(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffInHours())
 		assert.Zero(t, Now().DiffInHours(Parse("")))
@@ -151,6 +187,10 @@ func TestCarbon_DiffInHours(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInHours(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffAbsInHours())
 		assert.Zero(t, Now().DiffAbsInHours(Parse("")))
@@ -167,6 +207,10 @@ func TestCarbon_DiffAbsInHours(t *testing.T) {
 }
 
 func TestCarbon_DiffInMinutes(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffInMinutes())
 		assert.Zero(t, Now().DiffInMinutes(Parse("")))
@@ -183,6 +227,10 @@ func TestCarbon_DiffInMinutes(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInMinutes(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffAbsInMinutes())
 		assert.Zero(t, Now().DiffAbsInMinutes(Parse("")))
@@ -199,6 +247,10 @@ func TestCarbon_DiffAbsInMinutes(t *testing.T) {
 }
 
 func TestCarbon_DiffInSeconds(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffInSeconds())
 		assert.Zero(t, Now().DiffInSeconds(Parse("")))
@@ -215,6 +267,10 @@ func TestCarbon_DiffInSeconds(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInSeconds(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, Parse("").DiffAbsInSeconds())
 		assert.Zero(t, Now().DiffAbsInSeconds(Parse("")))
@@ -231,6 +287,10 @@ func TestCarbon_DiffAbsInSeconds(t *testing.T) {
 }
 
 func TestCarbon_DiffInString(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Empty(t, Parse("").DiffInString())
 		assert.Empty(t, Now().DiffInString(Parse("")))
@@ -239,7 +299,6 @@ func TestCarbon_DiffInString(t *testing.T) {
 	})
 
 	t.Run("valid time", func(t *testing.T) {
-		now := Now()
 		assert.Equal(t, "just now", Parse("2020-08-05 13:14:15").DiffInString(Parse("2020-08-05 13:14:15")))
 		assert.Equal(t, "-1 year", now.AddYearsNoOverflow(1).DiffInString(now))
 		assert.Equal(t, "1 year", now.SubYearsNoOverflow(1).DiffInString(now))
@@ -259,6 +318,10 @@ func TestCarbon_DiffInString(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInString(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Empty(t, Parse("").DiffAbsInString())
 		assert.Empty(t, Now().DiffAbsInString(Parse("")))
@@ -267,7 +330,6 @@ func TestCarbon_DiffAbsInString(t *testing.T) {
 	})
 
 	t.Run("valid time", func(t *testing.T) {
-		now := Now()
 		assert.Equal(t, "just now", Parse("2020-08-05 13:14:15").DiffAbsInString(Parse("2020-08-05 13:14:15")))
 		assert.Equal(t, "1 year", now.AddYearsNoOverflow(1).DiffAbsInString(now))
 		assert.Equal(t, "1 year", now.SubYearsNoOverflow(1).DiffAbsInString(now))
@@ -285,6 +347,10 @@ func TestCarbon_DiffAbsInString(t *testing.T) {
 }
 
 func TestCarbon_DiffInDuration(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Empty(t, Parse("").DiffInDuration())
 		assert.Empty(t, Now().DiffInDuration(Parse("")))
@@ -293,18 +359,21 @@ func TestCarbon_DiffInDuration(t *testing.T) {
 	})
 
 	t.Run("valid time", func(t *testing.T) {
-		now := Now()
 		assert.Equal(t, "0s", Parse("2020-08-05 13:14:15").DiffInDuration(Parse("2020-08-05 13:14:15")).String())
 		assert.Equal(t, "-8760h0m0s", now.AddYearsNoOverflow(1).DiffInDuration(now).String())
-		assert.Equal(t, "8760h0m0s", now.SubYearsNoOverflow(1).DiffInDuration(now).String())
+		assert.Equal(t, "8784h0m0s", now.SubYearsNoOverflow(1).DiffInDuration(now).String())
 		assert.Equal(t, "-744h0m0s", now.AddMonthsNoOverflow(1).DiffInDuration(now).String())
-		assert.Equal(t, "672h0m0s", now.SubMonthsNoOverflow(1).DiffInDuration(now).String())
+		assert.Equal(t, "744h0m0s", now.SubMonthsNoOverflow(1).DiffInDuration(now).String())
 		assert.Equal(t, "-24h0m0s", now.AddDays(1).DiffInDuration(now).String())
 		assert.Equal(t, "24h0m0s", now.SubDays(1).DiffInDuration(now).String())
 	})
 }
 
 func TestCarbon_DiffAbsInDuration(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Empty(t, Parse("").DiffAbsInDuration())
 		assert.Empty(t, Now().DiffAbsInDuration(Parse("")))
@@ -313,18 +382,21 @@ func TestCarbon_DiffAbsInDuration(t *testing.T) {
 	})
 
 	t.Run("valid time", func(t *testing.T) {
-		now := Now()
 		assert.Equal(t, "0s", Parse("2020-08-05 13:14:15").DiffAbsInDuration(Parse("2020-08-05 13:14:15")).String())
 		assert.Equal(t, "8760h0m0s", now.AddYearsNoOverflow(1).DiffAbsInDuration(now).String())
-		assert.Equal(t, "8760h0m0s", now.SubYearsNoOverflow(1).DiffAbsInDuration(now).String())
+		assert.Equal(t, "8784h0m0s", now.SubYearsNoOverflow(1).DiffAbsInDuration(now).String())
 		assert.Equal(t, "744h0m0s", now.AddMonthsNoOverflow(1).DiffAbsInDuration(now).String())
-		assert.Equal(t, "672h0m0s", now.SubMonthsNoOverflow(1).DiffAbsInDuration(now).String())
+		assert.Equal(t, "744h0m0s", now.SubMonthsNoOverflow(1).DiffAbsInDuration(now).String())
 		assert.Equal(t, "24h0m0s", now.AddDays(1).DiffAbsInDuration(now).String())
 		assert.Equal(t, "24h0m0s", now.SubDays(1).DiffAbsInDuration(now).String())
 	})
 }
 
 func TestCarbon_DiffForHumans(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Empty(t, Parse("").DiffForHumans())
 		assert.Empty(t, Now().DiffForHumans(Parse("")))
@@ -333,10 +405,6 @@ func TestCarbon_DiffForHumans(t *testing.T) {
 	})
 
 	t.Run("valid time", func(t *testing.T) {
-		defer CleanTestNow()
-
-		SetTestNow(Parse("2020-08-05 13:14:15"))
-		now := Now()
 		assert.Equal(t, "just now", Parse("2020-08-05 13:14:15").DiffForHumans(Parse("2020-08-05 13:14:15")))
 		assert.Equal(t, "2 days ago", Parse("2020-08-03 13:14:15").DiffForHumans())
 		assert.Equal(t, "2 days from now", Parse("2020-08-07 13:14:15").DiffForHumans())
@@ -350,6 +418,10 @@ func TestCarbon_DiffForHumans(t *testing.T) {
 }
 
 func TestCarbon_getDiffInMonths(t *testing.T) {
+	defer CleanTestNow()
+	now := Parse("2020-08-05 13:14:15")
+	SetTestNow(now)
+
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Zero(t, getDiffInMonths(Parse(""), Parse("")))
 		assert.Zero(t, getDiffInMonths(Parse(""), Parse("xxx")))
