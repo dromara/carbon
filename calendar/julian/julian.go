@@ -19,31 +19,15 @@ var (
 	diffJdFromMjd = 2400000.5
 )
 
-// Gregorian defines a Gregorian struct.
-// 定义 Gregorian 结构体
-type Gregorian struct {
-	calendar.Gregorian
-}
-
 // Julian defines a Julian struct.
 // 定义 Julian 结构体
 type Julian struct {
 	jd, mjd float64
 }
 
-// FromGregorian creates a Gregorian instance from time.Time.
-// 从标准 time.Time 创建 Gregorian 实例
-func FromGregorian(t time.Time) (g Gregorian) {
-	if t.IsZero() {
-		return
-	}
-	g.Time = t
-	return g
-}
-
-// FromJulian creates a Julian instance from julian day or modified julian day.
-// 从 儒略日 或 简化儒略日 创建 Julian 实例
-func FromJulian(f float64) (j Julian) {
+// NewJulian returns a new Lunar instance.
+// 返回 Lunar 实例
+func NewJulian(f float64) (j Julian) {
 	// get length of the integer part
 	l := len(strconv.Itoa(int(math.Ceil(f))))
 	switch l {
@@ -62,15 +46,17 @@ func FromJulian(f float64) (j Julian) {
 	return
 }
 
-// ToJulian converts Gregorian instance to Julian instance.
-// 将 Gregorian 实例转化为 Julian 实例
-func (g Gregorian) ToJulian() (j Julian) {
-	if g.IsZero() {
-		return
+// FromStdTime creates a Julian instance from standard time.Time.
+// 从标准 time.Time 创建 Julian 实例
+func FromStdTime(t time.Time) (j Julian) {
+	if t.IsZero() {
+		j.jd = 1721423.5
+		j.mjd = -678577
+		return j
 	}
-	y := g.Year()
-	m := g.Month()
-	d := float64(g.Day()) + ((float64(g.Second())/60+float64(g.Minute()))/60+float64(g.Hour()))/24
+	y := t.Year()
+	m := int(t.Month())
+	d := float64(t.Day()) + ((float64(t.Second())/60+float64(t.Minute()))/60+float64(t.Hour()))/24
 	n := 0
 	f := false
 	if y*372+m*31+int(d) >= 588829 {
@@ -85,14 +71,18 @@ func (g Gregorian) ToJulian() (j Julian) {
 		n = 2 - n + n/4
 	}
 	jd := float64(int(365.25*(float64(y)+4716))) + float64(int(30.6001*(float64(m)+1))) + d + float64(n) - 1524.5
-	return FromJulian(jd)
+	return NewJulian(jd)
 }
 
 // ToGregorian converts Julian instance to Gregorian instance.
-// 将 Julian 实例转化为 Gregorian 实例
-func (j Julian) ToGregorian() (g Gregorian) {
-	if j.IsZero() {
-		return
+// 将 Lunar 实例转化为 Gregorian 实例
+func (j Julian) ToGregorian(timezone ...string) (g calendar.Gregorian) {
+	loc := time.UTC
+	if len(timezone) > 0 {
+		loc, g.Error = time.LoadLocation(timezone[0])
+	}
+	if g.Error != nil {
+		return g
 	}
 	d := int(j.jd + 0.5)
 	f := j.jd + 0.5 - float64(d)
@@ -110,7 +100,7 @@ func (j Julian) ToGregorian() (g Gregorian) {
 		month -= 13
 		year -= 4715
 	} else {
-		month--
+		month -= 1
 		year -= 4716
 	}
 	f *= 24
@@ -123,7 +113,8 @@ func (j Julian) ToGregorian() (g Gregorian) {
 	f -= float64(minute)
 	f *= 60
 	second := int(math.Round(f))
-	return FromGregorian(time.Date(year, time.Month(month), day, hour, minute, second, 0, time.Local))
+	g.Time = time.Date(year, time.Month(month), day, hour, minute, second, 0, loc)
+	return g
 }
 
 // JD gets julian day like 2460332.5
@@ -144,15 +135,6 @@ func (j Julian) MJD(precision ...int) float64 {
 		p = precision[0]
 	}
 	return parseFloat64(j.mjd, p)
-}
-
-// IsZero reports whether is zero time.
-// 是否是零值时间
-func (j Julian) IsZero() bool {
-	if j.jd == 0 || j.mjd == 0 {
-		return true
-	}
-	return false
 }
 
 // parseFloat64 round to n decimal places
