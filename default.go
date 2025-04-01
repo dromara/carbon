@@ -48,7 +48,7 @@ func SetDefault(d Default) {
 // 重置全局默认值
 func ResetDefault() {
 	DefaultLayout = DateTimeLayout
-	DefaultTimezone = Local
+	DefaultTimezone = UTC
 	DefaultWeekStartsAt = Sunday
 	DefaultLocale = "en"
 }

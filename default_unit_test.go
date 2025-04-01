@@ -1,23 +1,25 @@
-package carbon
+package carbon_test
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
+	"github.com/dromara/carbon/v2"
 )
 
-func TestCarbon_SetDefault(t *testing.T) {
-	defer ResetDefault()
+func TestSetDefault(t *testing.T) {
+	defer carbon.ResetDefault()
 
-	SetDefault(Default{
-		Layout:       DateTimeLayout,
-		Timezone:     UTC,
-		Locale:       "en",
-		WeekStartsAt: Sunday,
+	carbon.SetDefault(carbon.Default{
+		Layout:       carbon.DateTimeLayout,
+		Timezone:     carbon.PRC,
+		Locale:       "zh-CN",
+		WeekStartsAt: carbon.Sunday,
 	})
 
-	assert.Equal(t, DateTimeLayout, DefaultLayout)
-	assert.Equal(t, UTC, DefaultTimezone)
-	assert.Equal(t, "en", DefaultLocale)
-	assert.Equal(t, "Sunday", DefaultWeekStartsAt)
+	assert.Equal(t, carbon.DateTimeLayout, carbon.DefaultLayout)
+	assert.Equal(t, carbon.PRC, carbon.DefaultTimezone)
+	assert.Equal(t, "zh-CN", carbon.DefaultLocale)
+	assert.Equal(t, carbon.Sunday, carbon.DefaultWeekStartsAt)
 }
