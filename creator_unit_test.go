@@ -7,607 +7,342 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCarbon_CreateFromStdTime(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: CreateFromStdTime(time.Now()),
-			want:   time.Now().Format(DateTimeLayout),
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromStdTime(time.Now(), PRC),
-			want:   time.Now().Format(DateTimeLayout),
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromStdTime(time.Now(), "xxx"),
-			want:   "",
-		},
-	}
+func TestCreateFromStdTime(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromStdTime(time.Now(), "").HasError())
+		assert.Empty(t, CreateFromStdTime(time.Now(), "").ToString())
+		assert.True(t, CreateFromStdTime(time.Now(), "xxx").HasError())
+		assert.Empty(t, CreateFromStdTime(time.Now(), "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToDateTimeString(), "CreateFromStdTime()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		now := time.Now()
+		assert.Equal(t, now.Unix(), CreateFromStdTime(now).Timestamp())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		now := time.Now().In(time.Local)
+		assert.Equal(t, now.Unix(), CreateFromStdTime(now).Timestamp())
+		assert.Equal(t, now.Unix(), CreateFromStdTime(now, UTC).Timestamp())
+	})
 }
 
-func TestCarbon_CreateFromTimestamp(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromTimestamp(0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromTimestamp(-1),
-			want:   "1970-01-01 07:59:59 +0800 CST",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromTimestamp(0),
-			want:   "1970-01-01 08:00:00 +0800 CST",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromTimestamp(1),
-			want:   "1970-01-01 08:00:01 +0800 CST",
-		},
-		{
-			name:   "case5",
-			carbon: CreateFromTimestamp(1649735755, PRC),
-			want:   "2022-04-12 11:55:55 +0800 CST",
-		},
-	}
+func TestCreateFromTimestamp(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromTimestamp(0, "").HasError())
+		assert.Empty(t, CreateFromTimestamp(0, "").ToString())
+		assert.True(t, CreateFromTimestamp(0, "xxx").HasError())
+		assert.Empty(t, CreateFromTimestamp(0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToString(), "CreateFromTimestamp()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "1969-12-31 23:59:59 +0000 UTC", CreateFromTimestamp(-1).ToString())
+		assert.Equal(t, "1970-01-01 00:00:00 +0000 UTC", CreateFromTimestamp(0).ToString())
+		assert.Equal(t, "1970-01-01 00:00:01 +0000 UTC", CreateFromTimestamp(1).ToString())
+		assert.Equal(t, "2022-04-12 03:55:55 +0000 UTC", CreateFromTimestamp(1649735755).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "1970-01-01 07:59:59 +0800 CST", CreateFromTimestamp(-1, PRC).ToString())
+		assert.Equal(t, "1970-01-01 08:00:00 +0800 CST", CreateFromTimestamp(0, PRC).ToString())
+		assert.Equal(t, "1970-01-01 08:00:01 +0800 CST", CreateFromTimestamp(1, PRC).ToString())
+		assert.Equal(t, "2022-04-12 11:55:55 +0800 CST", CreateFromTimestamp(1649735755, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromTimestampMilli(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromTimestampMilli(0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromTimestampMilli(-1),
-			want:   "1970-01-01 07:59:59.999 +0800 CST",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromTimestampMilli(0),
-			want:   "1970-01-01 08:00:00 +0800 CST",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromTimestampMilli(1),
-			want:   "1970-01-01 08:00:00.001 +0800 CST",
-		},
-		{
-			name:   "case5",
-			carbon: CreateFromTimestampMilli(1649735755981, PRC),
-			want:   "2022-04-12 11:55:55.981 +0800 CST",
-		},
-	}
+func TestCreateFromTimestampMilli(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromTimestampMilli(0, "").HasError())
+		assert.True(t, CreateFromTimestampMilli(0, "").HasError())
+		assert.Empty(t, CreateFromTimestampMilli(0, "xxx").ToString())
+		assert.Empty(t, CreateFromTimestampMilli(0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToString(), "CreateFromTimestampMilli()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "1969-12-31 23:59:59.999 +0000 UTC", CreateFromTimestampMilli(-1).ToString())
+		assert.Equal(t, "1970-01-01 00:00:00 +0000 UTC", CreateFromTimestampMilli(0).ToString())
+		assert.Equal(t, "1970-01-01 00:00:00.001 +0000 UTC", CreateFromTimestampMilli(1).ToString())
+		assert.Equal(t, "2022-04-12 03:55:55.981 +0000 UTC", CreateFromTimestampMilli(1649735755981).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "1970-01-01 07:59:59.999 +0800 CST", CreateFromTimestampMilli(-1, PRC).ToString())
+		assert.Equal(t, "1970-01-01 08:00:00 +0800 CST", CreateFromTimestampMilli(0, PRC).ToString())
+		assert.Equal(t, "1970-01-01 08:00:00.001 +0800 CST", CreateFromTimestampMilli(1, PRC).ToString())
+		assert.Equal(t, "2022-04-12 11:55:55.981 +0800 CST", CreateFromTimestampMilli(1649735755981, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromTimestampMicro(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromTimestampMicro(0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromTimestampMicro(-1),
-			want:   "1970-01-01 07:59:59.999999 +0800 CST",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromTimestampMicro(0),
-			want:   "1970-01-01 08:00:00 +0800 CST",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromTimestampMicro(1),
-			want:   "1970-01-01 08:00:00.000001 +0800 CST",
-		},
-		{
-			name:   "case5",
-			carbon: CreateFromTimestampMicro(1649735755981566, PRC),
-			want:   "2022-04-12 11:55:55.981566 +0800 CST",
-		},
-	}
+func TestCreateFromTimestampMicro(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromTimestampMicro(0, "").HasError())
+		assert.True(t, CreateFromTimestampMicro(0, "").HasError())
+		assert.Empty(t, CreateFromTimestampMicro(0, "xxx").ToString())
+		assert.Empty(t, CreateFromTimestampMicro(0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToString(), "CreateFromTimestampMicro()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "1969-12-31 23:59:59.999999 +0000 UTC", CreateFromTimestampMicro(-1).ToString())
+		assert.Equal(t, "1970-01-01 00:00:00 +0000 UTC", CreateFromTimestampMicro(0).ToString())
+		assert.Equal(t, "1970-01-01 00:00:00.000001 +0000 UTC", CreateFromTimestampMicro(1).ToString())
+		assert.Equal(t, "2022-04-12 03:55:55.981566 +0000 UTC", CreateFromTimestampMicro(1649735755981566).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "1970-01-01 07:59:59.999999 +0800 CST", CreateFromTimestampMicro(-1, PRC).ToString())
+		assert.Equal(t, "1970-01-01 08:00:00 +0800 CST", CreateFromTimestampMicro(0, PRC).ToString())
+		assert.Equal(t, "1970-01-01 08:00:00.000001 +0800 CST", CreateFromTimestampMicro(1, PRC).ToString())
+		assert.Equal(t, "2022-04-12 11:55:55.981566 +0800 CST", CreateFromTimestampMicro(1649735755981566, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromTimestampNano(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromTimestampNano(0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromTimestampNano(-1),
-			want:   "1970-01-01 07:59:59.999999999 +0800 CST",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromTimestampNano(0),
-			want:   "1970-01-01 08:00:00 +0800 CST",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromTimestampNano(1, PRC),
-			want:   "1970-01-01 08:00:00.000000001 +0800 CST",
-		},
-	}
+func TestCreateFromTimestampNano(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromTimestampNano(0, "").HasError())
+		assert.True(t, CreateFromTimestampNano(0, "").HasError())
+		assert.Empty(t, CreateFromTimestampNano(0, "xxx").ToString())
+		assert.Empty(t, CreateFromTimestampNano(0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToString(), "CreateFromTimestampNano()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "1969-12-31 23:59:59.999999999 +0000 UTC", CreateFromTimestampNano(-1).ToString())
+		assert.Equal(t, "1970-01-01 00:00:00 +0000 UTC", CreateFromTimestampNano(0).ToString())
+		assert.Equal(t, "1970-01-01 00:00:00.000000001 +0000 UTC", CreateFromTimestampNano(1).ToString())
+		assert.Equal(t, "2022-04-12 03:55:55.981566888 +0000 UTC", CreateFromTimestampNano(1649735755981566888).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "1970-01-01 07:59:59.999999999 +0800 CST", CreateFromTimestampNano(-1, PRC).ToString())
+		assert.Equal(t, "1970-01-01 08:00:00 +0800 CST", CreateFromTimestampNano(0, PRC).ToString())
+		assert.Equal(t, "1970-01-01 08:00:00.000000001 +0800 CST", CreateFromTimestampNano(1, PRC).ToString())
+		assert.Equal(t, "2022-04-12 11:55:55.981566888 +0800 CST", CreateFromTimestampNano(1649735755981566888, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromDateTime(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromDateTime(0, 0, 0, 0, 0, 0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromDateTime(2020, 1, 1, 13, 14, 15),
-			want:   "2020-01-01 13:14:15",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromDateTime(2020, 1, 31, 13, 14, 15),
-			want:   "2020-01-31 13:14:15",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromDateTime(2020, 2, 1, 13, 14, 15, PRC),
-			want:   "2020-02-01 13:14:15",
-		},
-	}
+func TestCreateFromDateTime(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromDateTime(0, 0, 0, 0, 0, 0, "").HasError())
+		assert.True(t, CreateFromDateTime(0, 0, 0, 0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromDateTime(0, 0, 0, 0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromDateTime(0, 0, 0, 0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToDateTimeString(), "CreateFromDateTime()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0000 UTC", CreateFromDateTime(0, 0, 0, 0, 0, 0).ToString())
+		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0805 LMT", CreateFromDateTime(0, 0, 0, 0, 0, 0, PRC).ToString())
+		assert.Equal(t, "2020-08-05 13:14:15 +0800 CST", CreateFromDateTime(2020, 8, 5, 13, 14, 15, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromDateTimeMilli(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromDateTimeMilli(0, 0, 0, 0, 0, 0, 0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromDateTimeMilli(2020, 1, 1, 13, 14, 15, 999),
-			want:   "2020-01-01 13:14:15.999 +0800 CST",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromDateTimeMilli(2020, 1, 31, 13, 14, 15, 999),
-			want:   "2020-01-31 13:14:15.999 +0800 CST",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromDateTimeMilli(2020, 2, 1, 13, 14, 15, 999),
-			want:   "2020-02-01 13:14:15.999 +0800 CST",
-		},
-	}
+func TestCreateFromDateTimeMilli(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromDateTimeMilli(0, 0, 0, 0, 0, 0, 0, "").HasError())
+		assert.True(t, CreateFromDateTimeMilli(0, 0, 0, 0, 0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromDateTimeMilli(0, 0, 0, 0, 0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromDateTimeMilli(0, 0, 0, 0, 0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToString(), "CreateFromDateTimeMilli()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0000 UTC", CreateFromDateTimeMilli(0, 0, 0, 0, 0, 0, 0).ToString())
+		assert.Equal(t, "2020-08-05 13:14:15.999 +0000 UTC", CreateFromDateTimeMilli(2020, 8, 5, 13, 14, 15, 999).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0805 LMT", CreateFromDateTimeMilli(0, 0, 0, 0, 0, 0, 0, PRC).ToString())
+		assert.Equal(t, "2020-08-05 13:14:15.999 +0800 CST", CreateFromDateTimeMilli(2020, 8, 5, 13, 14, 15, 999, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromDateTimeMicro(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromDateTimeMicro(0, 0, 0, 0, 0, 0, 0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromDateTimeMicro(2020, 1, 1, 13, 14, 15, 999999),
-			want:   "2020-01-01 13:14:15.999999 +0800 CST",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromDateTimeMicro(2020, 1, 31, 13, 14, 15, 999999),
-			want:   "2020-01-31 13:14:15.999999 +0800 CST",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromDateTimeMicro(2020, 2, 1, 13, 14, 15, 999999),
-			want:   "2020-02-01 13:14:15.999999 +0800 CST",
-		},
-	}
+func TestCreateFromDateTimeMicro(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromDateTimeMicro(0, 0, 0, 0, 0, 0, 0, "").HasError())
+		assert.True(t, CreateFromDateTimeMicro(0, 0, 0, 0, 0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromDateTimeMicro(0, 0, 0, 0, 0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromDateTimeMicro(0, 0, 0, 0, 0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToString(), "CreateFromDateTimeMicro()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0000 UTC", CreateFromDateTimeMicro(0, 0, 0, 0, 0, 0, 0).ToString())
+		assert.Equal(t, "2020-08-05 13:14:15.999999 +0000 UTC", CreateFromDateTimeMicro(2020, 8, 5, 13, 14, 15, 999999).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0805 LMT", CreateFromDateTimeMicro(0, 0, 0, 0, 0, 0, 0, PRC).ToString())
+		assert.Equal(t, "2020-08-05 13:14:15.999999 +0800 CST", CreateFromDateTimeMicro(2020, 8, 5, 13, 14, 15, 999999, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromDateTimeNano(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromDateTimeNano(0, 0, 0, 0, 0, 0, 0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromDateTimeNano(2020, 1, 1, 13, 14, 15, 999999999),
-			want:   "2020-01-01 13:14:15.999999999 +0800 CST",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromDateTimeNano(2020, 1, 31, 13, 14, 15, 999999999),
-			want:   "2020-01-31 13:14:15.999999999 +0800 CST",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromDateTimeNano(2020, 2, 1, 13, 14, 15, 999999999),
-			want:   "2020-02-01 13:14:15.999999999 +0800 CST",
-		},
-	}
+func TestCreateFromDateTimeNano(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromDateTimeNano(0, 0, 0, 0, 0, 0, 0, "").HasError())
+		assert.True(t, CreateFromDateTimeNano(0, 0, 0, 0, 0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromDateTimeNano(0, 0, 0, 0, 0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromDateTimeNano(0, 0, 0, 0, 0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToString(), "CreateFromDateTimeNano()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0000 UTC", CreateFromDateTimeNano(0, 0, 0, 0, 0, 0, 0).ToString())
+		assert.Equal(t, "2020-08-05 13:14:15.999999999 +0000 UTC", CreateFromDateTimeNano(2020, 8, 5, 13, 14, 15, 999999999).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0805 LMT", CreateFromDateTimeNano(0, 0, 0, 0, 0, 0, 0, PRC).ToString())
+		assert.Equal(t, "2020-08-05 13:14:15.999999999 +0800 CST", CreateFromDateTimeNano(2020, 8, 5, 13, 14, 15, 999999999, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromDate(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromDate(0, 0, 0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromDate(2020, 1, 1),
-			want:   "2020-01-01 00:00:00 +0800 CST",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromDate(2020, 1, 31),
-			want:   "2020-01-31 00:00:00 +0800 CST",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromDate(2020, 2, 1),
-			want:   "2020-02-01 00:00:00 +0800 CST",
-		},
-	}
+func TestCreateFromDate(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromDate(0, 0, 0, "").HasError())
+		assert.True(t, CreateFromDate(0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromDate(0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromDate(0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToString(), "CreateFromDate()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0000 UTC", CreateFromDate(0, 0, 0).ToString())
+		assert.Equal(t, "2020-08-05 00:00:00 +0000 UTC", CreateFromDate(2020, 8, 5).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0805 LMT", CreateFromDate(0, 0, 0, PRC).ToString())
+		assert.Equal(t, "2020-08-05 00:00:00 +0800 CST", CreateFromDate(2020, 8, 5, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromDateMilli(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromDateMilli(0, 0, 0, 0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromDateMilli(2020, 1, 1, 999),
-			want:   "2020-01-01 00:00:00.999 +0800 CST",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromDateMilli(2020, 1, 31, 999),
-			want:   "2020-01-31 00:00:00.999 +0800 CST",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromDateMilli(2020, 2, 1, 999),
-			want:   "2020-02-01 00:00:00.999 +0800 CST",
-		},
-	}
+func TestCreateFromDateMilli(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromDateMilli(0, 0, 0, 0, "").HasError())
+		assert.True(t, CreateFromDateMilli(0, 0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromDateMilli(0, 0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromDateMilli(0, 0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToString(), "CreateFromDateMilli()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0000 UTC", CreateFromDateMilli(0, 0, 0, 0).ToString())
+		assert.Equal(t, "2020-08-05 00:00:00.999 +0000 UTC", CreateFromDateMilli(2020, 8, 5, 999).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0805 LMT", CreateFromDateMilli(0, 0, 0, 0, PRC).ToString())
+		assert.Equal(t, "2020-08-05 00:00:00.999 +0800 CST", CreateFromDateMilli(2020, 8, 5, 999, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromDateMicro(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromDateMicro(0, 0, 0, 0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromDateMicro(2020, 1, 1, 999999),
-			want:   "2020-01-01 00:00:00.999999 +0800 CST",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromDateMicro(2020, 1, 31, 999999),
-			want:   "2020-01-31 00:00:00.999999 +0800 CST",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromDateMicro(2020, 2, 1, 999999),
-			want:   "2020-02-01 00:00:00.999999 +0800 CST",
-		},
-	}
+func TestCreateFromDateMicro(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromDateMicro(0, 0, 0, 0, "").HasError())
+		assert.True(t, CreateFromDateMicro(0, 0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromDateMicro(0, 0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromDateMicro(0, 0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToString(), "CreateFromDateMicro()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0000 UTC", CreateFromDateMicro(0, 0, 0, 0).ToString())
+		assert.Equal(t, "2020-08-05 00:00:00.999999 +0000 UTC", CreateFromDateMicro(2020, 8, 5, 999999).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0805 LMT", CreateFromDateMicro(0, 0, 0, 0, PRC).ToString())
+		assert.Equal(t, "2020-08-05 00:00:00.999999 +0800 CST", CreateFromDateMicro(2020, 8, 5, 999999, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromDateNano(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("xxx").CreateFromDateNano(0, 0, 0, 0),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromDateNano(2020, 1, 1, 999999999),
-			want:   "2020-01-01 00:00:00.999999999 +0800 CST",
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromDateNano(2020, 1, 31, 999999999),
-			want:   "2020-01-31 00:00:00.999999999 +0800 CST",
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromDateNano(2020, 2, 1, 999999999),
-			want:   "2020-02-01 00:00:00.999999999 +0800 CST",
-		},
-	}
+func TestCreateFromDateNano(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromDateNano(0, 0, 0, 0, "").HasError())
+		assert.True(t, CreateFromDateNano(0, 0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromDateNano(0, 0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromDateNano(0, 0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.ToString(), "CreateFromDateNano()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0000 UTC", CreateFromDateNano(0, 0, 0, 0).ToString())
+		assert.Equal(t, "2020-08-05 00:00:00.999999999 +0000 UTC", CreateFromDateNano(2020, 8, 5, 999999999).ToString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "-0001-11-30 00:00:00 +0805 LMT", CreateFromDateNano(0, 0, 0, 0, PRC).ToString())
+		assert.Equal(t, "2020-08-05 00:00:00.999999999 +0800 CST", CreateFromDateNano(2020, 8, 5, 999999999, PRC).ToString())
+	})
 }
 
-func TestCarbon_CreateFromTime(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   Carbon
-	}{
-		{
-			name:   "case1",
-			carbon: CreateFromTime(0, 0, 0),
-			want:   Now().SetTime(0, 0, 0),
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromTime(0, 0, 15),
-			want:   Now().SetTime(0, 0, 15),
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromTime(0, 14, 15),
-			want:   Now().SetTime(0, 14, 15),
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromTime(13, 14, 15),
-			want:   Now().SetTime(13, 14, 15),
-		},
-	}
+func TestCreateFromTime(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromTime(0, 0, 0, "").HasError())
+		assert.True(t, CreateFromTime(0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromTime(0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromTime(0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want.ToTimeString(), tt.carbon.ToTimeString(), "CreateFromTime()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", CreateFromTime(0, 0, 0).ToTimeString())
+		assert.Equal(t, "13:14:15", CreateFromTime(13, 14, 15).ToTimeString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", CreateFromTime(0, 0, 0, PRC).ToTimeString())
+		assert.Equal(t, "13:14:15", CreateFromTime(13, 14, 15, PRC).ToTimeString())
+	})
 }
 
-func TestCarbon_CreateFromTimeMilli(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   Carbon
-	}{
-		{
-			name:   "case1",
-			carbon: CreateFromTimeMilli(0, 0, 0, 999),
-			want:   Now().SetTimeMilli(0, 0, 0, 999),
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromTimeMilli(0, 0, 15, 999),
-			want:   Now().SetTimeMilli(0, 0, 15, 999),
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromTimeMilli(0, 14, 15, 999),
-			want:   Now().SetTimeMilli(0, 14, 15, 999),
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromTimeMilli(13, 14, 15, 999),
-			want:   Now().SetTimeMilli(13, 14, 15, 999),
-		},
-	}
+func TestCreateFromTimeMilli(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromTimeMilli(0, 0, 0, 0, "").HasError())
+		assert.True(t, CreateFromTimeMilli(0, 0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromTimeMilli(0, 0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromTimeMilli(0, 0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want.ToTimeMilliString(), tt.carbon.ToTimeMilliString(), "CreateFromTimeMilli()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", CreateFromTimeMilli(0, 0, 0, 0).ToTimeMilliString())
+		assert.Equal(t, "13:14:15.999", CreateFromTimeMilli(13, 14, 15, 999).ToTimeMilliString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", CreateFromTimeMilli(0, 0, 0, 0, PRC).ToTimeMilliString())
+		assert.Equal(t, "13:14:15.999", CreateFromTimeMilli(13, 14, 15, 999, PRC).ToTimeMilliString())
+	})
 }
 
-func TestCarbon_CreateFromTimeMicro(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   Carbon
-	}{
-		{
-			name:   "case1",
-			carbon: CreateFromTimeMicro(0, 0, 0, 999999),
-			want:   Now().SetTimeMicro(0, 0, 0, 999999),
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromTimeMicro(0, 0, 15, 999999),
-			want:   Now().SetTimeMicro(0, 0, 15, 999999),
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromTimeMicro(0, 14, 15, 999999),
-			want:   Now().SetTimeMicro(0, 14, 15, 999999),
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromTimeMicro(13, 14, 15, 999999),
-			want:   Now().SetTimeMicro(13, 14, 15, 999999),
-		},
-	}
+func TestCreateFromTimeMicro(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromTimeMicro(0, 0, 0, 0, "").HasError())
+		assert.True(t, CreateFromTimeMicro(0, 0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromTimeMicro(0, 0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromTimeMicro(0, 0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want.ToTimeMilliString(), tt.carbon.ToTimeMilliString(), "CreateFromTimeMicro()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", CreateFromTimeMicro(0, 0, 0, 0).ToTimeMicroString())
+		assert.Equal(t, "13:14:15.999999", CreateFromTimeMicro(13, 14, 15, 999999).ToTimeMicroString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", CreateFromTimeMicro(0, 0, 0, 0, PRC).ToTimeMicroString())
+		assert.Equal(t, "13:14:15.999999", CreateFromTimeMicro(13, 14, 15, 999999, PRC).ToTimeMicroString())
+	})
 }
 
-func TestCarbon_CreateFromTimeNano(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   Carbon
-	}{
-		{
-			name:   "case1",
-			carbon: CreateFromTimeNano(0, 0, 0, 999999999),
-			want:   Now().SetTimeNano(0, 0, 0, 999999999),
-		},
-		{
-			name:   "case2",
-			carbon: CreateFromTimeNano(0, 0, 15, 999999999),
-			want:   Now().SetTimeNano(0, 0, 15, 999999999),
-		},
-		{
-			name:   "case3",
-			carbon: CreateFromTimeNano(0, 14, 15, 999999999),
-			want:   Now().SetTimeNano(0, 14, 15, 999999999),
-		},
-		{
-			name:   "case4",
-			carbon: CreateFromTimeNano(13, 14, 15, 999999999),
-			want:   Now().SetTimeNano(13, 14, 15, 999999999),
-		},
-	}
+func TestCreateFromTimeNano(t *testing.T) {
+	t.Run("has error", func(t *testing.T) {
+		assert.True(t, CreateFromTimeNano(0, 0, 0, 0, "").HasError())
+		assert.True(t, CreateFromTimeNano(0, 0, 0, 0, "").HasError())
+		assert.Empty(t, CreateFromTimeNano(0, 0, 0, 0, "xxx").ToString())
+		assert.Empty(t, CreateFromTimeNano(0, 0, 0, 0, "xxx").ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want.ToTimeNanoString(), tt.carbon.ToTimeNanoString(), "CreateFromTimeMicro()")
-		})
-	}
+	t.Run("without timezone", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", CreateFromTimeNano(0, 0, 0, 0).ToTimeNanoString())
+		assert.Equal(t, "13:14:15.999999999", CreateFromTimeNano(13, 14, 15, 999999999).ToTimeNanoString())
+	})
+
+	t.Run("with timezone", func(t *testing.T) {
+		assert.Equal(t, "00:00:00", CreateFromTimeNano(0, 0, 0, 0, PRC).ToTimeNanoString())
+		assert.Equal(t, "13:14:15.999999999", CreateFromTimeNano(13, 14, 15, 999999999, PRC).ToTimeNanoString())
+	})
 }
