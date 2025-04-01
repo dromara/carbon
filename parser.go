@@ -7,7 +7,8 @@ import (
 
 // Parse parses a standard time string as a Carbon instance.
 // 将标准格式时间字符串解析成 Carbon 实例
-func (c Carbon) Parse(value string, timezone ...string) Carbon {
+func Parse(value string, timezone ...string) Carbon {
+	c := NewCarbon()
 	if value == "" {
 		c.isNil = true
 		return c
@@ -15,21 +16,20 @@ func (c Carbon) Parse(value string, timezone ...string) Carbon {
 	if len(timezone) > 0 {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
 	}
-	if c.Error != nil {
+	if c.HasError() {
 		return c
 	}
 	switch value {
 	case "now":
-		return c.Now(timezone...)
+		return Now(c.Timezone())
 	case "yesterday":
-		return c.Yesterday(timezone...)
+		return Yesterday(c.Timezone())
 	case "tomorrow":
-		return c.Tomorrow(timezone...)
+		return Tomorrow(c.Timezone())
 	}
 	for _, layout := range defaultLayouts {
-		t, err := time.ParseInLocation(layout, value, c.loc)
-		if err == nil {
-			c.time = t
+		if tt, err := time.ParseInLocation(layout, value, c.loc); err == nil {
+			c.time = tt
 			c.layout = layout
 			return c
 		}
@@ -38,15 +38,10 @@ func (c Carbon) Parse(value string, timezone ...string) Carbon {
 	return c
 }
 
-// Parse parses a standard time string as a Carbon instance.
-// 将标准时间字符串解析成 Carbon 实例
-func Parse(value string, timezone ...string) Carbon {
-	return NewCarbon().Parse(value, timezone...)
-}
-
 // ParseByFormat parses a time string as a Carbon instance by format.
 // 通过格式模板将时间字符串解析成 Carbon 实例
-func (c Carbon) ParseByFormat(value, format string, timezone ...string) Carbon {
+func ParseByFormat(value, format string, timezone ...string) Carbon {
+	c := NewCarbon()
 	if value == "" {
 		c.isNil = true
 		return c
@@ -55,22 +50,17 @@ func (c Carbon) ParseByFormat(value, format string, timezone ...string) Carbon {
 		c.Error = emptyFormatError()
 		return c
 	}
-	carbon := c.ParseByLayout(value, format2layout(format), timezone...)
-	if carbon.Error != nil {
-		carbon.Error = invalidFormatError(value, format)
+	c = ParseByLayout(value, format2layout(format), timezone...)
+	if c.HasError() {
+		c.Error = invalidFormatError(value, format)
 	}
-	return carbon
-}
-
-// ParseByFormat parses a time string as a Carbon instance by format.
-// 通过格式模板将时间字符串解析成 Carbon 实例
-func ParseByFormat(value, format string, timezone ...string) Carbon {
-	return NewCarbon().ParseByFormat(value, format, timezone...)
+	return c
 }
 
 // ParseByLayout parses a time string as a Carbon instance by layout.
 // 通过布局模板将时间字符串解析成 Carbon 实例
-func (c Carbon) ParseByLayout(value, layout string, timezone ...string) Carbon {
+func ParseByLayout(value, layout string, timezone ...string) Carbon {
+	c := NewCarbon()
 	if value == "" {
 		c.isNil = true
 		return c
@@ -82,10 +72,10 @@ func (c Carbon) ParseByLayout(value, layout string, timezone ...string) Carbon {
 	if len(timezone) > 0 {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
 	}
-	if c.Error != nil {
+	if c.HasError() {
 		return c
 	}
-	if layout == "timestamp" {
+	if layout == TimestampLayout {
 		ts, err := strconv.ParseInt(value, 10, 64)
 		if err != nil {
 			c.Error = invalidTimestampError(value)
@@ -93,7 +83,7 @@ func (c Carbon) ParseByLayout(value, layout string, timezone ...string) Carbon {
 		}
 		return CreateFromTimestamp(ts, c.Timezone())
 	}
-	if layout == "timestampMilli" {
+	if layout == TimestampMilliLayout {
 		ts, err := strconv.ParseInt(value, 10, 64)
 		if err != nil {
 			c.Error = invalidTimestampError(value)
@@ -101,7 +91,7 @@ func (c Carbon) ParseByLayout(value, layout string, timezone ...string) Carbon {
 		}
 		return CreateFromTimestampMilli(ts, c.Timezone())
 	}
-	if layout == "timestampMicro" {
+	if layout == TimestampMicroLayout {
 		ts, err := strconv.ParseInt(value, 10, 64)
 		if err != nil {
 			c.Error = invalidTimestampError(value)
@@ -109,7 +99,7 @@ func (c Carbon) ParseByLayout(value, layout string, timezone ...string) Carbon {
 		}
 		return CreateFromTimestampMicro(ts, c.Timezone())
 	}
-	if layout == "timestampNano" {
+	if layout == TimestampNanoLayout {
 		ts, err := strconv.ParseInt(value, 10, 64)
 		if err != nil {
 			c.Error = invalidTimestampError(value)
@@ -127,8 +117,54 @@ func (c Carbon) ParseByLayout(value, layout string, timezone ...string) Carbon {
 	return c
 }
 
-// ParseByLayout parses a time string as a Carbon instance by layout.
-// 通过布局模板将时间字符串解析成 Carbon 实例
-func ParseByLayout(value, layout string, timezone ...string) Carbon {
-	return NewCarbon().ParseByLayout(value, layout, timezone...)
+// ParseWithLayouts parses time string with layouts as a Carbon instance.
+// 通过自定义布局模板将时间字符串解析成 Carbon 实例
+func ParseWithLayouts(value string, layouts []string, timezone ...string) Carbon {
+	c := NewCarbon()
+	if value == "" {
+		c.isNil = true
+		return c
+	}
+	if len(timezone) > 0 {
+		c.loc, c.Error = getLocationByTimezone(timezone[0])
+	}
+	if c.HasError() {
+		return c
+	}
+	if len(layouts) == 0 {
+		return Parse(value, timezone...)
+	}
+	for _, layout := range layouts {
+		if tt, err := time.ParseInLocation(layout, value, c.loc); err == nil {
+			c.time = tt
+			c.layout = layout
+			return c
+		}
+	}
+	c.Error = failedParseError(value)
+	return c
+}
+
+// ParseWithFormats parses time string with formats as a Carbon instance.
+// 通过自定义格式模板将时间字符串解析成 Carbon 实例
+func ParseWithFormats(value string, formats []string, timezone ...string) Carbon {
+	c := NewCarbon()
+	if value == "" {
+		c.isNil = true
+		return c
+	}
+	if len(timezone) > 0 {
+		c.loc, c.Error = getLocationByTimezone(timezone[0])
+	}
+	if c.HasError() {
+		return c
+	}
+	if len(formats) == 0 {
+		return Parse(value, timezone...)
+	}
+	var layouts []string
+	for _, format := range formats {
+		layouts = append(layouts, format2layout(format))
+	}
+	return ParseWithLayouts(value, layouts, timezone...)
 }
