@@ -6,11 +6,12 @@ import (
 
 // Now returns a Carbon instance for now.
 // 当前
-func (c Carbon) Now(timezone ...string) Carbon {
+func Now(timezone ...string) Carbon {
+	c := NewCarbon()
 	if len(timezone) > 0 {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
 	}
-	if c.Error != nil {
+	if c.HasError() {
 		return c
 	}
 	if IsTestNow() {
@@ -20,52 +21,30 @@ func (c Carbon) Now(timezone ...string) Carbon {
 	return c
 }
 
-// Now returns a Carbon instance for now.
-// 当前
-func Now(timezone ...string) Carbon {
-	return NewCarbon().Now(timezone...)
-}
-
-// Tomorrow returns a Carbon instance for tomorrow.
-// 明天
-func (c Carbon) Tomorrow(timezone ...string) Carbon {
-	if len(timezone) > 0 {
-		c.loc, c.Error = getLocationByTimezone(timezone[0])
-	}
-	if c.Error != nil {
-		return c
-	}
-	if !c.IsZero() {
-		return c.AddDay()
-	}
-	return c.Now().AddDay()
-}
-
 // Tomorrow returns a Carbon instance for tomorrow.
 // 明天
 func Tomorrow(timezone ...string) Carbon {
-	return NewCarbon().Tomorrow(timezone...)
-}
-
-// Yesterday returns a Carbon instance for yesterday.
-// 昨天
-func (c Carbon) Yesterday(timezone ...string) Carbon {
+	c := NewCarbon()
 	if len(timezone) > 0 {
 		c.loc, c.Error = getLocationByTimezone(timezone[0])
 	}
-	if c.Error != nil {
+	if c.HasError() {
 		return c
 	}
-	if !c.IsZero() {
-		return c.SubDay()
-	}
-	return c.Now().SubDay()
+	return Now(c.Timezone()).AddDay()
 }
 
 // Yesterday returns a Carbon instance for yesterday.
 // 昨天
 func Yesterday(timezone ...string) Carbon {
-	return NewCarbon().Yesterday(timezone...)
+	c := NewCarbon()
+	if len(timezone) > 0 {
+		c.loc, c.Error = getLocationByTimezone(timezone[0])
+	}
+	if c.HasError() {
+		return c
+	}
+	return Now(c.Timezone()).SubDay()
 }
 
 // AddDuration adds one duration.
@@ -75,7 +54,11 @@ func (c Carbon) AddDuration(duration string) Carbon {
 		return c
 	}
 	td, err := parseByDuration(duration)
-	c.time, c.Error = c.StdTime().Add(td), err
+	if err != nil {
+		c.Error = err
+		return c
+	}
+	c.time = c.StdTime().Add(td)
 	return c
 }
 
@@ -200,11 +183,11 @@ func (c Carbon) AddYearsNoOverflow(years int) Carbon {
 	nanosecond := c.Nanosecond()
 	year, month, day, hour, minute, second := c.DateTime()
 	// 获取N年后本月的最后一天
-	lastYear, lastMonth, lastDay := c.create(year+years, month+1, 0, hour, minute, second, nanosecond).Date()
+	lastYear, lastMonth, lastDay := create(year+years, month+1, 0, hour, minute, second, nanosecond, c.Timezone()).Date()
 	if day > lastDay {
 		day = lastDay
 	}
-	return c.create(lastYear, lastMonth, day, hour, minute, second, nanosecond)
+	return create(lastYear, lastMonth, day, hour, minute, second, nanosecond, c.Timezone())
 }
 
 // AddYear adds one year.
@@ -313,11 +296,11 @@ func (c Carbon) AddMonthsNoOverflow(months int) Carbon {
 	nanosecond := c.Nanosecond()
 	year, month, day, hour, minute, second := c.DateTime()
 	// 获取N月后的最后一天
-	lastYear, lastMonth, lastDay := c.create(year, month+months+1, 0, hour, minute, second, nanosecond).Date()
+	lastYear, lastMonth, lastDay := create(year, month+months+1, 0, hour, minute, second, nanosecond, c.Timezone()).Date()
 	if day > lastDay {
 		day = lastDay
 	}
-	return c.create(lastYear, lastMonth, day, hour, minute, second, nanosecond)
+	return create(lastYear, lastMonth, day, hour, minute, second, nanosecond, c.Timezone())
 }
 
 // AddMonth adds one month.
