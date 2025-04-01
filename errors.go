@@ -4,6 +4,12 @@ import (
 	"fmt"
 )
 
+// returns a failed scan error.
+// 失败的扫描错误
+var failedScanError = func(src interface{}) error {
+	return fmt.Errorf("failed to scan value: %v", src)
+}
+
 // returns a failed parse error.
 // 解析失败错误
 var failedParseError = func(value string) error {
