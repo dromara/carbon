@@ -12,9 +12,15 @@ func TestCarbon_StdTime(t *testing.T) {
 		assert.Equal(t, time.Time{}, NewCarbon().StdTime())
 	})
 
+	t.Run("nil loc", func(t *testing.T) {
+		c := Parse("2020-08-05").SetTimezone(PRC)
+		assert.Equal(t, "2020-08-05 08:00:00 +0800 CST", c.StdTime().String())
+		c.loc = nil
+		assert.Equal(t, "2020-08-05 00:00:00 +0000 UTC", c.StdTime().String())
+	})
+
 	t.Run("without timezone", func(t *testing.T) {
 		c := Parse("2020-08-05")
-		c.loc = nil
 		assert.Equal(t, "2020-08-05 00:00:00 +0000 UTC", c.StdTime().String())
 	})
 

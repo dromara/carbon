@@ -304,7 +304,7 @@ func (c Carbon) Minute() int {
 	return c.StdTime().Minute()
 }
 
-// Second gets current second like 15.
+// Second gets current second like 9.
 // 获取当前秒数
 func (c Carbon) Second() int {
 	if c.IsInvalid() {
@@ -355,8 +355,7 @@ func (c Carbon) TimestampMilli() int64 {
 	if c.IsInvalid() {
 		return 0
 	}
-	t := c.StdTime()
-	return t.Unix()*1e3 + int64(t.Nanosecond())/1e6
+	return c.StdTime().UnixMilli()
 }
 
 // TimestampMicro gets timestamp with microsecond like 1596604455000000.
@@ -365,8 +364,7 @@ func (c Carbon) TimestampMicro() int64 {
 	if c.IsInvalid() {
 		return 0
 	}
-	t := c.StdTime()
-	return t.Unix()*1e6 + int64(t.Nanosecond())/1e3
+	return c.StdTime().UnixMicro()
 }
 
 // TimestampNano gets timestamp with nanosecond like 1596604455000000000.
@@ -397,7 +395,7 @@ func (c Carbon) ZoneName() string {
 	return name
 }
 
-// ZoneOffset gets offset seconds from the UTC timezone like 28800.
+// ZoneOffset gets timezone offset seconds from the UTC timezone like 28800.
 // 获取时区偏移量，单位秒
 func (c Carbon) ZoneOffset() int {
 	if c.IsInvalid() {
@@ -440,8 +438,8 @@ func (c Carbon) Age() int {
 	if c.IsInvalid() {
 		return 0
 	}
-	now := c.Now()
-	if c.TimestampNano() > now.TimestampNano() {
+	now := Now(c.Timezone())
+	if c.Gte(now) {
 		return 0
 	}
 	return int(c.DiffInYears(now))
