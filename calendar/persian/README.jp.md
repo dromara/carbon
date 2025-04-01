@@ -8,66 +8,66 @@
 
 ```go
 // ペルシャ暦の取得
-carbon.Parse("2020-08-05 13:14:15").Persian().Year() // 1399
+carbon.Parse("2020-08-05").Persian().Year() // 1399
 // ペルシャ暦月の取得
-carbon.Parse("2020-08-05 13:14:15").Persian().Month() // 5
+carbon.Parse("2020-08-05").Persian().Month() // 5
 // ペルシャ暦の取得日
-carbon.Parse("2020-08-05 13:14:15").Persian().Day() // 15
+carbon.Parse("2020-08-05").Persian().Day() // 15
 // ペルシャ暦時間の取得
-carbon.Parse("2020-08-05 13:14:15").Persian().Hour() // 13
+carbon.Parse("2020-08-05").Persian().Hour() // 13
 // ペルシャ暦分の取得
-carbon.Parse("2020-08-05 13:14:15").Persian().Minute() // 14
+carbon.Parse("2020-08-05").Persian().Minute() // 14
 // ペルシャ暦秒の取得
-carbon.Parse("2020-08-05 13:14:15").Persian().Second() // 15
+carbon.Parse("2020-08-05").Persian().Second() // 15
 
 // ペルシャ暦日時文字列の取得
-carbon.Parse("2020-08-05 13:14:15").Persian().String() // 1399-05-15 13:14:15
-fmt.Printf("%s", carbon.Parse("2020-08-05 13:14:15").Persian()) // 1399-05-15 13:14:15
+carbon.Parse("2020-08-05").Persian().String() // 1399-05-15
+fmt.Printf("%s", carbon.Parse("2020-08-05").Persian()) // 1399-05-15
 
 // ペルシア暦月文字列の取得
-carbon.Parse("2020-08-05 13:14:15").Persian().ToMonthString() // Mordad
-carbon.Parse("2020-08-05 13:14:15").Persian().ToMonthString("en") // Mordad
-carbon.Parse("2020-08-05 13:14:15").Persian().ToMonthString("fa") // مرداد
+carbon.Parse("2020-08-05").Persian().ToMonthString() // Mordad
+carbon.Parse("2020-08-05").Persian().ToMonthString("en") // Mordad
+carbon.Parse("2020-08-05").Persian().ToMonthString("fa") // مرداد
 
 // 略語ペルシャ暦文字列の取得
-carbon.Parse("2020-08-05 13:14:15").Persian().ToShortMonthString() // Mor
-carbon.Parse("2020-08-05 13:14:15").Persian().ToShortMonthString("en") // Mor
-carbon.Parse("2020-08-05 13:14:15").Persian().ToShortMonthString("fa") // مرد
+carbon.Parse("2020-08-05").Persian().ToShortMonthString() // Mor
+carbon.Parse("2020-08-05").Persian().ToShortMonthString("en") // Mor
+carbon.Parse("2020-08-05").Persian().ToShortMonthString("fa") // مرد
 
 // ペルシャ暦週文字列の取得
-carbon.Parse("2020-08-05 13:14:15").Persian().ToWeekString() // Chaharshanbeh
-carbon.Parse("2020-08-05 13:14:15").Persian().ToWeekString("en") // Chaharshanbeh
-carbon.Parse("2020-08-05 13:14:15").Persian().ToWeekString("fa") // چهارشنبه
+carbon.Parse("2020-08-05").Persian().ToWeekString() // Chaharshanbeh
+carbon.Parse("2020-08-05").Persian().ToWeekString("en") // Chaharshanbeh
+carbon.Parse("2020-08-05").Persian().ToWeekString("fa") // چهارشنبه
 
 // 略語ペルシャ暦週文字列の取得
-carbon.Parse("2020-08-05 13:14:15").Persian().ToShortWeekString() // Cha
-carbon.Parse("2020-08-05 13:14:15").Persian().ToShortWeekString("en") // Cha
-carbon.Parse("2020-08-05 13:14:15").Persian().ToShortWeekString("fa") // د
+carbon.Parse("2020-08-05").Persian().ToShortWeekString() // Cha
+carbon.Parse("2020-08-05").Persian().ToShortWeekString("en") // Cha
+carbon.Parse("2020-08-05").Persian().ToShortWeekString("fa") // د
 ```
 
 ##### ペルシャ暦を西暦に変換する
 
 ```go
-carbon.CreateFromPersian(1, 1, 1, 0, 0, 0).ToDateTimeString() // 2016-03-20 00:00:00
-carbon.CreateFromPersian(622, 1, 1, 0, 0, 0).ToDateTimeString() // 1243-03-21 00:00:00
-carbon.CreateFromPersian(1395, 1, 1, 0, 0, 0).ToDateTimeString() // 2016-03-20 00:00:00
-carbon.CreateFromPersian(9377, 1, 1, 0, 0, 0).ToDateTimeString() // 9998-03-19 00:00:00
+carbon.CreateFromPersian(1, 1, 1).ToDateTimeString() // 2016-03-20 00:00:00
+carbon.CreateFromPersian(622, 1, 1).ToDateTimeString() // 1243-03-21 00:00:00
+carbon.CreateFromPersian(1395, 1, 1).ToDateTimeString() // 2016-03-20 00:00:00
+carbon.CreateFromPersian(9377, 1, 1).ToDateTimeString() // 9998-03-19 00:00:00
 ```
 
 ##### 日付判断
 ```go
 // 合法的なペルシャ暦の日付かどうか
-carbon.CreateFromPersian(1, 1, 1, 0, 0, 0).IsValid() // true
-carbon.CreateFromPersian(622, 1, 1, 0, 0, 0).IsValid() // true
-carbon.CreateFromPersian(9377, 1, 1, 0, 0, 0).IsValid() // true
-carbon.CreateFromPersian(0, 0, 0, 0, 0, 0).IsValid() // false
-carbon.CreateFromPersian(2024, 0, 1, 0, 0, 0).IsValid() // false
-carbon.CreateFromPersian(2024, 1, 0, 0, 0, 0).IsValid() // false
+carbon.CreateFromPersian(1, 1, 1).IsValid() // true
+carbon.CreateFromPersian(622, 1, 1).IsValid() // true
+carbon.CreateFromPersian(9377, 1, 1).IsValid() // true
+carbon.CreateFromPersian(0, 0, 0, 0).IsValid() // false
+carbon.CreateFromPersian(2024, 0, 1).IsValid() // false
+carbon.CreateFromPersian(2024, 1, 0).IsValid() // false
 
 // ペルシア暦閏年かどうか
-carbon.CreateFromPersian(1395, 1, 1, 0, 0, 0).IsLeapYear() // true
-carbon.CreateFromPersian(9377, 1, 1, 0, 0, 0).IsLeapYear() // true
-carbon.CreateFromPersian(622, 1, 1, 0, 0, 0).IsLeapYear() // false
-carbon.CreateFromPersian(9999, 1, 1, 0, 0, 0).IsLeapYear() // false
+carbon.CreateFromPersian(1395, 1, 1).IsLeapYear() // true
+carbon.CreateFromPersian(9377, 1, 1).IsLeapYear() // true
+carbon.CreateFromPersian(622, 1, 1).IsLeapYear() // false
+carbon.CreateFromPersian(9999, 1, 1).IsLeapYear() // false
 
 ```

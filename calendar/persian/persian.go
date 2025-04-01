@@ -22,78 +22,58 @@ var (
 
 	FaWeeks      = []string{"نجشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه", "شنبه"}
 	ShortFaWeeks = []string{"پ", "چ", "س", "د", "ی", "ش", "ج"}
-
-	InvalidDateError = func() error {
-		return fmt.Errorf("invalid persian date, please make sure the date is valid")
-	}
 )
 
-// Gregorian defines a Gregorian struct.
-// 定义 Gregorian 结构体
-type Gregorian struct {
-	calendar.Gregorian
+var invalidPersianError = func() error {
+	return fmt.Errorf("invalid persian date, please make sure the persian date is valid")
 }
 
 // Persian defines a Persian struct.
 // 定义 Persian 结构体
 type Persian struct {
-	year, month, day, hour, minute, second int
-	Error                                  error
+	year, month, day int
+	Error            error
+}
+
+// NewPersian returns a new Persian instance.
+// 返回 Persian 实例
+func NewPersian(year, month, day int) *Persian {
+	p := new(Persian)
+	p.year, p.month, p.day = year, month, day
+	if !p.IsValid() {
+		p.Error = invalidPersianError()
+	}
+	return p
 }
 
 // MaxValue returns a Persian instance for the greatest supported date.
 // 返回 Persian 的最大值
-func MaxValue() Persian {
-	return Persian{
-		year:   9377,
-		month:  12,
-		day:    31,
-		hour:   23,
-		minute: 59,
-		second: 59,
+func MaxValue() *Persian {
+	return &Persian{
+		year:  9377,
+		month: 12,
+		day:   31,
 	}
 }
 
 // MinValue returns a Persian instance for the lowest supported date.
 // 返回 Persian 的最小值
-func MinValue() Persian {
-	return Persian{
-		year:   1,
-		month:  1,
-		day:    1,
-		hour:   0,
-		minute: 0,
-		second: 0,
+func MinValue() *Persian {
+	return &Persian{
+		year:  1,
+		month: 1,
+		day:   1,
 	}
 }
 
-// FromGregorian creates a Gregorian instance from time.Time.
-// 从标准 time.Time 创建 Gregorian 实例
-func FromGregorian(t time.Time) (g Gregorian) {
+// FromStdTime creates a Persian instance from standard time.Time.
+// 从标准 time.Time 创建 Persian 实例
+func FromStdTime(t time.Time) (p Persian) {
 	if t.IsZero() {
-		return
+		return p
 	}
-	g.Time = t
-	return
-}
-
-// FromPersian creates a Persian instance from persian datetime.
-// 从 波斯日期 创建 Persian 实例
-func FromPersian(year, month, day, hour, minute, second int) (p Persian) {
-	p.year, p.month, p.day = year, month, day
-	p.hour, p.minute, p.second = hour, minute, second
-	if !p.IsValid() {
-		p.Error = InvalidDateError()
-		return
-	}
-	return
-}
-
-// ToPersian converts Gregorian instance to Persian instance.
-// 将 Gregorian 实例转化为 Persian 实例
-func (g Gregorian) ToPersian() (p Persian) {
-	p.hour, p.minute, p.second = g.Hour(), g.Minute(), g.Second()
-	gjdn := getGregorianJdn(g.Year(), g.Month(), g.Day())
+	// 获取公历儒略日计数
+	gjdn := int(julian.FromStdTime(time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location())).JD(0))
 	pjdn := getPersianJdn(475, 1, 1)
 
 	diff := gjdn - pjdn
@@ -109,21 +89,23 @@ func (g Gregorian) ToPersian() (p Persian) {
 	}
 	pjdn = getPersianJdn(p.year, p.month, 1)
 	p.day = gjdn - pjdn + 1
-	if !p.IsValid() {
-		p.Error = InvalidDateError()
-		return
-	}
-	return
+	return p
 }
 
 // ToGregorian converts Persian instance to Gregorian instance.
 // 将 Persian 实例转化为 Gregorian 实例
-func (p Persian) ToGregorian() (g Gregorian) {
+func (p Persian) ToGregorian(timezone ...string) (g calendar.Gregorian) {
 	if !p.IsValid() {
-		return
+		return g
+	}
+	loc := time.UTC
+	if len(timezone) > 0 {
+		loc, g.Error = time.LoadLocation(timezone[0])
+	}
+	if g.Error != nil {
+		return g
 	}
 	jdn := getPersianJdn(p.year, p.month, p.day)
-
 	l := jdn + 68569
 	n := 4 * l / 146097
 	l = l - (146097*n+3)/4
@@ -135,14 +117,14 @@ func (p Persian) ToGregorian() (g Gregorian) {
 	m := j + 2 - 12*l
 	y := 100*(n-49) + i + l
 
-	g.Time = time.Date(y, time.Month(m), d, p.hour, p.minute, p.second, 0, time.Local)
-	return
+	g.Time = time.Date(y, time.Month(m), d, 0, 0, 0, 0, loc)
+	return g
 }
 
 // Year gets lunar year like 2020.
 // 获取年份，如 2020
 func (p Persian) Year() int {
-	if p.Error != nil {
+	if !p.IsValid() {
 		return 0
 	}
 	return p.year
@@ -151,7 +133,7 @@ func (p Persian) Year() int {
 // Month gets lunar month like 8.
 // 获取月份，如 8
 func (p Persian) Month() int {
-	if p.Error != nil {
+	if !p.IsValid() {
 		return 0
 	}
 	return p.month
@@ -160,46 +142,19 @@ func (p Persian) Month() int {
 // Day gets lunar day like 5.
 // 获取日，如 5
 func (p Persian) Day() int {
-	if p.Error != nil {
+	if !p.IsValid() {
 		return 0
 	}
 	return p.day
 }
 
-// Hour gets current hour like 13.
-// 获取小时，如 13
-func (p Persian) Hour() int {
-	if p.Error != nil {
-		return 0
-	}
-	return p.hour
-}
-
-// Minute gets current minute like 14.
-// 获取分钟数，如 14
-func (p Persian) Minute() int {
-	if p.Error != nil {
-		return 0
-	}
-	return p.minute
-}
-
-// Second gets current second like 15.
-// 获取秒数，如 15
-func (p Persian) Second() int {
-	if p.Error != nil {
-		return 0
-	}
-	return p.second
-}
-
-// String implements Stringer interface and outputs a string in YYYY-MM-DD HH::ii::ss format like "1402-11-11 00:00:00".
-// 实现 Stringer 接口, 输出 YYYY-MM-DD HH::ii::ss 格式字符串，如 "1402-11-11 00:00:00"
+// String implements Stringer interface for Persian.
+// 实现 Stringer 接口
 func (p Persian) String() string {
 	if !p.IsValid() {
 		return ""
 	}
-	return fmt.Sprintf("%d-%02d-%02d %02d:%02d:%02d", p.year, p.month, p.day, p.hour, p.minute, p.second)
+	return fmt.Sprintf("%04d-%02d-%02d", p.year, p.month, p.day)
 }
 
 // ToMonthString outputs a string in persian month format like "فروردین".
@@ -250,11 +205,12 @@ func (p Persian) ToWeekString(locale ...string) (month string) {
 	if len(locale) > 0 {
 		loc = locale[0]
 	}
+	week := p.ToGregorian().Time.Weekday()
 	switch loc {
 	case "en":
-		return EnWeeks[p.ToGregorian().Week()]
+		return EnWeeks[week]
 	case "fa":
-		return FaWeeks[p.ToGregorian().Week()]
+		return FaWeeks[week]
 	}
 	return ""
 }
@@ -269,11 +225,12 @@ func (p Persian) ToShortWeekString(locale ...string) (month string) {
 	if len(locale) > 0 {
 		loc = locale[0]
 	}
+	week := p.ToGregorian().Time.Weekday()
 	switch loc {
 	case "en":
-		return ShortEnWeeks[p.ToGregorian().Week()]
+		return ShortEnWeeks[week]
 	case "fa":
-		return ShortFaWeeks[p.ToGregorian().Week()]
+		return ShortFaWeeks[week]
 	}
 	return ""
 }
@@ -281,7 +238,10 @@ func (p Persian) ToShortWeekString(locale ...string) (month string) {
 // IsValid reports whether is a valid persian date.
 // 是否是有效的日期
 func (p Persian) IsValid() bool {
-	if p.Year() >= MinValue().year && p.Year() <= MaxValue().year && p.month >= MinValue().month && p.month <= MaxValue().month && p.day >= MinValue().day && p.day <= MaxValue().day {
+	if p.Error != nil {
+		return false
+	}
+	if p.year >= MinValue().year && p.year <= MaxValue().year {
 		return true
 	}
 	return false
@@ -311,11 +271,4 @@ func getPersianJdn(year, month, day int) int {
 		md = (month-1)*30 + 6
 	}
 	return day + md + (epy*682-110)/2816 + (epy-1)*365 + year/2820*1029983 + 1948320
-}
-
-// gets Julian day number in Gregorian calendar
-// 获取公历儒略日计数
-func getGregorianJdn(year, month, day int) int {
-	jdn := julian.FromGregorian(time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.Local)).ToJulian().JD(0)
-	return int(jdn)
 }
