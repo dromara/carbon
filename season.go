@@ -22,9 +22,9 @@ var seasons = []struct {
 }
 
 // Season gets season name according to the meteorological division method like "Spring", i18n is supported.
-// 获取当前季节(以气象划分)，支持i18n
+// 获取当前季节(以气象划分)，支持 i18n
 func (c Carbon) Season() string {
-	if c.Error != nil {
+	if c.IsInvalid() {
 		return ""
 	}
 	if len(c.lang.resources) == 0 {
@@ -52,36 +52,36 @@ func (c Carbon) Season() string {
 // StartOfSeason returns a Carbon instance for start of the season.
 // 本季节开始时间
 func (c Carbon) StartOfSeason() Carbon {
-	if c.Error != nil {
+	if c.IsInvalid() {
 		return c
 	}
 	year, month, _ := c.Date()
 	if month == 1 || month == 2 {
-		return c.create(year-1, 12, 1, 0, 0, 0, 0)
+		return create(year-1, 12, 1, 0, 0, 0, 0, c.Timezone())
 	}
-	return c.create(year, month/3*3, 1, 0, 0, 0, 0)
+	return create(year, month/3*3, 1, 0, 0, 0, 0, c.Timezone())
 }
 
 // EndOfSeason returns a Carbon instance for end of the season.
 // 本季节结束时间
 func (c Carbon) EndOfSeason() Carbon {
-	if c.Error != nil {
+	if c.IsInvalid() {
 		return c
 	}
 	year, month, _ := c.Date()
 	if month == 1 || month == 2 {
-		return c.create(year, 3, 0, 23, 59, 59, 999999999)
+		return create(year, 3, 0, 23, 59, 59, 999999999, c.Timezone())
 	}
 	if month == 12 {
-		return c.create(year+1, 3, 0, 23, 59, 59, 999999999)
+		return create(year+1, 3, 0, 23, 59, 59, 999999999, c.Timezone())
 	}
-	return c.create(year, month/3*3+3, 0, 23, 59, 59, 999999999)
+	return create(year, month/3*3+3, 0, 23, 59, 59, 999999999, c.Timezone())
 }
 
 // IsSpring reports whether is spring.
 // 是否是春季
 func (c Carbon) IsSpring() bool {
-	if c.Error != nil {
+	if c.IsInvalid() {
 		return false
 	}
 	month := c.Month()
@@ -94,7 +94,7 @@ func (c Carbon) IsSpring() bool {
 // IsSummer reports whether is summer.
 // 是否是夏季
 func (c Carbon) IsSummer() bool {
-	if c.Error != nil {
+	if c.IsInvalid() {
 		return false
 	}
 	month := c.Month()
@@ -107,7 +107,7 @@ func (c Carbon) IsSummer() bool {
 // IsAutumn reports whether is autumn.
 // 是否是秋季
 func (c Carbon) IsAutumn() bool {
-	if c.Error != nil {
+	if c.IsInvalid() {
 		return false
 	}
 	month := c.Month()
@@ -120,7 +120,7 @@ func (c Carbon) IsAutumn() bool {
 // IsWinter reports whether is winter.
 // 是否是冬季
 func (c Carbon) IsWinter() bool {
-	if c.Error != nil {
+	if c.IsInvalid() {
 		return false
 	}
 	month := c.Month()

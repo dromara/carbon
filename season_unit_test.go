@@ -7,356 +7,160 @@ import (
 )
 
 func TestCarbon_Season(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse("2020-01-05"),
-			want:   "Winter",
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-02-05"),
-			want:   "Winter",
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-03-05"),
-			want:   "Spring",
-		},
-		{
-			name:   "case4",
-			carbon: Parse("2020-04-05"),
-			want:   "Spring",
-		},
-		{
-			name:   "case5",
-			carbon: Parse("2020-05-05"),
-			want:   "Spring",
-		},
-		{
-			name:   "case6",
-			carbon: Parse("2020-06-05"),
-			want:   "Summer",
-		},
-		{
-			name:   "case7",
-			carbon: Parse("2020-07-05"),
-			want:   "Summer",
-		},
-		{
-			name:   "case8",
-			carbon: Parse("2020-08-05"),
-			want:   "Summer",
-		},
-		{
-			name:   "case9",
-			carbon: Parse("2020-09-05"),
-			want:   "Autumn",
-		},
-		{
-			name:   "case10",
-			carbon: Parse("2020-10-05"),
-			want:   "Autumn",
-		},
-		{
-			name:   "case11",
-			carbon: Parse("2020-11-05"),
-			want:   "Autumn",
-		},
-		{
-			name:   "case12",
-			carbon: Parse("2020-12-05"),
-			want:   "Winter",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, Winter, NewCarbon().Season())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.Season(), "Season()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").Season())
+		assert.Empty(t, Parse("0").Season())
+		assert.Empty(t, Parse("xxx").Season())
+	})
+
+	t.Run("invalid resources", func(t *testing.T) {
+		lang := NewLanguage()
+		resources := map[string]string{
+			"seasons": "xxx",
+		}
+		lang.SetResources(resources)
+		c := Parse("2020-01-05").SetLanguage(lang)
+		assert.Empty(t, c.Season())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, Winter, Parse("2020-01-05").Season())
+		assert.Equal(t, Winter, Parse("2020-02-05").Season())
+		assert.Equal(t, Spring, Parse("2020-03-05").Season())
+		assert.Equal(t, Spring, Parse("2020-04-05").Season())
+		assert.Equal(t, Spring, Parse("2020-05-05").Season())
+		assert.Equal(t, Summer, Parse("2020-06-05").Season())
+		assert.Equal(t, Summer, Parse("2020-07-05").Season())
+		assert.Equal(t, Summer, Parse("2020-08-05").Season())
+		assert.Equal(t, Autumn, Parse("2020-09-05").Season())
+		assert.Equal(t, Autumn, Parse("2020-10-05").Season())
+		assert.Equal(t, Autumn, Parse("2020-11-05").Season())
+		assert.Equal(t, Winter, Parse("2020-12-05").Season())
+	})
 }
 
 func TestCarbon_StartOfSeason(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-15"),
-			want:   "2019-12-01",
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-02-15"),
-			want:   "2019-12-01",
-		},
-		{
-			name:   "case4",
-			carbon: Parse("2020-03-15"),
-			want:   "2020-03-01",
-		},
-		{
-			name:   "case5",
-			carbon: Parse("2020-04-15"),
-			want:   "2020-03-01",
-		},
-		{
-			name:   "case6",
-			carbon: Parse("2020-05-15"),
-			want:   "2020-03-01",
-		},
-		{
-			name:   "case7",
-			carbon: Parse("2020-06-15"),
-			want:   "2020-06-01",
-		},
-		{
-			name:   "case8",
-			carbon: Parse("2020-07-15"),
-			want:   "2020-06-01",
-		},
-		{
-			name:   "case9",
-			carbon: Parse("2020-08-15"),
-			want:   "2020-06-01",
-		},
-		{
-			name:   "case10",
-			carbon: Parse("2020-09-15"),
-			want:   "2020-09-01",
-		},
-		{
-			name:   "case11",
-			carbon: Parse("2020-10-15"),
-			want:   "2020-09-01",
-		},
-		{
-			name:   "case12",
-			carbon: Parse("2020-11-15"),
-			want:   "2020-09-01",
-		},
-		{
-			name:   "case13",
-			carbon: Parse("2020-12-15"),
-			want:   "2020-12-01",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0000-12-01 00:00:00 +0000 UTC", NewCarbon().StartOfSeason().ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.StartOfSeason().ToDateString(), "StartOfSeason()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").StartOfSeason().ToString())
+		assert.Empty(t, Parse("0").StartOfSeason().ToString())
+		assert.Empty(t, Parse("xxx").StartOfSeason().ToString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2019-12-01 00:00:00 +0000 UTC", Parse("2020-01-15").StartOfSeason().ToString())
+		assert.Equal(t, "2019-12-01 00:00:00 +0000 UTC", Parse("2020-02-15").StartOfSeason().ToString())
+		assert.Equal(t, "2020-03-01 00:00:00 +0000 UTC", Parse("2020-03-15").StartOfSeason().ToString())
+		assert.Equal(t, "2020-03-01 00:00:00 +0000 UTC", Parse("2020-04-15").StartOfSeason().ToString())
+		assert.Equal(t, "2020-03-01 00:00:00 +0000 UTC", Parse("2020-05-15").StartOfSeason().ToString())
+		assert.Equal(t, "2020-06-01 00:00:00 +0000 UTC", Parse("2020-06-15").StartOfSeason().ToString())
+		assert.Equal(t, "2020-06-01 00:00:00 +0000 UTC", Parse("2020-07-15").StartOfSeason().ToString())
+		assert.Equal(t, "2020-06-01 00:00:00 +0000 UTC", Parse("2020-08-15").StartOfSeason().ToString())
+		assert.Equal(t, "2020-09-01 00:00:00 +0000 UTC", Parse("2020-09-15").StartOfSeason().ToString())
+		assert.Equal(t, "2020-09-01 00:00:00 +0000 UTC", Parse("2020-10-15").StartOfSeason().ToString())
+		assert.Equal(t, "2020-09-01 00:00:00 +0000 UTC", Parse("2020-11-15").StartOfSeason().ToString())
+		assert.Equal(t, "2020-12-01 00:00:00 +0000 UTC", Parse("2020-12-15").StartOfSeason().ToString())
+	})
 }
 
 func TestCarbon_EndOfSeason(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   string
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   "",
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-15"),
-			want:   "2020-02-29",
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-02-15"),
-			want:   "2020-02-29",
-		},
-		{
-			name:   "case4",
-			carbon: Parse("2020-03-15"),
-			want:   "2020-05-31",
-		},
-		{
-			name:   "case5",
-			carbon: Parse("2020-04-15"),
-			want:   "2020-05-31",
-		},
-		{
-			name:   "case6",
-			carbon: Parse("2020-05-15"),
-			want:   "2020-05-31",
-		},
-		{
-			name:   "case7",
-			carbon: Parse("2020-06-15"),
-			want:   "2020-08-31",
-		},
-		{
-			name:   "case8",
-			carbon: Parse("2020-07-15"),
-			want:   "2020-08-31",
-		},
-		{
-			name:   "case9",
-			carbon: Parse("2020-08-15"),
-			want:   "2020-08-31",
-		},
-		{
-			name:   "case10",
-			carbon: Parse("2020-09-15"),
-			want:   "2020-11-30",
-		},
-		{
-			name:   "case11",
-			carbon: Parse("2020-10-15"),
-			want:   "2020-11-30",
-		},
-		{
-			name:   "case12",
-			carbon: Parse("2020-11-15"),
-			want:   "2020-11-30",
-		},
-		{
-			name:   "case13",
-			carbon: Parse("2020-12-15"),
-			want:   "2021-02-28",
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, "0001-02-28 23:59:59.999999999 +0000 UTC", NewCarbon().EndOfSeason().ToString())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.EndOfSeason().ToDateString(), "EndOfSeason()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").EndOfSeason().ToString())
+		assert.Empty(t, Parse("0").EndOfSeason().ToString())
+		assert.Empty(t, Parse("xxx").EndOfSeason().ToString())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, "2020-02-29 23:59:59.999999999 +0000 UTC", Parse("2020-01-15").EndOfSeason().ToString())
+		assert.Equal(t, "2020-02-29 23:59:59.999999999 +0000 UTC", Parse("2020-02-15").EndOfSeason().ToString())
+		assert.Equal(t, "2020-05-31 23:59:59.999999999 +0000 UTC", Parse("2020-03-15").EndOfSeason().ToString())
+		assert.Equal(t, "2020-05-31 23:59:59.999999999 +0000 UTC", Parse("2020-04-15").EndOfSeason().ToString())
+		assert.Equal(t, "2020-05-31 23:59:59.999999999 +0000 UTC", Parse("2020-05-15").EndOfSeason().ToString())
+		assert.Equal(t, "2020-08-31 23:59:59.999999999 +0000 UTC", Parse("2020-06-15").EndOfSeason().ToString())
+		assert.Equal(t, "2020-08-31 23:59:59.999999999 +0000 UTC", Parse("2020-07-15").EndOfSeason().ToString())
+		assert.Equal(t, "2020-08-31 23:59:59.999999999 +0000 UTC", Parse("2020-08-15").EndOfSeason().ToString())
+		assert.Equal(t, "2020-11-30 23:59:59.999999999 +0000 UTC", Parse("2020-09-15").EndOfSeason().ToString())
+		assert.Equal(t, "2020-11-30 23:59:59.999999999 +0000 UTC", Parse("2020-10-15").EndOfSeason().ToString())
+		assert.Equal(t, "2020-11-30 23:59:59.999999999 +0000 UTC", Parse("2020-11-15").EndOfSeason().ToString())
+		assert.Equal(t, "2021-02-28 23:59:59.999999999 +0000 UTC", Parse("2020-12-15").EndOfSeason().ToString())
+	})
 }
 
 func TestCarbon_IsSpring(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-03-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsSpring())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsSpring(), "IsSpring()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsSpring())
+		assert.False(t, Parse("0").IsSpring())
+		assert.False(t, Parse("xxx").IsSpring())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-01-01").IsSpring())
+		assert.True(t, Parse("2020-03-01").IsSpring())
+	})
 }
 
 func TestCarbon_IsSummer(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-06-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsSummer())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsSummer(), "IsSummer()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsSummer())
+		assert.False(t, Parse("0").IsSummer())
+		assert.False(t, Parse("xxx").IsSummer())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-01-01").IsSummer())
+		assert.True(t, Parse("2020-06-01").IsSummer())
+	})
 }
 
 func TestCarbon_IsAutumn(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   false,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-09-01"),
-			want:   true,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.False(t, NewCarbon().IsAutumn())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsAutumn(), "IsAutumn()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsAutumn())
+		assert.False(t, Parse("0").IsAutumn())
+		assert.False(t, Parse("xxx").IsAutumn())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.False(t, Parse("2020-01-01").IsAutumn())
+		assert.True(t, Parse("2020-09-01").IsAutumn())
+	})
 }
 
 func TestCarbon_IsWinter(t *testing.T) {
-	tests := []struct {
-		name   string
-		carbon Carbon
-		want   bool
-	}{
-		{
-			name:   "case1",
-			carbon: Parse(""),
-			want:   false,
-		},
-		{
-			name:   "case2",
-			carbon: Parse("2020-01-01"),
-			want:   true,
-		},
-		{
-			name:   "case3",
-			carbon: Parse("2020-05-01"),
-			want:   false,
-		},
-	}
+	t.Run("zero time", func(t *testing.T) {
+		assert.True(t, NewCarbon().IsWinter())
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			assert.Equalf(t, tt.want, tt.carbon.IsWinter(), "IsWinter()")
-		})
-	}
+	t.Run("invalid time", func(t *testing.T) {
+		assert.False(t, Parse("").IsWinter())
+		assert.False(t, Parse("0").IsWinter())
+		assert.False(t, Parse("xxx").IsWinter())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.True(t, Parse("2020-01-01").IsWinter())
+		assert.False(t, Parse("2020-05-01").IsWinter())
+	})
 }
