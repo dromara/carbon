@@ -70,10 +70,10 @@ func (t Date) MarshalJSON() ([]byte, error) {
 // 实现 json.Unmarshaler 接口
 func (t *Date) UnmarshalJSON(b []byte) error {
 	value := string(bytes.Trim(b, `"`))
-	if value == "" || value == "null" {
+	if value == "" || value == "null" || value == "0" {
 		return nil
 	}
-	c := ParseByLayout(value, DateTimeLayout)
+	c := ParseByLayout(value, DateLayout)
 	if c.Error == nil {
 		*t = NewDate(c)
 	}
