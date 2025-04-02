@@ -1304,52 +1304,54 @@ carbon.Parse("2020-08-05 13:14:15").IsWinter() // false
 
 ##### JSON
 
+###### 内置字段类型
+
 ```go
 type User struct {
-	Date      carbon.Date     `json:"date"`
-	DateMilli carbon.DateMilli `json:"date_milli"`
-	DateMicro carbon.DateMicro `json:"date_micro"`
-	DateNano  carbon.DateNano  `json:"date_nano"`
+	Date      carbon.LayoutType[carbon.Date]      `json:"date"`
+	DateMilli carbon.LayoutType[carbon.DateMilli] `json:"date_milli"`
+	DateMicro carbon.LayoutType[carbon.DateMicro] `json:"date_micro"`
+	DateNano  carbon.LayoutType[carbon.DateNano]  `json:"date_nano"`
 	
-	Time      carbon.Time     `json:"time"`
-	TimeMilli carbon.TimeMilli `json:"time_milli"`
-	TimeMicro carbon.TimeMicro `json:"time_micro"`
-	TimeNano  carbon.TimeNano  `json:"time_nano"`
+	Time      carbon.LayoutType[carbon.Time]      `json:"time"`
+	TimeMilli carbon.LayoutType[carbon.TimeMilli] `json:"time_milli"`
+	TimeMicro carbon.LayoutType[carbon.TimeMicro] `json:"time_micro"`
+	TimeNano  carbon.LayoutType[carbon.TimeNano]  `json:"time_nano"`
 	
-	DateTime      carbon.DateTime     `json:"date_time"`
-	DateTimeMilli carbon.DateTimeMilli `json:"date_time_milli"`
-	DateTimeMicro carbon.DateTimeMicro `json:"date_time_micro"`
-	DateTimeNano  carbon.DateTimeNano  `json:"date_time_nano"`
+	DateTime      carbon.FormatType[carbon.DateTime]      `json:"date_time"`
+	DateTimeMilli carbon.FormatType[carbon.DateTimeMilli] `json:"date_time_milli"`
+	DateTimeMicro carbon.FormatType[carbon.DateTimeMicro] `json:"date_time_micro"`
+	DateTimeNano  carbon.FormatType[carbon.DateTimeNano]  `json:"date_time_nano"`
 	
-	Timestamp      carbon.Timestamp     `json:"timestamp"`
-	TimestampMilli carbon.TimestampMilli `json:"timestamp_milli"`
-	TimestampMicro carbon.TimestampMicro `json:"timestamp_micro"`
-	TimestampNano  carbon.TimestampNano  `json:"timestamp_nano"`
+	Timestamp      carbon.TimestampType[carbon.Timestamp]      `json:"timestamp"`
+	TimestampMilli carbon.TimestampType[carbon.TimestampMilli] `json:"timestamp_milli"`
+	TimestampMicro carbon.TimestampType[carbon.TimestampMicro] `json:"timestamp_micro"`
+	TimestampNano  carbon.TimestampType[carbon.TimestampNano]  `json:"timestamp_nano"`
 }
 
 var user User
 
 c := carbon.Parse("2020-08-05 13:14:15.999999999")
 
-user.Date = carbon.Date(c)
-user.DateMilli = carbon.NewDateMilli(c)
-user.DateMicro = carbon.NewDateMicro(c)
-user.DateNano = carbon.NewDateNano(c)
+user.Date = carbon.NewFormatType[carbon.Date](c)
+user.DateMilli = carbon.NewLayoutType[carbon.DateMilli](c)
+user.DateMicro = carbon.NewLayoutType[carbon.DateMicro](c)
+user.DateNano = carbon.NewLayoutType[carbon.DateNano](c)
 
-user.Time = carbon.NewTime(c)
-user.TimeMilli = carbon.NewTimeMilli(c)
-user.TimeMicro = carbon.NewTimeMicro(c)
-user.TimeNano = carbon.NewTimeNano(c)
+user.Time = carbon.NewLayoutType[carbon.Time](c)
+user.TimeMilli = carbon.NewLayoutType[carbon.TimeMilli](c)
+user.TimeMicro = carbon.NewLayoutType[carbon.TimeMicro](c)
+user.TimeNano = carbon.NewLayoutType[carbon.TimeNano](c)
 
-user.DateTime = carbon.NewDateTime(c)
-user.DateTimeMilli = carbon.NewDateTimeMilli(c)
-user.DateTimeMicro = carbon.NewDateTimeMicro(c)
-user.DateTimeNano = carbon.NewDateTimeNano(c)
+user.DateTime = carbon.NewFormatType[carbon.DateTime](c)
+user.DateTimeMilli = carbon.NewFormatType[carbon.DateTimeMilli](c)
+user.DateTimeMicro = carbon.NewFormatType[carbon.DateTimeMicro](c)
+user.DateTimeNano = carbon.NewFormatType[carbon.DateTimeNano](c)
 
-user.Timestamp = carbon.NewTimestamp(c)
-user.TimestampMilli = carbon.NewTimestampMilli(c)
-user.TimestampMicro = carbon.NewTimestampMicro(c)
-user.TimestampNano = carbon.NewTimestampNano(c)
+user.Timestamp = carbon.NewTimestampType[carbon.Timestamp](c)
+user.TimestampMilli = carbon.NewTimestampType[carbon.TimestampMilli](c)
+user.TimestampMicro = carbon.NewTimestampType[carbon.TimestampMicro](c)
+user.TimestampNano = carbon.NewTimestampType[carbon.TimestampNano](c)
 
 data, err := json.Marshal(&user)
 if err != nil {
@@ -1387,6 +1389,52 @@ if err != nil {
 fmt.Printf("person: %+v\n", person)
 // 输出
 person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 DateNano:2020-08-05.999999999 Time:13:14:15 TimeMilli:13:14:15.999 TimeMicro:13:14:15.999999 TimeNano:13:14:15.999999999 DateTime:2020-08-05 13:14:15 DateTimeMilli:2020-08-05 13:14:15.999 DateTimeMicro:2020-08-05 13:14:15.999999 DateTimeNano:2020-08-05 13:14:15.999999999 Timestamp:1596633255 TimestampMilli:1596633255999 TimestampMicro:1596633255999999 TimestampNano:1596633255999999999}
+```
+
+###### 自定义字段类型
+
+```go
+type RFC3339Layout string
+	func (t CustomerLayout) SetLayout() string {
+	return carbon.RFC3339Layout
+}
+
+type ISO8601Format string
+	func (t CustomerFormat) SetFormat() string {
+	return carbon.ISO8601Format
+}
+
+type User struct {
+	Customer1 carbon.LayoutType[RFC3339Layout] `json:"customer1"`
+	Customer2 carbon.FormatType[ISO8601Format] `json:"customer2"`
+}
+
+var user User
+
+c := carbon.Parse("2020-08-05 13:14:15")
+
+user.Customer1 = carbon.NewLayoutType[RFC3339Layout](c)
+user.Customer2 = carbon.NewFormatType[ISO8601Format](c)
+
+data, err := json.Marshal(&user)
+if err != nil {
+	// 错误处理
+	log.Fatal(err)
+}
+fmt.Printf("%s\n", data)
+// 输出
+{"customer1":"2020-08-05T13:14:15Z", "customer2":"2020-08-05T13:14:15+00:00"}
+
+var person User
+err := json.Unmarshal(data, &person)
+if err != nil {
+	// 错误处理
+	log.Fatal(err)
+}
+
+fmt.Printf("person: %+v\n", person)
+// 输出
+person: {Customer1:2020-08-05T13:14:15Z Customer2:2020-08-05T13:14:15+00:00}
 ```
 
 ##### 日历
@@ -1584,12 +1632,8 @@ invalid timezone "xxx", please see the file "$GOROOT/lib/time/zoneinfo.zip" for 
 
 #### 常见问题
 
-1、v1 和 v2 版本有什么区别？
-> v1 和 v2 版本的 API 没有任何区别，只是 `language.go` 里翻译资源文件内嵌的实现方式不同，v1
-> 版本是用第三方扩展库 [packr](https://github.com/gobuffalo/packr)
-> 实现的，
-> v2 版本是用 `golang1.16` 后内置标准库 [embed](https://pkg.go.dev/embed) 实现的。如果你的 go 版本大于 1.16推荐使用 v2
-> 版本，否则必须使用 v1 版本。
+1、v2.5.x 和 v2.6.x 版本有什么区别？
+> v2.5.x 及以下版本是值传递， v2.6.x 及以上版本是指针传递，并且使用了泛型实现了 JSON 编码输出格式自定义。两个版本都会长期维护，但是强烈建议使用 v2.6.x 版本。
 
 2、window 系统下部署二进制文件时区报错
 
