@@ -56,6 +56,8 @@ var (
 	}
 )
 
+// returns a invalid lunar date.
+// 无效的农历日期错误
 var invalidLunarError = func() error {
 	return fmt.Errorf("invalid lunar date, please make sure the lunar date is valid")
 }
