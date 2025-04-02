@@ -24,6 +24,8 @@ var (
 	ShortFaWeeks = []string{"پ", "چ", "س", "د", "ی", "ش", "ج"}
 )
 
+// returns a invalid persian date.
+// 无效的波斯历日期错误
 var invalidPersianError = func() error {
 	return fmt.Errorf("invalid persian date, please make sure the persian date is valid")
 }
