@@ -14,6 +14,14 @@ func TestMinValue(t *testing.T) {
 	assert.Equal(t, "-9998-01-01 00:00:00 +0000 UTC", MinValue().ToString())
 }
 
+func TestMaxDuration(t *testing.T) {
+	assert.Equal(t, 9.223372036854776e+09, MaxDuration().Seconds())
+}
+
+func TestMinDuration(t *testing.T) {
+	assert.Equal(t, -9.223372036854776e+09, MinDuration().Seconds())
+}
+
 func TestMax(t *testing.T) {
 	t.Run("zero time", func(t *testing.T) {
 		assert.Equal(t, "0001-01-01 00:00:00 +0000 UTC", Max(NewCarbon(), NewCarbon()).ToString())

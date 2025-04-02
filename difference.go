@@ -6,11 +6,6 @@ import (
 	"time"
 )
 
-const (
-	minDuration time.Duration = -1 << 63
-	maxDuration time.Duration = 1<<63 - 1
-)
-
 // DiffInYears gets the difference in years.
 // 相差多少年
 func (c Carbon) DiffInYears(carbon ...Carbon) int64 {
