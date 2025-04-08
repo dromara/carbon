@@ -1,13 +1,13 @@
 # These are supported funding model platforms
 
-github: gouguoyin
+github: #
 patreon: # Replace with a single Patreon username
 open_collective: go-carbon
-ko_fi: # Replace with a single Ko-fi username
+ko_fi: #go-carbon
 tidelift: # Replace with a single Tidelift platform-name/package-name e.g., npm/babel
-community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
-liberapay: gouguoyin
-issuehunt: dromara/carbon
+community_bridge: #go-carbon
+liberapay: #go-carbon
+issuehunt: #go-carbon
 otechie: # Replace with a single Otechie username
 lfx_crowdfunding: # Replace with a single LFX Crowdfunding project-name e.g., cloud-foundry
 custom: ['https://www.gouguoyin.com/zanzhu.html']
