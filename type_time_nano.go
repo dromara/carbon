@@ -21,7 +21,7 @@ func NewTimeNano(carbon Carbon) TimeNano {
 
 // Scan implements driver.Scanner interface.
 // 实现 driver.Scanner 接口
-func (t *TimeNano) Scan(src interface{}) error {
+func (t *TimeNano) Scan(src any) error {
 	c := NewCarbon()
 	switch v := src.(type) {
 	case []byte:

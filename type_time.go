@@ -21,7 +21,7 @@ func NewTime(carbon Carbon) Time {
 
 // Scan implements driver.Scanner interface.
 // 实现 driver.Scanner 接口
-func (t *Time) Scan(src interface{}) error {
+func (t *Time) Scan(src any) error {
 	c := NewCarbon()
 	switch v := src.(type) {
 	case []byte:

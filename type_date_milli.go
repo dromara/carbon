@@ -21,7 +21,7 @@ func NewDateMilli(carbon Carbon) DateMilli {
 
 // Scan implements driver.Scanner interface.
 // 实现 driver.Scanner 接口
-func (t *DateMilli) Scan(src interface{}) error {
+func (t *DateMilli) Scan(src any) error {
 	c := NewCarbon()
 	switch v := src.(type) {
 	case []byte:

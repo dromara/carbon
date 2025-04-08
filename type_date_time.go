@@ -21,7 +21,7 @@ func NewDateTime(carbon Carbon) DateTime {
 
 // Scan implements driver.Scanner interface.
 // 实现 driver.Scanner 接口
-func (t *DateTime) Scan(src interface{}) error {
+func (t *DateTime) Scan(src any) error {
 	c := NewCarbon()
 	switch v := src.(type) {
 	case []byte:

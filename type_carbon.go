@@ -9,7 +9,7 @@ import (
 
 // Scan implements driver.Scanner interface.
 // 实现 driver.Scanner 接口
-func (c *Carbon) Scan(src interface{}) error {
+func (c *Carbon) Scan(src any) error {
 	switch v := src.(type) {
 	case []byte:
 		*c = Parse(string(v), DefaultTimezone)

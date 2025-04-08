@@ -22,7 +22,7 @@ func NewTimestampMilli(carbon Carbon) TimestampMilli {
 
 // Scan implements driver.Scanner interface.
 // 实现 driver.Scanner 接口
-func (t *TimestampMilli) Scan(src interface{}) (err error) {
+func (t *TimestampMilli) Scan(src any) (err error) {
 	ts := int64(0)
 	c := NewCarbon()
 	switch v := src.(type) {

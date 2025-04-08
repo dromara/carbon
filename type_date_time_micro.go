@@ -21,7 +21,7 @@ func NewDateTimeMicro(carbon Carbon) DateTimeMicro {
 
 // Scan implements driver.Scanner interface.
 // 实现 driver.Scanner 接口
-func (t *DateTimeMicro) Scan(src interface{}) error {
+func (t *DateTimeMicro) Scan(src any) error {
 	c := NewCarbon()
 	switch v := src.(type) {
 	case []byte:

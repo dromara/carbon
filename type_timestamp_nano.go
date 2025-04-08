@@ -22,7 +22,7 @@ func NewTimestampNano(carbon Carbon) TimestampNano {
 
 // Scan implements driver.Scanner interface.
 // 实现 driver.Scanner 接口
-func (t *TimestampNano) Scan(src interface{}) (err error) {
+func (t *TimestampNano) Scan(src any) (err error) {
 	ts := int64(0)
 	c := NewCarbon()
 	switch v := src.(type) {

@@ -21,7 +21,7 @@ func NewTimeMicro(carbon Carbon) TimeMicro {
 
 // Scan implements driver.Scanner interface.
 // 实现 driver.Scanner 接口
-func (t *TimeMicro) Scan(src interface{}) error {
+func (t *TimeMicro) Scan(src any) error {
 	c := NewCarbon()
 	switch v := src.(type) {
 	case []byte:
