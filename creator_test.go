@@ -8,7 +8,7 @@ import (
 )
 
 func TestCreateFromStdTime(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromStdTime(time.Now(), "").HasError())
 		assert.Empty(t, CreateFromStdTime(time.Now(), "").ToString())
 		assert.True(t, CreateFromStdTime(time.Now(), "xxx").HasError())
@@ -28,7 +28,7 @@ func TestCreateFromStdTime(t *testing.T) {
 }
 
 func TestCreateFromTimestamp(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromTimestamp(0, "").HasError())
 		assert.Empty(t, CreateFromTimestamp(0, "").ToString())
 		assert.True(t, CreateFromTimestamp(0, "xxx").HasError())
@@ -51,7 +51,7 @@ func TestCreateFromTimestamp(t *testing.T) {
 }
 
 func TestCreateFromTimestampMilli(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromTimestampMilli(0, "").HasError())
 		assert.True(t, CreateFromTimestampMilli(0, "").HasError())
 		assert.Empty(t, CreateFromTimestampMilli(0, "xxx").ToString())
@@ -74,7 +74,7 @@ func TestCreateFromTimestampMilli(t *testing.T) {
 }
 
 func TestCreateFromTimestampMicro(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromTimestampMicro(0, "").HasError())
 		assert.True(t, CreateFromTimestampMicro(0, "").HasError())
 		assert.Empty(t, CreateFromTimestampMicro(0, "xxx").ToString())
@@ -97,7 +97,7 @@ func TestCreateFromTimestampMicro(t *testing.T) {
 }
 
 func TestCreateFromTimestampNano(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromTimestampNano(0, "").HasError())
 		assert.True(t, CreateFromTimestampNano(0, "").HasError())
 		assert.Empty(t, CreateFromTimestampNano(0, "xxx").ToString())
@@ -120,7 +120,7 @@ func TestCreateFromTimestampNano(t *testing.T) {
 }
 
 func TestCreateFromDateTime(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromDateTime(0, 0, 0, 0, 0, 0, "").HasError())
 		assert.True(t, CreateFromDateTime(0, 0, 0, 0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromDateTime(0, 0, 0, 0, 0, 0, "xxx").ToString())
@@ -139,7 +139,7 @@ func TestCreateFromDateTime(t *testing.T) {
 }
 
 func TestCreateFromDateTimeMilli(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromDateTimeMilli(0, 0, 0, 0, 0, 0, 0, "").HasError())
 		assert.True(t, CreateFromDateTimeMilli(0, 0, 0, 0, 0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromDateTimeMilli(0, 0, 0, 0, 0, 0, 0, "xxx").ToString())
@@ -158,7 +158,7 @@ func TestCreateFromDateTimeMilli(t *testing.T) {
 }
 
 func TestCreateFromDateTimeMicro(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromDateTimeMicro(0, 0, 0, 0, 0, 0, 0, "").HasError())
 		assert.True(t, CreateFromDateTimeMicro(0, 0, 0, 0, 0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromDateTimeMicro(0, 0, 0, 0, 0, 0, 0, "xxx").ToString())
@@ -177,7 +177,7 @@ func TestCreateFromDateTimeMicro(t *testing.T) {
 }
 
 func TestCreateFromDateTimeNano(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromDateTimeNano(0, 0, 0, 0, 0, 0, 0, "").HasError())
 		assert.True(t, CreateFromDateTimeNano(0, 0, 0, 0, 0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromDateTimeNano(0, 0, 0, 0, 0, 0, 0, "xxx").ToString())
@@ -196,7 +196,7 @@ func TestCreateFromDateTimeNano(t *testing.T) {
 }
 
 func TestCreateFromDate(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromDate(0, 0, 0, "").HasError())
 		assert.True(t, CreateFromDate(0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromDate(0, 0, 0, "xxx").ToString())
@@ -215,7 +215,7 @@ func TestCreateFromDate(t *testing.T) {
 }
 
 func TestCreateFromDateMilli(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromDateMilli(0, 0, 0, 0, "").HasError())
 		assert.True(t, CreateFromDateMilli(0, 0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromDateMilli(0, 0, 0, 0, "xxx").ToString())
@@ -234,7 +234,7 @@ func TestCreateFromDateMilli(t *testing.T) {
 }
 
 func TestCreateFromDateMicro(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromDateMicro(0, 0, 0, 0, "").HasError())
 		assert.True(t, CreateFromDateMicro(0, 0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromDateMicro(0, 0, 0, 0, "xxx").ToString())
@@ -253,7 +253,7 @@ func TestCreateFromDateMicro(t *testing.T) {
 }
 
 func TestCreateFromDateNano(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromDateNano(0, 0, 0, 0, "").HasError())
 		assert.True(t, CreateFromDateNano(0, 0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromDateNano(0, 0, 0, 0, "xxx").ToString())
@@ -272,7 +272,7 @@ func TestCreateFromDateNano(t *testing.T) {
 }
 
 func TestCreateFromTime(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromTime(0, 0, 0, "").HasError())
 		assert.True(t, CreateFromTime(0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromTime(0, 0, 0, "xxx").ToString())
@@ -291,7 +291,7 @@ func TestCreateFromTime(t *testing.T) {
 }
 
 func TestCreateFromTimeMilli(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromTimeMilli(0, 0, 0, 0, "").HasError())
 		assert.True(t, CreateFromTimeMilli(0, 0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromTimeMilli(0, 0, 0, 0, "xxx").ToString())
@@ -310,7 +310,7 @@ func TestCreateFromTimeMilli(t *testing.T) {
 }
 
 func TestCreateFromTimeMicro(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromTimeMicro(0, 0, 0, 0, "").HasError())
 		assert.True(t, CreateFromTimeMicro(0, 0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromTimeMicro(0, 0, 0, 0, "xxx").ToString())
@@ -329,7 +329,7 @@ func TestCreateFromTimeMicro(t *testing.T) {
 }
 
 func TestCreateFromTimeNano(t *testing.T) {
-	t.Run("has error", func(t *testing.T) {
+	t.Run("invalid timezone", func(t *testing.T) {
 		assert.True(t, CreateFromTimeNano(0, 0, 0, 0, "").HasError())
 		assert.True(t, CreateFromTimeNano(0, 0, 0, 0, "").HasError())
 		assert.Empty(t, CreateFromTimeNano(0, 0, 0, 0, "xxx").ToString())
