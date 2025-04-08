@@ -27,7 +27,7 @@ type Carbon struct {
 // NewCarbon returns a new Carbon instance.
 // 初始化 Carbon 结构体
 func NewCarbon(time ...time.Time) Carbon {
-	c := Carbon{lang: NewLanguage()}
+	c := Carbon{}
 	c.lang = NewLanguage().SetLocale(DefaultLocale)
 	c.layout = DefaultLayout
 	if weekday, ok := weekdays[DefaultWeekStartsAt]; ok {
