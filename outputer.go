@@ -781,6 +781,16 @@ func (c Carbon) Layout(layout string, timezone ...string) string {
 	if c.IsInvalid() {
 		return ""
 	}
+	switch layout {
+	case TimestampLayout:
+		return strconv.FormatInt(c.Timestamp(), 10)
+	case TimestampMilliLayout:
+		return strconv.FormatInt(c.TimestampMilli(), 10)
+	case TimestampMicroLayout:
+		return strconv.FormatInt(c.TimestampMicro(), 10)
+	case TimestampNanoLayout:
+		return strconv.FormatInt(c.TimestampNano(), 10)
+	}
 	return c.StdTime().Format(layout)
 }
 

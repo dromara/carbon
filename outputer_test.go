@@ -1185,6 +1185,11 @@ func TestCarbon_Layout(t *testing.T) {
 		assert.Equal(t, "2020-08-05 00:00:00", Parse("2020-08-05", PRC).Layout(DateTimeLayout, PRC))
 		assert.Equal(t, "2020年08月05日", Parse("2020-08-05 13:14:15").Layout("2006年01月02日"))
 		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 GMT", Parse("2020-08-05 13:14:15").Layout("Mon, 02 Jan 2006 15:04:05 GMT"))
+
+		assert.Equal(t, "1596633255", Parse("2020-08-05 13:14:15.999999999").Layout(TimestampLayout))
+		assert.Equal(t, "1596633255999", Parse("2020-08-05 13:14:15.999999999").Layout(TimestampMilliLayout))
+		assert.Equal(t, "1596633255999999", Parse("2020-08-05 13:14:15.999999999").Layout(TimestampMicroLayout))
+		assert.Equal(t, "1596633255999999999", Parse("2020-08-05 13:14:15.999999999").Layout(TimestampNanoLayout))
 	})
 }
 
@@ -1239,5 +1244,10 @@ func TestCarbon_Format(t *testing.T) {
 		assert.Equal(t, "31st", Parse("2020-08-31 13:14:15").Format("jK"))
 		assert.Equal(t, "It is 2020-08-31 13:14:15", Parse("2020-08-31 13:14:15").Format("I\\t \\i\\s Y-m-d H:i:s"))
 		assert.Equal(t, "上次打卡时间:2020-08-05 13:14:15，请每日按时打卡", Parse("2020-08-05 13:14:15").Format("上次打卡时间:Y-m-d H:i:s，请每日按时打卡"))
+
+		assert.Equal(t, "1596633255", Parse("2020-08-05 13:14:15.999999999").Format(TimestampFormat))
+		assert.Equal(t, "1596633255999", Parse("2020-08-05 13:14:15.999999999").Format(TimestampMilliFormat))
+		assert.Equal(t, "1596633255999999", Parse("2020-08-05 13:14:15.999999999").Format(TimestampMicroFormat))
+		assert.Equal(t, "1596633255999999999", Parse("2020-08-05 13:14:15.999999999").Format(TimestampNanoFormat))
 	})
 }
