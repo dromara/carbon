@@ -143,7 +143,7 @@ func (c Carbon) SetLocale(locale string) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.lang.SetLocale(locale)
+	c.lang = NewLanguage().SetLocale(locale)
 	c.Error = c.lang.Error
 	return c
 }
