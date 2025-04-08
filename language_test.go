@@ -68,7 +68,7 @@ func TestLanguage_SetResources(t *testing.T) {
 	t.Run("empty resources", func(t *testing.T) {
 		lang := NewLanguage()
 		lang.SetResources(map[string]string{})
-		assert.Equal(t, August, Parse("2020-08-05 13:14:15").SetLanguage(lang).ToMonthString())
+		assert.Empty(t, Parse("2020-08-05 13:14:15").SetLanguage(lang).ToMonthString())
 	})
 
 	t.Run("invalid resources", func(t *testing.T) {
@@ -76,7 +76,6 @@ func TestLanguage_SetResources(t *testing.T) {
 		lang.SetResources(map[string]string{
 			"xxx": "xxx",
 		})
-		fmt.Println("lang", lang.locale)
 		assert.Empty(t, Parse("2020-08-05 13:14:15").SetLanguage(lang).ToMonthString())
 	})
 
@@ -149,8 +148,7 @@ func TestLanguage_translate(t *testing.T) {
 	t.Run("empty resources", func(t *testing.T) {
 		lang := NewLanguage()
 		lang.SetResources(map[string]string{})
-		fmt.Println("lang", lang.locale)
-		assert.Equal(t, "1 month", lang.translate("month", 1))
+		assert.Empty(t, lang.translate("month", 1))
 	})
 
 	t.Run("invalid resources", func(t *testing.T) {
@@ -158,14 +156,12 @@ func TestLanguage_translate(t *testing.T) {
 		lang.SetResources(map[string]string{
 			"xxx": "xxx",
 		})
-		fmt.Println("lang", lang.locale)
 		assert.Empty(t, lang.translate("month", 1))
 	})
 
 	t.Run("valid resources", func(t *testing.T) {
 		lang := NewLanguage()
 		lang.SetLocale("en")
-		fmt.Println("lang", lang.locale)
 		assert.Equal(t, "1 month", lang.translate("month", 1))
 		assert.Equal(t, "-1 month", lang.translate("month", -1))
 	})
