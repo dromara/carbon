@@ -67,8 +67,8 @@ func TestCarbon_EndOfDecade(t *testing.T) {
 
 	t.Run("invalid time", func(t *testing.T) {
 		assert.Empty(t, Parse("").EndOfDecade().ToString())
-		assert.Empty(t, Parse("xxx").EndOfDecade().ToString())
 		assert.Empty(t, Parse("0").EndOfDecade().ToString())
+		assert.Empty(t, Parse("xxx").EndOfDecade().ToString())
 	})
 
 	t.Run("valid time", func(t *testing.T) {
