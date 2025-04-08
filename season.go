@@ -27,9 +27,6 @@ func (c Carbon) Season() string {
 	if c.IsInvalid() {
 		return ""
 	}
-	if len(c.lang.resources) == 0 {
-		c.lang.SetLocale(DefaultLocale)
-	}
 	index := -1
 	month := c.Month()
 	for i := 0; i < len(seasons); i++ {

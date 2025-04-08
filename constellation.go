@@ -28,9 +28,6 @@ func (c Carbon) Constellation() string {
 	if c.IsInvalid() {
 		return ""
 	}
-	if len(c.lang.resources) == 0 {
-		c.lang.SetLocale(DefaultLocale)
-	}
 	index := -1
 	_, month, day := c.Date()
 	for i := 0; i < len(constellations); i++ {
