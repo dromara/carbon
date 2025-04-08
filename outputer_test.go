@@ -6,23 +6,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCarbon_String(t *testing.T) {
-	t.Run("zero time", func(t *testing.T) {
-		assert.Equal(t, "0001-01-01 00:00:00", NewCarbon().String())
-	})
-
-	t.Run("invalid time", func(t *testing.T) {
-		assert.Empty(t, Parse("").String())
-		assert.Empty(t, Parse("0").String())
-		assert.Empty(t, Parse("xxx").String())
-	})
-
-	t.Run("valid time", func(t *testing.T) {
-		assert.Equal(t, "2020-08-05 13:14:15", Parse("2020-08-05 13:14:15").String())
-		assert.Equal(t, "2020-08-05", Parse("2020-08-05 13:14:15").SetLayout(DateLayout).String())
-	})
-}
-
 func TestCarbon_GoString(t *testing.T) {
 	t.Run("zero time", func(t *testing.T) {
 		assert.Equal(t, "time.Date(1, time.January, 1, 0, 0, 0, 0, time.UTC)", NewCarbon().GoString())

@@ -7,15 +7,6 @@ import (
 	"strings"
 )
 
-// String implements the interface Stringer for Carbon struct.
-// 实现 Stringer 接口
-func (c Carbon) String() string {
-	if c.IsInvalid() {
-		return ""
-	}
-	return c.Layout(c.layout, c.Timezone())
-}
-
 // GoString implements fmt.GoStringer and formats c to be printed in Go source code.
 // 实现 fmt.GoStringer 接口，并格式化 c 以在 Go 源代码中打印
 func (c Carbon) GoString() string {
