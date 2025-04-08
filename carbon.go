@@ -28,14 +28,16 @@ type Carbon struct {
 // 初始化 Carbon 结构体
 func NewCarbon(time ...time.Time) Carbon {
 	c := Carbon{lang: NewLanguage()}
-	c.loc, c.Error = getLocationByTimezone(DefaultTimezone)
+	c.lang = NewLanguage().SetLocale(DefaultLocale)
+	c.layout = DefaultLayout
 	if weekday, ok := weekdays[DefaultWeekStartsAt]; ok {
 		c.weekStartsAt = weekday
 	}
 	if len(time) > 0 {
 		c.time = time[0]
 		c.loc = time[0].Location()
+		return c
 	}
-	c.layout = DefaultLayout
+	c.loc, c.Error = getLocationByTimezone(DefaultTimezone)
 	return c
 }
