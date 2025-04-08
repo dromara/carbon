@@ -73,7 +73,7 @@ func (t *TimeMilli) UnmarshalJSON(b []byte) error {
 	if value == "" || value == "null" || value == "0" {
 		return nil
 	}
-	c := ParseByLayout(value, TimeLayout)
+	c := ParseByLayout(value, TimeMilliLayout)
 	if c.Error == nil {
 		*t = NewTimeMilli(c)
 	}

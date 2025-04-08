@@ -73,7 +73,7 @@ func (t *TimeMicro) UnmarshalJSON(b []byte) error {
 	if value == "" || value == "null" || value == "0" {
 		return nil
 	}
-	c := ParseByLayout(value, TimeLayout)
+	c := ParseByLayout(value, TimeMicroLayout)
 	if c.Error == nil {
 		*t = NewTimeMicro(c)
 	}
