@@ -34,7 +34,7 @@ func Parse(value string, timezone ...string) Carbon {
 			return c
 		}
 	}
-	c.Error = failedParseError(value)
+	c.Error = ErrFailedParse(value)
 	return c
 }
 
@@ -47,12 +47,12 @@ func ParseByFormat(value, format string, timezone ...string) Carbon {
 		return c
 	}
 	if format == "" {
-		c.Error = emptyFormatError()
+		c.Error = ErrEmptyFormat()
 		return c
 	}
 	c = ParseByLayout(value, format2layout(format), timezone...)
 	if c.HasError() {
-		c.Error = invalidFormatError(value, format)
+		c.Error = ErrMismatchedFormat(value, format)
 	}
 	return c
 }
@@ -66,7 +66,7 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 		return c
 	}
 	if layout == "" {
-		c.Error = emptyLayoutError()
+		c.Error = ErrEmptyLayout()
 		return c
 	}
 	if len(timezone) > 0 {
@@ -78,7 +78,7 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	if layout == TimestampLayout {
 		ts, err := strconv.ParseInt(value, 10, 64)
 		if err != nil {
-			c.Error = invalidTimestampError(value)
+			c.Error = ErrInvalidTimestamp(value)
 			return c
 		}
 		return CreateFromTimestamp(ts, c.Timezone())
@@ -86,7 +86,7 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	if layout == TimestampMilliLayout {
 		ts, err := strconv.ParseInt(value, 10, 64)
 		if err != nil {
-			c.Error = invalidTimestampError(value)
+			c.Error = ErrInvalidTimestamp(value)
 			return c
 		}
 		return CreateFromTimestampMilli(ts, c.Timezone())
@@ -94,7 +94,7 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	if layout == TimestampMicroLayout {
 		ts, err := strconv.ParseInt(value, 10, 64)
 		if err != nil {
-			c.Error = invalidTimestampError(value)
+			c.Error = ErrInvalidTimestamp(value)
 			return c
 		}
 		return CreateFromTimestampMicro(ts, c.Timezone())
@@ -102,14 +102,14 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	if layout == TimestampNanoLayout {
 		ts, err := strconv.ParseInt(value, 10, 64)
 		if err != nil {
-			c.Error = invalidTimestampError(value)
+			c.Error = ErrInvalidTimestamp(value)
 			return c
 		}
 		return CreateFromTimestampNano(ts, c.Timezone())
 	}
 	tt, err := time.ParseInLocation(layout, value, c.loc)
 	if err != nil {
-		c.Error = invalidLayoutError(value, layout)
+		c.Error = ErrMismatchedLayout(value, layout)
 		return c
 	}
 	c.time = tt
@@ -141,7 +141,7 @@ func ParseWithLayouts(value string, layouts []string, timezone ...string) Carbon
 			return c
 		}
 	}
-	c.Error = failedParseError(value)
+	c.Error = ErrFailedParse(value)
 	return c
 }
 

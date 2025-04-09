@@ -33,7 +33,7 @@ func (t *DateTimeMilli) Scan(src any) error {
 	case int64:
 		c = CreateFromTimestamp(v, DefaultTimezone)
 	default:
-		return failedScanError(v)
+		return ErrFailedParse(v)
 	}
 	if c.Error == nil {
 		*t = NewDateTimeMilli(c)

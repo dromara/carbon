@@ -40,7 +40,7 @@ func (lang *Language) SetLocale(locale string) *Language {
 	}
 
 	if locale == "" {
-		lang.Error = emptyLocaleError()
+		lang.Error = ErrEmptyLocale()
 		return lang
 	}
 
@@ -51,7 +51,7 @@ func (lang *Language) SetLocale(locale string) *Language {
 	fileName := lang.dir + locale + ".json"
 	bytes, err := fs.ReadFile(fileName)
 	if err != nil {
-		lang.Error = invalidLocaleError(fileName)
+		lang.Error = ErrNotExistLocale(fileName)
 		return lang
 	}
 	_ = json.Unmarshal(bytes, &lang.resources)
@@ -66,7 +66,7 @@ func (lang *Language) SetResources(resources map[string]string) *Language {
 	}
 
 	if len(resources) == 0 {
-		lang.Error = emptyResourcesError()
+		lang.Error = ErrEmptyResources()
 		return lang
 	}
 
@@ -77,7 +77,7 @@ func (lang *Language) SetResources(resources map[string]string) *Language {
 		if _, ok := lang.resources[k]; ok {
 			lang.resources[k] = v
 		} else {
-			lang.Error = invalidResourcesError()
+			lang.Error = ErrInvalidResourcesError()
 		}
 	}
 

@@ -20,7 +20,7 @@ func (c *Carbon) Scan(src any) error {
 	case int64:
 		*c = CreateFromTimestamp(v, DefaultTimezone)
 	default:
-		return failedScanError(v)
+		return ErrFailedScan(v)
 	}
 	return c.Error
 }

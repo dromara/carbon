@@ -69,7 +69,7 @@ func SetWeekStartsAt(day string) Carbon {
 // 设置布局模板
 func (c Carbon) SetLayout(layout string) Carbon {
 	if layout == "" {
-		c.Error = emptyLayoutError()
+		c.Error = ErrEmptyLayout()
 	}
 	if c.IsInvalid() {
 		return c
@@ -82,7 +82,7 @@ func (c Carbon) SetLayout(layout string) Carbon {
 // 设置格式模板
 func (c Carbon) SetFormat(format string) Carbon {
 	if format == "" {
-		c.Error = emptyFormatError()
+		c.Error = ErrEmptyFormat()
 	}
 	if c.IsInvalid() {
 		return c
@@ -91,28 +91,11 @@ func (c Carbon) SetFormat(format string) Carbon {
 	return c
 }
 
-// SetWeekStartsAt sets start day of the week.
-// 设置周起始日期
-func (c Carbon) SetWeekStartsAt(day string) Carbon {
-	if day == "" {
-		c.Error = emptyWeekStartsDayError()
-	}
-	if c.IsInvalid() {
-		return c
-	}
-	if weekday, ok := weekdays[day]; ok {
-		c.weekStartsAt = weekday
-	} else {
-		c.Error = invalidWeekStartsAtError(day)
-	}
-	return c
-}
-
 // SetTimezone sets timezone.
 // 设置时区
 func (c Carbon) SetTimezone(name string) Carbon {
 	if name == "" {
-		c.Error = emptyTimezoneError()
+		c.Error = ErrEmptyTimezone()
 	}
 	if c.IsInvalid() {
 		return c
@@ -125,7 +108,7 @@ func (c Carbon) SetTimezone(name string) Carbon {
 // 设置位置
 func (c Carbon) SetLocation(loc *time.Location) Carbon {
 	if loc == nil {
-		c.Error = nilLocationError()
+		c.Error = ErrNilLocation()
 	}
 	if c.IsInvalid() {
 		return c
@@ -138,13 +121,30 @@ func (c Carbon) SetLocation(loc *time.Location) Carbon {
 // 设置语言区域
 func (c Carbon) SetLocale(locale string) Carbon {
 	if locale == "" {
-		c.Error = emptyLocaleError()
+		c.Error = ErrEmptyLocale()
 	}
 	if c.IsInvalid() {
 		return c
 	}
 	c.lang = NewLanguage().SetLocale(locale)
 	c.Error = c.lang.Error
+	return c
+}
+
+// SetWeekStartsAt sets start day of the week.
+// 设置周起始日期
+func (c Carbon) SetWeekStartsAt(day string) Carbon {
+	if day == "" {
+		c.Error = ErrEmptyWeekStartDay()
+	}
+	if c.IsInvalid() {
+		return c
+	}
+	if weekday, ok := weekdays[day]; ok {
+		c.weekStartsAt = weekday
+	} else {
+		c.Error = ErrInvalidWeekStartDay(day)
+	}
 	return c
 }
 
@@ -155,7 +155,7 @@ func (c Carbon) SetLanguage(lang *Language) Carbon {
 		return c
 	}
 	if lang == nil {
-		c.Error = nilLanguageError()
+		c.Error = ErrNilLanguage()
 		return c
 	}
 	c.lang.dir = lang.dir

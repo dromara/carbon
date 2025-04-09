@@ -33,7 +33,7 @@ func (t *Time) Scan(src any) error {
 	case int64:
 		c = CreateFromTimestamp(v, DefaultTimezone)
 	default:
-		return failedScanError(v)
+		return ErrFailedScan(v)
 	}
 	if c.Error == nil {
 		*t = NewTime(c)

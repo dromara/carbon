@@ -29,12 +29,12 @@ func (t *TimestampNano) Scan(src any) (err error) {
 	case []byte:
 		ts, err = strconv.ParseInt(string(v), 10, 64)
 		if err != nil {
-			return invalidTimestampError(string(v))
+			return ErrInvalidTimestamp(string(v))
 		}
 	case string:
 		ts, err = strconv.ParseInt(v, 10, 64)
 		if err != nil {
-			return invalidTimestampError(v)
+			return ErrInvalidTimestamp(v)
 		}
 	case int64:
 		ts = v
@@ -43,7 +43,7 @@ func (t *TimestampNano) Scan(src any) (err error) {
 		*t = NewTimestampNano(c)
 		return t.Error
 	default:
-		return failedScanError(src)
+		return ErrInvalidTimestamp(src)
 	}
 	c = CreateFromTimestampNano(ts, DefaultTimezone)
 	*t = NewTimestampNano(c)
@@ -86,7 +86,7 @@ func (t *TimestampNano) UnmarshalJSON(b []byte) error {
 	}
 	ts, err := strconv.ParseInt(value, 10, 64)
 	if err != nil {
-		return invalidTimestampError(value)
+		return ErrInvalidTimestamp(value)
 	}
 	c = CreateFromTimestampNano(ts, DefaultTimezone)
 	*t = NewTimestampNano(c)
