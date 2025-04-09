@@ -43,7 +43,7 @@ func (t *TimestampNano) Scan(src any) (err error) {
 		*t = NewTimestampNano(c)
 		return t.Error
 	default:
-		return ErrInvalidTimestamp(src)
+		return ErrFailedScan(src)
 	}
 	c = CreateFromTimestampNano(ts, DefaultTimezone)
 	*t = NewTimestampNano(c)
