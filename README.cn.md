@@ -247,7 +247,7 @@ carbon.Parse("20200805131415.999999999+08:00").ToString() // 2020-08-05 13:14:15
 
 ```
 
-##### 通过 `布局模板` 将时间字符串解析成 `Carbon` 实例
+##### 通过一个确认的 `布局模板` 将时间字符串解析成 `Carbon` 实例
 
 ```go
 carbon.ParseByLayout("2020|08|05 13|14|15", "2006|01|02 15|04|05").ToDateTimeString() // 2020-08-05 13:14:15
@@ -256,14 +256,14 @@ carbon.ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 20
 carbon.ParseByLayout("2020-08-05 13:14:15", "2006-01-02 15:04:05", carbon.Tokyo).ToDateTimeString() // 2020-08-05 14:14:15
 ```
 
-##### 通过自定义 `布局模板` 将时间字符串解析成 `Carbon` 实例
+##### 通过多个模糊 `布局模板` 将时间字符串解析成 `Carbon` 实例
 
 ```go
 carbon.ParseWithLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).ToDateTimeString() // 2020-08-05 13:14:15
 carbon.ParseWithLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).CurrentLayout() // 2006|01|02 15|04|05
 ```
 
-##### 通过 `格式模板` 将时间字符串解析成 `Carbon` 实例
+##### 通过一个确认的 `格式模板` 将时间字符串解析成 `Carbon` 实例
 
 > 如果使用的字母与格式模板冲突时，请使用转义符转义该字母
 
@@ -274,7 +274,7 @@ carbon.ParseByFormat("今天是 2020年08月05日13时14分15秒", "今天是 Y�
 carbon.ParseByFormat("2020-08-05 13:14:15", "Y-m-d H:i:s", carbon.Tokyo).ToDateTimeString() // 2020-08-05 14:14:15
 ```
 
-##### 通过自定义 `格式模板` 将时间字符串解析成 `Carbon` 实例
+##### 通过多个模糊 `格式模板` 将时间字符串解析成 `Carbon` 实例
 
 ```go
 carbon.ParseWithFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).ToDateTimeString() // 2020-08-05 13:14:15
