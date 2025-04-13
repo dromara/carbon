@@ -48,7 +48,7 @@ go mod edit -replace github.com/golang-module/carbon/v2=github.com/dromara/carbo
 
 #### Usage and example
 
-> Assuming the current time is 2020-08-05 13:14:15.999999999 +0000 UTC
+> Default timezone is UTC, language locale is en(English), assuming the current time is 2020-08-05 13:14:15.999999999 +0000 UTC
 
 ##### Set globally default
 
@@ -241,6 +241,9 @@ carbon.Parse("20200805131415.999999999").ToString() // 2020-08-05 13:14:15.99999
 carbon.Parse("20200805131415.999+08:00").ToString() // 2020-08-05 13:14:15.999 +0000 UTC
 carbon.Parse("20200805131415.999999+08:00").ToString() // 2020-08-05 13:14:15.999999 +0000 UTC
 carbon.Parse("20200805131415.999999999+08:00").ToString() // 2020-08-05 13:14:15.999999999 +0000 UTC
+
+carbon.Parse("2022-03-08T03:01:14-07:00").ToString() // 2022-03-08 10:01:14 +0000 UTC
+carbon.Parse("2022-03-08T10:01:14Z").ToString() // 2022-03-08 10:01:14 +0000 UTC
 ```
 
 ##### Parse a time string as a `Carbon` instance by a confirmed layout
@@ -937,7 +940,7 @@ carbon.Parse("2020-08-02").SetWeekStartsAt(carbon.Monday).Week() // 6
 
 // Set weekend days of the week
 wd := []carbon.Weekday{
-carbon.Saturday, carbon.Sunday,
+	carbon.Saturday, carbon.Sunday,
 }
 carbon.Parse("2025-04-11").SetWeekendDays(wd).IsWeekend() // false
 carbon.Parse("2025-04-12").SetWeekendDays(wd).IsWeekend() // true
@@ -1304,89 +1307,138 @@ carbon.Parse("2020-08-05 13:14:15").IsWinter() // false
 ```
 
 ##### JSON
+
+###### Built-in type
+
 ```go
 type User struct {
-	Date      carbon.Date     `json:"date"`
-	DateMilli carbon.DateMilli `json:"date_milli"`
-	DateMicro carbon.DateMicro `json:"date_micro"`
-	DateNano  carbon.DateNano  `json:"date_nano"`
-	
-	Time      carbon.Time     `json:"time"`
-	TimeMilli carbon.TimeMilli `json:"time_milli"`
-	TimeMicro carbon.TimeMicro `json:"time_micro"`
-	TimeNano  carbon.TimeNano  `json:"time_nano"`
-	
-	DateTime      carbon.DateTime     `json:"date_time"`
-	DateTimeMilli carbon.DateTimeMilli `json:"date_time_milli"`
-	DateTimeMicro carbon.DateTimeMicro `json:"date_time_micro"`
-	DateTimeNano  carbon.DateTimeNano  `json:"date_time_nano"`
-	
-	Timestamp      carbon.Timestamp     `json:"timestamp"`
-	TimestampMilli carbon.TimestampMilli `json:"timestamp_milli"`
-	TimestampMicro carbon.TimestampMicro `json:"timestamp_micro"`
-	TimestampNano  carbon.TimestampNano  `json:"timestamp_nano"`
+  Date      carbon.LayoutType[carbon.Date]      `json:"date"`
+  DateMilli carbon.LayoutType[carbon.DateMilli] `json:"date_milli"`
+  DateMicro carbon.LayoutType[carbon.DateMicro] `json:"date_micro"`
+  DateNano  carbon.LayoutType[carbon.DateNano]  `json:"date_nano"`
+  
+  Time      carbon.LayoutType[carbon.Time]      `json:"time"`
+  TimeMilli carbon.LayoutType[carbon.TimeMilli] `json:"time_milli"`
+  TimeMicro carbon.LayoutType[carbon.TimeMicro] `json:"time_micro"`
+  TimeNano  carbon.LayoutType[carbon.TimeNano]  `json:"time_nano"`
+  
+  DateTime      carbon.FormatType[carbon.DateTime]      `json:"date_time"`
+  DateTimeMilli carbon.FormatType[carbon.DateTimeMilli] `json:"date_time_milli"`
+  DateTimeMicro carbon.FormatType[carbon.DateTimeMicro] `json:"date_time_micro"`
+  DateTimeNano  carbon.FormatType[carbon.DateTimeNano]  `json:"date_time_nano"`
+  
+  Timestamp      carbon.TimestampType[carbon.Timestamp]      `json:"timestamp"`
+  TimestampMilli carbon.TimestampType[carbon.TimestampMilli] `json:"timestamp_milli"`
+  TimestampMicro carbon.TimestampType[carbon.TimestampMicro] `json:"timestamp_micro"`
+  TimestampNano  carbon.TimestampType[carbon.TimestampNano]  `json:"timestamp_nano"`
 }
 
 var user User
 
 c := carbon.Parse("2020-08-05 13:14:15.999999999")
 
-user.Date = carbon.Date(c)
-user.DateMilli = carbon.NewDateMilli(c)
-user.DateMicro = carbon.NewDateMicro(c)
-user.DateNano = carbon.NewDateNano(c)
+user.Date      = carbon.NewLayoutType[carbon.Date](c)
+user.DateMilli = carbon.NewLayoutType[carbon.DateMilli](c)
+user.DateMicro = carbon.NewLayoutType[carbon.DateMicro](c)
+user.DateNano  = carbon.NewLayoutType[carbon.DateNano](c)
 
-user.Time = carbon.NewTime(c)
-user.TimeMilli = carbon.NewTimeMilli(c)
-user.TimeMicro = carbon.NewTimeMicro(c)
-user.TimeNano = carbon.NewTimeNano(c)
+user.Time      = carbon.NewLayoutType[carbon.Time](c)
+user.TimeMilli = carbon.NewLayoutType[carbon.TimeMilli](c)
+user.TimeMicro = carbon.NewLayoutType[carbon.TimeMicro](c)
+user.TimeNano  = carbon.NewLayoutType[carbon.TimeNano](c)
 
-user.DateTime = carbon.NewDateTime(c)
-user.DateTimeMilli = carbon.NewDateTimeMilli(c)
-user.DateTimeMicro = carbon.NewDateTimeMicro(c)
-user.DateTimeNano = carbon.NewDateTimeNano(c)
+user.DateTime      = carbon.NewFormatType[carbon.DateTime](c)
+user.DateTimeMilli = carbon.NewFormatType[carbon.DateTimeMilli](c)
+user.DateTimeMicro = carbon.NewFormatType[carbon.DateTimeMicro](c)
+user.DateTimeNano  = carbon.NewFormatType[carbon.DateTimeNano](c)
 
-user.Timestamp = carbon.NewTimestamp(c)
-user.TimestampMilli = carbon.NewTimestampMilli(c)
-user.TimestampMicro = carbon.NewTimestampMicro(c)
-user.TimestampNano = carbon.NewTimestampNano(c)
+user.Timestamp      = carbon.NewTimestampType[carbon.Timestamp](c)
+user.TimestampMilli = carbon.NewTimestampType[carbon.TimestampMilli](c)
+user.TimestampMicro = carbon.NewTimestampType[carbon.TimestampMicro](c)
+user.TimestampNano  = carbon.NewTimestampType[carbon.TimestampNano](c)
 
 data, err := json.Marshal(&user)
 if err != nil {
-	// Error handle...
-	log.Fatal(err)
+  // Error handle...
+  log.Fatal(err)
 }
 fmt.Printf("%s\n", data)
 // Output
 {
-	"date": "2020-08-05",
-	"date_milli": "2020-08-05.999",
-	"date_micro": "2020-08-05.999999",
-	"date_nano": "2020-08-05.999999999",
-	"time": "13:14:15",
-	"time_milli": "13:14:15.999",
-	"time_micro": "13:14:15.999999",
-	"time_nano": "13:14:15.999999999",
-	"date_time": "2020-08-05 13:14:15",
-	"date_time_milli": "2020-08-05 13:14:15.999",
-	"date_time_micro": "2020-08-05 13:14:15.999999",
-	"date_time_nano": "2020-08-05 13:14:15.999999999",
-	"timestamp": 1596633255,
-	"timestamp_milli": 1596633255999,
-	"timestamp_micro": 1596633255999999,
-	"timestamp_nano": 1596633255999999999
+  "date": "2020-08-05",
+  "date_milli": "2020-08-05.999",
+  "date_micro": "2020-08-05.999999",
+  "date_nano": "2020-08-05.999999999",
+  "time": "13:14:15",
+  "time_milli": "13:14:15.999",
+  "time_micro": "13:14:15.999999",
+  "time_nano": "13:14:15.999999999",
+  "date_time": "2020-08-05 13:14:15",
+  "date_time_milli": "2020-08-05 13:14:15.999",
+  "date_time_micro": "2020-08-05 13:14:15.999999",
+  "date_time_nano": "2020-08-05 13:14:15.999999999",
+  "timestamp": 1596633255,
+  "timestamp_milli": 1596633255999,
+  "timestamp_micro": 1596633255999999,
+  "timestamp_nano": 1596633255999999999
 }
 
 var person User
 err := json.Unmarshal(data, &person)
 if err != nil {
-	// Error handle...
-	log.Fatal(err)
+  // Error handle...
+  log.Fatal(err)
 }
 
 fmt.Printf("person: %+v\n", person)
 // Output
 person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 DateNano:2020-08-05.999999999 Time:13:14:15 TimeMilli:13:14:15.999 TimeMicro:13:14:15.999999 TimeNano:13:14:15.999999999 DateTime:2020-08-05 13:14:15 DateTimeMilli:2020-08-05 13:14:15.999 DateTimeMicro:2020-08-05 13:14:15.999999 DateTimeNano:2020-08-05 13:14:15.999999999 Timestamp:1596633255 TimestampMilli:1596633255999 TimestampMicro:1596633255999999 TimestampNano:1596633255999999999}
+```
+
+###### Customize type
+
+```go
+type RFC3339Layout string
+func (t CustomerLayout) SetLayout() string {
+  return carbon.RFC3339Layout
+}
+
+type ISO8601Format string
+func (t CustomerFormat) SetFormat() string {
+  return carbon.ISO8601Format
+}
+
+type User struct {
+  Customer1 carbon.LayoutType[RFC3339Layout] `json:"customer1"`
+  Customer2 carbon.FormatType[ISO8601Format] `json:"customer2"`
+}
+
+var user User
+
+c := carbon.Parse("2020-08-05 13:14:15")
+
+user.Customer1 = carbon.NewLayoutType[RFC3339Layout](c)
+user.Customer2 = carbon.NewFormatType[ISO8601Format](c)
+
+data, err := json.Marshal(&user)
+if err != nil {
+  // Error handle...
+  log.Fatal(err)
+}
+fmt.Printf("%s\n", data)
+// Output
+{"customer1":"2020-08-05T13:14:15Z","customer2":"2020-08-05T13:14:15+00:00"}
+
+var person User
+err := json.Unmarshal(data, &person)
+if err != nil {
+  // Error handle...
+  log.Fatal(err)
+}
+
+fmt.Printf("person: %+v\n", person)
+// Output
+person: {Customer1:2020-08-05T13:14:15Z Customer2:2020-08-05T13:14:15+00:00}
 ```
 
 ##### Calendar
@@ -1452,19 +1504,16 @@ The following methods are supported
 lang := carbon.NewLanguage()
 lang.SetLocale("en")
 
-c := carbon.SetLanguage(lang)
-if c.Error != nil {
-  // Error handle...
-  log.Fatal(c.Error)
-}
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+now := carbon.Now().SetLanguage(lang)
 
-c.Now().AddHours(1).DiffForHumans() // 1 hour from now
-c.Now().AddHours(1).ToMonthString() // August
-c.Now().AddHours(1).ToShortMonthString() // Aug
-c.Now().AddHours(1).ToWeekString() // Wednesday
-c.Now().AddHours(1).ToShortWeekString() // Wed
-c.Now().AddHours(1).Constellation() // Leo
-c.Now().AddHours(1).Season() // Summer
+now.Copy().AddHours(1).DiffForHumans() // 1 hour from now
+now.Copy().AddHours(1).ToMonthString() // August
+now.Copy().AddHours(1).ToShortMonthString() // Aug
+now.Copy().AddHours(1).ToWeekString() // Wednesday
+now.Copy().AddHours(1).ToShortWeekString() // Wed
+now.Copy().AddHours(1).Constellation() // Leo
+now.Copy().AddHours(1).Season() // Summer
 ```
 
 ###### Reset some resources(the rests still translate from the given locale)
@@ -1477,20 +1526,17 @@ resources := map[string]string {
 }
 lang.SetLocale("en").SetResources(resources)
 
-c := carbon.SetLanguage(lang)
-if c.Error != nil {
-  // Error handle...
-  log.Fatal(c.Error)
-}
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+now := carbon.Now().SetLanguage(lang)
 
-c.Now().AddYears(1).DiffForHumans() // 1 year from now
-c.Now().AddHours(1).DiffForHumans() // 1h from now
-c.Now().ToMonthString() // August
-c.Now().ToShortMonthString() // Aug
-c.Now().ToWeekString() // Tuesday
-c.Now().ToShortWeekString() // Tue
-c.Now().Constellation() // Leo
-c.Now().Season() // Summer
+now.Copy().AddYears(1).DiffForHumans() // 1 year from now
+now.Copy().AddHours(1).DiffForHumans() // 1h from now
+now.Copy().ToMonthString() // August
+now.Copy().ToShortMonthString() // Aug
+now.Copy().ToWeekString() // Tuesday
+now.Copy().ToShortWeekString() // Tue
+now.Copy().Constellation() // Leo
+now.Copy().Season() // Summer
 ```
 
 ###### Reset all resources
@@ -1519,27 +1565,29 @@ resources := map[string]string {
 }
 lang.SetResources(resources)
 
-c := carbon.SetLanguage(lang)
-c.Now().AddYears(1).DiffForHumans() // in 1 yr
-c.Now().AddHours(1).DiffForHumans() // in 1h
-c.Now().ToMonthString() // august
-c.Now().ToShortMonthString() // aug
-c.Now().ToWeekString() // tuesday
-c.Now().ToShortWeekString() // tue
-c.Now().Constellation() // leo
-c.Now().Season() // summer
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+now := carbon.Now().SetLanguage(lang)
+
+now.Copy().AddYears(1).DiffForHumans() // in 1 yr
+now.Copy().AddHours(1).DiffForHumans() // in 1h
+now.Copy().ToMonthString() // august
+now.Copy().ToShortMonthString() // aug
+now.Copy().ToWeekString() // tuesday
+now.Copy().ToShortWeekString() // tue
+now.Copy().Constellation() // leo
+now.Copy().Season() // summer
 ```
 
 ##### Error
 
 ```go
-c := carbon.SetTimezone("xxx").Parse("2020-08-05")
+c := carbon.Parse("2020-08-05").SetTimezone("xxx")
 if c.HasError() {
   // Error handle...
   log.Fatal(c.Error)
 }
 // Output
-invalid timezone "xxx", please see the file "$GOROOT/lib/time/zoneinfo.zip" for all valid timezones
+timezone "xxx" is invalid, please see the file "$GOROOT/lib/time/zoneinfo.zip" for all valid timezones
 ```
 
 #### Appendix
@@ -1583,7 +1631,7 @@ invalid timezone "xxx", please see the file "$GOROOT/lib/time/zoneinfo.zip" for 
 |  w   |                                            Day of the week                                             |   1    |       0-6        |          1          |
 |  t   |                                        Total days of the month                                         |   2    |      28-31       |         31          |
 |  z   |                                               Time zone                                                |   -    |        -         |    Asia/Shanghai    |
-|  o   |                                              Time offset                                               |   -    |        -         |          28800      |
+|  o   |                                              Time offset                                               |   -    |        -         |        28800        |
 |  q   |                                                Quarter                                                 |   1    |       1-4        |          1          |
 |  c   |                                                Century                                                 |   -    |       0-99       |         21          |
 

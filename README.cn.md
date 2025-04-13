@@ -50,7 +50,7 @@ go mod edit -replace github.com/golang-module/carbon/v2 = github.com/dromara/car
 
 #### 用法示例
 
-> 假设当前时间为 2020-08-05 13:14:15.999999999 +0800 CST
+> 默认时区 UTC, 语言环境 en(英语)，假设当前时间为 2020-08-05 13:14:15.999999999 +0800 CST
 
 ##### 设置全局默认值
 
@@ -120,8 +120,6 @@ carbon.Yesterday().ToDateTimeString() // 2020-08-04 13:14:15
 carbon.Yesterday().ToDateString() // 2020-08-04
 // 昨天时间
 carbon.Yesterday().ToTimeString() // 13:14:15
-// 指定日期的昨天此刻
-carbon.Parse("2021-01-28 13:14:15").Yesterday().ToDateTimeString() // 2021-01-27 13:14:15
 // 指定时区的昨天此刻
 carbon.Yesterday(carbon.NewYork).ToDateTimeString() // 2020-08-04 14:14:15
 // 昨天秒级时间戳
@@ -142,8 +140,6 @@ carbon.Tomorrow().ToDateTimeString() // 2020-08-06 13:14:15
 carbon.Tomorrow().ToDateString() // 2020-08-06
 // 明天时间
 carbon.Tomorrow().ToTimeString() // 13:14:15
-// 指定日期的明天此刻
-carbon.Parse("2021-01-28 13:14:15").Tomorrow().ToDateTimeString() // 2021-01-29 13:14:15
 // 指定时区的明天此刻
 carbon.Tomorrow(carbon.NewYork).ToDateTimeString() // 2020-08-06 14:14:15
 // 明天秒级时间戳
@@ -246,6 +242,9 @@ carbon.Parse("20200805131415.999999999").ToString() // 2020-08-05 13:14:15.99999
 carbon.Parse("20200805131415.999+08:00").ToString() // 2020-08-05 13:14:15.999 +0800 CST
 carbon.Parse("20200805131415.999999+08:00").ToString() // 2020-08-05 13:14:15.999999 +0800 CST
 carbon.Parse("20200805131415.999999999+08:00").ToString() // 2020-08-05 13:14:15.999999999 +0800 CST
+
+carbon.Parse("2022-03-08T03:01:14-07:00").ToString() // 2022-03-08 18:01:14 +0800 CST
+carbon.Parse("2022-03-08T10:01:14Z").ToString() // 2022-03-08 18:01:14 +0800 CST
 
 ```
 
@@ -943,12 +942,12 @@ carbon.Parse("2020-01-31").SetMonth(2).ToDateString() // 2020-03-02
 carbon.Parse("2020-01-31").SetMonthNoOverflow(2).ToDateString() // 2020-02-29
 
 // 设置一周的开始日期
-carbon.Parse("2020-08-02").SetWeekStartsAt(carbon.Monday).Week() // 6
 carbon.Parse("2020-08-02").SetWeekStartsAt(carbon.Sunday).Week() // 0
+carbon.Parse("2020-08-02").SetWeekStartsAt(carbon.Monday).Week() // 6
 
 // 设置一周的周末日期
 wd := []carbon.Weekday{
-carbon.Saturday, carbon.Sunday,
+	carbon.Saturday, carbon.Sunday,
 }
 carbon.Parse("2025-04-11").SetWeekendDays(wd).IsWeekend() // false
 carbon.Parse("2025-04-12").SetWeekendDays(wd).IsWeekend() // true
@@ -1317,52 +1316,117 @@ carbon.Parse("2020-08-05 13:14:15").IsWinter() // false
 
 ##### JSON
 
+###### 内置字段类型
+
 ```go
 type User struct {
-	Date      carbon.Date     `json:"date"`
-	DateMilli carbon.DateMilli `json:"date_milli"`
-	DateMicro carbon.DateMicro `json:"date_micro"`
-	DateNano  carbon.DateNano  `json:"date_nano"`
-	
-	Time      carbon.Time     `json:"time"`
-	TimeMilli carbon.TimeMilli `json:"time_milli"`
-	TimeMicro carbon.TimeMicro `json:"time_micro"`
-	TimeNano  carbon.TimeNano  `json:"time_nano"`
-	
-	DateTime      carbon.DateTime     `json:"date_time"`
-	DateTimeMilli carbon.DateTimeMilli `json:"date_time_milli"`
-	DateTimeMicro carbon.DateTimeMicro `json:"date_time_micro"`
-	DateTimeNano  carbon.DateTimeNano  `json:"date_time_nano"`
-	
-	Timestamp      carbon.Timestamp     `json:"timestamp"`
-	TimestampMilli carbon.TimestampMilli `json:"timestamp_milli"`
-	TimestampMicro carbon.TimestampMicro `json:"timestamp_micro"`
-	TimestampNano  carbon.TimestampNano  `json:"timestamp_nano"`
+  Date      carbon.LayoutType[carbon.Date]      `json:"date"`
+  DateMilli carbon.LayoutType[carbon.DateMilli] `json:"date_milli"`
+  DateMicro carbon.LayoutType[carbon.DateMicro] `json:"date_micro"`
+  DateNano  carbon.LayoutType[carbon.DateNano]  `json:"date_nano"`
+  
+  Time      carbon.LayoutType[carbon.Time]      `json:"time"`
+  TimeMilli carbon.LayoutType[carbon.TimeMilli] `json:"time_milli"`
+  TimeMicro carbon.LayoutType[carbon.TimeMicro] `json:"time_micro"`
+  TimeNano  carbon.LayoutType[carbon.TimeNano]  `json:"time_nano"`
+  
+  DateTime      carbon.FormatType[carbon.DateTime]      `json:"date_time"`
+  DateTimeMilli carbon.FormatType[carbon.DateTimeMilli] `json:"date_time_milli"`
+  DateTimeMicro carbon.FormatType[carbon.DateTimeMicro] `json:"date_time_micro"`
+  DateTimeNano  carbon.FormatType[carbon.DateTimeNano]  `json:"date_time_nano"`
+  
+  Timestamp      carbon.TimestampType[carbon.Timestamp]      `json:"timestamp"`
+  TimestampMilli carbon.TimestampType[carbon.TimestampMilli] `json:"timestamp_milli"`
+  TimestampMicro carbon.TimestampType[carbon.TimestampMicro] `json:"timestamp_micro"`
+  TimestampNano  carbon.TimestampType[carbon.TimestampNano]  `json:"timestamp_nano"`
 }
 
 var user User
 
 c := carbon.Parse("2020-08-05 13:14:15.999999999")
 
-user.Date = carbon.Date(c)
-user.DateMilli = carbon.NewDateMilli(c)
-user.DateMicro = carbon.NewDateMicro(c)
-user.DateNano = carbon.NewDateNano(c)
+user.Date      = carbon.NewLayoutType[carbon.Date](c)
+user.DateMilli = carbon.NewLayoutType[carbon.DateMilli](c)
+user.DateMicro = carbon.NewLayoutType[carbon.DateMicro](c)
+user.DateNano  = carbon.NewLayoutType[carbon.DateNano](c)
 
-user.Time = carbon.NewTime(c)
-user.TimeMilli = carbon.NewTimeMilli(c)
-user.TimeMicro = carbon.NewTimeMicro(c)
-user.TimeNano = carbon.NewTimeNano(c)
+user.Time      = carbon.NewLayoutType[carbon.Time](c)
+user.TimeMilli = carbon.NewLayoutType[carbon.TimeMilli](c)
+user.TimeMicro = carbon.NewLayoutType[carbon.TimeMicro](c)
+user.TimeNano  = carbon.NewLayoutType[carbon.TimeNano](c)
 
-user.DateTime = carbon.NewDateTime(c)
-user.DateTimeMilli = carbon.NewDateTimeMilli(c)
-user.DateTimeMicro = carbon.NewDateTimeMicro(c)
-user.DateTimeNano = carbon.NewDateTimeNano(c)
+user.DateTime      = carbon.NewFormatType[carbon.DateTime](c)
+user.DateTimeMilli = carbon.NewFormatType[carbon.DateTimeMilli](c)
+user.DateTimeMicro = carbon.NewFormatType[carbon.DateTimeMicro](c)
+user.DateTimeNano  = carbon.NewFormatType[carbon.DateTimeNano](c)
 
-user.Timestamp = carbon.NewTimestamp(c)
-user.TimestampMilli = carbon.NewTimestampMilli(c)
-user.TimestampMicro = carbon.NewTimestampMicro(c)
-user.TimestampNano = carbon.NewTimestampNano(c)
+user.Timestamp      = carbon.NewTimestampType[carbon.Timestamp](c)
+user.TimestampMilli = carbon.NewTimestampType[carbon.TimestampMilli](c)
+user.TimestampMicro = carbon.NewTimestampType[carbon.TimestampMicro](c)
+user.TimestampNano  = carbon.NewTimestampType[carbon.TimestampNano](c)
+
+data, err := json.Marshal(&user)
+if err != nil {
+  // 错误处理
+  log.Fatal(err)
+}
+fmt.Printf("%s\n", data)
+// 输出
+{
+  "date": "2020-08-05",
+  "date_milli": "2020-08-05.999",
+  "date_micro": "2020-08-05.999999",
+  "date_nano": "2020-08-05.999999999",
+  "time": "13:14:15",
+  "time_milli": "13:14:15.999",
+  "time_micro": "13:14:15.999999",
+  "time_nano": "13:14:15.999999999",
+  "date_time": "2020-08-05 13:14:15",
+  "date_time_milli": "2020-08-05 13:14:15.999",
+  "date_time_micro": "2020-08-05 13:14:15.999999",
+  "date_time_nano": "2020-08-05 13:14:15.999999999",
+  "timestamp": 1596633255,
+  "timestamp_milli": 1596633255999,
+  "timestamp_micro": 1596633255999999,
+  "timestamp_nano": 1596633255999999999
+}
+
+var person User
+err := json.Unmarshal(data, &person)
+if err != nil {
+  // 错误处理
+  log.Fatal(err)
+}
+
+fmt.Printf("person: %+v\n", person)
+// 输出
+person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 DateNano:2020-08-05.999999999 Time:13:14:15 TimeMilli:13:14:15.999 TimeMicro:13:14:15.999999 TimeNano:13:14:15.999999999 DateTime:2020-08-05 13:14:15 DateTimeMilli:2020-08-05 13:14:15.999 DateTimeMicro:2020-08-05 13:14:15.999999 DateTimeNano:2020-08-05 13:14:15.999999999 Timestamp:1596633255 TimestampMilli:1596633255999 TimestampMicro:1596633255999999 TimestampNano:1596633255999999999}
+```
+
+###### 自定义字段类型
+
+```go
+type RFC3339Layout string
+func (t CustomerLayout) SetLayout() string {
+	return carbon.RFC3339Layout
+}
+
+type ISO8601Format string
+func (t CustomerFormat) SetFormat() string {
+	return carbon.ISO8601Format
+}
+
+type User struct {
+	Customer1 carbon.LayoutType[RFC3339Layout] `json:"customer1"`
+	Customer2 carbon.FormatType[ISO8601Format] `json:"customer2"`
+}
+
+var user User
+
+c := carbon.Parse("2020-08-05 13:14:15")
+
+user.Customer1 = carbon.NewLayoutType[RFC3339Layout](c)
+user.Customer2 = carbon.NewFormatType[ISO8601Format](c)
 
 data, err := json.Marshal(&user)
 if err != nil {
@@ -1371,24 +1435,7 @@ if err != nil {
 }
 fmt.Printf("%s\n", data)
 // 输出
-{
-	"date": "2020-08-05",
-	"date_milli": "2020-08-05.999",
-	"date_micro": "2020-08-05.999999",
-	"date_nano": "2020-08-05.999999999",
-	"time": "13:14:15",
-	"time_milli": "13:14:15.999",
-	"time_micro": "13:14:15.999999",
-	"time_nano": "13:14:15.999999999",
-	"date_time": "2020-08-05 13:14:15",
-	"date_time_milli": "2020-08-05 13:14:15.999",
-	"date_time_micro": "2020-08-05 13:14:15.999999",
-	"date_time_nano": "2020-08-05 13:14:15.999999999",
-	"timestamp": 1596633255,
-	"timestamp_milli": 1596633255999,
-	"timestamp_micro": 1596633255999999,
-	"timestamp_nano": 1596633255999999999
-}
+{"customer1":"2020-08-05T13:14:15Z", "customer2":"2020-08-05T13:14:15+00:00"}
 
 var person User
 err := json.Unmarshal(data, &person)
@@ -1399,7 +1446,7 @@ if err != nil {
 
 fmt.Printf("person: %+v\n", person)
 // 输出
-person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 DateNano:2020-08-05.999999999 Time:13:14:15 TimeMilli:13:14:15.999 TimeMicro:13:14:15.999999 TimeNano:13:14:15.999999999 DateTime:2020-08-05 13:14:15 DateTimeMilli:2020-08-05 13:14:15.999 DateTimeMicro:2020-08-05 13:14:15.999999 DateTimeNano:2020-08-05 13:14:15.999999999 Timestamp:1596633255 TimestampMilli:1596633255999 TimestampMicro:1596633255999999 TimestampNano:1596633255999999999}
+person: {Customer1:2020-08-05T13:14:15Z Customer2:2020-08-05T13:14:15+00:00}
 ```
 
 ##### 日历
@@ -1460,19 +1507,16 @@ person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 Da
 lang := carbon.NewLanguage()
 lang.SetLocale("zh-CN")
 
-c := carbon.SetLanguage(lang)
-if c.Error != nil {
-	// 错误处理
-	log.Fatal(c.Error)
-}
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+now := carbon.Now().SetLanguage(lang)
 
-c.Now().AddHours(1).DiffForHumans() // 1 小时后
-c.Now().AddHours(1).ToMonthString() // 八月
-c.Now().AddHours(1).ToShortMonthString() // 8月
-c.Now().AddHours(1).ToWeekString() // 星期二
-c.Now().AddHours(1).ToShortWeekString() // 周二
-c.Now().AddHours(1).Constellation() // 狮子座
-c.Now().AddHours(1).Season() // 夏季
+now.Copy().AddHours(1).DiffForHumans() // 1 小时后
+now.Copy().AddHours(1).ToMonthString() // 八月
+now.Copy().AddHours(1).ToShortMonthString() // 8月
+now.Copy().AddHours(1).ToWeekString() // 星期二
+now.Copy().AddHours(1).ToShortWeekString() // 周二
+now.Copy().AddHours(1).Constellation() // 狮子座
+now.Copy().AddHours(1).Season() // 夏季
 ```
 
 ###### 重写部分翻译资源(其余仍然按照指定的 `locale` 文件内容翻译)
@@ -1485,20 +1529,17 @@ resources := map[string]string {
 }
 lang.SetLocale("en").SetResources(resources)
 
-c := carbon.SetLanguage(lang)
-if c.Error != nil {
-	// 错误处理
-	log.Fatal(c.Error)
-}
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+now := carbon.Now().SetLanguage(lang)
 
-c.Now().AddYears(1).DiffForHumans() // 1 year from now
-c.Now().AddHours(1).DiffForHumans() // 1h from now
-c.Now().ToMonthString() // August
-c.Now().ToShortMonthString() // Aug
-c.Now().ToWeekString() // Tuesday
-c.Now().ToShortWeekString() // Tue
-c.Now().Constellation() // Leo
-c.Now().Season() // Summer
+now.Copy().AddYears(1).DiffForHumans() // 1 year from now
+now.Copy().AddHours(1).DiffForHumans() // 1h from now
+now.Copy().ToMonthString() // August
+now.Copy().ToShortMonthString() // Aug
+now.Copy().ToWeekString() // Tuesday
+now.Copy().ToShortWeekString() // Tue
+now.Copy().Constellation() // Leo
+now.Copy().Season() // Summer
 ```
 
 ###### 重写全部翻译资源(无需指定 `locale`)
@@ -1506,36 +1547,38 @@ c.Now().Season() // Summer
 ```go
 lang := carbon.NewLanguage()
 resources := map[string]string {
-	"months": "january|february|march|april|may|june|july|august|september|october|november|december",
-	"short_months": "jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec",
-	"weeks": "sunday|monday|tuesday|wednesday|thursday|friday|saturday",
-	"short_weeks": "sun|mon|tue|wed|thu|fri|sat",
-	"seasons": "spring|summer|autumn|winter",
-	"constellations": "aries|taurus|gemini|cancer|leo|virgo|libra|scorpio|sagittarius|capricornus|aquarius|pisce",
-	"year": "1 yr|%d yrs",
-	"month": "1 mo|%d mos",
-	"week": "%dw",
-	"day": "%dd",
-	"hour": "%dh",
-	"minute": "%dm",
-	"second": "%ds",
-	"now": "just now",
-	"ago": "%s ago",
-	"from_now": "in %s",
-	"before": "%s before",
-	"after": "%s after",
+  "months": "january|february|march|april|may|june|july|august|september|october|november|december",
+  "short_months": "jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec",
+  "weeks": "sunday|monday|tuesday|wednesday|thursday|friday|saturday",
+  "short_weeks": "sun|mon|tue|wed|thu|fri|sat",
+  "seasons": "spring|summer|autumn|winter",
+  "constellations": "aries|taurus|gemini|cancer|leo|virgo|libra|scorpio|sagittarius|capricornus|aquarius|pisce",
+  "year": "1 yr|%d yrs",
+  "month": "1 mo|%d mos",
+  "week": "%dw",
+  "day": "%dd",
+  "hour": "%dh",
+  "minute": "%dm",
+  "second": "%ds",
+  "now": "just now",
+  "ago": "%s ago",
+  "from_now": "in %s",
+  "before": "%s before",
+  "after": "%s after",
 }
 lang.SetResources(resources)
 
-c := carbon.SetLanguage(lang)
-c.Now().AddYears(1).DiffForHumans() // in 1 yr
-c.Now().AddHours(1).DiffForHumans() // in 1h
-c.Now().ToMonthString() // august
-c.Now().ToShortMonthString() // aug
-c.Now().ToWeekString() // tuesday
-c.Now().ToShortWeekString() // tue
-c.Now().Constellation() // leo
-c.Now().Season() // summer
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+now := carbon.Now().SetLanguage(lang)
+
+now.Copy().AddYears(1).DiffForHumans() // in 1 yr
+now.Copy().AddHours(1).DiffForHumans() // in 1h
+now.Copy().ToMonthString() // august
+now.Copy().ToShortMonthString() // aug
+now.Copy().ToWeekString() // tuesday
+now.Copy().ToShortWeekString() // tue
+now.Copy().Constellation() // leo
+now.Copy().Season() // summer
 ```
 
 ##### 错误处理
@@ -1543,11 +1586,11 @@ c.Now().Season() // summer
 ```go
 c := carbon.Parse("2020-08-05").SetTimezone("xxx")
 if c.HasError() {
-	// 错误处理
-	log.Fatal(c.Error)
+  // 错误处理
+  log.Fatal(c.Error)
 }
 // 输出
-invalid timezone "xxx", please see the file "$GOROOT/lib/time/zoneinfo.zip" for all valid timezones
+timezone "xxx" is invalid, please see the file "$GOROOT/lib/time/zoneinfo.zip" for all valid timezones
 ```
 
 #### 附录
