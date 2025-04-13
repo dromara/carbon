@@ -55,16 +55,18 @@ go mod edit -replace github.com/golang-module/carbon/v2=github.com/dromara/carbo
 ```go
 carbon.SetLayout(carbon.DateTimeLayout)
 carbon.SetTimezone(carbon.UTC)
-carbon.SetWeekStartsAt(carbon.Sunday)
 carbon.SetLocale("en")
+carbon.SetWeekStartsAt(carbon.Sunday)
+carbon.SetWeekendDays([]carbon.Weekday{carbon.Saturday, carbon.Sunday,})
 
 or
 
 carbon.SetDefault(carbon.Default{
   Layout: carbon.DateTimeLayout,
   Timezone: carbon.UTC,
+  Locale: "en",
   WeekStartsAt: carbon.Sunday,
-  Locale: "en", 
+  WeekendDays: []carbon.Weekday{carbon.Saturday, carbon.Sunday,},
 })
 ```
 
@@ -621,7 +623,7 @@ carbon.Min(yesterday, today, tomorrow) // yesterday
 // Return a Carbon instance for the greatest supported date
 carbon.MaxValue().ToString() // 9999-12-31 23:59:59.999999999 +0000 UTC
 // Return a Carbon instance for the lowest supported date
-carbon.MinValue().ToString() // -9998-01-01 00:00:00 +0000 UTC
+carbon.MinValue().ToString() // 0001-01-01 00:00:00 +0000 UTC
 
 // Return the maximum duration
 carbon.MaxDuration().Seconds() // 9.223372036854776e+09
@@ -933,6 +935,14 @@ carbon.Parse("2020-01-31").SetMonthNoOverflow(2).ToDateString() // 2020-02-29
 carbon.Parse("2020-08-02").SetWeekStartsAt(carbon.Sunday).Week() // 0
 carbon.Parse("2020-08-02").SetWeekStartsAt(carbon.Monday).Week() // 6
 
+// Set weekend days of the week
+wd := []carbon.Weekday{
+carbon.Saturday, carbon.Sunday,
+}
+carbon.Parse("2025-04-11").SetWeekendDays(wd).IsWeekend() // false
+carbon.Parse("2025-04-12").SetWeekendDays(wd).IsWeekend() // true
+carbon.Parse("2025-04-13").SetWeekendDays(wd).IsWeekend() // true
+
 // Set day
 carbon.Parse("2019-08-05").SetDay(31).ToDateString() // 2020-08-31
 carbon.Parse("2020-02-01").SetDay(31).ToDateString() // 2020-03-02
@@ -1079,6 +1089,10 @@ carbon.Now().SetLocale("zh-CN").Season() // 夏季
 // Get start day of the week
 carbon.SetWeekStartsAt(carbon.Sunday).WeekStartsAt() // Sunday
 carbon.SetWeekStartsAt(carbon.Monday).WeekStartsAt() // Monday
+
+// Get end day of the week
+carbon.SetWeekStartsAt(carbon.Sunday).WeekEndsAt() // Saturday
+carbon.SetWeekStartsAt(carbon.Monday).WeekEndsAt() // Sunday
 
 // Get current layout
 carbon.Parse("now").CurrentLayout() // "2006-01-02 15:04:05"

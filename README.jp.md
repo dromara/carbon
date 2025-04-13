@@ -56,16 +56,18 @@ go mod edit -replace github.com/golang-module/carbon/v2=github.com/dromara/carbo
 ```go
 carbon.SetLayout(carbon.DateTimeLayout)
 carbon.SetTimezone(carbon.Japan)
-carbon.SetWeekStartsAt(carbon.Sunday)
 carbon.SetLocale("jp")
+carbon.SetWeekStartsAt(carbon.Sunday)
+carbon.SetWeekendDays([]carbon.Weekday{carbon.Saturday, carbon.Sunday,})
 
 または
 
 carbon.SetDefault(carbon.Default{
   Layout: carbon.DateTimeLayout,
   Timezone: carbon.Japan,
+  Locale: "jp",
   WeekStartsAt: carbon.Sunday,
-  Locale: "jp", 
+  WeekendDays: []carbon.Weekday{carbon.Saturday, carbon.Sunday,},
 })
 ```
 
@@ -623,9 +625,9 @@ carbon.Max(yesterday, today, tomorrow) // tomorrow
 carbon.Min(yesterday, today, tomorrow) // yesterday
 
 // Carbonの最大値を戻す
-carbon.MaxCarbon().ToString() // 9999-12-31 23:59:59.999999999 +0900 JST
+carbon.MaxValue().ToString() // 9999-12-31 23:59:59.999999999 +0000 UTC
 // Carbonの最小値を戻す
-carbon.MinCarbon().ToString() // -9998-01-01 00:00:00 +0900 JST
+carbon.MinValue().ToString() // 0001-01-01 00:00:00 +0000 UTC
 
 // 期間の最大値を返します
 carbon.MaxDuration().Seconds() // 9.223372036854776e+09
@@ -938,6 +940,14 @@ carbon.Parse("2020-01-31").SetMonthNoOverflow(2).ToDateString() // 2020-02-29
 carbon.Parse("2020-08-02").SetWeekStartsAt(carbon.Sunday).Week() // 0
 carbon.Parse("2020-08-02").SetWeekStartsAt(carbon.Monday).Week() // 6
 
+// 週の週末日付の設定
+wd := []carbon.Weekday{
+carbon.Saturday, carbon.Sunday,
+}
+carbon.Parse("2025-04-11").SetWeekendDays(wd).IsWeekend() // false
+carbon.Parse("2025-04-12").SetWeekendDays(wd).IsWeekend() // true
+carbon.Parse("2025-04-13").SetWeekendDays(wd).IsWeekend() // true
+
 // 日数を設定する
 carbon.Parse("2019-08-05").SetDay(31).ToDateString() // 2020-08-31
 carbon.Parse("2020-02-01").SetDay(31).ToDateString() // 2020-03-02
@@ -1085,6 +1095,10 @@ carbon.Now().SetLocale("jp").Season() // 夏
 // 週の開始日の取得
 carbon.SetWeekStartsAt(carbon.Sunday).WeekStartsAt() // Sunday
 carbon.SetWeekStartsAt(carbon.Monday).WeekStartsAt() // Monday
+
+// 週の終了日の取得
+carbon.SetWeekStartsAt(carbon.Sunday).WeekEndsAt() // Saturday
+carbon.SetWeekStartsAt(carbon.Monday).WeekEndsAt() // Sunday
 
 // 現在のレイアウトテンプレートの取得
 carbon.Parse("now").CurrentLayout() // "2006-01-02 15:04:05"
