@@ -722,7 +722,7 @@ func TestCarbon_Month(t *testing.T) {
 
 func TestCarbon_Week(t *testing.T) {
 	t.Run("zero time", func(t *testing.T) {
-		assert.Equal(t, 1, NewCarbon().Week())
+		assert.Equal(t, 0, NewCarbon().Week())
 	})
 
 	t.Run("invalid time", func(t *testing.T) {
@@ -732,10 +732,10 @@ func TestCarbon_Week(t *testing.T) {
 	})
 
 	t.Run("valid time", func(t *testing.T) {
-		assert.Equal(t, 1, Parse("2020-08-03").Week())
-		assert.Equal(t, 2, Parse("2020-08-04").Week())
-		assert.Equal(t, 3, Parse("2020-08-05").Week())
-		assert.Zero(t, Parse("2020-08-09").Week())
+		assert.Equal(t, 0, Parse("2020-08-03").Week())
+		assert.Equal(t, 1, Parse("2020-08-04").Week())
+		assert.Equal(t, 2, Parse("2020-08-05").Week())
+		assert.Equal(t, 6, Parse("2020-08-09").Week())
 	})
 }
 
@@ -1008,6 +1008,23 @@ func TestCarbon_WeekStartsAt(t *testing.T) {
 	t.Run("valid time", func(t *testing.T) {
 		assert.Equal(t, Sunday, Now().SetWeekStartsAt(Sunday).WeekStartsAt())
 		assert.Equal(t, Monday, Now().SetWeekStartsAt(Monday).WeekStartsAt())
+	})
+}
+
+func TestCarbon_WeekEndsAt(t *testing.T) {
+	t.Run("zero time", func(t *testing.T) {
+		assert.Equal(t, Sunday, NewCarbon().WeekEndsAt())
+	})
+
+	t.Run("invalid time", func(t *testing.T) {
+		assert.Empty(t, Parse("").WeekEndsAt())
+		assert.Empty(t, Parse("0").WeekEndsAt())
+		assert.Empty(t, Parse("xxx").WeekEndsAt())
+	})
+
+	t.Run("valid time", func(t *testing.T) {
+		assert.Equal(t, Saturday, Now().SetWeekStartsAt(Sunday).WeekEndsAt())
+		assert.Equal(t, Sunday, Now().SetWeekStartsAt(Monday).WeekEndsAt())
 	})
 }
 
