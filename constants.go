@@ -6,7 +6,7 @@ import (
 
 // Version current version
 // 当前版本号
-const Version = "2.5.6"
+const Version = "2.5.7"
 
 // timezone constants
 // 时区常量
@@ -77,18 +77,16 @@ const (
 // month constants
 // 月份常量
 const (
-	January   = "January"   // 一月
-	February  = "February"  // 二月
-	March     = "March"     // 三月
-	April     = "April"     // 四月
-	May       = "May"       // 五月
-	June      = "June"      // 六月
-	July      = "July"      // 七月
-	August    = "August"    // 八月
-	September = "September" // 九月
-	October   = "October"   // 十月
-	November  = "November"  // 十一月
-	December  = "December"  // 十二月
+	January  = time.January  // 一月
+	February = time.February // 二月
+	March    = time.March    // 三月
+	April    = time.April    // 四月
+	May      = time.May      // 五月
+	June     = time.June     // 六月
+	July     = time.July     // 七月
+	August   = time.August   // 八月
+	October  = time.October  // 十月
+	December = time.December // 十二月
 )
 
 // constellation constants
@@ -111,13 +109,13 @@ const (
 // week constants
 // 星期常量
 const (
-	Monday    = "Monday"    // 周一
-	Tuesday   = "Tuesday"   // 周二
-	Wednesday = "Wednesday" // 周三
-	Thursday  = "Thursday"  // 周四
-	Friday    = "Friday"    // 周五
-	Saturday  = "Saturday"  // 周六
-	Sunday    = "Sunday"    // 周日
+	Monday    = time.Monday    // 周一
+	Tuesday   = time.Tuesday   // 周二
+	Wednesday = time.Wednesday // 周三
+	Thursday  = time.Thursday  // 周四
+	Friday    = time.Friday    // 周五
+	Saturday  = time.Saturday  // 周六
+	Sunday    = time.Sunday    // 周日
 )
 
 // season constants
@@ -132,6 +130,7 @@ const (
 // number constants
 // 数字常量
 const (
+	EpochYear          = 1970   // UNIX 纪元年
 	YearsPerMillennium = 1000   // 每千年1000年
 	YearsPerCentury    = 100    // 每世纪100年
 	YearsPerDecade     = 10     // 每十年10年
@@ -139,7 +138,7 @@ const (
 	MonthsPerYear      = 12     // 每年12月
 	MonthsPerQuarter   = 3      // 每季度3月
 	WeeksPerNormalYear = 52     // 每常规年52周
-	weeksPerLongYear   = 53     // 每长年53周
+	WeeksPerLongYear   = 53     // 每长年53周
 	WeeksPerMonth      = 4      // 每月4周
 	DaysPerLeapYear    = 366    // 每闰年366天
 	DaysPerNormalYear  = 365    // 每常规年365天
