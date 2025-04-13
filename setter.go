@@ -57,10 +57,20 @@ func SetLocale(locale string) Carbon {
 
 // SetWeekStartsAt sets globally default start day of the week.
 // 设置全局默认周起始日期
-func SetWeekStartsAt(day string) Carbon {
-	c := NewCarbon().SetWeekStartsAt(day)
+func SetWeekStartsAt(weekday Weekday) Carbon {
+	c := NewCarbon().SetWeekStartsAt(weekday)
 	if !c.HasError() {
-		DefaultWeekStartsAt = day
+		DefaultWeekStartsAt = weekday
+	}
+	return c
+}
+
+// SetWeekendDays sets weekend days of the week.
+// 设置一周周末日期
+func SetWeekendDays(weekDays []Weekday) Carbon {
+	c := NewCarbon().SetWeekendDays(weekDays)
+	if !c.HasError() {
+		DefaultWeekendDays = weekDays
 	}
 	return c
 }
@@ -133,18 +143,21 @@ func (c Carbon) SetLocale(locale string) Carbon {
 
 // SetWeekStartsAt sets start day of the week.
 // 设置周起始日期
-func (c Carbon) SetWeekStartsAt(day string) Carbon {
-	if day == "" {
-		c.Error = ErrEmptyWeekStartDay()
-	}
+func (c Carbon) SetWeekStartsAt(weekday Weekday) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	if weekday, ok := weekdays[day]; ok {
-		c.weekStartsAt = weekday
-	} else {
-		c.Error = ErrInvalidWeekStartDay(day)
+	c.weekStartsAt = weekday
+	return c
+}
+
+// SetWeekendDays sets weekend days of the week.
+// 设置一周周末日期
+func (c Carbon) SetWeekendDays(weekDays []Weekday) Carbon {
+	if c.IsInvalid() {
+		return c
 	}
+	c.weekendDays = weekDays
 	return c
 }
 
