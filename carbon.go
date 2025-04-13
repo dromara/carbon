@@ -12,14 +12,19 @@ import (
 	"time"
 )
 
+type StdTime = time.Time
+type Weekday = time.Weekday
+type Location = time.Location
+
 // Carbon defines a Carbon struct.
 // 定义 Carbon 结构体
 type Carbon struct {
-	time         time.Time
+	time         StdTime
 	layout       string
 	isNil        bool
-	weekStartsAt time.Weekday
-	loc          *time.Location
+	weekStartsAt Weekday
+	weekendDays  []Weekday
+	loc          *Location
 	lang         *Language
 	Error        error
 }
@@ -30,9 +35,8 @@ func NewCarbon(time ...time.Time) Carbon {
 	c := Carbon{}
 	c.lang = NewLanguage().SetLocale(DefaultLocale)
 	c.layout = DefaultLayout
-	if weekday, ok := weekdays[DefaultWeekStartsAt]; ok {
-		c.weekStartsAt = weekday
-	}
+	c.weekStartsAt = DefaultWeekStartsAt
+	c.weekendDays = DefaultWeekendDays
 	if len(time) > 0 {
 		c.time = time[0]
 		c.loc = time[0].Location()
