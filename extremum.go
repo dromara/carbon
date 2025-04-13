@@ -19,7 +19,7 @@ func MaxValue() Carbon {
 // 返回 Carbon 的最小值
 func MinValue() Carbon {
 	c := NewCarbon()
-	c.time = time.Date(-9998, time.January, 1, 0, 0, 0, 0, time.UTC)
+	c.time = time.Date(1, time.January, 1, 0, 0, 0, 0, time.UTC)
 	return c
 }
 
