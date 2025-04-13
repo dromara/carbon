@@ -106,16 +106,4 @@ var (
 	ErrMismatchedFormat = func(value, format string) error {
 		return fmt.Errorf("value %q and format %q are mismatched", value, format)
 	}
-
-	// ErrEmptyWeekStartDay empty week start day error.
-	// 空的周起始日期错误
-	ErrEmptyWeekStartDay = func() error {
-		return fmt.Errorf("week start day cannot be empty")
-	}
-
-	// ErrInvalidWeekStartDay invalid week start day error.
-	// 无效的周起始日期错误
-	ErrInvalidWeekStartDay = func(day string) error {
-		return fmt.Errorf("invalid week start day %q", day)
-	}
 )
