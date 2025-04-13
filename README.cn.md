@@ -50,7 +50,7 @@ go mod edit -replace github.com/golang-module/carbon/v2 = github.com/dromara/car
 
 #### 用法示例
 
-> 默认时区 UTC, 语言环境 en(英语)，一周开始日期是周一，假设当前时间为 2020-08-05 13:14:15.999999999 +0800 CST
+> 默认时区 UTC, 语言环境英语，一周开始日期是周一。假设当前时间为 2020-08-05 13:14:15.999999999 +0800 CST
 
 ##### 设置全局默认值
 
