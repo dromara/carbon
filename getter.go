@@ -336,8 +336,8 @@ func (c Carbon) Nanosecond() int {
 	return c.StdTime().Nanosecond()
 }
 
-// Timestamp gets timestamp with second like 1596604455.
-// 输出秒级时间戳
+// Timestamp gets timestamp with second precision like 1596604455.
+// 输出秒精度时间戳
 func (c Carbon) Timestamp() int64 {
 	if c.IsInvalid() {
 		return 0
@@ -345,8 +345,8 @@ func (c Carbon) Timestamp() int64 {
 	return c.StdTime().Unix()
 }
 
-// TimestampMilli gets timestamp with millisecond like 1596604455000.
-// 获取毫秒级时间戳
+// TimestampMilli gets timestamp with millisecond precision like 1596604455000.
+// 获取毫秒精度时间戳
 func (c Carbon) TimestampMilli() int64 {
 	if c.IsInvalid() {
 		return 0
@@ -354,8 +354,8 @@ func (c Carbon) TimestampMilli() int64 {
 	return c.StdTime().UnixMilli()
 }
 
-// TimestampMicro gets timestamp with microsecond like 1596604455000000.
-// 获取微秒级时间戳
+// TimestampMicro gets timestamp with microsecond precision like 1596604455000000.
+// 获取微秒精度时间戳
 func (c Carbon) TimestampMicro() int64 {
 	if c.IsInvalid() {
 		return 0
@@ -363,8 +363,8 @@ func (c Carbon) TimestampMicro() int64 {
 	return c.StdTime().UnixMicro()
 }
 
-// TimestampNano gets timestamp with nanosecond like 1596604455000000000.
-// 获取纳秒级时间戳
+// TimestampNano gets timestamp with nanosecond precision like 1596604455000000000.
+// 获取纳秒精度时间戳
 func (c Carbon) TimestampNano() int64 {
 	if c.IsInvalid() {
 		return 0
