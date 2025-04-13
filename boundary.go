@@ -106,8 +106,11 @@ func (c Carbon) StartOfWeek() Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	dayOfWeek, weekStartsAt := c.DayOfWeek(), int(c.weekStartsAt)
-	return c.SubDays((DaysPerWeek + dayOfWeek - weekStartsAt) % DaysPerWeek).StartOfDay()
+	dayOfWeek, weekStartsAt := c.StdTime().Weekday(), c.WeekStartsAt()
+	if dayOfWeek == weekStartsAt {
+		return c.StartOfDay()
+	}
+	return c.SubDays(int(DaysPerWeek+dayOfWeek-weekStartsAt) % DaysPerWeek).StartOfDay()
 }
 
 // EndOfWeek returns a Carbon instance for end of the week.
@@ -116,8 +119,11 @@ func (c Carbon) EndOfWeek() Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	dayOfWeek, weekEndsAt := c.DayOfWeek(), int(c.weekStartsAt)+DaysPerWeek-1
-	return c.AddDays((DaysPerWeek - dayOfWeek + weekEndsAt) % DaysPerWeek).EndOfDay()
+	dayOfWeek, weekEndsAt := c.StdTime().Weekday(), c.WeekEndsAt()
+	if dayOfWeek == weekEndsAt {
+		return c.EndOfDay()
+	}
+	return c.AddDays(int(DaysPerWeek-dayOfWeek+weekEndsAt) % DaysPerWeek).EndOfDay()
 }
 
 // StartOfDay returns a Carbon instance for start of the day.
