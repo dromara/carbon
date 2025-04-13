@@ -668,6 +668,7 @@ carbon.Parse("2020-08-05").SetTimezone("xxx").IsZero() // false
 
 // UNIX 紀元時間かどうか（1970-01-01 00:00:00 +0000 UTC）
 carbon.Parse("1970-01-01 00:00:00 +0000 UTC").IsEpoch() // true
+carbon.CreateFromTimestamp(0).IsEpoch() // true
 carbon.NewCarbon().IsEpoch() // false
 carbon.Parse("").IsEpoch() // false
 carbon.Parse("0").IsEpoch() // false

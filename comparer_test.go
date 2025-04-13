@@ -82,6 +82,7 @@ func TestCarbon_IsEpoch(t *testing.T) {
 
 	t.Run("valid time", func(t *testing.T) {
 		assert.True(t, CreateFromDateTimeNano(1970, 1, 1, 0, 0, 0, 0, UTC).IsEpoch())
+		assert.True(t, CreateFromTimestamp(0).IsEpoch())
 		assert.False(t, Parse("2020-08-05").IsEpoch())
 		assert.False(t, Parse("0000-00-00").IsEpoch())
 	})
