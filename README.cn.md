@@ -672,6 +672,19 @@ carbon.Parse("2020-08-05 00:00:00").IsZero() // false
 carbon.Parse("2020-08-05").IsZero() // false
 carbon.Parse("2020-08-05").SetTimezone("xxx").IsZero() // false
 
+// 是否是 UNIX 纪元时间(1970-01-01 00:00:00 +0000 UTC)
+carbon.Parse("1970-01-01 00:00:00 +0000 UTC").IsEpoch() // true
+carbon.NewCarbon().IsEpoch() // false
+carbon.Parse("").IsEpoch() // false
+carbon.Parse("0").IsEpoch() // false
+carbon.Parse("xxx").IsEpoch() // false
+carbon.Parse("0000-00-00 00:00:00").IsEpoch() // false
+carbon.Parse("0000-00-00").IsEpoch() // false
+carbon.Parse("00:00:00").IsEpoch() // false
+carbon.Parse("2020-08-05 00:00:00").IsEpoch() // false
+carbon.Parse("2020-08-05").IsEpoch() // false
+carbon.Parse("2020-08-05").SetTimezone("xxx").IsEpoch() // false
+
 // 是否是有效时间
 carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsValid() // true
 carbon.NewCarbon().IsValid() // true

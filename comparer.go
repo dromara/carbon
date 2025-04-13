@@ -31,6 +31,15 @@ func (c Carbon) IsZero() bool {
 	return c.time.IsZero()
 }
 
+// IsEpoch reports whether is a UNIX epoch time(1970-01-01 00:00:00 +0000 UTC).
+// 是否是 UNIX 纪元时间(1970-01-01 00:00:00 +0000 UTC)
+func (c Carbon) IsEpoch() bool {
+	if c.IsInvalid() {
+		return false
+	}
+	return c.StdTime().Equal(time.Date(EpochYear, 1, 1, 0, 0, 0, 0, time.UTC))
+}
+
 // IsValid reports whether is a valid time.
 // 是否是有效时间
 func (c Carbon) IsValid() bool {
