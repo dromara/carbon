@@ -38,8 +38,8 @@ func Parse(value string, timezone ...string) Carbon {
 	return c
 }
 
-// ParseByFormat parses a time string as a Carbon instance by format.
-// 通过格式模板将时间字符串解析成 Carbon 实例
+// ParseByFormat parses a time string as a `Carbon` instance by a confirmed format.
+// 通过一个确认的 格式模板 将时间字符串解析成 Carbon 实例
 func ParseByFormat(value, format string, timezone ...string) Carbon {
 	c := NewCarbon()
 	if value == "" {
@@ -57,8 +57,8 @@ func ParseByFormat(value, format string, timezone ...string) Carbon {
 	return c
 }
 
-// ParseByLayout parses a time string as a Carbon instance by layout.
-// 通过布局模板将时间字符串解析成 Carbon 实例
+// ParseByLayout parses a time string as a `Carbon` instance by a confirmed layout
+// 通过一个确认的 布局模板 将时间字符串解析成 Carbon 实例
 func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	c := NewCarbon()
 	if value == "" {
@@ -117,8 +117,8 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	return c
 }
 
-// ParseWithLayouts parses time string with layouts as a Carbon instance.
-// 通过自定义布局模板将时间字符串解析成 Carbon 实例
+// ParseWithLayouts parses a time string as a `Carbon` instance with multiple fuzzy layouts.
+// 通过多个模糊的 布局模板 将时间字符串解析成 Carbon 实例
 func ParseWithLayouts(value string, layouts []string, timezone ...string) Carbon {
 	c := NewCarbon()
 	if value == "" {
@@ -145,8 +145,8 @@ func ParseWithLayouts(value string, layouts []string, timezone ...string) Carbon
 	return c
 }
 
-// ParseWithFormats parses time string with formats as a Carbon instance.
-// 通过自定义格式模板将时间字符串解析成 Carbon 实例
+// ParseWithFormats parses a time string as a `Carbon` instance with multiple fuzzy formats.
+// 通过多个模糊的 格式模板 将时间字符串解析成 Carbon 实例
 func ParseWithFormats(value string, formats []string, timezone ...string) Carbon {
 	c := NewCarbon()
 	if value == "" {
