@@ -48,7 +48,7 @@ go mod edit -replace github.com/golang-module/carbon/v2=github.com/dromara/carbo
 
 #### Usage and example
 
-> Default timezone is UTC, language locale is English, start day of the week is Sunday. Assuming the current time is 2020-08-05 13:14:15.999999999 +0000 UTC
+> Default timezone is `UTC`, language locale is `English`, start day of the week is `Monday`. Assuming the current time is `2020-08-05 13:14:15.999999999 +0000 UTC`
 
 ##### Set globally default
 
@@ -56,7 +56,7 @@ go mod edit -replace github.com/golang-module/carbon/v2=github.com/dromara/carbo
 carbon.SetLayout(carbon.DateTimeLayout)
 carbon.SetTimezone(carbon.UTC)
 carbon.SetLocale("en")
-carbon.SetWeekStartsAt(carbon.Sunday)
+carbon.SetWeekStartsAt(carbon.Monday)
 carbon.SetWeekendDays([]carbon.Weekday{carbon.Saturday, carbon.Sunday,})
 
 or
@@ -65,7 +65,7 @@ carbon.SetDefault(carbon.Default{
   Layout: carbon.DateTimeLayout,
   Timezone: carbon.UTC,
   Locale: "en",
-  WeekStartsAt: carbon.Sunday,
+  WeekStartsAt: carbon.Monday,
   WeekendDays: []carbon.Weekday{carbon.Saturday, carbon.Sunday,},
 })
 ```
@@ -81,9 +81,10 @@ carbon.Now().StdTime()
 or
 
 // Convert standard Time.time to Carbon
-carbon.CreateFromStdTime(time.Now())
+loc, _ := time.LoadLocation(carbon.PRC)
+carbon.CreateFromStdTime(time.Now().In(loc))
 // Convert Carbon to standard Time.time
-carbon.Now().StdTime()
+carbon.Now(carbon.PRC).StdTime()
 ```
 
 ##### Yesterday, today and tomorrow

@@ -49,7 +49,7 @@ go mod edit -replace github.com/golang-module/carbon/v2=github.com/dromara/carbo
 
 #### 使い方と例
 
-> デフォルトのタイムゾーンUTC、ロケール英語、週の開始日は月曜日。現在時刻が 2020-08-05 13:14:15.999999999 +0900 JST であると仮定します。
+> デフォルトのタイムゾーン `UTC`、ロケール `英語`、週の開始日は`月曜日`。現在時刻が `2020-08-05 13:14:15.999999999 +0900 JST` であると仮定します。
 
 ##### グローバルのデフォルト値設定
 
@@ -57,7 +57,7 @@ go mod edit -replace github.com/golang-module/carbon/v2=github.com/dromara/carbo
 carbon.SetLayout(carbon.DateTimeLayout)
 carbon.SetTimezone(carbon.Japan)
 carbon.SetLocale("jp")
-carbon.SetWeekStartsAt(carbon.Sunday)
+carbon.SetWeekStartsAt(carbon.Monday)
 carbon.SetWeekendDays([]carbon.Weekday{carbon.Saturday, carbon.Sunday,})
 
 または
@@ -66,7 +66,7 @@ carbon.SetDefault(carbon.Default{
   Layout: carbon.DateTimeLayout,
   Timezone: carbon.Japan,
   Locale: "jp",
-  WeekStartsAt: carbon.Sunday,
+  WeekStartsAt: carbon.Monday,
   WeekendDays: []carbon.Weekday{carbon.Saturday, carbon.Sunday,},
 })
 ```
@@ -81,9 +81,10 @@ carbon.Now().StdTime()
 
 または
 // time.Time を Carbon に変換
-carbon.CreateFromStdTime(time.Now())
+loc, _ := time.LoadLocation(carbon.PRC)
+carbon.CreateFromStdTime(time.Now().In(loc))
 // Carbon を time.Time に変換
-carbon.Now().StdTime()
+carbon.Now(carbon.PRC).StdTime()
 ```
 
 ##### 昨日、現在、明日

@@ -50,7 +50,7 @@ go mod edit -replace github.com/golang-module/carbon/v2 = github.com/dromara/car
 
 #### 用法示例
 
-> 默认时区 UTC, 语言环境英语，一周开始日期是周一。假设当前时间为 2020-08-05 13:14:15.999999999 +0800 CST
+> 默认时区是 `UTC`, 语言环境是 `英语`，一周开始日期是 `周一`。假设当前时间为 `2020-08-05 13:14:15.999999999 +0800 CST`
 
 ##### 设置全局默认值
 
@@ -58,7 +58,7 @@ go mod edit -replace github.com/golang-module/carbon/v2 = github.com/dromara/car
 carbon.SetLayout(carbon.DateTimeLayout)
 carbon.SetTimezone(carbon.PRC)
 carbon.SetLocale("zh-CN")
-carbon.SetWeekStartsAt(carbon.Sunday)
+carbon.SetWeekStartsAt(carbon.Monday)
 carbon.SetWeekendDays([]carbon.Weekday{carbon.Saturday, carbon.Sunday,})
 
 或
@@ -67,7 +67,7 @@ carbon.SetDefault(carbon.Default{
   Layout: carbon.DateTimeLayout,
   Timezone: carbon.PRC,
   Locale: "zh-CN",
-  WeekStartsAt: carbon.Sunday,
+  WeekStartsAt: carbon.Monday,
   WeekendDays: []carbon.Weekday{carbon.Saturday, carbon.Sunday,},
 })
 ```
@@ -83,9 +83,10 @@ carbon.Now().StdTime()
 或
 
 // 将标准 time.Time 转换成 Carbon
-carbon.CreateFromStdTime(time.Now())
+loc, _ := time.LoadLocation(carbon.PRC)
+carbon.CreateFromStdTime(time.Now().In(loc))
 // 将 Carbon 转换成标准 time.Time
-carbon.Now().StdTime()
+carbon.Now(carbon.PRC).StdTime()
 ```
 
 ##### 昨天、今天、明天
