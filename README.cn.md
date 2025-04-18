@@ -11,9 +11,10 @@
 
 #### 项目简介
 
-一个轻量级、语义化、对开发者友好的 `golang`
-时间处理库，已被 [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 收录，并获得
+一个轻量级、语义化、对开发者友好的 `golang` 时间处理库，不依赖于 `任何` 第三方库， `100%` 单元测试覆盖率，已被 [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 收录，并获得
 `gitee` 2024 年最有价值项目（`GVP`）和 `gitcode` 2024 年度开源摘星计划 (`G-Star`) 项目
+<img src="https://gitee.com/dromara/carbon/raw/master/gvp.jpg" wigth="100" alt="gvp"/>
+<img src="https://gitee.com/dromara/carbon/raw/master/gstar.jpg" wigth="100" alt="g-star"/>
 
 #### 仓库地址
 
@@ -50,7 +51,8 @@ go mod edit -replace github.com/golang-module/carbon/v2 = github.com/dromara/car
 
 #### 用法示例
 
-> 默认时区是 `UTC`, 语言环境是 `英语`，一周开始日期是 `周一`。假设当前时间为 `2020-08-05 13:14:15.999999999 +0800 CST`
+> 默认时区是 `UTC`, 语言环境是 `英语`，一周开始日期是 `周一`，周末是 `周六`和 `周日`。
+> 假设当前时间为 `2020-08-05 13:14:15.999999999 +0800 CST`
 
 ##### 设置全局默认值
 
