@@ -1670,7 +1670,7 @@ timezone "xxx" is invalid, please see the file "$GOROOT/lib/time/zoneinfo.zip" f
 #### FAQ
 
 1、What is the difference between v2.5.x and v2.6.x?
-> `v2.5.x` and below use `value` passing, while `v2.6.x` and above use `pointer` passing. It is strongly recommended to use `v2.6.x` and above.
+> `v2.5.x` and below use `value` passing, `v2.6.x` and above use `pointer` passing. It is strongly recommended to use `v2.6.x` and above.
 
 2、Timezone error when deploying on `Windows` system
 
