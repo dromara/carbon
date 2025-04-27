@@ -73,9 +73,9 @@ func (lang *Language) SetResources(resources map[string]string) *Language {
 	lang.rw.Lock()
 	defer lang.rw.Unlock()
 
-	for k, v := range resources {
-		if _, ok := lang.resources[k]; ok {
-			lang.resources[k] = v
+	for i := range resources {
+		if _, ok := lang.resources[i]; ok {
+			lang.resources[i] = resources[i]
 		} else {
 			lang.Error = ErrInvalidResourcesError()
 		}

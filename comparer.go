@@ -292,8 +292,8 @@ func (c Carbon) IsWeekend() bool {
 		return false
 	}
 	d := c.StdTime().Weekday()
-	for _, wd := range c.weekendDays {
-		if d == wd {
+	for i := range c.weekendDays {
+		if d == c.weekendDays[i] {
 			return true
 		}
 	}

@@ -161,8 +161,8 @@ func ParseWithFormats(value string, formats []string, timezone ...string) (c Car
 		return Parse(value, timezone...)
 	}
 	var layouts []string
-	for _, format := range formats {
-		layouts = append(layouts, format2layout(format))
+	for i := range formats {
+		layouts = append(layouts, format2layout(formats[i]))
 	}
 	return ParseWithLayouts(value, layouts, timezone...)
 }
