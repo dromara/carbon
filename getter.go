@@ -425,7 +425,7 @@ func (c Carbon) WeekEndsAt() Weekday {
 	if c.IsInvalid() {
 		return 0
 	}
-	return time.Weekday((int(c.weekStartsAt) + DaysPerWeek - 1) % 7)
+	return Weekday((int(c.weekStartsAt) + DaysPerWeek - 1) % 7)
 }
 
 // CurrentLayout returns the layout used for parsing the time string.
