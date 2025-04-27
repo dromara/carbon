@@ -33,46 +33,54 @@ var formatMap = map[byte]string{
 	'R': "Z07:00",  // Zone:   ISO8601 colon timezone. Eg: Z, +02:00.
 	'Z': "MST",     // Zone:   Zone name. Eg: UTC, EST, MDT ...
 
-	'u': "999",       // Millisecond. Eg: 999.
-	'v': "999999",    // Microsecond. Eg: 999999.
-	'x': "999999999", // Nanosecond. Eg: 999999999.
+	'u': "999",       // Second: Millisecond. Eg: 999.
+	'v': "999999",    // Second: Microsecond. Eg: 999999.
+	'x': "999999999", // Second: Nanosecond. Eg: 999999999.
 
-	'S': TimestampLayout,      // Timestamp with second. Eg: 1699677240.
-	'U': TimestampMilliLayout, // Timestamp with millisecond. Eg: 1596604455666.
-	'V': TimestampMicroLayout, // Timestamp with microsecond. Eg: 1596604455666666.
-	'X': TimestampNanoLayout,  // Timestamp with nanosecond. Eg: 1596604455666666666.
+	'S': TimestampLayout,      // Timestamp: Timestamp with second precision. Eg: 1699677240.
+	'U': TimestampMilliLayout, // Timestamp: Timestamp with millisecond precision. Eg: 1596604455666.
+	'V': TimestampMicroLayout, // Timestamp: Timestamp with microsecond precision. Eg: 1596604455666666.
+	'X': TimestampNanoLayout,  // Timestamp: Timestamp with nanosecond precision. Eg: 1596604455666666666.
 }
 
 // default layouts
 // 默认布局模板
 var defaultLayouts = []string{
-	DateTimeLayout, DateLayout, TimeLayout,
-	ISO8601Layout, DayDateTimeLayout, ISO8601NanoLayout,
-	DateTimeNanoLayout, ShortDateTimeLayout, ShortDateTimeNanoLayout,
-	DateLayout, DateNanoLayout, ShortDateLayout, ShortDateNanoLayout,
-	TimeMicroLayout, TimeMilliLayout, TimeNanoLayout,
-	RFC822Layout, RFC822ZLayout, RFC850Layout, RFC1123Layout, RFC1123ZLayout, RFC3339Layout, RFC3339NanoLayout, RFC1036Layout, RFC7231Layout,
-	KitchenLayout,
-	CookieLayout,
-	ANSICLayout,
-	UnixDateLayout,
-	RubyDateLayout,
+	DateTimeLayout, DateLayout, TimeLayout, DayDateTimeLayout,
+
+	"2006-01-02 15:04:05 -0700 MST", "2006-01-02T15:04:05Z07:00", "2006-01-02T15:04:05-07:00", "2006-01-02T15:04:05-0700", "2006-01-02T15:04:05",
+
+	ISO8601Layout, RFC1036Layout, RFC822Layout, RFC822ZLayout, RFC850Layout, RFC1123Layout, RFC1123ZLayout, RFC3339Layout, RFC7231Layout,
+	KitchenLayout, CookieLayout, ANSICLayout, UnixDateLayout, RubyDateLayout,
+
+	ShortDateTimeLayout, ShortDateLayout, ShortTimeLayout,
+
+	DateTimeMilliLayout, DateTimeMicroLayout, DateTimeNanoLayout,
+	DateMilliLayout, DateMicroLayout, DateNanoLayout,
+	TimeMilliLayout, TimeMicroLayout, TimeNanoLayout,
+
+	ShortDateTimeMilliLayout, ShortDateTimeMicroLayout, ShortDateTimeNanoLayout,
+	ShortDateMilliLayout, ShortDateMicroLayout, ShortDateNanoLayout,
+	ShortTimeMilliLayout, ShortTimeMicroLayout, ShortTimeNanoLayout,
+
+	ISO8601MilliLayout, ISO8601MicroLayout, ISO8601NanoLayout,
+	RFC3339MilliLayout, RFC3339MicroLayout, RFC3339NanoLayout,
+
 	"2006",
+	"2006-1-2 15:4:5 -0700 MST", "2006-1-2 3:4:5 -0700 MST",
 	"2006-1", "2006-1-2", "2006-1-2 15", "2006-1-2 15:4", "2006-1-2 15:4:5", "2006-1-2 15:4:5.999999999",
 	"2006.1", "2006.1.2", "2006.1.2 15", "2006.1.2 15:4", "2006.1.2 15:4:5", "2006.1.2 15:4:5.999999999",
 	"2006/1", "2006/1/2", "2006/1/2 15", "2006/1/2 15:4", "2006/1/2 15:4:5", "2006/1/2 15:4:5.999999999",
-	"2006-01-02 15:04:05 -0700 MST",
 	"2006-01-02 15:04:05PM MST", "2006-01-02 15:04:05.999999999PM MST", "2006-1-2 15:4:5PM MST", "2006-1-2 15:4:5.999999999PM MST",
 	"2006-01-02 15:04:05 PM MST", "2006-01-02 15:04:05.999999999 PM MST", "2006-1-2 15:4:5 PM MST", "2006-1-2 15:4:5.999999999 PM MST",
 	"1/2/2006", "1/2/2006 15", "1/2/2006 15:4", "1/2/2006 15:4:5", "1/2/2006 15:4:5.999999999",
-	"2006-1-2 15:4:5 -0700 MST", "2006-1-2 15:4:5.999999999 -0700 MST", "2006-1-2 15:04:05 -0700 MST", "2006-1-2 15:04:05.999999999 -0700 MST",
-	"2006-01-02T15:04:05", "2006-01-02T15:04:05.999999999", "2006-1-2T3:4:5", "2006-1-2T3:4:5.999999999",
-	"2006-01-02T15:04:05Z07", "2006-01-02T15:04:05.999999999Z07", "2006-1-2T15:4:5Z07", "2006-1-2T15:4:5.999999999Z07",
-	"2006-01-02T15:04:05Z07:00", "2006-01-02T15:04:05.999999999Z07:00", "2006-1-2T15:4:5Z07:00", "2006-1-2T15:4:5.999999999Z07:00",
-	"2006-01-02T15:04:05-07:00", "2006-01-02T15:04:05.999999999-07:00", "2006-1-2T15:4:5-07:00", "2006-1-2T15:4:5.999999999-07:00",
-	"2006-01-02T15:04:05-0700", "2006-01-02T15:04:05.999999999-0700", "2006-1-2T3:4:5-0700", "2006-1-2T3:4:5.999999999-0700",
+	"2006-1-2 15:4:5.999999999 -0700 MST", "2006-1-2 15:04:05 -0700 MST", "2006-1-2 15:04:05.999999999 -0700 MST",
+	"2006-01-02T15:04:05.999999999", "2006-1-2T3:4:5", "2006-1-2T3:4:5.999999999",
+	"2006-01-02T15:04:05.999999999Z07", "2006-1-2T15:4:5Z07", "2006-1-2T15:4:5.999999999Z07",
+	"2006-01-02T15:04:05.999999999Z07:00", "2006-1-2T15:4:5Z07:00", "2006-1-2T15:4:5.999999999Z07:00",
+	"2006-01-02T15:04:05.999999999-07:00", "2006-1-2T15:4:5-07:00", "2006-1-2T15:4:5.999999999-07:00",
+	"2006-01-02T15:04:05.999999999-0700", "2006-1-2T3:4:5-0700", "2006-1-2T3:4:5.999999999-0700",
 	"20060102150405-07:00", "20060102150405.999999999-07:00",
-	"20060102150405Z07", "20060102150405.999999999Z07",
 	"20060102150405Z07:00", "20060102150405.999999999Z07:00",
 }
 
@@ -99,38 +107,38 @@ func format2layout(format string) string {
 
 // parses a timezone string as a time.Location instance.
 // 将 时区字符串 解析成 time.Location 实例
-func parseTimezone(timezone string) (*Location, error) {
+func parseTimezone(timezone string) (loc *Location, err error) {
 	if timezone == "" {
 		return nil, ErrEmptyTimezone()
 	}
-	loc, err := time.LoadLocation(timezone)
+	loc, err = time.LoadLocation(timezone)
 	if err != nil {
 		err = fmt.Errorf("%w: %w", ErrInvalidTimezone(timezone), err)
 	}
-	return loc, err
+	return
 }
 
-// parses as a Duration instance by a duration string.
-// 通过时长解析
-func parseByDuration(duration string) (time.Duration, error) {
+// parses a duration string as a time.Duration instance.
+// 将 时长字符串 解析成 time.Duration 实例
+func parseDuration(duration string) (dur Duration, err error) {
 	if duration == "" {
 		return 0, ErrEmptyDuration()
 	}
-	td, err := time.ParseDuration(duration)
+	dur, err = time.ParseDuration(duration)
 	if err != nil {
-		err = ErrInvalidDuration(duration)
+		err = fmt.Errorf("%w: %w", ErrInvalidDuration(duration), err)
 	}
-	return td, err
+	return
 }
 
 // parses a timestamp string as a int64 format timestamp.
 // 将 时间戳字符串 解析成 int64 格式时间戳
-func parseTimestamp(timestamp string) (int64, error) {
-	ts, err := strconv.ParseInt(timestamp, 10, 64)
+func parseTimestamp(timestamp string) (ts int64, err error) {
+	ts, err = strconv.ParseInt(timestamp, 10, 64)
 	if err != nil {
 		return 0, fmt.Errorf("%w: %w", ErrInvalidTimestamp(timestamp), err)
 	}
-	return ts, nil
+	return
 }
 
 // gets absolute value.
