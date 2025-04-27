@@ -11,14 +11,16 @@ import (
 // 实现 driver.Scanner 接口
 func (c *Carbon) Scan(src any) error {
 	switch v := src.(type) {
+	case nil:
+		return nil
 	case []byte:
 		*c = Parse(string(v), DefaultTimezone)
 	case string:
 		*c = Parse(v, DefaultTimezone)
-	case time.Time:
-		*c = CreateFromStdTime(v, DefaultTimezone)
 	case int64:
 		*c = CreateFromTimestamp(v, DefaultTimezone)
+	case time.Time:
+		*c = CreateFromStdTime(v, DefaultTimezone)
 	default:
 		return ErrFailedScan(v)
 	}
@@ -40,13 +42,17 @@ func (c Carbon) Value() (driver.Value, error) {
 // MarshalJSON implements json.Marshal interface.
 // 实现 json.Marshaler 接口
 func (c Carbon) MarshalJSON() ([]byte, error) {
-	emptyBytes := []byte(`""`)
 	if c.IsNil() || c.IsZero() {
-		return emptyBytes, nil
+		return []byte(`""`), nil
 	}
 	if c.HasError() {
-		return emptyBytes, c.Error
+		return []byte(`""`), c.Error
 	}
+	v := c.Layout(DefaultLayout, c.Timezone())
+	b := make([]byte, 0, len(v)+2)
+	b = append(b, '"')
+	b = append(b, v...)
+	b = append(b, '"')
 	return []byte(fmt.Sprintf(`"%s"`, c.ToDateTimeString())), nil
 }
 
@@ -67,7 +73,7 @@ func (c Carbon) String() string {
 	if c.IsZero() || c.IsInvalid() {
 		return ""
 	}
-	return c.Layout(DefaultLayout, c.Timezone())
+	return c.Layout(c.layout, c.Timezone())
 }
 
 // GormDataType sets gorm data type.
