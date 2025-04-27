@@ -22,9 +22,9 @@ func (c Carbon) Lunar() (l lunar.Lunar) {
 // CreateFromLunar creates a Carbon instance from Lunar date and time.
 // 从 农历日期 创建 Carbon 实例
 func CreateFromLunar(year, month, day int, isLeapMonth bool) Carbon {
-	c := NewCarbon()
 	l := lunar.NewLunar(year, month, day, isLeapMonth)
 	if !l.IsValid() {
+		c := NewCarbon()
 		c.Error = l.Error
 		return c
 	}
@@ -46,8 +46,7 @@ func (c Carbon) Julian() (j julian.Julian) {
 // CreateFromJulian creates a Carbon instance from Julian Day or Modified Julian Day.
 // 从 儒略日/简化儒略日 创建 Carbon 实例
 func CreateFromJulian(f float64) Carbon {
-	j := julian.NewJulian(f)
-	return NewCarbon(j.ToGregorian(DefaultTimezone).Time)
+	return NewCarbon(julian.NewJulian(f).ToGregorian(DefaultTimezone).Time)
 }
 
 // Persian converts Carbon instance to Persian instance.
