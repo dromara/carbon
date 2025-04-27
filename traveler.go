@@ -53,7 +53,7 @@ func (c Carbon) AddDuration(duration string) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	td, err := parseByDuration(duration)
+	td, err := parseDuration(duration)
 	if err != nil {
 		c.Error = err
 		return c
