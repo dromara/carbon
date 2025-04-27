@@ -15,13 +15,14 @@ import (
 type StdTime = time.Time
 type Weekday = time.Weekday
 type Location = time.Location
+type Duration = time.Duration
 
 // Carbon defines a Carbon struct.
 // 定义 Carbon 结构体
 type Carbon struct {
-	time         StdTime
 	layout       string
 	isNil        bool
+	time         StdTime
 	weekStartsAt Weekday
 	weekendDays  []Weekday
 	loc          *Location
