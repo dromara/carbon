@@ -11,7 +11,7 @@
 
 #### イントロ
 
-軽量、セマンティック、開発者に優しい `golang` 時間処理ライブラリ
+軽量、セマンティック、開発者に優しい `golang` 時間処理ライブラリ, `いかなる`第三者ライブラリにも依存せず、` 100%`ユニットテストカバレッジ率は、[awesome-go](https://github.com/avelino/awesome-go#date-and-time "awesome-go") 収録
 
 Carbon は [awesome-go](https://github.com/avelino/awesome-go#date-and-time "awesome-go") に含まれています
 
@@ -645,7 +645,8 @@ carbon.NewCarbon().HasError() // false
 carbon.Parse("").HasError() // false
 carbon.Parse("0").HasError() // true
 carbon.Parse("xxx").HasError() // true
-carbon.Parse("2020-08-05").IsNil() // false
+carbon.Parse("2020-08-05").HasError() // false
+carbon.CreateFromTimestamp(0).HasError() // false
 
 // nil 時間かどうか
 carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsNil() // false
@@ -654,13 +655,15 @@ carbon.Parse("").IsNil() // true
 carbon.Parse("0").IsNil() // false
 carbon.Parse("xxx").IsNil() // false
 carbon.NewCarbon().IsNil() // false
+carbon.CreateFromTimestamp(0).IsNil() // false
 
 // ゼロ値の時間かどうか(0001-01-01 00:00:00 +0000 UTC)
 carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsZero() // true
 carbon.NewCarbon().IsZero() // true
+carbon.CreateFromTimestamp(0).IsZero() // false
 carbon.Parse("").IsZero() // false
-carbon.Parse("0").IsZero() // false
 carbon.Parse("xxx").IsZero() // false
+carbon.Parse("0").IsZero() // false
 carbon.Parse("0000-00-00 00:00:00").IsZero() // false
 carbon.Parse("0000-00-00").IsZero() // false
 carbon.Parse("00:00:00").IsZero() // false
@@ -671,6 +674,7 @@ carbon.Parse("2020-08-05").SetTimezone("xxx").IsZero() // false
 // UNIX 紀元時間かどうか（1970-01-01 00:00:00 +0000 UTC）
 carbon.Parse("1970-01-01 00:00:00 +0000 UTC").IsEpoch() // true
 carbon.CreateFromTimestamp(0).IsEpoch() // true
+carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsEpoch() // false
 carbon.NewCarbon().IsEpoch() // false
 carbon.Parse("").IsEpoch() // false
 carbon.Parse("0").IsEpoch() // false
@@ -683,7 +687,8 @@ carbon.Parse("2020-08-05").IsEpoch() // false
 carbon.Parse("2020-08-05").SetTimezone("xxx").IsEpoch() // false
 
 // 有効な時間かどうか
-carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsValid() // true
+carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsValid()
+carbon.CreateFromTimestamp(0).IsValid() // true
 carbon.NewCarbon().IsValid() // true
 carbon.Parse("").IsValid() // false
 carbon.Parse("0").IsValid() // false
@@ -697,6 +702,7 @@ carbon.Parse("2020-08-05").SetTimezone("xxx").IsValid() // false
 
 // 無効な時間かどうか
 carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsInvalid() // false
+carbon.CreateFromTimestamp(0).IsInvalid() // false
 carbon.NewCarbon().IsInvalid() // false
 carbon.Parse("").IsInvalid() // true
 carbon.Parse("0").IsInvalid() // true
@@ -957,7 +963,7 @@ carbon.Parse("2020-08-02").SetWeekStartsAt(carbon.Monday).Week() // 6
 
 // 週の週末日付の設定
 wd := []carbon.Weekday{
-	carbon.Saturday, carbon.Sunday,
+  carbon.Saturday, carbon.Sunday,
 }
 carbon.Parse("2025-04-11").SetWeekendDays(wd).IsWeekend() // false
 carbon.Parse("2025-04-12").SetWeekendDays(wd).IsWeekend() // true
@@ -1330,50 +1336,58 @@ carbon.Parse("2020-08-05 13:14:15").IsWinter() // false
 
 ```go
 type User struct {
-  Date      carbon.LayoutType[carbon.Date]      `json:"date"`
-  DateMilli carbon.LayoutType[carbon.DateMilli] `json:"date_milli"`
-  DateMicro carbon.LayoutType[carbon.DateMicro] `json:"date_micro"`
-  DateNano  carbon.LayoutType[carbon.DateNano]  `json:"date_nano"`
+  Date      carbon.Date      `json:"date"`
+  DateMilli carbon.DateMilli `json:"date_milli"`
+  DateMicro carbon.DateMicro `json:"date_micro"`
+  DateNano  carbon.DateNano  `json:"date_nano"`
   
-  Time      carbon.LayoutType[carbon.Time]      `json:"time"`
-  TimeMilli carbon.LayoutType[carbon.TimeMilli] `json:"time_milli"`
-  TimeMicro carbon.LayoutType[carbon.TimeMicro] `json:"time_micro"`
-  TimeNano  carbon.LayoutType[carbon.TimeNano]  `json:"time_nano"`
+  Time      carbon.Time      `json:"time"`
+  TimeMilli carbon.TimeMilli `json:"time_milli"`
+  TimeMicro carbon.TimeMicro `json:"time_micro"`
+  TimeNano  carbon.TimeNano  `json:"time_nano"`
   
-  DateTime      carbon.FormatType[carbon.DateTime]      `json:"date_time"`
-  DateTimeMilli carbon.FormatType[carbon.DateTimeMilli] `json:"date_time_milli"`
-  DateTimeMicro carbon.FormatType[carbon.DateTimeMicro] `json:"date_time_micro"`
-  DateTimeNano  carbon.FormatType[carbon.DateTimeNano]  `json:"date_time_nano"`
+  DateTime      carbon.DateTime      `json:"date_time"`
+  DateTimeMilli carbon.DateTimeMilli `json:"date_time_milli"`
+  DateTimeMicro carbon.DateTimeMicro `json:"date_time_micro"`
+  DateTimeNano  carbon.DateTimeNano  `json:"date_time_nano"`
   
-  Timestamp      carbon.TimestampType[carbon.Timestamp]      `json:"timestamp"`
-  TimestampMilli carbon.TimestampType[carbon.TimestampMilli] `json:"timestamp_milli"`
-  TimestampMicro carbon.TimestampType[carbon.TimestampMicro] `json:"timestamp_micro"`
-  TimestampNano  carbon.TimestampType[carbon.TimestampNano]  `json:"timestamp_nano"`
+  Timestamp      carbon.Timestamp      `json:"timestamp"`
+  TimestampMilli carbon.TimestampMilli `json:"timestamp_milli"`
+  TimestampMicro carbon.TimestampMicro `json:"timestamp_micro"`
+  TimestampNano  carbon.TimestampNano  `json:"timestamp_nano"`
+  
+  CreatedAt *carbon.DateTime `json:"created_at"`
+  UpdatedAt *carbon.DateTime `json:"updated_at"`
+  DeletedAt *carbon.Timestamp `json:"deleted_at"`
 }
 
 var user User
 
 c := carbon.Parse("2020-08-05 13:14:15.999999999")
 
-user.Date      = carbon.NewLayoutType[carbon.Date](c)
-user.DateMilli = carbon.NewLayoutType[carbon.DateMilli](c)
-user.DateMicro = carbon.NewLayoutType[carbon.DateMicro](c)
-user.DateNano  = carbon.NewLayoutType[carbon.DateNano](c)
+user.Date      = *carbon.NewDate(c)
+user.DateMilli = *carbon.NewDateMilli(c)
+user.DateMicro = *carbon.NewDateMicro(c)
+user.DateNano  = *carbon.NewDateNano(c)
 
-user.Time      = carbon.NewLayoutType[carbon.Time](c)
-user.TimeMilli = carbon.NewLayoutType[carbon.TimeMilli](c)
-user.TimeMicro = carbon.NewLayoutType[carbon.TimeMicro](c)
-user.TimeNano  = carbon.NewLayoutType[carbon.TimeNano](c)
+user.Time      = *carbon.NewTime(c)
+user.TimeMilli = *carbon.NewTimeMilli(c)
+user.TimeMicro = *carbon.NewTimeMicro(c)
+user.TimeNano  = *carbon.NewTimeNano(c)
 
-user.DateTime      = carbon.NewFormatType[carbon.DateTime](c)
-user.DateTimeMilli = carbon.NewFormatType[carbon.DateTimeMilli](c)
-user.DateTimeMicro = carbon.NewFormatType[carbon.DateTimeMicro](c)
-user.DateTimeNano  = carbon.NewFormatType[carbon.DateTimeNano](c)
+user.DateTime      = *carbon.NewDateTime(c)
+user.DateTimeMilli = *carbon.NewDateTimeMilli(c)
+user.DateTimeMicro = *carbon.NewDateTimeMicro(c)
+user.DateTimeNano  = *carbon.NewDateTimeNano(c)
 
-user.Timestamp      = carbon.NewTimestampType[carbon.Timestamp](c)
-user.TimestampMilli = carbon.NewTimestampType[carbon.TimestampMilli](c)
-user.TimestampMicro = carbon.NewTimestampType[carbon.TimestampMicro](c)
-user.TimestampNano  = carbon.NewTimestampType[carbon.TimestampNano](c)
+user.Timestamp      = *carbon.NewTimestamp(c)
+user.TimestampMilli = *carbon.NewTimestampMilli(c)
+user.TimestampMicro = *carbon.NewTimestampMicro(c)
+user.TimestampNano  = *carbon.NewTimestampNano(c)
+
+user.CreatedAt = carbon.NewDateTime(c)
+user.UpdatedAt = carbon.NewDateTime(c)
+user.DeletedAt = carbon.NewTimestamp(c)
 
 data, err := json.Marshal(&user)
 if err != nil {
@@ -1398,7 +1412,10 @@ fmt.Printf("%s\n", data)
   "timestamp": 1596633255,
   "timestamp_milli": 1596633255999,
   "timestamp_micro": 1596633255999999,
-  "timestamp_nano": 1596633255999999999
+  "timestamp_nano": 1596633255999999999,
+  "created_at": "2020-08-05 13:14:15",
+  "updated_at": "2020-08-05 13:14:15",
+  "deleted_at": 1596633255
 }
 
 var person User
@@ -1410,33 +1427,33 @@ if err != nil {
 
 fmt.Printf("person: %+v\n", person)
 // 出力
-person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 DateNano:2020-08-05.999999999 Time:13:14:15 TimeMilli:13:14:15.999 TimeMicro:13:14:15.999999 TimeNano:13:14:15.999999999 DateTime:2020-08-05 13:14:15 DateTimeMilli:2020-08-05 13:14:15.999 DateTimeMicro:2020-08-05 13:14:15.999999 DateTimeNano:2020-08-05 13:14:15.999999999 Timestamp:1596633255 TimestampMilli:1596633255999 TimestampMicro:1596633255999999 TimestampNano:1596633255999999999}
+person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 DateNano:2020-08-05.999999999 Time:13:14:15 TimeMilli:13:14:15.999 TimeMicro:13:14:15.999999 TimeNano:13:14:15.999999999 DateTime:2020-08-05 13:14:15 DateTimeMilli:2020-08-05 13:14:15.999 DateTimeMicro:2020-08-05 13:14:15.999999 DateTimeNano:2020-08-05 13:14:15.999999999 Timestamp:1596633255 TimestampMilli:1596633255999 TimestampMicro:1596633255999999 TimestampNano:1596633255999999999 CreatedAt:2020-08-05 13:14:15 UpdatedAt:2020-08-05 13:14:15 DeletedAt:1596633255}
 ```
 
 ###### カスタムフィールドタイプ
 
 ```go
-type RFC3339Layout string
-func (t CustomerLayout) SetLayout() string {
-    return carbon.RFC3339Layout
+type RFC3339Type string
+func (t RFC3339Type) Layout() string {
+  return carbon.RFC3339Layout
 }
 
-type ISO8601Format string
-func (t CustomerFormat) SetFormat() string {
+type ISO8601Type string
+func (t ISO8601Type) Format() string {
   return carbon.ISO8601Format
 }
 
 type User struct {
-  Customer1 carbon.LayoutType[RFC3339Layout] `json:"customer1"`
-  Customer2 carbon.FormatType[ISO8601Format] `json:"customer2"`
+  Customer1 *carbon.LayoutType[RFC3339Type] `json:"customer1"`
+  Customer2 *carbon.FormatType[ISO8601Type] `json:"customer2"`
 }
 
 var user User
 
 c := carbon.Parse("2020-08-05 13:14:15")
 
-user.Customer1 = carbon.NewLayoutType[RFC3339Layout](c)
-user.Customer2 = carbon.NewFormatType[ISO8601Format](c)
+user.Customer1 = carbon.NewLayoutType[RFC3339Type](c)
+user.Customer2 = carbon.NewFormatType[ISO8601Type](c)
 
 data, err := json.Marshal(&user)
 if err != nil {
@@ -1469,7 +1486,7 @@ person: {Customer1:2020-08-05T13:14:15Z Customer2:2020-08-05T13:14:15+00:00}
 
 ##### i18n
 
-現在サポートされている言語
+現在サポートされている言語（翻訳順に並べる）
 
 * [简体中国語(zh-CN)](./lang/zh-CN.json "简体中国語")：[gouguoyin](https://github.com/gouguoyin "gouguoyin") に翻訳
 * [繁体中国語(zh-TW)](./lang/zh-TW.json "繁体中国語")：[gouguoyin](https://github.com/gouguoyin "gouguoyin") に翻訳
@@ -1519,13 +1536,13 @@ lang.SetLocale("jp")
 carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
 now := carbon.Now().SetLanguage(lang)
 
-now.Copy().AddHours(1).DiffForHumans() // 1 時間後
-now.Copy().AddHours(1).ToMonthString() // はちがつ
-now.Copy().AddHours(1).ToShortMonthString() // 8がつ
-now.Copy().AddHours(1).ToWeekString() // 日曜日
-now.Copy().AddHours(1).ToShortWeekString() // 日
-now.Copy().AddHours(1).Constellation() // しし座
-now.Copy().AddHours(1).Season() // 夏
+now.AddHours(1).DiffForHumans() // 1 時間後
+now.AddHours(1).ToMonthString() // はちがつ
+now.AddHours(1).ToShortMonthString() // 8がつ
+now.AddHours(1).ToWeekString() // 日曜日
+now.AddHours(1).ToShortWeekString() // 日
+now.AddHours(1).Constellation() // しし座
+now.AddHours(1).Season() // 夏
 ```
 
 ###### 翻訳リソースの一部を書き換える(残りはまだ指定された `locale` ファイルの内容によって翻訳されます)
@@ -1541,14 +1558,14 @@ lang.SetLocale("en").SetResources(resources)
 carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
 now := carbon.Now().SetLanguage(lang)
 
-now.Copy().AddYears(1).DiffForHumans() // 1 year from now
-now.Copy().AddHours(1).DiffForHumans() // 1h from now
-now.Copy().ToMonthString() // August
-now.Copy().ToShortMonthString() // Aug
-now.Copy().ToWeekString() // Tuesday
-now.Copy().ToShortWeekString() // Tue
-now.Copy().Constellation() // Leo
-now.Copy().Season() // Summer
+now.AddYears(1).DiffForHumans() // 1 year from now
+now.AddHours(1).DiffForHumans() // 1h from now
+now.ToMonthString() // August
+now.ToShortMonthString() // Aug
+now.ToWeekString() // Tuesday
+now.ToShortWeekString() // Tue
+now.Constellation() // Leo
+now.Season() // Summer
 ```
 
 ###### すべての翻訳リソースを書き換える
@@ -1580,14 +1597,14 @@ lang.SetResources(resources)
 carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
 now := carbon.Now().SetLanguage(lang)
 
-now.Copy().AddYears(1).DiffForHumans() // in 1 yr
-now.Copy().AddHours(1).DiffForHumans() // in 1h
-now.Copy().ToMonthString() // august
-now.Copy().ToShortMonthString() // aug
-now.Copy().ToWeekString() // tuesday
-now.Copy().ToShortWeekString() // tue
-now.Copy().Constellation() // leo
-now.Copy().Season() // summer
+now.AddYears(1).DiffForHumans() // in 1 yr
+now.AddHours(1).DiffForHumans() // in 1h
+now.ToMonthString() // august
+now.ToShortMonthString() // aug
+now.ToWeekString() // tuesday
+now.ToShortWeekString() // tue
+now.Constellation() // leo
+now.Season() // summer
 ```
 
 ##### エラー処理
@@ -1633,10 +1650,10 @@ timezone "xxx" is invalid, please see the file "$GOROOT/lib/time/zoneinfo.zip" f
 | W  | ISO8601 フォーマットの数字は年の中の第何週(2桁でパディング) | 2  |       1-52       |         01          |
 | N  |   ISO8601 フォーマットの数字は曜日(2桁でパディング)    | 2  |      01-07       |         02          |
 | L  |       うるう年かどうか, うるう年が1であれば, 0       | 1  |       0-1        |          0          |
-| S  |              秒タイムスタンプ               | -  |        -         |     1596604455      |
-| U  |             ミリ秒のタイムスタンプ             | -  |        -         |    1596604455666    |
-| V  |            マイクロ秒タイムスタンプ             | -  |        -         |  1596604455666666   |
-| X  |             ナノ秒タイムスタンプ              | -  |        -         | 1596604455666666666 |
+| S  |              秒精度タイムスタンプ              | -  |        -         |     1596604455      |
+| U  |             ミリ精度タイムスタンプ      | -  |        -         |    1596604455666    |
+| V  |            マイクロ精度タイムスタンプ             | -  |        -         |  1596604455666666   |
+| X  |             納精度タイムスタンプ            | -  |        -         | 1596604455666666666 |
 | u  |                 ミリ秒                 | -  |      1-999       |         999         |
 | v  |                マイクロ秒                | -  |     1-999999     |       999999        |
 | x  |                 ナノ秒                 | -  |   1-999999999    |      999999999      |
@@ -1650,7 +1667,7 @@ timezone "xxx" is invalid, please see the file "$GOROOT/lib/time/zoneinfo.zip" f
 #### FAQ
 
 1、v2.5.x と v2.6.x のバージョンの違いは何ですか?
->  v2.5.x および以下のバージョンは値転送であり、v2.6.x 以上のバージョンはポインタ転送であり、汎用を使用して JSON 符号化出力フォーマットのカスタマイズを実現した。どちらのバージョンも長期的にメンテナンスされますが、v2.6.x バージョンを使用することを強くお勧めします。
+>  `v2.5.x` および以下のバージョンは `値` 転送であり、`v2.6.x` および以上のバージョンは `ポインタ` 転送であり、`v2.6.x` および以上のバージョンを使用することを強くお勧めします。
 
 2、window 系统下部署二进制文件时区报错
 
