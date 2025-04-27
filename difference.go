@@ -213,7 +213,7 @@ func (c Carbon) DiffAbsInString(carbon ...Carbon) string {
 
 // DiffInDuration gets the difference in duration.
 // 相差时长
-func (c Carbon) DiffInDuration(carbon ...Carbon) time.Duration {
+func (c Carbon) DiffInDuration(carbon ...Carbon) Duration {
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
@@ -229,7 +229,7 @@ func (c Carbon) DiffInDuration(carbon ...Carbon) time.Duration {
 
 // DiffAbsInDuration gets the difference in duration with absolute value.
 // 相差时长(绝对值)
-func (c Carbon) DiffAbsInDuration(carbon ...Carbon) time.Duration {
+func (c Carbon) DiffAbsInDuration(carbon ...Carbon) Duration {
 	d := c.DiffInDuration(carbon...)
 	if d >= 0 {
 		return d

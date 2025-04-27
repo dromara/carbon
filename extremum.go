@@ -3,8 +3,8 @@ package carbon
 import "time"
 
 const (
-	minDuration time.Duration = -1 << 63
-	maxDuration time.Duration = 1<<63 - 1
+	minDuration Duration = -1 << 63
+	maxDuration Duration = 1<<63 - 1
 )
 
 // MaxValue returns a Carbon instance for the greatest supported date.
@@ -25,13 +25,13 @@ func MinValue() Carbon {
 
 // MaxDuration returns the maximum duration value.
 // 返回 Duration 的最大值
-func MaxDuration() time.Duration {
+func MaxDuration() Duration {
 	return maxDuration
 }
 
 // MinDuration returns the minimum duration value.
 // 返回 Duration 的最小值
-func MinDuration() time.Duration {
+func MinDuration() Duration {
 	return minDuration
 }
 

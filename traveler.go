@@ -397,7 +397,7 @@ func (c Carbon) AddHours(hours int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	td := time.Duration(hours) * time.Hour
+	td := Duration(hours) * time.Hour
 	c.time = c.StdTime().Add(td)
 	return c
 }
@@ -426,7 +426,7 @@ func (c Carbon) AddMinutes(minutes int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	td := time.Duration(minutes) * time.Minute
+	td := Duration(minutes) * time.Minute
 	c.time = c.StdTime().Add(td)
 	return c
 }
@@ -455,7 +455,7 @@ func (c Carbon) AddSeconds(seconds int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	td := time.Duration(seconds) * time.Second
+	td := Duration(seconds) * time.Second
 	c.time = c.StdTime().Add(td)
 	return c
 }
@@ -484,7 +484,7 @@ func (c Carbon) AddMilliseconds(milliseconds int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	td := time.Duration(milliseconds) * time.Millisecond
+	td := Duration(milliseconds) * time.Millisecond
 	c.time = c.StdTime().Add(td)
 	return c
 }
@@ -513,7 +513,7 @@ func (c Carbon) AddMicroseconds(microseconds int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	td := time.Duration(microseconds) * time.Microsecond
+	td := Duration(microseconds) * time.Microsecond
 	c.time = c.StdTime().Add(td)
 	return c
 }
@@ -542,7 +542,7 @@ func (c Carbon) AddNanoseconds(nanoseconds int) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	td := time.Duration(nanoseconds) * time.Nanosecond
+	td := Duration(nanoseconds) * time.Nanosecond
 	c.time = c.StdTime().Add(td)
 	return c
 }
