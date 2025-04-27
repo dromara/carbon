@@ -14,12 +14,12 @@ var testNow = &TestNow{
 
 // SetTestNow sets a test Carbon instance (real or mock) to be returned when a "now" instance is created.
 // 设置当前测试时间
-func SetTestNow(carbon Carbon) {
+func SetTestNow(c Carbon) {
 	testNow.rw.Lock()
 	defer testNow.rw.Unlock()
 
 	testNow.isFrozen = true
-	testNow.frozenNow = carbon
+	testNow.frozenNow = c
 }
 
 // CleanTestNow clears a test Carbon instance (real or mock) to be returned when a "now" instance is created.
