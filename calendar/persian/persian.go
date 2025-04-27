@@ -10,6 +10,13 @@ import (
 	"github.com/dromara/carbon/v2/calendar/julian"
 )
 
+type Locale string
+
+const EnLocale Locale = "en"
+const FaLocale Locale = "fa"
+
+const defaultLocale = EnLocale
+
 var (
 	EnMonths      = []string{"Farvardin", "Ordibehesht", "Khordad", "Tir", "Mordad", "Shahrivar", "Mehr", "Aban", "Azar", "Dey", "Bahman", "Esfand"}
 	ShortEnMonths = []string{"Far", "Ord", "Kho", "Tir", "Mor", "Sha", "Meh", "Aba", "Aza", "Dey", "Bah", "Esf"}
@@ -24,9 +31,9 @@ var (
 	ShortFaWeeks = []string{"پ", "چ", "س", "د", "ی", "ش", "ج"}
 )
 
-// returns a invalid persian date.
+// ErrInvalidPersian returns a invalid persian date.
 // 无效的波斯历日期错误
-var invalidPersianError = func() error {
+var ErrInvalidPersian = func() error {
 	return fmt.Errorf("invalid persian date, please make sure the persian date is valid")
 }
 
@@ -43,7 +50,7 @@ func NewPersian(year, month, day int) *Persian {
 	p := new(Persian)
 	p.year, p.month, p.day = year, month, day
 	if !p.IsValid() {
-		p.Error = invalidPersianError()
+		p.Error = ErrInvalidPersian()
 	}
 	return p
 }
@@ -161,18 +168,18 @@ func (p Persian) String() string {
 
 // ToMonthString outputs a string in persian month format like "فروردین".
 // 获取完整月份字符串，如 "فروردین"
-func (p Persian) ToMonthString(locale ...string) (month string) {
+func (p Persian) ToMonthString(locale ...Locale) (month string) {
 	if !p.IsValid() {
 		return ""
 	}
-	loc := "en"
+	loc := defaultLocale
 	if len(locale) > 0 {
 		loc = locale[0]
 	}
 	switch loc {
-	case "en":
+	case EnLocale:
 		return EnMonths[p.month-1]
-	case "fa":
+	case FaLocale:
 		return FaMonths[p.month-1]
 	}
 	return ""
@@ -180,18 +187,18 @@ func (p Persian) ToMonthString(locale ...string) (month string) {
 
 // ToShortMonthString outputs a short string in persian month format like "فروردین".
 // 获取缩写月份字符串，如 "فروردین"
-func (p Persian) ToShortMonthString(locale ...string) (month string) {
+func (p Persian) ToShortMonthString(locale ...Locale) (month string) {
 	if !p.IsValid() {
 		return ""
 	}
-	loc := "en"
+	loc := defaultLocale
 	if len(locale) > 0 {
 		loc = locale[0]
 	}
 	switch loc {
-	case "en":
+	case EnLocale:
 		return ShortEnMonths[p.month-1]
-	case "fa":
+	case FaLocale:
 		return ShortFaMonths[p.month-1]
 	}
 	return ""
@@ -199,19 +206,19 @@ func (p Persian) ToShortMonthString(locale ...string) (month string) {
 
 // ToWeekString outputs a string in week layout like "چهارشنبه".
 // 输出完整星期字符串，如 "چهارشنبه"
-func (p Persian) ToWeekString(locale ...string) (month string) {
+func (p Persian) ToWeekString(locale ...Locale) (month string) {
 	if !p.IsValid() {
 		return ""
 	}
-	loc := "en"
+	loc := defaultLocale
 	if len(locale) > 0 {
 		loc = locale[0]
 	}
 	week := p.ToGregorian().Time.Weekday()
 	switch loc {
-	case "en":
+	case EnLocale:
 		return EnWeeks[week]
-	case "fa":
+	case FaLocale:
 		return FaWeeks[week]
 	}
 	return ""
@@ -219,11 +226,11 @@ func (p Persian) ToWeekString(locale ...string) (month string) {
 
 // ToShortWeekString outputs a short string in week layout like "چهارشنبه".
 // 输出缩写星期字符串，如 "چهارشنبه"
-func (p Persian) ToShortWeekString(locale ...string) (month string) {
+func (p Persian) ToShortWeekString(locale ...Locale) (month string) {
 	if !p.IsValid() {
 		return ""
 	}
-	loc := "en"
+	loc := defaultLocale
 	if len(locale) > 0 {
 		loc = locale[0]
 	}
