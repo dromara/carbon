@@ -56,9 +56,9 @@ var (
 	}
 )
 
-// returns a invalid lunar date.
+// ErrInvalidLunar returns a invalid lunar date.
 // 无效的农历日期错误
-var invalidLunarError = func() error {
+var ErrInvalidLunar = func() error {
 	return fmt.Errorf("invalid lunar date, please make sure the lunar date is valid")
 }
 
@@ -75,7 +75,7 @@ type Lunar struct {
 func NewLunar(year, month, day int, isLeapMonth bool) (l Lunar) {
 	l.year, l.month, l.day, l.isLeapMonth = year, month, day, isLeapMonth
 	if !l.IsValid() {
-		l.Error = invalidLunarError()
+		l.Error = ErrInvalidLunar()
 	}
 	return l
 }
@@ -248,8 +248,8 @@ func (l Lunar) ToYearString() (year string) {
 		return ""
 	}
 	year = fmt.Sprintf("%d", l.year)
-	for index, number := range numbers {
-		year = strings.Replace(year, fmt.Sprintf("%d", index), number, -1)
+	for i := range numbers {
+		year = strings.Replace(year, fmt.Sprintf("%d", i), numbers[i], -1)
 	}
 	return year
 }
