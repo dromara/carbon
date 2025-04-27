@@ -42,6 +42,6 @@ func NewCarbon(time ...time.Time) Carbon {
 		c.loc = time[0].Location()
 		return c
 	}
-	c.loc, c.Error = getLocationByTimezone(DefaultTimezone)
+	c.loc, c.Error = parseTimezone(DefaultTimezone)
 	return c
 }

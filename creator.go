@@ -9,7 +9,7 @@ import (
 func CreateFromStdTime(tt time.Time, timezone ...string) Carbon {
 	c := NewCarbon(tt)
 	if len(timezone) > 0 {
-		c.loc, c.Error = getLocationByTimezone(timezone[0])
+		c.loc, c.Error = parseTimezone(timezone[0])
 	}
 	return c
 }
@@ -19,7 +19,7 @@ func CreateFromStdTime(tt time.Time, timezone ...string) Carbon {
 func CreateFromTimestamp(timestamp int64, timezone ...string) Carbon {
 	c := NewCarbon()
 	if len(timezone) > 0 {
-		c.loc, c.Error = getLocationByTimezone(timezone[0])
+		c.loc, c.Error = parseTimezone(timezone[0])
 	}
 	if c.HasError() {
 		return c
@@ -33,7 +33,7 @@ func CreateFromTimestamp(timestamp int64, timezone ...string) Carbon {
 func CreateFromTimestampMilli(timestampMilli int64, timezone ...string) Carbon {
 	c := NewCarbon()
 	if len(timezone) > 0 {
-		c.loc, c.Error = getLocationByTimezone(timezone[0])
+		c.loc, c.Error = parseTimezone(timezone[0])
 	}
 	if c.HasError() {
 		return c
@@ -47,7 +47,7 @@ func CreateFromTimestampMilli(timestampMilli int64, timezone ...string) Carbon {
 func CreateFromTimestampMicro(timestampMicro int64, timezone ...string) Carbon {
 	c := NewCarbon()
 	if len(timezone) > 0 {
-		c.loc, c.Error = getLocationByTimezone(timezone[0])
+		c.loc, c.Error = parseTimezone(timezone[0])
 	}
 	if c.HasError() {
 		return c
@@ -61,7 +61,7 @@ func CreateFromTimestampMicro(timestampMicro int64, timezone ...string) Carbon {
 func CreateFromTimestampNano(timestampNano int64, timezone ...string) Carbon {
 	c := NewCarbon()
 	if len(timezone) > 0 {
-		c.loc, c.Error = getLocationByTimezone(timezone[0])
+		c.loc, c.Error = parseTimezone(timezone[0])
 	}
 	if c.HasError() {
 		return c
@@ -151,7 +151,7 @@ func CreateFromTimeNano(hour, minute, second, nanosecond int, timezone ...string
 func create(year, month, day, hour, minute, second, nanosecond int, timezone ...string) Carbon {
 	c := NewCarbon()
 	if len(timezone) > 0 {
-		c.loc, c.Error = getLocationByTimezone(timezone[0])
+		c.loc, c.Error = parseTimezone(timezone[0])
 	}
 	if c.HasError() {
 		return c

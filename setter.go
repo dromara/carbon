@@ -110,7 +110,7 @@ func (c Carbon) SetTimezone(name string) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.loc, c.Error = getLocationByTimezone(name)
+	c.loc, c.Error = parseTimezone(name)
 	return c
 }
 

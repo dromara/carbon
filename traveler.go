@@ -9,7 +9,7 @@ import (
 func Now(timezone ...string) Carbon {
 	c := NewCarbon()
 	if len(timezone) > 0 {
-		c.loc, c.Error = getLocationByTimezone(timezone[0])
+		c.loc, c.Error = parseTimezone(timezone[0])
 	}
 	if c.HasError() {
 		return c
@@ -26,7 +26,7 @@ func Now(timezone ...string) Carbon {
 func Tomorrow(timezone ...string) Carbon {
 	c := NewCarbon()
 	if len(timezone) > 0 {
-		c.loc, c.Error = getLocationByTimezone(timezone[0])
+		c.loc, c.Error = parseTimezone(timezone[0])
 	}
 	if c.HasError() {
 		return c
@@ -39,7 +39,7 @@ func Tomorrow(timezone ...string) Carbon {
 func Yesterday(timezone ...string) Carbon {
 	c := NewCarbon()
 	if len(timezone) > 0 {
-		c.loc, c.Error = getLocationByTimezone(timezone[0])
+		c.loc, c.Error = parseTimezone(timezone[0])
 	}
 	if c.HasError() {
 		return c
