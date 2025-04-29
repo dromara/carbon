@@ -7,44 +7,43 @@ import (
 // Now returns a Carbon instance for now.
 // 当前
 func Now(timezone ...string) Carbon {
-	c := NewCarbon()
-	if len(timezone) > 0 {
-		c.loc, c.Error = parseTimezone(timezone[0])
-	}
-	if c.HasError() {
-		return c
-	}
 	if IsTestNow() {
-		return testNow.frozenNow
+		return frozenNow.testNow
 	}
-	c.time = time.Now().In(c.loc)
-	return c
+	var (
+		tz  string
+		loc *Location
+		err error
+	)
+	if len(timezone) > 0 {
+		tz = timezone[0]
+	} else {
+		tz = DefaultTimezone
+	}
+	if loc, err = parseTimezone(tz); err != nil {
+		return Carbon{Error: err}
+	}
+	return CreateFromStdTime(time.Now().In(loc))
 }
 
 // Tomorrow returns a Carbon instance for tomorrow.
 // 明天
 func Tomorrow(timezone ...string) Carbon {
-	c := NewCarbon()
-	if len(timezone) > 0 {
-		c.loc, c.Error = parseTimezone(timezone[0])
+	now := Now(timezone...)
+	if now.IsInvalid() {
+		return now
 	}
-	if c.HasError() {
-		return c
-	}
-	return Now(c.Timezone()).AddDay()
+	return now.AddDay()
 }
 
 // Yesterday returns a Carbon instance for yesterday.
 // 昨天
 func Yesterday(timezone ...string) Carbon {
-	c := NewCarbon()
-	if len(timezone) > 0 {
-		c.loc, c.Error = parseTimezone(timezone[0])
+	now := Now(timezone...)
+	if now.IsInvalid() {
+		return now
 	}
-	if c.HasError() {
-		return c
-	}
-	return Now(c.Timezone()).SubDay()
+	return now.SubDay()
 }
 
 // AddDuration adds one duration.
@@ -53,8 +52,11 @@ func (c Carbon) AddDuration(duration string) Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	td, err := parseDuration(duration)
-	if err != nil {
+	var (
+		td  Duration
+		err error
+	)
+	if td, err = parseDuration(duration); err != nil {
 		c.Error = err
 		return c
 	}
