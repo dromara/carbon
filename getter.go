@@ -443,7 +443,7 @@ func (c Carbon) Age() int {
 	if c.IsInvalid() {
 		return 0
 	}
-	now := Now(c.Timezone())
+	now := Now().SetLocation(c.loc)
 	if c.Gte(now) {
 		return 0
 	}

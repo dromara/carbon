@@ -40,6 +40,7 @@ func (c Carbon) ToMonthString(timezone ...string) string {
 	if len(c.lang.resources) == 0 {
 		c.lang.SetLocale(DefaultLocale)
 	}
+
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
 
@@ -61,8 +62,10 @@ func (c Carbon) ToShortMonthString(timezone ...string) string {
 	if c.IsInvalid() {
 		return ""
 	}
+
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
+
 	if resources, ok := c.lang.resources["short_months"]; ok {
 		slice := strings.Split(resources, "|")
 		if len(slice) == MonthsPerYear {
@@ -81,8 +84,10 @@ func (c Carbon) ToWeekString(timezone ...string) string {
 	if c.IsInvalid() {
 		return ""
 	}
+
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
+
 	if resources, ok := c.lang.resources["weeks"]; ok {
 		slice := strings.Split(resources, "|")
 		if len(slice) == DaysPerWeek {
@@ -101,8 +106,10 @@ func (c Carbon) ToShortWeekString(timezone ...string) string {
 	if c.IsInvalid() {
 		return ""
 	}
+
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
+
 	if resources, ok := c.lang.resources["short_weeks"]; ok {
 		slice := strings.Split(resources, "|")
 		if len(slice) == DaysPerWeek {

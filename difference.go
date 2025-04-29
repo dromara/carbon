@@ -9,14 +9,17 @@ import (
 // DiffInYears gets the difference in years.
 // 相差多少年
 func (c Carbon) DiffInYears(carbon ...Carbon) int64 {
+	start := c
+	if start.IsInvalid() {
+		return 0
+	}
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
 	} else {
-		end = Now(c.Timezone())
+		end = Now().SetLocation(c.loc)
 	}
-	start := c
-	if start.IsInvalid() || end.IsInvalid() {
+	if end.IsInvalid() {
 		return 0
 	}
 	dy, dm, dd := end.Year()-start.Year(), end.Month()-start.Month(), end.Day()-start.Day()
@@ -38,14 +41,17 @@ func (c Carbon) DiffAbsInYears(carbon ...Carbon) int64 {
 // DiffInMonths gets the difference in months.
 // 相差多少月
 func (c Carbon) DiffInMonths(carbon ...Carbon) int64 {
+	start := c
+	if start.IsInvalid() {
+		return 0
+	}
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
 	} else {
-		end = Now(c.Timezone())
+		end = Now().SetLocation(c.loc)
 	}
-	start := c
-	if start.IsInvalid() || end.IsInvalid() {
+	if end.IsInvalid() {
 		return 0
 	}
 	if start.Month() == end.Month() && start.Year() == end.Year() {
@@ -70,14 +76,17 @@ func (c Carbon) DiffAbsInMonths(carbon ...Carbon) int64 {
 // DiffInWeeks gets the difference in weeks.
 // 相差多少周
 func (c Carbon) DiffInWeeks(carbon ...Carbon) int64 {
+	start := c
+	if start.IsInvalid() {
+		return 0
+	}
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
 	} else {
-		end = Now(c.Timezone())
+		end = Now().SetLocation(c.loc)
 	}
-	start := c
-	if start.IsInvalid() || end.IsInvalid() {
+	if end.IsInvalid() {
 		return 0
 	}
 	return int64(math.Floor(float64((end.Timestamp() - start.Timestamp()) / (7 * 24 * 3600))))
@@ -92,14 +101,17 @@ func (c Carbon) DiffAbsInWeeks(carbon ...Carbon) int64 {
 // DiffInDays gets the difference in days.
 // 相差多少天
 func (c Carbon) DiffInDays(carbon ...Carbon) int64 {
+	start := c
+	if start.IsInvalid() {
+		return 0
+	}
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
 	} else {
-		end = Now(c.Timezone())
+		end = Now().SetLocation(c.loc)
 	}
-	start := c
-	if start.IsInvalid() || end.IsInvalid() {
+	if end.IsInvalid() {
 		return 0
 	}
 	return int64(math.Floor(float64((end.Timestamp() - start.Timestamp()) / (24 * 3600))))
@@ -114,14 +126,17 @@ func (c Carbon) DiffAbsInDays(carbon ...Carbon) int64 {
 // DiffInHours gets the difference in hours.
 // 相差多少小时
 func (c Carbon) DiffInHours(carbon ...Carbon) int64 {
+	start := c
+	if start.IsInvalid() {
+		return 0
+	}
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
 	} else {
-		end = Now(c.Timezone())
+		end = Now().SetLocation(c.loc)
 	}
-	start := c
-	if start.IsInvalid() || end.IsInvalid() {
+	if end.IsInvalid() {
 		return 0
 	}
 	return start.DiffInSeconds(end) / SecondsPerHour
@@ -136,14 +151,17 @@ func (c Carbon) DiffAbsInHours(carbon ...Carbon) int64 {
 // DiffInMinutes gets the difference in minutes.
 // 相差多少分钟
 func (c Carbon) DiffInMinutes(carbon ...Carbon) int64 {
+	start := c
+	if start.IsInvalid() {
+		return 0
+	}
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
 	} else {
-		end = Now(c.Timezone())
+		end = Now().SetLocation(c.loc)
 	}
-	start := c
-	if start.IsInvalid() || end.IsInvalid() {
+	if end.IsInvalid() {
 		return 0
 	}
 	return start.DiffInSeconds(end) / SecondsPerMinute
@@ -158,14 +176,17 @@ func (c Carbon) DiffAbsInMinutes(carbon ...Carbon) int64 {
 // DiffInSeconds gets the difference in seconds.
 // 相差多少秒
 func (c Carbon) DiffInSeconds(carbon ...Carbon) int64 {
+	start := c
+	if start.IsInvalid() {
+		return 0
+	}
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
 	} else {
-		end = Now(c.Timezone())
+		end = Now().SetLocation(c.loc)
 	}
-	start := c
-	if start.IsInvalid() || end.IsInvalid() {
+	if end.IsInvalid() {
 		return 0
 	}
 	return end.Timestamp() - start.Timestamp()
@@ -180,14 +201,17 @@ func (c Carbon) DiffAbsInSeconds(carbon ...Carbon) int64 {
 // DiffInString gets the difference in string, i18n is supported.
 // 相差字符串，支持 i18n
 func (c Carbon) DiffInString(carbon ...Carbon) string {
+	start := c
+	if start.IsInvalid() {
+		return ""
+	}
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
 	} else {
-		end = Now(c.Timezone())
+		end = Now().SetLocation(c.loc)
 	}
-	start := c
-	if start.IsInvalid() || end.IsInvalid() {
+	if end.IsInvalid() {
 		return ""
 	}
 	unit, value := start.diff(end)
@@ -197,14 +221,17 @@ func (c Carbon) DiffInString(carbon ...Carbon) string {
 // DiffAbsInString gets the difference in string with absolute value, i18n is supported.
 // 相差字符串，支持 i18n(绝对值)
 func (c Carbon) DiffAbsInString(carbon ...Carbon) string {
+	start := c
+	if start.IsInvalid() {
+		return ""
+	}
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
 	} else {
-		end = Now(c.Timezone())
+		end = Now().SetLocation(c.loc)
 	}
-	start := c
-	if start.IsInvalid() || end.IsInvalid() {
+	if end.IsInvalid() {
 		return ""
 	}
 	unit, value := start.diff(end)
@@ -214,14 +241,17 @@ func (c Carbon) DiffAbsInString(carbon ...Carbon) string {
 // DiffInDuration gets the difference in duration.
 // 相差时长
 func (c Carbon) DiffInDuration(carbon ...Carbon) Duration {
+	start := c
+	if start.IsInvalid() {
+		return 0
+	}
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
 	} else {
-		end = Now(c.Timezone())
+		end = Now().SetLocation(c.loc)
 	}
-	start := c
-	if start.IsInvalid() || end.IsInvalid() {
+	if end.IsInvalid() {
 		return 0
 	}
 	return end.StdTime().Sub(start.StdTime())
@@ -240,14 +270,17 @@ func (c Carbon) DiffAbsInDuration(carbon ...Carbon) Duration {
 // DiffForHumans gets the difference in a human-readable format, i18n is supported.
 // 获取对人类友好的可读格式时间差，支持 i18n
 func (c Carbon) DiffForHumans(carbon ...Carbon) string {
+	start := c
+	if start.IsInvalid() {
+		return ""
+	}
 	var end Carbon
 	if len(carbon) > 0 {
 		end = carbon[0]
 	} else {
-		end = Now(c.Timezone())
+		end = Now().SetLocation(c.loc)
 	}
-	start := c
-	if start.IsInvalid() || end.IsInvalid() {
+	if end.IsInvalid() {
 		return ""
 	}
 	unit, value := start.diff(end)

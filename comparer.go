@@ -306,7 +306,7 @@ func (c Carbon) IsNow() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	return c.Timestamp() == Now(c.Timezone()).Timestamp()
+	return c.Timestamp() == Now().SetLocation(c.loc).Timestamp()
 }
 
 // IsFuture reports whether is future time.
@@ -318,7 +318,7 @@ func (c Carbon) IsFuture() bool {
 	if c.IsZero() {
 		return false
 	}
-	return c.Timestamp() > Now(c.Timezone()).Timestamp()
+	return c.Timestamp() > Now().SetLocation(c.loc).Timestamp()
 }
 
 // IsPast reports whether is past time.
@@ -330,7 +330,7 @@ func (c Carbon) IsPast() bool {
 	if c.IsZero() {
 		return true
 	}
-	return c.Timestamp() < Now(c.Timezone()).Timestamp()
+	return c.Timestamp() < Now().SetLocation(c.loc).Timestamp()
 }
 
 // IsYesterday reports whether is yesterday.
@@ -339,7 +339,7 @@ func (c Carbon) IsYesterday() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	return c.ToDateString() == Yesterday().ToDateString()
+	return c.ToDateString() == Yesterday().SetLocation(c.loc).ToDateString()
 }
 
 // IsToday reports whether is today.
@@ -348,7 +348,7 @@ func (c Carbon) IsToday() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	return c.ToDateString() == Now().ToDateString()
+	return c.ToDateString() == Now().SetLocation(c.loc).ToDateString()
 }
 
 // IsTomorrow reports whether is tomorrow.
@@ -357,7 +357,7 @@ func (c Carbon) IsTomorrow() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	return c.ToDateString() == Tomorrow().ToDateString()
+	return c.ToDateString() == Tomorrow().SetLocation(c.loc).ToDateString()
 }
 
 // IsSameCentury reports whether is same century.
