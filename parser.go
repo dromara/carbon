@@ -7,28 +7,35 @@ import (
 
 // Parse parses a standard time string as a Carbon instance.
 // 将标准格式时间字符串解析成 Carbon 实例
-func Parse(value string, timezone ...string) (c Carbon) {
+func Parse(value string, timezone ...string) Carbon {
 	if value == "" {
-		c.isNil = true
-		return c
+		return Carbon{isNil: true}
 	}
-	c = NewCarbon()
+	var (
+		tz  string
+		tt  StdTime
+		loc *Location
+		err error
+	)
 	if len(timezone) > 0 {
-		c.loc, c.Error = parseTimezone(timezone[0])
+		tz = timezone[0]
+	} else {
+		tz = DefaultTimezone
 	}
-	if c.HasError() {
-		return c
+	if loc, err = parseTimezone(tz); err != nil {
+		return Carbon{Error: err}
 	}
 	switch value {
 	case "now":
-		return Now(c.Timezone())
+		return Now().SetLocation(loc)
 	case "yesterday":
-		return Yesterday(c.Timezone())
+		return Yesterday().SetLocation(loc)
 	case "tomorrow":
-		return Tomorrow(c.Timezone())
+		return Tomorrow().SetLocation(loc)
 	}
+	c := NewCarbon().SetLocation(loc)
 	for i := range defaultLayouts {
-		if tt, err := time.ParseInLocation(defaultLayouts[i], value, c.loc); err == nil {
+		if tt, err = time.ParseInLocation(defaultLayouts[i], value, loc); err == nil {
 			c.time = tt
 			c.layout = defaultLayouts[i]
 			return c
@@ -40,59 +47,60 @@ func Parse(value string, timezone ...string) (c Carbon) {
 
 // ParseByLayout parses a time string as a `Carbon` instance by a confirmed layout
 // 通过一个确认的 布局模板 将时间字符串解析成 Carbon 实例
-func ParseByLayout(value, layout string, timezone ...string) (c Carbon) {
+func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	if value == "" {
-		c.isNil = true
-		return c
+		return Carbon{isNil: true}
 	}
 	if layout == "" {
-		c.Error = ErrEmptyLayout()
-		return c
+		return Carbon{Error: ErrEmptyLayout()}
 	}
-	c = NewCarbon()
+	var (
+		ts  int64
+		tz  string
+		tt  StdTime
+		loc *Location
+		err error
+	)
 	if len(timezone) > 0 {
-		c.loc, c.Error = parseTimezone(timezone[0])
+		tz = timezone[0]
+	} else {
+		tz = DefaultTimezone
 	}
-	if c.HasError() {
-		return c
+	if loc, err = parseTimezone(tz); err != nil {
+		return Carbon{Error: err}
 	}
-	if layout == TimestampLayout {
-		ts, err := parseTimestamp(value)
-		if err != nil {
-			c.Error = err
-			return c
+
+	// timestamp layouts
+	switch layout {
+	case TimestampLayout:
+		if ts, err = parseTimestamp(value); err != nil {
+			return Carbon{Error: err}
 		}
-		return CreateFromTimestamp(ts, c.Timezone())
-	}
-	if layout == TimestampMilliLayout {
-		ts, err := parseTimestamp(value)
-		if err != nil {
-			c.Error = err
-			return c
+		return CreateFromTimestamp(ts).SetLocation(loc)
+	case TimestampMilliLayout:
+		if ts, err = parseTimestamp(value); err != nil {
+			return Carbon{Error: err}
 		}
-		return CreateFromTimestampMilli(ts, c.Timezone())
-	}
-	if layout == TimestampMicroLayout {
-		ts, err := parseTimestamp(value)
-		if err != nil {
-			c.Error = err
-			return c
+		return CreateFromTimestampMilli(ts).SetLocation(loc)
+	case TimestampMicroLayout:
+		if ts, err = parseTimestamp(value); err != nil {
+			return Carbon{Error: err}
 		}
-		return CreateFromTimestampMicro(ts, c.Timezone())
-	}
-	if layout == TimestampNanoLayout {
-		ts, err := parseTimestamp(value)
-		if err != nil {
-			c.Error = err
-			return c
+		return CreateFromTimestampMicro(ts).SetLocation(loc)
+	case TimestampNanoLayout:
+		if ts, err = parseTimestamp(value); err != nil {
+			return Carbon{Error: err}
 		}
-		return CreateFromTimestampNano(ts, c.Timezone())
+		return CreateFromTimestampNano(ts).SetLocation(loc)
 	}
-	tt, err := time.ParseInLocation(layout, value, c.loc)
-	if err != nil {
-		c.Error = fmt.Errorf("%w: %w", ErrMismatchedLayout(value, layout), c.Error)
-		return c
+
+	// other layouts
+	if tt, err = time.ParseInLocation(layout, value, loc); err != nil {
+		return Carbon{Error: fmt.Errorf("%w: %w", ErrMismatchedLayout(value, layout), err)}
 	}
+
+	c := NewCarbon()
+	c.loc = loc
 	c.time = tt
 	c.layout = layout
 	return c
@@ -100,15 +108,14 @@ func ParseByLayout(value, layout string, timezone ...string) (c Carbon) {
 
 // ParseByFormat parses a time string as a `Carbon` instance by a confirmed format.
 // 通过一个确认的 格式模板 将时间字符串解析成 Carbon 实例
-func ParseByFormat(value, format string, timezone ...string) (c Carbon) {
+func ParseByFormat(value, format string, timezone ...string) Carbon {
 	if value == "" {
-		c.isNil = true
+		return Carbon{isNil: true}
 	}
 	if format == "" {
-		c.Error = ErrEmptyFormat()
-		return c
+		return Carbon{Error: ErrEmptyFormat()}
 	}
-	c = ParseByLayout(value, format2layout(format), timezone...)
+	c := ParseByLayout(value, format2layout(format), timezone...)
 	if c.HasError() {
 		c.Error = fmt.Errorf("%w: %w", ErrMismatchedFormat(value, format), c.Error)
 	}
@@ -117,23 +124,30 @@ func ParseByFormat(value, format string, timezone ...string) (c Carbon) {
 
 // ParseWithLayouts parses a time string as a Carbon instance with multiple fuzzy layouts.
 // 通过多个模糊的 布局模板 将时间字符串解析成 Carbon 实例
-func ParseWithLayouts(value string, layouts []string, timezone ...string) (c Carbon) {
+func ParseWithLayouts(value string, layouts []string, timezone ...string) Carbon {
 	if value == "" {
-		c.isNil = true
-		return c
-	}
-	c = NewCarbon()
-	if len(timezone) > 0 {
-		c.loc, c.Error = parseTimezone(timezone[0])
-	}
-	if c.HasError() {
-		return c
+		return Carbon{isNil: true}
 	}
 	if len(layouts) == 0 {
 		return Parse(value, timezone...)
 	}
+	var (
+		tz  string
+		tt  StdTime
+		loc *Location
+		err error
+	)
+	if len(timezone) > 0 {
+		tz = timezone[0]
+	} else {
+		tz = DefaultTimezone
+	}
+	if loc, err = parseTimezone(tz); err != nil {
+		return Carbon{Error: err}
+	}
+	c := NewCarbon().SetLocation(loc)
 	for i := range layouts {
-		if tt, err := time.ParseInLocation(layouts[i], value, c.loc); err == nil {
+		if tt, err = time.ParseInLocation(layouts[i], value, loc); err == nil {
 			c.time = tt
 			c.layout = layouts[i]
 			return c
@@ -147,22 +161,26 @@ func ParseWithLayouts(value string, layouts []string, timezone ...string) (c Car
 // 通过多个模糊的 格式模板 将时间字符串解析成 Carbon 实例
 func ParseWithFormats(value string, formats []string, timezone ...string) (c Carbon) {
 	if value == "" {
-		c.isNil = true
-		return c
-	}
-	c = NewCarbon()
-	if len(timezone) > 0 {
-		c.loc, c.Error = parseTimezone(timezone[0])
-	}
-	if c.HasError() {
-		return c
+		return Carbon{isNil: true}
 	}
 	if len(formats) == 0 {
 		return Parse(value, timezone...)
+	}
+	var (
+		tz  string
+		err error
+	)
+	if len(timezone) > 0 {
+		tz = timezone[0]
+	} else {
+		tz = DefaultTimezone
+	}
+	if _, err = parseTimezone(tz); err != nil {
+		return Carbon{Error: err}
 	}
 	var layouts []string
 	for i := range formats {
 		layouts = append(layouts, format2layout(formats[i]))
 	}
-	return ParseWithLayouts(value, layouts, timezone...)
+	return ParseWithLayouts(value, layouts, tz)
 }
