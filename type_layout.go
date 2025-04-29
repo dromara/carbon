@@ -3,7 +3,6 @@ package carbon
 import (
 	"bytes"
 	"database/sql/driver"
-	"time"
 )
 
 // LayoutTyper defines a LayoutTyper interface
@@ -40,8 +39,10 @@ func (t *LayoutType[T]) Scan(src any) error {
 		c = Parse(v, DefaultTimezone)
 	case int64:
 		c = CreateFromTimestamp(v, DefaultTimezone)
-	case time.Time:
+	case StdTime:
 		c = CreateFromStdTime(v, DefaultTimezone)
+	case *StdTime:
+		c = CreateFromStdTime(*v, DefaultTimezone)
 	default:
 		return ErrFailedScan(v)
 	}
@@ -70,7 +71,7 @@ func (t LayoutType[T]) MarshalJSON() ([]byte, error) {
 	if t.HasError() {
 		return []byte(`""`), t.Error
 	}
-	v := t.Layout(t.getLayout(), t.Timezone())
+	v := t.Layout(t.getLayout())
 	b := make([]byte, 0, len(v)+2)
 	b = append(b, '"')
 	b = append(b, v...)
@@ -95,7 +96,7 @@ func (t LayoutType[T]) String() string {
 	if t.IsInvalid() || t.IsZero() {
 		return ""
 	}
-	return t.Layout(t.getLayout(), t.Timezone())
+	return t.Layout(t.getLayout())
 }
 
 // GormDataType sets gorm data type for LayoutType generic struct.

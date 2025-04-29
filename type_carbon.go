@@ -3,8 +3,6 @@ package carbon
 import (
 	"bytes"
 	"database/sql/driver"
-	"fmt"
-	"time"
 )
 
 // Scan implements driver.Scanner interface.
@@ -19,8 +17,10 @@ func (c *Carbon) Scan(src any) error {
 		*c = Parse(v, DefaultTimezone)
 	case int64:
 		*c = CreateFromTimestamp(v, DefaultTimezone)
-	case time.Time:
+	case StdTime:
 		*c = CreateFromStdTime(v, DefaultTimezone)
+	case *StdTime:
+		*c = CreateFromStdTime(*v, DefaultTimezone)
 	default:
 		return ErrFailedScan(v)
 	}
@@ -48,12 +48,12 @@ func (c Carbon) MarshalJSON() ([]byte, error) {
 	if c.HasError() {
 		return []byte(`""`), c.Error
 	}
-	v := c.Layout(DefaultLayout, c.Timezone())
+	v := c.Layout(DefaultLayout)
 	b := make([]byte, 0, len(v)+2)
 	b = append(b, '"')
 	b = append(b, v...)
 	b = append(b, '"')
-	return []byte(fmt.Sprintf(`"%s"`, c.ToDateTimeString())), nil
+	return b, nil
 }
 
 // UnmarshalJSON implements json.Unmarshal interface.
@@ -73,7 +73,7 @@ func (c Carbon) String() string {
 	if c.IsZero() || c.IsInvalid() {
 		return ""
 	}
-	return c.Layout(c.layout, c.Timezone())
+	return c.Layout(c.layout)
 }
 
 // GormDataType sets gorm data type.

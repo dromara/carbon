@@ -30,7 +30,13 @@ func TestCarbonType_Scan(t *testing.T) {
 	})
 
 	t.Run("time type", func(t *testing.T) {
-		assert.Nil(t, c.Scan(time.Now()))
+		tt := time.Now()
+		assert.Nil(t, c.Scan(tt))
+	})
+
+	t.Run("*time type", func(t *testing.T) {
+		tt := time.Now()
+		assert.Nil(t, c.Scan(&tt))
 	})
 
 	t.Run("nil type", func(t *testing.T) {
@@ -266,20 +272,41 @@ func TestBuiltinType_Scan(t *testing.T) {
 	})
 
 	t.Run("time type", func(t *testing.T) {
+		tt := time.Now()
+
 		dt := NewDateTime(c)
-		assert.Nil(t, dt.Scan(time.Now()))
+		assert.Nil(t, dt.Scan(tt))
 
 		ts1 := NewTimestamp(c)
-		assert.Nil(t, ts1.Scan(time.Now()))
+		assert.Nil(t, ts1.Scan(tt))
 
 		ts2 := NewTimestampMilli(c)
-		assert.Nil(t, ts2.Scan(time.Now()))
+		assert.Nil(t, ts2.Scan(tt))
 
 		ts3 := NewTimestampMicro(c)
-		assert.Nil(t, ts3.Scan(time.Now()))
+		assert.Nil(t, ts3.Scan(tt))
 
 		ts4 := NewTimestampNano(c)
-		assert.Nil(t, ts4.Scan(time.Now()))
+		assert.Nil(t, ts4.Scan(tt))
+	})
+
+	t.Run("*time type", func(t *testing.T) {
+		tt := time.Now()
+
+		dt := NewDateTime(c)
+		assert.Nil(t, dt.Scan(&tt))
+
+		ts1 := NewTimestamp(c)
+		assert.Nil(t, ts1.Scan(&tt))
+
+		ts2 := NewTimestampMilli(c)
+		assert.Nil(t, ts2.Scan(&tt))
+
+		ts3 := NewTimestampMicro(c)
+		assert.Nil(t, ts3.Scan(&tt))
+
+		ts4 := NewTimestampNano(c)
+		assert.Nil(t, ts4.Scan(&tt))
 	})
 
 	t.Run("nil type", func(t *testing.T) {
@@ -738,8 +765,17 @@ func TestCustomerType_Scan(t *testing.T) {
 	})
 
 	t.Run("time type", func(t *testing.T) {
-		assert.Nil(t, t1.Scan(time.Now()))
-		assert.Nil(t, t2.Scan(time.Now()))
+		tt := time.Now()
+
+		assert.Nil(t, t1.Scan(tt))
+		assert.Nil(t, t2.Scan(tt))
+	})
+
+	t.Run("*time type", func(t *testing.T) {
+		tt := time.Now()
+
+		assert.Nil(t, t1.Scan(&tt))
+		assert.Nil(t, t2.Scan(&tt))
 	})
 
 	t.Run("nil type", func(t *testing.T) {
