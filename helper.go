@@ -111,8 +111,7 @@ func parseTimezone(timezone string) (loc *Location, err error) {
 	if timezone == "" {
 		return nil, ErrEmptyTimezone()
 	}
-	loc, err = time.LoadLocation(timezone)
-	if err != nil {
+	if loc, err = time.LoadLocation(timezone); err != nil {
 		err = fmt.Errorf("%w: %w", ErrInvalidTimezone(timezone), err)
 	}
 	return
@@ -124,8 +123,7 @@ func parseDuration(duration string) (dur Duration, err error) {
 	if duration == "" {
 		return 0, ErrEmptyDuration()
 	}
-	dur, err = time.ParseDuration(duration)
-	if err != nil {
+	if dur, err = time.ParseDuration(duration); err != nil {
 		err = fmt.Errorf("%w: %w", ErrInvalidDuration(duration), err)
 	}
 	return
@@ -134,9 +132,8 @@ func parseDuration(duration string) (dur Duration, err error) {
 // parses a timestamp string as a int64 format timestamp.
 // 将 时间戳字符串 解析成 int64 格式时间戳
 func parseTimestamp(timestamp string) (ts int64, err error) {
-	ts, err = strconv.ParseInt(timestamp, 10, 64)
-	if err != nil {
-		return 0, fmt.Errorf("%w: %w", ErrInvalidTimestamp(timestamp), err)
+	if ts, err = strconv.ParseInt(timestamp, 10, 64); err != nil {
+		err = fmt.Errorf("%w: %w", ErrInvalidTimestamp(timestamp), err)
 	}
 	return
 }
