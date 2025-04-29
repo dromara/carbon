@@ -32,15 +32,15 @@ type Carbon struct {
 
 // NewCarbon returns a new Carbon instance.
 // 初始化 Carbon 结构体
-func NewCarbon(time ...time.Time) Carbon {
+func NewCarbon(stdTime ...time.Time) Carbon {
 	c := Carbon{}
 	c.lang = NewLanguage().SetLocale(DefaultLocale)
 	c.layout = DefaultLayout
 	c.weekStartsAt = DefaultWeekStartsAt
 	c.weekendDays = DefaultWeekendDays
-	if len(time) > 0 {
-		c.time = time[0]
-		c.loc = time[0].Location()
+	if len(stdTime) > 0 {
+		c.time = stdTime[0]
+		c.loc = stdTime[0].Location()
 		return c
 	}
 	c.loc, c.Error = parseTimezone(DefaultTimezone)
