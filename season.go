@@ -35,8 +35,10 @@ func (c Carbon) Season() string {
 			index = season.index
 		}
 	}
+
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
+
 	if resources, ok := c.lang.resources["seasons"]; ok {
 		slice := strings.Split(resources, "|")
 		if len(slice) == QuartersPerYear {
