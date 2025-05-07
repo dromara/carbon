@@ -20,14 +20,14 @@ type Duration = time.Duration
 // Carbon defines a Carbon struct.
 // 定义 Carbon 结构体
 type Carbon struct {
-	layout       string
-	isNil        bool
-	time         StdTime
-	weekStartsAt Weekday
-	weekendDays  []Weekday
-	loc          *Location
-	lang         *Language
-	Error        error
+	isNil         bool
+	currentLayout string
+	time          StdTime
+	weekStartsAt  Weekday
+	weekendDays   []Weekday
+	loc           *Location
+	lang          *Language
+	Error         error
 }
 
 // NewCarbon returns a new Carbon instance.
@@ -35,7 +35,7 @@ type Carbon struct {
 func NewCarbon(stdTime ...time.Time) Carbon {
 	c := Carbon{}
 	c.lang = NewLanguage().SetLocale(DefaultLocale)
-	c.layout = DefaultLayout
+	c.currentLayout = DefaultLayout
 	c.weekStartsAt = DefaultWeekStartsAt
 	c.weekendDays = DefaultWeekendDays
 	if len(stdTime) > 0 {

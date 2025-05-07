@@ -37,7 +37,7 @@ func Parse(value string, timezone ...string) Carbon {
 	for i := range defaultLayouts {
 		if tt, err = time.ParseInLocation(defaultLayouts[i], value, loc); err == nil {
 			c.time = tt
-			c.layout = defaultLayouts[i]
+			c.currentLayout = defaultLayouts[i]
 			return c
 		}
 	}
@@ -102,7 +102,7 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	c := NewCarbon()
 	c.loc = loc
 	c.time = tt
-	c.layout = layout
+	c.currentLayout = layout
 	return c
 }
 
@@ -149,7 +149,7 @@ func ParseWithLayouts(value string, layouts []string, timezone ...string) Carbon
 	for i := range layouts {
 		if tt, err = time.ParseInLocation(layouts[i], value, loc); err == nil {
 			c.time = tt
-			c.layout = layouts[i]
+			c.currentLayout = layouts[i]
 			return c
 		}
 	}

@@ -73,7 +73,7 @@ func (c Carbon) String() string {
 	if c.IsZero() || c.IsInvalid() {
 		return ""
 	}
-	return c.Layout(c.layout)
+	return c.Layout(c.currentLayout)
 }
 
 // GormDataType sets gorm data type.
