@@ -6,18 +6,18 @@ import (
 
 // CreateFromStdTime creates a Carbon instance from standard time.Time.
 // 从标准的 time.Time 创建 Carbon 实例
-func CreateFromStdTime(stdTime time.Time, timezone ...string) Carbon {
+func CreateFromStdTime(stdTime StdTime, timezone ...string) Carbon {
+	if len(timezone) == 0 {
+		return NewCarbon(stdTime)
+	}
 	var (
 		loc *Location
 		err error
 	)
-	if len(timezone) > 0 {
-		if loc, err = parseTimezone(timezone[0]); err != nil {
-			return Carbon{Error: err}
-		}
-		return NewCarbon(stdTime.In(loc))
+	if loc, err = parseTimezone(timezone[0]); err != nil {
+		return Carbon{Error: err}
 	}
-	return NewCarbon(stdTime)
+	return NewCarbon(stdTime.In(loc))
 }
 
 // CreateFromTimestamp creates a Carbon instance from a given timestamp with second.
