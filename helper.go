@@ -141,5 +141,8 @@ func parseTimestamp(timestamp string) (ts int64, err error) {
 // gets absolute value.
 // 获取绝对值
 func getAbsValue(value int64) int64 {
-	return (value ^ value>>31) - value>>31
+	if value < 0 {
+		return -value
+	}
+	return value
 }
