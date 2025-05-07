@@ -260,11 +260,7 @@ func (c Carbon) DiffInDuration(carbon ...Carbon) Duration {
 // DiffAbsInDuration gets the difference in duration with absolute value.
 // 相差时长(绝对值)
 func (c Carbon) DiffAbsInDuration(carbon ...Carbon) Duration {
-	d := c.DiffInDuration(carbon...)
-	if d >= 0 {
-		return d
-	}
-	return -d
+	return c.DiffInDuration(carbon...).Abs()
 }
 
 // DiffForHumans gets the difference in a human-readable format, i18n is supported.
