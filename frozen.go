@@ -24,20 +24,20 @@ func SetTestNow(c Carbon) {
 	frozenNow.testNow = c
 }
 
-// CleanTestNow clears a test Carbon instance (real or mock) to be returned when a "now" instance is created.
+// Deprecated: it will be removed in the future, use ClearTestNow instead.
+// CleanTestNow clears the test Carbon instance for now.
 // 清除当前测试时间
 func CleanTestNow() {
+	ClearTestNow()
+}
+
+// ClearTestNow clears the test Carbon instance for now.
+// 清除当前测试时间
+func ClearTestNow() {
 	frozenNow.rw.Lock()
 	defer frozenNow.rw.Unlock()
 
 	frozenNow.isFrozen = false
-}
-
-// Deprecated: it will be removed in the future, use CleanTestNow instead.
-// UnSetTestNow clears a test Carbon instance (real or mock) to be returned when a "now" instance is created.
-// 清除当前测试时间
-func UnSetTestNow() {
-	CleanTestNow()
 }
 
 // Deprecated: it will be removed in the future, use IsTestNow instead.
