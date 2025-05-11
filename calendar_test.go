@@ -8,13 +8,21 @@ import (
 
 func TestCarbon_Lunar(t *testing.T) {
 	t.Run("zero time", func(t *testing.T) {
-		assert.Empty(t, NewCarbon().Lunar().String())
+		l := NewCarbon().Lunar()
+		assert.Nil(t, l.Error)
+		assert.Empty(t, l.String())
 	})
 
-	t.Run("invalid time", func(t *testing.T) {
-		assert.Empty(t, Parse("").Lunar().String())
-		assert.Empty(t, Parse("0").Lunar().String())
-		assert.Empty(t, Parse("xxx").Lunar().String())
+	t.Run("empty time", func(t *testing.T) {
+		l := Parse("").Lunar()
+		assert.Nil(t, l.Error)
+		assert.Empty(t, l.String())
+	})
+
+	t.Run("error time", func(t *testing.T) {
+		l := Parse("xxx").Lunar()
+		assert.Error(t, l.Error)
+		assert.Empty(t, l.String())
 	})
 
 	t.Run("valid time", func(t *testing.T) {
@@ -38,18 +46,21 @@ func TestCreateFromLunar(t *testing.T) {
 
 func TestCarbon_Julian(t *testing.T) {
 	t.Run("zero time", func(t *testing.T) {
-		assert.Equal(t, 1.7214235e+06, NewCarbon().Julian().JD())
-		assert.Equal(t, float64(-678577), NewCarbon().Julian().MJD())
+		j := NewCarbon().Julian()
+		assert.Equal(t, 1.7214235e+06, j.JD())
+		assert.Equal(t, float64(-678577), j.MJD())
 	})
 
-	t.Run("invalid time", func(t *testing.T) {
-		assert.Zero(t, Parse("").Julian().JD())
-		assert.Zero(t, Parse("0").Julian().JD())
-		assert.Zero(t, Parse("xxx").Julian().JD())
+	t.Run("empty time", func(t *testing.T) {
+		j := Parse("").Julian()
+		assert.Zero(t, j.JD())
+		assert.Zero(t, j.JD())
+	})
 
-		assert.Zero(t, Parse("").Julian().MJD())
-		assert.Zero(t, Parse("0").Julian().MJD())
-		assert.Zero(t, Parse("xxx").Julian().MJD())
+	t.Run("error time", func(t *testing.T) {
+		j := Parse("xxx").Julian()
+		assert.Zero(t, j.JD())
+		assert.Zero(t, j.JD())
 	})
 
 	t.Run("valid time", func(t *testing.T) {
@@ -86,14 +97,21 @@ func TestCreateFromJulian(t *testing.T) {
 
 func TestCarbon_Persian(t *testing.T) {
 	t.Run("zero time", func(t *testing.T) {
-		assert.Empty(t, NewCarbon().Persian().String())
-		assert.Empty(t, NewCarbon().Persian().String())
+		p := NewCarbon().Persian()
+		assert.Nil(t, p.Error)
+		assert.Empty(t, p.String())
 	})
 
-	t.Run("invalid time", func(t *testing.T) {
-		assert.Empty(t, Parse("").Persian().String())
-		assert.Empty(t, Parse("0").Persian().String())
-		assert.Empty(t, Parse("xxx").Persian().String())
+	t.Run("empty time", func(t *testing.T) {
+		p := Parse("").Persian()
+		assert.Nil(t, p.Error)
+		assert.Empty(t, p.String())
+	})
+
+	t.Run("error time", func(t *testing.T) {
+		p := Parse("xxx").Persian()
+		assert.Error(t, p.Error)
+		assert.Empty(t, p.String())
 	})
 
 	t.Run("valid time", func(t *testing.T) {
