@@ -332,15 +332,11 @@ func getDiffInMonths(start, end Carbon) int64 {
 	if start.IsInvalid() || end.IsInvalid() {
 		return 0
 	}
-	y, m, d, h, i, s, ns := start.DateTimeNano()
-	endYear, endMonth, _ := end.Date()
-
-	yearDiff := endYear - y
-	monthDiff := endMonth - m
-	totalMonths := yearDiff*12 + monthDiff
-
-	if time.Date(y, time.Month(m+totalMonths), d, h, i, s, ns, start.StdTime().Location()).After(end.StdTime()) {
-		return int64(totalMonths - 1)
+	sy, sm, d, h, i, s, ns := start.DateTimeNano()
+	ey, em, _ := end.Date()
+	dm := (ey-sy)*12 + (em - sm)
+	if time.Date(sy, time.Month(sm+dm), d, h, i, s, ns, start.StdTime().Location()).After(end.StdTime()) {
+		return int64(dm - 1)
 	}
-	return int64(totalMonths)
+	return int64(dm)
 }
