@@ -65,14 +65,11 @@ func (t FormatType[T]) Value() (driver.Value, error) {
 // MarshalJSON implements json.Marshal interface for FormatType generic struct.
 // 实现 json.Marshaler 接口
 func (t FormatType[T]) MarshalJSON() ([]byte, error) {
-	if t.IsZero() {
+	if t.IsZero() || t.IsEmpty() {
 		return []byte(`null`), nil
 	}
 	if t.HasError() {
 		return []byte(`null`), t.Error
-	}
-	if t.IsEmpty() {
-		return []byte(`""`), nil
 	}
 	v := t.Format(t.getFormat())
 	b := make([]byte, 0, len(v)+2)

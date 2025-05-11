@@ -65,14 +65,11 @@ func (t LayoutType[T]) Value() (driver.Value, error) {
 // MarshalJSON implements json.Marshal interface for LayoutType generic struct.
 // 实现 json.Marshaler 接口
 func (t LayoutType[T]) MarshalJSON() ([]byte, error) {
-	if t.IsZero() {
+	if t.IsZero() || t.IsEmpty() {
 		return []byte(`null`), nil
 	}
 	if t.HasError() {
 		return []byte(`null`), t.Error
-	}
-	if t.IsEmpty() {
-		return []byte(`""`), nil
 	}
 	v := t.Layout(t.getLayout())
 	b := make([]byte, 0, len(v)+2)
@@ -86,7 +83,7 @@ func (t LayoutType[T]) MarshalJSON() ([]byte, error) {
 // 实现 json.Unmarshaler 接口
 func (t *LayoutType[T]) UnmarshalJSON(src []byte) error {
 	v := string(bytes.Trim(src, `"`))
-	if v == "" || v == "null" || v == "0" {
+	if v == "" || v == "null" {
 		return nil
 	}
 	*t = NewLayoutType[T](ParseByLayout(v, t.getLayout()))

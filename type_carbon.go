@@ -42,14 +42,11 @@ func (c Carbon) Value() (driver.Value, error) {
 // MarshalJSON implements json.Marshal interface.
 // 实现 json.Marshaler 接口
 func (c Carbon) MarshalJSON() ([]byte, error) {
-	if c.IsZero() {
+	if c.IsZero() || c.IsEmpty() {
 		return []byte(`null`), nil
 	}
 	if c.HasError() {
 		return []byte(`null`), c.Error
-	}
-	if c.isEmpty {
-		return []byte(`""`), nil
 	}
 	v := c.Layout(DefaultLayout)
 	b := make([]byte, 0, len(v)+2)

@@ -106,7 +106,7 @@ func TestCarbonType_MarshalJSON(t *testing.T) {
 
 		data, err := json.Marshal(&model)
 		assert.NoError(t, err)
-		assert.Equal(t, `{"carbon1":"","carbon2":""}`, string(data))
+		assert.Equal(t, `{"carbon1":null,"carbon2":null}`, string(data))
 	})
 
 	t.Run("error carbon", func(t *testing.T) {
@@ -467,7 +467,7 @@ func TestBuiltinType_MarshalJSON(t *testing.T) {
 
 		data, err := json.Marshal(&model)
 		assert.NoError(t, err)
-		assert.Equal(t, `{"date":"","date_milli":"","date_micro":"","date_nano":"","time":"","time_milli":"","time_micro":"","time_nano":"","date_time":"","date_time_milli":"","date_time_micro":"","date_time_nano":"","created_at":"","updated_at":"","timestamp":null,"timestamp_milli":null,"timestamp_micro":null,"timestamp_nano":null,"deleted_at":null}`, string(data))
+		assert.Equal(t, `{"date":null,"date_milli":null,"date_micro":null,"date_nano":null,"time":null,"time_milli":null,"time_micro":null,"time_nano":null,"date_time":null,"date_time_milli":null,"date_time_micro":null,"date_time_nano":null,"created_at":null,"updated_at":null,"timestamp":null,"timestamp_milli":null,"timestamp_micro":null,"timestamp_nano":null,"deleted_at":null}`, string(data))
 	})
 
 	t.Run("error carbon", func(t *testing.T) {
@@ -859,7 +859,7 @@ func TestCustomerType_MarshalJSON(t *testing.T) {
 
 		data, err := json.Marshal(&model)
 		assert.NoError(t, err)
-		assert.Equal(t, `{"customer1":"","customer2":"","created_at":"","updated_at":""}`, string(data))
+		assert.Equal(t, `{"customer1":null,"customer2":null,"created_at":null,"updated_at":null}`, string(data))
 	})
 
 	t.Run("error carbon", func(t *testing.T) {
