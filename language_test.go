@@ -1,7 +1,6 @@
 package carbon
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -24,7 +23,6 @@ func TestLanguage_SetLocale(t *testing.T) {
 	t.Run("empty locale", func(t *testing.T) {
 		lang := NewLanguage()
 		lang.SetLocale("")
-		fmt.Println("lang", lang.locale)
 		assert.Empty(t, Parse("2020-08-05 13:14:15").SetLanguage(lang).ToMonthString())
 	})
 
