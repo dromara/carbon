@@ -9,7 +9,7 @@ import (
 // 通过默认的 布局模板 将时间字符串解析成 Carbon 实例
 func Parse(value string, timezone ...string) Carbon {
 	if value == "" {
-		return Carbon{isNil: true}
+		return Carbon{isEmpty: true}
 	}
 	var (
 		tz  string
@@ -49,7 +49,7 @@ func Parse(value string, timezone ...string) Carbon {
 // 通过一个确认的 布局模板 将时间字符串解析成 Carbon 实例
 func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	if value == "" {
-		return Carbon{isNil: true}
+		return Carbon{isEmpty: true}
 	}
 	if layout == "" {
 		return Carbon{Error: ErrEmptyLayout()}
@@ -110,7 +110,7 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 // 通过多个模糊的 布局模板 将时间字符串解析成 Carbon 实例
 func ParseByLayouts(value string, layouts []string, timezone ...string) Carbon {
 	if value == "" {
-		return Carbon{isNil: true}
+		return Carbon{isEmpty: true}
 	}
 	if len(layouts) == 0 {
 		return Parse(value, timezone...)
@@ -145,7 +145,7 @@ func ParseByLayouts(value string, layouts []string, timezone ...string) Carbon {
 // 通过一个确认的 格式模板 将时间字符串解析成 Carbon 实例
 func ParseByFormat(value, format string, timezone ...string) Carbon {
 	if value == "" {
-		return Carbon{isNil: true}
+		return Carbon{isEmpty: true}
 	}
 	if format == "" {
 		return Carbon{Error: ErrEmptyFormat()}
@@ -161,7 +161,7 @@ func ParseByFormat(value, format string, timezone ...string) Carbon {
 // 通过多个模糊的 格式模板 将时间字符串解析成 Carbon 实例
 func ParseByFormats(value string, formats []string, timezone ...string) Carbon {
 	if value == "" {
-		return Carbon{isNil: true}
+		return Carbon{isEmpty: true}
 	}
 	if len(formats) == 0 {
 		return Parse(value, timezone...)

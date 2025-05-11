@@ -41,7 +41,7 @@ func Max(c1 Carbon, c2 ...Carbon) (c Carbon) {
 	c = c1
 	for i := range c2 {
 		if c.IsInvalid() || c2[i].IsInvalid() {
-			c.isNil = true
+			c.isEmpty = true
 			return c
 		}
 		if c2[i].Gte(c) {
@@ -57,7 +57,7 @@ func Min(c1 Carbon, c2 ...Carbon) (c Carbon) {
 	c = c1
 	for i := range c2 {
 		if c.IsInvalid() || c2[i].IsInvalid() {
-			c.isNil = true
+			c.isEmpty = true
 			return c
 		}
 		if c2[i].Lte(c) {
@@ -71,7 +71,7 @@ func Min(c1 Carbon, c2 ...Carbon) (c Carbon) {
 // 返回离给定 carbon 实例最近的 Carbon 实例
 func (c Carbon) Closest(c1 Carbon, c2 Carbon) Carbon {
 	if c.IsInvalid() || c1.IsInvalid() || c2.IsInvalid() {
-		c.isNil = true
+		c.isEmpty = true
 		return c
 	}
 	if c.DiffAbsInSeconds(c1) < c.DiffAbsInSeconds(c2) {
@@ -84,7 +84,7 @@ func (c Carbon) Closest(c1 Carbon, c2 Carbon) Carbon {
 // 返回离给定 carbon 实例最远的 Carbon 实例
 func (c Carbon) Farthest(c1 Carbon, c2 Carbon) Carbon {
 	if c.IsInvalid() || c1.IsInvalid() || c2.IsInvalid() {
-		c.isNil = true
+		c.isEmpty = true
 		return c
 	}
 	if c.DiffAbsInSeconds(c1) > c.DiffAbsInSeconds(c2) {

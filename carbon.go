@@ -20,7 +20,7 @@ type Duration = time.Duration
 // Carbon defines a Carbon struct.
 // 定义 Carbon 结构体
 type Carbon struct {
-	isNil         bool
+	isEmpty       bool
 	currentLayout string
 	time          StdTime
 	weekStartsAt  Weekday
