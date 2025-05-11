@@ -7,7 +7,7 @@ import (
 )
 
 func TestCarbon_DiffInYears(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -34,7 +34,7 @@ func TestCarbon_DiffInYears(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInYears(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -61,7 +61,7 @@ func TestCarbon_DiffAbsInYears(t *testing.T) {
 }
 
 func TestCarbon_DiffInMonths(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -90,7 +90,7 @@ func TestCarbon_DiffInMonths(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInMonths(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -117,7 +117,7 @@ func TestCarbon_DiffAbsInMonths(t *testing.T) {
 }
 
 func TestCarbon_DiffInWeeks(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -142,7 +142,7 @@ func TestCarbon_DiffInWeeks(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInWeeks(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -167,7 +167,7 @@ func TestCarbon_DiffAbsInWeeks(t *testing.T) {
 }
 
 func TestCarbon_DiffInDays(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -194,7 +194,7 @@ func TestCarbon_DiffInDays(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInDays(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -221,7 +221,7 @@ func TestCarbon_DiffAbsInDays(t *testing.T) {
 }
 
 func TestCarbon_DiffInHours(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -248,7 +248,7 @@ func TestCarbon_DiffInHours(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInHours(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -275,7 +275,7 @@ func TestCarbon_DiffAbsInHours(t *testing.T) {
 }
 
 func TestCarbon_DiffInMinutes(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -302,7 +302,7 @@ func TestCarbon_DiffInMinutes(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInMinutes(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -329,7 +329,7 @@ func TestCarbon_DiffAbsInMinutes(t *testing.T) {
 }
 
 func TestCarbon_DiffInSeconds(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -356,7 +356,7 @@ func TestCarbon_DiffInSeconds(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInSeconds(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -383,7 +383,7 @@ func TestCarbon_DiffAbsInSeconds(t *testing.T) {
 }
 
 func TestCarbon_DiffInString(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -432,7 +432,7 @@ func TestCarbon_DiffInString(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInString(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -477,7 +477,7 @@ func TestCarbon_DiffAbsInString(t *testing.T) {
 }
 
 func TestCarbon_DiffInDuration(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -510,7 +510,7 @@ func TestCarbon_DiffInDuration(t *testing.T) {
 }
 
 func TestCarbon_DiffAbsInDuration(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -543,7 +543,7 @@ func TestCarbon_DiffAbsInDuration(t *testing.T) {
 }
 
 func TestCarbon_DiffForHumans(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
@@ -580,7 +580,7 @@ func TestCarbon_DiffForHumans(t *testing.T) {
 }
 
 func TestCarbon_getDiffInMonths(t *testing.T) {
-	defer CleanTestNow()
+	defer ClearTestNow()
 	now := Parse("2020-08-05 13:14:15")
 	SetTestNow(now)
 
