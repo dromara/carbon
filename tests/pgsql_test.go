@@ -30,8 +30,8 @@ func (s *PgSQLSuite) SetupSuite() {
 
 func (s *PgSQLSuite) TearDownSuite() {
 	carbon.ClearTestNow()
-	//db.Unscoped().Where("1 = 1").Delete(&PgSQLModel1{})
-	//db.Unscoped().Where("1 = 1").Delete(&PgSQLModel2{})
+	db.Unscoped().Where("1 = 1").Delete(&PgSQLModel1{})
+	db.Unscoped().Where("1 = 1").Delete(&PgSQLModel2{})
 }
 
 func (s *PgSQLSuite) TestCurd1() {
@@ -320,25 +320,30 @@ func (s *PgSQLSuite) TestCurd2() {
 		var model1 PgSQLModel2
 
 		c := carbon.Now()
+		model1.Carbon1 = &c
+		model1.Carbon2 = &c
 
-		model1.Carbon1 = c
-		model1.Carbon2 = c
+		date := carbon.NewDate(c)
+		model1.Date1 = &date
 
-		model1.Date1 = carbon.NewDate(c)
+		time := carbon.NewTime(c)
+		model1.Time1 = &time
+		model1.Time2 = &time
 
-		model1.Time1 = carbon.NewTime(c)
-		model1.Time2 = carbon.NewTime(c)
+		datetime := carbon.NewDateTime(c)
+		model1.DateTime1 = &datetime
+		model1.DateTime2 = &datetime
 
-		model1.DateTime1 = carbon.NewDateTime(c)
-		model1.DateTime2 = carbon.NewDateTime(c)
+		rfc3339Layout := carbon.NewLayoutType[RFC3339Layout](c)
+		model1.RFC3339Layout1 = &rfc3339Layout
+		model1.RFC3339Layout2 = &rfc3339Layout
 
-		model1.RFC3339Layout1 = carbon.NewLayoutType[RFC3339Layout](c)
-		model1.RFC3339Layout2 = carbon.NewLayoutType[RFC3339Layout](c)
+		iso8601Format := carbon.NewFormatType[ISO8601Format](c)
+		model1.ISO8601Format1 = &iso8601Format
+		model1.ISO8601Format2 = &iso8601Format
 
-		model1.ISO8601Format1 = carbon.NewFormatType[ISO8601Format](c)
-		model1.ISO8601Format2 = carbon.NewFormatType[ISO8601Format](c)
-
-		model1.Timestamp1 = carbon.NewTimestamp(c)
+		timestamp := carbon.NewTimestamp(c)
+		model1.Timestamp1 = &timestamp
 
 		// create
 		if err := db.Create(&model1).Error; err != nil {
@@ -353,26 +358,31 @@ func (s *PgSQLSuite) TestCurd2() {
 		s.Nil(err1)
 		s.Equal(`{"carbon1":"2020-08-05 21:14:15","carbon2":"2020-08-05 13:14:15","date1":"2020-08-05","time1":"13:14:15","time2":"13:19:58","date_time1":"2020-08-05 21:14:15","date_time2":"2020-08-05 13:14:15","rfc3339_layout1":"2020-08-05T21:14:15+08:00","rfc3339_layout2":"2020-08-05T13:14:15+08:00","iso8601_format1":"2020-08-05T21:14:15+08:00","iso8601_format2":"2020-08-05T13:14:15+08:00","timestamp1":1596604455}`, string(data1))
 
-		c = c.Copy().AddDay()
+		c = c.AddDay()
+		model2.Carbon1 = &c
+		model2.Carbon2 = &c
 
-		model2.Carbon1 = c
-		model2.Carbon2 = c
+		date = carbon.NewDate(c)
+		model2.Date1 = &date
 
-		model2.Date1 = carbon.NewDate(c)
+		time = carbon.NewTime(c)
+		model2.Time1 = &time
+		model2.Time2 = &time
 
-		model2.Time1 = carbon.NewTime(c)
-		model2.Time2 = carbon.NewTime(c)
+		datetime = carbon.NewDateTime(c)
+		model2.DateTime1 = &datetime
+		model2.DateTime2 = &datetime
 
-		model2.DateTime1 = carbon.NewDateTime(c)
-		model2.DateTime2 = carbon.NewDateTime(c)
+		rfc3339Layout = carbon.NewLayoutType[RFC3339Layout](c)
+		model2.RFC3339Layout1 = &rfc3339Layout
+		model2.RFC3339Layout2 = &rfc3339Layout
 
-		model2.RFC3339Layout1 = carbon.NewLayoutType[RFC3339Layout](c)
-		model2.RFC3339Layout2 = carbon.NewLayoutType[RFC3339Layout](c)
+		iso8601Format = carbon.NewFormatType[ISO8601Format](c)
+		model2.ISO8601Format1 = &iso8601Format
+		model2.ISO8601Format2 = &iso8601Format
 
-		model2.ISO8601Format1 = carbon.NewFormatType[ISO8601Format](c)
-		model2.ISO8601Format2 = carbon.NewFormatType[ISO8601Format](c)
-
-		model2.Timestamp1 = carbon.NewTimestamp(c)
+		timestamp = carbon.NewTimestamp(c)
+		model2.Timestamp1 = &timestamp
 
 		// update
 		db.Save(&model2)
