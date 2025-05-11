@@ -7,16 +7,16 @@ import (
 // HasError reports whether it has error.
 // 是否有错误
 func (c Carbon) HasError() bool {
-	if c.IsNil() {
+	if c.IsEmpty() {
 		return false
 	}
 	return c.Error != nil
 }
 
-// IsNil reports whether is a nil time.
+// IsEmpty reports whether is a EMPATY time.
 // 是否是空时间
-func (c Carbon) IsNil() bool {
-	if c.isNil == true || &c.time == nil {
+func (c Carbon) IsEmpty() bool {
+	if c.isEmpty == true {
 		return true
 	}
 	return false
@@ -25,7 +25,7 @@ func (c Carbon) IsNil() bool {
 // IsZero reports whether is a zero time(0001-01-01 00:00:00 +0000 UTC).
 // 是否是零值时间(0001-01-01 00:00:00 +0000 UTC)
 func (c Carbon) IsZero() bool {
-	if c.IsNil() || c.HasError() {
+	if c.IsEmpty() || c.HasError() {
 		return false
 	}
 	return c.time.IsZero()
@@ -43,7 +43,7 @@ func (c Carbon) IsEpoch() bool {
 // IsValid reports whether is a valid time.
 // 是否是有效时间
 func (c Carbon) IsValid() bool {
-	if !c.IsNil() && !c.HasError() {
+	if !c.IsEmpty() && !c.HasError() {
 		return true
 	}
 	return false

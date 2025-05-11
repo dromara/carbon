@@ -23,19 +23,19 @@ func TestCarbon_HasError(t *testing.T) {
 	})
 }
 
-func TestCarbon_IsNil(t *testing.T) {
+func TestCarbon_IsEmpty(t *testing.T) {
 	t.Run("zero time", func(t *testing.T) {
-		assert.False(t, NewCarbon().IsNil())
+		assert.False(t, NewCarbon().IsEmpty())
 	})
 
 	t.Run("invalid time", func(t *testing.T) {
-		assert.False(t, Parse("0").IsNil())
-		assert.False(t, Parse("xxx").IsNil())
-		assert.True(t, Parse("").IsNil())
+		assert.False(t, Parse("0").IsEmpty())
+		assert.False(t, Parse("xxx").IsEmpty())
+		assert.True(t, Parse("").IsEmpty())
 	})
 
 	t.Run("valid time", func(t *testing.T) {
-		assert.False(t, Parse("2020-08-05").IsNil())
+		assert.False(t, Parse("2020-08-05").IsEmpty())
 	})
 }
 

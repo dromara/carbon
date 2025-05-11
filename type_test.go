@@ -86,11 +86,21 @@ func TestCarbonType_MarshalJSON(t *testing.T) {
 
 		data, err := json.Marshal(&model)
 		assert.NoError(t, err)
-		assert.Equal(t, `{"carbon1":"","carbon2":null}`, string(data))
+		assert.Equal(t, `{"carbon1":null,"carbon2":null}`, string(data))
 	})
 
 	t.Run("zero time", func(t *testing.T) {
 		c := NewCarbon()
+		model.Carbon1 = c
+		model.Carbon2 = &c
+
+		data, err := json.Marshal(&model)
+		assert.NoError(t, err)
+		assert.Equal(t, `{"carbon1":null,"carbon2":null}`, string(data))
+	})
+
+	t.Run("empty time", func(t *testing.T) {
+		c := Parse("")
 		model.Carbon1 = c
 		model.Carbon2 = &c
 
@@ -139,14 +149,6 @@ func TestCarbonType_UnmarshalJSON(t *testing.T) {
 		assert.Empty(t, model.Carbon2.String())
 	})
 
-	t.Run("zero value", func(t *testing.T) {
-		value := `{"carbon1":"0","carbon2":"0"}`
-		assert.NoError(t, json.Unmarshal([]byte(value), &model))
-
-		assert.Empty(t, model.Carbon1.String())
-		assert.Empty(t, model.Carbon2.String())
-	})
-
 	t.Run("valid value", func(t *testing.T) {
 		value := `{"carbon1":"2020-08-05 13:14:15","carbon2":"2020-08-05 13:14:15"}`
 		assert.NoError(t, json.Unmarshal([]byte(value), &model))
@@ -176,10 +178,6 @@ func TestCarbonType_String(t *testing.T) {
 		assert.Equal(t, "2020-08-05 13:14:15", Parse("2020-08-05 13:14:15").String())
 		assert.Equal(t, "2020-08-05", Parse("2020-08-05 13:14:15").SetLayout(DateLayout).String())
 	})
-}
-
-func TestCarbonType_GormDataType(t *testing.T) {
-	assert.Equal(t, "time", Now().GormDataType())
 }
 
 type builtinTypeModel struct {
@@ -396,6 +394,41 @@ func TestBuiltinType_MarshalJSON(t *testing.T) {
 
 	t.Run("zero time", func(t *testing.T) {
 		c := NewCarbon()
+
+		model.Date = NewDate(c)
+		model.DateMilli = NewDateMilli(c)
+		model.DateMicro = NewDateMicro(c)
+		model.DateNano = NewDateNano(c)
+
+		model.Time = NewTime(c)
+		model.TimeMilli = NewTimeMilli(c)
+		model.TimeMicro = NewTimeMicro(c)
+		model.TimeNano = NewTimeNano(c)
+
+		model.DateTime = NewDateTime(c)
+		model.DateTimeMilli = NewDateTimeMilli(c)
+		model.DateTimeMicro = NewDateTimeMicro(c)
+		model.DateTimeNano = NewDateTimeNano(c)
+
+		model.Timestamp = NewTimestamp(c)
+		model.TimestampMilli = NewTimestampMilli(c)
+		model.TimestampMicro = NewTimestampMicro(c)
+		model.TimestampNano = NewTimestampNano(c)
+
+		createdAt := NewDateTime(c)
+		model.CreatedAt = &createdAt
+		updatedAt := NewDateTime(c)
+		model.UpdatedAt = &updatedAt
+		deletedAt := NewTimestamp(c)
+		model.DeletedAt = &deletedAt
+
+		data, err := json.Marshal(&model)
+		assert.NoError(t, err)
+		assert.Equal(t, `{"date":null,"date_milli":null,"date_micro":null,"date_nano":null,"time":null,"time_milli":null,"time_micro":null,"time_nano":null,"date_time":null,"date_time_milli":null,"date_time_micro":null,"date_time_nano":null,"created_at":null,"updated_at":null,"timestamp":null,"timestamp_milli":null,"timestamp_micro":null,"timestamp_nano":null,"deleted_at":null}`, string(data))
+	})
+
+	t.Run("empty time", func(t *testing.T) {
+		c := Parse("")
 
 		model.Date = NewDate(c)
 		model.DateMilli = NewDateMilli(c)
@@ -700,31 +733,6 @@ func TestBuiltinType_UnmarshalJSON(t *testing.T) {
 	})
 }
 
-func TestBuiltinType_GormDataType(t *testing.T) {
-	c := Now()
-	dataType := "time"
-
-	assert.Equal(t, dataType, NewDate(c).GormDataType())
-	assert.Equal(t, dataType, NewDateMilli(c).GormDataType())
-	assert.Equal(t, dataType, NewDateMicro(c).GormDataType())
-	assert.Equal(t, dataType, NewDateNano(c).GormDataType())
-
-	assert.Equal(t, dataType, NewTime(c).GormDataType())
-	assert.Equal(t, dataType, NewTimeMilli(c).GormDataType())
-	assert.Equal(t, dataType, NewTimeMicro(c).GormDataType())
-	assert.Equal(t, dataType, NewTimeNano(c).GormDataType())
-
-	assert.Equal(t, dataType, NewDateTime(c).GormDataType())
-	assert.Equal(t, dataType, NewDateTimeMilli(c).GormDataType())
-	assert.Equal(t, dataType, NewDateTimeMicro(c).GormDataType())
-	assert.Equal(t, dataType, NewDateTimeNano(c).GormDataType())
-
-	assert.Equal(t, dataType, NewTimestamp(c).GormDataType())
-	assert.Equal(t, dataType, NewTimestampMilli(c).GormDataType())
-	assert.Equal(t, dataType, NewTimestampMicro(c).GormDataType())
-	assert.Equal(t, dataType, NewTimestampNano(c).GormDataType())
-}
-
 type iso8601Type string
 
 func (t iso8601Type) Format() string {
@@ -850,6 +858,22 @@ func TestCustomerType_MarshalJSON(t *testing.T) {
 
 		data, err := json.Marshal(&model)
 		assert.NoError(t, err)
+		assert.Equal(t, `{"customer1":null,"customer2":null,"created_at":null,"updated_at":null}`, string(data))
+	})
+
+	t.Run("empty time", func(t *testing.T) {
+		c := Parse("")
+
+		model.Customer1 = NewFormatType[iso8601Type](c)
+		model.Customer2 = NewLayoutType[rfc3339Type](c)
+
+		createdAt := NewFormatType[iso8601Type](c)
+		model.CreatedAt = &createdAt
+		updatedAt := NewLayoutType[rfc3339Type](c)
+		model.UpdatedAt = &updatedAt
+
+		data, err := json.Marshal(&model)
+		assert.NoError(t, err)
 		assert.Equal(t, `{"customer1":"","customer2":"","created_at":"","updated_at":""}`, string(data))
 	})
 
@@ -909,16 +933,6 @@ func TestCustomerType_UnmarshalJSON(t *testing.T) {
 		assert.Empty(t, model.UpdatedAt.String())
 	})
 
-	t.Run("zero value", func(t *testing.T) {
-		value := `{"customer1":"0","customer2":"0","created_at":"0","updated_at":"0"}`
-		assert.NoError(t, json.Unmarshal([]byte(value), &model))
-
-		assert.Empty(t, model.Customer1.String())
-		assert.Empty(t, model.Customer2.String())
-		assert.Empty(t, model.CreatedAt.String())
-		assert.Empty(t, model.UpdatedAt.String())
-	})
-
 	t.Run("invalid value", func(t *testing.T) {
 		value := `{"customer1":"xxx","customer2":"xxx","created_at":"xxx","updated_at":"xxx"}`
 		assert.Error(t, json.Unmarshal([]byte(value), &model))
@@ -938,12 +952,4 @@ func TestCustomerType_UnmarshalJSON(t *testing.T) {
 		assert.Equal(t, "2020-08-05T13:14:15+00:00", model.CreatedAt.String())
 		assert.Equal(t, "2020-08-05T13:14:15Z", model.UpdatedAt.String())
 	})
-}
-
-func TestCustomerType_GormDataType(t *testing.T) {
-	c := Now()
-	dataType := "time"
-
-	assert.Equal(t, dataType, NewFormatType[iso8601Type](c).GormDataType())
-	assert.Equal(t, dataType, NewLayoutType[rfc3339Type](c).GormDataType())
 }

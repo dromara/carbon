@@ -53,7 +53,7 @@ func (t *LayoutType[T]) Scan(src any) error {
 // Value implements driver.Valuer interface for LayoutType generic struct.
 // 实现 driver.Valuer 接口
 func (t LayoutType[T]) Value() (driver.Value, error) {
-	if t.IsNil() || t.IsZero() {
+	if t.IsEmpty() || t.IsZero() {
 		return nil, nil
 	}
 	if t.HasError() {
@@ -65,11 +65,14 @@ func (t LayoutType[T]) Value() (driver.Value, error) {
 // MarshalJSON implements json.Marshal interface for LayoutType generic struct.
 // 实现 json.Marshaler 接口
 func (t LayoutType[T]) MarshalJSON() ([]byte, error) {
-	if t.IsNil() || t.IsZero() {
-		return []byte(`""`), nil
+	if t.IsZero() {
+		return []byte(`null`), nil
 	}
 	if t.HasError() {
-		return []byte(`""`), t.Error
+		return []byte(`null`), t.Error
+	}
+	if t.IsEmpty() {
+		return []byte(`""`), nil
 	}
 	v := t.Layout(t.getLayout())
 	b := make([]byte, 0, len(v)+2)
@@ -97,12 +100,6 @@ func (t LayoutType[T]) String() string {
 		return ""
 	}
 	return t.Layout(t.getLayout())
-}
-
-// GormDataType sets gorm data type for LayoutType generic struct.
-// 设置 gorm 数据类型
-func (t LayoutType[T]) GormDataType() string {
-	return "time"
 }
 
 // getLayout returns the set layout.

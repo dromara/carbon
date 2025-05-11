@@ -53,7 +53,7 @@ func (t *FormatType[T]) Scan(src any) error {
 // Value implements driver.Valuer interface for FormatType generic struct.
 // 实现 driver.Valuer 接口
 func (t FormatType[T]) Value() (driver.Value, error) {
-	if t.IsNil() || t.IsZero() {
+	if t.IsEmpty() || t.IsZero() {
 		return nil, nil
 	}
 	if t.HasError() {
@@ -65,11 +65,14 @@ func (t FormatType[T]) Value() (driver.Value, error) {
 // MarshalJSON implements json.Marshal interface for FormatType generic struct.
 // 实现 json.Marshaler 接口
 func (t FormatType[T]) MarshalJSON() ([]byte, error) {
-	if t.IsNil() || t.IsZero() {
-		return []byte(`""`), nil
+	if t.IsZero() {
+		return []byte(`null`), nil
 	}
 	if t.HasError() {
-		return []byte(`""`), t.Error
+		return []byte(`null`), t.Error
+	}
+	if t.IsEmpty() {
+		return []byte(`""`), nil
 	}
 	v := t.Format(t.getFormat())
 	b := make([]byte, 0, len(v)+2)
@@ -83,7 +86,7 @@ func (t FormatType[T]) MarshalJSON() ([]byte, error) {
 // 实现 json.Unmarshaler 接口
 func (t *FormatType[T]) UnmarshalJSON(src []byte) error {
 	v := string(bytes.Trim(src, `"`))
-	if v == "" || v == "null" || v == "0" {
+	if v == "" || v == "null" {
 		return nil
 	}
 	*t = NewFormatType[T](ParseByFormat(v, t.getFormat()))
@@ -97,12 +100,6 @@ func (t FormatType[T]) String() string {
 		return ""
 	}
 	return t.Format(t.getFormat())
-}
-
-// GormDataType sets gorm data type for FormatType generic struct.
-// 设置 gorm 数据类型
-func (t FormatType[T]) GormDataType() string {
-	return "time"
 }
 
 // getFormat returns the set format.

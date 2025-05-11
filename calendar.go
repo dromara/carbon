@@ -9,7 +9,7 @@ import (
 // Lunar converts Carbon instance to Lunar instance.
 // 将 Carbon 实例转化为 Lunar 实例
 func (c Carbon) Lunar() (l lunar.Lunar) {
-	if c.IsNil() {
+	if c.IsEmpty() {
 		return l
 	}
 	if c.HasError() {
@@ -34,7 +34,7 @@ func CreateFromLunar(year, month, day int, isLeapMonth bool) Carbon {
 // Julian converts Carbon instance to Julian instance.
 // 将 Carbon 实例转化为 Julian 实例
 func (c Carbon) Julian() (j julian.Julian) {
-	if c.IsNil() {
+	if c.IsEmpty() {
 		return j
 	}
 	if c.HasError() {
@@ -52,7 +52,7 @@ func CreateFromJulian(f float64) Carbon {
 // Persian converts Carbon instance to Persian instance.
 // 将 Carbon 实例转化为 Persian 实例
 func (c Carbon) Persian() (p persian.Persian) {
-	if c.IsNil() {
+	if c.IsEmpty() {
 		return p
 	}
 	if c.HasError() {

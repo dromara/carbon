@@ -30,7 +30,7 @@ func (c *Carbon) Scan(src any) error {
 // Value implements driver.Valuer interface.
 // 实现 driver.Valuer 接口
 func (c Carbon) Value() (driver.Value, error) {
-	if c.IsNil() || c.IsZero() {
+	if c.IsEmpty() || c.IsZero() {
 		return nil, nil
 	}
 	if c.HasError() {
@@ -42,11 +42,14 @@ func (c Carbon) Value() (driver.Value, error) {
 // MarshalJSON implements json.Marshal interface.
 // 实现 json.Marshaler 接口
 func (c Carbon) MarshalJSON() ([]byte, error) {
-	if c.IsNil() || c.IsZero() {
-		return []byte(`""`), nil
+	if c.IsZero() {
+		return []byte(`null`), nil
 	}
 	if c.HasError() {
-		return []byte(`""`), c.Error
+		return []byte(`null`), c.Error
+	}
+	if c.isEmpty {
+		return []byte(`""`), nil
 	}
 	v := c.Layout(DefaultLayout)
 	b := make([]byte, 0, len(v)+2)
@@ -60,7 +63,7 @@ func (c Carbon) MarshalJSON() ([]byte, error) {
 // 实现 json.Unmarshaler 接口
 func (c *Carbon) UnmarshalJSON(b []byte) error {
 	value := string(bytes.Trim(b, `"`))
-	if value == "" || value == "null" || value == "0" {
+	if value == "" || value == "null" {
 		return nil
 	}
 	*c = ParseByLayout(value, DefaultLayout)
@@ -70,14 +73,8 @@ func (c *Carbon) UnmarshalJSON(b []byte) error {
 // String implements the interface Stringer for Carbon struct.
 // 实现 Stringer 接口
 func (c Carbon) String() string {
-	if c.IsZero() || c.IsInvalid() {
+	if c.IsInvalid() || c.IsZero() {
 		return ""
 	}
 	return c.Layout(c.currentLayout)
-}
-
-// GormDataType sets gorm data type.
-// 设置 gorm 数据类型
-func (c Carbon) GormDataType() string {
-	return "time"
 }
