@@ -30,7 +30,7 @@ func (c *Carbon) Scan(src any) error {
 // Value implements driver.Valuer interface.
 // 实现 driver.Valuer 接口
 func (c Carbon) Value() (driver.Value, error) {
-	if c.IsEmpty() || c.IsZero() {
+	if c.IsZero() || c.IsEmpty() {
 		return nil, nil
 	}
 	if c.HasError() {
