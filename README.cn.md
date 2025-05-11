@@ -264,8 +264,8 @@ carbon.ParseByLayout("2020-08-05 13:14:15", "2006-01-02 15:04:05", carbon.Tokyo)
 ##### 通过多个模糊的 `布局模板` 将时间字符串解析成 `Carbon` 实例
 
 ```go
-carbon.ParseWithLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).ToDateTimeString() // 2020-08-05 13:14:15
-carbon.ParseWithLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).CurrentLayout() // 2006|01|02 15|04|05
+carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).ToDateTimeString() // 2020-08-05 13:14:15
+carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).CurrentLayout() // 2006|01|02 15|04|05
 ```
 
 ##### 通过一个确认的 `格式模板` 将时间字符串解析成 `Carbon` 实例
@@ -282,8 +282,8 @@ carbon.ParseByFormat("2020-08-05 13:14:15", "Y-m-d H:i:s", carbon.Tokyo).ToDateT
 ##### 通过多个模糊的 `格式模板` 将时间字符串解析成 `Carbon` 实例
 
 ```go
-carbon.ParseWithFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).ToDateTimeString() // 2020-08-05 13:14:15
-carbon.ParseWithFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).CurrentLayout() // 2006|01|02 15|04|05
+carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).ToDateTimeString() // 2020-08-05 13:14:15
+carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).CurrentLayout() // 2006|01|02 15|04|05
 ```
 
 ##### 时间冻结
@@ -1087,13 +1087,13 @@ carbon.Parse("2020-08-05 13:14:15.999").Microsecond() // 999000
 carbon.Parse("2020-08-05 13:14:15.999").Nanosecond() // 999000000
 
 // 获取秒精度时间戳
-carbon.Parse("2020-08-05 13:14:15").Timestamp() // 1596604455
+carbon.Parse("2020-08-05 13:14:15").Timestamp() // 1596633255
 // 获取毫秒精度时间戳
-carbon.Parse("2020-08-05 13:14:15").TimestampMilli() // 1596604455000
+carbon.Parse("2020-08-05 13:14:15.999").TimestampMilli() // 1596633255999
 // 获取微秒精度时间戳
-carbon.Parse("2020-08-05 13:14:15").TimestampMicro() // 1596604455000000
+carbon.Parse("2020-08-05 13:14:15.999999").TimestampMicro() // 1596633255999999
 // 获取纳秒精度时间戳
-carbon.Parse("2020-08-05 13:14:15").TimestampNano() // 1596604455000000000
+carbon.Parse("2020-08-05 13:14:15.999999999").TimestampNano() // 1596633255999999999
 
 // 获取时区位置
 carbon.SetTimezone(carbon.PRC).Timezone() // PRC

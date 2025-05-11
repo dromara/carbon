@@ -274,8 +274,8 @@ carbon.ParseByFormat("今天是 2020年08月05日13时14分15秒", "今天是 Y�
 ##### 複数のファジィフォーマットテンプレートによって時間文字列を `Carbon` インスタンスに解析する
 
 ```go
-carbon.ParseWithFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).ToDateTimeString() // 2020-08-05 13:14:15
-carbon.ParseWithFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).CurrentLayout() // 2006|01|02 15|04|05
+carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).ToDateTimeString() // 2020-08-05 13:14:15
+carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).CurrentLayout() // 2006|01|02 15|04|05
 ```
 
 ##### 時間凍結
@@ -1079,13 +1079,13 @@ carbon.Parse("2020-08-05 13:14:15.999").Microsecond() // 999000
 carbon.Parse("2020-08-05 13:14:15.999").Nanosecond() // 999000000
 
 // 秒タイムスタンプを取得
-carbon.Parse("2020-08-05 13:14:15").Timestamp() // 1596600855
+carbon.Parse("2020-08-05 13:14:15").Timestamp() // 1596633255
 // ミリ秒のタイムスタンプを取得
-carbon.Parse("2020-08-05 13:14:15").TimestampMilli() // 1596600855000
+carbon.Parse("2020-08-05 13:14:15.999").TimestampMilli() // 1596633255999
 // マイクロ秒タイムスタンプを取得
-carbon.Parse("2020-08-05 13:14:15").TimestampMicro() // 1596600855000000
+carbon.Parse("2020-08-05 13:14:15.999999").TimestampMicro() // 1596633255999999
 // ナノ秒タイムスタンプを取得
-carbon.Parse("2020-08-05 13:14:15").TimestampNano() // 1596600855000000000
+carbon.Parse("2020-08-05 13:14:15.999999999").TimestampNano() // 1596633255999999999
 
 // タイムゾーンロケーションの取得
 carbon.SetTimezone(carbon.PRC).Timezone() // PRC

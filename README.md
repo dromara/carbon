@@ -255,11 +255,11 @@ carbon.ParseByLayout("It is 2020-08-05 13:14:15", "It is 2006-01-02 15:04:05").T
 carbon.ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 2006年01月02日15时04分05秒").ToDateTimeString() // 2020-08-05 13:14:15
 ```
 
-##### Parse a time string as a `Carbon` instance with multiple fuzzy layouts
+##### Parse a time string as a `Carbon` instance by multiple fuzzy layouts
 
 ```go
-carbon.ParseWithLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).ToDateTimeString() // 2020-08-05 13:14:15
-carbon.ParseWithLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).CurrentLayout() // 2006|01|02 15|04|05
+carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).ToDateTimeString() // 2020-08-05 13:14:15
+carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).CurrentLayout() // 2006|01|02 15|04|05
 ```
 
 ##### Parse a time string as a `Carbon` instance by a confirmed format
@@ -270,11 +270,11 @@ carbon.ParseByFormat("It is 2020-08-05 13:14:15", "\\I\\t \\i\\s Y-m-d H:i:s").T
 carbon.ParseByFormat("今天是 2020年08月05日13时14分15秒", "今天是 Y年m月d日H时i分s秒").ToDateTimeString() // 2020-08-05 13:14:15
 ```
 
-##### Parse a time string as a `Carbon` instance with multiple fuzzy formats
+##### Parse a time string as a `Carbon` instance by multiple fuzzy formats
 
 ```go
-carbon.ParseWithFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).ToDateTimeString() // 2020-08-05 13:14:15
-carbon.ParseWithFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).CurrentLayout() // 2006|01|02 15|04|05
+carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).ToDateTimeString() // 2020-08-05 13:14:15
+carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).CurrentLayout() // 2006|01|02 15|04|05
 ```
 
 ##### Freeze
@@ -1076,13 +1076,13 @@ carbon.Parse("2020-08-05 13:14:15.999").Microsecond() // 999000
 carbon.Parse("2020-08-05 13:14:15.999").Nanosecond() // 999000000
 
 // Get timestamp with second precision
-carbon.Parse("2020-08-05 13:14:15").Timestamp() // 1596604455
+carbon.Parse("2020-08-05 13:14:15").Timestamp() // 1596633255
 // Get timestamp with millisecond precision
-carbon.Parse("2020-08-05 13:14:15").TimestampMilli() // 1596604455000
+carbon.Parse("2020-08-05 13:14:15.999").TimestampMilli() // 1596633255999
 // Get timestamp with microsecond precision
-carbon.Parse("2020-08-05 13:14:15").TimestampMicro() // 1596604455000000
+carbon.Parse("2020-08-05 13:14:15.999999").TimestampMicro() // 1596633255999999
 // Get timestamp with nanosecond precision
-carbon.Parse("2020-08-05 13:14:15").TimestampNano() // 1596604455000000000
+carbon.Parse("2020-08-05 13:14:15.999999999").TimestampNano() // 1596633255999999999
 
 // Get timezone location
 carbon.SetTimezone(carbon.PRC).Timezone() // PRC
