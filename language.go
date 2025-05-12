@@ -4,6 +4,7 @@ import (
 	"embed"
 	"encoding/json"
 	"path/filepath"
+	"slices"
 	"strconv"
 	"strings"
 	"sync"
@@ -11,6 +12,12 @@ import (
 
 //go:embed lang
 var fs embed.FS
+
+var validResourcesKey = []string{
+	"months", "short_months", "weeks", "short_weeks", "seasons", "constellations",
+	"year", "month", "week", "day", "hour", "minute", "second",
+	"now", "ago", "from_now", "before", "after",
+}
 
 // Language defines a Language struct.
 // 定义 Language 结构体
@@ -74,18 +81,18 @@ func (lang *Language) SetResources(resources map[string]string) *Language {
 	lang.rw.Lock()
 	defer lang.rw.Unlock()
 
-	for i := range resources {
-		if _, ok := lang.resources[i]; ok {
-			lang.resources[i] = resources[i]
-		} else {
-			lang.Error = ErrInvalidResourcesError()
-		}
-	}
-
 	if len(lang.resources) == 0 {
 		lang.resources = resources
 	}
-
+	for i := range resources {
+		if !slices.Contains(validResourcesKey, i) {
+			lang.Error = ErrInvalidResourcesError(resources)
+			return lang
+		}
+		if _, ok := lang.resources[i]; ok {
+			lang.resources[i] = resources[i]
+		}
+	}
 	return lang
 }
 
