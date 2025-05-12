@@ -58,14 +58,17 @@ func TestCarbon_Constellation(t *testing.T) {
 	})
 
 	t.Run("error resources", func(t *testing.T) {
-		lang := NewLanguage()
-		resources := map[string]string{
+		lang1 := NewLanguage()
+		lang1.SetResources(map[string]string{
 			"xxx": "xxx",
-		}
-		lang.SetResources(resources)
-		assert.Error(t, lang.Error)
-		c := Parse("2020-01-05").SetLanguage(lang)
-		assert.Empty(t, c.Constellation())
+		})
+		assert.Empty(t, Parse("2020-01-05").SetLanguage(lang1).Constellation())
+
+		lang2 := NewLanguage()
+		lang2.SetResources(map[string]string{
+			"constellations": "xxx",
+		})
+		assert.Empty(t, Parse("2020-01-05").SetLanguage(lang2).Constellation())
 	})
 }
 
