@@ -407,11 +407,11 @@ func TestCarbon_IsOctober(t *testing.T) {
 	})
 
 	t.Run("empty carbon", func(t *testing.T) {
-		assert.False(t, Parse("").IsNovember())
+		assert.False(t, Parse("").IsOctober())
 	})
 
 	t.Run("error carbon", func(t *testing.T) {
-		assert.False(t, Parse("xxx").IsNovember())
+		assert.False(t, Parse("xxx").IsOctober())
 	})
 
 	t.Run("valid carbon", func(t *testing.T) {
@@ -464,11 +464,11 @@ func TestCarbon_IsMonday(t *testing.T) {
 	})
 
 	t.Run("empty carbon", func(t *testing.T) {
-		assert.False(t, Parse("").IsTuesday())
+		assert.False(t, Parse("").IsMonday())
 	})
 
 	t.Run("error carbon", func(t *testing.T) {
-		assert.False(t, Parse("xxx").IsTuesday())
+		assert.False(t, Parse("xxx").IsMonday())
 	})
 
 	t.Run("valid carbon", func(t *testing.T) {
