@@ -176,6 +176,10 @@ func (c Carbon) SetLanguage(lang *Language) Carbon {
 		c.Error = ErrNilLanguage()
 		return c
 	}
+	if lang.Error != nil {
+		c.Error = ErrInvalidLanguage(lang)
+		return c
+	}
 	c.lang.dir = lang.dir
 	c.lang.locale = lang.locale
 	c.lang.resources = lang.resources
