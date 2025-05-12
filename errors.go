@@ -35,6 +35,12 @@ var (
 		return fmt.Errorf("language cannot be nil")
 	}
 
+	// ErrInvalidLanguage invalid language error.
+	// 无效的语言错误
+	ErrInvalidLanguage = func(lang *Language) error {
+		return fmt.Errorf("invalid Language %v", lang)
+	}
+
 	// ErrEmptyLocale empty locale error.
 	// 空的语言环境错误
 	ErrEmptyLocale = func() error {
@@ -55,8 +61,8 @@ var (
 
 	// ErrInvalidResourcesError invalid resources error.
 	// 无效的资源错误
-	ErrInvalidResourcesError = func() error {
-		return fmt.Errorf("invalid resources")
+	ErrInvalidResourcesError = func(resources map[string]string) error {
+		return fmt.Errorf("invalid resources %v", resources)
 	}
 
 	// ErrEmptyTimezone empty timezone error.
