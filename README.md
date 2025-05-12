@@ -23,7 +23,7 @@ A simple, semantic and developer-friendly time package for `golang`, `100%` unit
 
 #### Installation
 
-##### go version >= 1.18
+##### go version >= 1.21
 
 ```go
 // By github
