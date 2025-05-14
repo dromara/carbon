@@ -812,6 +812,15 @@ func TestCarbon_SubMonthsNoOverflow(t *testing.T) {
 		assert.Equal(t, "2019-11-29", Parse("2020-02-29").SubMonthsNoOverflow(3).ToDateString())
 		assert.Equal(t, "2020-06-30", Parse("2020-08-31").SubMonthsNoOverflow(2).ToDateString())
 	})
+
+	// https://github.com/dromara/carbon/issues/303
+	t.Run("issue303", func(t *testing.T) {
+		c := CreateFromDate(2025, 6, 11, "Asia/Shanghai")
+		c = c.SetWeekStartsAt(time.Sunday)
+		c = c.SubMonthNoOverflow()
+		c = c.StartOfWeek()
+		assert.Equal(t, "2025-05-11", c.ToDateString())
+	})
 }
 
 func TestCarbon_SubMonth(t *testing.T) {
