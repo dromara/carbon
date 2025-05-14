@@ -8,7 +8,6 @@ import (
 )
 
 // format map
-// 格式符号映射表
 var formatMap = map[byte]string{
 	'd': "02",      // Day:    Day of the month, 2 digits with leading zeros. Eg: 01 to 31.
 	'D': "Mon",     // Day:    A textual representation of a day, three letters. Eg: Mon through Sun.
@@ -44,7 +43,6 @@ var formatMap = map[byte]string{
 }
 
 // default layouts
-// 默认布局模板
 var defaultLayouts = []string{
 	DateTimeLayout, DateLayout, TimeLayout, DayDateTimeLayout,
 
@@ -89,7 +87,6 @@ var defaultLayouts = []string{
 }
 
 // converts format to layout.
-// format 转 layout
 func format2layout(format string) string {
 	buffer := &bytes.Buffer{}
 	for i := 0; i < len(format); i++ {
@@ -110,7 +107,6 @@ func format2layout(format string) string {
 }
 
 // parses a timezone string as a time.Location instance.
-// 将 时区字符串 解析成 time.Location 实例
 func parseTimezone(timezone string) (loc *Location, err error) {
 	if timezone == "" {
 		return nil, ErrEmptyTimezone()
@@ -122,7 +118,6 @@ func parseTimezone(timezone string) (loc *Location, err error) {
 }
 
 // parses a duration string as a time.Duration instance.
-// 将 时长字符串 解析成 time.Duration 实例
 func parseDuration(duration string) (dur Duration, err error) {
 	if duration == "" {
 		return 0, ErrEmptyDuration()
@@ -134,7 +129,6 @@ func parseDuration(duration string) (dur Duration, err error) {
 }
 
 // parses a timestamp string as a int64 format timestamp.
-// 将 时间戳字符串 解析成 int64 格式时间戳
 func parseTimestamp(timestamp string) (ts int64, err error) {
 	if ts, err = strconv.ParseInt(timestamp, 10, 64); err != nil {
 		err = fmt.Errorf("%w: %w", ErrInvalidTimestamp(timestamp), err)
@@ -143,7 +137,6 @@ func parseTimestamp(timestamp string) (ts int64, err error) {
 }
 
 // gets absolute value.
-// 获取绝对值
 func getAbsValue(value int64) int64 {
 	if value < 0 {
 		return -value

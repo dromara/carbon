@@ -6,7 +6,6 @@ import (
 )
 
 // Scan implements driver.Scanner interface.
-// 实现 driver.Scanner 接口
 func (c *Carbon) Scan(src any) error {
 	switch v := src.(type) {
 	case nil:
@@ -28,7 +27,6 @@ func (c *Carbon) Scan(src any) error {
 }
 
 // Value implements driver.Valuer interface.
-// 实现 driver.Valuer 接口
 func (c Carbon) Value() (driver.Value, error) {
 	if c.IsZero() || c.IsEmpty() {
 		return nil, nil
@@ -40,7 +38,6 @@ func (c Carbon) Value() (driver.Value, error) {
 }
 
 // MarshalJSON implements json.Marshal interface.
-// 实现 json.Marshaler 接口
 func (c Carbon) MarshalJSON() ([]byte, error) {
 	if c.IsZero() || c.IsEmpty() {
 		return []byte(`null`), nil
@@ -57,7 +54,6 @@ func (c Carbon) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshal interface.
-// 实现 json.Unmarshaler 接口
 func (c *Carbon) UnmarshalJSON(b []byte) error {
 	value := string(bytes.Trim(b, `"`))
 	if value == "" || value == "null" {
@@ -68,7 +64,6 @@ func (c *Carbon) UnmarshalJSON(b []byte) error {
 }
 
 // String implements the interface Stringer for Carbon struct.
-// 实现 Stringer 接口
 func (c Carbon) String() string {
 	if c.IsInvalid() || c.IsZero() {
 		return ""

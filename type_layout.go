@@ -6,20 +6,17 @@ import (
 )
 
 // LayoutTyper defines a LayoutTyper interface
-// 定义 LayoutTyper 接口
 type LayoutTyper interface {
 	~string
 	Layout() string
 }
 
 // LayoutType defines a LayoutType generic struct
-// 定义 LayoutType 泛型结构体
 type LayoutType[T LayoutTyper] struct {
 	Carbon
 }
 
 // NewLayoutType returns a new LayoutType generic instance.
-// 返回 LayoutType 泛型实例
 func NewLayoutType[T LayoutTyper](c Carbon) LayoutType[T] {
 	return LayoutType[T]{
 		Carbon: c,
@@ -27,7 +24,6 @@ func NewLayoutType[T LayoutTyper](c Carbon) LayoutType[T] {
 }
 
 // Scan implements driver.Scanner interface for LayoutType generic struct.
-// 实现 driver.Scanner 接口
 func (t *LayoutType[T]) Scan(src any) error {
 	var c Carbon
 	switch v := src.(type) {
@@ -51,7 +47,6 @@ func (t *LayoutType[T]) Scan(src any) error {
 }
 
 // Value implements driver.Valuer interface for LayoutType generic struct.
-// 实现 driver.Valuer 接口
 func (t LayoutType[T]) Value() (driver.Value, error) {
 	if t.IsZero() || t.IsEmpty() {
 		return nil, nil
@@ -63,7 +58,6 @@ func (t LayoutType[T]) Value() (driver.Value, error) {
 }
 
 // MarshalJSON implements json.Marshal interface for LayoutType generic struct.
-// 实现 json.Marshaler 接口
 func (t LayoutType[T]) MarshalJSON() ([]byte, error) {
 	if t.IsZero() || t.IsEmpty() {
 		return []byte(`null`), nil
@@ -80,7 +74,6 @@ func (t LayoutType[T]) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshal interface for LayoutType generic struct.
-// 实现 json.Unmarshaler 接口
 func (t *LayoutType[T]) UnmarshalJSON(src []byte) error {
 	v := string(bytes.Trim(src, `"`))
 	if v == "" || v == "null" {
@@ -91,7 +84,6 @@ func (t *LayoutType[T]) UnmarshalJSON(src []byte) error {
 }
 
 // String implements Stringer interface for LayoutType generic struct.
-// 实现 Stringer 接口
 func (t LayoutType[T]) String() string {
 	if t.IsInvalid() || t.IsZero() {
 		return ""
@@ -100,7 +92,6 @@ func (t LayoutType[T]) String() string {
 }
 
 // getLayout returns the set layout.
-// 返回设置的布局模板
 func (t LayoutType[T]) getLayout() string {
 	var typer T
 	return typer.Layout()

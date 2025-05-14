@@ -2,30 +2,24 @@ package carbon
 
 var (
 	// DefaultLayout default layout
-	// 默认布局模板
 	DefaultLayout = DateTimeLayout
 
 	// DefaultTimezone default timezone
-	// 默认时区
 	DefaultTimezone = UTC
 
 	// DefaultWeekStartsAt default week start date
-	// 默认一周开始日期
 	DefaultWeekStartsAt = Monday
 
 	// DefaultWeekendDays Default weekend days
-	// 默认周末日期
 	DefaultWeekendDays = []Weekday{
 		Saturday, Sunday,
 	}
 
 	// DefaultLocale default language locale
-	// 默认语言区域
 	DefaultLocale = "en"
 )
 
 // Default defines a Default struct.
-// 定义 Default 结构体
 type Default struct {
 	Layout       string
 	Timezone     string
@@ -35,7 +29,6 @@ type Default struct {
 }
 
 // SetDefault sets default.
-// 设置全局默认值
 func SetDefault(d Default) {
 	if d.Layout != "" {
 		DefaultLayout = d.Layout
@@ -55,7 +48,6 @@ func SetDefault(d Default) {
 }
 
 // ResetDefault resets default.
-// 重置全局默认值
 func ResetDefault() {
 	DefaultLayout = DateTimeLayout
 	DefaultTimezone = UTC

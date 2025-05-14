@@ -6,7 +6,6 @@ import (
 )
 
 // Parse parses a standard time string as a Carbon instance by default layouts.
-// 通过默认的 布局模板 将时间字符串解析成 Carbon 实例
 func Parse(value string, timezone ...string) Carbon {
 	if value == "" {
 		return Carbon{isEmpty: true}
@@ -46,7 +45,6 @@ func Parse(value string, timezone ...string) Carbon {
 }
 
 // ParseByLayout parses a time string as a `Carbon` instance by a confirmed layout
-// 通过一个确认的 布局模板 将时间字符串解析成 Carbon 实例
 func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	if value == "" {
 		return Carbon{isEmpty: true}
@@ -107,7 +105,6 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 }
 
 // ParseByLayouts parses a time string as a Carbon instance by multiple fuzzy layouts.
-// 通过多个模糊的 布局模板 将时间字符串解析成 Carbon 实例
 func ParseByLayouts(value string, layouts []string, timezone ...string) Carbon {
 	if value == "" {
 		return Carbon{isEmpty: true}
@@ -142,7 +139,6 @@ func ParseByLayouts(value string, layouts []string, timezone ...string) Carbon {
 }
 
 // ParseByFormat parses a time string as a `Carbon` instance by a confirmed format.
-// 通过一个确认的 格式模板 将时间字符串解析成 Carbon 实例
 func ParseByFormat(value, format string, timezone ...string) Carbon {
 	if value == "" {
 		return Carbon{isEmpty: true}
@@ -158,7 +154,6 @@ func ParseByFormat(value, format string, timezone ...string) Carbon {
 }
 
 // ParseByFormats parses a time string as a Carbon instance by multiple fuzzy formats.
-// 通过多个模糊的 格式模板 将时间字符串解析成 Carbon 实例
 func ParseByFormats(value string, formats []string, timezone ...string) Carbon {
 	if value == "" {
 		return Carbon{isEmpty: true}
@@ -185,18 +180,14 @@ func ParseByFormats(value string, formats []string, timezone ...string) Carbon {
 	return ParseByLayouts(value, layouts, tz)
 }
 
+// Deprecated: ParseWithLayouts will be removed in the future, use ParseByLayouts instead.
 // ParseWithLayouts parses a time string as a Carbon instance by multiple fuzzy layouts.
-// Deprecated: it will be removed in the future, use ParseByLayouts instead.
-// 通过多个模糊的 布局模板 将时间字符串解析成 Carbon 实例
-// 未来将移除，请用 ParseByLayouts 替代
 func ParseWithLayouts(value string, layouts []string, timezone ...string) Carbon {
 	return ParseByLayouts(value, layouts, timezone...)
 }
 
+// Deprecated: ParseWithFormats will be removed in the future, use ParseByFormats instead.
 // ParseWithFormats parses a time string as a Carbon instance by multiple fuzzy formats.
-// Deprecated: it will be removed in the future, use ParseByFormats instead.
-// 通过多个模糊的 格式模板 将时间字符串解析成 Carbon 实例
-// 未来将移除，请用 ParseByFormats 替代
 func ParseWithFormats(value string, formats []string, timezone ...string) Carbon {
 	return ParseByFormats(value, formats, timezone...)
 }

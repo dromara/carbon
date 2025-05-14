@@ -6,20 +6,17 @@ import (
 )
 
 // FormatTyper defines a FormatTyper interface.
-// 定义 FormatTyper 接口
 type FormatTyper interface {
 	~string
 	Format() string
 }
 
 // FormatType defines a FormatType generic struct.
-// 定义 FormatType 泛型结构体
 type FormatType[T FormatTyper] struct {
 	Carbon
 }
 
 // NewFormatType returns a new FormatType generic instance.
-// 返回 FormatType 泛型实例
 func NewFormatType[T FormatTyper](c Carbon) FormatType[T] {
 	return FormatType[T]{
 		Carbon: c,
@@ -27,7 +24,6 @@ func NewFormatType[T FormatTyper](c Carbon) FormatType[T] {
 }
 
 // Scan implements driver.Scanner interface for FormatType generic struct.
-// 实现 driver.Scanner 接口
 func (t *FormatType[T]) Scan(src any) error {
 	var c Carbon
 	switch v := src.(type) {
@@ -51,7 +47,6 @@ func (t *FormatType[T]) Scan(src any) error {
 }
 
 // Value implements driver.Valuer interface for FormatType generic struct.
-// 实现 driver.Valuer 接口
 func (t FormatType[T]) Value() (driver.Value, error) {
 	if t.IsZero() || t.IsEmpty() {
 		return nil, nil
@@ -63,7 +58,6 @@ func (t FormatType[T]) Value() (driver.Value, error) {
 }
 
 // MarshalJSON implements json.Marshal interface for FormatType generic struct.
-// 实现 json.Marshaler 接口
 func (t FormatType[T]) MarshalJSON() ([]byte, error) {
 	if t.IsZero() || t.IsEmpty() {
 		return []byte(`null`), nil
@@ -80,7 +74,6 @@ func (t FormatType[T]) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements json.Unmarshal interface for FormatType generic struct.
-// 实现 json.Unmarshaler 接口
 func (t *FormatType[T]) UnmarshalJSON(src []byte) error {
 	v := string(bytes.Trim(src, `"`))
 	if v == "" || v == "null" {
@@ -91,7 +84,6 @@ func (t *FormatType[T]) UnmarshalJSON(src []byte) error {
 }
 
 // String implements Stringer interface for FormatType generic struct.
-// 实现 Stringer 接口
 func (t FormatType[T]) String() string {
 	if t.IsInvalid() || t.IsZero() {
 		return ""
@@ -100,7 +92,6 @@ func (t FormatType[T]) String() string {
 }
 
 // getFormat returns the set format.
-// 返回设置的格式模板
 func (t *FormatType[T]) getFormat() string {
 	var typer T
 	return typer.Format()

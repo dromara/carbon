@@ -7,7 +7,6 @@ import (
 )
 
 // Lunar converts Carbon instance to Lunar instance.
-// 将 Carbon 实例转化为 Lunar 实例
 func (c Carbon) Lunar() (l lunar.Lunar) {
 	if c.IsEmpty() {
 		return l
@@ -20,7 +19,6 @@ func (c Carbon) Lunar() (l lunar.Lunar) {
 }
 
 // CreateFromLunar creates a Carbon instance from Lunar date and time.
-// 从 农历日期 创建 Carbon 实例
 func CreateFromLunar(year, month, day int, isLeapMonth bool) Carbon {
 	l := lunar.NewLunar(year, month, day, isLeapMonth)
 	if !l.IsValid() {
@@ -32,7 +30,6 @@ func CreateFromLunar(year, month, day int, isLeapMonth bool) Carbon {
 }
 
 // Julian converts Carbon instance to Julian instance.
-// 将 Carbon 实例转化为 Julian 实例
 func (c Carbon) Julian() (j julian.Julian) {
 	if c.IsEmpty() {
 		return j
@@ -44,13 +41,11 @@ func (c Carbon) Julian() (j julian.Julian) {
 }
 
 // CreateFromJulian creates a Carbon instance from Julian Day or Modified Julian Day.
-// 从 儒略日/简化儒略日 创建 Carbon 实例
 func CreateFromJulian(f float64) Carbon {
 	return NewCarbon(julian.NewJulian(f).ToGregorian(DefaultTimezone).Time)
 }
 
 // Persian converts Carbon instance to Persian instance.
-// 将 Carbon 实例转化为 Persian 实例
 func (c Carbon) Persian() (p persian.Persian) {
 	if c.IsEmpty() {
 		return p
@@ -63,7 +58,6 @@ func (c Carbon) Persian() (p persian.Persian) {
 }
 
 // CreateFromPersian creates a Carbon instance from Persian date and time.
-// 从 波斯日期 创建 Carbon 实例
 func CreateFromPersian(year, month, day int) (c Carbon) {
 	p := persian.NewPersian(year, month, day)
 	if !p.IsValid() {

@@ -5,7 +5,6 @@ import (
 )
 
 // HasError reports whether it has error.
-// 是否有错误
 func (c Carbon) HasError() bool {
 	if c.IsEmpty() {
 		return false
@@ -13,8 +12,7 @@ func (c Carbon) HasError() bool {
 	return c.Error != nil
 }
 
-// IsEmpty reports whether is a EMPATY time.
-// 是否是空时间
+// IsEmpty reports whether is a empty time.
 func (c Carbon) IsEmpty() bool {
 	if c.isEmpty == true {
 		return true
@@ -23,7 +21,6 @@ func (c Carbon) IsEmpty() bool {
 }
 
 // IsZero reports whether is a zero time(0001-01-01 00:00:00 +0000 UTC).
-// 是否是零值时间(0001-01-01 00:00:00 +0000 UTC)
 func (c Carbon) IsZero() bool {
 	if c.IsEmpty() || c.HasError() {
 		return false
@@ -32,7 +29,6 @@ func (c Carbon) IsZero() bool {
 }
 
 // IsEpoch reports whether is a unix epoch time(1970-01-01 00:00:00 +0000 UTC).
-// 是否是 UNIX 纪元时间(1970-01-01 00:00:00 +0000 UTC)
 func (c Carbon) IsEpoch() bool {
 	if c.IsInvalid() {
 		return false
@@ -41,7 +37,6 @@ func (c Carbon) IsEpoch() bool {
 }
 
 // IsValid reports whether is a valid time.
-// 是否是有效时间
 func (c Carbon) IsValid() bool {
 	if !c.IsEmpty() && !c.HasError() {
 		return true
@@ -50,13 +45,11 @@ func (c Carbon) IsValid() bool {
 }
 
 // IsInvalid reports whether is an invalid time.
-// 是否是无效时间
 func (c Carbon) IsInvalid() bool {
 	return !c.IsValid()
 }
 
 // IsDST reports whether is a daylight saving time.
-// 是否是夏令时
 func (c Carbon) IsDST() bool {
 	if c.IsInvalid() {
 		return false
@@ -65,7 +58,6 @@ func (c Carbon) IsDST() bool {
 }
 
 // IsAM reports whether is before noon.
-// 是否是上午
 func (c Carbon) IsAM() bool {
 	if c.IsInvalid() {
 		return false
@@ -74,7 +66,6 @@ func (c Carbon) IsAM() bool {
 }
 
 // IsPM reports whether is after noon.
-// 是否是下午
 func (c Carbon) IsPM() bool {
 	if c.IsInvalid() {
 		return false
@@ -83,7 +74,6 @@ func (c Carbon) IsPM() bool {
 }
 
 // IsLeapYear reports whether is a leap year.
-// 是否是闰年
 func (c Carbon) IsLeapYear() bool {
 	if c.IsInvalid() {
 		return false
@@ -95,8 +85,7 @@ func (c Carbon) IsLeapYear() bool {
 	return false
 }
 
-// IsLongYear reports whether is a long year, see https://en.wikipedia.org/wiki/ISO_8601#Week_dates.
-// 是否是长年
+// IsLongYear reports whether is a long year, refer to  https://en.wikipedia.org/wiki/ISO_8601#Week_dates.
 func (c Carbon) IsLongYear() bool {
 	if c.IsInvalid() {
 		return false
@@ -106,7 +95,6 @@ func (c Carbon) IsLongYear() bool {
 }
 
 // IsJanuary reports whether is January.
-// 是否是一月
 func (c Carbon) IsJanuary() bool {
 	if c.IsInvalid() {
 		return false
@@ -115,7 +103,6 @@ func (c Carbon) IsJanuary() bool {
 }
 
 // IsFebruary reports whether is February.
-// 是否是二月
 func (c Carbon) IsFebruary() bool {
 	if c.IsInvalid() {
 		return false
@@ -124,7 +111,6 @@ func (c Carbon) IsFebruary() bool {
 }
 
 // IsMarch reports whether is March.
-// 是否是三月
 func (c Carbon) IsMarch() bool {
 	if c.IsInvalid() {
 		return false
@@ -133,7 +119,6 @@ func (c Carbon) IsMarch() bool {
 }
 
 // IsApril reports whether is April.
-// 是否是四月
 func (c Carbon) IsApril() bool {
 	if c.IsInvalid() {
 		return false
@@ -142,7 +127,6 @@ func (c Carbon) IsApril() bool {
 }
 
 // IsMay reports whether is May.
-// 是否是五月
 func (c Carbon) IsMay() bool {
 	if c.IsInvalid() {
 		return false
@@ -151,7 +135,6 @@ func (c Carbon) IsMay() bool {
 }
 
 // IsJune reports whether is June.
-// 是否是六月
 func (c Carbon) IsJune() bool {
 	if c.IsInvalid() {
 		return false
@@ -160,7 +143,6 @@ func (c Carbon) IsJune() bool {
 }
 
 // IsJuly reports whether is July.
-// 是否是七月
 func (c Carbon) IsJuly() bool {
 	if c.IsInvalid() {
 		return false
@@ -169,7 +151,6 @@ func (c Carbon) IsJuly() bool {
 }
 
 // IsAugust reports whether is August.
-// 是否是八月
 func (c Carbon) IsAugust() bool {
 	if c.IsInvalid() {
 		return false
@@ -178,7 +159,6 @@ func (c Carbon) IsAugust() bool {
 }
 
 // IsSeptember reports whether is September.
-// 是否是九月
 func (c Carbon) IsSeptember() bool {
 	if c.IsInvalid() {
 		return false
@@ -187,7 +167,6 @@ func (c Carbon) IsSeptember() bool {
 }
 
 // IsOctober reports whether is October.
-// 是否是十月
 func (c Carbon) IsOctober() bool {
 	if c.IsInvalid() {
 		return false
@@ -196,7 +175,6 @@ func (c Carbon) IsOctober() bool {
 }
 
 // IsNovember reports whether is November.
-// 是否是十一月
 func (c Carbon) IsNovember() bool {
 	if c.IsInvalid() {
 		return false
@@ -205,7 +183,6 @@ func (c Carbon) IsNovember() bool {
 }
 
 // IsDecember reports whether is December.
-// 是否是十二月
 func (c Carbon) IsDecember() bool {
 	if c.IsInvalid() {
 		return false
@@ -214,7 +191,6 @@ func (c Carbon) IsDecember() bool {
 }
 
 // IsMonday reports whether is Monday.
-// 是否是周一
 func (c Carbon) IsMonday() bool {
 	if c.IsInvalid() {
 		return false
@@ -223,7 +199,6 @@ func (c Carbon) IsMonday() bool {
 }
 
 // IsTuesday reports whether is Tuesday.
-// 是否是周二
 func (c Carbon) IsTuesday() bool {
 	if c.IsInvalid() {
 		return false
@@ -232,7 +207,6 @@ func (c Carbon) IsTuesday() bool {
 }
 
 // IsWednesday reports whether is Wednesday.
-// 是否是周三
 func (c Carbon) IsWednesday() bool {
 	if c.IsInvalid() {
 		return false
@@ -241,7 +215,6 @@ func (c Carbon) IsWednesday() bool {
 }
 
 // IsThursday reports whether is Thursday.
-// 是否是周四
 func (c Carbon) IsThursday() bool {
 	if c.IsInvalid() {
 		return false
@@ -250,7 +223,6 @@ func (c Carbon) IsThursday() bool {
 }
 
 // IsFriday reports whether is Friday.
-// 是否是周五
 func (c Carbon) IsFriday() bool {
 	if c.IsInvalid() {
 		return false
@@ -259,7 +231,6 @@ func (c Carbon) IsFriday() bool {
 }
 
 // IsSaturday reports whether is Saturday.
-// 是否是周六
 func (c Carbon) IsSaturday() bool {
 	if c.IsInvalid() {
 		return false
@@ -268,7 +239,6 @@ func (c Carbon) IsSaturday() bool {
 }
 
 // IsSunday reports whether is Sunday.
-// 是否是周日
 func (c Carbon) IsSunday() bool {
 	if c.IsInvalid() {
 		return false
@@ -277,7 +247,6 @@ func (c Carbon) IsSunday() bool {
 }
 
 // IsWeekday reports whether is weekday.
-// 是否是工作日
 func (c Carbon) IsWeekday() bool {
 	if c.IsInvalid() {
 		return false
@@ -286,7 +255,6 @@ func (c Carbon) IsWeekday() bool {
 }
 
 // IsWeekend reports whether is weekend.
-// 是否是周末
 func (c Carbon) IsWeekend() bool {
 	if c.IsInvalid() {
 		return false
@@ -301,7 +269,6 @@ func (c Carbon) IsWeekend() bool {
 }
 
 // IsNow reports whether is now time.
-// 是否是当前时间
 func (c Carbon) IsNow() bool {
 	if c.IsInvalid() {
 		return false
@@ -310,7 +277,6 @@ func (c Carbon) IsNow() bool {
 }
 
 // IsFuture reports whether is future time.
-// 是否是未来时间
 func (c Carbon) IsFuture() bool {
 	if c.IsInvalid() {
 		return false
@@ -322,7 +288,6 @@ func (c Carbon) IsFuture() bool {
 }
 
 // IsPast reports whether is past time.
-// 是否是过去时间
 func (c Carbon) IsPast() bool {
 	if c.IsInvalid() {
 		return false
@@ -334,7 +299,6 @@ func (c Carbon) IsPast() bool {
 }
 
 // IsYesterday reports whether is yesterday.
-// 是否是昨天
 func (c Carbon) IsYesterday() bool {
 	if c.IsInvalid() {
 		return false
@@ -343,7 +307,6 @@ func (c Carbon) IsYesterday() bool {
 }
 
 // IsToday reports whether is today.
-// 是否是今天
 func (c Carbon) IsToday() bool {
 	if c.IsInvalid() {
 		return false
@@ -352,7 +315,6 @@ func (c Carbon) IsToday() bool {
 }
 
 // IsTomorrow reports whether is tomorrow.
-// 是否是明天
 func (c Carbon) IsTomorrow() bool {
 	if c.IsInvalid() {
 		return false
@@ -361,7 +323,6 @@ func (c Carbon) IsTomorrow() bool {
 }
 
 // IsSameCentury reports whether is same century.
-// 是否是同一世纪
 func (c Carbon) IsSameCentury(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -370,7 +331,6 @@ func (c Carbon) IsSameCentury(t Carbon) bool {
 }
 
 // IsSameDecade reports whether is same decade.
-// 是否是同一年代
 func (c Carbon) IsSameDecade(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -379,7 +339,6 @@ func (c Carbon) IsSameDecade(t Carbon) bool {
 }
 
 // IsSameYear reports whether is same year.
-// 是否是同一年
 func (c Carbon) IsSameYear(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -388,7 +347,6 @@ func (c Carbon) IsSameYear(t Carbon) bool {
 }
 
 // IsSameQuarter reports whether is same quarter.
-// 是否是同一季节
 func (c Carbon) IsSameQuarter(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -397,7 +355,6 @@ func (c Carbon) IsSameQuarter(t Carbon) bool {
 }
 
 // IsSameMonth reports whether is same month.
-// 是否是同一月
 func (c Carbon) IsSameMonth(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -406,7 +363,6 @@ func (c Carbon) IsSameMonth(t Carbon) bool {
 }
 
 // IsSameDay reports whether is same day.
-// 是否是同一天
 func (c Carbon) IsSameDay(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -415,7 +371,6 @@ func (c Carbon) IsSameDay(t Carbon) bool {
 }
 
 // IsSameHour reports whether is same hour.
-// 是否是同一小时
 func (c Carbon) IsSameHour(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -424,7 +379,6 @@ func (c Carbon) IsSameHour(t Carbon) bool {
 }
 
 // IsSameMinute reports whether is same minute.
-// 是否是同一分钟
 func (c Carbon) IsSameMinute(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -433,7 +387,6 @@ func (c Carbon) IsSameMinute(t Carbon) bool {
 }
 
 // IsSameSecond reports whether is same second.
-// 是否是同一秒
 func (c Carbon) IsSameSecond(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -443,7 +396,6 @@ func (c Carbon) IsSameSecond(t Carbon) bool {
 }
 
 // Compare compares by an operator.
-// 时间比较
 func (c Carbon) Compare(operator string, t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -466,7 +418,6 @@ func (c Carbon) Compare(operator string, t Carbon) bool {
 }
 
 // Gt reports whether greater than.
-// 是否大于
 func (c Carbon) Gt(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -475,7 +426,6 @@ func (c Carbon) Gt(t Carbon) bool {
 }
 
 // Lt reports whether less than.
-// 是否小于
 func (c Carbon) Lt(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -484,7 +434,6 @@ func (c Carbon) Lt(t Carbon) bool {
 }
 
 // Eq reports whether equal.
-// 是否等于
 func (c Carbon) Eq(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -493,7 +442,6 @@ func (c Carbon) Eq(t Carbon) bool {
 }
 
 // Ne reports whether not equal.
-// 是否不等于
 func (c Carbon) Ne(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -502,7 +450,6 @@ func (c Carbon) Ne(t Carbon) bool {
 }
 
 // Gte reports whether greater than or equal.
-// 是否大于等于
 func (c Carbon) Gte(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -511,7 +458,6 @@ func (c Carbon) Gte(t Carbon) bool {
 }
 
 // Lte reports whether less than or equal.
-// 是否小于等于
 func (c Carbon) Lte(t Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
@@ -520,7 +466,6 @@ func (c Carbon) Lte(t Carbon) bool {
 }
 
 // Between reports whether between two times, excluded the start and end time.
-// 是否在两个时间之间(不包括这两个时间)
 func (c Carbon) Between(start Carbon, end Carbon) bool {
 	if c.IsInvalid() || start.IsInvalid() || end.IsInvalid() {
 		return false
@@ -535,7 +480,6 @@ func (c Carbon) Between(start Carbon, end Carbon) bool {
 }
 
 // BetweenIncludedStart reports whether between two times, included the start time.
-// 是否在两个时间之间(包括开始时间)
 func (c Carbon) BetweenIncludedStart(start Carbon, end Carbon) bool {
 	if c.IsInvalid() || start.IsInvalid() || end.IsInvalid() {
 		return false
@@ -550,7 +494,6 @@ func (c Carbon) BetweenIncludedStart(start Carbon, end Carbon) bool {
 }
 
 // BetweenIncludedEnd reports whether between two times, included the end time.
-// 是否在两个时间之间(包括结束时间)
 func (c Carbon) BetweenIncludedEnd(start Carbon, end Carbon) bool {
 	if c.IsInvalid() || start.IsInvalid() || end.IsInvalid() {
 		return false
@@ -565,7 +508,6 @@ func (c Carbon) BetweenIncludedEnd(start Carbon, end Carbon) bool {
 }
 
 // BetweenIncludedBoth reports whether between two times, included the start and end time.
-// 是否在两个时间之间(包括这两个时间)
 func (c Carbon) BetweenIncludedBoth(start Carbon, end Carbon) bool {
 	if c.IsInvalid() || start.IsInvalid() || end.IsInvalid() {
 		return false

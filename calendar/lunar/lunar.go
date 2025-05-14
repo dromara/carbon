@@ -57,13 +57,11 @@ var (
 )
 
 // ErrInvalidLunar returns a invalid lunar date.
-// 无效的农历日期错误
 var ErrInvalidLunar = func() error {
 	return fmt.Errorf("invalid lunar date, please make sure the lunar date is valid")
 }
 
 // Lunar defines a Lunar struct.
-// 定义 Lunar 结构体
 type Lunar struct {
 	year, month, day int
 	isLeapMonth      bool
@@ -71,7 +69,6 @@ type Lunar struct {
 }
 
 // NewLunar returns a new Lunar instance.
-// 返回 Lunar 实例
 func NewLunar(year, month, day int, isLeapMonth bool) (l Lunar) {
 	l.year, l.month, l.day, l.isLeapMonth = year, month, day, isLeapMonth
 	if !l.IsValid() {
@@ -81,7 +78,6 @@ func NewLunar(year, month, day int, isLeapMonth bool) (l Lunar) {
 }
 
 // MaxValue returns a Lunar instance for the greatest supported date.
-// 返回 Carbon 的最大值
 func MaxValue() Lunar {
 	return Lunar{
 		year:  2100,
@@ -91,7 +87,6 @@ func MaxValue() Lunar {
 }
 
 // MinValue returns a Lunar instance for the lowest supported date.
-// 返回 Lunar 的最小值
 func MinValue() Lunar {
 	return Lunar{
 		year:  1900,
@@ -101,7 +96,6 @@ func MinValue() Lunar {
 }
 
 // FromStdTime creates a Lunar instance from standard time.Time.
-// 从标准 time.Time 创建 Lunar 实例
 func FromStdTime(t time.Time) (l Lunar) {
 	if t.IsZero() {
 		return l
@@ -132,7 +126,6 @@ func FromStdTime(t time.Time) (l Lunar) {
 			l.isLeapMonth = false
 		}
 	}
-	// offset为0时，并且月份是闰月，要校正
 	if offset == 0 && leapMonth > 0 && l.month == leapMonth+1 {
 		if l.isLeapMonth {
 			l.isLeapMonth = false
@@ -141,7 +134,6 @@ func FromStdTime(t time.Time) (l Lunar) {
 			l.month--
 		}
 	}
-	// offset小于0时，也要校正
 	if offset < 0 {
 		offset += daysInMonth
 		l.month--
@@ -151,7 +143,6 @@ func FromStdTime(t time.Time) (l Lunar) {
 }
 
 // ToGregorian converts Lunar instance to Gregorian instance.
-// 将 Lunar 实例转化为 Gregorian 实例
 func (l Lunar) ToGregorian(timezone ...string) (g calendar.Gregorian) {
 	if !l.IsValid() {
 		return g
@@ -167,7 +158,6 @@ func (l Lunar) ToGregorian(timezone ...string) (g calendar.Gregorian) {
 	offset := l.getOffsetInYear()
 	offset += l.getOffsetInMonth()
 
-	// 补充闰月的前一个月的时差
 	if l.isLeapMonth {
 		offset += days
 	}
@@ -178,7 +168,6 @@ func (l Lunar) ToGregorian(timezone ...string) (g calendar.Gregorian) {
 }
 
 // Animal gets lunar animal name like "猴".
-// 获取农历生肖
 func (l Lunar) Animal() string {
 	if !l.IsValid() {
 		return ""
@@ -187,7 +176,6 @@ func (l Lunar) Animal() string {
 }
 
 // Festival gets lunar festival name like "春节".
-// 获取农历节日
 func (l Lunar) Festival() string {
 	if !l.IsValid() {
 		return ""
@@ -196,7 +184,6 @@ func (l Lunar) Festival() string {
 }
 
 // Year gets lunar year like 2020.
-// 获取农历年份
 func (l Lunar) Year() int {
 	if !l.IsValid() {
 		return 0
@@ -205,7 +192,6 @@ func (l Lunar) Year() int {
 }
 
 // Month gets lunar month like 8.
-// 获取农历月份
 func (l Lunar) Month() int {
 	if !l.IsValid() {
 		return 0
@@ -214,7 +200,6 @@ func (l Lunar) Month() int {
 }
 
 // Day gets lunar day like 5.
-// 获取农历日，如 5
 func (l Lunar) Day() int {
 	if !l.IsValid() {
 		return 0
@@ -223,7 +208,6 @@ func (l Lunar) Day() int {
 }
 
 // LeapMonth gets lunar leap month like 2.
-// 获取农历闰月月份，如 2
 func (l Lunar) LeapMonth() int {
 	if !l.IsValid() {
 		return 0
@@ -233,7 +217,6 @@ func (l Lunar) LeapMonth() int {
 }
 
 // String implements Stringer interface for Lunar.
-// 实现 Stringer 接口
 func (l Lunar) String() string {
 	if !l.IsValid() {
 		return ""
@@ -242,7 +225,6 @@ func (l Lunar) String() string {
 }
 
 // ToYearString outputs a string in lunar year format like "二零二零".
-// 获取农历年份字符串，如 "二零二零"
 func (l Lunar) ToYearString() (year string) {
 	if !l.IsValid() {
 		return ""
@@ -255,7 +237,6 @@ func (l Lunar) ToYearString() (year string) {
 }
 
 // ToMonthString outputs a string in lunar month format like "正月".
-// 获取农历月份字符串，如 "正月"
 func (l Lunar) ToMonthString() (month string) {
 	if !l.IsValid() {
 		return ""
@@ -268,7 +249,6 @@ func (l Lunar) ToMonthString() (month string) {
 }
 
 // ToWeekString outputs a string in week layout like "周一".
-// 输出完整农历星期字符串，如 "周一"
 func (l Lunar) ToWeekString() (month string) {
 	if !l.IsValid() {
 		return ""
@@ -277,7 +257,6 @@ func (l Lunar) ToWeekString() (month string) {
 }
 
 // ToDayString outputs a string in lunar day format like "廿一".
-// 获取农历日字符串，如 "廿一"
 func (l Lunar) ToDayString() (day string) {
 	if !l.IsValid() {
 		return ""
@@ -301,7 +280,6 @@ func (l Lunar) ToDayString() (day string) {
 }
 
 // ToDateString outputs a string in lunar date format like "二零二零年腊月初五".
-// 获取农历日期字符串，如 "二零二零年腊月初五"
 func (l Lunar) ToDateString() string {
 	if !l.IsValid() {
 		return ""
@@ -310,7 +288,6 @@ func (l Lunar) ToDateString() string {
 }
 
 // IsValid reports whether is a valid lunar date.
-// 是否是有效的年份
 func (l Lunar) IsValid() bool {
 	if l.Error != nil {
 		return false
@@ -322,7 +299,6 @@ func (l Lunar) IsValid() bool {
 }
 
 // IsLeapYear reports whether is a lunar leap year.
-// 是否是农历闰年
 func (l Lunar) IsLeapYear() bool {
 	if !l.IsValid() {
 		return false
@@ -331,7 +307,6 @@ func (l Lunar) IsLeapYear() bool {
 }
 
 // IsLeapMonth reports whether is a lunar leap month.
-// 是否是农历闰月
 func (l Lunar) IsLeapMonth() bool {
 	if !l.IsValid() {
 		return false
@@ -340,7 +315,6 @@ func (l Lunar) IsLeapMonth() bool {
 }
 
 // IsRatYear reports whether is lunar year of Rat.
-// 是否是鼠年
 func (l Lunar) IsRatYear() bool {
 	if !l.IsValid() {
 		return false
@@ -352,7 +326,6 @@ func (l Lunar) IsRatYear() bool {
 }
 
 // IsOxYear reports whether is lunar year of Ox.
-// 是否是牛年
 func (l Lunar) IsOxYear() bool {
 	if !l.IsValid() {
 		return false
@@ -364,7 +337,6 @@ func (l Lunar) IsOxYear() bool {
 }
 
 // IsTigerYear reports whether is lunar year of Tiger.
-// 是否是虎年
 func (l Lunar) IsTigerYear() bool {
 	if !l.IsValid() {
 		return false
@@ -376,7 +348,6 @@ func (l Lunar) IsTigerYear() bool {
 }
 
 // IsRabbitYear reports whether is lunar year of Rabbit.
-// 是否是兔年
 func (l Lunar) IsRabbitYear() bool {
 	if !l.IsValid() {
 		return false
@@ -388,7 +359,6 @@ func (l Lunar) IsRabbitYear() bool {
 }
 
 // IsDragonYear reports whether is lunar year of Dragon.
-// 是否是龙年
 func (l Lunar) IsDragonYear() bool {
 	if !l.IsValid() {
 		return false
@@ -400,7 +370,6 @@ func (l Lunar) IsDragonYear() bool {
 }
 
 // IsSnakeYear reports whether is lunar year of Snake.
-// 是否是蛇年
 func (l Lunar) IsSnakeYear() bool {
 	if !l.IsValid() {
 		return false
@@ -412,7 +381,6 @@ func (l Lunar) IsSnakeYear() bool {
 }
 
 // IsHorseYear reports whether is lunar year of Horse.
-// 是否是马年
 func (l Lunar) IsHorseYear() bool {
 	if !l.IsValid() {
 		return false
@@ -424,7 +392,6 @@ func (l Lunar) IsHorseYear() bool {
 }
 
 // IsGoatYear reports whether is lunar year of Goat.
-// 是否是羊年
 func (l Lunar) IsGoatYear() bool {
 	if !l.IsValid() {
 		return false
@@ -436,7 +403,6 @@ func (l Lunar) IsGoatYear() bool {
 }
 
 // IsMonkeyYear reports whether is lunar year of Monkey.
-// 是否是猴年
 func (l Lunar) IsMonkeyYear() bool {
 	if !l.IsValid() {
 		return false
@@ -448,7 +414,6 @@ func (l Lunar) IsMonkeyYear() bool {
 }
 
 // IsRoosterYear reports whether is lunar year of Rooster.
-// 是否是鸡年
 func (l Lunar) IsRoosterYear() bool {
 	if !l.IsValid() {
 		return false
@@ -460,7 +425,6 @@ func (l Lunar) IsRoosterYear() bool {
 }
 
 // IsDogYear reports whether is lunar year of Dog.
-// 是否是狗年
 func (l Lunar) IsDogYear() bool {
 	if !l.IsValid() {
 		return false
@@ -472,7 +436,6 @@ func (l Lunar) IsDogYear() bool {
 }
 
 // IsPigYear reports whether is lunar year of Pig.
-// 是否是猪年
 func (l Lunar) IsPigYear() bool {
 	if !l.IsValid() {
 		return false

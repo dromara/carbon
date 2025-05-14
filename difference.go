@@ -7,7 +7,6 @@ import (
 )
 
 // DiffInYears gets the difference in years.
-// 相差多少年
 func (c Carbon) DiffInYears(carbon ...Carbon) int64 {
 	start := c
 	if start.IsInvalid() {
@@ -33,13 +32,11 @@ func (c Carbon) DiffInYears(carbon ...Carbon) int64 {
 }
 
 // DiffAbsInYears gets the difference in years with absolute value.
-// 相差多少年(绝对值)
 func (c Carbon) DiffAbsInYears(carbon ...Carbon) int64 {
 	return getAbsValue(c.DiffInYears(carbon...))
 }
 
 // DiffInMonths gets the difference in months.
-// 相差多少月
 func (c Carbon) DiffInMonths(carbon ...Carbon) int64 {
 	start := c
 	if start.IsInvalid() {
@@ -68,13 +65,11 @@ func (c Carbon) DiffInMonths(carbon ...Carbon) int64 {
 }
 
 // DiffAbsInMonths gets the difference in months with absolute value.
-// 相差多少月(绝对值)
 func (c Carbon) DiffAbsInMonths(carbon ...Carbon) int64 {
 	return getAbsValue(c.DiffInMonths(carbon...))
 }
 
 // DiffInWeeks gets the difference in weeks.
-// 相差多少周
 func (c Carbon) DiffInWeeks(carbon ...Carbon) int64 {
 	start := c
 	if start.IsInvalid() {
@@ -93,13 +88,11 @@ func (c Carbon) DiffInWeeks(carbon ...Carbon) int64 {
 }
 
 // DiffAbsInWeeks gets the difference in weeks with absolute value.
-// 相差多少周(绝对值)
 func (c Carbon) DiffAbsInWeeks(carbon ...Carbon) int64 {
 	return getAbsValue(c.DiffInWeeks(carbon...))
 }
 
 // DiffInDays gets the difference in days.
-// 相差多少天
 func (c Carbon) DiffInDays(carbon ...Carbon) int64 {
 	start := c
 	if start.IsInvalid() {
@@ -118,13 +111,11 @@ func (c Carbon) DiffInDays(carbon ...Carbon) int64 {
 }
 
 // DiffAbsInDays gets the difference in days with absolute value.
-// 相差多少天(绝对值)
 func (c Carbon) DiffAbsInDays(carbon ...Carbon) int64 {
 	return getAbsValue(c.DiffInDays(carbon...))
 }
 
 // DiffInHours gets the difference in hours.
-// 相差多少小时
 func (c Carbon) DiffInHours(carbon ...Carbon) int64 {
 	start := c
 	if start.IsInvalid() {
@@ -143,7 +134,6 @@ func (c Carbon) DiffInHours(carbon ...Carbon) int64 {
 }
 
 // DiffAbsInHours gets the difference in hours with absolute value.
-// 相差多少小时(绝对值)
 func (c Carbon) DiffAbsInHours(carbon ...Carbon) int64 {
 	return getAbsValue(c.DiffInHours(carbon...))
 }
@@ -168,13 +158,11 @@ func (c Carbon) DiffInMinutes(carbon ...Carbon) int64 {
 }
 
 // DiffAbsInMinutes gets the difference in minutes with absolute value.
-// 相差多少分钟(绝对值)
 func (c Carbon) DiffAbsInMinutes(carbon ...Carbon) int64 {
 	return getAbsValue(c.DiffInMinutes(carbon...))
 }
 
 // DiffInSeconds gets the difference in seconds.
-// 相差多少秒
 func (c Carbon) DiffInSeconds(carbon ...Carbon) int64 {
 	start := c
 	if start.IsInvalid() {
@@ -193,13 +181,11 @@ func (c Carbon) DiffInSeconds(carbon ...Carbon) int64 {
 }
 
 // DiffAbsInSeconds gets the difference in seconds with absolute value.
-// 相差多少秒(绝对值)
 func (c Carbon) DiffAbsInSeconds(carbon ...Carbon) int64 {
 	return getAbsValue(c.DiffInSeconds(carbon...))
 }
 
 // DiffInString gets the difference in string, i18n is supported.
-// 相差字符串，支持 i18n
 func (c Carbon) DiffInString(carbon ...Carbon) string {
 	start := c
 	if start.IsInvalid() {
@@ -219,7 +205,6 @@ func (c Carbon) DiffInString(carbon ...Carbon) string {
 }
 
 // DiffAbsInString gets the difference in string with absolute value, i18n is supported.
-// 相差字符串，支持 i18n(绝对值)
 func (c Carbon) DiffAbsInString(carbon ...Carbon) string {
 	start := c
 	if start.IsInvalid() {
@@ -239,7 +224,6 @@ func (c Carbon) DiffAbsInString(carbon ...Carbon) string {
 }
 
 // DiffInDuration gets the difference in duration.
-// 相差时长
 func (c Carbon) DiffInDuration(carbon ...Carbon) Duration {
 	start := c
 	if start.IsInvalid() {
@@ -258,13 +242,11 @@ func (c Carbon) DiffInDuration(carbon ...Carbon) Duration {
 }
 
 // DiffAbsInDuration gets the difference in duration with absolute value.
-// 相差时长(绝对值)
 func (c Carbon) DiffAbsInDuration(carbon ...Carbon) Duration {
 	return c.DiffInDuration(carbon...).Abs()
 }
 
 // DiffForHumans gets the difference in a human-readable format, i18n is supported.
-// 获取对人类友好的可读格式时间差，支持 i18n
 func (c Carbon) DiffForHumans(carbon ...Carbon) string {
 	start := c
 	if start.IsInvalid() {
@@ -297,7 +279,6 @@ func (c Carbon) DiffForHumans(carbon ...Carbon) string {
 }
 
 // gets the difference for unit and value.
-// 获取相差单位和差值
 func (c Carbon) diff(end Carbon) (unit string, value int64) {
 	switch true {
 	case c.DiffAbsInYears(end) > 0:

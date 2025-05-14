@@ -18,7 +18,6 @@ type Location = time.Location
 type Duration = time.Duration
 
 // Carbon defines a Carbon struct.
-// 定义 Carbon 结构体
 type Carbon struct {
 	time          StdTime
 	weekStartsAt  Weekday
@@ -31,7 +30,6 @@ type Carbon struct {
 }
 
 // NewCarbon returns a new Carbon instance.
-// 初始化 Carbon 结构体
 func NewCarbon(stdTime ...time.Time) Carbon {
 	c := Carbon{}
 	c.lang = NewLanguage().SetLocale(DefaultLocale)

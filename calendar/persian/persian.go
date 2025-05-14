@@ -32,20 +32,17 @@ var (
 )
 
 // ErrInvalidPersian returns a invalid persian date.
-// 无效的波斯历日期错误
 var ErrInvalidPersian = func() error {
 	return fmt.Errorf("invalid persian date, please make sure the persian date is valid")
 }
 
 // Persian defines a Persian struct.
-// 定义 Persian 结构体
 type Persian struct {
 	year, month, day int
 	Error            error
 }
 
 // NewPersian returns a new Persian instance.
-// 返回 Persian 实例
 func NewPersian(year, month, day int) *Persian {
 	p := new(Persian)
 	p.year, p.month, p.day = year, month, day
@@ -56,7 +53,6 @@ func NewPersian(year, month, day int) *Persian {
 }
 
 // MaxValue returns a Persian instance for the greatest supported date.
-// 返回 Persian 的最大值
 func MaxValue() *Persian {
 	return &Persian{
 		year:  9377,
@@ -66,7 +62,6 @@ func MaxValue() *Persian {
 }
 
 // MinValue returns a Persian instance for the lowest supported date.
-// 返回 Persian 的最小值
 func MinValue() *Persian {
 	return &Persian{
 		year:  1,
@@ -76,12 +71,10 @@ func MinValue() *Persian {
 }
 
 // FromStdTime creates a Persian instance from standard time.Time.
-// 从标准 time.Time 创建 Persian 实例
 func FromStdTime(t time.Time) (p Persian) {
 	if t.IsZero() {
 		return p
 	}
-	// 获取公历儒略日计数
 	gjdn := int(julian.FromStdTime(time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, t.Location())).JD(0))
 	pjdn := getPersianJdn(475, 1, 1)
 
@@ -102,7 +95,6 @@ func FromStdTime(t time.Time) (p Persian) {
 }
 
 // ToGregorian converts Persian instance to Gregorian instance.
-// 将 Persian 实例转化为 Gregorian 实例
 func (p Persian) ToGregorian(timezone ...string) (g calendar.Gregorian) {
 	if !p.IsValid() {
 		return g
@@ -131,7 +123,6 @@ func (p Persian) ToGregorian(timezone ...string) (g calendar.Gregorian) {
 }
 
 // Year gets lunar year like 2020.
-// 获取年份，如 2020
 func (p Persian) Year() int {
 	if !p.IsValid() {
 		return 0
@@ -140,7 +131,6 @@ func (p Persian) Year() int {
 }
 
 // Month gets lunar month like 8.
-// 获取月份，如 8
 func (p Persian) Month() int {
 	if !p.IsValid() {
 		return 0
@@ -149,7 +139,6 @@ func (p Persian) Month() int {
 }
 
 // Day gets lunar day like 5.
-// 获取日，如 5
 func (p Persian) Day() int {
 	if !p.IsValid() {
 		return 0
@@ -158,7 +147,6 @@ func (p Persian) Day() int {
 }
 
 // String implements Stringer interface for Persian.
-// 实现 Stringer 接口
 func (p Persian) String() string {
 	if !p.IsValid() {
 		return ""
@@ -167,7 +155,6 @@ func (p Persian) String() string {
 }
 
 // ToMonthString outputs a string in persian month format like "فروردین".
-// 获取完整月份字符串，如 "فروردین"
 func (p Persian) ToMonthString(locale ...Locale) (month string) {
 	if !p.IsValid() {
 		return ""
@@ -186,7 +173,6 @@ func (p Persian) ToMonthString(locale ...Locale) (month string) {
 }
 
 // ToShortMonthString outputs a short string in persian month format like "فروردین".
-// 获取缩写月份字符串，如 "فروردین"
 func (p Persian) ToShortMonthString(locale ...Locale) (month string) {
 	if !p.IsValid() {
 		return ""
@@ -205,7 +191,6 @@ func (p Persian) ToShortMonthString(locale ...Locale) (month string) {
 }
 
 // ToWeekString outputs a string in week layout like "چهارشنبه".
-// 输出完整星期字符串，如 "چهارشنبه"
 func (p Persian) ToWeekString(locale ...Locale) (month string) {
 	if !p.IsValid() {
 		return ""
@@ -225,7 +210,6 @@ func (p Persian) ToWeekString(locale ...Locale) (month string) {
 }
 
 // ToShortWeekString outputs a short string in week layout like "چهارشنبه".
-// 输出缩写星期字符串，如 "چهارشنبه"
 func (p Persian) ToShortWeekString(locale ...Locale) (month string) {
 	if !p.IsValid() {
 		return ""
@@ -245,7 +229,6 @@ func (p Persian) ToShortWeekString(locale ...Locale) (month string) {
 }
 
 // IsValid reports whether is a valid persian date.
-// 是否是有效的日期
 func (p Persian) IsValid() bool {
 	if p.Error != nil {
 		return false
@@ -257,7 +240,6 @@ func (p Persian) IsValid() bool {
 }
 
 // IsLeapYear reports whether is a persian leap year.
-// 是否是闰年
 func (p Persian) IsLeapYear() bool {
 	if !p.IsValid() {
 		return false
@@ -266,7 +248,6 @@ func (p Persian) IsLeapYear() bool {
 }
 
 // gets Julian day number in Persian calendar
-// 获取波斯历儒略日计数
 func getPersianJdn(year, month, day int) int {
 	year = year - 473
 	if year >= 0 {

@@ -23,7 +23,6 @@ var constellations = []struct {
 }
 
 // Constellation gets constellation name like "Aries", i18n is supported.
-// 获取星座，支持i18n
 func (c Carbon) Constellation() string {
 	if c.IsInvalid() {
 		return ""
@@ -53,7 +52,6 @@ func (c Carbon) Constellation() string {
 }
 
 // IsAries reports whether is Aries.
-// 是否是白羊座
 func (c Carbon) IsAries() bool {
 	if c.IsInvalid() {
 		return false
@@ -69,7 +67,6 @@ func (c Carbon) IsAries() bool {
 }
 
 // IsTaurus reports whether is Taurus.
-// 是否是金牛座
 func (c Carbon) IsTaurus() bool {
 	if c.IsInvalid() {
 		return false
@@ -85,7 +82,6 @@ func (c Carbon) IsTaurus() bool {
 }
 
 // IsGemini reports whether is Gemini.
-// 是否是双子座
 func (c Carbon) IsGemini() bool {
 	if c.IsInvalid() {
 		return false
@@ -101,7 +97,6 @@ func (c Carbon) IsGemini() bool {
 }
 
 // IsCancer reports whether is Cancer.
-// 是否是巨蟹座
 func (c Carbon) IsCancer() bool {
 	if c.IsInvalid() {
 		return false
@@ -117,7 +112,6 @@ func (c Carbon) IsCancer() bool {
 }
 
 // IsLeo reports whether is Leo.
-// 是否是狮子座
 func (c Carbon) IsLeo() bool {
 	if c.IsInvalid() {
 		return false
@@ -133,7 +127,6 @@ func (c Carbon) IsLeo() bool {
 }
 
 // IsVirgo reports whether is Virgo.
-// 是否是处女座
 func (c Carbon) IsVirgo() bool {
 	if c.IsInvalid() {
 		return false
@@ -149,7 +142,6 @@ func (c Carbon) IsVirgo() bool {
 }
 
 // IsLibra reports whether is Libra.
-// 是否是天秤座
 func (c Carbon) IsLibra() bool {
 	if c.IsInvalid() {
 		return false
@@ -165,7 +157,6 @@ func (c Carbon) IsLibra() bool {
 }
 
 // IsScorpio reports whether is Scorpio.
-// 是否是天蝎座
 func (c Carbon) IsScorpio() bool {
 	if c.IsInvalid() {
 		return false
@@ -181,7 +172,6 @@ func (c Carbon) IsScorpio() bool {
 }
 
 // IsSagittarius reports whether is Sagittarius.
-// 是否是射手座
 func (c Carbon) IsSagittarius() bool {
 	if c.IsInvalid() {
 		return false
@@ -197,7 +187,6 @@ func (c Carbon) IsSagittarius() bool {
 }
 
 // IsCapricorn reports whether is Capricorn.
-// 是否是摩羯座
 func (c Carbon) IsCapricorn() bool {
 	if c.IsInvalid() {
 		return false
@@ -213,7 +202,6 @@ func (c Carbon) IsCapricorn() bool {
 }
 
 // IsAquarius reports whether is Aquarius.
-// 是否是水瓶座
 func (c Carbon) IsAquarius() bool {
 	if c.IsInvalid() {
 		return false
@@ -229,7 +217,6 @@ func (c Carbon) IsAquarius() bool {
 }
 
 // IsPisces reports whether is Pisces.
-// 是否是双鱼座
 func (c Carbon) IsPisces() bool {
 	if c.IsInvalid() {
 		return false

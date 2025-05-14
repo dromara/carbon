@@ -20,7 +20,6 @@ var validResourcesKey = []string{
 }
 
 // Language defines a Language struct.
-// 定义 Language 结构体
 type Language struct {
 	dir       string
 	locale    string
@@ -30,7 +29,6 @@ type Language struct {
 }
 
 // NewLanguage returns a new Language instance.
-// 初始化 Language 结构体
 func NewLanguage() *Language {
 	return &Language{
 		dir:       "lang",
@@ -41,7 +39,6 @@ func NewLanguage() *Language {
 }
 
 // SetLocale sets language locale.
-// 设置区域
 func (lang *Language) SetLocale(locale string) *Language {
 	if lang == nil || lang.Error != nil {
 		return lang
@@ -67,7 +64,6 @@ func (lang *Language) SetLocale(locale string) *Language {
 }
 
 // SetResources sets language resources.
-// 设置资源
 func (lang *Language) SetResources(resources map[string]string) *Language {
 	if lang == nil || lang.Error != nil {
 		return lang
@@ -97,7 +93,6 @@ func (lang *Language) SetResources(resources map[string]string) *Language {
 }
 
 // returns a translated string.
-// 翻译转换
 func (lang *Language) translate(unit string, value int64) string {
 	if lang == nil || lang.resources == nil {
 		return ""

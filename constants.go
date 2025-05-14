@@ -5,158 +5,150 @@ import (
 )
 
 // Version current version
-// 当前版本号
 const Version = "2.5.10"
 
 // timezone constants
-// 时区常量
 const (
-	Local = "Local" // 本地时间
-	UTC   = "UTC"   // 世界协调时间
+	Local = "Local"
+	UTC   = "UTC"
 
-	CET  = "CET"  // 欧洲中部标准时间
-	EET  = "EET"  // 欧洲东部标准时间
-	EST  = "EST"  // 美国东部标准时间
-	GMT  = "GMT"  // 格林尼治标准时间
-	MET  = "MET"  // 欧洲中部标准时间
-	MST  = "MST"  // 美国山地标准时间
-	UCT  = "MST"  // 世界协调时间
-	WET  = "WET"  // 欧洲西部标准时间
-	Zulu = "Zulu" // 世界协调时间
+	CET  = "CET"
+	EET  = "EET"
+	EST  = "EST"
+	GMT  = "GMT"
+	MET  = "MET"
+	MST  = "MST"
+	UCT  = "MST"
+	WET  = "WET"
+	Zulu = "Zulu"
 
-	Cuba      = "Cuba"      // 古巴
-	Egypt     = "Egypt"     // 埃及
-	Eire      = "Eire"      // 爱尔兰
-	Greenwich = "Greenwich" // 格林尼治
-	Iceland   = "Iceland"   // 冰岛
-	Iran      = "Iran"      // 伊朗
-	Israel    = "Israel"    // 以色列
-	Jamaica   = "Jamaica"   // 牙买加
-	Japan     = "Japan"     // 日本
-	Libya     = "Libya"     // 利比亚
-	Poland    = "Poland"    // 波兰
-	Portugal  = "Portugal"  // 葡萄牙
-	PRC       = "PRC"       // 中国
-	Singapore = "Singapore" // 新加坡
-	Turkey    = "Turkey"    // 土耳其
+	Cuba      = "Cuba"
+	Egypt     = "Egypt"
+	Eire      = "Eire"
+	Greenwich = "Greenwich"
+	Iceland   = "Iceland"
+	Iran      = "Iran"
+	Israel    = "Israel"
+	Jamaica   = "Jamaica"
+	Japan     = "Japan"
+	Libya     = "Libya"
+	Poland    = "Poland"
+	Portugal  = "Portugal"
+	PRC       = "PRC"
+	Singapore = "Singapore"
+	Turkey    = "Turkey"
 
-	Shanghai   = "Asia/Shanghai"       // 上海
-	Chongqing  = "Asia/Chongqing"      // 重庆
-	Harbin     = "Asia/Harbin"         // 哈尔滨
-	Urumqi     = "Asia/Urumqi"         // 乌鲁木齐
-	HongKong   = "Asia/Hong_Kong"      // 香港
-	Macao      = "Asia/Macao"          // 澳门
-	Taipei     = "Asia/Taipei"         // 台北
-	Tokyo      = "Asia/Tokyo"          // 东京
-	HoChiMinh  = "Asia/Ho_Chi_Minh"    // 胡志明
-	Hanoi      = "Asia/Hanoi"          // 河内
-	Saigon     = "Asia/Saigon"         // 西贡
-	Seoul      = "Asia/Seoul"          // 首尔
-	Pyongyang  = "Asia/Pyongyang"      // 平壤
-	Bangkok    = "Asia/Bangkok"        // 曼谷
-	Dubai      = "Asia/Dubai"          // 迪拜
-	Qatar      = "Asia/Qatar"          // 卡塔尔
-	Bangalore  = "Asia/Bangalore"      // 班加罗尔
-	Kolkata    = "Asia/Kolkata"        // 加尔各答
-	Mumbai     = "Asia/Mumbai"         // 孟买
-	MexicoCity = "America/Mexico_City" // 墨西哥
-	NewYork    = "America/New_York"    // 纽约
-	LosAngeles = "America/Los_Angeles" // 洛杉矶
-	Chicago    = "America/Chicago"     // 芝加哥
-	SaoPaulo   = "America/Sao_Paulo"   // 圣保罗
-	Moscow     = "Europe/Moscow"       // 莫斯科
-	London     = "Europe/London"       // 伦敦
-	Berlin     = "Europe/Berlin"       // 柏林
-	Paris      = "Europe/Paris"        // 巴黎
-	Rome       = "Europe/Rome"         // 罗马
-	Sydney     = "Australia/Sydney"    // 悉尼
-	Melbourne  = "Australia/Melbourne" // 墨尔本
-	Darwin     = "Australia/Darwin"    // 达尔文
+	Shanghai   = "Asia/Shanghai"
+	Chongqing  = "Asia/Chongqing"
+	Harbin     = "Asia/Harbin"
+	Urumqi     = "Asia/Urumqi"
+	HongKong   = "Asia/Hong_Kong"
+	Macao      = "Asia/Macao"
+	Taipei     = "Asia/Taipei"
+	Tokyo      = "Asia/Tokyo"
+	HoChiMinh  = "Asia/Ho_Chi_Minh"
+	Hanoi      = "Asia/Hanoi"
+	Saigon     = "Asia/Saigon"
+	Seoul      = "Asia/Seoul"
+	Pyongyang  = "Asia/Pyongyang"
+	Bangkok    = "Asia/Bangkok"
+	Dubai      = "Asia/Dubai"
+	Qatar      = "Asia/Qatar"
+	Bangalore  = "Asia/Bangalore"
+	Kolkata    = "Asia/Kolkata"
+	Mumbai     = "Asia/Mumbai"
+	MexicoCity = "America/Mexico_City"
+	NewYork    = "America/New_York"
+	LosAngeles = "America/Los_Angeles"
+	Chicago    = "America/Chicago"
+	SaoPaulo   = "America/Sao_Paulo"
+	Moscow     = "Europe/Moscow"
+	London     = "Europe/London"
+	Berlin     = "Europe/Berlin"
+	Paris      = "Europe/Paris"
+	Rome       = "Europe/Rome"
+	Sydney     = "Australia/Sydney"
+	Melbourne  = "Australia/Melbourne"
+	Darwin     = "Australia/Darwin"
 )
 
 // month constants
-// 月份常量
 const (
-	January   = time.January   // 一月
-	February  = time.February  // 二月
-	March     = time.March     // 三月
-	April     = time.April     // 四月
-	May       = time.May       // 五月
-	June      = time.June      // 六月
-	July      = time.July      // 七月
-	August    = time.August    // 八月
-	September = time.September // 九月
-	October   = time.October   // 十月
-	November  = time.November  // 十一月
-	December  = time.December  // 十二月
+	January   = time.January
+	February  = time.February
+	March     = time.March
+	April     = time.April
+	May       = time.May
+	June      = time.June
+	July      = time.July
+	August    = time.August
+	September = time.September
+	October   = time.October
+	November  = time.November
+	December  = time.December
 )
 
 // constellation constants
-// 星座常量
 const (
-	Aries       = "Aries"       // 白羊座
-	Taurus      = "Taurus"      // 金牛座
-	Gemini      = "Gemini"      // 双子座
-	Cancer      = "Cancer"      // 巨蟹座
-	Leo         = "Leo"         // 狮子座
-	Virgo       = "Virgo"       // 处女座
-	Libra       = "Libra"       // 天秤座
-	Scorpio     = "Scorpio"     // 天蝎座
-	Sagittarius = "Sagittarius" // 射手座
-	Capricorn   = "Capricorn"   // 摩羯座
-	Aquarius    = "Aquarius"    // 水瓶座
-	Pisces      = "Pisces"      // 双鱼座
+	Aries       = "Aries"
+	Taurus      = "Taurus"
+	Gemini      = "Gemini"
+	Cancer      = "Cancer"
+	Leo         = "Leo"
+	Virgo       = "Virgo"
+	Libra       = "Libra"
+	Scorpio     = "Scorpio"
+	Sagittarius = "Sagittarius"
+	Capricorn   = "Capricorn"
+	Aquarius    = "Aquarius"
+	Pisces      = "Pisces"
 )
 
 // week constants
-// 星期常量
 const (
-	Monday    = time.Monday    // 周一
-	Tuesday   = time.Tuesday   // 周二
-	Wednesday = time.Wednesday // 周三
-	Thursday  = time.Thursday  // 周四
-	Friday    = time.Friday    // 周五
-	Saturday  = time.Saturday  // 周六
-	Sunday    = time.Sunday    // 周日
+	Monday    = time.Monday
+	Tuesday   = time.Tuesday
+	Wednesday = time.Wednesday
+	Thursday  = time.Thursday
+	Friday    = time.Friday
+	Saturday  = time.Saturday
+	Sunday    = time.Sunday
 )
 
 // season constants
-// 季节常量
 const (
-	Spring = "Spring" // 春季
-	Summer = "Summer" // 夏季
-	Autumn = "Autumn" // 秋季
-	Winter = "Winter" // 冬季
+	Spring = "Spring"
+	Summer = "Summer"
+	Autumn = "Autumn"
+	Winter = "Winter"
 )
 
 // number constants
-// 数字常量
 const (
-	EpochYear          = 1970   // UNIX 纪元年
-	YearsPerMillennium = 1000   // 每千年1000年
-	YearsPerCentury    = 100    // 每世纪100年
-	YearsPerDecade     = 10     // 每十年10年
-	QuartersPerYear    = 4      // 每年4个季度
-	MonthsPerYear      = 12     // 每年12月
-	MonthsPerQuarter   = 3      // 每季度3月
-	WeeksPerNormalYear = 52     // 每常规年52周
-	WeeksPerLongYear   = 53     // 每长年53周
-	WeeksPerMonth      = 4      // 每月4周
-	DaysPerLeapYear    = 366    // 每闰年366天
-	DaysPerNormalYear  = 365    // 每常规年365天
-	DaysPerWeek        = 7      // 每周7天
-	HoursPerWeek       = 168    // 每周168小时
-	HoursPerDay        = 24     // 每天24小时
-	MinutesPerDay      = 1440   // 每天1440分钟
-	MinutesPerHour     = 60     // 每小时60分钟
-	SecondsPerWeek     = 604800 // 每周604800秒
-	SecondsPerDay      = 86400  // 每天86400秒
-	SecondsPerHour     = 3600   // 每小时3600秒
-	SecondsPerMinute   = 60     // 每分钟60秒
+	EpochYear          = 1970
+	YearsPerMillennium = 1000
+	YearsPerCentury    = 100
+	YearsPerDecade     = 10
+	QuartersPerYear    = 4
+	MonthsPerYear      = 12
+	MonthsPerQuarter   = 3
+	WeeksPerNormalYear = 52
+	WeeksPerLongYear   = 53
+	WeeksPerMonth      = 4
+	DaysPerLeapYear    = 366
+	DaysPerNormalYear  = 365
+	DaysPerWeek        = 7
+	HoursPerWeek       = 168
+	HoursPerDay        = 24
+	MinutesPerDay      = 1440
+	MinutesPerHour     = 60
+	SecondsPerWeek     = 604800
+	SecondsPerDay      = 86400
+	SecondsPerHour     = 3600
+	SecondsPerMinute   = 60
 )
 
 // layout constants
-// 布局模板常量
 const (
 	AtomLayout     = RFC3339Layout
 	ANSICLayout    = time.ANSIC
@@ -228,7 +220,6 @@ const (
 )
 
 // format constants
-// 格式模板常量
 const (
 	AtomFormat     = "Y-m-d\\TH:i:sR"
 	ANSICFormat    = "D M  j H:i:s Y"
