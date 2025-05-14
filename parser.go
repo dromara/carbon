@@ -180,14 +180,16 @@ func ParseByFormats(value string, formats []string, timezone ...string) Carbon {
 	return ParseByLayouts(value, layouts, tz)
 }
 
-// Deprecated: ParseWithLayouts will be removed in the future, use ParseByLayouts instead.
 // ParseWithLayouts parses a time string as a Carbon instance by multiple fuzzy layouts.
+//
+// Deprecated: it will be removed in the future, use ParseByLayouts instead.
 func ParseWithLayouts(value string, layouts []string, timezone ...string) Carbon {
 	return ParseByLayouts(value, layouts, timezone...)
 }
 
-// Deprecated: ParseWithFormats will be removed in the future, use ParseByFormats instead.
 // ParseWithFormats parses a time string as a Carbon instance by multiple fuzzy formats.
+//
+// Deprecated: it will be removed in the future, use ParseByFormats instead.
 func ParseWithFormats(value string, formats []string, timezone ...string) Carbon {
 	return ParseByFormats(value, formats, timezone...)
 }

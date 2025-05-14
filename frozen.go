@@ -22,8 +22,9 @@ func SetTestNow(c Carbon) {
 	frozenNow.testNow = c
 }
 
-// Deprecated: CleanTestNow will be removed in the future, use ClearTestNow instead.
 // CleanTestNow clears the test Carbon instance for now.
+//
+// Deprecated: it will be removed in the future, use ClearTestNow instead.
 func CleanTestNow() {
 	ClearTestNow()
 }
@@ -36,8 +37,9 @@ func ClearTestNow() {
 	frozenNow.isFrozen = false
 }
 
-// Deprecated: IsSetTestNow will be removed in the future, use IsTestNow instead.
 // IsSetTestNow report whether there is testing time now.
+//
+// Deprecated: it will be removed in the future, use IsTestNow instead.
 func IsSetTestNow() bool {
 	return IsTestNow()
 }
