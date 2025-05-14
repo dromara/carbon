@@ -185,16 +185,18 @@ func ParseByFormats(value string, formats []string, timezone ...string) Carbon {
 	return ParseByLayouts(value, layouts, tz)
 }
 
-// Deprecated: it will be removed in the future, use ParseByLayouts instead.
 // ParseWithLayouts parses a time string as a Carbon instance by multiple fuzzy layouts.
+// Deprecated: it will be removed in the future, use ParseByLayouts instead.
 // 通过多个模糊的 布局模板 将时间字符串解析成 Carbon 实例
+// 未来将移除，请用 ParseByLayouts 替代
 func ParseWithLayouts(value string, layouts []string, timezone ...string) Carbon {
 	return ParseByLayouts(value, layouts, timezone...)
 }
 
-// Deprecated: it will be removed in the future, use ParseByFormats instead.
 // ParseWithFormats parses a time string as a Carbon instance by multiple fuzzy formats.
+// Deprecated: it will be removed in the future, use ParseByFormats instead.
 // 通过多个模糊的 格式模板 将时间字符串解析成 Carbon 实例
+// 未来将移除，请用 ParseByFormats 替代
 func ParseWithFormats(value string, formats []string, timezone ...string) Carbon {
 	return ParseByFormats(value, formats, timezone...)
 }
