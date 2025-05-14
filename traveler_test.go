@@ -8,7 +8,7 @@ import (
 )
 
 func TestCarbon_Now(t *testing.T) {
-	t.Run("without timezone", func(t *testing.T) {
+	t.Run("no timezone", func(t *testing.T) {
 		assert.Equal(t, time.Now().Format(DateLayout), Now().Layout(DateLayout, Local))
 	})
 
@@ -30,7 +30,7 @@ func TestCarbon_Now(t *testing.T) {
 }
 
 func TestCarbon_Tomorrow(t *testing.T) {
-	t.Run("without timezone", func(t *testing.T) {
+	t.Run("no timezone", func(t *testing.T) {
 		assert.Equal(t, time.Now().Add(time.Hour*24).Format(DateLayout), Tomorrow().Layout(DateLayout, Local))
 	})
 

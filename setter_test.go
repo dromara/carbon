@@ -769,27 +769,27 @@ func TestCarbon_SetDateTimeMilli(t *testing.T) {
 
 func TestCarbon_SetDateTimeMicro(t *testing.T) {
 	t.Run("zero carbon", func(t *testing.T) {
-		c := Parse("2020-08-05").SetDateMilli(2020, 8, 5, 999)
+		c := Parse("2020-08-05").SetDateTimeMicro(2020, 8, 5, 13, 14, 15, 999999)
 		assert.False(t, c.HasError())
-		assert.Equal(t, "2020-08-05 13:14:15.999999 +0000 UTC", NewCarbon().SetDateTimeMicro(2020, 8, 5, 13, 14, 15, 999999).ToString())
+		assert.Equal(t, "2020-08-05 13:14:15.999999 +0000 UTC", c.ToString())
 	})
 
 	t.Run("empty carbon", func(t *testing.T) {
-		c := Parse("").SetDateMilli(2020, 8, 5, 999)
+		c := Parse("").SetDateTimeMicro(2020, 8, 5, 13, 14, 15, 999999)
 		assert.False(t, c.HasError())
 		assert.Empty(t, c.ToString())
 	})
 
 	t.Run("error carbon", func(t *testing.T) {
-		c := Parse("xxx").SetDateMilli(2020, 8, 5, 999)
+		c := Parse("xxx").SetDateTimeMicro(2020, 8, 5, 13, 14, 15, 999999)
 		assert.True(t, c.HasError())
 		assert.Empty(t, c.ToString())
 	})
 
 	t.Run("valid carbon", func(t *testing.T) {
-		c := Parse("2020-08-05").SetDateMilli(2020, 8, 5, 999)
+		c := Parse("2020-08-05").SetDateTimeMicro(2020, 8, 5, 13, 14, 15, 999999)
 		assert.False(t, c.HasError())
-		assert.Equal(t, "2020-08-05 13:14:15.999999 +0000 UTC", Parse("2020-08-05").SetDateTimeMicro(2020, 8, 5, 13, 14, 15, 999999).ToString())
+		assert.Equal(t, "2020-08-05 13:14:15.999999 +0000 UTC", c.ToString())
 	})
 }
 
@@ -798,6 +798,18 @@ func TestCarbon_SetDateTimeNano(t *testing.T) {
 		c := NewCarbon().SetDateTimeNano(2020, 8, 5, 13, 14, 15, 999999999)
 		assert.False(t, c.HasError())
 		assert.Equal(t, "2020-08-05 13:14:15.999999999 +0000 UTC", c.ToString())
+	})
+
+	t.Run("empty carbon", func(t *testing.T) {
+		c := Parse("").SetDateTimeNano(2020, 8, 5, 13, 14, 15, 999999999)
+		assert.False(t, c.HasError())
+		assert.Empty(t, c.ToString())
+	})
+
+	t.Run("error carbon", func(t *testing.T) {
+		c := Parse("xxx").SetDateTimeNano(2020, 8, 5, 13, 14, 15, 999999999)
+		assert.True(t, c.HasError())
+		assert.Empty(t, c.ToString())
 	})
 
 	t.Run("valid carbon", func(t *testing.T) {
@@ -811,7 +823,7 @@ func TestCarbon_SetDate(t *testing.T) {
 	t.Run("zero carbon", func(t *testing.T) {
 		c := Parse("2020-08-05").SetDate(2020, 8, 5)
 		assert.False(t, c.HasError())
-		assert.Equal(t, "2020-08-05 00:00:00 +0000 UTC", NewCarbon().SetDate(2020, 8, 5).ToString())
+		assert.Equal(t, "2020-08-05 00:00:00 +0000 UTC", c.ToString())
 	})
 
 	t.Run("empty carbon", func(t *testing.T) {

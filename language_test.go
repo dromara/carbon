@@ -78,13 +78,11 @@ func TestLanguage_SetResources(t *testing.T) {
 	})
 
 	t.Run("set some resources", func(t *testing.T) {
-		resources := map[string]string{
+		lang := NewLanguage()
+		lang.SetLocale("en").SetResources(map[string]string{
 			"months":       "Ⅰ月|Ⅱ月|Ⅲ月|Ⅳ月|Ⅴ月|Ⅵ月|Ⅶ月|Ⅷ月|Ⅸ月|Ⅹ月|Ⅺ月|Ⅻ月",
 			"short_months": "Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ|Ⅵ|Ⅶ|Ⅷ|Ⅸ|Ⅹ|Ⅺ|Ⅻ",
-		}
-
-		lang := NewLanguage()
-		lang.SetLocale("en").SetResources(resources)
+		})
 
 		assert.Equal(t, "Leo", Parse("2020-08-05").SetLanguage(lang).Constellation())
 		assert.Equal(t, "Summer", Parse("2020-08-05").SetLanguage(lang).Season())
