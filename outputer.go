@@ -37,9 +37,6 @@ func (c Carbon) ToMonthString(timezone ...string) string {
 	if c.IsInvalid() {
 		return ""
 	}
-	if len(c.lang.resources) == 0 {
-		c.lang.SetLocale(DefaultLocale)
-	}
 
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
