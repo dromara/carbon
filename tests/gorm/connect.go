@@ -1,4 +1,4 @@
-package tests
+package gorm
 
 import (
 	"fmt"
@@ -22,10 +22,11 @@ var (
 	dsn string
 	dia gorm.Dialector
 	db  *gorm.DB
+	err error
 )
 
 func connect(driver string) *gorm.DB {
-	if err := godotenv.Load(".env"); err != nil {
+	if err = godotenv.Load("../.env"); err != nil {
 		panic("`.env` file does not exist, please copy `.env.example` file to `.env` file")
 	}
 
@@ -39,7 +40,7 @@ func connect(driver string) *gorm.DB {
 	case driverSQLite:
 		dia = sqlite.Open(os.Getenv("SQLite_DB_DATABASE"))
 	}
-	db, err := gorm.Open(dia, &gorm.Config{
+	db, err = gorm.Open(dia, &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
 	if err != nil {

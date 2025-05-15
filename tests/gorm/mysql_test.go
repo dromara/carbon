@@ -1,4 +1,4 @@
-package tests
+package gorm
 
 import (
 	"encoding/json"
@@ -20,10 +20,10 @@ func (s *MySQLSuite) SetupSuite() {
 	carbon.SetTimezone(carbon.PRC)
 	carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
 	db = connect(driverMySQL)
-	if err := db.AutoMigrate(&MySQLModel1{}); err != nil {
+	if err = db.AutoMigrate(&MySQLModel1{}); err != nil {
 		panic(err)
 	}
-	if err := db.AutoMigrate(&MySQLModel2{}); err != nil {
+	if err = db.AutoMigrate(&MySQLModel2{}); err != nil {
 		panic(err)
 	}
 }
@@ -39,7 +39,7 @@ func (s *MySQLSuite) TestCurd1() {
 		var model1 MySQLModel1
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
@@ -86,7 +86,7 @@ func (s *MySQLSuite) TestCurd1() {
 		model1.Timestamp1 = carbon.NewTimestamp(c)
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
@@ -133,7 +133,7 @@ func (s *MySQLSuite) TestCurd1() {
 		model1.Timestamp1 = carbon.NewTimestamp(c)
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
@@ -180,7 +180,7 @@ func (s *MySQLSuite) TestCurd1() {
 		model1.Timestamp1 = carbon.NewTimestamp(c)
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
@@ -237,12 +237,12 @@ func (s *MySQLSuite) TestCurd2() {
 		var model1 MySQLModel2
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
 		// read
-		var model2 MySQLModel1
+		var model2 MySQLModel2
 		db.Last(&model2)
 
 		data1, err1 := json.Marshal(&model2)
@@ -290,12 +290,12 @@ func (s *MySQLSuite) TestCurd2() {
 		model1.Timestamp1 = &timestamp
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
 		// read
-		var model2 MySQLModel1
+		var model2 MySQLModel2
 		db.Last(&model2)
 
 		data1, err1 := json.Marshal(&model2)
@@ -343,12 +343,12 @@ func (s *MySQLSuite) TestCurd2() {
 		model1.Timestamp1 = &timestamp
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
 		// read
-		var model2 MySQLModel1
+		var model2 MySQLModel2
 		db.Last(&model2)
 
 		data1, err1 := json.Marshal(&model2)
@@ -396,7 +396,7 @@ func (s *MySQLSuite) TestCurd2() {
 		model1.Timestamp1 = &timestamp
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 

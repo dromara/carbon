@@ -1,4 +1,4 @@
-package tests
+package gorm
 
 import (
 	"encoding/json"
@@ -20,10 +20,10 @@ func (s *PgSQLSuite) SetupSuite() {
 	carbon.SetTimezone(carbon.PRC)
 	carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
 	db = connect(driverPgSQL)
-	if err := db.AutoMigrate(&PgSQLModel1{}); err != nil {
+	if err = db.AutoMigrate(&PgSQLModel1{}); err != nil {
 		panic(err)
 	}
-	if err := db.AutoMigrate(&PgSQLModel2{}); err != nil {
+	if err = db.AutoMigrate(&PgSQLModel2{}); err != nil {
 		panic(err)
 	}
 }
@@ -39,7 +39,7 @@ func (s *PgSQLSuite) TestCurd1() {
 		var model1 PgSQLModel1
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
@@ -79,7 +79,7 @@ func (s *PgSQLSuite) TestCurd1() {
 		model1.Timestamp1 = carbon.NewTimestamp(c)
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
@@ -119,7 +119,7 @@ func (s *PgSQLSuite) TestCurd1() {
 		model1.Timestamp1 = carbon.NewTimestamp(c)
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
@@ -159,13 +159,14 @@ func (s *PgSQLSuite) TestCurd1() {
 		model1.Timestamp1 = carbon.NewTimestamp(c)
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
 		// read
 		var model2 PgSQLModel1
 		db.Last(&model2)
+
 		data1, err1 := json.Marshal(&model2)
 		s.Nil(err1)
 		s.Equal(`{"carbon1":"2020-08-05 21:14:15","carbon2":"2020-08-05 13:14:15","date1":"2020-08-05","time1":"13:14:15","time2":"13:19:58","date_time1":"2020-08-05 21:14:15","date_time2":"2020-08-05 13:14:15","rfc3339_layout1":"2020-08-05T21:14:15+08:00","rfc3339_layout2":"2020-08-05T13:14:15+08:00","iso8601_format1":"2020-08-05T21:14:15+08:00","iso8601_format2":"2020-08-05T13:14:15+08:00","timestamp1":1596604455}`, string(data1))
@@ -208,7 +209,7 @@ func (s *PgSQLSuite) TestCurd2() {
 		var model1 PgSQLModel2
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
@@ -254,7 +255,7 @@ func (s *PgSQLSuite) TestCurd2() {
 		model1.Timestamp1 = &timestamp1
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
@@ -300,7 +301,7 @@ func (s *PgSQLSuite) TestCurd2() {
 		model1.Timestamp1 = &timestamp1
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 
@@ -346,7 +347,7 @@ func (s *PgSQLSuite) TestCurd2() {
 		model1.Timestamp1 = &timestamp
 
 		// create
-		if err := db.Create(&model1).Error; err != nil {
+		if err = db.Create(&model1).Error; err != nil {
 			panic(err)
 		}
 

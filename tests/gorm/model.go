@@ -1,4 +1,4 @@
-package tests
+package gorm
 
 import (
 	"github.com/dromara/carbon/v2"
