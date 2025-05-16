@@ -3,7 +3,7 @@ package carbon
 import (
 	"embed"
 	"encoding/json"
-	"path/filepath"
+	"fmt"
 	"slices"
 	"strconv"
 	"strings"
@@ -53,7 +53,7 @@ func (lang *Language) SetLocale(locale string) *Language {
 	defer lang.rw.Unlock()
 
 	lang.locale = locale
-	fileName := filepath.Join(lang.dir, locale+".json")
+	fileName := fmt.Sprintf("%s/%s.json", lang.dir, locale)
 	bytes, err := fs.ReadFile(fileName)
 	if err != nil {
 		lang.Error = ErrNotExistLocale(fileName)
