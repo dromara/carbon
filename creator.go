@@ -173,7 +173,7 @@ func create(year, month, day, hour, minute, second, nanosecond int, timezone ...
 	return NewCarbon(time.Date(year, time.Month(month), day, hour, minute, second, nanosecond, loc))
 }
 
-// creates a Carbon instance from a given date, time and nanosecond.
+// creates a new Carbon instance from a given date, time and nanosecond based on the existing Carbon instance.
 func (c Carbon) create(year, month, day, hour, minute, second, nanosecond int) Carbon {
 	return Carbon{
 		time:          time.Date(year, time.Month(month), day, hour, minute, second, nanosecond, c.loc),
