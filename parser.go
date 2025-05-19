@@ -104,9 +104,26 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	return c
 }
 
+// ParseByFormat parses a time string as a `Carbon` instance by a confirmed format.
+//
+// Note: If the letter used conflicts with the format sign, please use the escape character "\" to escape the letter
+func ParseByFormat(value, format string, timezone ...string) Carbon {
+	if value == "" {
+		return Carbon{isEmpty: true}
+	}
+	if format == "" {
+		return Carbon{Error: ErrEmptyFormat()}
+	}
+	c := ParseByLayout(value, format2layout(format), timezone...)
+	if c.HasError() {
+		c.Error = fmt.Errorf("%w: %w", ErrMismatchedFormat(value, format), c.Error)
+	}
+	return c
+}
+
 // ParseByLayouts parses a time string as a Carbon instance by multiple fuzzy layouts.
 //
-// Notice: it doesn't support timestamp layouts parsing
+// Note: it doesn't support parsing by timestamp layouts.
 func ParseByLayouts(value string, layouts []string, timezone ...string) Carbon {
 	if value == "" {
 		return Carbon{isEmpty: true}
@@ -140,24 +157,9 @@ func ParseByLayouts(value string, layouts []string, timezone ...string) Carbon {
 	return c
 }
 
-// ParseByFormat parses a time string as a `Carbon` instance by a confirmed format.
-func ParseByFormat(value, format string, timezone ...string) Carbon {
-	if value == "" {
-		return Carbon{isEmpty: true}
-	}
-	if format == "" {
-		return Carbon{Error: ErrEmptyFormat()}
-	}
-	c := ParseByLayout(value, format2layout(format), timezone...)
-	if c.HasError() {
-		c.Error = fmt.Errorf("%w: %w", ErrMismatchedFormat(value, format), c.Error)
-	}
-	return c
-}
-
 // ParseByFormats parses a time string as a Carbon instance by multiple fuzzy formats.
 //
-// Notice: it doesn't support timestamp formats parsing
+// Note: it doesn't support parsing by timestamp formats.
 func ParseByFormats(value string, formats []string, timezone ...string) Carbon {
 	if value == "" {
 		return Carbon{isEmpty: true}
