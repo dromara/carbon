@@ -5,7 +5,7 @@ import (
 	"database/sql/driver"
 )
 
-// Scan implements driver.Scanner interface.
+// Scan implements driver.Scanner interface for Carbon struct.
 func (c *Carbon) Scan(src any) error {
 	switch v := src.(type) {
 	case nil:
@@ -26,7 +26,7 @@ func (c *Carbon) Scan(src any) error {
 	return c.Error
 }
 
-// Value implements driver.Valuer interface.
+// Value implements driver.Valuer interface for Carbon struct.
 func (c Carbon) Value() (driver.Value, error) {
 	if c.IsZero() || c.IsEmpty() {
 		return nil, nil
@@ -37,7 +37,7 @@ func (c Carbon) Value() (driver.Value, error) {
 	return c.StdTime(), nil
 }
 
-// MarshalJSON implements json.Marshal interface.
+// MarshalJSON implements json.Marshal interface for Carbon struct.
 func (c Carbon) MarshalJSON() ([]byte, error) {
 	if c.IsZero() || c.IsEmpty() {
 		return []byte(`null`), nil
@@ -53,7 +53,7 @@ func (c Carbon) MarshalJSON() ([]byte, error) {
 	return b, nil
 }
 
-// UnmarshalJSON implements json.Unmarshal interface.
+// UnmarshalJSON implements json.Unmarshal interface for Carbon struct.
 func (c *Carbon) UnmarshalJSON(b []byte) error {
 	value := string(bytes.Trim(b, `"`))
 	if value == "" || value == "null" {
