@@ -8,6 +8,7 @@ import (
 // LayoutTyper defines a LayoutTyper interface
 type LayoutTyper interface {
 	~string
+	DataType() string
 	Layout() string
 }
 
@@ -91,7 +92,21 @@ func (t LayoutType[T]) String() string {
 	return t.Layout(t.getLayout())
 }
 
-// getLayout returns the set layout.
+// GormDataType implements GormDataType interface for FormatType generic struct.
+func (t LayoutType[T]) GormDataType() string {
+	if &t == nil {
+		return ""
+	}
+	return t.getDataType()
+}
+
+// getDataType returns the data type of FormatType generic struct.
+func (t LayoutType[T]) getDataType() string {
+	var typer T
+	return typer.DataType()
+}
+
+// getLayout returns the layout of FormatType generic struct.
 func (t LayoutType[T]) getLayout() string {
 	var typer T
 	return typer.Layout()
