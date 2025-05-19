@@ -256,7 +256,7 @@ carbon.ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 20
 ```
 
 ##### Parse a time string as a `Carbon` instance by a confirmed format
-> Note: If the letter used conflicts with the format sign, please use the escape character "\" to escape the letter
+> Note: If the letter used conflicts with the format sign, please use the escape character "\\" to escape the letter
 
 ```go
 carbon.ParseByFormat("2020|08|05 13|14|15", "Y|m|d H|i|s").ToDateTimeString() // 2020-08-05 13:14:15
