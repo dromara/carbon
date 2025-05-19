@@ -255,14 +255,8 @@ carbon.ParseByLayout("It is 2020-08-05 13:14:15", "It is 2006-01-02 15:04:05").T
 carbon.ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 2006年01月02日15时04分05秒").ToDateTimeString() // 2020-08-05 13:14:15
 ```
 
-##### Parse a time string as a `Carbon` instance by multiple fuzzy layouts
-
-```go
-carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).ToDateTimeString() // 2020-08-05 13:14:15
-carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).CurrentLayout() // 2006|01|02 15|04|05
-```
-
 ##### Parse a time string as a `Carbon` instance by a confirmed format
+> Note: If the letter used conflicts with the format sign, please use an escape character to escape the letter
 
 ```go
 carbon.ParseByFormat("2020|08|05 13|14|15", "Y|m|d H|i|s").ToDateTimeString() // 2020-08-05 13:14:15
@@ -270,7 +264,16 @@ carbon.ParseByFormat("It is 2020-08-05 13:14:15", "\\I\\t \\i\\s Y-m-d H:i:s").T
 carbon.ParseByFormat("今天是 2020年08月05日13时14分15秒", "今天是 Y年m月d日H时i分s秒").ToDateTimeString() // 2020-08-05 13:14:15
 ```
 
+##### Parse a time string as a `Carbon` instance by multiple fuzzy layouts
+> Note: it doesn't support parsing by timestamp layouts
+
+```go
+carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).ToDateTimeString() // 2020-08-05 13:14:15
+carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).CurrentLayout() // 2006|01|02 15|04|05
+```
+
 ##### Parse a time string as a `Carbon` instance by multiple fuzzy formats
+> Note: it doesn't support parsing by timestamp formats
 
 ```go
 carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).ToDateTimeString() // 2020-08-05 13:14:15
