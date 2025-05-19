@@ -8,6 +8,7 @@ import (
 // FormatTyper defines a FormatTyper interface.
 type FormatTyper interface {
 	~string
+	DataType() string
 	Format() string
 }
 
@@ -91,8 +92,22 @@ func (t FormatType[T]) String() string {
 	return t.Format(t.getFormat())
 }
 
-// getFormat returns the set format.
-func (t *FormatType[T]) getFormat() string {
+// GormDataType implements GormDataType interface for FormatType generic struct.
+func (t FormatType[T]) GormDataType() string {
+	if &t == nil {
+		return ""
+	}
+	return t.getDataType()
+}
+
+// getDataType returns the data type of FormatType generic struct.
+func (t FormatType[T]) getDataType() string {
+	var typer T
+	return typer.DataType()
+}
+
+// getFormat returns the format of FormatType generic struct.
+func (t FormatType[T]) getFormat() string {
 	var typer T
 	return typer.Format()
 }
