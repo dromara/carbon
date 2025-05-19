@@ -2,7 +2,6 @@ package carbon
 
 import (
 	"encoding/json"
-	"strconv"
 	"testing"
 	"time"
 
@@ -212,19 +211,15 @@ func TestBuiltinType_Scan(t *testing.T) {
 
 		ts1 := NewTimestamp(c)
 		assert.Error(t, ts1.Scan([]byte("xxx")))
-		assert.Nil(t, ts1.Scan([]byte(strconv.Itoa(int(ts1.Timestamp())))))
 
 		ts2 := NewTimestampMilli(c)
 		assert.Error(t, ts2.Scan([]byte("xxx")))
-		assert.Nil(t, ts2.Scan([]byte(strconv.Itoa(int(ts2.TimestampMilli())))))
 
 		ts3 := NewTimestampMicro(c)
 		assert.Error(t, ts3.Scan([]byte("xxx")))
-		assert.Nil(t, ts3.Scan([]byte(strconv.Itoa(int(ts3.TimestampMicro())))))
 
 		ts4 := NewTimestampNano(c)
 		assert.Error(t, ts4.Scan([]byte("xxx")))
-		assert.Nil(t, ts4.Scan([]byte(strconv.Itoa(int(ts3.TimestampNano())))))
 	})
 
 	t.Run("string type", func(t *testing.T) {
@@ -233,36 +228,15 @@ func TestBuiltinType_Scan(t *testing.T) {
 
 		ts1 := NewTimestamp(c)
 		assert.Error(t, ts1.Scan("xxx"))
-		assert.Nil(t, ts1.Scan(strconv.Itoa(int(ts1.Timestamp()))))
 
 		ts2 := NewTimestampMilli(c)
 		assert.Error(t, ts2.Scan("xxx"))
-		assert.Nil(t, ts2.Scan(strconv.Itoa(int(ts2.TimestampMilli()))))
 
 		ts3 := NewTimestampMicro(c)
 		assert.Error(t, ts3.Scan("xxx"))
-		assert.Nil(t, ts3.Scan(strconv.Itoa(int(ts3.TimestampMicro()))))
 
 		ts4 := NewTimestampNano(c)
 		assert.Error(t, ts4.Scan("xxx"))
-		assert.Nil(t, ts4.Scan(strconv.Itoa(int(ts4.TimestampNano()))))
-	})
-
-	t.Run("int64 type", func(t *testing.T) {
-		dt := NewDateTime(c)
-		assert.Nil(t, dt.Scan(c.Timestamp()))
-
-		ts1 := NewTimestamp(c)
-		assert.Nil(t, ts1.Scan(c.Timestamp()))
-
-		ts2 := NewTimestampMilli(c)
-		assert.Nil(t, ts2.Scan(c.TimestampMilli()))
-
-		ts3 := NewTimestampMicro(c)
-		assert.Nil(t, ts3.Scan(c.TimestampMicro()))
-
-		ts4 := NewTimestampNano(c)
-		assert.Nil(t, ts4.Scan(c.TimestampNano()))
 	})
 
 	t.Run("time type", func(t *testing.T) {
@@ -380,19 +354,19 @@ func TestBuiltinType_Value(t *testing.T) {
 		assert.Nil(t, e1)
 
 		v2, e2 := NewTimestamp(c).Value()
-		assert.Equal(t, c.Timestamp(), v2)
+		assert.Equal(t, c.StdTime(), v2)
 		assert.Nil(t, e2)
 
 		v3, e3 := NewTimestampMilli(c).Value()
-		assert.Equal(t, c.TimestampMilli(), v3)
+		assert.Equal(t, c.StdTime(), v3)
 		assert.Nil(t, e3)
 
 		v4, e4 := NewTimestampMicro(c).Value()
-		assert.Equal(t, c.TimestampMicro(), v4)
+		assert.Equal(t, c.StdTime(), v4)
 		assert.Nil(t, e4)
 
 		v5, e5 := NewTimestampNano(c).Value()
-		assert.Equal(t, c.TimestampNano(), v5)
+		assert.Equal(t, c.StdTime(), v5)
 		assert.Nil(t, e5)
 	})
 }
@@ -706,14 +680,49 @@ func TestBuiltinType_UnmarshalJSON(t *testing.T) {
 	})
 }
 
+func TestBuiltinType_GormDataType(t *testing.T) {
+	var model builtinTypeModel
+
+	assert.Equal(t, "date", model.Date.GormDataType())
+	assert.Equal(t, "timestamp", model.DateMilli.GormDataType())
+	assert.Equal(t, "timestamp", model.DateMicro.GormDataType())
+	assert.Equal(t, "timestamp", model.DateNano.GormDataType())
+
+	assert.Equal(t, "time", model.Time.GormDataType())
+	assert.Equal(t, "timestamp", model.TimeMilli.GormDataType())
+	assert.Equal(t, "timestamp", model.TimeMicro.GormDataType())
+	assert.Equal(t, "timestamp", model.TimeNano.GormDataType())
+
+	assert.Equal(t, "datetime", model.DateTime.GormDataType())
+	assert.Equal(t, "timestamp", model.DateTimeMilli.GormDataType())
+	assert.Equal(t, "timestamp", model.DateTimeMicro.GormDataType())
+	assert.Equal(t, "timestamp", model.DateTimeNano.GormDataType())
+
+	assert.Equal(t, "timestamp", model.Timestamp.GormDataType())
+	assert.Equal(t, "timestamp", model.TimestampMilli.GormDataType())
+	assert.Equal(t, "timestamp", model.TimestampMicro.GormDataType())
+	assert.Equal(t, "timestamp", model.TimestampNano.GormDataType())
+
+	assert.Equal(t, "datetime", model.CreatedAt.GormDataType())
+	assert.Equal(t, "datetime", model.UpdatedAt.GormDataType())
+	assert.Equal(t, "timestamp", model.DeletedAt.GormDataType())
+	assert.Equal(t, "timestamp", model.DeletedAt.GormDataType())
+}
+
 type iso8601Type string
 
+func (t iso8601Type) DataType() string {
+	return "timestamp"
+}
 func (t iso8601Type) Format() string {
 	return ISO8601Format
 }
 
 type rfc3339Type string
 
+func (t rfc3339Type) DataType() string {
+	return "timestamp"
+}
 func (t rfc3339Type) Layout() string {
 	return RFC3339Layout
 }
@@ -937,4 +946,13 @@ func TestCustomerType_UnmarshalJSON(t *testing.T) {
 		assert.Equal(t, "2020-08-05T13:14:15+00:00", model.CreatedAt.String())
 		assert.Equal(t, "2020-08-05T13:14:15Z", model.UpdatedAt.String())
 	})
+}
+
+func TestCustomerType_GormDataType(t *testing.T) {
+	var model CustomerTypeModel
+
+	assert.Equal(t, "timestamp", model.Customer1.GormDataType())
+	assert.Equal(t, "timestamp", model.Customer2.GormDataType())
+	assert.Equal(t, "timestamp", model.CreatedAt.GormDataType())
+	assert.Equal(t, "timestamp", model.UpdatedAt.GormDataType())
 }
