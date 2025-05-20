@@ -8,17 +8,17 @@ import (
 
 // timestamp Precision constants
 const (
-	PrecisionSecond      = 9
-	PrecisionMillisecond = 999
-	PrecisionMicrosecond = 999999
-	PrecisionNanosecond  = 999999999
+	PrecisionSecond      = "second"
+	PrecisionMillisecond = "millisecond"
+	PrecisionMicrosecond = "microsecond"
+	PrecisionNanosecond  = "nanosecond"
 )
 
 // TimestampTyper defines a TimestampTyper interface.
 type TimestampTyper interface {
 	~int64
 	DataType() string
-	Precision() int64
+	Precision() string
 }
 
 // TimestampType defines a TimestampType generic struct.
@@ -42,9 +42,9 @@ func (t *TimestampType[T]) Scan(src any) (err error) {
 	case nil:
 		return nil
 	case []byte:
-		c = Parse(string(v))
+		c = Parse(string(v), DefaultTimezone)
 	case string:
-		c = Parse(v)
+		c = Parse(v, DefaultTimezone)
 	case StdTime:
 		c = CreateFromStdTime(v, DefaultTimezone)
 	case *StdTime:
@@ -142,9 +142,6 @@ func (t TimestampType[T]) Int64() (ts int64) {
 
 // GormDataType implements GormDataType interface for TimestampType generic struct.
 func (t TimestampType[T]) GormDataType() string {
-	if &t == nil {
-		return ""
-	}
 	return t.getDataType()
 }
 
@@ -155,7 +152,7 @@ func (t TimestampType[T]) getDataType() string {
 }
 
 // getPrecision returns precision of TimestampType generic struct.
-func (t TimestampType[T]) getPrecision() int64 {
+func (t TimestampType[T]) getPrecision() string {
 	var typer T
 	return typer.Precision()
 }
