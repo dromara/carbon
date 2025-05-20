@@ -79,7 +79,7 @@ type timestampType int64
 func (t timestampType) DataType() string {
 	return "timestamp"
 }
-func (t timestampType) Precision() int64 {
+func (t timestampType) Precision() string {
 	return PrecisionSecond
 }
 
@@ -88,7 +88,7 @@ type timestampMilliType int64
 func (t timestampMilliType) DataType() string {
 	return "timestamp"
 }
-func (t timestampMilliType) Precision() int64 {
+func (t timestampMilliType) Precision() string {
 	return PrecisionMillisecond
 }
 
@@ -97,7 +97,7 @@ type timestampMicroType int64
 func (t timestampMicroType) DataType() string {
 	return "timestamp"
 }
-func (t timestampMicroType) Precision() int64 {
+func (t timestampMicroType) Precision() string {
 	return PrecisionMicrosecond
 }
 
@@ -106,7 +106,7 @@ type timestampNanoType int64
 func (t timestampNanoType) DataType() string {
 	return "timestamp"
 }
-func (t timestampNanoType) Precision() int64 {
+func (t timestampNanoType) Precision() string {
 	return PrecisionNanosecond
 }
 
