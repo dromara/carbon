@@ -34,8 +34,6 @@ func (t *LayoutType[T]) Scan(src any) error {
 		c = Parse(string(v), DefaultTimezone)
 	case string:
 		c = Parse(v, DefaultTimezone)
-	case int64:
-		c = CreateFromTimestamp(v, DefaultTimezone)
 	case StdTime:
 		c = CreateFromStdTime(v, DefaultTimezone)
 	case *StdTime:
@@ -92,21 +90,18 @@ func (t LayoutType[T]) String() string {
 	return t.Layout(t.getLayout())
 }
 
-// GormDataType implements GormDataType interface for FormatType generic struct.
+// GormDataType implements GormDataType interface for LayoutType generic struct.
 func (t LayoutType[T]) GormDataType() string {
-	if &t == nil {
-		return ""
-	}
 	return t.getDataType()
 }
 
-// getDataType returns the data type of FormatType generic struct.
+// getDataType returns the data type of LayoutType generic struct.
 func (t LayoutType[T]) getDataType() string {
 	var typer T
 	return typer.DataType()
 }
 
-// getLayout returns the layout of FormatType generic struct.
+// getLayout returns the layout of LayoutType generic struct.
 func (t LayoutType[T]) getLayout() string {
 	var typer T
 	return typer.Layout()
