@@ -1373,7 +1373,7 @@ func TestCarbon_Format(t *testing.T) {
 		assert.Equal(t, "5", Parse("2020-08-05 13:14:15").Format("j"))
 		assert.Equal(t, "32", Parse("2020-08-05 13:14:15").Format("W"))
 		assert.Equal(t, "August", Parse("2020-08-05 13:14:15").Format("F"))
-		assert.Equal(t, "03", Parse("2020-08-05 13:14:15").Format("N"))
+		assert.Equal(t, "3", Parse("2020-08-05 13:14:15").Format("N"))
 		assert.Equal(t, "1", Parse("2020-08-05 13:14:15").Format("L"))
 		assert.Equal(t, "0", Parse("2021-08-05 13:14:15").Format("L"))
 		assert.Equal(t, "13", Parse("2020-08-05 13:14:15").Format("G"))
