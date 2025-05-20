@@ -14,8 +14,6 @@ func (c *Carbon) Scan(src any) error {
 		*c = Parse(string(v), DefaultTimezone)
 	case string:
 		*c = Parse(v, DefaultTimezone)
-	case int64:
-		*c = CreateFromTimestamp(v, DefaultTimezone)
 	case StdTime:
 		*c = CreateFromStdTime(v, DefaultTimezone)
 	case *StdTime:

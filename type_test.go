@@ -24,10 +24,6 @@ func TestCarbonType_Scan(t *testing.T) {
 		assert.Nil(t, c.Scan(c.ToDateString()))
 	})
 
-	t.Run("int64 type", func(t *testing.T) {
-		assert.Nil(t, c.Scan(c.Timestamp()))
-	})
-
 	t.Run("time type", func(t *testing.T) {
 		tt := time.Now()
 		assert.Nil(t, c.Scan(tt))
@@ -702,11 +698,6 @@ func TestBuiltinType_GormDataType(t *testing.T) {
 	assert.Equal(t, "timestamp", model.TimestampMilli.GormDataType())
 	assert.Equal(t, "timestamp", model.TimestampMicro.GormDataType())
 	assert.Equal(t, "timestamp", model.TimestampNano.GormDataType())
-
-	assert.Equal(t, "datetime", model.CreatedAt.GormDataType())
-	assert.Equal(t, "datetime", model.UpdatedAt.GormDataType())
-	assert.Equal(t, "timestamp", model.DeletedAt.GormDataType())
-	assert.Equal(t, "timestamp", model.DeletedAt.GormDataType())
 }
 
 type iso8601Type string
@@ -747,11 +738,6 @@ func TestCustomerType_Scan(t *testing.T) {
 	t.Run("string type", func(t *testing.T) {
 		assert.Nil(t, t1.Scan(Now().ToDateString()))
 		assert.Nil(t, t2.Scan(Now().ToDateString()))
-	})
-
-	t.Run("int64 type", func(t *testing.T) {
-		assert.Nil(t, t1.Scan(Now().Timestamp()))
-		assert.Nil(t, t2.Scan(Now().Timestamp()))
 	})
 
 	t.Run("time type", func(t *testing.T) {
@@ -950,9 +936,6 @@ func TestCustomerType_UnmarshalJSON(t *testing.T) {
 
 func TestCustomerType_GormDataType(t *testing.T) {
 	var model CustomerTypeModel
-
 	assert.Equal(t, "timestamp", model.Customer1.GormDataType())
 	assert.Equal(t, "timestamp", model.Customer2.GormDataType())
-	assert.Equal(t, "timestamp", model.CreatedAt.GormDataType())
-	assert.Equal(t, "timestamp", model.UpdatedAt.GormDataType())
 }
