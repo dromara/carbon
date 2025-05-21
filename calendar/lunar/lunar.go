@@ -216,7 +216,7 @@ func (l Lunar) LeapMonth() int {
 	return years[l.year-minYear] & 0xf
 }
 
-// String implements Stringer interface for Lunar.
+// String implements "Stringer" interface for Lunar.
 func (l Lunar) String() string {
 	if !l.IsValid() {
 		return ""

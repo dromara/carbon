@@ -146,7 +146,7 @@ func (p Persian) Day() int {
 	return p.day
 }
 
-// String implements Stringer interface for Persian.
+// String implements "Stringer" interface for Persian.
 func (p Persian) String() string {
 	if !p.IsValid() {
 		return ""

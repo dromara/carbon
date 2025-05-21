@@ -11,7 +11,7 @@ type Gregorian struct {
 	Error error
 }
 
-// String implements Stringer interface.
+// String implements "Stringer" interface.
 func (g Gregorian) String() string {
 	if g.Error != nil {
 		return ""

@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// GoString implements fmt.GoStringer interface for Carbon struct.
+// GoString implements "fmt.GoStringer" interface for Carbon struct.
 func (c Carbon) GoString() string {
 	if c.IsInvalid() {
 		return ""
