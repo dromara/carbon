@@ -14,13 +14,6 @@ const (
 	PrecisionNanosecond  = "nanosecond"
 )
 
-// TimestampTyper defines a TimestampTyper interface.
-type TimestampTyper interface {
-	~int64
-	DataType() string
-	Precision() string
-}
-
 // TimestampType defines a TimestampType generic struct.
 type TimestampType[T TimestampTyper] struct {
 	Carbon
@@ -33,7 +26,7 @@ func NewTimestampType[T TimestampTyper](c Carbon) TimestampType[T] {
 	}
 }
 
-// Scan implements driver.Scanner interface for TimestampType generic struct.
+// Scan implements "driver.Scanner" interface for TimestampType generic struct.
 func (t *TimestampType[T]) Scan(src any) (err error) {
 	var (
 		c Carbon
@@ -42,13 +35,13 @@ func (t *TimestampType[T]) Scan(src any) (err error) {
 	case nil:
 		return nil
 	case []byte:
-		c = Parse(string(v), DefaultTimezone)
+		c = Parse(string(v))
 	case string:
-		c = Parse(v, DefaultTimezone)
+		c = Parse(v)
 	case StdTime:
-		c = CreateFromStdTime(v, DefaultTimezone)
+		c = CreateFromStdTime(v)
 	case *StdTime:
-		c = CreateFromStdTime(*v, DefaultTimezone)
+		c = CreateFromStdTime(*v)
 	default:
 		return ErrFailedScan(src)
 	}
@@ -56,7 +49,7 @@ func (t *TimestampType[T]) Scan(src any) (err error) {
 	return t.Error
 }
 
-// Value implements driver.Valuer interface for TimestampType generic struct.
+// Value implements "driver.Valuer" interface for TimestampType generic struct.
 func (t TimestampType[T]) Value() (driver.Value, error) {
 	if t.IsZero() || t.IsEmpty() {
 		return nil, nil
@@ -67,7 +60,7 @@ func (t TimestampType[T]) Value() (driver.Value, error) {
 	return t.StdTime(), nil
 }
 
-// MarshalJSON implements json.Marshal interface for TimestampType generic struct.
+// MarshalJSON implements "json.Marshaler" interface for TimestampType generic struct.
 func (t *TimestampType[T]) MarshalJSON() ([]byte, error) {
 	if t.IsZero() || t.IsEmpty() {
 		return []byte(`null`), nil
@@ -89,7 +82,7 @@ func (t *TimestampType[T]) MarshalJSON() ([]byte, error) {
 	return []byte(strconv.FormatInt(ts, 10)), nil
 }
 
-// UnmarshalJSON implements json.Unmarshal interface for TimestampType generic struct.
+// UnmarshalJSON implements "json.Unmarshaler" interface for TimestampType generic struct.
 func (t *TimestampType[T]) UnmarshalJSON(src []byte) error {
 	v := string(bytes.Trim(src, `"`))
 	if v == "" || v == "null" {
@@ -114,7 +107,7 @@ func (t *TimestampType[T]) UnmarshalJSON(src []byte) error {
 	return t.Error
 }
 
-// String implements Stringer interface for TimestampType generic struct.
+// String implements "Stringer" interface for TimestampType generic struct.
 func (t TimestampType[T]) String() string {
 	if t.IsInvalid() || t.IsZero() {
 		return "0"
@@ -140,15 +133,18 @@ func (t TimestampType[T]) Int64() (ts int64) {
 	return
 }
 
-// GormDataType implements GormDataType interface for TimestampType generic struct.
+// GormDataType implements "gorm.GormDataTypeInterface" interface for TimestampType generic struct.
 func (t TimestampType[T]) GormDataType() string {
 	return t.getDataType()
 }
 
 // getDataType returns data type of TimestampType generic struct.
-func (t TimestampType[T]) getDataType() string {
+func (t *TimestampType[T]) getDataType() string {
 	var typer T
-	return typer.DataType()
+	if v, ok := any(typer).(DataTyper); ok {
+		return v.DataType()
+	}
+	return "timestamp"
 }
 
 // getPrecision returns precision of TimestampType generic struct.

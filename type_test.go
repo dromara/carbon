@@ -680,64 +680,86 @@ func TestBuiltinType_GormDataType(t *testing.T) {
 	var model builtinTypeModel
 
 	assert.Equal(t, "date", model.Date.GormDataType())
-	assert.Equal(t, "timestamp", model.DateMilli.GormDataType())
-	assert.Equal(t, "timestamp", model.DateMicro.GormDataType())
-	assert.Equal(t, "timestamp", model.DateNano.GormDataType())
+	assert.Equal(t, "datetime(6)", model.DateMilli.GormDataType())
+	assert.Equal(t, "datetime(6)", model.DateMicro.GormDataType())
+	assert.Equal(t, "datetime(6)", model.DateNano.GormDataType())
 
 	assert.Equal(t, "time", model.Time.GormDataType())
-	assert.Equal(t, "timestamp", model.TimeMilli.GormDataType())
-	assert.Equal(t, "timestamp", model.TimeMicro.GormDataType())
-	assert.Equal(t, "timestamp", model.TimeNano.GormDataType())
+	assert.Equal(t, "datetime(6)", model.TimeMilli.GormDataType())
+	assert.Equal(t, "datetime(6)", model.TimeMicro.GormDataType())
+	assert.Equal(t, "datetime(6)", model.TimeNano.GormDataType())
 
 	assert.Equal(t, "datetime", model.DateTime.GormDataType())
-	assert.Equal(t, "timestamp", model.DateTimeMilli.GormDataType())
-	assert.Equal(t, "timestamp", model.DateTimeMicro.GormDataType())
-	assert.Equal(t, "timestamp", model.DateTimeNano.GormDataType())
+	assert.Equal(t, "datetime(6)", model.DateTimeMilli.GormDataType())
+	assert.Equal(t, "datetime(6)", model.DateTimeMicro.GormDataType())
+	assert.Equal(t, "datetime(6)", model.DateTimeNano.GormDataType())
 
 	assert.Equal(t, "timestamp", model.Timestamp.GormDataType())
-	assert.Equal(t, "timestamp", model.TimestampMilli.GormDataType())
-	assert.Equal(t, "timestamp", model.TimestampMicro.GormDataType())
-	assert.Equal(t, "timestamp", model.TimestampNano.GormDataType())
-}
-
-type iso8601Type string
-
-func (t iso8601Type) DataType() string {
-	return "timestamp"
-}
-func (t iso8601Type) Format() string {
-	return ISO8601Format
+	assert.Equal(t, "timestamp(6)", model.TimestampMilli.GormDataType())
+	assert.Equal(t, "timestamp(6)", model.TimestampMicro.GormDataType())
+	assert.Equal(t, "timestamp(6)", model.TimestampNano.GormDataType())
 }
 
 type rfc3339Type string
 
 func (t rfc3339Type) DataType() string {
-	return "timestamp"
+	return "datetime"
 }
 func (t rfc3339Type) Layout() string {
 	return RFC3339Layout
 }
 
+type w3cType string
+
+func (w3cType) Layout() string {
+	return W3cLayout
+}
+
+type iso8601Type string
+
+func (t iso8601Type) DataType() string {
+	return "datetime"
+}
+func (t iso8601Type) Format() string {
+	return ISO8601Format
+}
+
+type rssType string
+
+func (rssType) Format() string {
+	return RssFormat
+}
+
 type CustomerTypeModel struct {
-	Customer1 FormatType[iso8601Type] `json:"customer1"`
-	Customer2 LayoutType[rfc3339Type] `json:"customer2"`
+	Customer1 LayoutType[rfc3339Type] `json:"customer1"`
+	Customer2 LayoutType[w3cType]     `json:"customer2"`
+	Customer3 FormatType[iso8601Type] `json:"customer3"`
+	Customer4 FormatType[rssType]     `json:"customer4"`
 
 	CreatedAt *FormatType[iso8601Type] `json:"created_at"`
 	UpdatedAt *LayoutType[rfc3339Type] `json:"updated_at"`
 }
 
 func TestCustomerType_Scan(t *testing.T) {
-	t1 := NewFormatType[iso8601Type](Now())
-	t2 := NewLayoutType[rfc3339Type](Now())
+	c := Now()
+
+	t1 := NewLayoutType[rfc3339Type](c)
+	t2 := NewLayoutType[w3cType](c)
+	t3 := NewFormatType[iso8601Type](c)
+	t4 := NewFormatType[rssType](c)
 
 	t.Run("[]byte type", func(t *testing.T) {
 		assert.Nil(t, t1.Scan([]byte(Now().ToDateString())))
 		assert.Nil(t, t2.Scan([]byte(Now().ToDateString())))
+		assert.Nil(t, t3.Scan([]byte(Now().ToDateString())))
+		assert.Nil(t, t4.Scan([]byte(Now().ToDateString())))
 	})
 
 	t.Run("string type", func(t *testing.T) {
 		assert.Nil(t, t1.Scan(Now().ToDateString()))
 		assert.Nil(t, t2.Scan(Now().ToDateString()))
+		assert.Nil(t, t3.Scan(Now().ToDateString()))
+		assert.Nil(t, t4.Scan(Now().ToDateString()))
 	})
 
 	t.Run("time type", func(t *testing.T) {
@@ -745,6 +767,8 @@ func TestCustomerType_Scan(t *testing.T) {
 
 		assert.Nil(t, t1.Scan(tt))
 		assert.Nil(t, t2.Scan(tt))
+		assert.Nil(t, t3.Scan(tt))
+		assert.Nil(t, t4.Scan(tt))
 	})
 
 	t.Run("*time type", func(t *testing.T) {
@@ -752,23 +776,41 @@ func TestCustomerType_Scan(t *testing.T) {
 
 		assert.Nil(t, t1.Scan(&tt))
 		assert.Nil(t, t2.Scan(&tt))
+		assert.Nil(t, t3.Scan(&tt))
+		assert.Nil(t, t4.Scan(&tt))
 	})
 
 	t.Run("nil type", func(t *testing.T) {
 		assert.Nil(t, t1.Scan(nil))
 		assert.Nil(t, t2.Scan(nil))
+		assert.Nil(t, t3.Scan(nil))
+		assert.Nil(t, t4.Scan(nil))
 	})
 
 	t.Run("unsupported type", func(t *testing.T) {
 		assert.Error(t, t1.Scan(true))
 		assert.Error(t, t1.Scan(func() {}))
+		assert.Error(t, t1.Scan(int64(0)))
 		assert.Error(t, t1.Scan(float64(0)))
 		assert.Error(t, t1.Scan(map[string]string{}))
 
 		assert.Error(t, t2.Scan(true))
 		assert.Error(t, t2.Scan(func() {}))
+		assert.Error(t, t2.Scan(int64(0)))
 		assert.Error(t, t2.Scan(float64(0)))
 		assert.Error(t, t2.Scan(map[string]string{}))
+
+		assert.Error(t, t3.Scan(true))
+		assert.Error(t, t3.Scan(func() {}))
+		assert.Error(t, t3.Scan(int64(0)))
+		assert.Error(t, t3.Scan(float64(0)))
+		assert.Error(t, t3.Scan(map[string]string{}))
+
+		assert.Error(t, t4.Scan(true))
+		assert.Error(t, t4.Scan(func() {}))
+		assert.Error(t, t4.Scan(int64(0)))
+		assert.Error(t, t4.Scan(float64(0)))
+		assert.Error(t, t4.Scan(map[string]string{}))
 	})
 }
 
@@ -776,37 +818,61 @@ func TestCustomerType_Value(t *testing.T) {
 	t.Run("zero carbon", func(t *testing.T) {
 		c := NewCarbon()
 
-		t1, e1 := NewFormatType[iso8601Type](c).Value()
+		t1, e1 := NewLayoutType[rfc3339Type](c).Value()
 		assert.Nil(t, t1)
 		assert.Nil(t, e1)
 
-		t2, e2 := NewLayoutType[rfc3339Type](c).Value()
+		t2, e2 := NewLayoutType[w3cType](c).Value()
 		assert.Nil(t, t2)
 		assert.Nil(t, e2)
+
+		t3, e3 := NewFormatType[iso8601Type](c).Value()
+		assert.Nil(t, t3)
+		assert.Nil(t, e3)
+
+		t4, e4 := NewFormatType[rssType](c).Value()
+		assert.Nil(t, t4)
+		assert.Nil(t, e4)
 	})
 
 	t.Run("empty carbon", func(t *testing.T) {
 		c := Parse("")
 
-		t1, e1 := NewFormatType[iso8601Type](c).Value()
+		t1, e1 := NewLayoutType[rfc3339Type](c).Value()
 		assert.Nil(t, t1)
 		assert.Nil(t, e1)
 
-		t2, e2 := NewLayoutType[rfc3339Type](c).Value()
+		t2, e2 := NewLayoutType[w3cType](c).Value()
 		assert.Nil(t, t2)
 		assert.Nil(t, e2)
+
+		t3, e3 := NewFormatType[iso8601Type](c).Value()
+		assert.Nil(t, t3)
+		assert.Nil(t, e3)
+
+		t4, e4 := NewFormatType[rssType](c).Value()
+		assert.Nil(t, t4)
+		assert.Nil(t, e4)
 	})
 
 	t.Run("error carbon", func(t *testing.T) {
 		c := Parse("xxx")
 
-		t1, e1 := NewFormatType[iso8601Type](c).Value()
+		t1, e1 := NewLayoutType[rfc3339Type](c).Value()
 		assert.Nil(t, t1)
 		assert.Error(t, e1)
 
-		t2, e2 := NewLayoutType[rfc3339Type](c).Value()
+		t2, e2 := NewLayoutType[w3cType](c).Value()
 		assert.Nil(t, t2)
 		assert.Error(t, e2)
+
+		t3, e3 := NewFormatType[iso8601Type](c).Value()
+		assert.Nil(t, t3)
+		assert.Error(t, e3)
+
+		t4, e4 := NewFormatType[rssType](c).Value()
+		assert.Nil(t, t4)
+		assert.Error(t, e4)
 	})
 
 	t.Run("valid carbon", func(t *testing.T) {
@@ -828,8 +894,10 @@ func TestCustomerType_MarshalJSON(t *testing.T) {
 	t.Run("zero carbon", func(t *testing.T) {
 		c := NewCarbon()
 
-		model.Customer1 = NewFormatType[iso8601Type](c)
-		model.Customer2 = NewLayoutType[rfc3339Type](c)
+		model.Customer1 = NewLayoutType[rfc3339Type](c)
+		model.Customer2 = NewLayoutType[w3cType](c)
+		model.Customer3 = NewFormatType[iso8601Type](c)
+		model.Customer4 = NewFormatType[rssType](c)
 
 		createdAt := NewFormatType[iso8601Type](c)
 		model.CreatedAt = &createdAt
@@ -838,14 +906,16 @@ func TestCustomerType_MarshalJSON(t *testing.T) {
 
 		data, err := json.Marshal(&model)
 		assert.NoError(t, err)
-		assert.Equal(t, `{"customer1":null,"customer2":null,"created_at":null,"updated_at":null}`, string(data))
+		assert.Equal(t, `{"customer1":null,"customer2":null,"customer3":null,"customer4":null,"created_at":null,"updated_at":null}`, string(data))
 	})
 
 	t.Run("empty carbon", func(t *testing.T) {
 		c := Parse("")
 
-		model.Customer1 = NewFormatType[iso8601Type](c)
-		model.Customer2 = NewLayoutType[rfc3339Type](c)
+		model.Customer1 = NewLayoutType[rfc3339Type](c)
+		model.Customer2 = NewLayoutType[w3cType](c)
+		model.Customer3 = NewFormatType[iso8601Type](c)
+		model.Customer4 = NewFormatType[rssType](c)
 
 		createdAt := NewFormatType[iso8601Type](c)
 		model.CreatedAt = &createdAt
@@ -854,30 +924,43 @@ func TestCustomerType_MarshalJSON(t *testing.T) {
 
 		data, err := json.Marshal(&model)
 		assert.NoError(t, err)
-		assert.Equal(t, `{"customer1":null,"customer2":null,"created_at":null,"updated_at":null}`, string(data))
+		assert.Equal(t, `{"customer1":null,"customer2":null,"customer3":null,"customer4":null,"created_at":null,"updated_at":null}`, string(data))
 	})
 
 	t.Run("error carbon", func(t *testing.T) {
 		c := Parse("xxx")
 
-		model.Customer1 = NewFormatType[iso8601Type](c)
-		model.Customer2 = NewLayoutType[rfc3339Type](c)
+		var model1 CustomerTypeModel
+		model1.Customer1 = NewLayoutType[rfc3339Type](c)
+		model1.Customer2 = NewLayoutType[w3cType](c)
+		v1, e1 := json.Marshal(&model1)
+		assert.Error(t, e1)
+		assert.Empty(t, string(v1))
 
+		var model2 CustomerTypeModel
+		model2.Customer3 = NewFormatType[iso8601Type](c)
+		model2.Customer4 = NewFormatType[rssType](c)
+		v2, e2 := json.Marshal(&model2)
+		assert.Error(t, e2)
+		assert.Empty(t, string(v2))
+
+		var model3 CustomerTypeModel
 		createdAt := NewFormatType[iso8601Type](c)
-		model.CreatedAt = &createdAt
+		model3.CreatedAt = &createdAt
 		updatedAt := NewLayoutType[rfc3339Type](c)
-		model.UpdatedAt = &updatedAt
-
-		data, err := json.Marshal(&model)
-		assert.Error(t, err)
-		assert.Empty(t, string(data))
+		model3.UpdatedAt = &updatedAt
+		v3, e3 := json.Marshal(&model3)
+		assert.Error(t, e3)
+		assert.Empty(t, string(v3))
 	})
 
 	t.Run("valid carbon", func(t *testing.T) {
 		c := Parse("2020-08-05 13:14:15.999999999")
 
-		model.Customer1 = NewFormatType[iso8601Type](c)
-		model.Customer2 = NewLayoutType[rfc3339Type](c)
+		model.Customer1 = NewLayoutType[rfc3339Type](c)
+		model.Customer2 = NewLayoutType[w3cType](c)
+		model.Customer3 = NewFormatType[iso8601Type](c)
+		model.Customer4 = NewFormatType[rssType](c)
 
 		createdAt := NewFormatType[iso8601Type](c)
 		model.CreatedAt = &createdAt
@@ -886,7 +969,7 @@ func TestCustomerType_MarshalJSON(t *testing.T) {
 
 		data, err := json.Marshal(&model)
 		assert.NoError(t, err)
-		assert.Equal(t, `{"customer1":"2020-08-05T13:14:15+00:00","customer2":"2020-08-05T13:14:15Z","created_at":"2020-08-05T13:14:15+00:00","updated_at":"2020-08-05T13:14:15Z"}`, string(data))
+		assert.Equal(t, `{"customer1":"2020-08-05T13:14:15Z","customer2":"2020-08-05T13:14:15Z","customer3":"2020-08-05T13:14:15+00:00","customer4":"Wed, 05 Aug 2020 13:14:15 +0000","created_at":"2020-08-05T13:14:15+00:00","updated_at":"2020-08-05T13:14:15Z"}`, string(data))
 	})
 }
 
@@ -894,7 +977,7 @@ func TestCustomerType_UnmarshalJSON(t *testing.T) {
 	var model CustomerTypeModel
 
 	t.Run("empty value", func(t *testing.T) {
-		value := `{"customer1":"","customer2":"","created_at":"","updated_at":""}`
+		value := `{"customer1":"","customer2":"","customer3":"","customer4":"","created_at":"","updated_at":""}`
 		assert.NoError(t, json.Unmarshal([]byte(value), &model))
 
 		assert.Empty(t, model.Customer1.String())
@@ -904,8 +987,8 @@ func TestCustomerType_UnmarshalJSON(t *testing.T) {
 	})
 
 	t.Run("null value", func(t *testing.T) {
-		value := `{"customer1":"null","customer2":"null","created_at":"null","updated_at":"null"}`
-		assert.NoError(t, json.Unmarshal([]byte(value), &model))
+		value := `{"customer1":"null","customer2":"null","customer3":"null","customer4":"null","created_at":"null","updated_at":"null"}`
+		assert.Nil(t, json.Unmarshal([]byte(value), &model))
 
 		assert.Empty(t, model.Customer1.String())
 		assert.Empty(t, model.Customer2.String())
@@ -914,21 +997,25 @@ func TestCustomerType_UnmarshalJSON(t *testing.T) {
 	})
 
 	t.Run("error value", func(t *testing.T) {
-		value := `{"customer1":"xxx","customer2":"xxx","created_at":"xxx","updated_at":"xxx"}`
+		value := `{"customer1":"xxx","customer2":"xxx","customer3":"xxx","customer4":"xxx","created_at":"xxx","updated_at":"xxx"}`
 		assert.Error(t, json.Unmarshal([]byte(value), &model))
 
 		assert.Empty(t, model.Customer1.String())
 		assert.Empty(t, model.Customer2.String())
+		assert.Empty(t, model.Customer3.String())
+		assert.Empty(t, model.Customer4.String())
 		assert.Empty(t, model.CreatedAt.String())
 		assert.Empty(t, model.UpdatedAt.String())
 	})
 
 	t.Run("valid value", func(t *testing.T) {
-		value := `{"customer1":"2020-08-05T13:14:15+00:00","customer2":"2020-08-05T13:14:15Z","created_at":"2020-08-05T13:14:15+00:00","updated_at":"2020-08-05T13:14:15Z"}`
+		value := `{"customer1":"2020-08-05T13:14:15Z","customer2":"2020-08-05T13:14:15Z","customer3":"2020-08-05T13:14:15+00:00","customer4":"Wed, 05 Aug 2020 13:14:15 +0000","created_at":"2020-08-05T13:14:15+00:00","updated_at":"2020-08-05T13:14:15Z"}`
 		assert.NoError(t, json.Unmarshal([]byte(value), &model))
 
-		assert.Equal(t, "2020-08-05T13:14:15+00:00", model.Customer1.String())
+		assert.Equal(t, "2020-08-05T13:14:15Z", model.Customer1.String())
 		assert.Equal(t, "2020-08-05T13:14:15Z", model.Customer2.String())
+		assert.Equal(t, "2020-08-05T13:14:15+00:00", model.Customer3.String())
+		assert.Equal(t, "Wed, 05 Aug 2020 13:14:15 +0000", model.Customer4.String())
 		assert.Equal(t, "2020-08-05T13:14:15+00:00", model.CreatedAt.String())
 		assert.Equal(t, "2020-08-05T13:14:15Z", model.UpdatedAt.String())
 	})
@@ -936,6 +1023,8 @@ func TestCustomerType_UnmarshalJSON(t *testing.T) {
 
 func TestCustomerType_GormDataType(t *testing.T) {
 	var model CustomerTypeModel
-	assert.Equal(t, "timestamp", model.Customer1.GormDataType())
-	assert.Equal(t, "timestamp", model.Customer2.GormDataType())
+	assert.Equal(t, "datetime", model.Customer1.GormDataType())
+	assert.Equal(t, "datetime", model.Customer2.GormDataType())
+	assert.Equal(t, "datetime", model.Customer3.GormDataType())
+	assert.Equal(t, "datetime", model.Customer4.GormDataType())
 }

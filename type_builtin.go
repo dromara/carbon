@@ -76,9 +76,6 @@ func NewTimeNano(c Carbon) TimeNano {
 
 type timestampType int64
 
-func (t timestampType) DataType() string {
-	return "timestamp"
-}
 func (t timestampType) Precision() string {
 	return PrecisionSecond
 }
@@ -86,7 +83,7 @@ func (t timestampType) Precision() string {
 type timestampMilliType int64
 
 func (t timestampMilliType) DataType() string {
-	return "timestamp"
+	return "timestamp(6)"
 }
 func (t timestampMilliType) Precision() string {
 	return PrecisionMillisecond
@@ -95,7 +92,7 @@ func (t timestampMilliType) Precision() string {
 type timestampMicroType int64
 
 func (t timestampMicroType) DataType() string {
-	return "timestamp"
+	return "timestamp(6)"
 }
 func (t timestampMicroType) Precision() string {
 	return PrecisionMicrosecond
@@ -104,7 +101,7 @@ func (t timestampMicroType) Precision() string {
 type timestampNanoType int64
 
 func (t timestampNanoType) DataType() string {
-	return "timestamp"
+	return "timestamp(6)"
 }
 func (t timestampNanoType) Precision() string {
 	return PrecisionNanosecond
@@ -122,7 +119,7 @@ func (t DateTimeType) Layout() string {
 type DateTimeMilliType string
 
 func (t DateTimeMilliType) DataType() string {
-	return "timestamp"
+	return "datetime(6)"
 }
 func (t DateTimeMilliType) Layout() string {
 	return DateTimeMilliLayout
@@ -131,7 +128,7 @@ func (t DateTimeMilliType) Layout() string {
 type DateTimeMicroType string
 
 func (t DateTimeMicroType) DataType() string {
-	return "timestamp"
+	return "datetime(6)"
 }
 func (t DateTimeMicroType) Layout() string {
 	return DateTimeMicroLayout
@@ -140,7 +137,7 @@ func (t DateTimeMicroType) Layout() string {
 type DateTimeNanoType string
 
 func (t DateTimeNanoType) DataType() string {
-	return "timestamp"
+	return "datetime(6)"
 }
 func (t DateTimeNanoType) Layout() string {
 	return DateTimeNanoLayout
@@ -158,7 +155,7 @@ func (t DateType) Layout() string {
 type DateMilliType string
 
 func (t DateMilliType) DataType() string {
-	return "timestamp"
+	return "datetime(6)"
 }
 func (t DateMilliType) Layout() string {
 	return DateMilliLayout
@@ -167,7 +164,7 @@ func (t DateMilliType) Layout() string {
 type DateMicroType string
 
 func (t DateMicroType) DataType() string {
-	return "timestamp"
+	return "datetime(6)"
 }
 func (t DateMicroType) Layout() string {
 	return DateMicroLayout
@@ -176,7 +173,7 @@ func (t DateMicroType) Layout() string {
 type DateNanoType string
 
 func (t DateNanoType) DataType() string {
-	return "timestamp"
+	return "datetime(6)"
 }
 func (t DateNanoType) Layout() string {
 	return DateNanoLayout
@@ -194,7 +191,7 @@ func (t TimeType) Layout() string {
 type TimeMilliType string
 
 func (t TimeMilliType) DataType() string {
-	return "timestamp"
+	return "datetime(6)"
 }
 func (t TimeMilliType) Layout() string {
 	return TimeMilliLayout
@@ -203,7 +200,7 @@ func (t TimeMilliType) Layout() string {
 type TimeMicroType string
 
 func (t TimeMicroType) DataType() string {
-	return "timestamp"
+	return "datetime(6)"
 }
 func (t TimeMicroType) Layout() string {
 	return TimeMicroLayout
@@ -212,7 +209,7 @@ func (t TimeMicroType) Layout() string {
 type TimeNanoType string
 
 func (t TimeNanoType) DataType() string {
-	return "timestamp"
+	return "datetime(6)"
 }
 func (t TimeNanoType) Layout() string {
 	return TimeNanoLayout
