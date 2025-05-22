@@ -629,6 +629,11 @@ carbon.Max(yesterday, today, tomorrow) // tomorrow
 // 最小の Carbon インスタンスを返します
 carbon.Min(yesterday, today, tomorrow) // yesterday
 
+// ゼロ値 Carbon を戻す
+carbon.ZeroValue().ToString() // 0001-01-01 00:00:00 +0000 UTC
+// linux 紀元値 Carbon を戻す
+carbon.EpochValue().ToString() // 1970-01-01 00:00:00 +0000 UTC
+
 // Carbonの最大値を戻す
 carbon.MaxValue().ToString() // 9999-12-31 23:59:59.999999999 +0000 UTC
 // Carbonの最小値を戻す
@@ -1435,6 +1440,7 @@ person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 Da
 ```
 
 ###### カスタムフィールドタイプ
+> データベースフィールドタイプをリセットするには、`carbon.DataTyper` インタフェースの `DataType` メソッドを実装できます
 
 ```go
 type RFC3339Type string

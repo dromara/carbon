@@ -634,6 +634,11 @@ carbon.Max(yesterday, today, tomorrow) // tomorrow
 // 返回最小的 Carbon 实例
 carbon.Min(yesterday, today, tomorrow) // yesterday
 
+// 返回零值 Carbon
+carbon.ZeroValue().ToString() // 0001-01-01 00:00:00 +0000 UTC
+// 返回 linux 纪元值 Carbon
+carbon.EpochValue().ToString() // 1970-01-01 00:00:00 +0000 UTC
+
 // 返回 Carbon 的最大值
 carbon.MaxValue().ToString() // 9999-12-31 23:59:59.999999999 +0000 UTC
 // 返回 Carbon 的最小值
@@ -1440,6 +1445,7 @@ person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 Da
 ```
 
 ###### 自定义字段类型
+> 你可以实现 `carbon.DataTyper` 接口的 `DataType` 方法来重置数据库字段类型
 
 ```go
 type RFC3339Type string
