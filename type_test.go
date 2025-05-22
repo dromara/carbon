@@ -155,7 +155,7 @@ func TestCarbonType_UnmarshalJSON(t *testing.T) {
 
 func TestCarbonType_String(t *testing.T) {
 	t.Run("zero carbon", func(t *testing.T) {
-		assert.Empty(t, NewCarbon().String())
+		assert.Equal(t, "0001-01-01 00:00:00", NewCarbon().String())
 	})
 
 	t.Run("empty carbon", func(t *testing.T) {
