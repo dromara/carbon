@@ -63,7 +63,7 @@ func (c *Carbon) UnmarshalJSON(b []byte) error {
 
 // String implements "Stringer" interface for Carbon struct.
 func (c Carbon) String() string {
-	if c.IsInvalid() || c.IsZero() {
+	if c.IsInvalid() {
 		return ""
 	}
 	return c.Layout(c.currentLayout)

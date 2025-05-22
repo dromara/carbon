@@ -85,7 +85,11 @@ func (t *TimestampType[T]) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON implements "json.Unmarshaler" interface for TimestampType generic struct.
 func (t *TimestampType[T]) UnmarshalJSON(src []byte) error {
 	v := string(bytes.Trim(src, `"`))
-	if v == "" || v == "null" {
+	if v == "" {
+		t.isEmpty = true
+		return nil
+	}
+	if v == "null" {
 		return nil
 	}
 	ts, err := parseTimestamp(v)
@@ -109,7 +113,7 @@ func (t *TimestampType[T]) UnmarshalJSON(src []byte) error {
 
 // String implements "Stringer" interface for TimestampType generic struct.
 func (t TimestampType[T]) String() string {
-	if t.IsInvalid() || t.IsZero() {
+	if t.IsInvalid() {
 		return "0"
 	}
 	return strconv.FormatInt(t.Int64(), 10)

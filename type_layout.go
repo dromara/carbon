@@ -68,7 +68,11 @@ func (t LayoutType[T]) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON implements "json.Unmarshaler" interface for LayoutType generic struct.
 func (t *LayoutType[T]) UnmarshalJSON(src []byte) error {
 	v := string(bytes.Trim(src, `"`))
-	if v == "" || v == "null" {
+	if v == "" {
+		t.isEmpty = true
+		return nil
+	}
+	if v == "null" {
 		return nil
 	}
 	*t = NewLayoutType[T](ParseByLayout(v, t.getLayout()))
@@ -77,7 +81,7 @@ func (t *LayoutType[T]) UnmarshalJSON(src []byte) error {
 
 // String implements "Stringer" interface for LayoutType generic struct.
 func (t LayoutType[T]) String() string {
-	if t.IsInvalid() || t.IsZero() {
+	if t.IsInvalid() {
 		return ""
 	}
 	return t.Layout(t.getLayout())

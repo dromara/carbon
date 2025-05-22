@@ -68,7 +68,11 @@ func (t FormatType[T]) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON implements "json.Unmarshaler" interface for FormatType generic struct.
 func (t *FormatType[T]) UnmarshalJSON(src []byte) error {
 	v := string(bytes.Trim(src, `"`))
-	if v == "" || v == "null" {
+	if v == "" {
+		t.isEmpty = true
+		return nil
+	}
+	if v == "null" {
 		return nil
 	}
 	*t = NewFormatType[T](ParseByFormat(v, t.getFormat()))
@@ -77,7 +81,7 @@ func (t *FormatType[T]) UnmarshalJSON(src []byte) error {
 
 // String implements "Stringer" interface for FormatType generic struct.
 func (t FormatType[T]) String() string {
-	if t.IsInvalid() || t.IsZero() {
+	if t.IsInvalid() {
 		return ""
 	}
 	return t.Format(t.getFormat())
