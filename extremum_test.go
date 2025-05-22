@@ -6,6 +6,14 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestZeroValue(t *testing.T) {
+	assert.Equal(t, "0001-01-01 00:00:00 +0000 UTC", ZeroValue().ToString())
+}
+
+func TestEpochValue(t *testing.T) {
+	assert.Equal(t, "1970-01-01 00:00:00 +0000 UTC", EpochValue().ToString())
+}
+
 func TestMaxValue(t *testing.T) {
 	assert.Equal(t, "9999-12-31 23:59:59.999999999 +0000 UTC", MaxValue().ToString())
 }

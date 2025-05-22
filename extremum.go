@@ -7,6 +7,16 @@ const (
 	maxDuration Duration = 1<<63 - 1
 )
 
+// ZeroValue returns a zero Carbon instance.
+func ZeroValue() Carbon {
+	return MinValue()
+}
+
+// EpochValue returns a unix epoch Carbon instance.
+func EpochValue() Carbon {
+	return NewCarbon(time.Date(EpochYear, 1, 1, 0, 0, 0, 0, time.UTC))
+}
+
 // MaxValue returns a Carbon instance for the greatest supported date.
 func MaxValue() Carbon {
 	c := NewCarbon()
