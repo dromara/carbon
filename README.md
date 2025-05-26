@@ -195,8 +195,10 @@ carbon.CreateFromTimeNano(13, 14, 15, 999999999).ToString() // 2020-08-05 13:14:
 
 ```
 
-##### Parse a time string as a `Carbon` instance
+##### time parsing
+> This series of methods don't support `timestamp` string parsing. To parse timestamp, please use methods such as `CreateFromTimestamp` or `CreateFromTimestampXXX`
 
+###### Parse a time string as a `Carbon` instance by default layouts
 ```go
 carbon.Parse("").ToDateTimeString() // empty string
 carbon.Parse("0").ToDateTimeString() // empty string
@@ -247,7 +249,7 @@ carbon.Parse("2022-03-08T03:01:14-07:00").ToString() // 2022-03-08 10:01:14 +000
 carbon.Parse("2022-03-08T10:01:14Z").ToString() // 2022-03-08 10:01:14 +0000 UTC
 ```
 
-##### Parse a time string as a `Carbon` instance by a confirmed layout
+###### Parse a time string as a `Carbon` instance by a confirmed layout
 
 ```go
 carbon.ParseByLayout("2020|08|05 13|14|15", "2006|01|02 15|04|05").ToDateTimeString() // 2020-08-05 13:14:15
@@ -255,7 +257,7 @@ carbon.ParseByLayout("It is 2020-08-05 13:14:15", "It is 2006-01-02 15:04:05").T
 carbon.ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 2006年01月02日15时04分05秒").ToDateTimeString() // 2020-08-05 13:14:15
 ```
 
-##### Parse a time string as a `Carbon` instance by a confirmed format
+###### Parse a time string as a `Carbon` instance by a confirmed format
 > Note: If the letter used conflicts with the format sign, please use the escape character "\\" to escape the letter
 
 ```go
@@ -264,20 +266,18 @@ carbon.ParseByFormat("It is 2020-08-05 13:14:15", "\\I\\t \\i\\s Y-m-d H:i:s").T
 carbon.ParseByFormat("今天是 2020年08月05日13时14分15秒", "今天是 Y年m月d日H时i分s秒").ToDateTimeString() // 2020-08-05 13:14:15
 ```
 
-##### Parse a time string as a `Carbon` instance by multiple fuzzy layouts
-> Note: it doesn't support parsing by timestamp layouts
-
+###### Parse a time string as a `Carbon` instance by multiple fuzzy layouts
 ```go
-carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).ToDateTimeString() // 2020-08-05 13:14:15
-carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).CurrentLayout() // 2006|01|02 15|04|05
+c := carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"})
+c.ToDateTimeString() // 2020-08-05 13:14:15
+c.CurrentLayout() // 2006|01|02 15|04|05
 ```
 
-##### Parse a time string as a `Carbon` instance by multiple fuzzy formats
-> Note: it doesn't support parsing by timestamp formats
-
+###### Parse a time string as a `Carbon` instance by multiple fuzzy formats
 ```go
-carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).ToDateTimeString() // 2020-08-05 13:14:15
-carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).CurrentLayout() // 2006|01|02 15|04|05
+c := carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"})
+c.ToDateTimeString() // 2020-08-05 13:14:15
+c.CurrentLayout() // 2006|01|02 15|04|05
 ```
 
 ##### Freeze
@@ -612,91 +612,84 @@ carbon.Parse("2022-08-05 13:14:15").DiffForHumans(carbon.Now()) // 2 years after
 ##### Extremum
 
 ```go
-c1 := carbon.Parse("2023-03-28")
-c2 := carbon.Parse("2023-04-16")
-// Return the closest Carbon instance
-carbon.Parse("2023-04-01").Closest(c1, c2) // c1
-// Return the farthest Carbon instance
-carbon.Parse("2023-04-01").Farthest(c1, c2) // c2
+c1 := carbon.Parse("2020-08-01")
+c2 := carbon.Parse("2020-08-05")
+c3 := carbon.Parse("2020-08-06")
 
-yesterday := carbon.Yesterday()
-today     := carbon.Now()
-tomorrow  := carbon.Tomorrow()
-// Return the maximum Carbon instance
-carbon.Max(yesterday, today, tomorrow) // tomorrow
-// Return the minimum Carbon instance
-carbon.Min(yesterday, today, tomorrow) // yesterday
+// Return the maximum Carbon instance from some given Carbon instances
+carbon.Max(c1, c2, c3) // c3
+// Return the minimum Carbon instance from some given Carbon instances
+carbon.Min(c1, c2, c3) // c1
 
-// Return a zero value Carbon
+// Return the closest Carbon instance from some given Carbon instances
+c1.Closest(c2, c3) // c2
+// Return the farthest Carbon instance from some given Carbon instances
+c1.Farthest(c2, c3) // c3
+
+// Return the zero value of Carbon instance
 carbon.ZeroValue().ToString() // 0001-01-01 00:00:00 +0000 UTC
-// Return a linux epoch value Carbon
+// Return the unix epoch value of Carbon instance
 carbon.EpochValue().ToString() // 1970-01-01 00:00:00 +0000 UTC
 
-// Return a Carbon instance for the greatest supported date
+// Return the maximum value of Carbon instance
 carbon.MaxValue().ToString() // 9999-12-31 23:59:59.999999999 +0000 UTC
-// Return a Carbon instance for the lowest supported date
+// Return the minimum value of Carbon instance
 carbon.MinValue().ToString() // 0001-01-01 00:00:00 +0000 UTC
 
-// Return the maximum duration
+// Return the maximum value of duration instance
 carbon.MaxDuration().Seconds() // 9.223372036854776e+09
-// Return the minimum duration
+// Return the minimum value of duration instance
 carbon.MinDuration().Seconds() // -9.223372036854776e+09
 ```
 
 ##### Comparison
 
 ```go
-// Whether it has error
-carbon.Parse("0001-01-01 00:00:00 +0000 UTC").HasError() // false
+// Whether has error
 carbon.NewCarbon().HasError() // false
+carbon.ZeroValue().HasError() // false
+carbon.EpochValue().HasError() // false
+carbon.CreateFromTimestamp(0).HasError() // false
 carbon.Parse("").HasError() // false
 carbon.Parse("0").HasError() // true
 carbon.Parse("xxx").HasError() // true
 carbon.Parse("2020-08-05").HasError() // false
-carbon.CreateFromTimestamp(0).HasError() // false
 
 // Whether is a nil time
-carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsNil() // false
 carbon.NewCarbon().IsNil() // false
+carbon.ZeroValue().IsNil() // false
+carbon.EpochValue().IsNil() // false
+carbon.CreateFromTimestamp(0).IsNil() // false
 carbon.Parse("").IsNil() // true
 carbon.Parse("0").IsNil() // false
 carbon.Parse("xxx").IsNil() // false
-carbon.NewCarbon().IsNil() // false
-carbon.CreateFromTimestamp(0).IsNil() // false
+carbon.Parse("2020-08-05").IsNil() // false
 
 // Whether is a zero time(0001-01-01 00:00:00 +0000 UTC)
-carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsZero() // true
 carbon.NewCarbon().IsZero() // true
+carbon.ZeroValue().IsZero() // true
+carbon.EpochValue().IsZero() // false
 carbon.CreateFromTimestamp(0).IsZero() // false
 carbon.Parse("").IsZero() // false
-carbon.Parse("xxx").IsZero() // false
 carbon.Parse("0").IsZero() // false
-carbon.Parse("0000-00-00 00:00:00").IsZero() // false
-carbon.Parse("0000-00-00").IsZero() // false
-carbon.Parse("00:00:00").IsZero() // false
-carbon.Parse("2020-08-05 00:00:00").IsZero() // false
+carbon.Parse("xxx").IsZero() // false
 carbon.Parse("2020-08-05").IsZero() // false
-carbon.Parse("2020-08-05").SetTimezone("xxx").IsZero() // false
 
 // Whether is a unix epoch time(1970-01-01 00:00:00 +0000 UTC).
-carbon.Parse("1970-01-01 00:00:00 +0000 UTC").IsEpoch() // true
-carbon.CreateFromTimestamp(0).IsEpoch() // true
-carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsEpoch() // false
 carbon.NewCarbon().IsEpoch() // false
+carbon.ZeroValue().IsEpoch() // false
+carbon.EpochValue().IsEpoch() // true
+carbon.CreateFromTimestamp(0).IsEpoch() // true
 carbon.Parse("").IsEpoch() // false
 carbon.Parse("0").IsEpoch() // false
 carbon.Parse("xxx").IsEpoch() // false
-carbon.Parse("0000-00-00 00:00:00").IsEpoch() // false
-carbon.Parse("0000-00-00").IsEpoch() // false
-carbon.Parse("00:00:00").IsEpoch() // false
-carbon.Parse("2020-08-05 00:00:00").IsEpoch() // false
 carbon.Parse("2020-08-05").IsEpoch() // false
-carbon.Parse("2020-08-05").SetTimezone("xxx").IsEpoch() // false
 
 // Whether is a valid time
-carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsValid()
-carbon.CreateFromTimestamp(0).IsValid() // true
 carbon.NewCarbon().IsValid() // true
+carbon.ZeroValue().IsValid() // true
+carbon.EpochValue().IsEpoch() // true
+carbon.CreateFromTimestamp(0).IsValid() // true
 carbon.Parse("").IsValid() // false
 carbon.Parse("0").IsValid() // false
 carbon.Parse("xxx").IsValid() // false
@@ -705,13 +698,13 @@ carbon.Parse("0000-00-00").IsValid() // false
 carbon.Parse("00:00:00").IsValid() // false
 carbon.Parse("2020-08-05 00:00:00").IsValid() // true
 carbon.Parse("2020-08-05").IsValid() // true
-carbon.Parse("2020-08-05").SetTimezone("xxx").IsValid() // false
 
 // Whether is an invalid time
-carbon.Parse("0001-01-01 00:00:00 +0000 UTC").IsInvalid() // false
-carbon.CreateFromTimestamp(0).IsInvalid() // false
 carbon.NewCarbon().IsInvalid() // false
-carbon.Parse("").IsInvalid() // true
+carbon.ZeroValue().IsInvalid() // false
+carbon.EpochValue().IsInvalid() // false
+carbon.CreateFromTimestamp(0).IsInvalid() // false
+carbon.Parse("").IsInvalid() // false
 carbon.Parse("0").IsInvalid() // true
 carbon.Parse("xxx").IsInvalid() // true
 carbon.Parse("0000-00-00 00:00:00").IsInvalid() // true
@@ -719,7 +712,6 @@ carbon.Parse("0000-00-00").IsInvalid() // true
 carbon.Parse("00:00:00").IsInvalid() // true
 carbon.Parse("2020-08-05 00:00:00").IsInvalid() // false
 carbon.Parse("2020-08-05").IsInvalid() // false
-carbon.Parse("2020-08-05").SetTimezone("xxx").IsInvalid() // true
 
 // Whether is a daylight saving time
 carbon.Parse("").IsDST() // false
@@ -1436,28 +1428,30 @@ person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 Da
 ```
 
 ###### Customize type
-> You can implement `DataType` method of the `carbon.DataTyper` interface to reset database field type
-
 ```go
 type RFC3339Type string
-func (t RFC3339Type) DataType() string {
-  return "datetime"
+// implement "carbon.LayoutTyper" interface
+func (RFC3339Type) Layout() string {
+return carbon.RFC3339Layout
 }
-func (t RFC3339Type) Layout() string {
-  return carbon.RFC3339Layout
+// implement "carbon.DataTyper" interface (not required, default data type is datetime)
+func (RFC3339Type) DataType() string {
+return "datetime"
 }
 
 type ISO8601Type string
-func (t ISO8601Type) DataType() string {
-  return "datetime"
+// implement "carbon.FormatTyper" interface
+func (ISO8601Type) Format() string {
+return carbon.ISO8601Format
 }
-func (t ISO8601Type) Format() string {
-  return carbon.ISO8601Format
+// implement "carbon.DataTyper" interface (not required, default data type is datetime)
+func (RFC3339Type) DataType() string {
+return "datetime"
 }
 
 type User struct {
-  Customer1 *carbon.LayoutType[RFC3339Type] `json:"customer1"`
-  Customer2 *carbon.FormatType[ISO8601Type] `json:"customer2"`
+Customer1 *carbon.LayoutType[RFC3339Type] `json:"customer1"`
+Customer2 *carbon.FormatType[ISO8601Type] `json:"customer2"`
 }
 
 var user User
@@ -1469,8 +1463,8 @@ user.Customer2 = carbon.NewFormatType[ISO8601Type](c)
 
 data, err := json.Marshal(&user)
 if err != nil {
-  // Error handle...
-  log.Fatal(err)
+// Error handle...
+log.Fatal(err)
 }
 fmt.Printf("%s\n", data)
 // Output

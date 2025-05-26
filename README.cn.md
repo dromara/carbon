@@ -199,8 +199,10 @@ carbon.CreateFromTimeMicro(13, 14, 15, 999999).ToString() // 2020-08-05 13:14:15
 carbon.CreateFromTimeNano(13, 14, 15, 999999999).ToString() // 2020-08-05 13:14:15.999999999 +0800 CST
 ```
 
-##### 将 `时间字符串` 解析成 `Carbon` 实例
+##### 时间解析
+> 该系列方法不支持 `时间戳` 字符串解析，解析时间戳请使用 `CreateFromTimestamp` 或 `CreateFromTimestampXXX` 等方法
 
+###### 通过默认 `布局模板` 将 `时间字符串` 解析成 `Carbon` 实例
 ```go
 carbon.Parse("").ToDateTimeString() // 空字符串
 carbon.Parse("0").ToDateTimeString() // 空字符串
@@ -252,8 +254,7 @@ carbon.Parse("2022-03-08T10:01:14Z").ToString() // 2022-03-08 18:01:14 +0800 CST
 
 ```
 
-##### 通过一个确认的 `布局模板` 将时间字符串解析成 `Carbon` 实例
-
+###### 通过一个确认的 `布局模板` 将时间字符串解析成 `Carbon` 实例
 ```go
 carbon.ParseByLayout("2020|08|05 13|14|15", "2006|01|02 15|04|05").ToDateTimeString() // 2020-08-05 13:14:15
 carbon.ParseByLayout("It is 2020-08-05 13:14:15", "It is 2006-01-02 15:04:05").ToDateTimeString() // 2020-08-05 13:14:15
@@ -261,7 +262,7 @@ carbon.ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 20
 carbon.ParseByLayout("2020-08-05 13:14:15", "2006-01-02 15:04:05", carbon.Tokyo).ToDateTimeString() // 2020-08-05 14:14:15
 ```
 
-##### 通过一个确认的 `格式模板` 将时间字符串解析成 `Carbon` 实例
+###### 通过一个确认的 `格式模板` 将时间字符串解析成 `Carbon` 实例
 > 注：如果使用的字母与格式模板冲突时，请使用转义符 "\\" 转义该字母
 
 ```go
@@ -271,17 +272,13 @@ carbon.ParseByFormat("今天是 2020年08月05日13时14分15秒", "今天是 Y�
 carbon.ParseByFormat("2020-08-05 13:14:15", "Y-m-d H:i:s", carbon.Tokyo).ToDateTimeString() // 2020-08-05 14:14:15
 ```
 
-##### 通过多个模糊的 `布局模板` 将时间字符串解析成 `Carbon` 实例
-> 注：该方法不支持通过时间戳 `布局模板` 解析
-
+###### 通过多个模糊的 `布局模板` 将时间字符串解析成 `Carbon` 实例
 ```go
 carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).ToDateTimeString() // 2020-08-05 13:14:15
 carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).CurrentLayout() // 2006|01|02 15|04|05
 ```
 
-##### 通过多个模糊的 `格式模板` 将时间字符串解析成 `Carbon` 实例
-> 注：该方法不支持通过时间戳 `格式模板` 解析
-
+###### 通过多个模糊的 `格式模板` 将时间字符串解析成 `Carbon` 实例
 ```go
 carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).ToDateTimeString() // 2020-08-05 13:14:15
 carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).CurrentLayout() // 2006|01|02 15|04|05
@@ -619,20 +616,19 @@ carbon.Parse("2022-08-05 13:14:15").DiffForHumans(carbon.Now()) // 2 years after
 ##### 时间极值
 
 ```go
-c1 := carbon.Parse("2023-03-28")
-c2 := carbon.Parse("2023-04-16")
-// 返回最近的 Carbon 实例
-carbon.Parse("2023-04-01").Closest(c1, c2) // c1
-// 返回最远的 Carbon 实例
-carbon.Parse("2023-04-01").Farthest(c1, c2) // c2
+c1 := carbon.Parse("2020-08-01")
+c2 := carbon.Parse("2020-08-05")
+c3 := carbon.Parse("2020-08-06")
 
-yesterday := carbon.Yesterday()
-today := carbon.Now()
-tomorrow := carbon.Tomorrow()
 // 返回最大的 Carbon 实例
-carbon.Max(yesterday, today, tomorrow) // tomorrow
+carbon.Max(c1, c2, c3) // c3
 // 返回最小的 Carbon 实例
-carbon.Min(yesterday, today, tomorrow) // yesterday
+carbon.Min(c1, c2, c3) // c1
+
+// 返回最近的 Carbon 实例
+c1.Closest(c2, c3) // c2
+// 返回最远的 Carbon 实例
+c1.Farthest(c2, c3) // c3
 
 // 返回零值 Carbon
 carbon.ZeroValue().ToString() // 0001-01-01 00:00:00 +0000 UTC
@@ -1445,23 +1441,26 @@ person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 Da
 ```
 
 ###### 自定义字段类型
-> 你可以实现 `carbon.DataTyper` 接口的 `DataType` 方法来重置数据库字段类型
 
 ```go
 type RFC3339Type string
-func (t RFC3339Type) DataType() string {
-  return "datetime"
-}
-func (t RFC3339Type) Layout() string {
+// 实现 "carbon.LayoutTyper" 接口
+func (RFC3339Type) Layout() string {
   return carbon.RFC3339Layout
+}
+// 实现 "carbon.DataTyper" 接口 (非必需，默认数据类型是 datetime)
+func (RFC3339Type) DataType() string {
+  return "datetime"
 }
 
 type ISO8601Type string
-func (t ISO8601Type) DataType() string {
-  return "datetime"
-}
-func (t ISO8601Type) Format() string {
+// 实现 "carbon.FormatTyper" 接口
+func (ISO8601Type) Format() string {
   return carbon.ISO8601Format
+}
+// 实现 "carbon.DataTyper" 接口 (非必需，默认数据类型是 datetime)
+func (RFC3339Type) DataType() string {
+  return "datetime"
 }
 
 type User struct {

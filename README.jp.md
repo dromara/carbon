@@ -195,8 +195,10 @@ carbon.CreateFromTimeMicro(13, 14, 15, 999999).ToString() // 2020-08-05 13:14:15
 carbon.CreateFromTimeNano(13, 14, 15, 999999999).ToString() // 2020-08-05 13:14:15.999999999 +0900 JST
 ```
 
-##### 時間文字列を Carbon インスタンスにパース
+##### 時間解析
+> この一連のメソッドは `タイムスタンプ` 文字列の解析をサポートしていません。タイムスタンプを解析するには、`CreateFromTimestamp` や `CreateFromTimestampXXX` などのメソッドを使用してください
 
+###### デフォルトの `レイアウトテンプレート` を使って `時間文字列` を `Carbon` インスタンスに解析します
 ```go
 carbon.Parse("").ToDateTimeString() // 空の文字列
 carbon.Parse("0").ToDateTimeString() // 空の文字列
@@ -247,7 +249,7 @@ carbon.Parse("2022-03-08T03:01:14-07:00").ToString() // 2022-03-08 19:01:14 +090
 carbon.Parse("2022-03-08T10:01:14Z").ToString() // 2022-03-08 19:01:14 +0900 JST
 ```
 
-##### 確認されたレイアウトテンプレートによって時間文字列を `Carbon` インスタンスに解析する
+###### 確認されたレイアウトテンプレートによって時間文字列を `Carbon` インスタンスに解析する
 
 ```go
 carbon.ParseByLayout("2020|08|05 13|14|15", "2006|01|02 15|04|05").ToDateTimeString() // 2020-08-05 13:14:15
@@ -256,7 +258,7 @@ carbon.ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 20
 carbon.ParseByLayout("2020-08-05 13:14:15", "2006-01-02 15:04:05", carbon.Tokyo).ToDateTimeString() // 2020-08-05 14:14:15
 ```
 
-##### 確認されたフォーマットテンプレートによって時間文字列を `Carbon` インスタンスに解析する
+###### 確認されたフォーマットテンプレートによって時間文字列を `Carbon` インスタンスに解析する
 > 注：使用している文字がフォームテンプレートと競合している場合は、エスケープ文字 "\\" を使用して文字をエスケープします
 
 ```go
@@ -265,21 +267,18 @@ carbon.ParseByFormat("It is 2020-08-05 13:14:15", "\\I\\t \\i\\s Y-m-d H:i:s").T
 carbon.ParseByFormat("今天是 2020年08月05日13时14分15秒", "今天是 Y年m月d日H时i分s秒").ToDateTimeString() // 2020-08-05 13:14:15
 ```
 
-##### 複数のファジィレイアウトテンプレートによって時間文字列を `Carbon` インスタンスに解析する
-> 注：タイムスタンプ `レイアウトテンプレート` による解析はサポートされていません
-
+###### 複数のファジィレイアウトテンプレートによって時間文字列を `Carbon` インスタンスに解析する
 ```go
-carbon.ParseWithLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).ToDateTimeString() // 2020-08-05 13:14:15
-carbon.ParseWithLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}).CurrentLayout() // 2006|01|02 15|04|05
+c := carbon.ParseByLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"})
+c.ToDateTimeString() // 2020-08-05 13:14:15
+c.CurrentLayout() // 2006|01|02 15|04|05
 ```
 
-
-##### 複数のファジィフォーマットテンプレートによって時間文字列を `Carbon` インスタンスに解析する
-> 注：この方法では、タイムスタンプ `フォーマットテンプレート` による解析はサポートされていません
-
+###### 複数のファジィフォーマットテンプレートによって時間文字列を `Carbon` インスタンスに解析する
 ```go
-carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).ToDateTimeString() // 2020-08-05 13:14:15
-carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}).CurrentLayout() // 2006|01|02 15|04|05
+c := carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"})
+c.ToDateTimeString() // 2020-08-05 13:14:15
+c.CurrentLayout() // 2006|01|02 15|04|05
 ```
 
 ##### 時間凍結
@@ -614,20 +613,19 @@ carbon.Parse("2022-08-05 13:14:15").DiffForHumans(carbon.Now()) // 2 years after
 ##### 時間極值
 
 ```go
-c1 := carbon.Parse("2023-03-28")
-c2 := carbon.Parse("2023-04-16")
-// 最近のCarbonインスタンスを返す
-carbon.Parse("2023-04-01").Closest(c1, c2) // c1
-// 遠いCarbonインスタンスを返す
-carbon.Parse("2023-04-01").Farthest(c1, c2) // c2
+c1 := carbon.Parse("2020-08-01")
+c2 := carbon.Parse("2020-08-05")
+c3 := carbon.Parse("2020-08-06")
 
-yesterday := carbon.Yesterday()
-today     := carbon.Now()
-tomorrow  := carbon.Tomorrow()
 // 最大の Carbon インスタンスを返します
-carbon.Max(yesterday, today, tomorrow) // tomorrow
+carbon.Max(c1, c2, c3) // c3
 // 最小の Carbon インスタンスを返します
-carbon.Min(yesterday, today, tomorrow) // yesterday
+carbon.Min(c1, c2, c3) // c1
+
+// 最近のCarbonインスタンスを返す
+c1.Closest(c2, c3) // c2
+// 遠いCarbonインスタンスを返す
+c1.Farthest(c2, c3) // c3
 
 // ゼロ値 Carbon を戻す
 carbon.ZeroValue().ToString() // 0001-01-01 00:00:00 +0000 UTC
@@ -1440,23 +1438,25 @@ person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 Da
 ```
 
 ###### カスタムフィールドタイプ
-> データベースフィールドタイプをリセットするには、`carbon.DataTyper` インタフェースの `DataType` メソッドを実装できます
-
 ```go
 type RFC3339Type string
-func (t RFC3339Type) DataType() string {
-  return "datetime"
-}
-func (t RFC3339Type) Layout() string {
+// "carbon.LayoutTyper" インタフェースの実装
+func (RFC3339Type) Layout() string {
   return carbon.RFC3339Layout
+}
+// "carbon.DataTyper" インタフェースの実装（必須ではなく、デフォルトのデータ型は datetime）
+func (RFC3339Type) DataType() string {
+  return "datetime"
 }
 
 type ISO8601Type string
-func (t ISO8601Type) DataType() string {
-  return "datetime"
-}
-func (t ISO8601Type) Format() string {
+// "carbon.FormatTyper" インタフェースの実装
+func (ISO8601Type) Format() string {
   return carbon.ISO8601Format
+}
+// "carbon.DataTyper" インタフェースの実装（必須ではなく、デフォルトのデータ型は datetime）
+func (RFC3339Type) DataType() string {
+  return "datetime"
 }
 
 type User struct {
