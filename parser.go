@@ -5,7 +5,9 @@ import (
 	"time"
 )
 
-// Parse parses a standard time string as a Carbon instance by default layouts.
+// Parse parses a time string as a Carbon instance by default layouts.
+//
+// Note: it doesn't support parsing timestamp string.
 func Parse(value string, timezone ...string) Carbon {
 	if value == "" {
 		return Carbon{isEmpty: true}
@@ -70,21 +72,25 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 
 	// timestamp layouts
 	switch layout {
+	// Deprecated: it will be removed in the future, use "CreateFromTimestamp" instead.
 	case TimestampLayout:
 		if ts, err = parseTimestamp(value); err != nil {
 			return Carbon{Error: err}
 		}
 		return CreateFromTimestamp(ts).SetLocation(loc)
+	// Deprecated: it will be removed in the future, use "CreateFromTimestampMilli" instead.
 	case TimestampMilliLayout:
 		if ts, err = parseTimestamp(value); err != nil {
 			return Carbon{Error: err}
 		}
 		return CreateFromTimestampMilli(ts).SetLocation(loc)
+	// Deprecated: it will be removed in the future, use "CreateFromTimestampMicro" instead.
 	case TimestampMicroLayout:
 		if ts, err = parseTimestamp(value); err != nil {
 			return Carbon{Error: err}
 		}
 		return CreateFromTimestampMicro(ts).SetLocation(loc)
+	// Deprecated: it will be removed in the future, use "CreateFromTimestampNano" instead.
 	case TimestampNanoLayout:
 		if ts, err = parseTimestamp(value); err != nil {
 			return Carbon{Error: err}
