@@ -151,7 +151,7 @@ carbon.Tomorrow().TimestampMicro() // 1596719655999999
 carbon.Tomorrow().TimestampNano() // 1596719655999999999
 ```
 
-##### Create a `Carbon` instance
+##### Creator
 
 ```go
 // Create a Carbon instance from a given timestamp with second precision
@@ -195,7 +195,7 @@ carbon.CreateFromTimeNano(13, 14, 15, 999999999).ToString() // 2020-08-05 13:14:
 
 ```
 
-##### time parsing
+##### Parsing
 > This series of methods don't support `timestamp` string parsing. To parse timestamp, please use methods such as `CreateFromTimestamp` or `CreateFromTimestampXXX`
 
 ###### Parse a time string as a `Carbon` instance by default layouts
