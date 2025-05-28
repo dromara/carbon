@@ -5,7 +5,10 @@ import (
 )
 
 // StdTime gets standard time.Time.
-func (c Carbon) StdTime() time.Time {
+func (c *Carbon) StdTime() StdTime {
+	if c.IsInvalid() {
+		return StdTime{}
+	}
 	if c.loc == nil {
 		return c.time
 	}
@@ -13,7 +16,7 @@ func (c Carbon) StdTime() time.Time {
 }
 
 // DaysInYear gets total days in year like 365.
-func (c Carbon) DaysInYear() int {
+func (c *Carbon) DaysInYear() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -24,7 +27,7 @@ func (c Carbon) DaysInYear() int {
 }
 
 // DaysInMonth gets total days in month like 30.
-func (c Carbon) DaysInMonth() int {
+func (c *Carbon) DaysInMonth() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -32,7 +35,7 @@ func (c Carbon) DaysInMonth() int {
 }
 
 // MonthOfYear gets month of year like 12.
-func (c Carbon) MonthOfYear() int {
+func (c *Carbon) MonthOfYear() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -40,7 +43,7 @@ func (c Carbon) MonthOfYear() int {
 }
 
 // DayOfYear gets day of year like 365.
-func (c Carbon) DayOfYear() int {
+func (c *Carbon) DayOfYear() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -48,23 +51,23 @@ func (c Carbon) DayOfYear() int {
 }
 
 // DayOfMonth gets day of month like 30.
-func (c Carbon) DayOfMonth() int {
+func (c *Carbon) DayOfMonth() int {
 	if c.IsInvalid() {
 		return 0
 	}
 	return c.StdTime().Day()
 }
 
-// DayOfWeek gets day of week like 6.
-func (c Carbon) DayOfWeek() int {
+// DayOfWeek gets day of week like 6, start from 1.
+func (c *Carbon) DayOfWeek() int {
 	if c.IsInvalid() {
 		return 0
 	}
 	return (int(c.StdTime().Weekday())+DaysPerWeek-int(c.weekStartsAt))%DaysPerWeek + 1
 }
 
-// WeekOfYear gets week of year like 1, refer to  https://en.wikipedia.org/wiki/ISO_8601#Week_dates.
-func (c Carbon) WeekOfYear() int {
+// WeekOfYear gets week of year like 1, refer to https://en.wikipedia.org/wiki/ISO_8601#Week_dates.
+func (c *Carbon) WeekOfYear() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -73,7 +76,7 @@ func (c Carbon) WeekOfYear() int {
 }
 
 // WeekOfMonth gets week of month like 1.
-func (c Carbon) WeekOfMonth() int {
+func (c *Carbon) WeekOfMonth() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -85,7 +88,7 @@ func (c Carbon) WeekOfMonth() int {
 }
 
 // DateTime gets current year, month, day, hour, minute, and second like 2020, 8, 5, 13, 14, 15.
-func (c Carbon) DateTime() (year, month, day, hour, minute, second int) {
+func (c *Carbon) DateTime() (year, month, day, hour, minute, second int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -95,7 +98,7 @@ func (c Carbon) DateTime() (year, month, day, hour, minute, second int) {
 }
 
 // DateTimeMilli gets current year, month, day, hour, minute, second and millisecond like 2020, 8, 5, 13, 14, 15, 999.
-func (c Carbon) DateTimeMilli() (year, month, day, hour, minute, second, millisecond int) {
+func (c *Carbon) DateTimeMilli() (year, month, day, hour, minute, second, millisecond int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -104,7 +107,7 @@ func (c Carbon) DateTimeMilli() (year, month, day, hour, minute, second, millise
 }
 
 // DateTimeMicro gets current year, month, day, hour, minute, second and microsecond like 2020, 8, 5, 13, 14, 15, 999999.
-func (c Carbon) DateTimeMicro() (year, month, day, hour, minute, second, microsecond int) {
+func (c *Carbon) DateTimeMicro() (year, month, day, hour, minute, second, microsecond int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -113,7 +116,7 @@ func (c Carbon) DateTimeMicro() (year, month, day, hour, minute, second, microse
 }
 
 // DateTimeNano gets current year, month, day, hour, minute, second and nanosecond like 2020, 8, 5, 13, 14, 15, 999999999.
-func (c Carbon) DateTimeNano() (year, month, day, hour, minute, second, nanosecond int) {
+func (c *Carbon) DateTimeNano() (year, month, day, hour, minute, second, nanosecond int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -122,7 +125,7 @@ func (c Carbon) DateTimeNano() (year, month, day, hour, minute, second, nanoseco
 }
 
 // Date gets current year, month, and day like 2020, 8, 5.
-func (c Carbon) Date() (year, month, day int) {
+func (c *Carbon) Date() (year, month, day int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -132,7 +135,7 @@ func (c Carbon) Date() (year, month, day int) {
 }
 
 // DateMilli gets current year, month, day and millisecond like 2020, 8, 5, 999.
-func (c Carbon) DateMilli() (year, month, day, millisecond int) {
+func (c *Carbon) DateMilli() (year, month, day, millisecond int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -141,7 +144,7 @@ func (c Carbon) DateMilli() (year, month, day, millisecond int) {
 }
 
 // DateMicro gets current year, month, day and microsecond like 2020, 8, 5, 999999.
-func (c Carbon) DateMicro() (year, month, day, microsecond int) {
+func (c *Carbon) DateMicro() (year, month, day, microsecond int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -150,7 +153,7 @@ func (c Carbon) DateMicro() (year, month, day, microsecond int) {
 }
 
 // DateNano gets current year, month, day and nanosecond like 2020, 8, 5, 999999999.
-func (c Carbon) DateNano() (year, month, day, nanosecond int) {
+func (c *Carbon) DateNano() (year, month, day, nanosecond int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -159,7 +162,7 @@ func (c Carbon) DateNano() (year, month, day, nanosecond int) {
 }
 
 // Time gets current hour, minute, and second like 13, 14, 15.
-func (c Carbon) Time() (hour, minute, second int) {
+func (c *Carbon) Time() (hour, minute, second int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -167,7 +170,7 @@ func (c Carbon) Time() (hour, minute, second int) {
 }
 
 // TimeMilli gets current hour, minute, second and millisecond like 13, 14, 15, 999.
-func (c Carbon) TimeMilli() (hour, minute, second, millisecond int) {
+func (c *Carbon) TimeMilli() (hour, minute, second, millisecond int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -176,7 +179,7 @@ func (c Carbon) TimeMilli() (hour, minute, second, millisecond int) {
 }
 
 // TimeMicro gets current hour, minute, second and microsecond like 13, 14, 15, 999999.
-func (c Carbon) TimeMicro() (hour, minute, second, microsecond int) {
+func (c *Carbon) TimeMicro() (hour, minute, second, microsecond int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -185,7 +188,7 @@ func (c Carbon) TimeMicro() (hour, minute, second, microsecond int) {
 }
 
 // TimeNano gets current hour, minute, second and nanosecond like 13, 14, 15, 999999999.
-func (c Carbon) TimeNano() (hour, minute, second, nanosecond int) {
+func (c *Carbon) TimeNano() (hour, minute, second, nanosecond int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -194,7 +197,7 @@ func (c Carbon) TimeNano() (hour, minute, second, nanosecond int) {
 }
 
 // Century gets current century like 21.
-func (c Carbon) Century() int {
+func (c *Carbon) Century() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -202,7 +205,7 @@ func (c Carbon) Century() int {
 }
 
 // Decade gets current decade like 20.
-func (c Carbon) Decade() int {
+func (c *Carbon) Decade() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -210,7 +213,7 @@ func (c Carbon) Decade() int {
 }
 
 // Year gets current year like 2020.
-func (c Carbon) Year() int {
+func (c *Carbon) Year() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -218,7 +221,7 @@ func (c Carbon) Year() int {
 }
 
 // Quarter gets current quarter like 3.
-func (c Carbon) Quarter() (quarter int) {
+func (c *Carbon) Quarter() (quarter int) {
 	if c.IsInvalid() {
 		return
 	}
@@ -237,12 +240,12 @@ func (c Carbon) Quarter() (quarter int) {
 }
 
 // Month gets current month like 8.
-func (c Carbon) Month() int {
+func (c *Carbon) Month() int {
 	return c.MonthOfYear()
 }
 
 // Week gets current week like 6, start from 0.
-func (c Carbon) Week() int {
+func (c *Carbon) Week() int {
 	if c.IsInvalid() {
 		return -1
 	}
@@ -250,12 +253,12 @@ func (c Carbon) Week() int {
 }
 
 // Day gets current day like 5.
-func (c Carbon) Day() int {
+func (c *Carbon) Day() int {
 	return c.DayOfMonth()
 }
 
 // Hour gets current hour like 13.
-func (c Carbon) Hour() int {
+func (c *Carbon) Hour() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -263,7 +266,7 @@ func (c Carbon) Hour() int {
 }
 
 // Minute gets current minute like 14.
-func (c Carbon) Minute() int {
+func (c *Carbon) Minute() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -271,7 +274,7 @@ func (c Carbon) Minute() int {
 }
 
 // Second gets current second like 9.
-func (c Carbon) Second() int {
+func (c *Carbon) Second() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -279,7 +282,7 @@ func (c Carbon) Second() int {
 }
 
 // Millisecond gets current millisecond like 999.
-func (c Carbon) Millisecond() int {
+func (c *Carbon) Millisecond() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -287,7 +290,7 @@ func (c Carbon) Millisecond() int {
 }
 
 // Microsecond gets current microsecond like 999999.
-func (c Carbon) Microsecond() int {
+func (c *Carbon) Microsecond() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -295,7 +298,7 @@ func (c Carbon) Microsecond() int {
 }
 
 // Nanosecond gets current nanosecond like 999999999.
-func (c Carbon) Nanosecond() int {
+func (c *Carbon) Nanosecond() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -303,31 +306,31 @@ func (c Carbon) Nanosecond() int {
 }
 
 // Timestamp gets timestamp with second precision like 1596604455.
-func (c Carbon) Timestamp() int64 {
+func (c *Carbon) Timestamp() int64 {
 	if c.IsInvalid() {
 		return 0
 	}
 	return c.StdTime().Unix()
 }
 
-// TimestampMilli gets timestamp with millisecond precision like 1596604455999.
-func (c Carbon) TimestampMilli() int64 {
+// TimestampMilli gets timestamp with millisecond precision like 1596604455000.
+func (c *Carbon) TimestampMilli() int64 {
 	if c.IsInvalid() {
 		return 0
 	}
 	return c.StdTime().UnixMilli()
 }
 
-// TimestampMicro gets timestamp with microsecond precision like 1596604455999999.
-func (c Carbon) TimestampMicro() int64 {
+// TimestampMicro gets timestamp with microsecond precision like 1596604455000000.
+func (c *Carbon) TimestampMicro() int64 {
 	if c.IsInvalid() {
 		return 0
 	}
 	return c.StdTime().UnixMicro()
 }
 
-// TimestampNano gets timestamp with nanosecond precision like 1596604455999999999.
-func (c Carbon) TimestampNano() int64 {
+// TimestampNano gets timestamp with nanosecond precision like 1596604455000000000.
+func (c *Carbon) TimestampNano() int64 {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -335,7 +338,7 @@ func (c Carbon) TimestampNano() int64 {
 }
 
 // Timezone gets timezone location like "Asia/Shanghai".
-func (c Carbon) Timezone() string {
+func (c *Carbon) Timezone() string {
 	if c.IsInvalid() {
 		return ""
 	}
@@ -343,7 +346,7 @@ func (c Carbon) Timezone() string {
 }
 
 // ZoneName gets timezone name like "CST".
-func (c Carbon) ZoneName() string {
+func (c *Carbon) ZoneName() string {
 	if c.IsInvalid() {
 		return ""
 	}
@@ -352,7 +355,7 @@ func (c Carbon) ZoneName() string {
 }
 
 // ZoneOffset gets timezone offset seconds from the UTC timezone like 28800.
-func (c Carbon) ZoneOffset() int {
+func (c *Carbon) ZoneOffset() int {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -361,7 +364,7 @@ func (c Carbon) ZoneOffset() int {
 }
 
 // Locale gets locale name like "zh-CN".
-func (c Carbon) Locale() string {
+func (c *Carbon) Locale() string {
 	if c.IsInvalid() {
 		return ""
 	}
@@ -369,7 +372,7 @@ func (c Carbon) Locale() string {
 }
 
 // WeekStartsAt returns start day of the week.
-func (c Carbon) WeekStartsAt() Weekday {
+func (c *Carbon) WeekStartsAt() Weekday {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -377,7 +380,7 @@ func (c Carbon) WeekStartsAt() Weekday {
 }
 
 // WeekEndsAt returns end day of the week.
-func (c Carbon) WeekEndsAt() Weekday {
+func (c *Carbon) WeekEndsAt() Weekday {
 	if c.IsInvalid() {
 		return 0
 	}
@@ -385,7 +388,7 @@ func (c Carbon) WeekEndsAt() Weekday {
 }
 
 // CurrentLayout returns the layout used for parsing the time string.
-func (c Carbon) CurrentLayout() string {
+func (c *Carbon) CurrentLayout() string {
 	if c.IsInvalid() {
 		return ""
 	}
@@ -393,7 +396,7 @@ func (c Carbon) CurrentLayout() string {
 }
 
 // Age gets age like 18.
-func (c Carbon) Age() int {
+func (c *Carbon) Age() int {
 	if c.IsInvalid() {
 		return 0
 	}
