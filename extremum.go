@@ -7,41 +7,41 @@ const (
 	maxDuration Duration = 1<<63 - 1
 )
 
-// ZeroValue returns a zero Carbon instance.
+// ZeroValue returns the zero value of Carbon instance.
 func ZeroValue() Carbon {
 	return MinValue()
 }
 
-// EpochValue returns a unix epoch Carbon instance.
+// EpochValue returns the unix epoch value of Carbon instance.
 func EpochValue() Carbon {
 	return NewCarbon(time.Date(EpochYear, 1, 1, 0, 0, 0, 0, time.UTC))
 }
 
-// MaxValue returns a Carbon instance for the greatest supported date.
+// MaxValue returns the maximum value of Carbon instance.
 func MaxValue() Carbon {
 	c := NewCarbon()
 	c.time = time.Date(9999, time.December, 31, 23, 59, 59, 999999999, time.UTC)
 	return c
 }
 
-// MinValue returns a Carbon instance for the lowest supported date.
+// MinValue returns the minimum value of Carbon instance.
 func MinValue() Carbon {
 	c := NewCarbon()
 	c.time = time.Date(1, time.January, 1, 0, 0, 0, 0, time.UTC)
 	return c
 }
 
-// MaxDuration returns the maximum duration value.
+// MaxDuration returns the maximum value of duration instance.
 func MaxDuration() Duration {
 	return maxDuration
 }
 
-// MinDuration returns the minimum duration value.
+// MinDuration returns the minimum value of duration instance.
 func MinDuration() Duration {
 	return minDuration
 }
 
-// Max returns the maximum Carbon instance from the given Carbon instance (second-precision).
+// Max returns the maximum Carbon instance from some given Carbon instances.
 func Max(c1 Carbon, c2 ...Carbon) (c Carbon) {
 	c = c1
 	if c.IsInvalid() {
@@ -61,7 +61,7 @@ func Max(c1 Carbon, c2 ...Carbon) (c Carbon) {
 	return
 }
 
-// Min returns the minimum Carbon instance from the given Carbon instance (second-precision).
+// Min returns the minimum Carbon instance from some given Carbon instances.
 func Min(c1 Carbon, c2 ...Carbon) (c Carbon) {
 	c = c1
 	if c.IsInvalid() {
