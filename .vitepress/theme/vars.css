@@ -44,5 +44,10 @@ html[lang="zh-Hans"] {
             }
         }
     }
+    .VPFooter {
+        .copyright a {
+            text-decoration-line:  none;
+        }
+    }
 }
 
