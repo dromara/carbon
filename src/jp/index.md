@@ -2,11 +2,11 @@
 layout: home
 
 title: Carbon
-titleTemplate: 軽量、セマンティック、開発者に優しい `golang` 時間処理ライブラリ
+titleTemplate: 軽量、セマンティック、開発者に優しい golang 時間処理ライブラリ
 
 hero:
   name: Carbon
-  tagline: 軽量、セマンティック、開発者に優しい `golang` 時間処理ライブラリ
+  tagline: 軽量、セマンティック、開発者に優しい golang 時間処理ライブラリ
   actions:
     - theme: brand
       text: クイックスタート

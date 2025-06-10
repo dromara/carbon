@@ -50,7 +50,7 @@ function nav(): DefaultTheme.NavItem[] {
     return [
         {
             text: '首页',
-            link: '/zh'
+            link: '/zh/index'
         },
         {
             text: '文档',
