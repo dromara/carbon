@@ -10,7 +10,7 @@ export const zh = defineConfig({
         },
 
         editLink: {
-            pattern: 'https://github.com/golang-module/carbon-docs/blob/main/src/:path',
+            pattern: 'https://github.com/dromara/carbon/edit/docs/src/:path',
             text: '在 GitHub 上编辑此页面'
         },
 

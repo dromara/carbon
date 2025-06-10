@@ -10,7 +10,7 @@ export const jp = defineConfig({
         },
 
         editLink: {
-            pattern: 'https://github.com/golang-module/carbon-docs/blob/main/src/:path',
+            pattern: 'https://github.com/dromara/carbon/edit/docs/src/:path',
             text: 'GitHubでこのページを編集する'
         },
 
