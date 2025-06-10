@@ -13,6 +13,9 @@ html[lang="zh-Hans"] {
     --vp-nav-logo-height: 20px;
     .VPNavBar .container {
         max-width: 100%;
+        .VPNavBarTitle a.title {
+            font-size: 20px;
+        }
     }
     .VPContent {
         .VPHome {
