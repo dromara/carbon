@@ -50,7 +50,7 @@ function nav(): DefaultTheme.NavItem[] {
     return [
         {
             text: 'ホームページ',
-            link: '/jp/index'
+            link: '/jp'
         },
         {
             text: 'ドキュメント',

@@ -12,7 +12,7 @@ export default defineConfig({
     base: '/',
     srcDir: './src/',
     outDir: './dist',
-    appearance: true,
+    appearance: 'dark',
     locales: locales,
     head: head,
     markdown: markdown,
