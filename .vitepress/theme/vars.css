@@ -1,0 +1,45 @@
+html[lang="en-US"] {
+    --vp-code-copy-copied-text-content: 'Copied'
+}
+html[lang="ja-JP"] {
+    --vp-code-copy-copied-text-content: 'コピー済み'
+}
+html[lang="zh-Hans"] {
+    --vp-code-copy-copied-text-content: '已复制'
+}
+
+:root {
+    --vp-layout-max-width: 100%;
+    --vp-nav-logo-height: 20px;
+    .VPNavBar .container {
+        max-width: 100%;
+    }
+    .VPContent {
+        .VPHome {
+            margin-bottom: 50px;
+        }
+        .VPDoc {
+            .content {
+                padding: 0 0 20px 10px;
+                .content-container {
+                    max-width: 100%;
+                    .vp-doc h2 {
+                        margin-top: 30px;
+                    }
+                    .VPLink {
+                        span{
+                            display:  inline-block;
+                        }
+                        .title {
+                            margin-left: 10px;
+                        }
+                    }
+                }
+            }
+            .VPDocFooter {
+                margin-top: 0;
+            }
+        }
+    }
+}
+

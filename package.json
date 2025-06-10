@@ -1,0 +1,14 @@
+{
+  "name": "carbon",
+  "type": "module",
+  "version": "1.0.15",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "dependencies": {
+    "markdown-it-mathjax3": "^4.3.2",
+    "vitepress": "^2.0.0-alpha.5"
+  }
+}
