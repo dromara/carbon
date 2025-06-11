@@ -1,4 +1,6 @@
 # Format signs
+`Format` and `ParseByFormat` methods are not completely reversible. `Format` method supports all of the following signs, while `ParseByFormat` method does not support `K`, `W`, `N`, `L`, `w`, `t`, `o`, `q`, `c` because these signs are custom and do not have corresponding signs in the standard time package.
+
 | sign |                                                  desc                                                  | length |      range       |       example       |
 |:----:|:------------------------------------------------------------------------------------------------------:|:------:|:----------------:|:-------------------:|
 |  d   |                                     Day of the month, padded to 2                                      |   2    |      01-31       |         02          |

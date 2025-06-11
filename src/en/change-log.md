@@ -11,8 +11,8 @@
 ## [v2.6.6](https://github.com/dromara/carbon/compare/v2.6.5...v2.6.6) (2025-05-19)
 
 - Fix bug locale file cannot be found on `Windows` os
-- Fix bug lose of values of `layout`, `weekStartsAt`, `weekendDays` and `lang` when create new `Carbon` instance #303
-- Fix bug `StartOfWeek` and `EndOfWeek` methods change original `Carbon` instance Unexpectedly #304
+- Fix bug lose of values of `layout`, `weekStartsAt`, `weekendDays` and `lang` when create new `Carbon` instance 
+- Fix bug `StartOfWeek` and `EndOfWeek` methods change original `Carbon` instance Unexpectedly 
 - Add  `curd` integration testing for `xorm`, currently covering `MySQL`/`Postgres`/`SQLite`
 - Add unit testing for the `Windows` os in `ci` action
 

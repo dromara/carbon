@@ -11,8 +11,8 @@
 ## [v2.6.6](https://github.com/dromara/carbon/compare/v2.6.5...v2.6.6) (2025-05-19)
 
 - 修复在 `window` 平台无法找到语言文件的 bug
-- 修复在创建新的 `Carbon` 实例时丢失`layout`、`weekStartsAt`、`weekendDays` 和 `lang 值的错误 #303
-- 修复 `StartOfWeek` 和 `EndOfWeek`方法意外更改原始 `Carbon`实例的错误 #304
+- 修复在创建新的 `Carbon` 实例时丢失`layout`、`weekStartsAt`、`weekendDays` 和 `lang 值的错误
+- 修复 `StartOfWeek` 和 `EndOfWeek`方法意外更改原始 `Carbon`实例的错误 
 - 新增对 `xorm` 的 `curd` 集成测试，目前已覆盖 `MySQL`/`Postgres`/`SQLite`
 - 在  `ci` 中新增 `window` 系统的单元测试
 
