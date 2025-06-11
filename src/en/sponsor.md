@@ -14,7 +14,7 @@ There are several ways to help:
         wechat：gouguolei
     </li>
     <li>
-        opencollective：<a target="_blank" rel="noreferrer" href="https://opencollective.com/go-carbon">opencollective.com/go-carbon</a>
+        opencollective：<a target="_blank" rel="noreferrer" href="https://opencollective.com/go-carbon">go-carbon</a>
     </li>
 </ul>
 

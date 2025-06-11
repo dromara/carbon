@@ -9,11 +9,14 @@ hero:
   tagline: 軽量、セマンティック、開発者に優しい golang 時間処理ライブラリ
   actions:
     - theme: brand
-      text: クイックスタート
+      text: スタート
       link: /jp/getting-started
     - theme: alt
       text: GitHub
       link: https://github.com/dromara/carbon
+    - theme: alt
+      text: Go.dev
+      link: https://pkg.go.dev/github.com/dromara/carbon/v2
   image:
     src: /bg.svg
     alt: carbon

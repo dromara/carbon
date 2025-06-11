@@ -1,4 +1,4 @@
-# 更新日志
+# Change Log
 
 ## [v2.6.7](https://github.com/dromara/carbon/compare/v2.6.6...v2.6.7) (2025-05-26)
 

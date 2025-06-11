@@ -12,8 +12,11 @@ hero:
       text: 快速开始
       link: /zh/getting-started
     - theme: alt
-      text: GitHub
-      link: https://github.com/dromara/carbon
+      text: Gitee
+      link: https://gitee.com/dromara/carbon
+    - theme: alt
+      text: Gitcode
+      link: https://gitcode.com/dromara/carbon
   image:
     src: /bg.svg
     alt: carbon
