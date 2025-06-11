@@ -18,8 +18,10 @@ There are several ways to help:
     </li>
 </ul>
 
+please note your `gitHub` or `gitee` account name and message comment
+
 ## Sponsor list
-| Donors | Money | DateTime   | Way    | Message |
-|-------| ----- | ---------- | ------ | ------ |
+| Name  | Amount | Time  | Channel  | Comment |
+|-------| ----- | --------- | ------ | ------ |
 | Mr 周  | ￥188 | 2025-04-16 | wechat |        |
 | 黑色大丽花 | ￥100 | 2024-08-31 | alipay |      |
