@@ -11,6 +11,9 @@ html[lang="zh-Hans"] {
 :root {
     --vp-layout-max-width: 100%;
     --vp-nav-logo-height: 20px;
+    a {
+        text-decoration-line:  none;
+    }
     .VPNavBar .container {
         max-width: 100%;
         .VPNavBarTitle a.title {

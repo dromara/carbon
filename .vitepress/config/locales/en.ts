@@ -52,7 +52,7 @@ function nav(): DefaultTheme.NavItem[] {
       activeMatch: '/faq'
     },
     {
-      text: 'CHANGELOG',
+      text: 'ChangeLog',
       link: '/change-log',
       activeMatch: '/change-log'
     },
