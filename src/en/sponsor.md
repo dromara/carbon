@@ -1,11 +1,16 @@
 # Sponsor 
 
 `Carbon` is a non-commercial open source project that takes a lot of effort to develop, iterate and maintain.
-If you like this project and want it to continue, please consider helping out. Thank you for supporting open source project.
+If you like this project and want it to continue, please provide sponsorship, thank you for supporting open source project.
 
-## Sponsor way
+Your sponsorship will be used for:
+- Server and domain name fee for website
+- Development, iteration and maintenance
+- Project promotion
 
-There are several ways to help:
+## Sponsor channel
+
+There are several channels to help:
 <ul class="simple-list">
     <li>
         alipay：gouguolei@vip.qq.com
