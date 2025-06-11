@@ -9,8 +9,8 @@ Carbon is a simple, semantic and developer-friendly time package for `golang`, `
 - Rich time retrieve：retrieve each parts of time (such as year, month, day, hour, minute, second, etc.) and timestamp
 - Diversified output format：output time strings of different precision and formats as needed, including ISO8601, RFC series, and custom formats
 - Time freeze：support setting testing time, friendly to testing, convenient for unit testing
-- Time zone handling：support setting and obtaining time zones, as well as time zone conversion
-- I18N：support multiple languages (such as Chinese, English, Japanese, etc.) and allow customization of translation resources
+- Time zone handling：support setting and obtaining time zones, as well as converting between different time zones
+- I18N：support over 30 localized translation languages and allow customization of translation resources
 - Error handling：provide error checking mechanism for handling errors such as time resolution
 
 ## Repository
