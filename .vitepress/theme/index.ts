@@ -1,4 +1,11 @@
-import Theme from 'vitepress/theme'
+import DefaultTheme from 'vitepress/theme'
 import './vars.css'
 
-export default Theme
+DefaultTheme.enhanceApp = ({ app, router, siteData }) => {
+    router.onBeforeRouteChange = (to) => {
+        if (typeof _hmt !== 'undefined') {
+            _hmt.push(['_trackPageview', to]);
+        }
+    };
+}
+export default { ...DefaultTheme }
