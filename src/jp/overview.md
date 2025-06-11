@@ -1,6 +1,6 @@
 # プロジェクトの概要
 
-`carbon` は軽量でセマンティックで開発者に優しい `golang`時間処理ライブラリで、サードパーティ製ライブラリに依存せず、ユニットテストのカバー率は `100%` で、[awesome-go](https://github.com/avelino/awesome-go#date-and-time "awesome-go") に収録されています
+`carbon` は軽量でセマンティックで開発者に優しい `golang`時間処理ライブラリで、サードパーティ製ライブラリに依存せず、ユニットテストのカバー率は `100%` で、[awesome-go](https://github.com/avelino/awesome-go#date-and-time "awesome-go") と [hello-github](https://hellogithub.com/en/repository/dromara/carbon "hello-github") 収録
 
 ## プロジェクトのプロパティ
 - 軽量ゼロ依存：純Go実現、第三者依存なし、100%ユニットテストカバー率、コード品質と安定性を保証する
