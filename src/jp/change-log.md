@@ -6,7 +6,7 @@
 - `tests` で `gorm.io/driver/mysql` を `1.5.7` から `1.6.0` にアップグレード
 - `tests` で `gorm.io/driver/postgres` を `1.5.7` から `1.6.0` にアップグレード
 - `tests` で `gorm.io/driver/sqlite` を `1.5.7` から `1.6.0` にアップグレード
-- `type_builtin.go` では` DateTimeType` を `DateTimeType` に、`DateTimeXXXXXType` を `DateTimeXXXXType` に、それぞれ名前を変更します
+- `type_builtin.go` では` DateTimeType` を `dateTimeType` に、`DateTimeXXXXXType` を `dateTimeXXXXType` に、それぞれ名前を変更します
 - `type_builtin.go` では` DateType` を `dateType` に、`DateXXXXXType` を `dateXXXType` に、それぞれ名前を変更します
 - `type_builtin.go` では` TimeType` を `timeType` に、`TimeXXXXType` を `timeXXXType` に、それぞれ名前を変更します
 - `README` ファイルをシンプル化し、詳細な使用方法と使用例を［公式サイト］に移行（https://carbon.go-pkg.com)

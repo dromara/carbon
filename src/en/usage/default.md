@@ -1,6 +1,5 @@
 # Set globally default
 Default timezone is `UTC`, language locale is `English`, start day of the week is `Monday` and weekend days of the week are `Saturday` and `Sunday`.
-Assuming the current time is `2020-08-05 13:14:15.999999999 +0000 UTC`
 
 ## Set single default value
 ```go
