@@ -1,5 +1,18 @@
 # Change Log
 
+## [v2.6.8](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-12)
+
+- Parsing when layouts or formats is empty, returns a error
+- Upgrade `gorm.io/gorm` from `1.21.1` to `1.30.0` in `tests`
+- Upgrade `gorm.io/driver/mysql` from `1.5.7` to `1.6.0` in `tests`
+- Upgrade `gorm.io/driver/postgres` from `1.5.7` to `1.6.0` in `tests`
+- Upgrade `gorm.io/driver/sqlite` from `1.5.7` to `1.6.0` in `tests`
+- Rename  `DateTimeType` to `dateTimeType`, `DateTimeXXXType` to `dateTimeXXXType`  in `type_builtin.go`
+- Rename  `DateType` to `dateType`, `DateXXXType` to `dateXXXType` in `type_builtin.go`
+- Rename  `TimeType` to `timeType`, `TimeXXXType` to `timeXXXType`  in `type_builtin.go`
+- Simplify readme file and migrate overview and example usage to the [official doc website](https://carbon.go-pkg.com/)
+- Add [HelloGitHub](https://hellogithub.com/repository/dromara/carbon) badge link
+
 ## [v2.6.7](https://github.com/dromara/carbon/compare/v2.6.6...v2.6.7) (2025-05-26)
 
 - `String` method removes the check for null value carbon

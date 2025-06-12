@@ -1,4 +1,16 @@
 # 更新日志
+## [v2.6.8](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-12)
+
+- 解析时如果布局模板或格式模板为空时，返回错误
+- 在 `tests` 中将 `gorm.io/gorm` 从 `1.21.1` 升级到 `1.30.0`
+- 在 `tests` 中将 `gorm.io/driver/mysql` 从 `1.5.7` 升级到 `1.6.0`
+- 在 `tests` 中将 `gorm.io/driver/postgres` 从 `1.5.7` 升级到 `1.6.0`
+- 在 `tests` 中将 `gorm.io/driver/sqlite` 从 `1.5.7` 升级到 `1.6.0`
+- 在 `type_builtin.go` 中将 `DateTimeType` 重命名为`DateTimeType`，将 `DateTimeXXXType` 重命名为 `DateTimeXXXType`
+- 在 `type_builtin.go` 中将 `DateType` 重命名为`dateType`，将 `DateXXXType` 重命名为 `dateXXXType`
+- 在 `type_builtin.go` 中将 `TimeType` 重命名为`timeType`，将 `TimeXXXType` 重命名为 `timeXXXType`
+- 简化 READEME 文件，将详细使用说明和示例用法迁移到 [官方网站](https://carbon.go-pkg.com)
+- 添加 [HelloGitHub](https://hellogithub.com/repository/dromara/carbon) 徽章链接
 
 ## [v2.6.7](https://github.com/dromara/carbon/compare/v2.6.6...v2.6.7) (2025-05-26)
 

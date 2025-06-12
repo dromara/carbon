@@ -1,4 +1,16 @@
 # 変更履歴
+## [v2.6.8](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-12)
+
+- 解析時にレイアウトテンプレートまたはフォーマットテンプレートが空の場合は、エラーを返します
+- `tests` で `gorm.io/gorm` を `1.21.1` から `1.30.0` にアップグレードする
+- `tests` で `gorm.io/driver/mysql` を `1.5.7` から `1.6.0` にアップグレード
+- `tests` で `gorm.io/driver/postgres` を `1.5.7` から `1.6.0` にアップグレード
+- `tests` で `gorm.io/driver/sqlite` を `1.5.7` から `1.6.0` にアップグレード
+- `type_builtin.go` では` DateTimeType` を `DateTimeType` に、`DateTimeXXXXXType` を `DateTimeXXXXType` に、それぞれ名前を変更します
+- `type_builtin.go` では` DateType` を `dateType` に、`DateXXXXXType` を `dateXXXType` に、それぞれ名前を変更します
+- `type_builtin.go` では` TimeType` を `timeType` に、`TimeXXXXType` を `timeXXXType` に、それぞれ名前を変更します
+- `README` ファイルをシンプル化し、詳細な使用方法と使用例を［公式サイト］に移行（https://carbon.go-pkg.com)
+- [HelloGitHub]（https://hellogithub.com/repository/dromara/carbon）バッジリンク
 
 ## [v2.6.7](https://github.com/dromara/carbon/compare/v2.6.6...v2.6.7) (2025-05-26)
 
