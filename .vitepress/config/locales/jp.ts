@@ -2,6 +2,11 @@ import {type DefaultTheme, defineConfig} from 'vitepress'
 
 export const jp = defineConfig({
     lang: 'ja-JP',
+    title: 'carbon',
+    description: '軽量、セマンティック、開発者に優しい golang 時間処理ライブラリ',
+    head: [
+        ['meta', { name: 'keywords', content: 'golang, carbon, 时间处理, 星座, 季节, グレゴリオ暦, 旧暦, 儒略の日, 簡略化ユリウスデー, ペルシア暦, イラン暦' }],
+    ],
     themeConfig: {
         nav: nav(),
 

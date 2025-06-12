@@ -20,4 +20,7 @@ export default defineConfig({
     rewrites: {
         'en/:rest*': ':rest*'
     },
+    sitemap: {
+        hostname: 'https://carbon.go-pkg.com'
+    }
 })
