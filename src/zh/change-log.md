@@ -6,7 +6,7 @@
 - 在 `tests` 中将 `gorm.io/driver/mysql` 从 `1.5.7` 升级到 `1.6.0`
 - 在 `tests` 中将 `gorm.io/driver/postgres` 从 `1.5.7` 升级到 `1.6.0`
 - 在 `tests` 中将 `gorm.io/driver/sqlite` 从 `1.5.7` 升级到 `1.6.0`
-- 在 `type_builtin.go` 中将 `DateTimeType` 重命名为`DateTimeType`，将 `DateTimeXXXType` 重命名为 `DateTimeXXXType`
+- 在 `type_builtin.go` 中将 `DateTimeType` 重命名为`dateTimeType`，将 `DateTimeXXXType` 重命名为 `dateTimeXXXType`
 - 在 `type_builtin.go` 中将 `DateType` 重命名为`dateType`，将 `DateXXXType` 重命名为 `dateXXXType`
 - 在 `type_builtin.go` 中将 `TimeType` 重命名为`timeType`，将 `TimeXXXType` 重命名为 `timeXXXType`
 - 简化 READEME 文件，将详细使用说明和示例用法迁移到 [官方网站](https://carbon.go-pkg.com)

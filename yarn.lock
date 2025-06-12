@@ -1381,6 +1381,11 @@ vite@^6.3.2:
   optionalDependencies:
     fsevents "~2.3.3"
 
+vitepress-plugin-51la@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/vitepress-plugin-51la/-/vitepress-plugin-51la-0.1.0.tgz#19b9c5676dd8ce326ee2528152a704cb50699e28"
+  integrity sha512-jV5w7sgqGFuum70wpIY9hggFio4H1C3+MayeeP/b55Cf+lRiFVNMrQQvWjw7UjT0bO1eiJYq4DiLsxzXt7r+QA==
+
 vitepress@^2.0.0-alpha.5:
   version "2.0.0-alpha.5"
   resolved "https://registry.yarnpkg.com/vitepress/-/vitepress-2.0.0-alpha.5.tgz#9198ac456431dc28f54e75005cb0f3280b63531c"
