@@ -123,3 +123,5 @@
 - `IsValid` と `IsInvalid` メソッドの判断論理を変更し、`ゼロタイム` はもはや無効タイムとみなされません
 - 更新 `時間。ローカル` グローバルデフォルトタイムゾーンを設定するとき
 - リファクター `database.go` および削除 `炭素。日付時間、炭素。DateTimeMilli、カーボン。DateTimeMicro、カーボン。DateTimeNanoは、カーボンです。日付、炭素。DateMilli、カーボン。デートマイクロ、カーボン。デートナノ、カーボン。時間、炭素。TimeMilli、カーボン。タイムマイクロ、カーボン。タイムナノ、カーボン。タイムスタンプ、カーボン。タイムスタンプミリ、カーボン。タイムスタンプマイクロ、カーボン。TimestampNano`フィールドタイプは、`MarshalJSON/UnmarshalJSON`でカスタム出力フォーマットを実装するために代わりに一般的なフィールドを使用します
+
+旧バージョンの更新ログについては <a href="https://github.com/dromara/carbon/releases" target="_blank" rel="noreferrer">releases</a> を参照してください

@@ -16,7 +16,7 @@ export const zh = defineConfig({
 
         footer: {
             message: '基于 MIT 许可发布，未经许可禁止任何形式的转载',
-            copyright: `版权所有 © 2024-${new Date().getFullYear()} carbon <a href="https://beian.miit.gov.cn" target="_blank">京ICP备19041346号-6</a>`
+            copyright: `版权所有 © 2024-${new Date().getFullYear()} carbon <a href="https://beian.miit.gov.cn" target="_blank">京ICP备19041346号-7</a>`
         },
 
         docFooter: {
@@ -68,7 +68,7 @@ function nav(): DefaultTheme.NavItem[] {
             activeMatch: '/zh/change-log'
         },
         {
-            text: '捐赠',
+            text: '赞助',
             link: '/zh/sponsor',
             activeMatch: '/zh/sponsor'
         },

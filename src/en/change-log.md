@@ -123,3 +123,5 @@
 - Change the judgment logic of `IsValid` and `IsInvalid` methods, `zero time` is no longer considered invalid time
 - Update `time.Local` when setting the global default timezone
 - Refactor `database.go` and remove `carbon.DateTime`, `carbon. DateTimeMilli`, `carbon.DateTimeMicro`,  `carbon.DateTimeNano`, `carbon. Date`, `carbon.DateMilli`, `carbon.DateMicro`,  `carbon.DateNano`, `carbon.Time`, `carbon.TimeMilli`,  `carbon.TimeMicro`, `carbon.TimeNano`, `carbon.Timestamp`, `carbon.TimestampMilli`, `carbon.TimestampMicro`, `carbon.TimestampNano` field types, use generic fields instead to implement custom output format when `MarshalJSON/UnmarshalJSON`
+
+Refer to <a href="https://github.com/dromara/carbon/releases" target="_blank" rel="noreferrer">releases</a> for change logs of earlier versions

@@ -1,5 +1,5 @@
 # 错误处理
-如果出现多个错误，则只返回第一个错误
+如果出现多个错误，则只返回第一个错误，访问 <a href="https://github.com/dromara/carbon/blob/master/errors.go" target="_blank" rel="noreferrer">errors.go</a> 查看所有可能出现的错误
 
 ```go
 c1 := carbon.Parse("xxx")
@@ -26,3 +26,4 @@ if c3.HasError() {
 // 输出
 failed to parse "xxx" as carbon
 ```
+

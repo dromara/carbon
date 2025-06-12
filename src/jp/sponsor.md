@@ -15,10 +15,13 @@
 
 <ul class="simple-list">
     <li>
-        アリペイ：gouguolei@vip.qq.com
+        alipay：gouguolei@vip.qq.com
     </li>
     <li>
-        ウィーチャット：gouguolei
+        wechat：gouguolei
+    </li>
+    <li>
+        QQ：245629560
     </li>
     <li>
         opencollective：<a target="_blank" rel="noreferrer" href="https://opencollective.com/go-carbon">go-carbon</a>
@@ -30,12 +33,12 @@
 ## スポンサーシップの詳細
 | ドナーのニックネーム     | 寄付金額  | 寄付期間       | 協賛チャネル   | コメント |
 |:--------|-------|---------|-----|------|
-| Mr 周    | ￥ 188 | 2025-04-16 | 微信红包 | 加油   |
-| 黑色大丽花   | ￥ 100 | 2024-08-31 | 支付宝 |  |
-| 刘全德     | ￥ 100 |  | 微信支付 |      |
-| 彭帅      | ￥ 100 |  | 微信支付 |      |
-| medive  | ￥ 88  |  | 支付宝 |      |
-| phpok   | ￥ 100 |  | QQ红包 |      |
-| 花道家的樱木  | ￥ 66  |  | 微信支付 |  喝杯咖啡    |
-| 郑天仕     | ￥ 100 |  | QQ红包 |  喝杯咖啡    |
-| 五福科技    | ￥ 200 |  | QQ红包 |      |
+| Mr 周    | ￥ 188 | 2025-04-16 | wechat | 喝杯咖啡  |
+| 黑色大丽花   | ￥ 100 |  | alipay	 |  |
+| 刘全德     | ￥ 100 |  | wechat |     |
+| 彭帅      | ￥ 100 |  | wechat |     |
+| medive  | ￥ 88  |  | alipay	 |     |
+| phpok   | ￥ 100 |  | QQ |     |
+| 花道家的樱木  | ￥ 66  |  | wechat |     |
+| 郑天仕     | ￥ 100 |  | QQ |     |
+| 五福科技    | ￥ 200 |  | QQ |     |

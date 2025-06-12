@@ -19,6 +19,9 @@ There are several channels to help:
         wechat：gouguolei
     </li>
     <li>
+        QQ：245629560
+    </li>
+    <li>
         opencollective：<a target="_blank" rel="noreferrer" href="https://opencollective.com/go-carbon">go-carbon</a>
     </li>
 </ul>
@@ -26,15 +29,15 @@ There are several channels to help:
 please note your `gitHub` or `gitee` account name and message comment
 
 ## Sponsor list
-| Name  | Amount | Time  | Channel  | Comment |
-|:--------|-------|---------|-----|------|
-| Mr 周    | ￥ 188 | 2025-04-16 | 微信红包 | 加油   |
-| 黑色大丽花   | ￥ 100 | 2024-08-31 | 支付宝 |  |
-| 刘全德     | ￥ 100 |  | 微信支付 |      |
-| 彭帅      | ￥ 100 |  | 微信支付 |      |
-| medive  | ￥ 88  |  | 支付宝 |      |
-| phpok   | ￥ 100 |  | QQ红包 |      |
-| 花道家的樱木  | ￥ 66  |  | 微信支付 |  喝杯咖啡    |
-| 郑天仕     | ￥ 100 |  | QQ红包 |  喝杯咖啡    |
-| 五福科技    | ￥ 200 |  | QQ红包 |      |
+| Name  | Amount | Time | Channel | Comment |
+|:--------|-------|--------|----|-----|
+| Mr 周    | ￥ 188 | 2025-04-16 | wechat | 喝杯咖啡  |
+| 黑色大丽花   | ￥ 100 |  | alipay	 |  |
+| 刘全德     | ￥ 100 |  | wechat |     |
+| 彭帅      | ￥ 100 |  | wechat |     |
+| medive  | ￥ 88  |  | alipay	 |     |
+| phpok   | ￥ 100 |  | QQ |     |
+| 花道家的樱木  | ￥ 66  |  | wechat |     |
+| 郑天仕     | ￥ 100 |  | QQ |     |
+| 五福科技    | ￥ 200 |  | QQ |     |
 

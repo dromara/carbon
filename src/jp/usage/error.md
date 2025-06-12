@@ -1,5 +1,5 @@
 # エラー処理
-複数のエラーが発生した場合、最初のエラーのみが返されます
+複数のエラーが発生した場合、最初のエラーのみが返されます, アクセス <a href="https://github.com/dromara/carbon/blob/master/errors.go" target="_blank" rel="noreferrer">errors.go</a> 発生する可能性のあるすべてのエラーを表示
 
 ```go
 c1 := carbon.Parse("xxx")
