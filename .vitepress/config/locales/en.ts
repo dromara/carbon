@@ -91,8 +91,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {text: 'setter', link: 'usage/setter'},
         {text: 'getter', link: 'usage/getter'},
         {text: 'output', link: 'usage/output'},
-        {text: 'difference', link: 'usage/difference'},
         {text: 'boundary', link: 'usage/boundary'},
+        {text: 'difference', link: 'usage/difference'},
         {text: 'extremum', link: 'usage/extremum'},
         {text: 'comparison', link: 'usage/comparison'},
         {text: 'error handling', link: 'usage/error'},
@@ -107,7 +107,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {text: 'calendar', link: 'usage/calendar'},
         {text: 'i18n', link: 'usage/i18n'},
         {text: 'json', link: 'usage/json'},
-        {text: 'freeze test', link: 'usage/freeze'},
+        {text: 'test', link: 'usage/test'},
       ]
     },
     {

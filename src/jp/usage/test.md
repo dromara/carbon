@@ -1,6 +1,7 @@
-# 時間凍結
-テスト時間の設定をサポートし、テストがフレンドリーで、ユニットテストに便利である
-## 凍結時間の設定
+# テスト
+現在の時刻を固定し、任意の時刻を現在の時刻に設定することができます。これにより、実際のシステム時刻ではなく、このシミュレーション時刻に基づいて後続の操作が実行され、セルテストが容易になります
+
+## テスト時間の設定
 ```go
 now := carbon.Parse("2020-08-05")
 carbon.SetTestNow(now)
@@ -15,12 +16,12 @@ carbon.Parse("2020-10-05").DiffForHumans() // 2 months from now
 now.DiffForHumans(carbon.Parse("2020-10-05")) // 2 months before
 ```
 
-## 凍結時間かどうかを判断する
+## テスト時間かどうか
 ```go
 carbon.IsTestNow() 
 ```
 
-## パージ凍結時間
+## パージテスト時間
 ```go
 carbon.ClearTestNow()
 ```

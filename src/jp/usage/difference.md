@@ -1,6 +1,6 @@
 # 時間差値
 
-## デフォルトの差
+## そうたいさ
 ```go
 carbon.Parse("2021-08-05 13:14:15").DiffInYears(carbon.Parse("2020-08-05 13:14:15")) // -1
 carbon.Parse("2020-08-05 13:14:15").DiffInMonths(carbon.Parse("2020-07-05 13:14:15")) // -1
@@ -20,7 +20,7 @@ now.Copy().AddHour().DiffInDuration(now).String() // 1h0m0s
 now.Copy().SubHour().DiffInDuration(now).String() // -1h0m0s
 ```
 
-## 差分絶対値
+## ぜったいさ
 ```go
 carbon.Parse("2021-08-05 13:14:15").DiffAbsInYears(carbon.Parse("2020-08-05 13:14:15")) // 1
 carbon.Parse("2020-08-05 13:14:15").DiffAbsInMonths(carbon.Parse("2020-07-05 13:14:15")) // 1
@@ -39,7 +39,7 @@ now.Copy().AddHour().DiffAbsInDuration(now).String() // 1h0m0s
 now.Copy().SubHour().DiffAbsInDuration(now).String() // 1h0m0s
 ```
 
-## 人間友好の差
+## ヒューマンエラー
 ```go
 carbon.Parse("2020-08-05 13:14:15").DiffForHumans() // just now
 carbon.Parse("2019-08-05 13:14:15").DiffForHumans() // 1 year ago

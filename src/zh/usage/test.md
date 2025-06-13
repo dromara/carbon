@@ -1,6 +1,7 @@
-# 时间冻结
-支持设置测试时间，测试友好，便于单元测试
-## 设置冻结时间
+# 测试
+测试方法允许您冻结固定 `当前时间`，将任意时间设置为`当前时间`，使后续操作基于此模拟时间运行，而非真实系统时间，便于单元测试
+
+## 设置测试时间
 ```go
 now := carbon.Parse("2020-08-05")
 carbon.SetTestNow(now)
@@ -15,12 +16,12 @@ carbon.Parse("2020-10-05").DiffForHumans() // 2 months from now
 now.DiffForHumans(carbon.Parse("2020-10-05")) // 2 months before
 ```
 
-## 判断是否是冻结时间
+## 是否是测试时间
 ```go
 carbon.IsTestNow() 
 ```
 
-## 清除冻结时间
+## 清除测试时间
 ```go
 carbon.ClearTestNow()
 ```

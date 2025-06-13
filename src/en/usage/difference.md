@@ -1,6 +1,6 @@
 # Difference
 
-## Default difference
+## Relative difference
 ```go
 // Difference in years
 carbon.Parse("2021-08-05 13:14:15").DiffInYears(carbon.Parse("2020-08-05 13:14:15")) // -1

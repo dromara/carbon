@@ -58,7 +58,7 @@ function nav(): DefaultTheme.NavItem[] {
             link: '/zh'
         },
         {
-            text: '文档',
+            text: '使用文档',
             link: '/zh/overview',
             activeMatch: '/zh/overview'
         },
@@ -73,7 +73,7 @@ function nav(): DefaultTheme.NavItem[] {
             activeMatch: '/zh/change-log'
         },
         {
-            text: '赞助',
+            text: '赞助支持',
             link: '/zh/sponsor',
             activeMatch: '/zh/sponsor'
         },
@@ -103,8 +103,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 {text: '时间设置', link: 'usage/setter'},
                 {text: '时间获取', link: 'usage/getter'},
                 {text: '时间输出', link: 'usage/output'},
-                {text: '时间差值', link: 'usage/difference'},
                 {text: '时间边界', link: 'usage/boundary'},
+                {text: '时间差值', link: 'usage/difference'},
                 {text: '时间极值', link: 'usage/extremum'},
                 {text: '时间判断', link: 'usage/comparison'},
                 {text: '错误处理', link: 'usage/error'},
@@ -119,7 +119,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 {text: '日历', link: 'usage/calendar'},
                 {text: '国际化', link: 'usage/i18n'},
                 {text: 'JSON', link: 'usage/json'},
-                {text: '时间冻结', link: 'usage/freeze'},
+                {text: '测试', link: 'usage/test'},
             ]
         },
         {

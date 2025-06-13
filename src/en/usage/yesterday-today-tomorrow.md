@@ -1,5 +1,5 @@
 # Yesterday、Today、Tomorrow
-Yesterday, today, and tomorrow are a special example of time travel, equivalent to
+Yesterday, today, and tomorrow are special examples of time travel, equivalent to
 ```go
 carbon.Yesterday() = carbon.Now().SubDay()
 carbon.Tomorrow() = carbon.Now().AddDay()

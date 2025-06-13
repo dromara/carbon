@@ -1,5 +1,5 @@
 # 昨天、今天、明天
-昨天、今天、明天是时间旅行的一个特殊例子，等价于
+昨天、今天、明天是时间旅行的特例，等价于
 ```go
 carbon.Yesterday() = carbon.Now().SubDay()
 carbon.Tomorrow() = carbon.Now().AddDay()

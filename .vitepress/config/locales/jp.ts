@@ -103,8 +103,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 {text: '時間設定', link: 'usage/setter'},
                 {text: '時間取得', link: 'usage/getter'},
                 {text: '時間出力', link: 'usage/output'},
-                {text: '時間差分', link: 'usage/difference'},
                 {text: '时间境界', link: 'usage/boundary'},
+                {text: '時間差值', link: 'usage/difference'},
                 {text: '時間極值', link: 'usage/extremum'},
                 {text: '時間比較', link: 'usage/comparison'},
                 {text: 'エラー処理', link: 'usage/error'},
@@ -119,7 +119,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
                 {text: 'カレンダ＃カレンダ＃', link: 'usage/calendar'},
                 {text: '国際化', link: 'usage/i18n'},
                 {text: 'JSON', link: 'usage/json'},
-                {text: '時間凍結', link: 'usage/freeze'},
+                {text: 'テスト', link: 'usage/test'},
             ]
         },
         {
