@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 时间边界|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+  - - meta
+    - name: keywords
+      content: 世纪边界, 年代边界, 年份边界, 季度边界, 月份边界, 周边界, 日边界, 小时边界, 分钟边界, 秒钟边界
+---
+
 # 时间边界
 
 ## 世纪边界

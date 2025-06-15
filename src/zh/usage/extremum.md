@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 时间极值|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+  - - meta
+    - name: keywords
+      content: 极值判断, 极值边界
+---
+
 # 时间极值
 
 ## 极值判断

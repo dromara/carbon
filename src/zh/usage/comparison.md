@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 时间判断|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+  - - meta
+    - name: keywords
+      content: 含有判断, 是否判断, 数学判断, 距离判断
+---
+
 # 时间判断
 
 ## 含有判断

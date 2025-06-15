@@ -1,3 +1,10 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 快速开始|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+---
+
 # 快速开始
 > go version >= 1.21
 

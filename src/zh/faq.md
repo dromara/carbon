@@ -1,3 +1,10 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 常见问题|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+---
+
 # 常见问题
 
 1、v2.5.x 和 v2.6.x 版本有什么区别？

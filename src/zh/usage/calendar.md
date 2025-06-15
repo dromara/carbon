@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 日历|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+  - - meta
+    - name: keywords
+      content: 公历, 格里历, 儒略日, 简化儒略日, 中国农历, 波斯历, 伊朗历
+---
+
 # 日历
 
 目前支持的日历有

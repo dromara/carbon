@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 时间解析|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+  - - meta
+    - name: keywords
+      content: 通过默认模板解析, 通过布局模板解析, 通过格式模板解析
+---
+
 # 时间解析
 该系列方法不支持 `时间戳` 字符串解析，解析时间戳请使用 `CreateFromTimestamp` 或 `CreateFromTimestampXXX` 等方法
 

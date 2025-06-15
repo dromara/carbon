@@ -1,3 +1,10 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 更新日志|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+---
+
 # 更新日志
 ## [v2.6.8](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-12)
 
@@ -136,4 +143,4 @@
 - 设置全局默认时区时同步更新 `time.Local`
 - 重构 `database.go`，移除 `carbon.DateTime`、`carbon. DateTimeMilli `、 `carbon.DateTimeMicro`、`carbon.DateTimeNano`、 `carbon. Date`、`carbon.DateMilli`、 `carbon.DateMicro`、 `carbon.DateNano`、 `carbon.Time`、 `carbon.TimeMilli`、 `carbon.TimeMicro`、  `carbon.TimeNano`、`carbon.Timestamp` 、`carbon.TimestampMilli ` 、`carbon.TimestampMicro`、`carbon.TimestampNano` 字段类型, 使用泛型字段替代以实现 `MarshalJSON/UnmarshalJSON` 时自定义输出格式
 
-有关早期版本的更新日志，请参阅 <a href="https://github.com/dromara/carbon/releases" target="_blank" rel="noreferrer">releases</a>
+有关更早版本的更新日志，请参阅 <a href="https://github.com/dromara/carbon/releases" target="_blank" rel="noreferrer">releases</a>

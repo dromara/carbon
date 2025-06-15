@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 昨天、今天、明天|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+  - - meta
+    - name: keywords
+      content: 昨天, 今天, 明天
+---
+
 # 昨天、今天、明天
 昨天、今天、明天是时间旅行的特例，等价于
 ```go

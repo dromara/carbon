@@ -1,3 +1,10 @@
+---
+head:
+  - - meta
+    - name: description
+      content: JSON|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+---
+
 # JSON
 
 ## 内置字段类型

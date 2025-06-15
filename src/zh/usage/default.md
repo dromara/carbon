@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 设置全局默认值|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+  - - meta
+    - name: keywords
+      content: 设置单个默认值, 设置多个默认值, 重置默认值
+---
+
 # 设置全局默认值
 默认时区是 `UTC`, 语言环境是 `英语`，一周开始日期是 `周一`，周末是 `周六`和 `周日`。
 

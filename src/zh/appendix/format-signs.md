@@ -1,3 +1,10 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 格式符号|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+---
+
 # 格式符号
 `Format`和 `ParseByFormat`方法并不是完全可逆的，`Format` 方法支持以下所有符号，`ParseByFormat` 方法不支持 `K`, `W`, `N` `L`, `w`, `t`, `o`, `q`, `c`，因为这些符号是自定义的，在标准时间库中没有相应的符号。
 

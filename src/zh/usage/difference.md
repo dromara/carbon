@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 时间差值|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+  - - meta
+    - name: keywords
+      content: 相对差值, 绝对差值, 人性化差值
+---
+
 # 时间差值
 
 ## 相对差值
