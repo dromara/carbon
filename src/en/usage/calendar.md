@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Calendar | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, gregorian, julian day, modified julian day, chinese lunar, persian, jalaali
+---
+
 # Calendar
 
 The following calendars are supported

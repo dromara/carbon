@@ -1,3 +1,10 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Frequently asked questions | A simple, semantic and developer-friendly time package for golang
+---
+
 # FAQ
 
 1、What is the difference between `v2.5.x` and `v2.6.x`?

@@ -1,3 +1,10 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Installation | A simple, semantic and developer-friendly time package for golang
+---
+
 # Installation
 
 > go version >= 1.21

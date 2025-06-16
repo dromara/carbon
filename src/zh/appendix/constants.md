@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 内置常量|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+      content: 内置常量|一个轻量级、语义化、对开发者友好的 golang 时间处理库
   - - meta
     - name: keywords
       content: 版本常量, 时区常量, 月份常量, 季节常量, 星座常量, 星期常量, 数字常量, 布局模板常量

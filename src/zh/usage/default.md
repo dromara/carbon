@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 设置全局默认值|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+      content: 设置全局默认值|一个轻量级、语义化、对开发者友好的 golang 时间处理库
   - - meta
     - name: keywords
-      content: 设置单个默认值, 设置多个默认值, 重置默认值
+      content: carbon, go-carbon, 设置单个默认值, 设置多个默认值, 重置默认值
 ---
 
 # 设置全局默认值

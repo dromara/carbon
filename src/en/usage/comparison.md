@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Comparison | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, has compare, is compare, maths compare, between compare
+---
+
 # Comparison
 
 ## Has compare

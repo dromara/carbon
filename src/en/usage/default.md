@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Set default | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, default
+---
+
 # Set globally default
 Default timezone is `UTC`, language locale is `English`, start day of the week is `Monday` and weekend days of the week are `Saturday` and `Sunday`.
 

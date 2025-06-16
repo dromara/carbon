@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Traveler | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, century travel, decade travel, year travel, quarter travel, month travel, week travel, day travel, hour travel, minute travel, second travel, time travel
+---
+
 # Traveler
 
 ## Century travel

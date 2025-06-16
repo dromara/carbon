@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Testing | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, freeze, test, SetTestNow, IsTestNow, ClearTestNow
+---
+
 # Testing
 The testing methods allow you to set a `Carbon` instance to be returned when a `now` instance is created. The provided instance will be used when retrieving any relative time from `Carbon` (now, today, yesterday, next month, etc.)
 

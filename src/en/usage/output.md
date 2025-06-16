@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Output | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, ansic, atom, iso8601, iso8601zulu, rfc822, rfc822z, rfc850, rfc1036, rss, w3c, daydatetime, cookie, kitchen, rubydate, atom, unixdate, rfc822zulu, rfc822z, rfc850z, rfc1036z, rfc822zulu, rfc822z, rfc850z, rfc1036z, rfc822zulu, rfc822z, rfc850z
+---
+
 # Output
 
 ```go

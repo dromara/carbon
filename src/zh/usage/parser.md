@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 时间解析|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+      content: 时间解析|一个轻量级、语义化、对开发者友好的 golang 时间处理库
   - - meta
     - name: keywords
-      content: 通过默认模板解析, 通过布局模板解析, 通过格式模板解析
+      content: carbon, go-carbon, 默认模板, 布局模板, 格式模板
 ---
 
 # 时间解析

@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 季节|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+      content: 季节|一个轻量级、语义化、对开发者友好的 golang 时间处理库
   - - meta
     - name: keywords
-      content: 季节, 春季, 夏季, 秋季, 冬季, 季节边界, 季节判断
+      content: carbon, go-carbon, 季节, 春季, 夏季, 秋季, 冬季, 季节边界, 季节判断
 ---
 
 # 季节

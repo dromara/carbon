@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Boundary | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, century boundary, decade boundary, year boundary, quarter boundary, month boundary, week boundary, day boundary, hour boundary, minute boundary, second boundary
+---
+
 # Boundary
 
 ## Century boundary

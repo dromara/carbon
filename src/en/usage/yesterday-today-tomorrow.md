@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Yesterday、Today、Tomorrow | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, yesterday, today, tomorrow
+---
+
 # Yesterday、Today、Tomorrow
 Yesterday, today, and tomorrow are special examples of time travel, equivalent to
 ```go

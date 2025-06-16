@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 更新日志|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+      content: 更新日志|一个轻量级、语义化、对开发者友好的 golang 时间处理库
 ---
 
 # 更新日志

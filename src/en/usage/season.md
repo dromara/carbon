@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Season | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, season, spring, summer, autumn, winter
+---
+
 # Season
 According to the meteorological division method, `March` to `May` is `spring`, `June` to `August` is `summer`, `September` to `November` is `autumn`, and `December` to `February` is `winter`
 

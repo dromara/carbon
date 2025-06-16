@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Difference | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, relative difference, absolute difference, humanized difference
+---
+
 # Difference
 
 ## Relative difference
@@ -69,7 +79,7 @@ now.Copy().AddHour().DiffAbsInDuration(now).String() // 1h0m0s
 now.Copy().SubHour().DiffAbsInDuration(now).String() // 1h0m0s
 ```
 
-## Human difference
+## Humanized difference
 ```go
 // Difference in a human-readable format
 carbon.Parse("2020-08-05 13:14:15").DiffForHumans() // just now

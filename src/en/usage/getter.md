@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Getter | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, getter
+---
+
 # Getter
 
 ```go

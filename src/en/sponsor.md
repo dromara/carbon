@@ -1,3 +1,10 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Sponsor | A simple, semantic and developer-friendly time package for golang
+---
+
 # Sponsor 
 
 `Carbon` is a non-commercial open source project that takes a lot of effort to develop, iterate and maintain.

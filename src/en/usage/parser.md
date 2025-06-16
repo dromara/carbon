@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Parser | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, parse
+---
+
 # Parser
 
 This series of methods don't support `timestamp` string parsing. 

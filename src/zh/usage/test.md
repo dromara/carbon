@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 冻结测试|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 测试时间, 冻结时间
+---
+
 # 测试
 支持冻结固定时间，将任意时间设置为`当前时间`，使后续操作基于此模拟时间运行，而非真实系统时间，便于单元测试
 

@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 创建 Carbon 实例|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+      content: 创建 Carbon 实例|一个轻量级、语义化、对开发者友好的 golang 时间处理库
   - - meta
     - name: keywords
-      content: 从时间戳创建Carbon实例, 从日期创建Carbon实例
+      content: carbon, go-carbon, 从时间戳创建Carbon实例, 从日期创建Carbon实例
 ---
 
 # 创建 `Carbon` 实例

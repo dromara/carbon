@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 赞助支持|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+      content: 赞助支持|一个轻量级、语义化、对开发者友好的 golang 时间处理库
 ---
 
 # 赞助支持

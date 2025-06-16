@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 昨天、今天、明天|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+      content: 昨天、今天、明天|一个轻量级、语义化、对开发者友好的 golang 时间处理库
   - - meta
     - name: keywords
-      content: 昨天, 今天, 明天
+      content: carbon, go-carbon, 昨天, 今天, 明天
 ---
 
 # 昨天、今天、明天

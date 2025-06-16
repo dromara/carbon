@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 项目简介|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+      content: 项目简介|一个轻量级、语义化、对开发者友好的 golang 时间处理库
 ---
 
 # 项目简介

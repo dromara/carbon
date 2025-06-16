@@ -1,3 +1,10 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Change Log | A simple, semantic and developer-friendly time package for golang
+---
+
 # Change Log
 
 ## [v2.6.8](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-12)

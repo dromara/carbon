@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 格式符号|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+      content: 格式符号|一个轻量级、语义化、对开发者友好的 golang 时间处理库
 ---
 
 # 格式符号

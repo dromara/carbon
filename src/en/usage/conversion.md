@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Conversion | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, conversion, convert, time.Time
+---
+
 # Convert between `carbon` and `time.Time`
 
 ## Convert standard `time.Time` to `carbon`

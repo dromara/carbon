@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Error handling | A simple, semantic and developer-friendly time package for golang
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, error
+---
+
 # Error handling
 If more than one error, only the first error is returned, refer to <a href="https://github.com/dromara/carbon/blob/master/errors.go" target="_blank" rel="noreferrer">errors.go</a> for all possible errors
 
