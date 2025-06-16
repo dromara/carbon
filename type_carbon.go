@@ -1,75 +1,90 @@
 package carbon
 
 import (
-	"bytes"
-	"database/sql/driver"
+    "bytes"
+    "database/sql/driver"
+    "gorm.io/gorm"
+    "gorm.io/gorm/schema"
 )
 
 // Scan implements "driver.Scanner" interface for Carbon struct.
 func (c *Carbon) Scan(src any) error {
-	switch v := src.(type) {
-	case nil:
-		return nil
-	case []byte:
-		*c = *Parse(string(v))
-	case string:
-		*c = *Parse(v)
-	case StdTime:
-		*c = *CreateFromStdTime(v)
-	case *StdTime:
-		*c = *CreateFromStdTime(*v)
-	default:
-		return ErrFailedScan(v)
-	}
-	return c.Error
+    switch v := src.(type) {
+    case nil:
+        return nil
+    case []byte:
+        *c = *Parse(string(v))
+    case string:
+        *c = *Parse(v)
+    case StdTime:
+        *c = *CreateFromStdTime(v)
+    case *StdTime:
+        *c = *CreateFromStdTime(*v)
+    default:
+        return ErrFailedScan(v)
+    }
+    return c.Error
 }
 
 // Value implements "driver.Valuer" interface for Carbon struct.
 func (c Carbon) Value() (driver.Value, error) {
-	if c.IsNil() || c.IsZero() || c.IsEmpty() {
-		return nil, nil
-	}
-	if c.HasError() {
-		return nil, c.Error
-	}
-	return c.StdTime(), nil
+    if c.IsNil() || c.IsZero() || c.IsEmpty() {
+        return nil, nil
+    }
+    if c.HasError() {
+        return nil, c.Error
+    }
+    return c.StdTime(), nil
 }
 
 // MarshalJSON implements "json.Marshaler" interface for Carbon struct.
 func (c Carbon) MarshalJSON() ([]byte, error) {
-	if c.IsNil() || c.IsZero() || c.IsEmpty() {
-		return []byte(`null`), nil
-	}
-	if c.HasError() {
-		return []byte(`null`), c.Error
-	}
-	v := c.Layout(DefaultLayout)
-	b := make([]byte, 0, len(v)+2)
-	b = append(b, '"')
-	b = append(b, v...)
-	b = append(b, '"')
-	return b, nil
+    if c.IsNil() || c.IsZero() || c.IsEmpty() {
+        return []byte(`null`), nil
+    }
+    if c.HasError() {
+        return []byte(`null`), c.Error
+    }
+    v := c.Layout(DefaultLayout)
+    b := make([]byte, 0, len(v)+2)
+    b = append(b, '"')
+    b = append(b, v...)
+    b = append(b, '"')
+    return b, nil
 }
 
 // UnmarshalJSON implements "json.Unmarshaler" interface for Carbon struct.
 func (c *Carbon) UnmarshalJSON(src []byte) error {
-	v := string(bytes.Trim(src, `"`))
-	if v == "" || v == "null" {
-		return nil
-	}
-	*c = *ParseByLayout(v, DefaultLayout)
-	return c.Error
+    v := string(bytes.Trim(src, `"`))
+    if v == "" || v == "null" {
+        return nil
+    }
+    *c = *ParseByLayout(v, DefaultLayout)
+    return c.Error
 }
 
 // String implements "Stringer" interface for Carbon struct.
 func (c *Carbon) String() string {
-	if c.IsInvalid() {
-		return ""
-	}
-	return c.Layout(c.currentLayout)
+    if c.IsInvalid() {
+        return ""
+    }
+    return c.Layout(c.currentLayout)
 }
 
-// GormDataType implements "gorm.GormDataTypeInterface" interface for Carbon struct.
-func (c *Carbon) GormDataType() string {
-	return "datetime"
+// GormDBDataType implements "gorm.GormDataTypeInterface" interface for Carbon struct.
+// fix: gorm.GormDataTypeInterface => gorm.GormDBDataTypeInterface
+func (c *Carbon) GormDBDataType(db *gorm.DB, _ *schema.Field) string {
+    switch db.Dialector.Name() {
+    case "mysql":
+        return "DATETIME"
+    case "postgres":
+        return "TIMESTAMP"
+    case "sqlite":
+        return "TEXT"
+    case "oracle":
+        return "TIMESTAMP"
+    case "sqlserver":
+        return "DATETIME2"
+    }
+    return ""
 }
