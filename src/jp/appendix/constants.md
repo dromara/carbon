@@ -8,7 +8,6 @@ carbon.Version // 2.6.7
 ## タイムゾーン定数
 ```go
 carbon.Local // Local
-carbon.Local // Local
 carbon.UTC   // UTC
 
 carbon.CET  // CET

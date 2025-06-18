@@ -18,7 +18,6 @@ carbon.Version // 2.6.7
 ## 时区常量
 ```go
 carbon.Local // Local
-carbon.Local // Local
 carbon.UTC   // UTC
 
 carbon.CET  // CET

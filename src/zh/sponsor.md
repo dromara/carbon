@@ -31,6 +31,9 @@ head:
         QQ：245629560
     </li>
     <li>
+        gitee：<a target="_blank" rel="noreferrer" href="https://gitee.com/dromara/carbon?donate=true">dromara/carbon</a>
+    </li>
+    <li>
         opencollective：<a target="_blank" rel="noreferrer" href="https://opencollective.com/go-carbon">go-carbon</a>
     </li>
 </ul>
