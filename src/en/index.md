@@ -12,10 +12,10 @@ hero:
       text: Quick Start
       link: /getting-started
     - theme: alt
-      text: About Carbon
+      text: About
       link: /overview
     - theme: alt
-      text: Go Dev
+      text: API
       link: https://pkg.go.dev/github.com/dromara/carbon/v2
   image:
     src: /bg.svg
