@@ -9,7 +9,8 @@ head:
 ---
 
 # 昨天、今天、明天
-昨天、今天、明天是时间旅行的特例，等价于
+昨天是今天的前一天，明天是今天的后一天，等价于
+
 ```go
 carbon.Yesterday() = carbon.Now().SubDay()
 carbon.Tomorrow() = carbon.Now().AddDay()

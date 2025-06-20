@@ -1,5 +1,6 @@
 # 昨日、今日、明日
-昨日、今日、明日は時間旅行の特別な例であり、同等である
+昨日は今日の前日、明日は今日の翌日、同等である
+
 ```go
 carbon.Yesterday() = carbon.Now().SubDay()
 carbon.Tomorrow() = carbon.Now().AddDay()

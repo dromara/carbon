@@ -9,7 +9,8 @@ head:
 ---
 
 # Yesterday、Today、Tomorrow
-Yesterday, today, and tomorrow are special examples of time travel, equivalent to
+Yesterday was the day before today, and tomorrow is the day after today, equivalent to
+
 ```go
 carbon.Yesterday() = carbon.Now().SubDay()
 carbon.Tomorrow() = carbon.Now().AddDay()

@@ -17,8 +17,6 @@ To parse timestamp, please use methods such as `CreateFromTimestamp` or `CreateF
 Parse a time string as a `Carbon` instance by default layouts
 ```go
 carbon.Parse("").ToDateTimeString() // 空字符串
-carbon.Parse("0").ToDateTimeString() // 空字符串
-carbon.Parse("xxx").ToDateTimeString() // 空字符串
 carbon.Parse("00:00:00").ToDateTimeString() // 空字符串
 carbon.Parse("0000-00-00").ToDateTimeString() // 空字符串
 carbon.Parse("0000-00-00 00:00:00").ToDateTimeString() // 空字符串
