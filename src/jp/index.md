@@ -12,10 +12,10 @@ hero:
       text: スタート
       link: /jp/getting-started
     - theme: alt
-      text: Carbon について
+      text: につい
       link: /jp/overview
     - theme: alt
-      text: API ドキュメント
+      text: API
       link: https://pkg.go.dev/github.com/dromara/carbon/v2
   image:
     src: /bg.svg
