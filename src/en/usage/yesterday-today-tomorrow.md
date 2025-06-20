@@ -14,6 +14,7 @@ Yesterday, today, and tomorrow are special examples of time travel, equivalent t
 carbon.Yesterday() = carbon.Now().SubDay()
 carbon.Tomorrow() = carbon.Now().AddDay()
 ```
+Assuming the current time is `2020-08-05 13:14:15.999999999 +0000 UTC`
 
 ## Yesterday
 ```go
@@ -52,13 +53,13 @@ carbon.Now().ToTimeString() // 13:14:15
 // Return datetime of today in a given timezone
 carbon.Now(carbon.NewYork).ToDateTimeString() // 2020-08-05 13:14:15
 // Return timestamp with second precision of today
-carbon.Now().Timestamp() // 1596604455
+carbon.Now().Timestamp() // 1596633255
 // Return timestamp with millisecond precision of today
-carbon.Now().TimestampMilli() // 1596604455999
+carbon.Now().TimestampMilli() // 1596633255999
 // Return timestamp with microsecond precision of today
-carbon.Now().TimestampMicro() // 1596604455999999
+carbon.Now().TimestampMicro() // 1596633255999999
 // Return timestamp with nanosecond precision of today
-carbon.Now().TimestampNano() // 1596604455999999999
+carbon.Now().TimestampNano() // 1596633255999999999
 ```
 
 ## Tomorrow
