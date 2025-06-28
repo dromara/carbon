@@ -10,6 +10,8 @@ head:
 
 # Difference
 
+Assuming the current time is `2020-08-05 13:14:15.999999999 +0000 UTC`
+
 ## Relative difference
 ```go
 // Difference in years

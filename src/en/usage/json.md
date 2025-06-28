@@ -111,23 +111,13 @@ person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 Da
 ## Customize type
 ```go
 type RFC3339Type string
-// implement "carbon.LayoutTyper" interface
 func (RFC3339Type) Layout() string {
   return carbon.RFC3339Layout
 }
-// implement "carbon.DataTyper" interface (not required, default data type is datetime)
-func (RFC3339Type) DataType() string {
-  return "datetime"
-}
 
 type ISO8601Type string
-// implement "carbon.FormatTyper" interface
 func (ISO8601Type) Format() string {
   return carbon.ISO8601Format
-}
-// implement "carbon.DataTyper" interface (not required, default data type is datetime)
-func (RFC3339Type) DataType() string {
-  return "datetime"
 }
 
 type User struct {
