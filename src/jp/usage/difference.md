@@ -1,5 +1,9 @@
 # 時間差値
+
 現在時刻が `2020-08-05 13:14:15.999999999 +0000 UTC` であると仮定します
+```go
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15.999999999 +0000 UTC"))
+```
 
 ## そうたいさ
 ```go
@@ -48,8 +52,9 @@ carbon.Parse("2018-08-05 13:14:15").DiffForHumans() // 2 years ago
 carbon.Parse("2021-08-05 13:14:15").DiffForHumans() // 1 year from now
 carbon.Parse("2022-08-05 13:14:15").DiffForHumans() // 2 years from now
 
-carbon.Parse("2020-08-05 13:14:15").DiffForHumans(carbon.Now()) // 1 year before
-carbon.Parse("2019-08-05 13:14:15").DiffForHumans(carbon.Now()) // 2 years before
-carbon.Parse("2018-08-05 13:14:15").DiffForHumans(carbon.Now()) // 1 year after
+carbon.Parse("2020-08-05 13:14:15").DiffForHumans(carbon.Now()) // just now
+carbon.Parse("2019-08-05 13:14:15").DiffForHumans(carbon.Now()) // 1 year before
+carbon.Parse("2018-08-05 13:14:15").DiffForHumans(carbon.Now()) // 2 years before
+carbon.Parse("2021-08-05 13:14:15").DiffForHumans(carbon.Now()) // 1 year after
 carbon.Parse("2022-08-05 13:14:15").DiffForHumans(carbon.Now()) // 2 years after
 ```
