@@ -6,6 +6,11 @@ head:
 ---
 
 # 更新日志
+
+## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-28)
+
+- 移除对 `gorm` 的 `GormDataType` 接口的实现
+
 ## [v2.6.8](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-12)
 
 - 解析时如果布局模板或格式模板为空时，返回错误
