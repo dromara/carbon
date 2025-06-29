@@ -62,25 +62,13 @@ carbon.CreateFromJulian(60333.5).Julian().JD(4) // 2460334
 carbon.CreateFromJulian(60333.551563).Julian().JD(4) // 2460333.0516
 ```
 
-### Convert `modified julian day` to `julian day`
+### Convert `julian day/modified julian day` to `gregorian`
 ```go
-// By default, 6 decimal places are retained for precision
-carbon.CreateFromJulian(60333.5).Julian().JD()() // 2460334
-carbon.CreateFromJulian(60333.551563).Julian().JD()() // 2460333.051563
-
-// 4 decimal places are retained for precision
-carbon.CreateFromJulian(60333.5).Julian().JD(4) // 2460334
-carbon.CreateFromJulian(60333.551563).Julian().JD(4) // 2460333.0516
-```
-
-### Convert `julian day` to `gregorian`
-```go
+//  Convert julian day to gregorian
 carbon.CreateFromJulian(2460334).ToDateTimeString() // 2024-01-24 12:00:00
 carbon.CreateFromJulian(2460334.051563).ToDateTimeString() // 2024-01-24 13:14:15
-```
 
-### Convert `modified julian day` to `gregorian`
-```go
+// Convert modified julian day to gregorian
 carbon.CreateFromJulian(60333.551563).ToDateTimeString() // 2024-01-24 13:14:15
 carbon.CreateFromJulian(60333.5).ToDateTimeString() // 2024-01-24 12:00:00
 ```
