@@ -7,6 +7,9 @@ head:
 
 # Change Log
 
+## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-28)
+- Remove the implementation of the `GormDataType` interface for `gorm`
+
 ## [v2.6.8](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-12)
 
 - Parsing when layouts or formats is empty, returns a error

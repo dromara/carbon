@@ -1,4 +1,8 @@
 # 変更履歴
+## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-28)
+
+- `gorm` の `GormDataType` インタフェースの実装の削除
+
 ## [v2.6.8](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-12)
 
 - 解析時にレイアウトテンプレートまたはフォーマットテンプレートが空の場合は、エラーを返します
