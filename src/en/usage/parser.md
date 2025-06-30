@@ -16,10 +16,10 @@ To parse timestamp, please use methods such as `CreateFromTimestamp` or `CreateF
 ## Parse by default
 Parse a time string as a `Carbon` instance by default layouts
 ```go
-carbon.Parse("").ToDateTimeString() // 空字符串
-carbon.Parse("00:00:00").ToDateTimeString() // 空字符串
-carbon.Parse("0000-00-00").ToDateTimeString() // 空字符串
-carbon.Parse("0000-00-00 00:00:00").ToDateTimeString() // 空字符串
+carbon.Parse("").ToDateTimeString() // empty string
+carbon.Parse("00:00:00").ToDateTimeString() // empty string
+carbon.Parse("0000-00-00").ToDateTimeString() // empty string
+carbon.Parse("0000-00-00 00:00:00").ToDateTimeString() // empty string
 
 carbon.Parse("now").ToString() // 2020-08-05 13:14:15 +0800 CST
 carbon.Parse("yesterday").ToString() // 2020-08-04 13:14:15 +0800 CST
