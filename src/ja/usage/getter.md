@@ -100,18 +100,18 @@ carbon.SetTimezone(carbon.PRC).ZoneOffset() // 28800
 carbon.SetTimezone(carbon.Tokyo).ZoneOffset() // 32400
 
 // ロケール名を取得
-carbon.Now().Locale() // jp
+carbon.Now().Locale() // ja
 carbon.Now().SetLocale("en").Locale() // en
 
 // 星座を取得
 carbon.Now().Constellation() // しし座
 carbon.Now().SetLocale("en").Constellation() // Leo
-carbon.Now().SetLocale("jp").Constellation() // しし座
+carbon.Now().SetLocale("ja").Constellation() // しし座
 
 // 季節を取得
 carbon.Now().Season() // 夏
 carbon.Now().SetLocale("en").Season() // Summer
-carbon.Now().SetLocale("jp").Season() // 夏
+carbon.Now().SetLocale("ja").Season() // 夏
 
 // 週の開始日の取得
 carbon.SetWeekStartsAt(carbon.Sunday).WeekStartsAt() // Sunday

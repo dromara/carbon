@@ -52,7 +52,7 @@ carbon.Parse("2018-08-05 13:14:15").DiffForHumans() // 2 years ago
 carbon.Parse("2021-08-05 13:14:15").DiffForHumans() // 1 year from now
 carbon.Parse("2022-08-05 13:14:15").DiffForHumans() // 2 years from now
 
-carbon.SetLocale("jp")
+carbon.SetLocale("ja")
 carbon.Parse("2020-08-05 13:14:15").DiffForHumans() // 剛剛
 carbon.Parse("2019-08-05 13:14:15").DiffForHumans() // 1 年前
 carbon.Parse("2018-08-05 13:14:15").DiffForHumans() // 2 年前

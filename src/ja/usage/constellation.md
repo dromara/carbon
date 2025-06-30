@@ -3,7 +3,7 @@
 ## 星座名前
 ```go
 carbon.Parse("2020-08-05 13:14:15").Constellation() // Leo
-carbon.Parse("2020-08-05 13:14:15").SetLocale("jp").Constellation() // しし座
+carbon.Parse("2020-08-05 13:14:15").SetLocale("ja").Constellation() // しし座
 ```
 
 ## 星座判定

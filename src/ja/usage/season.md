@@ -3,7 +3,7 @@
 ## 季節名前
 ```go
 carbon.Parse("2020-08-05 13:14:15").Season() // Summer
-carbon.Parse("2020-08-05 13:14:15").SetLocale("jp").Season() // 夏
+carbon.Parse("2020-08-05 13:14:15").SetLocale("ja").Season() // 夏
 ```
 
 ## 季節境界

@@ -1,6 +1,6 @@
 import {type DefaultTheme, defineConfig} from 'vitepress'
 
-export const jp = defineConfig({
+export const ja = defineConfig({
     lang: 'ja-JP',
     title: 'carbon',
     description: '軽量、セマンティック、開発者に優しい golang 時間処理ライブラリ',
@@ -11,7 +11,7 @@ export const jp = defineConfig({
         nav: nav(),
 
         sidebar: {
-            '/jp/': { base: '/jp/', items: sidebarGuide() },
+            '/ja/': { base: '/ja/', items: sidebarGuide() },
         },
 
         editLink: {
@@ -55,27 +55,27 @@ function nav(): DefaultTheme.NavItem[] {
     return [
         {
             text: 'ホームページ',
-            link: '/jp'
+            link: '/ja'
         },
         {
             text: 'ドキュメント',
-            link: '/jp/overview',
-            activeMatch: '/jp/overview'
+            link: '/ja/overview',
+            activeMatch: '/ja/overview'
         },
         {
             text: 'よくある質問',
-            link: '/jp/faq',
-            activeMatch: '/jp/faq'
+            link: '/ja/faq',
+            activeMatch: '/ja/faq'
         },
         {
             text: '変更履歴',
-            link: '/jp/change-log',
-            activeMatch: '/jp/change-log'
+            link: '/ja/change-log',
+            activeMatch: '/ja/change-log'
         },
         {
             text: '寄付する',
-            link: '/jp/sponsor',
-            activeMatch: '/jp/sponsor'
+            link: '/ja/sponsor',
+            activeMatch: '/ja/sponsor'
         },
     ]
 }

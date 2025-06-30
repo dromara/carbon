@@ -10,10 +10,10 @@ hero:
   actions:
     - theme: brand
       text: スタート
-      link: /jp/getting-started
+      link: /ja/getting-started
     - theme: alt
       text: につい
-      link: /jp/overview
+      link: /ja/overview
     - theme: alt
       text: API
       link: https://pkg.go.dev/github.com/dromara/carbon/v2
