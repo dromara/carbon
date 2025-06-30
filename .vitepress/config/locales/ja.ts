@@ -135,7 +135,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
 
 
 export const search: DefaultTheme.AlgoliaSearchOptions['locales'] = {
-    jp: {
+    ja: {
         placeholder: 'ドキュメントの検索',
         translations: {
             button: {
