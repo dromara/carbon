@@ -133,7 +133,7 @@ func ParseByLayouts(value string, layouts []string, timezone ...string) Carbon {
 		return Carbon{isEmpty: true}
 	}
 	if len(layouts) == 0 {
-		return Parse(value, timezone...)
+		return Carbon{Error: ErrEmptyLayout()}
 	}
 	var (
 		tz  string
@@ -169,7 +169,7 @@ func ParseByFormats(value string, formats []string, timezone ...string) Carbon {
 		return Carbon{isEmpty: true}
 	}
 	if len(formats) == 0 {
-		return Parse(value, timezone...)
+		return Carbon{Error: ErrEmptyFormat()}
 	}
 	var (
 		tz  string

@@ -156,8 +156,8 @@ func TestParseByLayouts(t *testing.T) {
 	})
 
 	t.Run("empty layouts", func(t *testing.T) {
-		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseByLayouts("2020-08-05 13:14:15", []string{}).ToString())
-		assert.Equal(t, "2006-01-02 15:04:05", ParseByLayouts("2020-08-05 13:14:15", []string{}).CurrentLayout())
+		assert.Empty(t, ParseByLayouts("2020-08-05 13:14:15", []string{}).ToString())
+		assert.Empty(t, ParseByLayouts("2020-08-05 13:14:15", []string{}).CurrentLayout())
 	})
 
 	t.Run("invalid timezone", func(t *testing.T) {
@@ -273,8 +273,8 @@ func TestParseByFormats(t *testing.T) {
 	})
 
 	t.Run("empty layouts", func(t *testing.T) {
-		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseByFormats("2020-08-05 13:14:15", []string{}).ToString())
-		assert.Equal(t, "2006-01-02 15:04:05", ParseByFormats("2020-08-05 13:14:15", []string{}).CurrentLayout())
+		assert.Empty(t, ParseByFormats("2020-08-05 13:14:15", []string{}).ToString())
+		assert.Empty(t, ParseByFormats("2020-08-05 13:14:15", []string{}).CurrentLayout())
 	})
 
 	t.Run("invalid timezone", func(t *testing.T) {
@@ -444,8 +444,8 @@ func TestParseWithLayouts(t *testing.T) {
 	})
 
 	t.Run("empty layouts", func(t *testing.T) {
-		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseWithLayouts("2020-08-05 13:14:15", []string{}).ToString())
-		assert.Equal(t, "2006-01-02 15:04:05", ParseWithLayouts("2020-08-05 13:14:15", []string{}).CurrentLayout())
+		assert.Empty(t, ParseWithLayouts("2020-08-05 13:14:15", []string{}).ToString())
+		assert.Empty(t, ParseWithLayouts("2020-08-05 13:14:15", []string{}).CurrentLayout())
 	})
 
 	t.Run("invalid timezone", func(t *testing.T) {
@@ -483,8 +483,8 @@ func TestParseWithFormats(t *testing.T) {
 	})
 
 	t.Run("empty layouts", func(t *testing.T) {
-		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseWithFormats("2020-08-05 13:14:15", []string{}).ToString())
-		assert.Equal(t, "2006-01-02 15:04:05", ParseWithFormats("2020-08-05 13:14:15", []string{}).CurrentLayout())
+		assert.Empty(t, ParseWithFormats("2020-08-05 13:14:15", []string{}).ToString())
+		assert.Empty(t, ParseWithFormats("2020-08-05 13:14:15", []string{}).CurrentLayout())
 	})
 
 	t.Run("invalid timezone", func(t *testing.T) {
