@@ -87,20 +87,6 @@ func (t FormatType[T]) String() string {
 	return t.Format(t.getFormat())
 }
 
-// GormDataType implements "gorm.GormDataTypeInterface" interface for LayoutType generic struct.
-func (t FormatType[T]) GormDataType() string {
-	return t.getDataType()
-}
-
-// getDataType returns the data type of FormatType generic struct.
-func (t *FormatType[T]) getDataType() string {
-	var typer T
-	if v, ok := any(typer).(DataTyper); ok {
-		return v.DataType()
-	}
-	return "datetime"
-}
-
 // getFormat returns the format of FormatType generic struct.
 func (t FormatType[T]) getFormat() string {
 	var typer T

@@ -1,10 +1,5 @@
 package carbon
 
-// DataTyper defines a DataTyper interface
-type DataTyper interface {
-	DataType() string
-}
-
 // LayoutTyper defines a LayoutTyper interface
 type LayoutTyper interface {
 	~string

@@ -676,30 +676,6 @@ func TestBuiltinType_UnmarshalJSON(t *testing.T) {
 	})
 }
 
-func TestBuiltinType_GormDataType(t *testing.T) {
-	var model builtinTypeModel
-
-	assert.Equal(t, "date", model.Date.GormDataType())
-	assert.Equal(t, "datetime(6)", model.DateMilli.GormDataType())
-	assert.Equal(t, "datetime(6)", model.DateMicro.GormDataType())
-	assert.Equal(t, "datetime(6)", model.DateNano.GormDataType())
-
-	assert.Equal(t, "time", model.Time.GormDataType())
-	assert.Equal(t, "datetime(6)", model.TimeMilli.GormDataType())
-	assert.Equal(t, "datetime(6)", model.TimeMicro.GormDataType())
-	assert.Equal(t, "datetime(6)", model.TimeNano.GormDataType())
-
-	assert.Equal(t, "datetime", model.DateTime.GormDataType())
-	assert.Equal(t, "datetime(6)", model.DateTimeMilli.GormDataType())
-	assert.Equal(t, "datetime(6)", model.DateTimeMicro.GormDataType())
-	assert.Equal(t, "datetime(6)", model.DateTimeNano.GormDataType())
-
-	assert.Equal(t, "timestamp", model.Timestamp.GormDataType())
-	assert.Equal(t, "timestamp(6)", model.TimestampMilli.GormDataType())
-	assert.Equal(t, "timestamp(6)", model.TimestampMicro.GormDataType())
-	assert.Equal(t, "timestamp(6)", model.TimestampNano.GormDataType())
-}
-
 type rfc3339Type string
 
 func (t rfc3339Type) DataType() string {
@@ -1019,12 +995,4 @@ func TestCustomerType_UnmarshalJSON(t *testing.T) {
 		assert.Equal(t, "2020-08-05T13:14:15+00:00", model.CreatedAt.String())
 		assert.Equal(t, "2020-08-05T13:14:15Z", model.UpdatedAt.String())
 	})
-}
-
-func TestCustomerType_GormDataType(t *testing.T) {
-	var model CustomerTypeModel
-	assert.Equal(t, "datetime", model.Customer1.GormDataType())
-	assert.Equal(t, "datetime", model.Customer2.GormDataType())
-	assert.Equal(t, "datetime", model.Customer3.GormDataType())
-	assert.Equal(t, "datetime", model.Customer4.GormDataType())
 }

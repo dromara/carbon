@@ -87,20 +87,6 @@ func (t LayoutType[T]) String() string {
 	return t.Layout(t.getLayout())
 }
 
-// GormDataType implements "gorm.GormDataTypeInterface" interface for LayoutType generic struct.
-func (t LayoutType[T]) GormDataType() string {
-	return t.getDataType()
-}
-
-// getDataType returns the data type of LayoutType generic struct.
-func (t *LayoutType[T]) getDataType() string {
-	var typer T
-	if v, ok := any(typer).(DataTyper); ok {
-		return v.DataType()
-	}
-	return "datetime"
-}
-
 // getLayout returns the layout of LayoutType generic struct.
 func (t LayoutType[T]) getLayout() string {
 	var typer T

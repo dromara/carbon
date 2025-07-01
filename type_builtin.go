@@ -82,135 +82,90 @@ func (t timestampType) Precision() string {
 
 type timestampMilliType int64
 
-func (t timestampMilliType) DataType() string {
-	return "timestamp(6)"
-}
 func (t timestampMilliType) Precision() string {
 	return PrecisionMillisecond
 }
 
 type timestampMicroType int64
 
-func (t timestampMicroType) DataType() string {
-	return "timestamp(6)"
-}
 func (t timestampMicroType) Precision() string {
 	return PrecisionMicrosecond
 }
 
 type timestampNanoType int64
 
-func (t timestampNanoType) DataType() string {
-	return "timestamp(6)"
-}
 func (t timestampNanoType) Precision() string {
 	return PrecisionNanosecond
 }
 
 type DateTimeType string
 
-func (t DateTimeType) DataType() string {
-	return "datetime"
-}
 func (t DateTimeType) Layout() string {
 	return DateTimeLayout
 }
 
 type DateTimeMilliType string
 
-func (t DateTimeMilliType) DataType() string {
-	return "datetime(6)"
-}
 func (t DateTimeMilliType) Layout() string {
 	return DateTimeMilliLayout
 }
 
 type DateTimeMicroType string
 
-func (t DateTimeMicroType) DataType() string {
-	return "datetime(6)"
-}
 func (t DateTimeMicroType) Layout() string {
 	return DateTimeMicroLayout
 }
 
 type DateTimeNanoType string
 
-func (t DateTimeNanoType) DataType() string {
-	return "datetime(6)"
-}
 func (t DateTimeNanoType) Layout() string {
 	return DateTimeNanoLayout
 }
 
 type DateType string
 
-func (t DateType) DataType() string {
-	return "date"
-}
 func (t DateType) Layout() string {
 	return DateLayout
 }
 
 type DateMilliType string
 
-func (t DateMilliType) DataType() string {
-	return "datetime(6)"
-}
 func (t DateMilliType) Layout() string {
 	return DateMilliLayout
 }
 
 type DateMicroType string
 
-func (t DateMicroType) DataType() string {
-	return "datetime(6)"
-}
 func (t DateMicroType) Layout() string {
 	return DateMicroLayout
 }
 
 type DateNanoType string
 
-func (t DateNanoType) DataType() string {
-	return "datetime(6)"
-}
 func (t DateNanoType) Layout() string {
 	return DateNanoLayout
 }
 
 type TimeType string
 
-func (t TimeType) DataType() string {
-	return "time"
-}
 func (t TimeType) Layout() string {
 	return TimeLayout
 }
 
 type TimeMilliType string
 
-func (t TimeMilliType) DataType() string {
-	return "datetime(6)"
-}
 func (t TimeMilliType) Layout() string {
 	return TimeMilliLayout
 }
 
 type TimeMicroType string
 
-func (t TimeMicroType) DataType() string {
-	return "datetime(6)"
-}
 func (t TimeMicroType) Layout() string {
 	return TimeMicroLayout
 }
 
 type TimeNanoType string
 
-func (t TimeNanoType) DataType() string {
-	return "datetime(6)"
-}
 func (t TimeNanoType) Layout() string {
 	return TimeNanoLayout
 }
