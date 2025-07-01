@@ -148,4 +148,4 @@ carbon.Parse("2020-08-05 13:14:15").Format("l jK \\o\\f F Y h:i:s A") // Wednesd
 carbon.Parse("2020-08-05 13:14:15").Format("\\I\\t \\i\\s Y-m-d H:i:s") // It is 2020-08-05 13:14:15
 ```
 
-更多格式输出符号请查看 <a href="/zh/appendix/format-signs" target="_blank" rel="noreferrer">格式化符号</a>
+更多格式输出符号请查看 <a href="/zh/appendix/format-signs.html" target="_blank" rel="noreferrer">格式化符号</a>

@@ -150,4 +150,4 @@ carbon.Parse("2020-08-05 13:14:15").Format("Y年m月d日 H时i分s秒") // 2020�
 carbon.Parse("2020-08-05 13:14:15").Format("l jK \\o\\f F Y h:i:s A") // Wednesday 5th of August 2020 01:14:15 PM
 carbon.Parse("2020-08-05 13:14:15").Format("\\I\\t \\i\\s Y-m-d H:i:s") // It is 2020-08-05 13:14:15
 ```
-Refer to <a href="/appendix/format-signs" target="_blank" rel="noreferrer">Format signs</a> for more supported format signs
+Refer to <a href="/appendix/format-signs.html" target="_blank" rel="noreferrer">Format signs</a> for more supported format signs
