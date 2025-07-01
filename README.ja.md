@@ -1,4 +1,4 @@
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="./logo.svg" width="15%" alt="carbon" /></a></p>
+<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/ja" target="_blank"><img src="./logo.svg" width="15%" alt="carbon" /></a></p>
 
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)
@@ -9,17 +9,13 @@
 [![HelloGitHub](https://api.hellogithub.com/v1/widgets/recommend.svg?rid=0eddd8c3469549b7b246f85a83d1c42e&claim_uid=kKBvMpyxSgLhmJO&theme=small)](https://hellogithub.com/en/repository/dromara/carbon)
 [![License](https://img.shields.io/github/license/dromara/carbon)](https://github.com/dromara/carbon/blob/master/LICENSE)
 
-简体中文 | [English](README.md) | [日本語](README.ja.md)
+日本語 | [English](README.md) | [简体中文](README.cn.md)
 
-## 项目简介
+## イントロ
 
-`Carbon` 是一个轻量级、语义化、对开发者友好的 `golang` 时间处理库，不依赖于 `任何` 第三方库， `100%` 单元测试覆盖率，已被 [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 和 [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github") 收录，并获得
-`gitee` 2024 年最有价值项目（`GVP`）和 `gitcode` 2024 年度开源摘星计划 (`G-Star`) 项目
+`Carbon` は軽量、セマンティック、開発者に優しい `golang` 時間処理ライブラリ, `いかなる`第三者ライブラリにも依存せず、`100%`ユニットテストカバレッジ率は、[awesome-go](https://github.com/avelino/awesome-go#date-and-time "awesome-go") と [hello-github](https://hellogithub.com/en/repository/dromara/carbon "hello-github") 収録
 
-<img src="https://gitee.com/dromara/carbon/raw/master/gvp.jpg" width="100%" alt="gvp"/>
-<img src="https://gitee.com/dromara/carbon/raw/master/gstar.jpg" width="100%" alt="g-star"/>
-
-## 仓库地址
+## リポジトリ
 
 [github.com/dromara/carbon](https://github.com/dromara/carbon "github.com/dromara/carbon")
 
@@ -27,36 +23,33 @@
 
 [gitcode.com/dromara/carbon](https://gitcode.com/dromara/carbon "gitcode.com/dromara/carbon")
 
-## 快速开始
+## クイックスタート
 
-### 安装使用
-
+### インストール
 > go version >= 1.21
 
 ```go
-// 使用 github 库
+// github から使う
 go get -u github.com/dromara/carbon/v2
 import "github.com/dromara/carbon/v2"
 
-// 使用 gitee 库
+// gitee から使う
 go get -u gitee.com/dromara/carbon/v2
 import "gitee.com/dromara/carbon/v2"
 
-// 使用 gitcode 库
+// gitcode から使う
 go get -u gitcode.com/dromara/carbon/v2
 import "gitcode.com/dromara/carbon/v2"
 ```
 
-`Carbon` 已经捐赠给了 [dromara](https://dromara.org/ "dromara") 开源组织，仓库地址发生了改变，如果之前用的路径是
-`golang-module/carbon`，请在 `go.mod` 里将原地址更换为新路径，或执行如下命令
+`Carbon` は [dromara](https://dromara.org/ "dromara") 組織に寄付されたためリポジトリのURLが変更されました。以前のリポジトリ `golang-module/carbon` を使用している場合は`go.mod`で新しいリポジトリURLに変更するか下記コマンドを実行します
 
 ```go
-go mod edit -replace github.com/golang-module/carbon/v2 = github.com/dromara/carbon/v2
+go mod edit -replace github.com/golang-module/carbon/v2=github.com/dromara/carbon/v2
 ```
 
-### 用法示例
-
-默认时区是 `UTC`, 语言环境是 `英语`，一周开始日期是 `周一`，周末是 `周六`和 `周日`。
+### 使い方と例
+デフォルトのタイムゾーンは` UTC `、ロケールは`英語`、週の開始日は`月曜日`、週末は`土曜日`、`日曜日`。
 
 ```go
 carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15.999999999"))
@@ -78,14 +71,14 @@ carbon.CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToString() // 2020-08-05 13:14
 carbon.CreateFromTimestamp(1596633255).ToString() // 2020-08-05 13:14:15 +0000 UTC
 
 carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month before
-carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月前
+carbon.Parse("2020-07-05 13:14:15").SetLocale("jp").DiffForHumans() // 1 ヶ月前
 
 carbon.ClearTestNow()
 carbon.IsTestNow() // false
 ```
-更多示例请查看 <a href="https://carbon.go-pkg.com/zh" target="_blank">官方文档</a>
+詳細については <a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>
 
-## 参考项目
+## リファレンス
 
 * [briannesbitt/carbon](https://github.com/briannesbitt/Carbon)
 * [nodatime/nodatime](https://github.com/nodatime/nodatime)
@@ -96,23 +89,21 @@ carbon.IsTestNow() // false
 * [moment/moment](https://github.com/moment/moment)
 * [iamkun/dayjs](https://github.com/iamkun/dayjs)
 
-## 贡献者
-
-感谢以下所有为 `Carbon` 做出贡献的人：
+## コントリビューター
+`Carbon` に貢献してくれた以下のすべてに感謝します：
 
 <a href="https://github.com/dromara/carbon/graphs/contributors"><img src="https://contrib.rocks/image?repo=dromara/carbon&max=100&columns=16"/></a>
 
-## 赞助
+## スポンサー
 
-`Carbon` 是一个非商业开源项目, 如果你想支持 `Carbon`,
-你可以为开发者 [购买一杯咖啡](https://www.gouguoyin.com/zanzhu.html)
+`Carbon` は非営利のオープンソースプロジェクトです，`Carbon` をサポートしたい場合は、開発者のために [コーヒーを1杯購入](https://opencollective.com/go-carbon) できます
 
-## 致谢
+## 謝辞
 
-`Carbon`已获取免费的 JetBrains 开源许可证，在此表示感谢
+`Carbon` は無料の JetBrains オープンソースライセンスを取得しました，これに感謝します
 
 <a href="https://www.jetbrains.com"><img src="https://foruda.gitee.com/images/1704325523163241662/1bf21f86_544375.png" height="100" alt="JetBrains"/></a>
 
-## 开源协议
+## オープンソースプロトコル
 
-`Carbon` 遵循 `MIT` 开源协议, 请参阅 [LICENSE](./LICENSE) 查看详细信息。
+`Carbon` は `MIT` オープンソースプロトコルに準拠しており、詳細は[LICENSE]（./LICENSE）を参照してください
