@@ -12,7 +12,7 @@ hero:
       text: Quick Start
       link: /getting-started
     - theme: alt
-      text: About
+      text: Overview
       link: /overview
     - theme: alt
       text: API
