@@ -1,4 +1,4 @@
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/" target="_blank"><img src="./logo.svg" width="15%" alt="carbon" /></a></p>
+<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="https://carbon.go-pkg.com/logo.svg?v=2.6.x" width="15%" alt="carbon" /></a></p>
 
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)
@@ -107,7 +107,7 @@ Thanks to all the following who contributed to `Carbon`:
 `Carbon` had been being developed with GoLand under the free JetBrains Open Source license, I would like to express my
 thanks here.
 
-<a href="https://www.jetbrains.com"><img src="https://foruda.gitee.com/images/1704325523163241662/1bf21f86_544375.png" height="100" alt="JetBrains"/></a>
+<a href="https://www.jetbrains.com" target="_blank"><img src="https://carbon.go-pkg.com/jetbrains.svg?v=2.6.x" height="50" alt="JetBrains"/></a>
 
 ## License
 

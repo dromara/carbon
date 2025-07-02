@@ -1,4 +1,4 @@
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/ja" target="_blank"><img src="./logo.svg" width="15%" alt="carbon" /></a></p>
+<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="https://carbon.go-pkg.com/logo.svg?v=2.6.x" width="15%" alt="carbon" /></a></p>
 
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)
@@ -102,7 +102,7 @@ carbon.IsTestNow() // false
 
 `Carbon` は無料の JetBrains オープンソースライセンスを取得しました，これに感謝します
 
-<a href="https://www.jetbrains.com"><img src="https://foruda.gitee.com/images/1704325523163241662/1bf21f86_544375.png" height="100" alt="JetBrains"/></a>
+<a href="https://www.jetbrains.com" target="_blank"><img src="https://carbon.go-pkg.com/jetbrains.svg?v=2.6.x" height="50" alt="JetBrains"/></a>
 
 ## オープンソースプロトコル
 

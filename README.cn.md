@@ -1,4 +1,4 @@
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="./logo.svg" width="15%" alt="carbon" /></a></p>
+<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="https://carbon.go-pkg.com/logo.svg?v=2.6.x" width="15%" alt="carbon" /></a></p>
 
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)
@@ -16,8 +16,8 @@
 `Carbon` 是一个轻量级、语义化、对开发者友好的 `golang` 时间处理库，不依赖于 `任何` 第三方库， `100%` 单元测试覆盖率，已被 [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 和 [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github") 收录，并获得
 `gitee` 2024 年最有价值项目（`GVP`）和 `gitcode` 2024 年度开源摘星计划 (`G-Star`) 项目
 
-<img src="https://gitee.com/dromara/carbon/raw/master/gvp.jpg" width="100%" alt="gvp"/>
-<img src="https://gitee.com/dromara/carbon/raw/master/gstar.jpg" width="100%" alt="g-star"/>
+<img src="https://carbon.go-pkg.com/gvp.jpg?v=2.6.x" width="100%" alt="gvp"/>
+<img src="https://carbon.go-pkg.com/gstar.jpg?v=2.6.x" width="100%" alt="g-star"/>
 
 ## 仓库地址
 
@@ -111,7 +111,7 @@ carbon.IsTestNow() // false
 
 `Carbon`已获取免费的 JetBrains 开源许可证，在此表示感谢
 
-<a href="https://www.jetbrains.com"><img src="https://foruda.gitee.com/images/1704325523163241662/1bf21f86_544375.png" height="100" alt="JetBrains"/></a>
+<a href="https://www.jetbrains.com" target="_blank"><img src="https://carbon.go-pkg.com/jetbrains.svg?v=2.6.x" height="50" alt="JetBrains"/></a>
 
 ## 开源协议
 
