@@ -18,7 +18,7 @@ hero:
       text: API
       link: https://pkg.go.dev/github.com/dromara/carbon/v2
   image:
-    src: /bg.svg
+    src: /logo.svg
     alt: carbon
     style: { width: '100%' }
 
