@@ -5,7 +5,7 @@ import (
 )
 
 // Version current version
-const Version = "2.5.12"
+const Version = "2.5.13"
 
 // timezone constants
 const (
@@ -88,6 +88,14 @@ const (
 	December  = time.December
 )
 
+// season constants
+const (
+	Spring = "Spring"
+	Summer = "Summer"
+	Autumn = "Autumn"
+	Winter = "Winter"
+)
+
 // constellation constants
 const (
 	Aries       = "Aries"
@@ -115,14 +123,6 @@ const (
 	Sunday    = time.Sunday
 )
 
-// season constants
-const (
-	Spring = "Spring"
-	Summer = "Summer"
-	Autumn = "Autumn"
-	Winter = "Winter"
-)
-
 // number constants
 const (
 	EpochYear          = 1970
@@ -146,6 +146,28 @@ const (
 	SecondsPerDay      = 86400
 	SecondsPerHour     = 3600
 	SecondsPerMinute   = 60
+)
+
+// max constants
+const (
+	MaxYear       = 9999
+	MaxMonth      = 12
+	MaxDay        = 31
+	MaxHour       = 23
+	MaxMinute     = 59
+	MaxSecond     = 59
+	MaxNanosecond = 999999999
+)
+
+// min constants
+const (
+	MinYear       = 1
+	MinMonth      = 1
+	MinDay        = 1
+	MinHour       = 0
+	MinMinute     = 0
+	MinSecond     = 0
+	MinNanosecond = 0
 )
 
 // layout constants
