@@ -48,7 +48,7 @@ func Parse(value string, timezone ...string) Carbon {
 
 // ParseByLayout parses a time string as a Carbon instance by a confirmed layout.
 //
-// Note: it will not support parsing timestamp string in the future.
+// Note: it doesn't support parsing timestamp string.
 func ParseByLayout(value, layout string, timezone ...string) Carbon {
 	if value == "" {
 		return Carbon{isEmpty: true}
@@ -57,7 +57,6 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 		return Carbon{Error: ErrEmptyLayout()}
 	}
 	var (
-		ts  int64
 		tz  string
 		tt  StdTime
 		loc *Location
@@ -72,31 +71,6 @@ func ParseByLayout(value, layout string, timezone ...string) Carbon {
 		return Carbon{Error: err}
 	}
 
-	// timestamp layouts
-	switch layout {
-	case TimestampLayout:
-		if ts, err = parseTimestamp(value); err != nil {
-			return Carbon{Error: err}
-		}
-		return CreateFromTimestamp(ts).SetLocation(loc)
-	case TimestampMilliLayout:
-		if ts, err = parseTimestamp(value); err != nil {
-			return Carbon{Error: err}
-		}
-		return CreateFromTimestampMilli(ts).SetLocation(loc)
-	case TimestampMicroLayout:
-		if ts, err = parseTimestamp(value); err != nil {
-			return Carbon{Error: err}
-		}
-		return CreateFromTimestampMicro(ts).SetLocation(loc)
-	case TimestampNanoLayout:
-		if ts, err = parseTimestamp(value); err != nil {
-			return Carbon{Error: err}
-		}
-		return CreateFromTimestampNano(ts).SetLocation(loc)
-	}
-
-	// other layouts
 	if tt, err = time.ParseInLocation(layout, value, loc); err != nil {
 		return Carbon{Error: fmt.Errorf("%w: %w", ErrMismatchedLayout(value, layout), err)}
 	}
@@ -188,18 +162,4 @@ func ParseByFormats(value string, formats []string, timezone ...string) Carbon {
 		layouts = append(layouts, format2layout(formats[i]))
 	}
 	return ParseByLayouts(value, layouts, tz)
-}
-
-// ParseWithLayouts parses a time string as a Carbon instance by multiple fuzzy layouts.
-//
-// Deprecated: it will be removed in the future, use ParseByLayouts instead.
-func ParseWithLayouts(value string, layouts []string, timezone ...string) Carbon {
-	return ParseByLayouts(value, layouts, timezone...)
-}
-
-// ParseWithFormats parses a time string as a Carbon instance by multiple fuzzy formats.
-//
-// Deprecated: it will be removed in the future, use ParseByFormats instead.
-func ParseWithFormats(value string, formats []string, timezone ...string) Carbon {
-	return ParseByFormats(value, formats, timezone...)
 }

@@ -119,11 +119,6 @@ func TestParseByLayout(t *testing.T) {
 		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseByLayout("2020|08|05 13:14:15", "2006|01|02 15:04:05").ToString())
 		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseByLayout("It is 2020-08-05 13:14:15", "It is 2006-01-02 15:04:05").ToString())
 		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 2006年01月02日15时04分05秒").ToString())
-
-		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseByLayout("1596633255", TimestampLayout).ToString())
-		assert.Equal(t, "2020-08-05 13:14:15.999 +0000 UTC", ParseByLayout("1596633255999", TimestampMilliLayout).ToString())
-		assert.Equal(t, "2020-08-05 13:14:15.999999 +0000 UTC", ParseByLayout("1596633255999999", TimestampMicroLayout).ToString())
-		assert.Equal(t, "2020-08-05 13:14:15.999999999 +0000 UTC", ParseByLayout("1596633255999999999", TimestampNanoLayout).ToString())
 	})
 
 	t.Run("with timezone", func(t *testing.T) {
@@ -134,11 +129,6 @@ func TestParseByLayout(t *testing.T) {
 		assert.Equal(t, "2020-08-05 13:14:15 +0800 CST", ParseByFormat("It is 2020-08-05 13:14:15", "\\I\\t \\i\\s 2006-01-02 15:04:05", PRC).ToString())
 		assert.Equal(t, "2020-08-05 13:14:15 +0800 CST", ParseByLayout("2020|08|05 13:14:15", "2006|01|02 15:04:05", PRC).ToString())
 		assert.Equal(t, "2020-08-05 13:14:15 +0800 CST", ParseByLayout("今天是 2020年08月05日13时14分15秒", "今天是 2006年01月02日15时04分05秒", PRC).ToString())
-
-		assert.Equal(t, "2020-08-05 21:14:15 +0800 CST", ParseByLayout("1596633255", TimestampLayout, PRC).ToString())
-		assert.Equal(t, "2020-08-05 21:14:15.999 +0800 CST", ParseByLayout("1596633255999", TimestampMilliLayout, PRC).ToString())
-		assert.Equal(t, "2020-08-05 21:14:15.999999 +0800 CST", ParseByLayout("1596633255999999", TimestampMicroLayout, PRC).ToString())
-		assert.Equal(t, "2020-08-05 21:14:15.999999999 +0800 CST", ParseByLayout("1596633255999999999", TimestampNanoLayout, PRC).ToString())
 	})
 }
 
@@ -228,11 +218,6 @@ func TestParseByFormat(t *testing.T) {
 		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseByFormat("2020|08|05 13:14:15", "Y|m|d H:i:s").ToString())
 		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseByFormat("It is 2020-08-05 13:14:15", "\\I\\t \\i\\s Y-m-d H:i:s").ToString())
 		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseByFormat("今天是 2020年08月05日13时14分15秒", "今天是 Y年m月d日H时i分s秒").ToString())
-
-		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", ParseByFormat("1596633255", TimestampFormat).ToString())
-		assert.Equal(t, "2020-08-05 13:14:15.999 +0000 UTC", ParseByFormat("1596633255999", TimestampMilliFormat).ToString())
-		assert.Equal(t, "2020-08-05 13:14:15.999999 +0000 UTC", ParseByFormat("1596633255999999", TimestampMicroFormat).ToString())
-		assert.Equal(t, "2020-08-05 13:14:15.999999999 +0000 UTC", ParseByFormat("1596633255999999999", TimestampNanoFormat).ToString())
 	})
 
 	t.Run("with timezone", func(t *testing.T) {
@@ -243,19 +228,6 @@ func TestParseByFormat(t *testing.T) {
 		assert.Equal(t, "2020-08-05 13:14:15 +0800 CST", ParseByFormat("2020|08|05 13:14:15", "Y|m|d H:i:s", PRC).ToString())
 		assert.Equal(t, "2020-08-05 13:14:15 +0800 CST", ParseByFormat("It is 2020-08-05 13:14:15", "\\I\\t \\i\\s Y-m-d H:i:s", PRC).ToString())
 		assert.Equal(t, "2020-08-05 13:14:15 +0800 CST", ParseByFormat("今天是 2020年08月05日13时14分15秒", "今天是 Y年m月d日H时i分s秒", PRC).ToString())
-
-		assert.Equal(t, "2020-08-05 21:14:15 +0800 CST", ParseByFormat("1596633255", TimestampFormat, PRC).ToString())
-		assert.Equal(t, "2020-08-05 21:14:15.999 +0800 CST", ParseByFormat("1596633255999", TimestampMilliFormat, PRC).ToString())
-		assert.Equal(t, "2020-08-05 21:14:15.999999 +0800 CST", ParseByFormat("1596633255999999", TimestampMicroFormat, PRC).ToString())
-		assert.Equal(t, "2020-08-05 21:14:15.999999999 +0800 CST", ParseByFormat("1596633255999999999", TimestampNanoFormat, PRC).ToString())
-	})
-
-	// https://github.com/dromara/carbon/issues/206
-	t.Run("issue206", func(t *testing.T) {
-		assert.Equal(t, "2023-11-11 04:34:00 +0000 UTC", ParseByFormat("1699677240", TimestampFormat).ToString())
-		assert.Equal(t, "2023-11-11 04:34:00.666 +0000 UTC", ParseByFormat("1699677240666", TimestampMilliFormat).ToString())
-		assert.Equal(t, "2023-11-11 04:34:00.666666 +0000 UTC", ParseByFormat("1699677240666666", TimestampMicroFormat).ToString())
-		assert.Equal(t, "2023-11-11 04:34:00.666666666 +0000 UTC", ParseByFormat("1699677240666666666", TimestampNanoFormat).ToString())
 	})
 }
 
@@ -427,83 +399,5 @@ func TestFormat2Layout(t *testing.T) {
 		assert.Equal(t, c.Layout(ShortTimeMilliLayout, PRC), c.Format(ShortTimeMilliFormat, PRC))
 		assert.Equal(t, c.Layout(ShortTimeMicroLayout, PRC), c.Format(ShortTimeMicroFormat, PRC))
 		assert.Equal(t, c.Layout(ShortTimeNanoLayout, PRC), c.Format(ShortTimeNanoFormat, PRC))
-	})
-}
-
-func TestParseWithLayouts(t *testing.T) {
-	t.Run("empty time", func(t *testing.T) {
-		assert.Empty(t, ParseWithLayouts("", []string{DateTimeLayout}).ToString())
-	})
-
-	t.Run("invalid time", func(t *testing.T) {
-		assert.True(t, ParseWithLayouts("0", []string{DateTimeLayout}).HasError())
-		assert.True(t, ParseWithLayouts("xxx", []string{DateTimeLayout}).HasError())
-
-		assert.Empty(t, ParseWithLayouts("0", []string{DateTimeLayout}).ToString())
-		assert.Empty(t, ParseWithLayouts("xxx", []string{DateTimeLayout}).ToString())
-	})
-
-	t.Run("empty layouts", func(t *testing.T) {
-		assert.Empty(t, ParseWithLayouts("2020-08-05 13:14:15", []string{}).ToString())
-		assert.Empty(t, ParseWithLayouts("2020-08-05 13:14:15", []string{}).CurrentLayout())
-	})
-
-	t.Run("invalid timezone", func(t *testing.T) {
-		assert.True(t, ParseWithLayouts("2020-08-05 13:14:15", []string{DateLayout}, "").HasError())
-		assert.True(t, ParseWithLayouts("2020-08-05 13:14:15", []string{DateLayout}, "xxx").HasError())
-
-		assert.Empty(t, ParseWithLayouts("2020-08-05 13:14:15", []string{DateLayout}, "").ToString())
-		assert.Empty(t, ParseWithLayouts("2020-08-05 13:14:15", []string{DateLayout}, "xxx").ToString())
-	})
-
-	t.Run("without timezone", func(t *testing.T) {
-		c := ParseWithLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"})
-		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", c.ToString())
-		assert.Equal(t, "2006|01|02 15|04|05", c.CurrentLayout())
-	})
-
-	t.Run("with timezone", func(t *testing.T) {
-		c := ParseWithLayouts("2020|08|05 13|14|15", []string{"2006|01|02 15|04|05", "2006|1|2 3|4|5"}, PRC)
-		assert.Equal(t, "2020-08-05 13:14:15 +0800 CST", c.ToString())
-		assert.Equal(t, "2006|01|02 15|04|05", c.CurrentLayout())
-	})
-}
-
-func TestParseWithFormats(t *testing.T) {
-	t.Run("empty time", func(t *testing.T) {
-		assert.Empty(t, ParseWithFormats("", []string{DateTimeFormat}).ToString())
-	})
-
-	t.Run("invalid time", func(t *testing.T) {
-		assert.True(t, ParseWithFormats("0", []string{DateTimeLayout}).HasError())
-		assert.True(t, ParseWithFormats("xxx", []string{DateTimeLayout}).HasError())
-
-		assert.Empty(t, ParseWithFormats("0", []string{DateTimeLayout}).ToString())
-		assert.Empty(t, ParseWithFormats("xxx", []string{DateTimeLayout}).ToString())
-	})
-
-	t.Run("empty layouts", func(t *testing.T) {
-		assert.Empty(t, ParseWithFormats("2020-08-05 13:14:15", []string{}).ToString())
-		assert.Empty(t, ParseWithFormats("2020-08-05 13:14:15", []string{}).CurrentLayout())
-	})
-
-	t.Run("invalid timezone", func(t *testing.T) {
-		assert.True(t, ParseWithFormats("2020-08-05 13:14:15", []string{DateFormat}, "").HasError())
-		assert.True(t, ParseWithFormats("2020-08-05 13:14:15", []string{DateFormat}, "xxx").HasError())
-
-		assert.Empty(t, ParseWithFormats("2020-08-05 13:14:15", []string{DateFormat}, "").ToString())
-		assert.Empty(t, ParseWithFormats("2020-08-05 13:14:15", []string{DateFormat}, "xxx").ToString())
-	})
-
-	t.Run("without timezone", func(t *testing.T) {
-		c := ParseWithFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"})
-		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", c.ToString())
-		assert.Equal(t, "2006|01|02 15|04|05", c.CurrentLayout())
-	})
-
-	t.Run("with timezone", func(t *testing.T) {
-		c := ParseWithFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"}, PRC)
-		assert.Equal(t, "2020-08-05 13:14:15 +0800 CST", c.ToString())
-		assert.Equal(t, "2006|01|02 15|04|05", c.CurrentLayout())
 	})
 }
