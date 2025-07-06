@@ -90,7 +90,7 @@ func (c Carbon) IsLongYear() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	_, w := time.Date(c.Year(), 12, 31, 0, 0, 0, 0, c.loc).ISOWeek()
+	_, w := time.Date(c.Year(), MaxMonth, MaxDay, MinHour, MinMinute, MinSecond, MinNanosecond, c.loc).ISOWeek()
 	return w == WeeksPerLongYear
 }
 

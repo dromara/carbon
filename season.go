@@ -54,9 +54,9 @@ func (c Carbon) StartOfSeason() Carbon {
 	}
 	year, month, _ := c.Date()
 	if month == 1 || month == 2 {
-		return c.create(year-1, 12, 1, 0, 0, 0, 0)
+		return c.create(year-1, MaxMonth, MinDay, MinHour, MinMinute, MinSecond, MinNanosecond)
 	}
-	return c.create(year, month/3*3, 1, 0, 0, 0, 0)
+	return c.create(year, month/3*3, MinDay, MinHour, MinMinute, MinSecond, MinNanosecond)
 }
 
 // EndOfSeason returns a Carbon instance for end of the season.
@@ -66,12 +66,12 @@ func (c Carbon) EndOfSeason() Carbon {
 	}
 	year, month, _ := c.Date()
 	if month == 1 || month == 2 {
-		return c.create(year, 3, 0, 23, 59, 59, 999999999)
+		return c.create(year, 3, 0, MaxHour, MaxMinute, MaxSecond, MaxNanosecond)
 	}
 	if month == 12 {
-		return c.create(year+1, 3, 0, 23, 59, 59, 999999999)
+		return c.create(year+1, 3, 0, MaxHour, MaxMinute, MaxSecond, MaxNanosecond)
 	}
-	return c.create(year, month/3*3+3, 0, 23, 59, 59, 999999999)
+	return c.create(year, month/3*3+3, 0, MaxHour, MaxMinute, MaxSecond, MaxNanosecond)
 }
 
 // IsSpring reports whether is spring.

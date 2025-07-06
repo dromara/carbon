@@ -5,7 +5,7 @@ func (c Carbon) StartOfCentury() Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	return c.create(c.Year()/YearsPerCentury*YearsPerCentury, 1, 1, 0, 0, 0, 0)
+	return c.create(c.Year()/YearsPerCentury*YearsPerCentury, MinMonth, MinDay, MinHour, MinMinute, MinSecond, MinNanosecond)
 }
 
 // EndOfCentury returns a Carbon instance for end of the century.
@@ -13,7 +13,7 @@ func (c Carbon) EndOfCentury() Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	return c.create(c.Year()/YearsPerCentury*YearsPerCentury+99, 12, 31, 23, 59, 59, 999999999)
+	return c.create(c.Year()/YearsPerCentury*YearsPerCentury+99, MaxMonth, MaxDay, MaxHour, MaxMinute, MaxSecond, MaxNanosecond)
 }
 
 // StartOfDecade returns a Carbon instance for start of the decade.
@@ -21,7 +21,7 @@ func (c Carbon) StartOfDecade() Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	return c.create(c.Year()/YearsPerDecade*YearsPerDecade, 1, 1, 0, 0, 0, 0)
+	return c.create(c.Year()/YearsPerDecade*YearsPerDecade, MinMonth, MinDay, MinHour, MinMinute, MinSecond, MinNanosecond)
 }
 
 // EndOfDecade returns a Carbon instance for end of the decade.
@@ -29,7 +29,7 @@ func (c Carbon) EndOfDecade() Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	return c.create(c.Year()/YearsPerDecade*YearsPerDecade+9, 12, 31, 23, 59, 59, 999999999)
+	return c.create(c.Year()/YearsPerDecade*YearsPerDecade+9, MaxMonth, MaxDay, MaxHour, MaxMinute, MaxSecond, MaxNanosecond)
 }
 
 // StartOfYear returns a Carbon instance for start of the year.
@@ -37,7 +37,7 @@ func (c Carbon) StartOfYear() Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	return c.create(c.Year(), 1, 1, 0, 0, 0, 0)
+	return c.create(c.Year(), MinMonth, MinDay, MinHour, MinMinute, MinSecond, MinNanosecond)
 }
 
 // EndOfYear returns a Carbon instance for end of the year.
@@ -45,7 +45,7 @@ func (c Carbon) EndOfYear() Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	return c.create(c.Year(), 12, 31, 23, 59, 59, 999999999)
+	return c.create(c.Year(), MaxMonth, MaxDay, MaxHour, MaxMinute, MaxSecond, MaxNanosecond)
 }
 
 // StartOfQuarter returns a Carbon instance for start of the quarter.
@@ -53,8 +53,8 @@ func (c Carbon) StartOfQuarter() Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	year, quarter, day := c.Year(), c.Quarter(), 1
-	return c.create(year, 3*quarter-2, day, 0, 0, 0, 0)
+	year, quarter, day := c.Year(), c.Quarter(), MinDay
+	return c.create(year, 3*quarter-2, day, MinHour, MinMinute, MinSecond, MinNanosecond)
 }
 
 // EndOfQuarter returns a Carbon instance for end of the quarter.
@@ -65,11 +65,11 @@ func (c Carbon) EndOfQuarter() Carbon {
 	year, quarter, day := c.Year(), c.Quarter(), 30
 	switch quarter {
 	case 1, 4:
-		day = 31
+		day = MaxDay
 	case 2, 3:
 		day = 30
 	}
-	return c.create(year, 3*quarter, day, 23, 59, 59, 999999999)
+	return c.create(year, 3*quarter, day, MaxHour, MaxMinute, MaxSecond, MaxNanosecond)
 }
 
 // StartOfMonth returns a Carbon instance for start of the month.
@@ -78,7 +78,7 @@ func (c Carbon) StartOfMonth() Carbon {
 		return c
 	}
 	year, month, _ := c.Date()
-	return c.create(year, month, 1, 0, 0, 0, 0)
+	return c.create(year, month, MinDay, MinHour, MinMinute, MinSecond, MinNanosecond)
 }
 
 // EndOfMonth returns a Carbon instance for end of the month.
@@ -87,7 +87,7 @@ func (c Carbon) EndOfMonth() Carbon {
 		return c
 	}
 	year, month, _ := c.Date()
-	return c.create(year, month+1, 0, 23, 59, 59, 999999999)
+	return c.create(year, month+1, 0, MaxHour, MaxMinute, MaxSecond, MaxNanosecond)
 }
 
 // StartOfWeek returns a Carbon instance for start of the week.
@@ -120,7 +120,7 @@ func (c Carbon) StartOfDay() Carbon {
 		return c
 	}
 	year, month, day := c.Date()
-	return c.create(year, month, day, 0, 0, 0, 0)
+	return c.create(year, month, day, MinHour, MinMinute, MinSecond, MinNanosecond)
 }
 
 // EndOfDay returns a Carbon instance for end of the day.
@@ -129,7 +129,7 @@ func (c Carbon) EndOfDay() Carbon {
 		return c
 	}
 	year, month, day := c.Date()
-	return c.create(year, month, day, 23, 59, 59, 999999999)
+	return c.create(year, month, day, MaxHour, MaxMinute, MaxSecond, MaxNanosecond)
 }
 
 // StartOfHour returns a Carbon instance for start of the hour.
@@ -138,7 +138,7 @@ func (c Carbon) StartOfHour() Carbon {
 		return c
 	}
 	year, month, day := c.Date()
-	return c.create(year, month, day, c.Hour(), 0, 0, 0)
+	return c.create(year, month, day, c.Hour(), MinMinute, MinSecond, MinNanosecond)
 }
 
 // EndOfHour returns a Carbon instance for end of the hour.
@@ -147,7 +147,7 @@ func (c Carbon) EndOfHour() Carbon {
 		return c
 	}
 	year, month, day := c.Date()
-	return c.create(year, month, day, c.Hour(), 59, 59, 999999999)
+	return c.create(year, month, day, c.Hour(), MaxMinute, MaxSecond, MaxNanosecond)
 }
 
 // StartOfMinute returns a Carbon instance for start of the minute.
@@ -156,7 +156,7 @@ func (c Carbon) StartOfMinute() Carbon {
 		return c
 	}
 	year, month, day, hour, minute, _ := c.DateTime()
-	return c.create(year, month, day, hour, minute, 0, 0)
+	return c.create(year, month, day, hour, minute, MinSecond, MinNanosecond)
 }
 
 // EndOfMinute returns a Carbon instance for end of the minute.
@@ -165,7 +165,7 @@ func (c Carbon) EndOfMinute() Carbon {
 		return c
 	}
 	year, month, day, hour, minute, _ := c.DateTime()
-	return c.create(year, month, day, hour, minute, 59, 999999999)
+	return c.create(year, month, day, hour, minute, MaxSecond, MaxNanosecond)
 }
 
 // StartOfSecond returns a Carbon instance for start of the second.
@@ -174,7 +174,7 @@ func (c Carbon) StartOfSecond() Carbon {
 		return c
 	}
 	year, month, day, hour, minute, second := c.DateTime()
-	return c.create(year, month, day, hour, minute, second, 0)
+	return c.create(year, month, day, hour, minute, second, MinNanosecond)
 }
 
 // EndOfSecond returns a Carbon instance for end of the second.
@@ -183,5 +183,5 @@ func (c Carbon) EndOfSecond() Carbon {
 		return c
 	}
 	year, month, day, hour, minute, second := c.DateTime()
-	return c.create(year, month, day, hour, minute, second, 999999999)
+	return c.create(year, month, day, hour, minute, second, MaxNanosecond)
 }

@@ -14,20 +14,20 @@ func ZeroValue() Carbon {
 
 // EpochValue returns the unix epoch value of Carbon instance.
 func EpochValue() Carbon {
-	return NewCarbon(time.Date(EpochYear, 1, 1, 0, 0, 0, 0, time.UTC))
+	return NewCarbon(time.Date(EpochYear, MinMonth, MinDay, MinHour, MinMinute, MinSecond, MinNanosecond, time.UTC))
 }
 
 // MaxValue returns the maximum value of Carbon instance.
 func MaxValue() Carbon {
 	c := NewCarbon()
-	c.time = time.Date(9999, time.December, 31, 23, 59, 59, 999999999, time.UTC)
+	c.time = time.Date(MaxYear, time.December, MaxDay, MaxHour, MaxMinute, MaxSecond, MaxNanosecond, time.UTC)
 	return c
 }
 
 // MinValue returns the minimum value of Carbon instance.
 func MinValue() Carbon {
 	c := NewCarbon()
-	c.time = time.Date(1, time.January, 1, 0, 0, 0, 0, time.UTC)
+	c.time = time.Date(MinYear, time.January, MinDay, MinHour, MinMinute, MinSecond, MinNanosecond, time.UTC)
 	return c
 }
 
