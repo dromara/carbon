@@ -33,3 +33,79 @@ func TestNewCarbon(t *testing.T) {
 		assert.Equal(t, t2.String(), c2.ToString())
 	})
 }
+
+func TestCarbon_Sleep(t *testing.T) {
+	t.Run("sleep in normal mode", func(t *testing.T) {
+		ClearTestNow()
+		assert.False(t, IsTestNow())
+
+		c := NewCarbon()
+		start := time.Now()
+
+		c.Sleep(1 * time.Millisecond)
+
+		duration := time.Since(start)
+		assert.GreaterOrEqual(t, duration, 1*time.Millisecond)
+	})
+
+	t.Run("sleep in test mode", func(t *testing.T) {
+		testNow := Parse("2020-08-05 13:14:15")
+		SetTestNow(testNow)
+		defer ClearTestNow()
+
+		assert.True(t, IsTestNow())
+		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", Now().ToString())
+
+		c := NewCarbon()
+		c.Sleep(1 * time.Hour)
+
+		assert.Equal(t, "2020-08-05 14:14:15 +0000 UTC", Now().ToString())
+	})
+
+	t.Run("sleep zero duration", func(t *testing.T) {
+		testNow := Parse("2020-08-05 13:14:15")
+		SetTestNow(testNow)
+		defer ClearTestNow()
+
+		assert.True(t, IsTestNow())
+		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", Now().ToString())
+
+		c := NewCarbon()
+		c.Sleep(0)
+
+		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", Now().ToString())
+	})
+
+	t.Run("sleep negative duration", func(t *testing.T) {
+		testNow := Parse("2020-08-05 13:14:15")
+		SetTestNow(testNow)
+		defer ClearTestNow()
+
+		assert.True(t, IsTestNow())
+		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", Now().ToString())
+
+		c := NewCarbon()
+		c.Sleep(-1 * time.Hour)
+
+		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", Now().ToString())
+	})
+
+	t.Run("sleep multiple times", func(t *testing.T) {
+		testNow := Parse("2020-08-05 13:14:15")
+		SetTestNow(testNow)
+		defer ClearTestNow()
+
+		assert.True(t, IsTestNow())
+		assert.Equal(t, "2020-08-05 13:14:15 +0000 UTC", Now().ToString())
+
+		c := NewCarbon()
+		c.Sleep(30 * time.Minute)
+		assert.Equal(t, "2020-08-05 13:44:15 +0000 UTC", Now().ToString())
+
+		c.Sleep(15 * time.Minute)
+		assert.Equal(t, "2020-08-05 13:59:15 +0000 UTC", Now().ToString())
+
+		c.Sleep(45 * time.Second)
+		assert.Equal(t, "2020-08-05 14:00:00 +0000 UTC", Now().ToString())
+	})
+}

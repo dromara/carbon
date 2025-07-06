@@ -44,3 +44,12 @@ func NewCarbon(stdTime ...time.Time) Carbon {
 	c.loc, c.Error = parseTimezone(DefaultTimezone)
 	return c
 }
+
+// Sleep sleeps for the specified duration like time.Sleep.
+func (c Carbon) Sleep(d time.Duration) {
+	if IsTestNow() && d > 0 {
+		frozenNow.testNow = frozenNow.testNow.AddDuration(d.String())
+		return
+	}
+	time.Sleep(d)
+}
