@@ -6,6 +6,18 @@ head:
 ---
 
 # 更新日志
+## [v2.6.10](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-07-07)
+
+- 将`日语`翻译文件从 `jp.json` 改成 `ja.json`，说明文档从 `README.jp.md` 更名为 `README.ja.md`，以符合 [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) 标准
+- 移除已弃用的 `ParseWithLayouts` 方法，用 `ParseByLayouts` 方法替代
+- 移除已弃用的  `ParseWithFormats` 方法，用 `ParseByFormats` 方法替代
+- 移除已弃用的 `CleanTestNow` 方法，用 `ClearTestNow` 方法替代
+- 移除 `ParseByLayout` 和 `ParseByFormat` 方法对`时间戳`字符串的解析支持，解析`时间戳`请使用 `CreateFromTimestamp`, `CreateFromTimestampMilli`, `CreateFromTimestampMicro`, `CreateFromTimestampNano` 方法
+- 优化 `helper.go` 里 `getAbsValue` 方法，用`位操作`替换条件判断
+- 优化 `frozen.go` 文件里时间冻结相关方法，用`原子操作`减少锁竞争，优化内存分配
+- 优化基准测试文件，覆盖`串行测试`、`并行测试`和`并发测试`
+- 新增 `Sleep` 方法及相关`单元测试`、`基准测试`和`示例文件`
+- 新增数字常量，如 `MaxYear`, `MinYear`, `MaxMonth`, `MinMonth`, `MaxDay`, `MinDay` 等，并使用这些常量替换硬编码
 
 ## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-28)
 

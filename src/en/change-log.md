@@ -6,6 +6,18 @@ head:
 ---
 
 # Change Log
+## [v2.6.10](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-07-07)
+
+- Change `Japanese` translation file from `jp.json` to `ja.json` and rename document from `README.jp.md` to `README.ja.md` to comply with the [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) standard
+- Remove deprecated `ParseWithLayouts` method and replace with `ParseByLayouts` method
+- Remove deprecated `ParseWithFormats` method and replace with `ParseByFormats` method
+- Remove deprecated `CleanTestNow` method and replace with `ClearTestNow` method
+- Remove parsing support for timestamp strings from `ParseByLayout` and `ParseByFormat` methods, use` CreateFromTimestamp`, `CreateFromTimestampMilli`, `CreateFromTimestampMicro`, `CreateFromTimestampNano` to parse timestamp strings
+- Optimize `getAbsValue` method in `helper.go` to replace conditional judgments with `bitwise operation`
+- Optimize the methods related to time freezing in `frozen.go`, reduce lock contention using `atomic operation` and optimize memory allocation
+- Optimize benchmark test files to cover `serial` testing, `parallel` testing and `concurrent` testing
+- Add `Sleep` method and related `unit tests`, `benchmark tests`, and `example file`
+- Add number constants such as `MaxYear`, `MinYear`, `MaxMonth`, `MinMonth`, `MaxDay`, `MinDay` etc. and replace hard coded with these constants
 
 ## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-28)
 - Remove the implementation of the `GormDataType` interface for `gorm`

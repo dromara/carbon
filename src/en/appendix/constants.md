@@ -2,7 +2,7 @@
 
 ## Version constants
 ```go
-carbon.Version // 2.6.9
+carbon.Version // 2.6.10
 ```
 
 ## Timezone constants
@@ -144,6 +144,22 @@ carbon.SecondsPerWeek     // 604800
 carbon.SecondsPerDay      // 86400
 carbon.SecondsPerHour     // 3600
 carbon.SecondsPerMinute   // 60
+
+carbon.EpochYear     // 1970
+carbon.MaxYear       // 9999
+carbon.MinYear       // 1
+carbon.MaxMonth      // 12
+carbon.MinMonth      // 1
+carbon.MaxDay        // 31
+carbon.MinDay        // 1
+carbon.MaxHour       // 23
+carbon.MinHour       // 0
+carbon.MaxMinute     // 59
+carbon.MinMinute     // 0
+carbon.MaxSecond     // 59
+carbon.MinSecond     // 0
+carbon.MaxNanosecond // 999999999
+carbon.MinNanosecond // 0
 ```
 
 ## Layout constants
