@@ -1,4 +1,17 @@
 # 変更履歴
+## [v2.6.10](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-07-07)
+
+- `日本語`翻訳ファイルを`jp.json`から`ja.json`に変更し、説明文書を`README.jp.md`から`README.ja.md`に変更して、[ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)標準に準拠
+- 非推奨の`ParseWithLayouts`メソッドを削除し、`ParseByLayouts`メソッドで置き換え
+- 非推奨の`ParseWithFormats`メソッドを削除し、`ParseByFormats`メソッドで置き換え
+- 非推奨の`CleanTestNow`メソッドを削除し、`ClearTestNow`メソッドで置き換え
+- `ParseByLayout`と`ParseByFormat`メソッドの`タイムスタンプ`文字列解析サポートを削除、`タイムスタンプ`の解析には`CreateFromTimestamp`、`CreateFromTimestampMilli`、`CreateFromTimestampMicro`、`CreateFromTimestampNano`メソッドを使用
+- `helper.go`の`getAbsValue`メソッドを最適化し、条件判断を`ビット演算`で置き換え
+- `frozen.go`ファイルの時間凍結関連メソッドを最適化し、`アトミック操作`でロック競合を削減し、メモリ割り当てを最適化
+- ベンチマークテストファイルを最適化し、`シーケンシャルテスト`、`パラレルテスト`、`コンカレントテスト`をカバー
+- `Sleep`メソッドと関連する`ユニットテスト`、`ベンチマークテスト`、`サンプルファイル`を追加
+- `MaxYear`、`MinYear`、`MaxMonth`、`MinMonth`、`MaxDay`、`MinDay`などの数値定数を追加し、これらの定数を使用してハードコーディングを置き換え
+
 ## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-28)
 
 - `gorm` の `GormDataType` インタフェースの実装の削除
