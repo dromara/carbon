@@ -21,7 +21,7 @@ export const en = defineConfig({
 
     footer: {
       message: 'Released under the MIT License, unauthorized reproduction is prohibited in any form',
-      copyright: `Copyright © 2024-${new Date().getFullYear()} carbon <a href="https://beian.miit.gov.cn" target="_blank">京ICP备19041346号-7</a>`
+      copyright: `Copyright © 2020-${new Date().getFullYear()} carbon team`
     },
 
     outline: {

@@ -21,7 +21,7 @@ export const ja = defineConfig({
 
         footer: {
             message: 'MITライセンスに基づいて公開されており、許可なく複製することは禁止されています',
-            copyright: `無断転載を禁じます © 2024-${new Date().getFullYear()} carbon <a href="https://beian.miit.gov.cn" target="_blank">京ICP备19041346号-7</a>`
+            copyright: `無断転載を禁じます © 2020-${new Date().getFullYear()} carbon team`
         },
 
         docFooter: {

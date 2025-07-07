@@ -21,7 +21,7 @@ export const zh = defineConfig({
 
         footer: {
             message: '基于 MIT 许可发布，未经许可禁止任何形式的转载',
-            copyright: `版权所有 © 2024-${new Date().getFullYear()} carbon <a href="https://beian.miit.gov.cn" target="_blank">京ICP备19041346号-7</a>`
+            copyright: `版权所有 © 2020-${new Date().getFullYear()} carbon team <a href="https://beian.miit.gov.cn" target="_blank">京ICP备19041346号-7</a>`
         },
 
         docFooter: {
