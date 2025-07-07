@@ -16,6 +16,7 @@ head:
 - 优化 `helper.go` 里 `getAbsValue` 方法，用`位操作`替换条件判断
 - 优化 `frozen.go` 文件里时间冻结相关方法，用`原子操作`减少锁竞争，优化内存分配
 - 优化基准测试文件，覆盖`串行测试`、`并行测试`和`并发测试`
+- 新增韩语文档 `README.ko.md`
 - 新增 `Sleep` 方法及相关`单元测试`、`基准测试`和`示例文件`
 - 新增数字常量，如 `MaxYear`, `MinYear`, `MaxMonth`, `MinMonth`, `MaxDay`, `MinDay` 等，并使用这些常量替换硬编码
 

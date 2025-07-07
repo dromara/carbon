@@ -16,6 +16,7 @@ head:
 - Optimize `getAbsValue` method in `helper.go` to replace conditional judgments with `bitwise operation`
 - Optimize the methods related to time freezing in `frozen.go`, reduce lock contention using `atomic operation` and optimize memory allocation
 - Optimize benchmark test files to cover `serial` testing, `parallel` testing and `concurrent` testing
+- Add Korean readme document `README.ko.md`
 - Add `Sleep` method and related `unit tests`, `benchmark tests`, and `example file`
 - Add number constants such as `MaxYear`, `MinYear`, `MaxMonth`, `MinMonth`, `MaxDay`, `MinDay` etc. and replace hard coded with these constants
 
