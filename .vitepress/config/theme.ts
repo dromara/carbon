@@ -1,6 +1,7 @@
 import {search as zhSearch} from './locales/zh'
 import {search as enSearch} from './locales/en'
 import {search as jaSearch} from "./locales/ja";
+import {search as koSearch} from "./locales/ko";
 import {type DefaultTheme} from 'vitepress'
 
 export const themeConfig: DefaultTheme.Config = {
@@ -13,7 +14,7 @@ export const themeConfig: DefaultTheme.Config = {
   search: {
     provider: 'local',
     options: {
-      locales: { ...zhSearch, ...enSearch, ...jaSearch  }
+      locales: { ...zhSearch, ...enSearch, ...jaSearch, ...koSearch  }
     }
   },
 }
