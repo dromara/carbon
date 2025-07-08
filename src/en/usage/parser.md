@@ -11,7 +11,7 @@ head:
 # Parser
 
 This series of methods don't support `timestamp` string parsing. 
-To parse timestamp, please use methods such as `CreateFromTimestamp` or `CreateFromTimestampXXX`
+To parse timestamp, please use `CreateFromTimestamp`, `CreateFromTimestampMilli`, `CreateFromTimestampMicro`, `CreateFromTimestampNano` methods
 
 ## Parse by default
 Parse a time string as a `Carbon` instance by default layouts

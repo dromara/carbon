@@ -21,10 +21,11 @@ carbon.Max(c1, c2, c3) // c3
 // 返回最小的 Carbon 实例
 carbon.Min(c1, c2, c3) // c1
 
+c := carbon.Parse("2020-07-01")
 // 返回最近的 Carbon 实例
-c1.Closest(c2, c3) // c2
+c.Closest(c1, c2, c3) // c1
 // 返回最远的 Carbon 实例
-c1.Farthest(c2, c3) // c3
+c.Farthest(c1, c2, c3) // c3
 ```
 
 ## 极值边界

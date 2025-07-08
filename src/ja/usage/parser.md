@@ -1,5 +1,5 @@
 # 时间解析
-この一連のメソッドは `タイムスタンプ` 文字列の解析をサポートしていません。タイムスタンプを解析するには、`CreateFromTimestamp` や `CreateFromTimestampXXX` などのメソッドを使用してください
+この一連のメソッドは `タイムスタンプ` 文字列の解析をサポートしていません。タイムスタンプを解析するには、`CreateFromTimestamp`、`CreateFromTimestampMilli`、`CreateFromTimestampMicro`、`CreateFromTimestampNano` メソッドを使用してください
 
 ## デフォルトの `レイアウトテンプレート` による解析
 デフォルトの `レイアウトテンプレート` を使用して時間文字列を `Carbon` インスタンスに解析する

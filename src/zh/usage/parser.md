@@ -9,7 +9,7 @@ head:
 ---
 
 # 时间解析
-该系列方法不支持 `时间戳` 字符串解析，解析时间戳请使用 `CreateFromTimestamp` 或 `CreateFromTimestampXXX` 等方法
+该系列方法不支持 `时间戳` 字符串解析，解析时间戳请使用 `CreateFromTimestamp`, `CreateFromTimestampMilli`, `CreateFromTimestampMicro`, `CreateFromTimestampNano` 方法
 
 ## 通过默认 `布局模板` 解析
 通过默认 `布局模板` 将时间字符串解析成 `Carbon` 实例

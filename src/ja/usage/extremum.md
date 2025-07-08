@@ -11,10 +11,11 @@ carbon.Max(c1, c2, c3) // c3
 // 最小の Carbon インスタンスを返します
 carbon.Min(c1, c2, c3) // c1
 
+c := carbon.Parse("2020-07-01")
 // 最近のCarbonインスタンスを返す
-c1.Closest(c2, c3) // c2
+c.Closest(c1, c2, c3) // c1
 // 遠いCarbonインスタンスを返す
-c1.Farthest(c2, c3) // c3
+c.Farthest(c1, c2, c3) // c3
 ```
 
 ## 極値境界

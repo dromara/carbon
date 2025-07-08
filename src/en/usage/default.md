@@ -31,7 +31,7 @@ carbon.SetDefault(carbon.Default{
 })
 ```
 
-## Resetting default value
+## Reset default value
 ```go
 carbon.ResetDefault()
 ```

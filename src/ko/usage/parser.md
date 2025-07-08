@@ -9,7 +9,7 @@ head:
 ---
 
 # 시간 파싱
-이 시리즈 메서드는 `타임스탬프` 문자열 파싱을 지원하지 않습니다. 타임스탬프를 파싱하려면 `CreateFromTimestamp` 또는 `CreateFromTimestampXXX` 등의 메서드를 사용하세요
+이 메서드 시리즈는 `타임스탬프` 문자열 구문 분석을 지원하지 않습니다. 타임스탬프를 구문 분석하려면 `CreateFromTimestamp`, `CreateFromTimestampMilli`, `CreateFromTimestampMicro`, `CreateFromTimestampNano` 메서드를 사용하세요.
 
 ## 기본 `레이아웃 템플릿`을 통한 파싱
 기본 `레이아웃 템플릿`을 통해 시간 문자열을 `Carbon` 인스턴스로 파싱합니다
