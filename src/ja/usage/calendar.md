@@ -109,11 +109,11 @@ carbon.Parse("2020-08-05").Lunar().ToDateString() // 二零二零年六月十六
 ### `旧暦`を`西暦`に変換する
 ```go
 // 2023 年の旧暦 12 月 11 日をグレゴリオ暦に変換します
-carbon.CreateFromLunar(2023, 12, 11, 0, 0, 0, false).ToDateTimeString() // 2024-01-21 00:00:00
+carbon.CreateFromLunar(2023, 12, 11, false).ToDateTimeString() // 2024-01-21 00:00:00
 // 旧暦の 2023 年 2 月 11 日をグレゴリオ暦に変換します
-carbon.CreateFromLunar(2023, 2, 11, 0, 0, 0, false).ToDateTimeString() // 2023-03-02 00:00:00
+carbon.CreateFromLunar(2023, 2, 11, false).ToDateTimeString() // 2023-03-02 00:00:00
 // 旧暦 2023 年、閏 2 月 11 日をグレゴリオ暦に変換します
-carbon.CreateFromLunar(2023, 2, 11, 0, 0, 0, true).ToDateTimeString() // 2023-04-01 00:00:00
+carbon.CreateFromLunar(2023, 2, 11, true).ToDateTimeString() // 2023-04-01 00:00:00
 ```
 
 ### 日付判断

@@ -120,11 +120,11 @@ carbon.Parse("2020-08-05").Lunar().ToDateString() // 二零二零年六月十六
 
 ```go
 // Convert the Lunar Calendar December 11, 2023 to the gregorian calendar
-carbon.CreateFromLunar(2023, 12, 11, 0, 0, 0, false).ToDateTimeString() // 2024-01-21 00:00:00
+carbon.CreateFromLunar(2023, 12, 11, false).ToDateTimeString() // 2024-01-21 00:00:00
 // Convert lunar calendar February 11, 2023 to gregorian calendar
-carbon.CreateFromLunar(2023, 2, 11, 0, 0, 0, false).ToDateTimeString() // 2024-03-02 00:00:00
+carbon.CreateFromLunar(2023, 2, 11, false).ToDateTimeString() // 2023-03-02 00:00:00
 // Convert the Lunar Calendar Leap February 11, 2024 to the gregorian calendar
-carbon.CreateFromLunar(2023, 2, 11, 0, 0, 0, true).ToDateTimeString() // 2023-04-01 00:00:00
+carbon.CreateFromLunar(2023, 2, 11, true).ToDateTimeString() // 2023-04-01 00:00:00
 ```
 
 ### Lunar compare
