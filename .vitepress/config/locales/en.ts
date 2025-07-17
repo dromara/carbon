@@ -11,7 +11,7 @@ export const en = defineConfig({
     nav: nav(),
 
     sidebar: {
-      '/': { base: '/', items: sidebarGuide() },
+      '/': { items: sidebarGuide() },
     },
 
     editLink: {
@@ -116,6 +116,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         {text: 'constants', link: 'appendix/constants'},
         {text: 'Format signs', link: 'appendix/format-signs'},
+        {text: 'Test reports', link: 'https://github.com/dromara/carbon/blob/master/test_report.en.md', target: '_blank'},
       ]
     },
   ]

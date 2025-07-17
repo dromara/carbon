@@ -128,6 +128,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             items: [
                 {text: 'コンスタント', link: 'appendix/constants'},
                 {text: '書式設定記号', link: 'appendix/format-signs'},
+                {text: 'テストレポート', link: 'https://github.com/dromara/carbon/blob/master/test_report.ja.md', target: '_blank'},
             ]
         },
     ]

@@ -128,6 +128,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             items: [
                 {text: '내장 상수', link: 'appendix/constants'},
                 {text: '형식 기호', link: 'appendix/format-signs'},
+                {text: '테스트 보고서', link: 'https://github.com/dromara/carbon/blob/master/test_report.ko.md', target: '_blank'},
             ]
         },
     ]
