@@ -68,9 +68,9 @@ carbon.Parse("2020-08-05 13:14:15").SetWeekStartsAt(carbon.Monday).EndOfWeek().T
 
 ## 일 경계
 ```go
-// 오늘 시작 시간
+// 본일 시작 시간
 carbon.Parse("2020-08-05 13:14:15").StartOfDay().ToDateTimeString() // 2020-08-05 00:00:00
-// 오늘 종료 시간
+// 본일 종료 시간
 carbon.Parse("2020-08-05 13:14:15").EndOfDay().ToDateTimeString() // 2020-08-05 23:59:59
 ```
 

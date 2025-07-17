@@ -15,6 +15,7 @@ head:
 - 儒略日/简化儒略日
 - 中国农历
 - 波斯历(伊朗历)
+- 希伯来历(犹太历)
 
 ## 儒略日/简化儒略日
 
@@ -91,12 +92,6 @@ carbon.Parse("2020-08-05").Lunar().Month() // 6
 carbon.Parse("2020-08-05").Lunar().LeapMonth() // 4
 // 获取农历日期
 carbon.Parse("2020-08-05").Lunar().Day() // 16
-// 获取农历时辰
-carbon.Parse("2020-08-05").Lunar().Hour() // 13
-// 获取农历分钟
-carbon.Parse("2020-08-05").Lunar().Minute() // 14
-// 获取农历秒数
-carbon.Parse("2020-08-05").Lunar().Second() // 15
 
 // 获取农历日期时间字符串
 carbon.Parse("2020-08-05").Lunar().String() // 2020-06-16
@@ -119,11 +114,11 @@ carbon.Parse("2020-08-05").Lunar().ToDateString() // 二零二零年六月十六
 ### 将 `农历` 转化成 `公历`
 ```go
 // 将农历 二零二三年腊月十一 转化为 公历
-carbon.CreateFromLunar(2023, 12, 11, false).ToDateTimeString() // 2024-01-21 00:00:00
+carbon.CreateFromLunar(2023, 12, 11, false).ToDateString() // 2024-01-21
 // 将农历 二零二三年二月十一 转化为 公历
-carbon.CreateFromLunar(2023, 2, 11, false).ToDateTimeString() // 2023-03-02 00:00:00
+carbon.CreateFromLunar(2023, 2, 11, false).ToDateString() // 2023-03-02
 // 将农历 二零二三年闰二月十一 转化为 公历
-carbon.CreateFromLunar(2023, 2, 11, true).ToDateTimeString() // 2023-04-01 00:00:00
+carbon.CreateFromLunar(2023, 2, 11, true).ToDateString() // 2023-04-01
 ```
 
 ### 日期判断
@@ -174,12 +169,6 @@ carbon.Parse("2020-08-05").Persian().Year() // 1399
 carbon.Parse("2020-08-05").Persian().Month() // 5
 // 获取波斯历日期
 carbon.Parse("2020-08-05").Persian().Day() // 15
-// 获取波斯历小时
-carbon.Parse("2020-08-05").Persian().Hour() // 13
-// 获取波斯历分钟
-carbon.Parse("2020-08-05").Persian().Minute() // 14
-// 获取波斯历秒数
-carbon.Parse("2020-08-05").Persian().Second() // 15
 
 // 获取波斯历日期时间字符串
 carbon.Parse("2020-08-05").Persian().String() // 1399-05-15
@@ -190,28 +179,18 @@ carbon.Parse("2020-08-05").Persian().ToMonthString() // Mordad
 carbon.Parse("2020-08-05").Persian().ToMonthString("en") // Mordad
 carbon.Parse("2020-08-05").Persian().ToMonthString("fa") // مرداد
 
-// 获取简写波斯历月字符串
-carbon.Parse("2020-08-05").Persian().ToShortMonthString() // Mor
-carbon.Parse("2020-08-05").Persian().ToShortMonthString("en") // Mor
-carbon.Parse("2020-08-05").Persian().ToShortMonthString("fa") // مرد
-
 // 获取波斯历周字符串
 carbon.Parse("2020-08-05").Persian().ToWeekString() // Chaharshanbeh
 carbon.Parse("2020-08-05").Persian().ToWeekString("en") // Chaharshanbeh
 carbon.Parse("2020-08-05").Persian().ToWeekString("fa") // چهارشنبه
-
-// 获取简写波斯历周字符串
-carbon.Parse("2020-08-05").Persian().ToShortWeekString() // Cha
-carbon.Parse("2020-08-05").Persian().ToShortWeekString("en") // Cha
-carbon.Parse("2020-08-05").Persian().ToShortWeekString("fa") // د
 ```
 
 ### 将 `波斯历` 转化成 `公历`
 ```go
-carbon.CreateFromPersian(1, 1, 1).ToDateTimeString() // 2016-03-20 00:00:00
-carbon.CreateFromPersian(622, 1, 1).ToDateTimeString() // 1243-03-21 00:00:00
-carbon.CreateFromPersian(1395, 1, 1).ToDateTimeString() // 2016-03-20 00:00:00
-carbon.CreateFromPersian(9377, 1, 1).ToDateTimeString() // 9998-03-19 00:00:00
+carbon.CreateFromPersian(1, 1, 1).ToDateString() // 2016-03-20
+carbon.CreateFromPersian(622, 1, 1).ToDateString() // 1243-03-21
+carbon.CreateFromPersian(1395, 1, 1).ToDateString() // 2016-03-20
+carbon.CreateFromPersian(9377, 1, 1).ToDateString() // 9998-03-19
 ```
 
 ### 日期判断
@@ -229,4 +208,48 @@ carbon.CreateFromPersian(1395, 1, 1).IsLeapYear() // true
 carbon.CreateFromPersian(9377, 1, 1).IsLeapYear() // true
 carbon.CreateFromPersian(622, 1, 1).IsLeapYear() // false
 carbon.CreateFromPersian(9999, 1, 1).IsLeapYear() // false
+```
+
+## 希伯来历(犹太历)
+
+### 将 `公历` 转换成 `希伯来历`
+```go
+// 获取希伯来历年份
+carbon.Parse("2024-01-01").Hebrew().Year() // 5784
+// 获取希伯来历月份
+carbon.Parse("2024-01-01").Hebrew().Month() // 10
+// 获取希伯来历日期
+carbon.Parse("2024-01-01").Hebrew().Day() // 20
+
+// 获取希伯来历日期时间字符串
+carbon.Parse("2024-01-01").Hebrew().String() // 5784-10-20
+fmt.Printf("%s", carbon.Parse("2024-01-01").Hebrew()) // 5784-10-20
+
+// 获取希伯来历月字符串
+carbon.Parse("2020-08-05").Hebrew().ToMonthString() // Av
+carbon.Parse("2020-08-05").Hebrew().ToMonthString("en") // Av
+carbon.Parse("2020-08-05").Hebrew().ToMonthString("he") // אב
+
+// 获取希伯来历周字符串
+carbon.Parse("2020-08-05").Hebrew().ToWeekString() // Wednesday
+carbon.Parse("2020-08-05").Hebrew().ToWeekString("en") // Wednesday
+carbon.Parse("2020-08-05").Hebrew().ToWeekString("he") // רביעי
+```
+
+### 将 `希伯来历` 转化成 `公历`
+```go
+carbon.CreateFromHebrew(5784, 10, 20).ToDateString() // 2023-12-17
+carbon.CreateFromHebrew(5784, 5, 1).ToDateString() // 2024-07-21
+carbon.CreateFromHebrew(5786, 7, 10).ToDateString() // 2025-09-18
+```
+
+### 日期判断
+```go
+// 是否是合法的希伯来历日期
+carbon.CreateFromHebrew(5780, 14, 1).IsValid() // false
+carbon.CreateFromHebrew(5780, 10, 30).IsValid() // true
+
+// 是否是希伯来历闰年
+carbon.CreateFromHebrew(5784, 1, 1).IsLeapYear() // true
+carbon.CreateFromHebrew(5788, 1, 1).IsLeapYear() // false
 ```

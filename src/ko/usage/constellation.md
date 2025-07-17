@@ -13,33 +13,33 @@ head:
 ## 별자리 이름
 ```go
 carbon.Parse("2020-08-05 13:14:15").Constellation() // Leo
-carbon.Parse("2020-08-05 13:14:15").SetLocale("ko-KR").Constellation() // 사자자리
+carbon.Parse("2020-08-05 13:14:15").SetLocale("ko").Constellation() // 사자자리
 ```
 
 ## 별자리 판단
 ```go
-// 양자리인지 여부
+// 양자리인지
 carbon.Parse("2020-08-05 13:14:15").IsAries() // false
-// 황소자리인지 여부
+// 황소자리인지
 carbon.Parse("2020-08-05 13:14:15").IsTaurus() // false
-// 쌍둥이자리인지 여부
+// 쌍둥이자리인지
 carbon.Parse("2020-08-05 13:14:15").IsGemini() // false
-// 게자리인지 여부
+// 게자리인지
 carbon.Parse("2020-08-05 13:14:15").IsCancer() // false
-// 사자자리인지 여부
+// 사자자리인지
 carbon.Parse("2020-08-05 13:14:15").IsLeo() // true
-// 처녀자리인지 여부
+// 처녀자리인지
 carbon.Parse("2020-08-05 13:14:15").IsVirgo() // false
-// 천칭자리인지 여부
+// 천칭자리인지
 carbon.Parse("2020-08-05 13:14:15").IsLibra() // false
-// 전갈자리인지 여부
+// 전갈자리인지
 carbon.Parse("2020-08-05 13:14:15").IsScorpio() // false
-// 궁수자리인지 여부
+// 궁수자리인지
 carbon.Parse("2020-08-05 13:14:15").IsSagittarius() // false
-// 염소자리인지 여부
+// 염소자리인지
 carbon.Parse("2020-08-05 13:14:15").IsCapricorn() // false
-// 물병자리인지 여부
+// 물병자리인지
 carbon.Parse("2020-08-05 13:14:15").IsAquarius() // false
-// 물고기자리인지 여부
+// 물고기자리인지
 carbon.Parse("2020-08-05 13:14:15").IsPisces() // false
 ``` 

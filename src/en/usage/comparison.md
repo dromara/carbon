@@ -25,16 +25,6 @@ carbon.Parse("2020-08-05").HasError() // false
 
 ## Is compare
 ```go
-// Whether is a nil time
-carbon.NewCarbon().IsNil() // false
-carbon.ZeroValue().IsNil() // false
-carbon.EpochValue().IsNil() // false
-carbon.CreateFromTimestamp(0).IsNil() // false
-carbon.Parse("").IsNil() // true
-carbon.Parse("0").IsNil() // false
-carbon.Parse("xxx").IsNil() // false
-carbon.Parse("2020-08-05").IsNil() // false
-
 // Whether is a zero time(0001-01-01 00:00:00 +0000 UTC)
 carbon.NewCarbon().IsZero() // true
 carbon.ZeroValue().IsZero() // true
