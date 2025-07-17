@@ -11,11 +11,11 @@ head:
 # Calendar
 
 The following calendars are currently supported
-- Gregorian
-- Julian Day/Modified Julian Day
-- Chinese Lunar
-- Persian (Jalaali)
-- Hebrew (Jewish)
+
+- [Julian Day/Modified Julian Day](#julian-day-modified-julian-day)
+- [Chinese Lunar](#chinese-lunar)
+- [Persian (Jalaali)](#persian-jalaali)
+- [Hebrew (Jewish)](#hebrew-jewish)
 
 ## Julian Day/Modified Julian Day
 
@@ -120,7 +120,7 @@ carbon.CreateFromLunar(2023, 2, 11, false).ToDateString() // 2023-03-02
 carbon.CreateFromLunar(2023, 2, 11, true).ToDateString() // 2023-04-01
 ```
 
-### Date Validation
+### Lunar Date Validation
 ```go
 // Whether is a valid lunar date
 carbon.Parse("0000-00-00").Lunar().IsValid() // false
@@ -191,7 +191,7 @@ carbon.CreateFromPersian(1395, 1, 1).ToDateString() // 2016-03-20
 carbon.CreateFromPersian(9377, 1, 1).ToDateString() // 9998-03-19
 ```
 
-### Date Validation
+### Persian Date Validation
 ```go
 // Whether is a valid Persian date
 carbon.CreateFromPersian(1, 1, 1).IsValid() // true
@@ -241,7 +241,7 @@ carbon.CreateFromHebrew(5784, 5, 1).ToDateString() // 2024-07-21
 carbon.CreateFromHebrew(5786, 7, 10).ToDateString() // 2025-09-18
 ```
 
-### Date Validation
+### Hebrew Date Validation
 ```go
 // Whether is a valid Hebrew date
 carbon.CreateFromHebrew(5780, 14, 1).IsValid() // false
