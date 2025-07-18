@@ -1,5 +1,27 @@
 # 変更履歴
-## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-28)
+
+## [v2.6.11](https://github.com/dromara/carbon/compare/v2.6.10...v2.6.11) (2025-07-18)
+
+- `Sleep` を構造体メソッドからグローバルメソッドに変更
+- `ペルシア暦` をリファクタリングし、ベンチマークテストを追加
+- `ヘブライ暦 サポートを追加
+- パフォーマンステストレポートファイルを追加
+
+## [v2.6.10](https://github.com/dromara/carbon/compare/v2.6.9...v2.6.10) (2025-07-07)
+
+- `日本語` 翻訳ファイルを `jp.json` から `ja.json` に変更し、ドキュメントを `README.jp.md` から `README.ja.md` に名前変更して [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) 標準に準拠
+- 非推奨の `ParseWithLayouts` メソッドを削除し、`ParseByLayouts` メソッドに置き換え
+- 非推奨の `ParseWithFormats` メソッドを削除し、`ParseByFormats` メソッドに置き換え
+- 非推奨の `CleanTestNow` メソッドを削除し、`ClearTestNow` メソッドに置き換え
+- `ParseByLayout` と `ParseByFormat` メソッドからタイムスタンプ文字列の解析サポートを削除、タイムスタンプの解析には `CreateFromTimestamp`、`CreateFromTimestampMilli`、`CreateFromTimestampMicro`、`CreateFromTimestampNano` メソッドを使用
+- `helper.go` の `getAbsValue` メソッドを最適化し、条件判断をビット演算に置き換え
+- `frozen.go` ファイルの時間凍結関連メソッドを最適化し、原子操作を使用してロック競合を減らし、メモリ割り当てを最適化
+- ベンチマークテストファイルを最適化し、`シリアルテスト`、`パラレルテスト`、`コンカレントテスト`をカバー
+- 韓国語ドキュメント `README.ko.md` を追加
+- `Sleep` メソッドと関連する`ユニットテスト`、`ベンチマークテスト`、`サンプルファイル`を追加
+- `MaxYear`、`MinYear`、`MaxMonth`、`MinMonth`、`MaxDay`、`MinDay` などの数値定数を追加し、これらの定数でハードコードを置き換え
+
+## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.8...v2.6.9) (2025-06-28)
 
 - `gorm` の `GormDataType` インタフェースの実装の削除
 
@@ -55,14 +77,14 @@
 - データベースフィールドタイプが `nil' だったときのパニックを修正
 - 分割 `database_types.go` に `type_carbon.go`, `type_layout.go`, `type_format.go`, `type_timestamp.go`
 - `LayoutFactory` インターフェイスを `LayoutTyper` に、`SetLayout` メソッドを `Layout` に変更
-- `FormatFactory` インターフェイスを `FormatTyper` と `SeFormat` メソッドを `Format` に変更
-- `TimestampFactory` インターフェイスを `TimestampTyper` と `SePrecision` メソッドを `Precision` に変更
+- `FormatFactory` インターフェイスを `FormatTyper` に、`SetFormat` メソッドを `Format` に変更
+- `TimestampFactory` インターフェイスを `TimestampTyper` に、`SetPrecision` メソッドを `Precision` に変更
 - ベンチマークテストファイルに `b.ResetTimer()` を追加する
 - `Language` 構造の `Copy` メソッドを追加
-- 炭素を追加します。タイムスタンプのタイプアリアスおよびカーボン。NewTimestamp` メソッド
-- 炭素を追加します。TimestampMilli` タイプの別名と `炭素.NewTimestampMilli` メソッド
-- 炭素を追加します。タイムスタンプマイクロ`タイプアリアスと`カーボン。NewTimestampMicro` メソッド
-- 炭素を追加します。タイムスタンプNano`タイプアリアスと`炭素。NewTimestampNano` メソッド
+- `carbon.Timestamp` 型エイリアスと `carbon.NewTimestamp` メソッドを追加
+- `carbon.TimestampMilli` 型エイリアスと `carbon.NewTimestampMilli` メソッドを追加
+- `carbon.TimestampMicro` 型エイリアスと `carbon.NewTimestampMicro` メソッドを追加
+- `carbon.TimestampNano` 型エイリアスと `carbon.NewTimestampNano` メソッドを追加
 - 炭素を追加します。DateTime タイプアリアスと carbonNewDateTime メソッド
 - 炭素を追加します。DateTimeMicro タイプアリアスと `carbon.NewDateTimeMicro` メソッド
 - 炭素を追加します。DateTimeMilli 型の別名と `carbon.NewDateTimeMilli` メソッド
@@ -113,7 +135,7 @@
 ## [v2.6.1](https://github.com/dromara/carbon/compare/v2.6.0...v2.6.1) (2025-03-27)
 
 - 追加 `ParseWithLayouts` と `ParseWithFormats` メソッド
-- インターフェース `formatFactory` `FormatFactory` 、 `formatFactory` インターフェイス `FormatFactory` 、 `formatFactory` インターフェイス `FormatFactory` に名前を変更し、タイプ制約を追加します
+- `formatFactory` インターフェイスを `FormatFactory` に、`layoutFactory` インターフェイスを `LayoutFactory` に、`timestampFactory` インターフェイスを `TimestampFactory` に名前変更し、タイプ制約を追加
 - LayoutType、FormatType、TimestampType、struct メソッドの返り値を time に変更します。
 - `DateTime`, `Date`, `Time` タイプを `struct` から `string` に変更する
 - `TimestampMilli`、`TimestampMicro`、`TimestampNano` タイプを `struct` から `int64` に変更する

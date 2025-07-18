@@ -7,7 +7,7 @@ head:
 
 # 프로젝트 소개
 
-`carbon`은 가벼우면서도 의미론적이고 개발자 친화적인 `golang` 시간 처리 라이브러리로, `어떤` 서드파티 라이브러리에도 의존하지 않으며, `100%` 단위 테스트 커버리지를 가지고 있습니다. [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn")와 [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github")
+`carbon`은 가벼우면서도 의미론적이고 개발자 친화적인 `golang` 시간 처리 라이브러리로, `어떤` 서드파티 라이브러리에도 의존하지 않으며, `100%` 단위 테스트 커버리지를 가지고 있습니다. 
 
 ## 프로젝트 특징
 - 가벼움 & 제로 의존성: 단위 테스트를 제외하고는 `어떤` 서드파티 라이브러리에도 의존하지 않으며, `100%` 단위 테스트 커버리지로 코드 품질과 안정성을 보장합니다

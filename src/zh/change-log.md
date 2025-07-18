@@ -6,7 +6,15 @@ head:
 ---
 
 # 更新日志
-## [v2.6.10](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-07-07)
+
+## [v2.6.11](https://github.com/dromara/carbon/compare/v2.6.10...v2.6.11) (2025-07-18)
+
+- 将 `Sleep` 由结构体方法更改成全局方法
+- 重构 `波斯历` 并添加基准测试
+- 新增 `希伯来历` 支持
+- 新增性能测试报告文件
+
+## [v2.6.10](https://github.com/dromara/carbon/compare/v2.6.9...v2.6.10) (2025-07-07)
 
 - 将`日语`翻译文件从 `jp.json` 改成 `ja.json`，说明文档从 `README.jp.md` 更名为 `README.ja.md`，以符合 [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) 标准
 - 移除已弃用的 `ParseWithLayouts` 方法，用 `ParseByLayouts` 方法替代

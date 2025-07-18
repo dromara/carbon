@@ -1,13 +1,15 @@
-# IndexNow URL 提交工具
+# Carbon 文档 URL 推送工具
 
-这个工具可以自动将 Carbon 文档网站的所有页面 URL 提交到 IndexNow API，帮助搜索引擎快速发现和索引新内容。
+这是一个统一的 Go 工具，用于将 Carbon 文档网站的所有页面 URL 推送到搜索引擎，支持 IndexNow 和百度搜索提交。
 
 ## 📋 功能特性
 
+- ✅ **统一架构**: 基于 `engine.go` 核心引擎和 `main.go` 程序入口的模块化设计
+- ✅ **多平台支持**: 同时支持 IndexNow 和百度搜索提交
 - ✅ **自动读取 URL**: 从 `dist/sitemap.xml` 自动读取所有构建后的页面 URL
-- ✅ **配置验证**: 验证 IndexNow 配置的正确性和密钥文件可访问性
+- ✅ **配置验证**: 完整的配置验证，包括密钥文件可访问性检查
 - ✅ **预览模式**: 预览将要提交的 URL 而不实际提交
-- ✅ **批量提交**: 自动处理大量 URL 的批量提交 (每批最多 10,000 个)
+- ✅ **批量提交**: 自动处理大量 URL 的批量提交 (IndexNow 每批最多 10,000 个)
 - ✅ **错误处理**: 详细的错误信息和故障排除建议
 - ✅ **中文界面**: 完全中文的用户界面和错误信息
 
@@ -37,19 +39,23 @@ cp .env.example .env
 ### 步骤 3: 验证配置
 
 ```bash
-go run indexnow.go --validate
+go run main.go engine.go --validate
 ```
 
 ### 步骤 4: 预览 URL
 
 ```bash
-go run indexnow.go --preview
+go run main.go engine.go --preview
 ```
 
-### 步骤 5: 提交到 IndexNow
+### 步骤 5: 推送到搜索引擎
 
 ```bash
-go run indexnow.go --push
+# 推送到 IndexNow
+go run main.go engine.go --indexnow
+
+# 推送到百度搜索
+go run main.go engine.go --baidu
 ```
 
 ## 📝 环境变量配置
@@ -57,33 +63,44 @@ go run indexnow.go --push
 环境变量文件 `.env` 需要包含以下变量：
 
 ```env
-HOST=carbon.go-pkg.com
-KEY=your-indexnow-key
-KEY_LOCATION=https://carbon.go-pkg.com/your-key.txt
-BASE_URL=https://carbon.go-pkg.com
+INDEXNOW_KEY=your-indexnow-key
+INDEXNOW_SITE=https://carbon.go-pkg.com
 SITEMAP_PATH=../dist/sitemap.xml
+BAIDU_SITE=https://carbon.go-pkg.com
+BAIDU_TOKEN=your-baidu-token
 ```
 
 ### 配置说明
 
-- **HOST**: 网站域名 (不包含协议)
-- **KEY**: IndexNow 密钥字符串
-- **KEY_LOCATION**: 密钥文件的完整 URL (必须与 HOST 域名匹配)
-- **BASE_URL**: 网站的完整 URL (包含协议)
+- **INDEXNOW_KEY**: IndexNow 密钥字符串
+- **INDEXNOW_SITE**: 网站的完整 URL (包含协议)
 - **SITEMAP_PATH**: sitemap.xml 文件的相对路径
+- **BAIDU_SITE**: 百度搜索提交的网站 URL (必须包含协议)
+- **BAIDU_TOKEN**: 百度搜索提交的 token
 
 ## 🔧 命令说明
 
 | 命令 | 描述 |
 |------|------|
-| `go run indexnow.go --validate` | 验证配置文件 |
-| `go run indexnow.go --preview` | 预览 URL (不提交) |
-| `go run indexnow.go --push` | 提交 URL 到 IndexNow |
+| `go run main.go engine.go --validate` | 验证配置文件 |
+| `go run main.go engine.go --preview` | 预览 URL (不提交) |
+| `go run main.go engine.go --indexnow` | 提交 URL 到 IndexNow |
+| `go run main.go engine.go --baidu` | 提交 URL 到百度搜索 |
 
-## 📁 输出文件
+## 📁 文件结构
 
-- `tools/preview_urls.txt`: 包含所有从 sitemap.xml 读取的 URL
-- `tools/.env`: IndexNow 环境变量配置文件
+```
+tools/
+├── engine.go          # 核心逻辑引擎
+├── main.go            # 程序入口
+├── .env               # 环境变量配置文件
+├── .env.example       # 环境变量示例文件
+├── .gitignore         # Git 忽略文件
+├── go.mod             # Go 模块文件
+├── go.sum             # Go 依赖校验文件
+├── README.md          # 说明文档
+└── urls.txt           # 生成的 URL 文件 (运行时生成)
+```
 
 ## 🚨 故障排除
 
@@ -93,21 +110,67 @@ SITEMAP_PATH=../dist/sitemap.xml
    - 确保已运行 `npm run build` 生成 sitemap.xml
    - 检查 `dist/sitemap.xml` 文件是否存在
 
-2. **"keyLocation URL 必须属于 host 域名"**
-   - 确保 keyLocation 的域名与 host 完全匹配
-
-3. **"密钥文件验证失败"**
+2. **"密钥文件验证失败"**
    - 检查密钥文件是否可以公开访问
    - 确认文件内容只包含密钥字符串
 
+3. **"BAIDU_SITE 必须包含协议"**
+   - 确保 BAIDU_SITE 包含 http:// 或 https:// 协议
+
+4. **"over quota" (百度搜索)**
+   - 百度搜索提交配额已用完，等待配额重置或联系百度站长平台
+
 ## 🔍 技术细节
 
-- **URL 来源**: 从构建后的 `dist/sitemap.xml` 读取所有页面 URL
-- **提交限制**: 每次请求最多 10,000 个 URL (自动分批处理)
-- **重试机制**: 内置错误处理和详细错误信息
-- **文件格式**: 生成的 URL 列表保存为纯文本格式，每行一个 URL
+### 架构设计
+
+- **Engine 结构体**: 封装所有核心逻辑
+  - `LoadConfig()`: 加载环境变量配置
+  - `ValidateConfig()`: 验证配置完整性
+  - `ProcessSitemap()`: 解析 sitemap.xml
+  - `GenerateURLs()`: 生成 URL 文件
+  - `SubmitToIndexNow()`: 提交到 IndexNow
+  - `SubmitToBaidu()`: 提交到百度搜索
+
+- **Main 程序**: 处理命令行参数和用户交互
+
+### API 限制
+
+- **IndexNow**: 每次请求最多 10,000 个 URL (自动分批处理)
+- **百度搜索**: 根据百度站长平台配额限制
+
+### 文件格式
+
+- **输入**: XML sitemap 格式
+- **输出**: 纯文本格式，每行一个 URL
+- **配置**: 环境变量格式
 
 ## 📖 相关链接
 
 - [IndexNow 官方文档](https://www.indexnow.org/)
-- [Carbon 文档网站](https://carbon.go-pkg.com/) 
+- [百度站长平台](https://ziyuan.baidu.com/linksubmit/index)
+- [Carbon 文档网站](https://carbon.go-pkg.com/)
+
+## 🚀 快速开始
+
+```bash
+# 1. 构建文档
+npm run build
+
+# 2. 进入工具目录
+cd tools
+
+# 3. 配置环境变量
+cp .env.example .env
+# 编辑 .env 文件
+
+# 4. 验证配置
+go run main.go engine.go --validate
+
+# 5. 预览 URL
+go run main.go engine.go --preview
+
+# 6. 推送到搜索引擎
+go run main.go engine.go --indexnow
+go run main.go engine.go --baidu
+``` 

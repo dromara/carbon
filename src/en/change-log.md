@@ -6,7 +6,15 @@ head:
 ---
 
 # Change Log
-## [v2.6.10](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-07-07)
+
+## [v2.6.11](https://github.com/dromara/carbon/compare/v2.6.10...v2.6.11) (2025-07-18)
+
+- Change `Sleep` from struct method to global method
+- Refactor `Persian` calendar and add benchmark tests
+- Add `Hebrew` calendar support
+- Add performance test report file
+
+## [v2.6.10](https://github.com/dromara/carbon/compare/v2.6.9...v2.6.10) (2025-07-07)
 
 - Change `Japanese` translation file from `jp.json` to `ja.json` and rename document from `README.jp.md` to `README.ja.md` to comply with the [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) standard
 - Remove deprecated `ParseWithLayouts` method and replace with `ParseByLayouts` method
@@ -20,7 +28,7 @@ head:
 - Add `Sleep` method and related `unit tests`, `benchmark tests`, and `example file`
 - Add number constants such as `MaxYear`, `MinYear`, `MaxMonth`, `MinMonth`, `MaxDay`, `MinDay` etc. and replace hard coded with these constants
 
-## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-28)
+## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.8...v2.6.9) (2025-06-28)
 - Remove the implementation of the `GormDataType` interface for `gorm`
 
 ## [v2.6.8](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-12)
@@ -75,8 +83,8 @@ head:
 - Fix panic when database field type was `nil`
 - Split  `database_types.go` into` type_carbon.go`, `type_layout.go`, `type_format.go`,  `type_timestamp.go`
 - Rename  `LayoutFactory` interface to `LayoutTyper` and `SetLayout` method to `Layout`
-- Rename  `FormatFactory` interface to `FormatTyper` and `SeFormat` method to `Format`
-- Rename  `TimestampFactory` interface to `TimestampTyper` and `SePrecision` method to `Precision`
+- Rename  `FormatFactory` interface to `FormatTyper` and `SetFormat` method to `Format`
+- Rename  `TimestampFactory` interface to `TimestampTyper` and `SetPrecision` method to `Precision`
 - Add `b.ResetTimer()` in  benchmark test files
 - Add `Copy` method for `Language` struct
 - Add `carbon.Timestamp` type alias and `carbon.NewTimestamp` method
@@ -133,7 +141,7 @@ head:
 ## [v2.6.1](https://github.com/dromara/carbon/compare/v2.6.0...v2.6.1) (2025-03-27)
 
 - Add `ParseWithLayouts` and `ParseWithFormats` methods
-- Rename `formatFactory` interface to `FormatFactory`, `formatFactory` interface to `FormatFactory`, `formatFactory` interface to `FormatFactory`, and add type constraints
+- Rename `formatFactory` interface to `FormatFactory`, `layoutFactory` interface to `LayoutFactory`, `timestampFactory` interface to `TimestampFactory`, and add type constraints
 - Change the return value of the `GormDataType` method of the `LayoutType`, `FormatType`, `TimestampType`  `struct`  to `time`
 - Change `DateTime`, `Date`, `Time` types from `struct` to `string`
 - Change `Timestamp`、`TimestampMilli`、`TimestampMicro`,`TimestampNano` types from `struct` to `int64`

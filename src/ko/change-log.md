@@ -1,5 +1,13 @@
 # 업데이트 로그
-## [v2.6.10](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-07-07)
+
+## [v2.6.11](https://github.com/dromara/carbon/compare/v2.6.10...v2.6.11) (2025-07-18)
+
+- `Sleep`을 구조체 메서드에서 전역 메서드로 변경
+- 페르시아력 리팩토링 및 벤치마크 테스트 추가
+- `히브리력(유대력)` 지원 추가
+- 성능 테스트 리포트 파일 추가
+
+## [v2.6.10](https://github.com/dromara/carbon/compare/v2.6.9...v2.6.10) (2025-07-07)
 
 - `한국어` 번역 파일을 `jp.json`에서 `ja.json`으로 변경하고, 설명 문서를 `README.jp.md`에서 `README.ja.md`로 변경하여 [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) 표준에 준수
 - 더 이상 사용되지 않는 `ParseWithLayouts` 메서드를 제거하고 `ParseByLayouts` 메서드로 대체
@@ -13,7 +21,7 @@
 - `Sleep` 메서드와 관련 `단위 테스트`, `벤치마크 테스트`, `예제 파일`을 추가
 - `MaxYear`, `MinYear`, `MaxMonth`, `MinMonth`, `MaxDay`, `MinDay` 등의 숫자 상수를 추가하고 이러한 상수를 사용하여 하드코딩을 대체
 
-## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.7...v2.6.8) (2025-06-28)
+## [v2.6.9](https://github.com/dromara/carbon/compare/v2.6.8...v2.6.9) (2025-06-28)
 
 - `gorm`의 `GormDataType` 인터페이스 구현을 제거
 
@@ -127,7 +135,7 @@
 ## [v2.6.1](https://github.com/dromara/carbon/compare/v2.6.0...v2.6.1) (2025-03-27)
 
 - `ParseWithLayouts`와 `ParseWithFormats` 메서드 추가
-- `formatFactory` 인터페이스를 `FormatFactory`로 이름 변경하고 타입 제약 추가
+- `formatFactory` 인터페이스를 `FormatFactory`로, `layoutFactory` 인터페이스를 `LayoutFactory`로, `timestampFactory` 인터페이스를 `TimestampFactory`로 이름 변경하고 타입 제약 추가
 - `LayoutType`, `FormatType`, `TimestampType` 구조체 메서드의 반환값을 `time`으로 변경
 - `DateTime`, `Date`, `Time` 타입을 `struct`에서 `string`으로 변경
 - `Timestamp`, `TimestampMilli`, `TimestampMicro`, `TimestampNano` 타입을 `struct`에서 `int64`로 변경
