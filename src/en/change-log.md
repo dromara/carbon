@@ -10,9 +10,11 @@ head:
 ## [v2.6.11](https://github.com/dromara/carbon/compare/v2.6.10...v2.6.11) (2025-07-18)
 
 - Change `Sleep` from struct method to global method
-- Refactor `Persian` calendar and add benchmark tests
-- Add `Hebrew` calendar support
-- Add performance test report file
+- Refactor `Persian` calendar and add benchmark test files
+- Refactor `Chinese Lunar` calendar and add benchmark test files
+- Refactor `Julian/Modified Julian` calendar and add benchmark test files
+- Add `Hebrew` calendar support and add unit tests and benchmark test files
+- Add overall performance test report file
 
 ## [v2.6.10](https://github.com/dromara/carbon/compare/v2.6.9...v2.6.10) (2025-07-07)
 
