@@ -55,6 +55,7 @@ func (c Carbon) MarshalJSON() ([]byte, error) {
 func (c *Carbon) UnmarshalJSON(src []byte) error {
 	v := string(bytes.Trim(src, `"`))
 	if v == "" || v == "null" {
+		c.isEmpty = true
 		return nil
 	}
 	*c = *ParseByLayout(v, DefaultLayout)

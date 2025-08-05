@@ -149,6 +149,8 @@ func (s *CarbonTypeSuite) TestCarbonType_UnmarshalJSON() {
 
 		s.Empty(model.Carbon1.String())
 		s.Empty(model.Carbon2.String())
+		s.False(model.Carbon1.IsValid())
+		s.False(model.Carbon2.IsValid())
 	})
 
 	s.Run("null value", func() {
