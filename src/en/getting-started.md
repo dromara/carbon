@@ -10,15 +10,15 @@ head:
 > go version >= 1.21
 
 ```go
-// By github
+// Via github
 go get -u github.com/dromara/carbon/v2
 import "github.com/dromara/carbon/v2"
 
-// By gitee
+// Via gitee
 go get -u gitee.com/dromara/carbon/v2
 import "gitee.com/dromara/carbon/v2"
 
-// By gitcode
+// Via gitcode
 go get -u gitcode.com/dromara/carbon/v2
 import "gitee.com/dromara/gitcode/v2"
 ```

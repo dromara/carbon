@@ -65,6 +65,10 @@ function nav(): DefaultTheme.NavItem[] {
       link: '/sponsor',
       activeMatch: '/sponsor'
     },
+    {
+      text: 'Dongle',
+      link: 'https://dongle.go-pkg.com/',
+    },
   ]
 }
 
