@@ -1157,6 +1157,12 @@ func (s *GetterSuite) TestCarbon_Locale() {
 		s.Empty(Parse("xxx").Locale())
 	})
 
+	s.Run("nil lang", func() {
+		c := Now()
+		c.lang = nil
+		s.Empty(c.Locale())
+	})
+
 	s.Run("valid carbon", func() {
 		s.Empty(Now().SetLocale("").Locale())
 		s.Equal("en", Now().SetLocale("en").Locale())
