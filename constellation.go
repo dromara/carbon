@@ -24,7 +24,7 @@ var constellations = []struct {
 
 // Constellation gets constellation name like "Aries", i18n is supported.
 func (c *Carbon) Constellation() string {
-	if c.IsInvalid() {
+	if c.IsInvalid() || c.lang == nil {
 		return ""
 	}
 	index := -1

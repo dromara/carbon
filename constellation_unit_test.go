@@ -33,6 +33,12 @@ func (s *ConstellationSuite) TestCarbon_Constellation() {
 		s.Empty(Parse("xxx").Constellation())
 	})
 
+	s.Run("nil lang", func() {
+		c := Now()
+		c.lang = nil
+		s.Empty(c.Constellation())
+	})
+
 	s.Run("valid carbon", func() {
 		s.Equal(Capricorn, Parse("2020-01-05").Constellation())
 		s.Equal(Aquarius, Parse("2020-02-05").Constellation())
@@ -60,6 +66,44 @@ func (s *ConstellationSuite) TestCarbon_Constellation() {
 		s.Equal("天秤座", Parse("2020-10-05").SetLocale("zh-CN").Constellation())
 		s.Equal("天蝎座", Parse("2020-11-05").SetLocale("zh-CN").Constellation())
 		s.Equal("射手座", Parse("2020-12-05").SetLocale("zh-CN").Constellation())
+	})
+
+	s.Run("cross-year constellations", func() {
+		// Capricorn: 12/22-1/19
+		s.Equal(Capricorn, Parse("2023-12-22").Constellation())
+		s.Equal(Capricorn, Parse("2023-12-31").Constellation())
+		s.Equal(Capricorn, Parse("2024-01-01").Constellation())
+		s.Equal(Capricorn, Parse("2024-01-19").Constellation())
+		s.Equal(Aquarius, Parse("2024-01-20").Constellation())
+
+		// Aquarius: 1/20-2/18
+		s.Equal(Aquarius, Parse("2024-01-20").Constellation())
+		s.Equal(Aquarius, Parse("2024-02-10").Constellation())
+		s.Equal(Aquarius, Parse("2024-02-18").Constellation())
+		s.Equal(Pisces, Parse("2024-02-19").Constellation())
+
+		// Pisces: 2/19-3/20
+		s.Equal(Pisces, Parse("2024-02-19").Constellation())
+		s.Equal(Pisces, Parse("2024-03-10").Constellation())
+		s.Equal(Pisces, Parse("2024-03-20").Constellation())
+		s.Equal(Aries, Parse("2024-03-21").Constellation())
+
+		// Chinese cross-year constellation tests
+		s.Equal("摩羯座", Parse("2023-12-22").SetLocale("zh-CN").Constellation())
+		s.Equal("摩羯座", Parse("2023-12-31").SetLocale("zh-CN").Constellation())
+		s.Equal("摩羯座", Parse("2024-01-01").SetLocale("zh-CN").Constellation())
+		s.Equal("摩羯座", Parse("2024-01-19").SetLocale("zh-CN").Constellation())
+		s.Equal("水瓶座", Parse("2024-01-20").SetLocale("zh-CN").Constellation())
+
+		s.Equal("水瓶座", Parse("2024-01-20").SetLocale("zh-CN").Constellation())
+		s.Equal("水瓶座", Parse("2024-02-10").SetLocale("zh-CN").Constellation())
+		s.Equal("水瓶座", Parse("2024-02-18").SetLocale("zh-CN").Constellation())
+		s.Equal("双鱼座", Parse("2024-02-19").SetLocale("zh-CN").Constellation())
+
+		s.Equal("双鱼座", Parse("2024-02-19").SetLocale("zh-CN").Constellation())
+		s.Equal("双鱼座", Parse("2024-03-10").SetLocale("zh-CN").Constellation())
+		s.Equal("双鱼座", Parse("2024-03-20").SetLocale("zh-CN").Constellation())
+		s.Equal("白羊座", Parse("2024-03-21").SetLocale("zh-CN").Constellation())
 	})
 
 	s.Run("empty resources", func() {
@@ -344,6 +388,16 @@ func (s *ConstellationSuite) TestCarbon_IsCapricorn() {
 		s.True(Parse("2020-01-19").IsCapricorn())
 		s.False(Parse("2020-08-05").IsCapricorn())
 	})
+
+	s.Run("cross-year capricorn", func() {
+		// Capricorn: 12/22-1/19
+		s.True(Parse("2023-12-22").IsCapricorn())
+		s.True(Parse("2023-12-31").IsCapricorn())
+		s.True(Parse("2024-01-01").IsCapricorn())
+		s.True(Parse("2024-01-19").IsCapricorn())
+		s.False(Parse("2024-01-20").IsCapricorn())
+		s.False(Parse("2024-08-05").IsCapricorn())
+	})
 }
 
 func (s *ConstellationSuite) TestCarbon_IsAquarius() {
@@ -370,6 +424,15 @@ func (s *ConstellationSuite) TestCarbon_IsAquarius() {
 		s.True(Parse("2020-02-18").IsAquarius())
 		s.False(Parse("2020-08-05").IsAquarius())
 	})
+
+	s.Run("cross-year aquarius", func() {
+		// Aquarius: 1/20-2/18
+		s.True(Parse("2024-01-20").IsAquarius())
+		s.True(Parse("2024-02-10").IsAquarius())
+		s.True(Parse("2024-02-18").IsAquarius())
+		s.False(Parse("2024-02-19").IsAquarius())
+		s.False(Parse("2024-08-05").IsAquarius())
+	})
 }
 
 func (s *ConstellationSuite) TestCarbon_IsPisces() {
@@ -395,5 +458,14 @@ func (s *ConstellationSuite) TestCarbon_IsPisces() {
 		s.True(Parse("2020-02-19").IsPisces())
 		s.True(Parse("2020-03-20").IsPisces())
 		s.False(Parse("2020-08-05").IsPisces())
+	})
+
+	s.Run("cross-year pisces", func() {
+		// Pisces: 2/19-3/20
+		s.True(Parse("2024-02-19").IsPisces())
+		s.True(Parse("2024-03-10").IsPisces())
+		s.True(Parse("2024-03-20").IsPisces())
+		s.False(Parse("2024-03-21").IsPisces())
+		s.False(Parse("2024-08-05").IsPisces())
 	})
 }
