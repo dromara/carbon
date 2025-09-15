@@ -50,11 +50,6 @@ var (
 		return fmt.Errorf("resources cannot be empty")
 	}
 
-	// ErrInvalidResourcesError invalid resources error.
-	ErrInvalidResourcesError = func(resources map[string]string) error {
-		return fmt.Errorf("invalid resources %v", resources)
-	}
-
 	// ErrEmptyTimezone empty timezone error.
 	ErrEmptyTimezone = func() error {
 		return fmt.Errorf("timezone cannot be empty")
