@@ -67,7 +67,7 @@ func (c *Carbon) IsAM() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	return c.Format("a") == "am"
+	return c.Hour() < 12
 }
 
 // IsPM reports whether it is after noon.
@@ -75,7 +75,7 @@ func (c *Carbon) IsPM() bool {
 	if c.IsInvalid() {
 		return false
 	}
-	return c.Format("a") == "pm"
+	return c.Hour() >= 12
 }
 
 // IsLeapYear reports whether it is a leap year.
@@ -103,154 +103,97 @@ func (c *Carbon) IsLongYear() bool {
 
 // IsJanuary reports whether it is January.
 func (c *Carbon) IsJanuary() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.January)
+	return c.isMonth(time.January)
 }
 
 // IsFebruary reports whether it is February.
 func (c *Carbon) IsFebruary() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.February)
+	return c.isMonth(time.February)
 }
 
 // IsMarch reports whether it is March.
 func (c *Carbon) IsMarch() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.March)
+	return c.isMonth(time.March)
 }
 
 // IsApril reports whether it is April.
 func (c *Carbon) IsApril() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.April)
+	return c.isMonth(time.April)
 }
 
 // IsMay reports whether it is May.
 func (c *Carbon) IsMay() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.May)
+	return c.isMonth(time.May)
 }
 
 // IsJune reports whether it is June.
 func (c *Carbon) IsJune() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.June)
+	return c.isMonth(time.June)
 }
 
 // IsJuly reports whether it is July.
 func (c *Carbon) IsJuly() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.July)
+	return c.isMonth(time.July)
 }
 
 // IsAugust reports whether it is August.
 func (c *Carbon) IsAugust() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.August)
+	return c.isMonth(time.August)
 }
 
 // IsSeptember reports whether it is September.
 func (c *Carbon) IsSeptember() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.September)
+	return c.isMonth(time.September)
 }
 
 // IsOctober reports whether it is October.
 func (c *Carbon) IsOctober() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.October)
+	return c.isMonth(time.October)
 }
 
 // IsNovember reports whether it is November.
 func (c *Carbon) IsNovember() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.November)
+	return c.isMonth(time.November)
 }
 
 // IsDecember reports whether it is December.
 func (c *Carbon) IsDecember() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.Month() == int(time.December)
+	return c.isMonth(time.December)
 }
 
 // IsMonday reports whether it is Monday.
 func (c *Carbon) IsMonday() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.StdTime().Weekday() == time.Monday
+	return c.isWeekday(time.Monday)
 }
 
 // IsTuesday reports whether it is Tuesday.
 func (c *Carbon) IsTuesday() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.StdTime().Weekday() == time.Tuesday
+	return c.isWeekday(time.Tuesday)
 }
 
 // IsWednesday reports whether it is Wednesday.
 func (c *Carbon) IsWednesday() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.StdTime().Weekday() == time.Wednesday
+	return c.isWeekday(time.Wednesday)
 }
 
 // IsThursday reports whether it is Thursday.
 func (c *Carbon) IsThursday() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.StdTime().Weekday() == time.Thursday
+	return c.isWeekday(time.Thursday)
 }
 
 // IsFriday reports whether it is Friday.
 func (c *Carbon) IsFriday() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.StdTime().Weekday() == time.Friday
+	return c.isWeekday(time.Friday)
 }
 
 // IsSaturday reports whether it is Saturday.
 func (c *Carbon) IsSaturday() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.StdTime().Weekday() == time.Saturday
+	return c.isWeekday(time.Saturday)
 }
 
 // IsSunday reports whether it is Sunday.
 func (c *Carbon) IsSunday() bool {
-	if c.IsInvalid() {
-		return false
-	}
-	return c.StdTime().Weekday() == time.Sunday
+	return c.isWeekday(time.Sunday)
 }
 
 // IsWeekday reports whether it is weekday.
@@ -366,7 +309,9 @@ func (c *Carbon) IsSameMonth(t *Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
 	}
-	return c.Format("Ym") == t.Format("Ym")
+	cTime := c.StdTime()
+	tTime := t.StdTime()
+	return cTime.Year() == tTime.Year() && cTime.Month() == tTime.Month()
 }
 
 // IsSameDay reports whether it is same day.
@@ -374,7 +319,11 @@ func (c *Carbon) IsSameDay(t *Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
 	}
-	return c.Format("Ymd") == t.Format("Ymd")
+	cTime := c.StdTime()
+	tTime := t.StdTime()
+	return cTime.Year() == tTime.Year() &&
+		cTime.Month() == tTime.Month() &&
+		cTime.Day() == tTime.Day()
 }
 
 // IsSameHour reports whether it is same hour.
@@ -382,7 +331,12 @@ func (c *Carbon) IsSameHour(t *Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
 	}
-	return c.Format("YmdH") == t.Format("YmdH")
+	cTime := c.StdTime()
+	tTime := t.StdTime()
+	return cTime.Year() == tTime.Year() &&
+		cTime.Month() == tTime.Month() &&
+		cTime.Day() == tTime.Day() &&
+		cTime.Hour() == tTime.Hour()
 }
 
 // IsSameMinute reports whether it is same minute.
@@ -390,7 +344,13 @@ func (c *Carbon) IsSameMinute(t *Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
 	}
-	return c.Format("YmdHi") == t.Format("YmdHi")
+	cTime := c.StdTime()
+	tTime := t.StdTime()
+	return cTime.Year() == tTime.Year() &&
+		cTime.Month() == tTime.Month() &&
+		cTime.Day() == tTime.Day() &&
+		cTime.Hour() == tTime.Hour() &&
+		cTime.Minute() == tTime.Minute()
 }
 
 // IsSameSecond reports whether it is same second.
@@ -398,7 +358,14 @@ func (c *Carbon) IsSameSecond(t *Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
 	}
-	return c.Format("YmdHis") == t.Format("YmdHis")
+	cTime := c.StdTime()
+	tTime := t.StdTime()
+	return cTime.Year() == tTime.Year() &&
+		cTime.Month() == tTime.Month() &&
+		cTime.Day() == tTime.Day() &&
+		cTime.Hour() == tTime.Hour() &&
+		cTime.Minute() == tTime.Minute() &&
+		cTime.Second() == tTime.Second()
 }
 
 // Compare compares by an operator.
@@ -534,4 +501,22 @@ func (c *Carbon) BetweenIncludedBoth(start *Carbon, end *Carbon) bool {
 		return true
 	}
 	return false
+}
+
+// isMonth reports whether the current month matches the given month.
+// It returns false if the Carbon instance is invalid.
+func (c *Carbon) isMonth(month time.Month) bool {
+	if c.IsInvalid() {
+		return false
+	}
+	return c.StdTime().Month() == month
+}
+
+// isWeekday reports whether the current weekday matches the given weekday.
+// It returns false if the Carbon instance is invalid.
+func (c *Carbon) isWeekday(weekday time.Weekday) bool {
+	if c.IsInvalid() {
+		return false
+	}
+	return c.StdTime().Weekday() == weekday
 }
