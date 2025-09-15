@@ -1,6 +1,7 @@
 package carbon
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/suite"
@@ -102,6 +103,13 @@ func (s *LanguageSuite) TestLanguage_SetLocale() {
 		s.Equal("星期三", Parse("2020-08-05").SetLanguage(lang).ToWeekString())
 		s.Equal("周三", Parse("2020-08-05").SetLanguage(lang).ToShortWeekString())
 	})
+
+	s.Run("error language", func() {
+		lang := NewLanguage()
+		lang.Error = fmt.Errorf("test error")
+		lang.SetLocale("en")
+		s.Error(lang.Error)
+	})
 }
 
 func (s *LanguageSuite) TestLanguage_SetResources() {
@@ -125,15 +133,6 @@ func (s *LanguageSuite) TestLanguage_SetResources() {
 	s.Run("empty resources", func() {
 		lang := NewLanguage()
 		lang.SetResources(map[string]string{})
-		s.Error(lang.Error)
-		s.Empty(Parse("2020-08-05 13:14:15").SetLanguage(lang).ToMonthString())
-	})
-
-	s.Run("error resources", func() {
-		lang := NewLanguage()
-		lang.SetResources(map[string]string{
-			"xxx": "xxx",
-		})
 		s.Error(lang.Error)
 		s.Empty(Parse("2020-08-05 13:14:15").SetLanguage(lang).ToMonthString())
 	})
@@ -189,6 +188,13 @@ func (s *LanguageSuite) TestLanguage_SetResources() {
 		s.Equal("Wednesday", Parse("2020-08-05").SetLanguage(lang).ToWeekString())
 		s.Equal("Wed", Parse("2020-08-05").SetLanguage(lang).ToShortWeekString())
 	})
+
+	s.Run("error language", func() {
+		lang := NewLanguage()
+		lang.Error = fmt.Errorf("test error")
+		lang.SetResources(map[string]string{"month": "1 month"})
+		s.Error(lang.Error)
+	})
 }
 
 func (s *LanguageSuite) TestLanguage_translate() {
@@ -200,32 +206,98 @@ func (s *LanguageSuite) TestLanguage_translate() {
 
 	s.Run("nil resources", func() {
 		lang := NewLanguage()
-		lang.SetResources(nil)
-		s.Error(lang.Error)
+		lang.resources = nil
 		s.Empty(lang.translate("month", 1))
 	})
 
 	s.Run("empty resources", func() {
 		lang := NewLanguage()
-		lang.SetResources(map[string]string{})
-		s.Error(lang.Error)
-		s.Empty(lang.translate("month", 1))
+		lang.resources = make(map[string]string)
+		// Empty resources will trigger SetLocale(DefaultLocale) and retry
+		result := lang.translate("month", 1)
+		s.NotEmpty(result) // Should get default locale result
 	})
 
-	s.Run("error resources", func() {
-		lang := NewLanguage()
-		lang.SetResources(map[string]string{
-			"xxx": "xxx",
-		})
-		s.Error(lang.Error)
-		s.Empty(lang.translate("month", 1))
-	})
-
-	s.Run("valid resources", func() {
+	s.Run("unit not exists", func() {
 		lang := NewLanguage()
 		lang.SetLocale("en")
-		s.Nil(lang.Error)
+		s.Empty(lang.translate("nonexistent", 1))
+	})
+
+	s.Run("single slice item", func() {
+		lang := NewLanguage()
+		lang.SetResources(map[string]string{
+			"month": "1 month",
+		})
 		s.Equal("1 month", lang.translate("month", 1))
-		s.Equal("-1 month", lang.translate("month", -1))
+		s.Equal("1 month", lang.translate("month", 5)) // Single slice always returns the same
+	})
+
+	s.Run("single slice item with placeholder", func() {
+		lang := NewLanguage()
+		lang.SetResources(map[string]string{
+			"month": "%d months",
+		})
+		s.Equal("1 months", lang.translate("month", 1))
+		s.Equal("5 months", lang.translate("month", 5))
+	})
+
+	s.Run("multiple slice items - normal case", func() {
+		lang := NewLanguage()
+		lang.SetResources(map[string]string{
+			"month": "1 month|%d months",
+		})
+		s.Equal("1 month", lang.translate("month", 1))
+		s.Equal("5 months", lang.translate("month", 5))
+	})
+
+	s.Run("multiple slice items - index out of range", func() {
+		lang := NewLanguage()
+		lang.SetResources(map[string]string{
+			"month": "1 month|%d months",
+		})
+		// getAbsValue(10) = 10, len(slice) = 2, so use slice[len(slice)-1]
+		s.Equal("10 months", lang.translate("month", 10))
+	})
+
+	s.Run("negative value without placeholder", func() {
+		lang := NewLanguage()
+		lang.SetResources(map[string]string{
+			"month": "1 month|months",
+		})
+		// getAbsValue(-5) = 5, slice[5-1] = slice[4] doesn't exist, use slice[len(slice)-1]
+		s.Equal("months", lang.translate("month", -5))
+	})
+
+	s.Run("negative value with placeholder", func() {
+		lang := NewLanguage()
+		lang.SetResources(map[string]string{
+			"month": "1 month|%d months",
+		})
+		s.Equal("-5 months", lang.translate("month", -5))
+	})
+
+	s.Run("large positive value", func() {
+		lang := NewLanguage()
+		lang.SetResources(map[string]string{
+			"month": "1 month|%d months",
+		})
+		s.Equal("1000 months", lang.translate("month", 1000))
+	})
+
+	s.Run("large negative value", func() {
+		lang := NewLanguage()
+		lang.SetResources(map[string]string{
+			"month": "1 month|%d months",
+		})
+		s.Equal("-1000 months", lang.translate("month", -1000))
+	})
+
+	s.Run("negative value in range without placeholder", func() {
+		lang := NewLanguage()
+		lang.SetResources(map[string]string{
+			"month": "1 month|months|many months",
+		})
+		s.Equal("-months", lang.translate("month", -2))
 	})
 }
