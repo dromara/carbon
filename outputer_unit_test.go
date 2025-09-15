@@ -81,6 +81,12 @@ func (s *OutputerSuite) TestCarbon_ToMonthString() {
 		s.Empty(Parse("xxx").ToMonthString())
 	})
 
+	s.Run("nil lang", func() {
+		c := Now()
+		c.lang = nil
+		s.Empty(c.ToMonthString())
+	})
+
 	s.Run("valid carbon", func() {
 		s.Equal(January.String(), Parse("2020-01-05").ToMonthString())
 		s.Equal(February.String(), Parse("2020-02-05").ToMonthString())
@@ -100,6 +106,12 @@ func (s *OutputerSuite) TestCarbon_ToMonthString() {
 		lang := NewLanguage()
 		lang.SetResources(map[string]string{})
 		c := Parse("2020-01-05").SetLanguage(lang)
+		s.Empty(c.ToMonthString())
+	})
+
+	s.Run("nil lang", func() {
+		c := Now()
+		c.lang = nil
 		s.Empty(c.ToMonthString())
 	})
 
@@ -129,6 +141,12 @@ func (s *OutputerSuite) TestCarbon_ToShortMonthString() {
 
 	s.Run("error carbon", func() {
 		s.Empty(Parse("xxx").ToShortMonthString())
+	})
+
+	s.Run("nil lang", func() {
+		c := Now()
+		c.lang = nil
+		s.Empty(c.ToShortMonthString())
 	})
 
 	s.Run("valid carbon", func() {
@@ -181,6 +199,12 @@ func (s *OutputerSuite) TestCarbon_ToWeekString() {
 		s.Empty(Parse("xxx").ToWeekString())
 	})
 
+	s.Run("nil lang", func() {
+		c := Now()
+		c.lang = nil
+		s.Empty(c.ToWeekString())
+	})
+
 	s.Run("valid carbon", func() {
 		s.Equal(Saturday.String(), Parse("2020-08-01").ToWeekString())
 		s.Equal(Sunday.String(), Parse("2020-08-02").ToWeekString())
@@ -224,6 +248,12 @@ func (s *OutputerSuite) TestCarbon_ToShortWeekString() {
 
 	s.Run("error carbon", func() {
 		s.Empty(Parse("xxx").ToShortWeekString())
+	})
+
+	s.Run("nil lang", func() {
+		c := Now()
+		c.lang = nil
+		s.Empty(c.ToShortWeekString())
 	})
 
 	s.Run("valid carbon", func() {

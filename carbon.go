@@ -50,12 +50,17 @@ func (c *Carbon) Copy() *Carbon {
 	if c.IsNil() {
 		return nil
 	}
+
+	// Create a deep copy of weekendDays slice to avoid shared reference
+	weekendDays := make([]Weekday, len(c.weekendDays))
+	copy(weekendDays, c.weekendDays)
+
 	return &Carbon{
-		time:          time.Date(c.Year(), time.Month(c.Month()), c.Day(), c.Hour(), c.Minute(), c.Second(), c.Nanosecond(), c.loc),
+		time:          c.time,
 		weekStartsAt:  c.weekStartsAt,
-		weekendDays:   c.weekendDays,
+		weekendDays:   weekendDays,
 		loc:           c.loc,
-		lang:          c.lang.Copy(),
+		lang:          c.lang,
 		currentLayout: c.currentLayout,
 		isEmpty:       c.isEmpty,
 		Error:         c.Error,

@@ -58,11 +58,11 @@ func (W3CType) Layout() string {
 }
 
 func ExampleLayoutType_MarshalJSON() {
-	//type W3CType string
+	// type W3CType string
 	//
-	//func (W3CType) Layout() string {
+	// func (W3CType) Layout() string {
 	//	return carbon.W3cLayout
-	//}
+	// }
 
 	type User struct {
 		Date     carbon.Date                `json:"date"`
@@ -94,11 +94,11 @@ func ExampleLayoutType_MarshalJSON() {
 }
 
 func ExampleLayoutType_UnmarshalJSON() {
-	//type W3CType string
+	// type W3CType string
 	//
-	//func (W3CType) Layout() string {
+	// func (W3CType) Layout() string {
 	//	return carbon.W3cLayout
-	//}
+	// }
 	type User struct {
 		Date     carbon.Date                `json:"date"`
 		Time     carbon.Time                `json:"time"`
@@ -152,11 +152,11 @@ func (RFC3339Type) Format() string {
 }
 
 func ExampleFormatType_MarshalJSON() {
-	//type RFC3339Type string
+	// type RFC3339Type string
 	//
-	//func (RFC3339Type) Format() string {
+	// func (RFC3339Type) Format() string {
 	//	return carbon.RFC3339Format
-	//}
+	// }
 	type User struct {
 		Customer1 carbon.FormatType[RFC3339Type]  `json:"customer1"`
 		Customer2 *carbon.FormatType[RFC3339Type] `json:"customer2"`
@@ -177,11 +177,11 @@ func ExampleFormatType_MarshalJSON() {
 }
 
 func ExampleFormatType_UnmarshalJSON() {
-	//type RFC3339Type string
+	// type RFC3339Type string
 	//
-	//func (RFC3339Type) Format() string {
+	// func (RFC3339Type) Format() string {
 	//	return carbon.RFC3339Format
-	//}
+	// }
 
 	type User struct {
 		Customer1 carbon.FormatType[RFC3339Type]  `json:"customer1"`

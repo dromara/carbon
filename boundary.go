@@ -63,13 +63,8 @@ func (c *Carbon) EndOfQuarter() *Carbon {
 		return c
 	}
 	year, quarter := c.Year(), c.Quarter()
-	var day int
-	switch quarter {
-	case 1, 4:
-		day = MaxDay
-	case 2, 3:
-		day = 30
-	}
+	var quarterDays = [4]int{31, 30, 30, 31} // Q1, Q2, Q3, Q4
+	day := quarterDays[quarter-1]
 	return c.create(year, 3*quarter, day, MaxHour, MaxMinute, MaxSecond, MaxNanosecond)
 }
 

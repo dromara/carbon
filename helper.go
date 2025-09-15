@@ -1,9 +1,8 @@
 package carbon
 
 import (
-	"bytes"
 	"fmt"
-	"strconv"
+	"sync"
 	"time"
 )
 
@@ -86,52 +85,91 @@ var defaultLayouts = []string{
 	"20060102150405Z07:00", "20060102150405.999999999Z07:00",
 }
 
+// layoutCache caches format to layout conversions to avoid repeated parsing
+var layoutCache = sync.Map{}
+
 // converts format to layout.
 func format2layout(format string) string {
-	buffer := &bytes.Buffer{}
+	// Check cache first
+	if cached, exists := layoutCache.Load(format); exists {
+		return cached.(string)
+	}
+
+	// Pre-allocate buffer with estimated capacity to reduce allocations
+	estimatedSize := len(format) * 2
+	buffer := make([]byte, 0, estimatedSize)
+
 	for i := 0; i < len(format); i++ {
 		if layout, ok := formatMap[format[i]]; ok {
-			buffer.WriteString(layout)
+			buffer = append(buffer, layout...)
 		} else {
 			switch format[i] {
 			case '\\': // raw output, no parse
-				buffer.WriteByte(format[i+1])
+				buffer = append(buffer, format[i+1])
 				i++
 				continue
 			default:
-				buffer.WriteByte(format[i])
+				buffer = append(buffer, format[i])
 			}
 		}
 	}
-	return buffer.String()
+
+	result := string(buffer)
+
+	// Cache the result for common formats
+	if len(format) <= 50 { // Only cache short formats to avoid memory bloat
+		layoutCache.Store(format, result)
+	}
+
+	return result
 }
+
+// timezoneCache caches parsed timezone locations to avoid repeated parsing
+var timezoneCache = sync.Map{}
 
 // parses a timezone string as a time.Location instance.
 func parseTimezone(timezone string) (loc *Location, err error) {
 	if timezone == "" {
 		return nil, ErrEmptyTimezone()
 	}
+
+	// Check cache first
+	if cached, exists := timezoneCache.Load(timezone); exists {
+		return cached.(*Location), nil
+	}
+
 	if loc, err = time.LoadLocation(timezone); err != nil {
 		err = fmt.Errorf("%w: %w", ErrInvalidTimezone(timezone), err)
+		return
 	}
+
+	// Cache the successful result
+	timezoneCache.Store(timezone, loc)
 	return
 }
+
+// durationCache caches parsed durations to avoid repeated parsing
+var durationCache = sync.Map{}
 
 // parses a duration string as a time.Duration instance.
 func parseDuration(duration string) (dur Duration, err error) {
 	if duration == "" {
 		return 0, ErrEmptyDuration()
 	}
+
+	// Check cache first for common durations
+	if cached, exists := durationCache.Load(duration); exists {
+		return cached.(Duration), nil
+	}
+
 	if dur, err = time.ParseDuration(duration); err != nil {
 		err = fmt.Errorf("%w: %w", ErrInvalidDuration(duration), err)
+		return
 	}
-	return
-}
 
-// parses a timestamp string as a int64 format timestamp.
-func parseTimestamp(timestamp string) (ts int64, err error) {
-	if ts, err = strconv.ParseInt(timestamp, 10, 64); err != nil {
-		err = fmt.Errorf("%w: %w", ErrInvalidTimestamp(timestamp), err)
+	// Cache the successful result for common durations
+	if len(duration) <= 10 { // Only cache short durations to avoid memory bloat
+		durationCache.Store(duration, dur)
 	}
 	return
 }

@@ -26,7 +26,7 @@
 ## クイックスタート
 
 ### インストール
-> go version >= 1.21
+> go version >= 1.18
 
 ```go
 // github から使う
@@ -78,7 +78,7 @@ carbon.IsTestNow() // false
 ```
 詳細については <a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>
 
-より多くの使用例については、<a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>をご覧ください。性能テストレポートについては、[分析报告](test_report.ja.md)をご参照ください
+より多くの使用例については、<a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>をご覧ください。性能テストレポートについては、[分析レポート](BENCHMARK.ja.md)をご参照ください
 
 ## リファレンス
 
@@ -95,6 +95,8 @@ carbon.IsTestNow() // false
 `Carbon` に貢献してくれた以下のすべてに感謝します：
 
 <a href="https://github.com/dromara/carbon/graphs/contributors"><img src="https://contrib.rocks/image?repo=dromara/carbon&max=100&columns=16"/></a>
+
+[Carbon に新しい言語サポートを追加する方法](CONTRIBUTING.ja.md)
 
 ## スポンサー
 

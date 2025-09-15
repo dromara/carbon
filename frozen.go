@@ -21,18 +21,18 @@ func SetTestNow(c *Carbon) {
 	}
 
 	frozenNow.rw.Lock()
-	frozenNow.testNow = c
-	frozenNow.rw.Unlock()
+	defer frozenNow.rw.Unlock()
 
+	frozenNow.testNow = c
 	atomic.StoreInt32(&frozenNow.isFrozen, 1)
 }
 
 // ClearTestNow clears the test Carbon instance for now.
 func ClearTestNow() {
 	frozenNow.rw.Lock()
-	frozenNow.testNow = nil
-	frozenNow.rw.Unlock()
+	defer frozenNow.rw.Unlock()
 
+	frozenNow.testNow = nil
 	atomic.StoreInt32(&frozenNow.isFrozen, 0)
 }
 

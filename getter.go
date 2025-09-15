@@ -370,6 +370,9 @@ func (c *Carbon) Locale() string {
 	if c.IsInvalid() {
 		return ""
 	}
+	if c.lang == nil {
+		return ""
+	}
 	return c.lang.locale
 }
 

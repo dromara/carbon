@@ -34,6 +34,9 @@ func (c *Carbon) ToMonthString(timezone ...string) string {
 	if c.IsInvalid() {
 		return ""
 	}
+	if c.lang == nil {
+		return ""
+	}
 
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
@@ -53,6 +56,9 @@ func (c *Carbon) ToShortMonthString(timezone ...string) string {
 		c.loc, c.Error = parseTimezone(timezone[0])
 	}
 	if c.IsInvalid() {
+		return ""
+	}
+	if c.lang == nil {
 		return ""
 	}
 
@@ -76,6 +82,9 @@ func (c *Carbon) ToWeekString(timezone ...string) string {
 	if c.IsInvalid() {
 		return ""
 	}
+	if c.lang == nil {
+		return ""
+	}
 
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
@@ -95,6 +104,9 @@ func (c *Carbon) ToShortWeekString(timezone ...string) string {
 		c.loc, c.Error = parseTimezone(timezone[0])
 	}
 	if c.IsInvalid() {
+		return ""
+	}
+	if c.lang == nil {
 		return ""
 	}
 

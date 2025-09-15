@@ -90,8 +90,8 @@ func (t *TimestampType[T]) UnmarshalJSON(src []byte) error {
 		ts  int64
 		err error
 	)
-	if ts, err = parseTimestamp(v); err != nil {
-		return err
+	if ts, err = strconv.ParseInt(v, 10, 64); err != nil {
+		return ErrInvalidTimestamp(v)
 	}
 	var c *Carbon
 	switch t.getPrecision() {

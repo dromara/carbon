@@ -26,7 +26,7 @@ English | [简体中文](README.cn.md) | [日本語](README.ja.md) | [한국어]
 ## Quick Start
 
 ### Installation
-> go version >= 1.21
+> go version >= 1.18
 
 ```go
 // By github
@@ -82,7 +82,7 @@ carbon.IsTestNow() // false
 
 For more usage examples, please refer to <a href="https://carbon.go-pkg.com" target="_blank">official document</a>. 
 
-For performance test reports, please refer to [analysis report](test_report.en.md)
+For performance test reports, please refer to [benchmark report](BENCHMARK.md)
 
 ## References
 
@@ -99,6 +99,8 @@ For performance test reports, please refer to [analysis report](test_report.en.m
 Thanks to all the following who contributed to `Carbon`:
 
 <a href="https://github.com/dromara/carbon/graphs/contributors"><img src="https://contrib.rocks/image?repo=dromara/carbon&max=100&columns=16" /></a>
+
+[How to add new language support to Carbon](CONTRIBUTING.md)
 
 ## Sponsors
 

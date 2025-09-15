@@ -874,6 +874,12 @@ func (s *DifferenceSuite) TestCarbon_DiffForHumans() {
 		s.Empty(c.DiffForHumans(c))
 	})
 
+	s.Run("nil lang", func() {
+		c := Now()
+		c.lang = nil
+		s.Empty(c.DiffForHumans())
+	})
+
 	s.Run("valid carbon", func() {
 		s.Equal("just now", Parse("2020-08-05 13:14:15").DiffForHumans())
 		s.Equal("2 days ago", Parse("2020-08-03 13:14:15").DiffForHumans())
@@ -944,4 +950,89 @@ func (s *DifferenceSuite) TestCarbon_Issue255() {
 	s.Equal(int64(-23), Parse("2020-08-05 13:14:15").DiffInMonths(Parse("2018-08-28 13:14:59")))
 	s.Equal(int64(23), Parse("2018-08-28 13:14:59").DiffInMonths(Parse("2020-08-05 13:14:15")))
 	s.Equal(int64(11999), Parse("1024-12-25 13:14:20").DiffInMonths(Parse("2024-12-25 13:14:19")))
+}
+
+// TestCarbon_diff tests the internal diff function for 100% coverage
+func (s *DifferenceSuite) TestCarbon_diff() {
+	s.Run("same time", func() {
+		now := Parse("2020-08-05 13:14:15")
+		unit, value := now.diff(now)
+		s.Equal("now", unit)
+		s.Equal(int64(0), value)
+	})
+
+	s.Run("years difference", func() {
+		start := Parse("2020-08-05 13:14:15")
+		end := Parse("2022-08-05 13:14:15")
+		unit, value := start.diff(end)
+		s.Equal("year", unit)
+		s.Equal(int64(2), value)
+	})
+
+	s.Run("months difference", func() {
+		start := Parse("2020-08-05 13:14:15")
+		end := Parse("2020-10-05 13:14:15")
+		unit, value := start.diff(end)
+		s.Equal("month", unit)
+		s.Equal(int64(2), value)
+	})
+
+	s.Run("weeks difference", func() {
+		start := Parse("2020-08-05 13:14:15")
+		end := Parse("2020-08-19 13:14:15")
+		unit, value := start.diff(end)
+		s.Equal("week", unit)
+		s.Equal(int64(2), value)
+	})
+
+	s.Run("days difference", func() {
+		start := Parse("2020-08-05 13:14:15")
+		end := Parse("2020-08-07 13:14:15")
+		unit, value := start.diff(end)
+		s.Equal("day", unit)
+		s.Equal(int64(2), value)
+	})
+
+	s.Run("hours difference", func() {
+		start := Parse("2020-08-05 13:14:15")
+		end := Parse("2020-08-05 15:14:15")
+		unit, value := start.diff(end)
+		s.Equal("hour", unit)
+		s.Equal(int64(2), value)
+	})
+
+	s.Run("minutes difference", func() {
+		start := Parse("2020-08-05 13:14:15")
+		end := Parse("2020-08-05 13:16:15")
+		unit, value := start.diff(end)
+		s.Equal("minute", unit)
+		s.Equal(int64(2), value)
+	})
+
+	s.Run("seconds difference", func() {
+		start := Parse("2020-08-05 13:14:15")
+		end := Parse("2020-08-05 13:14:17")
+		unit, value := start.diff(end)
+		s.Equal("second", unit)
+		s.Equal(int64(2), value)
+	})
+
+	s.Run("edge case - all units zero", func() {
+		// This should trigger the final return "now", 0
+		start := Parse("2020-08-05 13:14:15")
+		end := Parse("2020-08-05 13:14:15")
+		unit, value := start.diff(end)
+		s.Equal("now", unit)
+		s.Equal(int64(0), value)
+	})
+
+	s.Run("edge case - very small difference", func() {
+		// Test case where all absolute differences are 0 but secondsDiff is not 0
+		// This should trigger the final return "now", 0
+		start := Parse("2020-08-05 13:14:15.000000001")
+		end := Parse("2020-08-05 13:14:15.000000002")
+		unit, value := start.diff(end)
+		s.Equal("now", unit)
+		s.Equal(int64(0), value)
+	})
 }
