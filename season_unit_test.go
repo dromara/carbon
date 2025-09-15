@@ -33,6 +33,12 @@ func (s *SeasonSuite) TestSeason() {
 		s.Empty(Parse("xxx").Season())
 	})
 
+	s.Run("nil lang", func() {
+		c := Now()
+		c.lang = nil
+		s.Empty(c.Season())
+	})
+
 	s.Run("error resources", func() {
 		lang := NewLanguage()
 		lang.SetResources(map[string]string{

@@ -25,6 +25,9 @@ func (c *Carbon) Season() string {
 	if c.IsInvalid() {
 		return ""
 	}
+	if c.lang == nil {
+		return ""
+	}
 
 	c.lang.rw.RLock()
 	defer c.lang.rw.RUnlock()
