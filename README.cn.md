@@ -83,7 +83,7 @@ carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月�
 carbon.ClearTestNow()
 carbon.IsTestNow() // false
 ```
-更多用法示例请查看 <a href="https://carbon.go-pkg.com/zh" target="_blank">官方文档</a>，性能测试报告请查看 [分析报告](test_report.cn.md)
+更多用法示例请查看 <a href="https://carbon.go-pkg.com/zh" target="_blank">官方文档</a>，性能测试报告请查看 [分析报告](./reports/zh.md)
 
 ## 参考项目
 

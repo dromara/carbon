@@ -82,7 +82,7 @@ carbon.IsTestNow() // false
 
 For more usage examples, please refer to <a href="https://carbon.go-pkg.com/zh" target="_blank">official document</a>. 
 
-For performance test reports, please refer to [analysis report](test_report.en.md)
+For performance test reports, please refer to [analysis report](./reports/en.md)
 
 ## References
 

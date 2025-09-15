@@ -77,7 +77,7 @@ carbon.ClearTestNow()
 carbon.IsTestNow() // false
 ```
 
-더 많은 사용 예시는 <a href="https://carbon.go-pkg.com/ko" target="_blank">공식 문서</a>를 참조하세요. 성능 테스트 보고서는 [분석 보고서](test_report.ko.md)를 참조하세요.
+더 많은 사용 예시는 <a href="https://carbon.go-pkg.com/ko" target="_blank">공식 문서</a>를 참조하세요. 성능 테스트 보고서는 [분석 보고서](./reports/ko.md)를 참조하세요.
 
 ## 참고 자료
 

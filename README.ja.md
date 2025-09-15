@@ -78,7 +78,7 @@ carbon.IsTestNow() // false
 ```
 詳細については <a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>
 
-より多くの使用例については、<a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>をご覧ください。性能テストレポートについては、[分析报告](test_report.ja.md)をご参照ください
+より多くの使用例については、<a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>をご覧ください。性能テストレポートについては、[分析报告](./reports/ja.md)をご参照ください
 
 ## リファレンス
 
