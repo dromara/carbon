@@ -187,7 +187,7 @@ func (c *Carbon) DiffAbsInSeconds(carbon ...*Carbon) int64 {
 // DiffInString gets the difference in string, i18n is supported.
 func (c *Carbon) DiffInString(carbon ...*Carbon) string {
 	start := c
-	if start.IsInvalid() {
+	if start.IsInvalid() || start.lang == nil {
 		return ""
 	}
 	var end *Carbon
@@ -199,6 +199,7 @@ func (c *Carbon) DiffInString(carbon ...*Carbon) string {
 	if end.IsInvalid() {
 		return ""
 	}
+
 	unit, value := start.diff(end)
 	return c.lang.translate(unit, value)
 }
@@ -206,7 +207,7 @@ func (c *Carbon) DiffInString(carbon ...*Carbon) string {
 // DiffAbsInString gets the difference in string with absolute value, i18n is supported.
 func (c *Carbon) DiffAbsInString(carbon ...*Carbon) string {
 	start := c
-	if start.IsInvalid() {
+	if start.IsInvalid() || start.lang == nil {
 		return ""
 	}
 	var end *Carbon
@@ -248,7 +249,7 @@ func (c *Carbon) DiffAbsInDuration(carbon ...*Carbon) Duration {
 // DiffForHumans gets the difference in a human-readable format, i18n is supported.
 func (c *Carbon) DiffForHumans(carbon ...*Carbon) string {
 	start := c
-	if start.IsInvalid() {
+	if start.IsInvalid() || start.lang == nil {
 		return ""
 	}
 	var end *Carbon
@@ -260,54 +261,75 @@ func (c *Carbon) DiffForHumans(carbon ...*Carbon) string {
 	if end.IsInvalid() {
 		return ""
 	}
+
 	unit, value := start.diff(end)
 	translation := c.lang.translate(unit, getAbsValue(value))
 	if unit == "now" {
 		return translation
 	}
-	if c.Lt(end) && len(carbon) == 0 {
-		return strings.Replace(c.lang.resources["ago"], "%s", translation, 1)
+
+	resources := c.lang.resources
+	isBefore := value > 0
+	if isBefore && len(carbon) == 0 {
+		return strings.Replace(resources["ago"], "%s", translation, 1)
 	}
-	if c.Lt(end) && len(carbon) > 0 {
-		return strings.Replace(c.lang.resources["before"], "%s", translation, 1)
+	if isBefore && len(carbon) > 0 {
+		return strings.Replace(resources["before"], "%s", translation, 1)
 	}
-	if c.Gt(end) && len(carbon) == 0 {
-		return strings.Replace(c.lang.resources["from_now"], "%s", translation, 1)
+	if !isBefore && len(carbon) == 0 {
+		return strings.Replace(resources["from_now"], "%s", translation, 1)
 	}
-	return strings.Replace(c.lang.resources["after"], "%s", translation, 1)
+	return strings.Replace(resources["after"], "%s", translation, 1)
 }
 
 // gets the difference for unit and value.
 func (c *Carbon) diff(end *Carbon) (unit string, value int64) {
-	switch true {
-	case c.DiffAbsInYears(end) > 0:
-		unit = "year"
-		value = c.DiffInYears(end)
-	case c.DiffAbsInMonths(end) > 0:
-		unit = "month"
-		value = c.DiffInMonths(end)
-	case c.DiffAbsInWeeks(end) > 0:
-		unit = "week"
-		value = c.DiffInWeeks(end)
-	case c.DiffAbsInDays(end) > 0:
-		unit = "day"
-		value = c.DiffInDays(end)
-	case c.DiffAbsInHours(end) > 0:
-		unit = "hour"
-		value = c.DiffInHours(end)
-	case c.DiffAbsInMinutes(end) > 0:
-		unit = "minute"
-		value = c.DiffInMinutes(end)
-	case c.DiffAbsInSeconds(end) > 0:
-		unit = "second"
-		value = c.DiffInSeconds(end)
-	case c.DiffAbsInSeconds(end) == 0:
-		unit = "now"
-		value = 0
+	// Years
+	diffYears := c.DiffInYears(end)
+	if getAbsValue(diffYears) > 0 {
+		return "year", diffYears
 	}
-	return
+
+	// Months
+	diffMonths := c.DiffInMonths(end)
+	if getAbsValue(diffMonths) > 0 {
+		return "month", diffMonths
+	}
+
+	// Weeks
+	diffWeeks := c.DiffInWeeks(end)
+	if getAbsValue(diffWeeks) > 0 {
+		return "week", diffWeeks
+	}
+
+	// Days
+	diffDays := c.DiffInDays(end)
+	if getAbsValue(diffDays) > 0 {
+		return "day", diffDays
+	}
+
+	// Hours
+	diffHours := c.DiffInHours(end)
+	if getAbsValue(diffHours) > 0 {
+		return "hour", diffHours
+	}
+
+	// Minutes
+	diffMinutes := c.DiffInMinutes(end)
+	if getAbsValue(diffMinutes) > 0 {
+		return "minute", diffMinutes
+	}
+
+	// Seconds
+	diffSeconds := c.DiffInSeconds(end)
+	if getAbsValue(diffSeconds) > 0 {
+		return "second", diffSeconds
+	}
+
+	return "now", 0
 }
 
+// gets the difference in months.
 func getDiffInMonths(start, end *Carbon) int64 {
 	if start.IsInvalid() || end.IsInvalid() {
 		return 0
