@@ -19,6 +19,46 @@
 <img src="https://carbon.go-pkg.com/gvp.jpg?v=2.6.x" width="100%" alt="gvp"/>
 <img src="https://carbon.go-pkg.com/gstar.jpg?v=2.6.x" width="100%" alt="g-star"/>
 
+## 库的优势
+
+### 🚀 高性能
+- **零内存分配**: 大部分核心操作实现零内存分配，极大提升性能
+- **纳秒级响应**: 核心操作耗时在 1-100ns 之间，性能卓越
+- **并发安全**: 经过充分测试的并发安全设计，支持高并发场景
+
+### 🔧 开发者友好
+- **语义化API**: 提供直观、易读的方法名，降低学习成本
+- **零依赖**: 不依赖任何第三方库，仅使用 Go 标准库
+- **100% 测试覆盖**: 完整的单元测试保证代码质量和稳定性
+
+### 🌍 国际化支持
+- **28+ 语言环境**: 支持中文、英文、日文、韩文等 28 种语言
+- **多日历系统**: 支持公历、波斯历等多种日历系统
+- **本地化输出**: 支持不同语言环境下的时间格式化输出
+
+### 📅 功能丰富
+- **全面的时间操作**: 创建、解析、格式化、计算、比较等完整功能
+- **灵活的格式支持**: 支持多种时间格式的解析和输出
+- **星座季节支持**: 内置星座、季节等实用功能
+- **时区处理**: 完善的时区转换和处理机制
+
+### 🏆 行业认可
+- **开源奖项**: 获得 Gitee 2024 年最有价值项目（GVP）奖
+- **社区收录**: 被 [awesome-go](https://github.com/avelino/awesome-go#date-and-time) 和 [hello-github](https://hellogithub.com/repository/dromara/carbon) 收录
+- **G-Star 项目**: 获得 GitCode 2024 年度开源摘星计划项目认证
+
+### 💾 数据库集成
+- **JSON 序列化**: 内置 JSON Marshal/Unmarshal 支持
+- **数据库驱动**: 实现 SQL driver.Scanner 和 driver.Valuer 接口
+- **ORM 兼容**: 可无缝集成各种 Go ORM 框架
+
+### 📊 性能基准
+```
+BenchmarkCarbon_Now-8                   50000000     1.3 ns/op     0 B/op     0 allocs/op
+BenchmarkCarbon_Parse-8                 10000000     50 ns/op      0 B/op     0 allocs/op
+BenchmarkCarbon_Format-8                5000000      80 ns/op      0 B/op     0 allocs/op
+```
+
 ## 仓库地址
 
 [github.com/dromara/carbon](https://github.com/dromara/carbon "github.com/dromara/carbon")

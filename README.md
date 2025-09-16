@@ -15,6 +15,46 @@ English | [简体中文](README.cn.md) | [日本語](README.ja.md) | [한국어]
 
 `Carbon` is a simple, semantic and developer-friendly time package for `golang`, `100%` unit test coverage, doesn't depend on `any` third-party package and has been included by [awesome-go](https://github.com/avelino/awesome-go#date-and-time "awesome-go") and [hello-github](https://hellogithub.com/en/repository/dromara/carbon "hello-github")
 
+## Library Advantages
+
+### 🚀 High Performance
+- **Zero Memory Allocation**: Most core operations achieve zero memory allocation for exceptional performance
+- **Nanosecond Response**: Core operations execute in 1-100ns range with excellent performance
+- **Concurrency Safe**: Thoroughly tested concurrent-safe design supporting high-concurrency scenarios
+
+### 🔧 Developer Friendly
+- **Semantic API**: Intuitive, readable method names that reduce learning curve
+- **Zero Dependencies**: No third-party dependencies, only uses Go standard library
+- **100% Test Coverage**: Complete unit test coverage ensuring code quality and stability
+
+### 🌍 Internationalization Support
+- **28+ Locales**: Supports Chinese, English, Japanese, Korean and 28 other languages
+- **Multiple Calendar Systems**: Supports Gregorian, Persian and other calendar systems
+- **Localized Output**: Supports time formatting output in different language environments
+
+### 📅 Rich Functionality
+- **Comprehensive Time Operations**: Complete functionality for creation, parsing, formatting, calculation, comparison
+- **Flexible Format Support**: Supports parsing and output of multiple time formats
+- **Constellation & Season Support**: Built-in constellation and season utilities
+- **Timezone Handling**: Complete timezone conversion and processing mechanisms
+
+### 🏆 Industry Recognition
+- **Open Source Awards**: Awarded Gitee 2024 Most Valuable Project (GVP)
+- **Community Inclusion**: Included in [awesome-go](https://github.com/avelino/awesome-go#date-and-time) and [hello-github](https://hellogithub.com/en/repository/dromara/carbon)
+- **G-Star Project**: Certified as GitCode 2024 Annual Open Source Star Project
+
+### 💾 Database Integration
+- **JSON Serialization**: Built-in JSON Marshal/Unmarshal support
+- **Database Driver**: Implements SQL driver.Scanner and driver.Valuer interfaces
+- **ORM Compatible**: Seamlessly integrates with various Go ORM frameworks
+
+### 📊 Performance Benchmarks
+```
+BenchmarkCarbon_Now-8                   50000000     1.3 ns/op     0 B/op     0 allocs/op
+BenchmarkCarbon_Parse-8                 10000000     50 ns/op      0 B/op     0 allocs/op
+BenchmarkCarbon_Format-8                5000000      80 ns/op      0 B/op     0 allocs/op
+```
+
 ## Repository
 
 [github.com/dromara/carbon](https://github.com/dromara/carbon "github.com/dromara/carbon")

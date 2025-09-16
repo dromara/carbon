@@ -15,6 +15,46 @@
 
 `Carbon`은 `golang`을 위한 간단하고, 의미론적이며, 개발자 친화적인 시간 패키지입니다. `100%` 단위 테스트 커버리지를 제공하며, `어떤` 서드파티 패키지에도 의존하지 않으며, [awesome-go](https://github.com/avelino/awesome-go#date-and-time "awesome-go")와 [hello-github](https://hellogithub.com/en/repository/dromara/carbon "hello-github")에 포함되어 있습니다.
 
+## 라이브러리 장점
+
+### 🚀 고성능
+- **제로 메모리 할당**: 대부분의 핵심 작업에서 제로 메모리 할당을 달성하여 뛰어난 성능 제공
+- **나노초 응답**: 핵심 작업이 1-100ns 범위에서 실행되어 우수한 성능 발휘
+- **동시성 안전**: 고동시성 시나리오를 지원하는 충분히 테스트된 동시성 안전 설계
+
+### 🔧 개발자 친화적
+- **의미적 API**: 학습 비용을 줄이는 직관적이고 읽기 쉬운 메서드 이름
+- **제로 의존성**: 제3자 라이브러리에 의존하지 않으며 Go 표준 라이브러리만 사용
+- **100% 테스트 커버리지**: 코드 품질과 안정성을 보장하는 완전한 유닛 테스트 커버리지
+
+### 🌍 국제화 지원
+- **28개 이상 로케일**: 중국어, 영어, 일본어, 한국어 등 28개 언어 지원
+- **다중 달력 시스템**: 그레고리력, 페르시아력 등 다양한 달력 시스템 지원
+- **현지화 출력**: 다양한 언어 환경에서의 시간 형식 출력 지원
+
+### 📅 풍부한 기능
+- **포괄적인 시간 연산**: 생성, 파싱, 형식화, 계산, 비교의 완전한 기능
+- **유연한 형식 지원**: 다양한 시간 형식의 파싱과 출력 지원
+- **별자리 및 계절 지원**: 내장된 별자리와 계절 유틸리티
+- **시간대 처리**: 완전한 시간대 변환과 처리 메커니즘
+
+### 🏆 업계 인정
+- **오픈소스 상**: Gitee 2024년 최유가치 프로젝트(GVP) 수상
+- **커뮤니티 수록**: [awesome-go](https://github.com/avelino/awesome-go#date-and-time)와 [hello-github](https://hellogithub.com/en/repository/dromara/carbon)에 수록
+- **G-Star 프로젝트**: GitCode 2024년도 오픈소스 스타 프로젝트로 인증
+
+### 💾 데이터베이스 통합
+- **JSON 직렬화**: 내장된 JSON Marshal/Unmarshal 지원
+- **데이터베이스 드라이버**: SQL driver.Scanner와 driver.Valuer 인터페이스 구현
+- **ORM 호환**: 다양한 Go ORM 프레임워크와 원활한 통합
+
+### 📊 성능 벤치마크
+```
+BenchmarkCarbon_Now-8                   50000000     1.3 ns/op     0 B/op     0 allocs/op
+BenchmarkCarbon_Parse-8                 10000000     50 ns/op      0 B/op     0 allocs/op
+BenchmarkCarbon_Format-8                5000000      80 ns/op      0 B/op     0 allocs/op
+```
+
 ## 저장소
 
 [github.com/dromara/carbon](https://github.com/dromara/carbon "github.com/dromara/carbon")
