@@ -25,14 +25,16 @@ func (c *Carbon) Season() string {
 	if c.IsInvalid() {
 		return ""
 	}
-	if c.lang == nil {
+
+	lang := c.lang
+	if lang == nil {
 		return ""
 	}
 
-	c.lang.rw.RLock()
-	defer c.lang.rw.RUnlock()
+	lang.rw.RLock()
+	defer lang.rw.RUnlock()
 
-	if resources, ok := c.lang.resources["seasons"]; ok {
+	if resources, ok := lang.resources["seasons"]; ok {
 		slice := strings.Split(resources, "|")
 		if len(slice) == QuartersPerYear {
 			return slice[seasons[c.Month()]]

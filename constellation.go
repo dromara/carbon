@@ -24,9 +24,15 @@ var constellations = []struct {
 
 // Constellation gets constellation name like "Aries", i18n is supported.
 func (c *Carbon) Constellation() string {
-	if c.IsInvalid() || c.lang == nil {
+	if c.IsInvalid() {
 		return ""
 	}
+
+	lang := c.lang
+	if lang == nil {
+		return ""
+	}
+
 	index := -1
 	_, month, day := c.Date()
 	for i := 0; i < len(constellations); i++ {
@@ -39,10 +45,10 @@ func (c *Carbon) Constellation() string {
 		}
 	}
 
-	c.lang.rw.RLock()
-	defer c.lang.rw.RUnlock()
+	lang.rw.RLock()
+	defer lang.rw.RUnlock()
 
-	if resources, ok := c.lang.resources["constellations"]; ok {
+	if resources, ok := lang.resources["constellations"]; ok {
 		slice := strings.Split(resources, "|")
 		if len(slice) == MonthsPerYear {
 			return slice[index]
