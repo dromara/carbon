@@ -6,7 +6,7 @@ head:
 ---
 
 # 快速开始
-> go version >= 1.21
+> go version >= 1.18
 
 ```go
 // 使用 github 库

@@ -7,7 +7,7 @@ head:
 
 # Installation
 
-> go version >= 1.21
+> go version >= 1.18
 
 ```go
 // Via github

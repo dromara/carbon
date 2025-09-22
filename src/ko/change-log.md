@@ -1,5 +1,13 @@
 # 업데이트 로그
 
+## [v2.6.12](https://github.com/dromara/carbon/compare/v2.6.11...v2.6.12) (2025-09-16)
+
+- `golang` 환경 의존성을 `1.21`에서 `1.18`로 낮춤
+- `testify` 테스트 프레임워크를 `v1.10.0`에서 `v1.11.1`로 업그레이드
+- `type_carbon.go` 파일의 `UnmarshalJSON` 메서드에서 `isEmpty` 플래그를 설정하여 빈 값을 나타냄
+- `sync.Map`을 사용하여 고성능 동시 캐싱을 구현
+- 잠재적인 경합 상태와 null 포인터 역참조 문제를 수정하여 동시성 안전성 향상
+
 ## [v2.6.11](https://github.com/dromara/carbon/compare/v2.6.10...v2.6.11) (2025-07-18)
 
 - `Sleep`을 구조체 메서드에서 전역 메서드로 변경

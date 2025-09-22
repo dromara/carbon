@@ -7,6 +7,14 @@ head:
 
 # Change Log
 
+## [v2.6.12](https://github.com/dromara/carbon/compare/v2.6.11...v2.6.12) (2025-09-16)
+
+- Lower `golang` environment dependency from `1.21` to `1.18`
+- Upgrade `testify` testing framework from `v1.10.0` to `v1.11.1`
+- Set `isEmpty` flag in `UnmarshalJSON` method of `type_carbon.go` file to indicate empty values
+- Use `sync.Map` to implement high-performance concurrent caching
+- Fix potential race conditions and null pointer dereference issues, improving concurrency safety
+
 ## [v2.6.11](https://github.com/dromara/carbon/compare/v2.6.10...v2.6.11) (2025-07-18)
 
 - Change `Sleep` from struct method to global method

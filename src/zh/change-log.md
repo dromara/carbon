@@ -7,6 +7,14 @@ head:
 
 # 更新日志
 
+## [v2.6.12](https://github.com/dromara/carbon/compare/v2.6.11...v2.6.12) (2025-09-16)
+
+- 将 `golang` 环境依赖从 `1.21` 降低到 `1.18`
+- 将 `testify` 测试框架从 `v1.10.0` 升级到 `v1.11.1`
+- 在 `type_carbon.go` 文件 `UnmarshalJSON` 方法中设置 `isEmpty` 标志以表示空值
+- 使用 `sync.Map` 实现高性能并发缓存
+- 修复潜在的竞态条件和空指针解引用问题，提高并发安全性
+
 ## [v2.6.11](https://github.com/dromara/carbon/compare/v2.6.10...v2.6.11) (2025-07-18)
 
 - 将 `Sleep` 由结构体方法更改成全局方法

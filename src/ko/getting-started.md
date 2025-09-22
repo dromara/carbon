@@ -6,7 +6,7 @@ head:
 ---
 
 # 빠른 시작
-> go version >= 1.21
+> go version >= 1.18
 
 ```go
 // github 라이브러리 사용

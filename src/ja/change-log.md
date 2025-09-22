@@ -1,5 +1,13 @@
 # 変更履歴
 
+## [v2.6.12](https://github.com/dromara/carbon/compare/v2.6.11...v2.6.12) (2025-09-16)
+
+- `golang` 環境依存を `1.21` から `1.18` に下げる
+- `testify` テストフレームワークを `v1.10.0` から `v1.11.1` にアップグレード
+- `type_carbon.go` ファイルの `UnmarshalJSON` メソッドで `isEmpty` フラグを設定して空値を示す
+- `sync.Map` を使用して高性能な並行キャッシュを実装
+- 潜在的な競合状態とnullポインタ逆参照の問題を修正し、並行安全性を向上
+
 ## [v2.6.11](https://github.com/dromara/carbon/compare/v2.6.10...v2.6.11) (2025-07-18)
 
 - `Sleep` を構造体メソッドからグローバルメソッドに変更
