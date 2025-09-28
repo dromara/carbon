@@ -1,8 +1,8 @@
 // @Package carbon
 // @Description a simple, semantic and developer-friendly time package for golang
-// @Page github.com/dromara/carbon
+// @Source github.com/dromara/carbon
+// @Document carbon.go-pkg.com
 // @Developer gouguoyin
-// @Blog www.gouguoyin.com
 // @Email 245629560@qq.com
 
 // Package carbon is a simple, semantic and developer-friendly time package for golang.
