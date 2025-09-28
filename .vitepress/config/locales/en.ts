@@ -120,7 +120,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         {text: 'constants', link: 'appendix/constants'},
         {text: 'Format signs', link: 'appendix/format-signs'},
-        {text: 'Test reports', link: 'https://github.com/dromara/carbon/blob/master/BENCHMARK.md', target: '_blank'},
+        {base:'https://', text: 'Test reports', link: 'github.com/dromara/carbon/blob/master/docs/BENCHMARK.en.md', target: '_blank'},
       ]
     },
   ]

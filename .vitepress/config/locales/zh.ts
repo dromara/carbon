@@ -132,7 +132,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             items: [
                 {text: '内置常量', link: 'appendix/constants'},
                 {text: '格式符号', link: 'appendix/format-signs'},
-                {base:'https://', text: '测试报告', link: 'https://github.com/dromara/carbon/blob/master/BENCHMARK.cn.md', target: '_blank'},
+                {base:'https://', text: '测试报告', link: 'github.com/dromara/carbon/blob/master/docs/BENCHMARK.cn.md', target: '_blank'},
             ]
         },
     ]

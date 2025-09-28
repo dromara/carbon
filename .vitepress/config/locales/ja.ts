@@ -132,7 +132,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             items: [
                 {text: 'コンスタント', link: 'appendix/constants'},
                 {text: '書式設定記号', link: 'appendix/format-signs'},
-                {base: 'https://', text: 'テストレポート', link: 'https://github.com/dromara/carbon/blob/master/BENCHMARK.ja.md', target: '_blank'},
+                {base:'https://', text: 'テストレポート', link: 'github.com/dromara/carbon/blob/master/docs/BENCHMARK.ja.md', target: '_blank'},
             ]
         },
     ]
