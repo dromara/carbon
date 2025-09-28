@@ -77,7 +77,7 @@ carbon.ClearTestNow()
 carbon.IsTestNow() // false
 ```
 
-더 많은 사용 예시는 <a href="https://carbon.go-pkg.com/ko" target="_blank">공식 문서</a>를 참조하세요. 성능 테스트 보고서는 [분석 보고서](BENCHMARK.ko.md)를 참조하세요.
+더 많은 사용 예시는 <a href="https://carbon.go-pkg.com/ko" target="_blank">공식 문서</a>를 참조하세요. 성능 테스트 보고서는 [분석 보고서](docs/BENCHMARK.ko.md)를 참조하세요.
 
 ## 참고 자료
 
@@ -95,7 +95,7 @@ carbon.IsTestNow() // false
 
 <a href="https://github.com/dromara/carbon/graphs/contributors"><img src="https://contrib.rocks/image?repo=dromara/carbon&max=100&columns=16" /></a>
 
-[Carbon에 새로운 언어 지원을 추가하는 방법](CONTRIBUTING.ko.md)
+[Carbon에 새로운 언어 지원을 추가하는 방법](docs/CONTRIBUTING.ko.md)
 
 ## 스폰서
 

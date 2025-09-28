@@ -78,7 +78,7 @@ carbon.IsTestNow() // false
 ```
 詳細については <a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>
 
-より多くの使用例については、<a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>をご覧ください。性能テストレポートについては、[分析レポート](BENCHMARK.ja.md)をご参照ください
+より多くの使用例については、<a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>をご覧ください。性能テストレポートについては、[分析レポート](docs/BENCHMARK.ja.md)をご参照ください
 
 ## リファレンス
 
@@ -96,7 +96,7 @@ carbon.IsTestNow() // false
 
 <a href="https://github.com/dromara/carbon/graphs/contributors"><img src="https://contrib.rocks/image?repo=dromara/carbon&max=100&columns=16"/></a>
 
-[Carbon に新しい言語サポートを追加する方法](CONTRIBUTING.ja.md)
+[Carbon に新しい言語サポートを追加する方法](docs/CONTRIBUTING.ja.md)
 
 ## スポンサー
 

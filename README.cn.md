@@ -83,7 +83,7 @@ carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月�
 carbon.ClearTestNow()
 carbon.IsTestNow() // false
 ```
-更多用法示例请查看 <a href="https://carbon.go-pkg.com/zh" target="_blank">官方文档</a>，性能测试报告请查看 [分析报告](BENCHMARK.cn.md)
+更多用法示例请查看 <a href="https://carbon.go-pkg.com/zh" target="_blank">官方文档</a>，性能测试报告请查看 [分析报告](docs/BENCHMARK.cn.md)
 
 ## 参考项目
 
@@ -102,7 +102,7 @@ carbon.IsTestNow() // false
 
 <a href="https://github.com/dromara/carbon/graphs/contributors"><img src="https://contrib.rocks/image?repo=dromara/carbon&max=100&columns=16"/></a>
 
-[如何为 Carbon 添加新的语言支持](CONTRIBUTING.cn.md)
+[如何为 carbon 添加新的语言支持](docs/CONTRIBUTING.cn.md)
 ## 赞助
 
 `Carbon` 是一个非商业开源项目, 如果你想支持 `Carbon`,

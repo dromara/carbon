@@ -82,7 +82,7 @@ carbon.IsTestNow() // false
 
 For more usage examples, please refer to <a href="https://carbon.go-pkg.com" target="_blank">official document</a>. 
 
-For performance test reports, please refer to [benchmark report](BENCHMARK.md)
+For performance test reports, please refer to [benchmark report](docs/BENCHMARK.en.md)
 
 ## References
 
@@ -100,7 +100,7 @@ Thanks to all the following who contributed to `Carbon`:
 
 <a href="https://github.com/dromara/carbon/graphs/contributors"><img src="https://contrib.rocks/image?repo=dromara/carbon&max=100&columns=16" /></a>
 
-[How to add new language support to Carbon](CONTRIBUTING.md)
+[How to add new language support to carbon](docs/CONTRIBUTING.en.md)
 
 ## Sponsors
 
