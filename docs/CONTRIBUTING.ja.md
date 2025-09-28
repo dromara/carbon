@@ -17,7 +17,7 @@ cp lang/en.json lang/xx.json
 ```json
 {
   "name": "Japanese",
-  "author": "https://github.com/gouguoyin",
+  "author": "https://github.com/your-username",
   "months": "1月|2月|3月|4月|5月|6月|7月|8月|9月|10月|11月|12月",
   "short_months": "1月|2月|3月|4月|5月|6月|7月|8月|9月|10月|11月|12月",
   "weeks": "日曜日|月曜日|火曜日|水曜日|木曜日|金曜日|土曜日",
@@ -43,8 +43,8 @@ cp lang/en.json lang/xx.json
 
 | フィールド | 説明 | 例 |
 |-----------|------|-----|
-| `name` | 言語名（その言語で書かれたもの） | "Japanese" |
-| `author` | 貢献者のGitHubリンク | "https://github.com/gouguoyin" |
+| `name` | 言語名（英語の正式名称） | "Japanese" |
+| `author` | 貢献者のGitHubリンク | "https://github.com/your-username" |
 | `months` | 完全な月名、`\|` で区切る | "1月\|2月\|3月..." |
 | `short_months` | 短縮月名、`\|` で区切る | "1月\|2月\|3月..." |
 | `weeks` | 完全な曜日名、`\|` で区切る | "日曜日\|月曜日\|火曜日..." |
@@ -65,8 +65,6 @@ cp lang/en.json lang/xx.json
 | `after` | "後" の翻訳 | "%s後" |
 
 #### 単数/複数処理
-
-異なる言語は単数/複数形を異なる方法で処理します：
 
 1. **東アジア言語（中国語、日本語、韓国語など）**：通常1つのフォーマットのみを使用
    ```json

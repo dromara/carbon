@@ -17,7 +17,7 @@ cp lang/en.json lang/xx.json
 ```json
 {
   "name": "Korean",
-  "author": "https://github.com/nannul",
+  "author": "https://github.com/your-username",
   "months": "일월|이월|삼월|사월|오월|유월|칠월|팔월|구월|시월|십일월|십이월",
   "short_months": "1월|2월|3월|4월|5월|6월|7월|8월|9월|10월|11월|12월",
   "weeks": "일요일|월요일|화요일|수요일|목요일|금요일|토요일",
@@ -43,8 +43,8 @@ cp lang/en.json lang/xx.json
 
 | 필드 | 설명 | 예시 |
 |------|------|------|
-| `name` | 언어 이름 (해당 언어로 작성된 것) | "Korean" |
-| `author` | 기여자의 GitHub 링크 | "https://github.com/nannul" |
+| `name` | 언어 이름 (영어 공식 명칭) | "Korean" |
+| `author` | 기여자의 GitHub 링크 | "https://github.com/your-username" |
 | `months` | 전체 월 이름, `\|`로 구분 | "일월\|이월\|삼월..." |
 | `short_months` | 짧은 월 이름, `\|`로 구분 | "1월\|2월\|3월..." |
 | `weeks` | 전체 요일 이름, `\|`로 구분 | "일요일\|월요일\|화요일..." |
@@ -65,8 +65,6 @@ cp lang/en.json lang/xx.json
 | `after` | "후"의 번역 | "%s 후" |
 
 #### 단수/복수 처리
-
-다른 언어들은 단수/복수형을 다른 방식으로 처리합니다:
 
 1. **동아시아 언어 (중국어, 일본어, 한국어 등)**: 보통 하나의 형식만 사용
    ```json

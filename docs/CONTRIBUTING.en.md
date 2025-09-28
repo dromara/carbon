@@ -43,7 +43,7 @@ Edit the newly created `lang/xx.json` file and translate all English content to 
 
 | Field | Description | Example |
 |-------|-------------|---------|
-| `name` | Language name (written in that language) | "English" |
+| `name` | Language name (English full name) | "English" |
 | `author` | Contributor's GitHub link | "https://github.com/gouguoyin" |
 | `months` | Full month names, separated by `\|` | "January\|February\|March..." |
 | `short_months` | Short month names, separated by `\|` | "Jan\|Feb\|Mar..." |
@@ -65,8 +65,6 @@ Edit the newly created `lang/xx.json` file and translate all English content to 
 | `after` | Translation of "after" | "%s after" |
 
 #### Singular/Plural Handling
-
-Different languages handle singular/plural forms differently:
 
 1. **East Asian languages (Chinese, Japanese, Korean, etc.)**: Usually use only one format
    ```json
