@@ -12,6 +12,16 @@ import (
 //go:embed lang
 var fs embed.FS
 
+// localeCache stores parsed locale resources keyed by the embedded file path.
+var localeCache sync.Map
+
+// localeEntry caches the parsed resources of a locale file.
+type localeEntry struct {
+	once      sync.Once
+	resources map[string]string
+	err       error
+}
+
 // Language defines a Language struct.
 type Language struct {
 	dir       string
@@ -68,20 +78,34 @@ func (lang *Language) SetLocale(locale string) *Language {
 	}
 
 	fileName := fmt.Sprintf("%s/%s.json", lang.dir, locale)
-	bs, err := fs.ReadFile(fileName)
-	if err != nil {
-		lang.Error = fmt.Errorf("%w: %w", ErrNotExistLocale(fileName), err)
+	entryIface, _ := localeCache.LoadOrStore(fileName, new(localeEntry))
+	entry := entryIface.(*localeEntry)
+
+	entry.once.Do(func() {
+		bs, err := fs.ReadFile(fileName)
+		if err != nil {
+			entry.err = fmt.Errorf("%w: %w", ErrNotExistLocale(fileName), err)
+			return
+		}
+
+		var resources map[string]string
+		if err := json.Unmarshal(bs, &resources); err != nil {
+			entry.err = fmt.Errorf("failed to decode locale file %q: %w", fileName, err)
+			return
+		}
+		entry.resources = resources
+	})
+
+	if entry.err != nil {
+		lang.Error = entry.err
 		return lang
 	}
-
-	var resources map[string]string
-	_ = json.Unmarshal(bs, &resources)
 
 	lang.rw.Lock()
 	defer lang.rw.Unlock()
 
 	lang.locale = locale
-	lang.resources = resources
+	lang.resources = entry.resources
 	return lang
 }
 
