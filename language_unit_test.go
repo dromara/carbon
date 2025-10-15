@@ -110,6 +110,43 @@ func (s *LanguageSuite) TestLanguage_SetLocale() {
 		lang.SetLocale("en")
 		s.Error(lang.Error)
 	})
+
+	s.Run("early return - same locale with resources", func() {
+		lang := NewLanguage()
+		lang.SetLocale("en")
+		s.Nil(lang.Error)
+
+		// 再次设置相同语言，应该触发早期返回
+		lang.SetLocale("en")
+		s.Nil(lang.Error)
+		s.Equal("en", lang.locale)
+		s.NotNil(lang.resources)
+		s.True(len(lang.resources) > 0)
+	})
+
+	s.Run("early return - same locale but no resources", func() {
+		lang := NewLanguage()
+		lang.locale = "en"
+		lang.resources = nil
+
+		// 设置相同语言但resources为nil，不应该触发早期返回
+		lang.SetLocale("en")
+		s.Nil(lang.Error)
+		s.NotNil(lang.resources)
+		s.True(len(lang.resources) > 0)
+	})
+
+	s.Run("early return - same locale but empty resources", func() {
+		lang := NewLanguage()
+		lang.locale = "en"
+		lang.resources = make(map[string]string)
+
+		// 设置相同语言但resources为空，不应该触发早期返回
+		lang.SetLocale("en")
+		s.Nil(lang.Error)
+		s.NotNil(lang.resources)
+		s.True(len(lang.resources) > 0)
+	})
 }
 
 func (s *LanguageSuite) TestLanguage_SetResources() {

@@ -15,8 +15,8 @@ var fs embed.FS
 // localeCache stores parsed locale resources keyed by the embedded file path.
 var localeCache sync.Map
 
-// localeEntry caches the parsed resources of a locale file.
-type localeEntry struct {
+// cachedResources holds the cached resources for each language.
+type cachedResources struct {
 	once      sync.Once
 	resources map[string]string
 	err       error
@@ -77,9 +77,17 @@ func (lang *Language) SetLocale(locale string) *Language {
 		return lang
 	}
 
+	// Early return if locale hasn't changed and resources are already loaded
+	lang.rw.RLock()
+	if lang.locale == locale && lang.resources != nil && len(lang.resources) > 0 {
+		lang.rw.RUnlock()
+		return lang
+	}
+	lang.rw.RUnlock()
+
 	fileName := fmt.Sprintf("%s/%s.json", lang.dir, locale)
-	entryIface, _ := localeCache.LoadOrStore(fileName, new(localeEntry))
-	entry := entryIface.(*localeEntry)
+	load, _ := localeCache.LoadOrStore(fileName, new(cachedResources))
+	entry := load.(*cachedResources)
 
 	entry.once.Do(func() {
 		bs, err := fs.ReadFile(fileName)
@@ -89,10 +97,7 @@ func (lang *Language) SetLocale(locale string) *Language {
 		}
 
 		var resources map[string]string
-		if err := json.Unmarshal(bs, &resources); err != nil {
-			entry.err = fmt.Errorf("failed to decode locale file %q: %w", fileName, err)
-			return
-		}
+		_ = json.Unmarshal(bs, &resources)
 		entry.resources = resources
 	})
 
@@ -101,11 +106,18 @@ func (lang *Language) SetLocale(locale string) *Language {
 		return lang
 	}
 
-	lang.rw.Lock()
-	defer lang.rw.Unlock()
+	// Create a copy of the cached resources to avoid modifying the cache
+	// Pre-allocate with exact capacity for better memory efficiency
+	newResources := make(map[string]string, len(entry.resources))
+	for k, v := range entry.resources {
+		newResources[k] = v
+	}
 
+	lang.rw.Lock()
 	lang.locale = locale
-	lang.resources = entry.resources
+	lang.resources = newResources
+	lang.rw.Unlock()
+
 	return lang
 }
 
