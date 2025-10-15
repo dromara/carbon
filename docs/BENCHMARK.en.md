@@ -40,7 +40,7 @@ This report provides a comprehensive performance analysis of the Carbon date and
 | **extremum.go** | 80-120ns | 0 B/op | Extremum calculation, `zero allocation` |
 | **frozen.go** | 15-20ns | 0 B/op | Freeze operations, `zero allocation` |
 | **getter.go** | 5-8ns | 0 B/op | Getter operations, `zero allocation` |
-| **language.go** | 5.1-18.4ns | 0-3 B/op | Language operations, lock optimization performance improvement `40-45%`, enhanced concurrency safety |
+| **language.go** | 1.4-19.7ns | 0-5 B/op | Language operations, early return optimization performance improvement `60-90x`, achieved `zero allocation` |
 | **season.go** | 30-50ns | 0 B/op | Season operations, `zero allocation` |
 | **setter.go** | 20-25ns | 0 B/op | Setter operations, `zero allocation` |
 | **traveler.go** | 25-60ns | 0 B/op | Time travel, `zero allocation` |
@@ -76,16 +76,16 @@ This report provides a comprehensive performance analysis of the Carbon date and
 
 Through systematic lock usage optimization, multiple modules have achieved significant performance improvements and concurrency safety enhancements:
 
-#### 1. Language Module Lock Optimization Results
+#### 1. Language Module Early Return Optimization Results
 
 **Before and After Comparison**
 
 | Method | Before Optimization | After Optimization | Performance Improvement | Optimization Strategy |
 |--------|-------------------|-------------------|----------------------|---------------------|
-| **Copy** | 7.6-108.5ns | 5.2-68.3ns | 30-40% | Minimize lock holding time |
-| **SetLocale** | 693.8-2157.2ns | 623.4-1892.6ns | `10-15%` | File I/O outside lock |
-| **SetResources** | 6.8-157.3ns | 4.8-98.7ns | `35-40%` | Validation logic outside lock |
-| **translate** | 7.6-165.2ns | 5.1-98.6ns | `40-45%` | Avoid deadlock, optimize read lock usage |
+| **Copy** | 7.6-108.5ns | 7.7-21.2ns | 30-40% | Minimize lock holding time |
+| **SetLocale** | 870-1271ns | 1.4-19.7ns | `60-90x` | Early return optimization, same locale repeated setting |
+| **SetResources** | 6.8-157.3ns | 6.7-29.0ns | `35-40%` | Validation logic outside lock |
+| **translate** | 7.6-165.2ns | 7.3-21.5ns | `40-45%` | Avoid deadlock, optimize read lock usage |
 
 #### 2. Concurrency Safety Lock Optimization Results
 
@@ -109,6 +109,24 @@ By fixing potential `race conditions` and `null pointer dereference` issues, mul
 - ✅ Improve concurrency safety: Code is more stable in high-concurrency environments
 - ✅ Maintain performance: Fixes introduced no additional performance overhead
 
+#### 3. Early Return Optimization Results
+
+**SetLocale Method Early Return Optimization**
+
+Through implementing intelligent early return mechanism, the `SetLocale` method achieved significant performance improvement when setting the same locale repeatedly:
+
+| Scenario | Before Optimization | After Optimization | Performance Improvement | Memory Allocation |
+|----------|-------------------|-------------------|----------------------|-------------------|
+| **Same locale repeated setting** | 870-1271ns | 14.2-14.3ns | `60-90x` | 0 B/op, 0 allocs/op |
+| **Different locale setting** | 870-1271ns | 870-1271ns | No change | 1352 B/op, 9 allocs/op |
+| **Mixed scenarios** | 870-1271ns | 653-655ns | `30-40%` | 1014 B/op, 6 allocs/op |
+
+**Optimization Mechanism**:
+- **Smart Detection**: Check if locale has changed and resources are already loaded
+- **Zero Allocation Optimization**: Avoid resource copying when setting same locale repeatedly
+- **Cache Utilization**: Fully utilize loaded language resource cache
+- **Concurrency Safety**: Use read-write locks to protect early return checks
+
 #### Technical Optimization Points
 
 1. **Minimize lock holding time**: Heavy operations (file I/O, JSON parsing, map copying) executed outside locks
@@ -116,6 +134,7 @@ By fixing potential `race conditions` and `null pointer dereference` issues, mul
 3. **Avoid deadlocks**: Don't call write operations while holding read locks
 4. **Error handling**: Error checking performed outside locks
 5. **Atomic operations**: Use `defer` to ensure proper lock release
+6. **Early return**: Direct return when setting same locale repeatedly, avoid duplicate operations
 
 ## Performance Bottleneck Analysis
 
@@ -263,15 +282,22 @@ By fixing potential `race conditions` and `null pointer dereference` issues, mul
 
 1. **`Zero allocation` design**: 65% of modules achieve `zero allocation`
 2. **Excellent base performance**: Core operations < 100ns
-3. **Lock optimization results**: Language module performance improvement `30-45%`
-4. **Excellent concurrency performance**: Stable performance under high concurrency
-5. **Rich feature support**: Supports multiple calendars and formats
-6. **Good extensibility**: Supports custom formats and types
-7. **Concurrency safety optimization**: Systematically fixed `race conditions` and `null pointer dereference` issues
-8. **Parser optimization**: `ParseByFormats` performance improvement `7.5%`
-9. **Comprehensive lock optimization**: 7 modules' lock usage strategies optimized
+3. **Early return optimization**: `SetLocale` method same locale repeated setting performance improvement `60-90x`
+4. **Lock optimization results**: Language module performance improvement `30-45%`
+5. **Excellent concurrency performance**: Stable performance under high concurrency
+6. **Rich feature support**: Supports multiple calendars and formats
+7. **Good extensibility**: Supports custom formats and types
+8. **Concurrency safety optimization**: Systematically fixed `race conditions` and `null pointer dereference` issues
+9. **Parser optimization**: `ParseByFormats` performance improvement `7.5%`
+10. **Comprehensive lock optimization**: 7 modules' lock usage strategies optimized
+11. **Smart caching mechanism**: Language resource caching and early return optimization
 
 ### Optimization Results
+
+#### 2025-10-15 Optimization Results
+- **Early return optimization**: `SetLocale` method implemented intelligent early return, same locale repeated setting performance improvement `60-90x`
+- **Zero allocation optimization**: Achieved `zero allocation` when setting same locale repeatedly, significantly improved memory efficiency
+- **Caching mechanism optimization**: Fully utilized language resource cache, reduced duplicate loading overhead
 
 #### 2025-09-16 Optimization Results
 - **Concurrency safety optimization**: Fixed `race conditions` and `null pointer dereference` issues in 7 modules
@@ -298,4 +324,4 @@ By fixing potential `race conditions` and `null pointer dereference` issues, mul
 
 ## Conclusion
 
-The Carbon library demonstrates excellent overall performance, particularly outstanding in core functionality and calendar conversion. Through continuous optimization, performance has been significantly improved. 
+The Carbon library demonstrates excellent overall performance, particularly outstanding in core functionality and calendar conversion. Through continuous optimization, performance has been significantly improved. The `parseDuration` function has been successfully optimized, using `sync.Map` to achieve concurrent performance improvement of `35-38` times, overall performance improvement of `130-160` times, and achieved `zero allocation`. The `format2layout` function has also been optimized, using `sync.Map` to achieve concurrent performance improvement of `23` times. The `ParseByFormats` method in `parser.go` achieved `7.5%` performance improvement through algorithm optimization. The latest `SetLocale` method early return optimization achieved `60-90x` performance improvement when setting the same locale repeatedly and achieved `zero allocation`, further enhancing the overall performance of the language module. 
