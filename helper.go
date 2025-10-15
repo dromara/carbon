@@ -86,7 +86,7 @@ var defaultLayouts = []string{
 }
 
 // layoutCache caches format to layout conversions to avoid repeated parsing
-var layoutCache = sync.Map{}
+var layoutCache sync.Map
 
 // converts format to layout.
 func format2layout(format string) string {
@@ -125,7 +125,7 @@ func format2layout(format string) string {
 }
 
 // timezoneCache caches parsed timezone locations to avoid repeated parsing
-var timezoneCache = sync.Map{}
+var timezoneCache sync.Map
 
 // parses a timezone string as a time.Location instance.
 func parseTimezone(timezone string) (loc *Location, err error) {
@@ -149,7 +149,7 @@ func parseTimezone(timezone string) (loc *Location, err error) {
 }
 
 // durationCache caches parsed durations to avoid repeated parsing
-var durationCache = sync.Map{}
+var durationCache sync.Map
 
 // parses a duration string as a time.Duration instance.
 func parseDuration(duration string) (dur Duration, err error) {
