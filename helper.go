@@ -105,8 +105,11 @@ func format2layout(format string) string {
 		} else {
 			switch format[i] {
 			case '\\': // raw output, no parse
-				buffer = append(buffer, format[i+1])
-				i++
+				// Ensure we don't go out of bounds
+				if i+1 < len(format) {
+					buffer = append(buffer, format[i+1])
+					i++
+				}
 				continue
 			default:
 				buffer = append(buffer, format[i])
@@ -116,8 +119,9 @@ func format2layout(format string) string {
 
 	result := string(buffer)
 
-	// Cache the result for common formats
-	if len(format) <= 50 { // Only cache short formats to avoid memory bloat
+	// Cache the result for common formats to improve performance
+	// Only cache reasonably short formats to avoid memory bloat
+	if len(format) <= 50 {
 		layoutCache.Store(format, result)
 	}
 
@@ -168,7 +172,8 @@ func parseDuration(duration string) (dur Duration, err error) {
 	}
 
 	// Cache the successful result for common durations
-	if len(duration) <= 10 { // Only cache short durations to avoid memory bloat
+	// Only cache reasonably short durations to avoid memory bloat
+	if len(duration) <= 20 {
 		durationCache.Store(duration, dur)
 	}
 	return
@@ -176,5 +181,8 @@ func parseDuration(duration string) (dur Duration, err error) {
 
 // gets absolute value.
 func getAbsValue(value int64) int64 {
+	// Use bit manipulation for better performance
+	// For positive numbers: value ^ 0 - 0 = value
+	// For negative numbers: value ^ -1 - (-1) = ^value + 1 = -value
 	return (value ^ (value >> 63)) - (value >> 63)
 }
