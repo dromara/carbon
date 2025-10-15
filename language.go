@@ -12,7 +12,7 @@ import (
 //go:embed lang
 var fs embed.FS
 
-// localeCache stores parsed locale resources keyed by the embedded file path.
+// localeCache caches parsed locale resources to avoid repeated file loading and JSON parsing
 var localeCache sync.Map
 
 // cachedResources holds the cached resources for each language.
