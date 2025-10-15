@@ -12,7 +12,7 @@ head:
 
 ```go
 // Output datetime format string
-carbon.Parse("2020-08-05 13:14:15").ToDateTimeString() // 2020-08-05 13:14:15
+carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToDateTimeString() // 2020-08-05 13:14:15
 // Output datetime with millisecond format string
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToDateTimeMilliString() // 2020-08-05 13:14:15.999
 // Output datetime with microsecond format string
@@ -68,7 +68,7 @@ carbon.Parse("2020-08-05 13:14:15.999999999").ToShortTimeNanoString() // 131415.
 // Output Ansic format string
 carbon.Parse("2020-08-05 13:14:15").ToAnsicString() // Wed Aug  5 13:14:15 2020
 // Output Atom format string
-carbon.Parse("2020-08-05 13:14:15").ToAtomString() // 2020-08-05T13:14:15+08:00
+carbon.Parse("2020-08-05 13:14:15").ToAtomString() // 2020-08-05T13:14:15+00:00
 // Output Unix date format string
 carbon.Parse("2020-08-05 13:14:15").ToUnixDateString() // Wed Aug  5 13:14:15 UTC 2020
 // Output Ruby date format string
@@ -77,12 +77,12 @@ carbon.Parse("2020-08-05 13:14:15").ToRubyDateString() // Wed Aug 05 13:14:15 +0
 carbon.Parse("2020-08-05 13:14:15").ToKitchenString() // 1:14PM
 // Output Cookie format string
 carbon.Parse("2020-08-05 13:14:15").ToCookieString() // Wednesday, 05-Aug-2020 13:14:15 UTC
-// Output day, date and time format string
+// Output DayDateTime format string
 carbon.Parse("2020-08-05 13:14:15").ToDayDateTimeString() // Wed, Aug 5, 2020 1:14 PM
 // Output RSS format string
 carbon.Parse("2020-08-05 13:14:15").ToRssString() // Wed, 05 Aug 2020 13:14:15 +0000
 // Output W3C format string
-carbon.Parse("2020-08-05 13:14:15").ToW3cString() // 2020-08-05T13:14:15Z
+carbon.Parse("2020-08-05 13:14:15").ToW3cString() // 2020-08-05T13:14:15+00:00
 
 // Output ISO8601 format string
 carbon.Parse("2020-08-05 13:14:15.999999999").ToIso8601String() // 2020-08-05T13:14:15+00:00
@@ -119,13 +119,13 @@ carbon.Parse("2020-08-05 13:14:15").ToRfc2822String() // Wed, 05 Aug 2020 13:14:
 carbon.Parse("2020-08-05 13:14:15").ToRfc7231String() // Wed, 05 Aug 2020 13:14:15 UTC
 
 // Output RFC3339 format string
-carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339String() // 2020-08-05T05:14:15Z
+carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339String() // 2020-08-05T13:14:15+00:00
 // Output RFC3339 with millisecond format string
-carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339MilliString() // 2020-08-05T05:14:15.999Z
+carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339MilliString() // 2020-08-05T13:14:15.999+00:00
 // Output RFC3339 with microsecond format string
-carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339MicroString() // 2020-08-05T05:14:15.999999Z
+carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339MicroString() // 2020-08-05T13:14:15.999999+00:00
 // Output RFC3339 with nanosecond format string
-carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339NanoString() // 2020-08-05T05:14:15.999999999Z
+carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339NanoString() // 2020-08-05T13:14:15.999999999+00:00
 
 // Output datetime format string
 fmt.Printf("%s", carbon.Parse("2020-08-05 13:14:15")) // 2020-08-05 13:14:15

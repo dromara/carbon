@@ -1,4 +1,14 @@
-#### `Carbon` インスタンスの作成
+---
+head:
+  - - meta
+    - name: description
+      content: Carbon インスタンスの作成|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, タイムスタンプからCarbonインスタンス作成, 日付からCarbonインスタンス作成
+---
+
+# `Carbon` インスタンスの作成
 
 ## タイムスタンプからの `Carbon` インスタンスの作成
 ```go
@@ -8,23 +18,23 @@ carbon.CreateFromTimestamp(0).ToString() // 1970-01-01 00:00:00 +0000 UTC
 carbon.CreateFromTimestamp(1).ToString() // 1970-01-01 00:00:01 +0000 UTC
 carbon.CreateFromTimestamp(1596633255).ToString() // 2020-08-05 13:14:15 +0000 UTC
 // ミリ秒のタイムスタンプから Carbon インスタンスを作成します
-carbon.CreateFromTimestampMilli(1596600855999).ToString() // 2020-08-05 13:14:15.999 +0000 UTC
+carbon.CreateFromTimestampMilli(1596604455999).ToString() // 2020-08-05 13:14:15.999 +0000 UTC
 // マイクロ秒タイムスタンプから Carbon インスタンスを作成します
-carbon.CreateFromTimestampMicro(1596600855999999).ToString() // 2020-08-05 13:14:15.999999 +0000 UTC
+carbon.CreateFromTimestampMicro(1596604455999999).ToString() // 2020-08-05 13:14:15.999999 +0000 UTC
 // ナノタイムスタンプから Carbon インスタンスを作成します
-carbon.CreateFromTimestampNano(1596600855999999999).ToString() // 2020-08-05 13:14:15.999999999 +0000 UTC
+carbon.CreateFromTimestampNano(1596604455999999999).ToString() // 2020-08-05 13:14:15.999999999 +0000 UTC
 ```
 
 ## 日付からの `Carbon` インスタンスの作成
 ```go
 // 年、月、日、時、分、秒からCarbonインスタンスを作成する
-carbon.CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToDateTimeString() // 2020-08-05 13:14:15
+carbon.CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC
 // 年、月、日、時、分、秒、ミリ秒から Carbon インスタンスを作成します
-carbon.CreateFromDateTimeMilli(2020, 1, 1, 13, 14, 15, 999).ToString() // 2020-01-01 13:14:15.999 +0000 UTC
+carbon.CreateFromDateTimeMilli(2020, 8, 5, 13, 14, 15, 999).ToString() // 2020-08-05 13:14:15.999 +0000 UTC
 // 年、月、日、時、分、秒、マイクロ秒から Carbon インスタンスを作成します
-carbon.CreateFromDateTimeMicro(2020, 1, 1, 13, 14, 15, 999999).ToString() // 2020-01-01 13:14:15.999999 +0000 UTC
+carbon.CreateFromDateTimeMicro(2020, 8, 5, 13, 14, 15, 999999).ToString() // 2020-08-05 13:14:15.999999 +0000 UTC
 // 年、月、日、時、分、秒、ナノ秒からCarbonインスタンスを作成する
-carbon.CreateFromDateTimeNano(2020, 1, 1, 13, 14, 15, 999999999).ToString() // 2020-01-01 13:14:15.999999999 +0000 UTC
+carbon.CreateFromDateTimeNano(2020, 8, 5, 13, 14, 15, 999999999).ToString() // 2020-08-05 13:14:15.999999999 +0000 UTC
 
 // 年、月、日からCarbonインスタンスを作成する
 carbon.CreateFromDate(2020, 8, 5).ToString() // 2020-08-05 00:00:00 +0000 UTC

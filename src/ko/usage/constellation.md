@@ -13,7 +13,7 @@ head:
 ## 별자리 이름
 ```go
 carbon.Parse("2020-08-05 13:14:15").Constellation() // Leo
-carbon.Parse("2020-08-05 13:14:15").SetLocale("ko").Constellation() // 사자자리
+carbon.Parse("2020-08-05 13:14:15").SetLocale("zh-CN").Constellation() // 狮子座
 ```
 
 ## 별자리 판단

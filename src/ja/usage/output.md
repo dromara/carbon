@@ -1,8 +1,18 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 時間出力|軽量で意味論的で開発者に優しい golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, ansic, atom, iso8601, iso8601zulu, rfc822, rfc822z, rfc850, rfc1036, rss, w3c, daydatetime, cookie, kitchen, rubydate, atom, unixdate, rfc822zulu, rfc822z, rfc850z, rfc1036z, rfc822zulu, rfc822z, rfc850z, rfc1036z, rfc822zulu, rfc822z, rfc850z
+---
+
 # 時間出力
 
 ```go
 // datetimeを文字列出力
-carbon.Parse("2020-08-05 13:14:15").ToDateTimeString() // 2020-08-05 13:14:15
+carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToDateTimeString() // 2020-08-05 13:14:15
 // ミリ秒を含むdatetimeを文字列出力
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToDateTimeMilliString() // 2020-08-05 13:14:15.999
 // マイクロ秒を含むdatetimeを文字列出力
@@ -46,13 +56,13 @@ carbon.Parse("2020-08-05 13:14:15.999999999").ToTimeMicroString() // 13:14:15.99
 // ナノ秒を含む時間を文字列出力
 carbon.Parse("2020-08-05 13:14:15.999999999").ToTimeNanoString() // 13:14:15.999999999
 
-// 時間を略語形式の出力
+// 時間を略語形式の文字列出力
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortTimeString() // 131415
-// ミリ秒を含む時間を略語形式の出力
+// ミリ秒を含む時間を略語形式の文字列出力
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortTimeMilliString() // 131415.999
-// マイクロ秒を含む時間を略語形式の出力
+// マイクロ秒を含む時間を略語形式の文字列出力
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortTimeMicroString() // 131415.999999
-// ナノ秒を含む時間を略語形式の出力
+// ナノ秒を含む時間を略語形式の文字列出力
 carbon.Parse("2020-08-05 13:14:15.999999999").ToShortTimeNanoString() // 131415.999999999
 
 // Ansic フォーマット文字列の出力
@@ -60,13 +70,13 @@ carbon.Parse("2020-08-05 13:14:15").ToAnsicString() // Wed Aug  5 13:14:15 2020
 // Atom フォーマット文字列の出力
 carbon.Parse("2020-08-05 13:14:15").ToAtomString() // 2020-08-05T13:14:15+00:00
 // UnixDate フォーマット文字列の出力
-carbon.Parse("2020-08-05 13:14:15").ToUnixDateString() // Wed Aug  5 13:14:15 JST 2020
+carbon.Parse("2020-08-05 13:14:15").ToUnixDateString() // Wed Aug  5 13:14:15 UTC 2020
 // RubyDate フォーマット文字列の出力
 carbon.Parse("2020-08-05 13:14:15").ToRubyDateString() // Wed Aug 05 13:14:15 +0000 2020
 // Kitchen フォーマット文字列の出力
 carbon.Parse("2020-08-05 13:14:15").ToKitchenString() // 1:14PM
 // Cookie フォーマット文字列の出力
-carbon.Parse("2020-08-05 13:14:15").ToCookieString() // Wednesday, 05-Aug-2020 13:14:15 JST
+carbon.Parse("2020-08-05 13:14:15").ToCookieString() // Wednesday, 05-Aug-2020 13:14:15 UTC
 // DayDateTime フォーマット文字列の出力
 carbon.Parse("2020-08-05 13:14:15").ToDayDateTimeString() // Wed, Aug 5, 2020 1:14 PM
 // RSS フォーマット文字列の出力
@@ -110,11 +120,11 @@ carbon.Parse("2020-08-05 13:14:15").ToRfc7231String() // Wed, 05 Aug 2020 13:14:
 
 // RFC3339 フォーマット文字列の出力
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339String() // 2020-08-05T13:14:15+00:00
-// RFC3339 フォーマット文字列の出力(ミリ秒を含む)
+// RFC3339Milli フォーマット文字列の出力
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339MilliString() // 2020-08-05T13:14:15.999+00:00
-// RFC3339 フォーマット文字列の出力(マイクロ秒を含む)
+// RFC3339Micro フォーマット文字列の出力
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339MicroString() // 2020-08-05T13:14:15.999999+00:00
-// RFC3339 フォーマット文字列の出力(ナノ秒を含む)
+// RFC3339Nano フォーマット文字列の出力
 carbon.Parse("2020-08-05T13:14:15.999999999+08:00").ToRfc3339NanoString() // 2020-08-05T13:14:15.999999999+00:00
 
 // 日付時間文字列の出力

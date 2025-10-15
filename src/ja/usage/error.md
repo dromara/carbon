@@ -1,5 +1,15 @@
+---
+head:
+  - - meta
+    - name: description
+      content: エラー処理|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, エラー
+---
+
 # エラー処理
-複数のエラーが発生した場合、最初のエラーのみが返されます, アクセス <a href="https://github.com/dromara/carbon/blob/master/errors.go" target="_blank" rel="noreferrer">errors.go</a> 発生する可能性のあるすべてのエラーを表示
+複数のエラーが発生した場合、最初のエラーのみが返されます。<a href="https://github.com/dromara/carbon/blob/master/errors.go" target="_blank" rel="noreferrer">errors.go</a> を参照して、発生する可能性のあるすべてのエラーを確認してください
 
 ```go
 c1 := carbon.Parse("xxx")

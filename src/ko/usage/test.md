@@ -5,7 +5,7 @@ head:
       content: 테스트 동결|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 테스트 시간, 시간 동결
+      content: carbon, go-carbon, 테스트 시간, 동결 시간
 ---
 
 # 테스트
@@ -26,7 +26,7 @@ carbon.Parse("2020-10-05").DiffForHumans() // 2 months from now
 now.DiffForHumans(carbon.Parse("2020-10-05")) // 2 months before
 ```
 
-## 테스트 시간인지 확인
+## 테스트 시간인지
 ```go
 carbon.IsTestNow() 
 ```

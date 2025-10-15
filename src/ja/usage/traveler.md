@@ -1,4 +1,15 @@
+---
+head:
+  - - meta
+    - name: description
+      content: タイムトラベル|軽量で、セマンティックで、開発者に優しい golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 世紀旅行, 年代旅行, 年旅行, 四半期旅行, 月旅行, 週旅行, 日旅行, 時間旅行, 分旅行, 秒旅行, ミリ秒旅行, マイクロ秒旅行, ナノ秒旅行
+---
+
 # タイムトラベル
+この一連のメソッドは元の値を変更します。元の値を変更したくない場合は、`Clone` メソッドを使用してください
 
 ## 世紀旅行する
 ```go
@@ -117,7 +128,7 @@ carbon.Parse("2020-02-29 13:14:15").SubWeek().ToDateTimeString() // 2020-02-22 1
 // 3日追加
 carbon.Parse("2020-08-05 13:14:15").AddDays(3).ToDateTimeString() // 2020-08-08 13:14:15
 // 1日追加
-carbon.Parse("2020-08-05 13:14:15").AddDay().ToDateTimeString() // 2020-08-05 13:14:15
+carbon.Parse("2020-08-05 13:14:15").AddDay().ToDateTimeString() // 2020-08-06 13:14:15
 // 3日減らす
 carbon.Parse("2020-08-05 13:14:15").SubDays(3).ToDateTimeString() // 2020-08-02 13:14:15
 // 1日減らす

@@ -62,10 +62,10 @@ carbon.Parse("2018-08-05 13:14:15").DiffForHumans() // 2 years ago
 carbon.Parse("2021-08-05 13:14:15").DiffForHumans() // 1 year from now
 carbon.Parse("2022-08-05 13:14:15").DiffForHumans() // 2 years from now
 
-carbon.SetLocale("ko")
-carbon.Parse("2020-08-05 13:14:15").DiffForHumans() // 방금 전
-carbon.Parse("2019-08-05 13:14:15").DiffForHumans() // 1년 전
-carbon.Parse("2018-08-05 13:14:15").DiffForHumans() // 2년 전
-carbon.Parse("2021-08-05 13:14:15").DiffForHumans() // 1년 후
-carbon.Parse("2022-08-05 13:14:15").DiffForHumans() // 2년 후
+carbon.SetLocale("zh-CN")
+carbon.Parse("2020-08-05 13:14:15").DiffForHumans() // 刚刚
+carbon.Parse("2019-08-05 13:14:15").DiffForHumans() // 1 年前
+carbon.Parse("2018-08-05 13:14:15").DiffForHumans() // 2 年前
+carbon.Parse("2021-08-05 13:14:15").DiffForHumans() // 1 年后
+carbon.Parse("2022-08-05 13:14:15").DiffForHumans() // 2 年后
 ``` 

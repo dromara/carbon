@@ -5,7 +5,7 @@ head:
       content: Setter | A simple, semantic and developer-friendly time package for golang
   - - meta
     - name: keywords
-      content: carbon, go-carbon
+      content: carbon, go-carbon, set timezone, set location, set region, set year month day hour minute second, set year, set month, set week start day, set week weekend day, set day, set hour, set minute, set second, set millisecond, set microsecond, set nanosecond
 ---
 
 # Setter
@@ -25,7 +25,7 @@ tokyo, _ := time.LoadLocation(carbon.Tokyo)
 carbon.Parse("2020-08-05 13:14:15").SetLocation(tokyo).ToString() // 2020-08-05 22:14:15 +0900 JST
 
 // Set locale
-carbon.Parse("2020-07-05 13:14:15").SetLocale("en").DiffForHumans() // 1 month before
+carbon.Parse("2020-07-05 13:14:15").SetLocale("en").DiffForHumans() // 1 month ago
 carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月前
 
 // Set year, month, day, hour, minute and second

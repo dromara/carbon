@@ -22,6 +22,7 @@ carbon.Parse("2020-08-01 13:14:15").DaysInMonth() // 31
 // Get day of the year
 carbon.Parse("2020-08-05 13:14:15").DayOfYear() // 218
 // Get week of the year
+carbon.Parse("2019-12-31 13:14:15").WeekOfYear() // 1
 carbon.Parse("2020-08-05 13:14:15").WeekOfYear() // 32
 // Get day of the month
 carbon.Parse("2020-08-05 13:14:15").DayOfMonth() // 5
@@ -31,31 +32,31 @@ carbon.Parse("2020-08-05 13:14:15").WeekOfMonth() // 1
 carbon.Parse("2020-08-05 13:14:15").DayOfWeek() // 3
 
 // Get current year, month, day, hour, minute and second
-carbon.Parse("2020-08-05 13:14:15").DateTime() // 2020, 8, 5, 13, 14, 15
+carbon.Parse("2020-08-05 13:14:15").DateTime() // 2020,8,5,13,14,15
 // Get current year, month, day, hour, minute, second and millisecond
-carbon.Parse("2020-08-05 13:14:15").DateTimeMilli() // 2020, 8, 5, 13, 14, 15, 999
+carbon.Parse("2020-08-05 13:14:15").DateTimeMilli() // 2020,8,5,13,14,15,999
 // Get current year, month, day, hour, minute, second and microsecond
-carbon.Parse("2020-08-05 13:14:15").DateTimeMicro() // 2020, 8, 5, 13, 14, 15, 999999
+carbon.Parse("2020-08-05 13:14:15").DateTimeMicro() // 2020,8,5,13,14,15,999999
 // Get current year, month, day, hour, minute, second and nanosecond
-carbon.Parse("2020-08-05 13:14:15").DateTimeNano() // 2020, 8, 5, 13, 14, 15, 999999999
+carbon.Parse("2020-08-05 13:14:15").DateTimeNano() // 2020,8,5,13,14,15,999999999
 
 // Get current year, month and day
-carbon.Parse("2020-08-05 13:14:15.999999999").Date() // 2020, 8, 5
+carbon.Parse("2020-08-05 13:14:15.999999999").Date() // 2020,8,5
 // Get current year, month, day and millisecond
-carbon.Parse("2020-08-05 13:14:15.999999999").DateMilli() // 2020, 8, 5, 999
+carbon.Parse("2020-08-05 13:14:15.999999999").DateMilli() // 2020,8,5,999
 // Get current year, month, day and microsecond
-carbon.Parse("2020-08-05 13:14:15.999999999").DateMicro() // 2020, 8, 5, 999999
+carbon.Parse("2020-08-05 13:14:15.999999999").DateMicro() // 2020,8,5,999999
 // Get current year, month, day and nanosecond
-carbon.Parse("2020-08-05 13:14:15.999999999").DateNano() // 2020, 8, 5, 999999999
+carbon.Parse("2020-08-05 13:14:15.999999999").DateNano() // 2020,8,5,999999999
 
 // Get current hour, minute and second
-carbon.Parse("2020-08-05 13:14:15.999999999").Time() // 13, 14, 15
+carbon.Parse("2020-08-05 13:14:15.999999999").Time() // 13,14,15
 // Get current hour, minute, second and millisecond
-carbon.Parse("2020-08-05 13:14:15.999999999").TimeMilli() // 13, 14, 15, 999
+carbon.Parse("2020-08-05 13:14:15.999999999").TimeMilli() // 13,14,15,999
 // Get current hour, minute, second and microsecond
-carbon.Parse("2020-08-05 13:14:15.999999999").TimeMicro() // 13, 14, 15, 999999
+carbon.Parse("2020-08-05 13:14:15.999999999").TimeMicro() // 13,14,15,999999
 // Get current hour, minute, second and nanosecond
-carbon.Parse("2020-08-05 13:14:15.999999999").TimeNano() // 13, 14, 15, 999999999
+carbon.Parse("2020-08-05 13:14:15.999999999").TimeNano() // 13,14,15,999999999
 
 // Get current century
 carbon.Parse("2020-08-05 13:14:15").Century() // 21
@@ -109,6 +110,7 @@ carbon.SetTimezone(carbon.PRC).ZoneOffset() // 28800
 carbon.SetTimezone(carbon.Tokyo).ZoneOffset() // 32400
 
 // Get locale name
+carbon.Now().Locale() // zh-CN
 carbon.Now().SetLocale("en").Locale() // en
 carbon.Now().SetLocale("zh-CN").Locale() // zh-CN
 

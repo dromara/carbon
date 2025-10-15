@@ -96,6 +96,13 @@ time := carbon.Parse("2020-08-05 13:14:15")
 carbon.Parse("2020-08-05 13:14:15").DiffForHumans(time) // just now
 carbon.Parse("2019-08-05 13:14:15").DiffForHumans(time) // 1 year before
 carbon.Parse("2018-08-05 13:14:15").DiffForHumans(time) // 2 years before
-carbon.Parse("2021-08-05 13:14:15").DiffForHumans(time)) // 1 year after
+carbon.Parse("2021-08-05 13:14:15").DiffForHumans(time) // 1 year after
 carbon.Parse("2022-08-05 13:14:15").DiffForHumans(time) // 2 years after
+
+carbon.SetLocale("zh-CN")
+carbon.Parse("2020-08-05 13:14:15").DiffForHumans() // 刚刚
+carbon.Parse("2019-08-05 13:14:15").DiffForHumans() // 1 年前
+carbon.Parse("2018-08-05 13:14:15").DiffForHumans() // 2 年前
+carbon.Parse("2021-08-05 13:14:15").DiffForHumans() // 1 年后
+carbon.Parse("2022-08-05 13:14:15").DiffForHumans() // 2 年后
 ```

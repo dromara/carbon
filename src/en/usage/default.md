@@ -5,13 +5,13 @@ head:
       content: Set default | A simple, semantic and developer-friendly time package for golang
   - - meta
     - name: keywords
-      content: carbon, go-carbon, default
+      content: carbon, go-carbon, set single default, set multiple default, reset default
 ---
 
-# Set globally default
+# Set global default
 Default timezone is `UTC`, language locale is `English`, start day of the week is `Monday` and weekend days of the week are `Saturday` and `Sunday`.
 
-## Set single default value
+## Set single default values
 ```go
 carbon.SetLayout(carbon.DateTimeLayout)
 carbon.SetTimezone(carbon.UTC)
@@ -20,7 +20,7 @@ carbon.SetWeekStartsAt(carbon.Monday)
 carbon.SetWeekendDays([]carbon.Weekday{carbon.Saturday, carbon.Sunday,})
 ```
 
-## Set multiple default value
+## Set multiple default values
 ```go
 carbon.SetDefault(carbon.Default{
   Layout: carbon.DateTimeLayout,
@@ -31,7 +31,7 @@ carbon.SetDefault(carbon.Default{
 })
 ```
 
-## Reset default value
+## Reset default values
 ```go
 carbon.ResetDefault()
 ```

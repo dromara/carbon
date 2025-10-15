@@ -1,6 +1,16 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 季節|軽量、セマンティック、開発者フレンドリーな golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 季節, 春季, 夏季, 秋季, 冬季, 季節境界, 季節判断
+---
+
 # 季節
-気象区分によると、`3-5`月は`春で`、`6-8`月は`夏で`、`9-11`月は`秋で`、`12-2`月は`冬です`
-## 季節名前
+気象区分によると、`3-5`月は`春`、`6-8`月は`夏`、`9-11`月は`秋`、`12-2`月は`冬`
+## 季節名称
 ```go
 carbon.Parse("2020-08-05 13:14:15").Season() // Summer
 carbon.Parse("2020-08-05 13:14:15").SetLocale("ja").Season() // 夏
@@ -8,9 +18,9 @@ carbon.Parse("2020-08-05 13:14:15").SetLocale("ja").Season() // 夏
 
 ## 季節境界
 ```go
-// この季節の開始日
+// 本季節開始時間
 carbon.Parse("2020-08-05 13:14:15").StartOfSeason().ToDateTimeString() // 2020-06-01 00:00:00
-// この季節の最終日
+// 本季節終了時間
 carbon.Parse("2020-08-05 13:14:15").EndOfSeason().ToDateTimeString() // 2020-08-31 23:59:59
 ```
 

@@ -1,6 +1,16 @@
+---
+head:
+  - - meta
+    - name: description
+      content: JSON|軽量で意味論的で開発者に優しい golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, json, Marshal, Unmarshal, orm, grom, xorm
+---
+
 # JSON
 
-## 組み込みフィールドタイプ
+## 組み込みフィールド型
 ```go
 type User struct {
   Date      *carbon.Date      `json:"date"`
@@ -58,8 +68,8 @@ user.DeletedAt = carbon.NewTimestamp(c)
 
 data, err := json.Marshal(&user)
 if err != nil {
-  // エラー処理...
-  log.Fatal(err)
+  // エラー処理
+  //log.Fatal(err)
 }
 fmt.Printf("%s\n", data)
 // 出力
@@ -88,7 +98,7 @@ fmt.Printf("%s\n", data)
 var person User
 err := json.Unmarshal(data, &person)
 if err != nil {
-  // エラー処理...
+  // エラー処理
   log.Fatal(err)
 }
 
@@ -97,7 +107,7 @@ fmt.Printf("person: %+v\n", person)
 person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 DateNano:2020-08-05.999999999 Time:13:14:15 TimeMilli:13:14:15.999 TimeMicro:13:14:15.999999 TimeNano:13:14:15.999999999 DateTime:2020-08-05 13:14:15 DateTimeMilli:2020-08-05 13:14:15.999 DateTimeMicro:2020-08-05 13:14:15.999999 DateTimeNano:2020-08-05 13:14:15.999999999 Timestamp:1596633255 TimestampMilli:1596633255999 TimestampMicro:1596633255999999 TimestampNano:1596633255999999999 CreatedAt:2020-08-05 13:14:15 UpdatedAt:2020-08-05 13:14:15 DeletedAt:1596633255}
 ```
 
-## カスタムフィールドタイプ
+## カスタムフィールド型
 ```go
 type RFC3339Type string
 func (RFC3339Type) Layout() string {
@@ -110,8 +120,8 @@ func (ISO8601Type) Format() string {
 }
 
 type User struct {
-Customer1 *carbon.LayoutType[RFC3339Type] `json:"customer1"`
-Customer2 *carbon.FormatType[ISO8601Type] `json:"customer2"`
+  Customer1 *carbon.LayoutType[RFC3339Type] `json:"customer1"`
+  Customer2 *carbon.FormatType[ISO8601Type] `json:"customer2"`
 }
 
 var user User
@@ -123,18 +133,18 @@ user.Customer2 = carbon.NewFormatType[ISO8601Type](c)
 
 data, err := json.Marshal(&user)
 if err != nil {
-// エラー処理...
-log.Fatal(err)
+  // エラー処理
+  //log.Fatal(err)
 }
 fmt.Printf("%s\n", data)
 // 出力
-{"customer1":"2020-08-05T13:14:15Z","customer2":"2020-08-05T13:14:15+00:00"}
+{"customer1":"2020-08-05T13:14:15Z", "customer2":"2020-08-05T13:14:15+00:00"}
 
 var person User
 err := json.Unmarshal(data, &person)
 if err != nil {
-// エラー処理...
-log.Fatal(err)
+  // エラー処理
+  log.Fatal(err)
 }
 
 fmt.Printf("person: %+v\n", person)

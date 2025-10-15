@@ -1,12 +1,22 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 星座|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 星座, おひつじ座, おうし座, ふたご座, かに座, しし座, おとめ座, てんびん座, さそり座, いて座, やぎ座, みずがめ座, うお座
+---
+
 # 星座
 
-## 星座名前
+## 星座名称
 ```go
 carbon.Parse("2020-08-05 13:14:15").Constellation() // Leo
-carbon.Parse("2020-08-05 13:14:15").SetLocale("ja").Constellation() // しし座
+carbon.Parse("2020-08-05 13:14:15").SetLocale("zh-CN").Constellation() // 狮子座
 ```
 
-## 星座判定
+## 星座判断
 ```go
 // おひつじ座かどうか
 carbon.Parse("2020-08-05 13:14:15").IsAries() // false

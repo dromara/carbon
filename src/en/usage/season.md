@@ -5,7 +5,7 @@ head:
       content: Season | A simple, semantic and developer-friendly time package for golang
   - - meta
     - name: keywords
-      content: carbon, go-carbon, season, spring, summer, autumn, winter
+      content: carbon, go-carbon, season, spring, summer, autumn, winter, season boundary, season judgment
 ---
 
 # Season
@@ -25,14 +25,14 @@ carbon.Parse("2020-08-05 13:14:15").StartOfSeason().ToDateTimeString() // 2020-0
 carbon.Parse("2020-08-05 13:14:15").EndOfSeason().ToDateTimeString() // 2020-08-31 23:59:59
 ```
 
-## Season compare
+## Season judgment
 ```go
-// Whether is spring
+// Is spring
 carbon.Parse("2020-08-05 13:14:15").IsSpring() // false
-// Whether is summer
+// Is summer
 carbon.Parse("2020-08-05 13:14:15").IsSummer() // true
-// Whether is autumn
+// Is autumn
 carbon.Parse("2020-08-05 13:14:15").IsAutumn() // false
-// Whether is winter
+// Is winter
 carbon.Parse("2020-08-05 13:14:15").IsWinter() // false
 ```

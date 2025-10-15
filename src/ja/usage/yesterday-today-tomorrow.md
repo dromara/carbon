@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 昨日、今日、明日|軽量、セマンティック、開発者フレンドリーな golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 昨日, 今日, 明日
+---
+
 # 昨日、今日、明日
 昨日は今日の前日、明日は今日の翌日、同等である
 
@@ -32,7 +42,7 @@ carbon.Yesterday().TimestampNano() // 1596546855999999999
 
 ## 今日
 ```go
-// 今日は今
+// 今日の今頃
 fmt.Printf("%s", carbon.Now()) // 2020-08-05 13:14:15
 carbon.Now().String() // 2020-08-05 13:14:15
 carbon.Now().ToString() // 2020-08-05 13:14:15.999999999 +0000 UTC
@@ -55,23 +65,23 @@ carbon.Now().TimestampNano() // 1596633255999999999
 
 ## 明日
 ```go
-// 明天此刻
+// 明日の今頃
 fmt.Printf("%s", carbon.Tomorrow()) // 2020-08-06 13:14:15
 carbon.Tomorrow().String() // 2020-08-06 13:14:15
 carbon.Tomorrow().ToString() // 2020-08-06 13:14:15.999999999 +0000 UTC
 carbon.Tomorrow().ToDateTimeString() // 2020-08-06 13:14:15
-// 明天日期
+// 明日の日付
 carbon.Tomorrow().ToDateString() // 2020-08-06
-// 明天时间
+// 明日の時間
 carbon.Tomorrow().ToTimeString() // 13:14:15
-// 指定时区的明天此刻
+// 指定されたタイムゾーンの明日の今頃
 carbon.Tomorrow(carbon.NewYork).ToDateTimeString() // 2020-08-06 14:14:15
-// 明天秒精度时间戳
+// 明日の秒精度タイムスタンプ
 carbon.Tomorrow().Timestamp() // 1596719655
-// 明天毫秒精度时间戳
+// 明日のミリ秒精度タイムスタンプ
 carbon.Tomorrow().TimestampMilli() // 1596719655999
-// 明天微秒精度时间戳
+// 明日のマイクロ秒精度タイムスタンプ
 carbon.Tomorrow().TimestampMicro() // 1596719655999999
-// 明天纳秒精度时间戳
+// 明日のナノ秒精度タイムスタンプ
 carbon.Tomorrow().TimestampNano() // 1596719655999999999
 ```

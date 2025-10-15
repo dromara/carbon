@@ -9,6 +9,7 @@ head:
 ---
 
 # Traveler
+These methods will change the original value. If you don't want to change the original value, please use the `Clone` method
 
 ## Century travel
 ```go
@@ -27,7 +28,7 @@ carbon.Parse("2020-02-29 13:14:15").SubCenturiesNoOverflow(3).ToDateTimeString()
 // Subtract one century
 carbon.Parse("2020-02-29 13:14:15").SubCentury().ToDateTimeString() // 1920-02-29 13:14:15
 // Subtract one century without overflowing month
-carbon.Parse("2020-02-29 13:14:15").SubCenturyNoOverflow().ToDateTimeString() // 1920-02-20 13:14:15
+carbon.Parse("2020-02-29 13:14:15").SubCenturyNoOverflow().ToDateTimeString() // 1920-02-29 13:14:15
 ```
 
 ## Decade travel
@@ -118,7 +119,7 @@ carbon.Parse("2020-02-29 13:14:15").AddWeeks(3).ToDateTimeString() // 2020-03-21
 carbon.Parse("2020-02-29 13:14:15").AddWeek().ToDateTimeString() // 2020-03-07 13:14:15
 // Subtract three weeks
 carbon.Parse("2020-02-29 13:14:15").SubWeeks(3).ToDateTimeString() // 2020-02-08 13:14:15
-// Subtract three week
+// Subtract one week
 carbon.Parse("2020-02-29 13:14:15").SubWeek().ToDateTimeString() // 2020-02-22 13:14:15
 ```
 
@@ -127,7 +128,7 @@ carbon.Parse("2020-02-29 13:14:15").SubWeek().ToDateTimeString() // 2020-02-22 1
 // Add three days
 carbon.Parse("2020-08-05 13:14:15").AddDays(3).ToDateTimeString() // 2020-08-08 13:14:15
 // Add one day
-carbon.Parse("2020-08-05 13:14:15").AddDay().ToDateTimeString() // 2020-08-05 13:14:15
+carbon.Parse("2020-08-05 13:14:15").AddDay().ToDateTimeString() // 2020-08-06 13:14:15
 // Subtract three days
 carbon.Parse("2020-08-05 13:14:15").SubDays(3).ToDateTimeString() // 2020-08-02 13:14:15
 // Subtract one day

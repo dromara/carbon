@@ -5,7 +5,7 @@ head:
       content: 시간 파싱|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 기본 템플릿, 레이아웃 템플릿, 형식 템플릿
+      content: carbon, go-carbon, 기본 레이아웃 템플릿, 레이아웃 템플릿, 포맷 템플릿
 ---
 
 # 시간 파싱
@@ -70,9 +70,9 @@ carbon.ParseByLayout("오늘은 2020년08월05일13시14분15초", "오늘은 20
 carbon.ParseByLayout("2020-08-05 13:14:15", "2006-01-02 15:04:05", carbon.Tokyo).ToDateTimeString() // 2020-08-05 14:14:15
 ```
 
-## 하나의 `형식 템플릿`을 통한 파싱
-확정된 `형식 템플릿`을 통해 시간 문자열을 `Carbon` 인스턴스로 파싱합니다
-> 주의: 사용하는 문자가 형식 템플릿과 충돌할 때는 이스케이프 문자 "\\"를 사용하여 해당 문자를 이스케이프하세요
+## 하나의 `포맷 템플릿`을 통한 파싱
+확정된 `포맷 템플릿`을 통해 시간 문자열을 `Carbon` 인스턴스로 파싱합니다
+> 주의: 사용하는 문자가 포맷 템플릿과 충돌할 때는 이스케이프 문자 "\\"를 사용하여 해당 문자를 이스케이프하세요
 ```go
 carbon.ParseByFormat("2020|08|05 13|14|15", "Y|m|d H|i|s").ToDateTimeString() // 2020-08-05 13:14:15
 carbon.ParseByFormat("It is 2020-08-05 13:14:15", "\\I\\t \\i\\s Y-m-d H:i:s").ToDateTimeString() // 2020-08-05 13:14:15
@@ -88,8 +88,8 @@ c.ToDateTimeString() // 2020-08-05 13:14:15
 c.CurrentLayout() // 2006|01|02 15|04|05
 ```
 
-## 여러 `형식 템플릿`을 통한 파싱
-여러 모호한 `형식 템플릿`을 통해 시간 문자열을 `Carbon` 인스턴스로 파싱합니다
+## 여러 `포맷 템플릿`을 통한 파싱
+여러 모호한 `포맷 템플릿`을 통해 시간 문자열을 `Carbon` 인스턴스로 파싱합니다
 ```go
 c := carbon.ParseByFormats("2020|08|05 13|14|15", []string{"Y|m|d H|i|s", "y|m|d h|i|s"})
 c.ToDateTimeString() // 2020-08-05 13:14:15

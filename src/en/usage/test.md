@@ -5,11 +5,11 @@ head:
       content: Testing | A simple, semantic and developer-friendly time package for golang
   - - meta
     - name: keywords
-      content: carbon, go-carbon, freeze, test, SetTestNow, IsTestNow, ClearTestNow
+      content: carbon, go-carbon, test time, freeze time, SetTestNow, IsTestNow, ClearTestNow
 ---
 
 # Testing
-The testing methods allow you to set a `Carbon` instance to be returned when a `now` instance is created. The provided instance will be used when retrieving any relative time from `Carbon` (now, today, yesterday, next month, etc.)
+Supports freezing a fixed time, setting any time as the `current time`, so that subsequent operations run based on this simulated time rather than the real system time, which is convenient for unit testing
 
 ## Set freeze time as test now
 ```go
@@ -26,7 +26,7 @@ carbon.Parse("2020-10-05").DiffForHumans() // 2 months from now
 now.DiffForHumans(carbon.Parse("2020-10-05")) // 2 months before
 ```
 
-## Is test now
+## Is test time
 ```go
 carbon.IsTestNow() 
 ```

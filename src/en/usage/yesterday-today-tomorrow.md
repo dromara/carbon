@@ -29,7 +29,7 @@ carbon.Yesterday().ToDateString() // 2020-08-04
 // Return time of yesterday
 carbon.Yesterday().ToTimeString() // 13:14:15
 // Return datetime of yesterday in a given timezone
-carbon.Yesterday(carbon.NewYork).ToDateTimeString() // 2020-08-04 13:14:15
+carbon.Yesterday(carbon.NewYork).ToDateTimeString() // 2020-08-04 14:14:15
 // Return timestamp with second precision of yesterday
 carbon.Yesterday().Timestamp() // 1596546855
 // Return timestamp with millisecond precision of yesterday
@@ -52,7 +52,7 @@ carbon.Now().ToDateString() // 2020-08-05
 // Return time of today
 carbon.Now().ToTimeString() // 13:14:15
 // Return datetime of today in a given timezone
-carbon.Now(carbon.NewYork).ToDateTimeString() // 2020-08-05 13:14:15
+carbon.Now(carbon.NewYork).ToDateTimeString() // 2020-08-05 14:14:15
 // Return timestamp with second precision of today
 carbon.Now().Timestamp() // 1596633255
 // Return timestamp with millisecond precision of today
@@ -68,14 +68,14 @@ carbon.Now().TimestampNano() // 1596633255999999999
 // Return datetime of tomorrow
 fmt.Printf("%s", carbon.Tomorrow()) // 2020-08-06 13:14:15
 carbon.Tomorrow().String() // 2020-08-06 13:14:15
-carbon.Tomorrow().ToString() // 22020-08-06 13:14:15.999999999 +0000 UTC
+carbon.Tomorrow().ToString() // 2020-08-06 13:14:15.999999999 +0000 UTC
 carbon.Tomorrow().ToDateTimeString() // 2020-08-06 13:14:15
 // Return date of tomorrow
 carbon.Tomorrow().ToDateString() // 2020-08-06
 // Return time of tomorrow
 carbon.Tomorrow().ToTimeString() // 13:14:15
 // Return datetime of tomorrow in a given timezone
-carbon.Tomorrow(carbon.NewYork).ToDateTimeString() // 2020-08-06 13:14:15
+carbon.Tomorrow(carbon.NewYork).ToDateTimeString() // 2020-08-06 14:14:15
 // Return timestamp with second precision of tomorrow
 carbon.Tomorrow().Timestamp() // 1596719655
 // Return timestamp with millisecond precision of tomorrow

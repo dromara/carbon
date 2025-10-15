@@ -5,7 +5,7 @@ head:
       content: 시간 설정|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 시간대 설정, 위치 설정, 지역 설정, 연도, 월, 일, 시, 분, 초 설정, 연도 설정, 월 설정, 주 시작일 설정, 주말 설정, 날짜 설정, 시간 설정, 분 설정, 초 설정, 밀리초 설정, 마이크로초 설정, 나노초 설정
+      content: carbon, go-carbon, 시간대 설정, 위치 설정, 지역 설정, 연도월일시분초 설정, 연도 설정, 월 설정, 주 시작일 설정, 주말일 설정, 날짜 설정, 시간 설정, 분 설정, 초 설정, 밀리초 설정, 마이크로초 설정, 나노초 설정
 ---
 
 # 시간 설정
@@ -81,7 +81,7 @@ carbon.Parse("2020-01-31").SetMonthNoOverflow(2).ToDateString() // 2020-02-29
 carbon.Parse("2020-08-02").SetWeekStartsAt(carbon.Sunday).Week() // 0
 carbon.Parse("2020-08-02").SetWeekStartsAt(carbon.Monday).Week() // 6
 
-// 주말 설정
+// 주말일 설정
 wd := []carbon.Weekday{
   carbon.Saturday, carbon.Sunday,
 }

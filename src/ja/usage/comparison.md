@@ -1,6 +1,16 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 時間比較|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 含有判定, 判定, 数学判定, 距離判定
+---
+
 # 時間比較
 
-## 含有判断
+## 含有判定
 ```go
 // エラーがありますか
 carbon.NewCarbon().HasError() // false
@@ -13,7 +23,7 @@ carbon.Parse("xxx").HasError() // true
 carbon.Parse("2020-08-05").HasError() // false
 ```
 
-## 判断するかどうか
+## 判定
 ```go
 // ゼロ値の時間かどうか(0001-01-01 00:00:00 +0000 UTC)
 carbon.NewCarbon().IsZero() // true
@@ -25,7 +35,7 @@ carbon.Parse("0").IsZero() // false
 carbon.Parse("xxx").IsZero() // false
 carbon.Parse("2020-08-05").IsZero() // false
 
-// NULLかどうか
+// 空値かどうか
 carbon.NewCarbon().IsEmpty() // false
 carbon.ZeroValue().IsEmpty() // false
 carbon.EpochValue().IsEmpty() // false
@@ -193,7 +203,7 @@ carbon.Parse("2020-08-05 13:14:15").IsSameSecond(carbon.Parse("2021-08-05 13:14:
 carbon.Parse("2020-08-05 13:14:15").IsSameSecond(carbon.Parse("2020-08-05 13:14:15")) // true
 ```
 
-## 数学判断
+## 数学判定
 ```go
 // 超過かどうか
 carbon.Parse("2020-08-05 13:14:15").Gt(carbon.Parse("2020-08-04 13:14:15")) // true
@@ -213,7 +223,7 @@ carbon.Parse("2020-08-05 13:14:15").Eq(carbon.Parse("2020-08-05 13:14:00")) // f
 carbon.Parse("2020-08-05 13:14:15").Compare("=", carbon.Parse("2020-08-05 13:14:15")) // true
 carbon.Parse("2020-08-05 13:14:15").Compare("=", carbon.Parse("2020-08-05 13:14:00")) // false
 
-// と等しくないかどうか
+// 等しくないかどうか
 carbon.Parse("2020-08-05 13:14:15").Ne(carbon.Parse("2020-08-06 13:14:15")) // true
 carbon.Parse("2020-08-05 13:14:15").Ne(carbon.Parse("2020-08-05 13:14:15")) // false
 carbon.Parse("2020-08-05 13:14:15").Compare("!=", carbon.Parse("2020-08-06 13:14:15")) // true
@@ -232,21 +242,21 @@ carbon.Parse("2020-08-05 13:14:15").Compare("<=", carbon.Parse("2020-08-06 13:14
 carbon.Parse("2020-08-05 13:14:15").Compare("<=", carbon.Parse("2020-08-05 13:14:15")) // true
 ```
 
-## きょりはんてい
+## 距離判定
 ```go
-//　二つの Carbon インスタンスの間に含まれているか(開始時間、終了時間を含まない)
+// 二つの Carbon インスタンスの間に含まれているか(開始時間、終了時間を含まない)
 carbon.Parse("2020-08-05 13:14:15").Between(carbon.Parse("2020-08-05 13:14:15"), carbon.Parse("2020-08-06 13:14:15")) // false
 carbon.Parse("2020-08-05 13:14:15").Between(carbon.Parse("2020-08-04 13:14:15"), carbon.Parse("2020-08-06 13:14:15")) // true
 
-//　二つの Carbon インスタンスの間に含まれているか(開始時間を含む)
+// 二つの Carbon インスタンスの間に含まれているか(開始時間を含む)
 carbon.Parse("2020-08-05 13:14:15").BetweenIncludedStart(carbon.Parse("2020-08-05 13:14:15"), carbon.Parse("2020-08-06 13:14:15")) // true
 carbon.Parse("2020-08-05 13:14:15").BetweenIncludedStart(carbon.Parse("2020-08-04 13:14:15"), carbon.Parse("2020-08-06 13:14:15")) // true
 
-//　二つの Carbon インスタンスの間に含まれているか(終了時間を含む)
+// 二つの Carbon インスタンスの間に含まれているか(終了時間を含む)
 carbon.Parse("2020-08-05 13:14:15").BetweenIncludedEnd(carbon.Parse("2020-08-04 13:14:15"), carbon.Parse("2020-08-05 13:14:15")) // true
 carbon.Parse("2020-08-05 13:14:15").BetweenIncludedEnd(carbon.Parse("2020-08-04 13:14:15"), carbon.Parse("2020-08-06 13:14:15")) // true
 
-//　二つの Carbon インスタンスの間に含まれているか(開始時間、終了時間を含む)
+// 二つの Carbon インスタンスの間に含まれているか(開始時間、終了時間を含む)
 carbon.Parse("2020-08-05 13:14:15").BetweenIncludedBoth(carbon.Parse("2020-08-05 13:14:15"), carbon.Parse("2020-08-06 13:14:15")) // true
 carbon.Parse("2020-08-05 13:14:15").BetweenIncludedBoth(carbon.Parse("2020-08-04 13:14:15"), carbon.Parse("2020-08-05 13:14:15")) // true
 ```

@@ -1,4 +1,14 @@
-# 時間極值
+---
+head:
+  - - meta
+    - name: description
+      content: 時間極値|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 極値判定, 極値境界
+---
+
+# 時間極値
 
 ## 極値判定
 ```go
@@ -12,26 +22,26 @@ carbon.Max(c1, c2, c3) // c3
 carbon.Min(c1, c2, c3) // c1
 
 c := carbon.Parse("2020-07-01")
-// 最近のCarbonインスタンスを返す
+// 最も近い Carbon インスタンスを返します
 c.Closest(c1, c2, c3) // c1
-// 遠いCarbonインスタンスを返す
+// 最も遠い Carbon インスタンスを返します
 c.Farthest(c1, c2, c3) // c3
 ```
 
 ## 極値境界
 ```go
-// ゼロ値 Carbon を戻す
+// ゼロ値 Carbon を返します
 carbon.ZeroValue().ToString() // 0001-01-01 00:00:00 +0000 UTC
-// linux 紀元値 Carbon を戻す
+// UNIX 紀元値 Carbon を返します
 carbon.EpochValue().ToString() // 1970-01-01 00:00:00 +0000 UTC
 
-// Carbonの最大値を戻す
+// Carbon の最大値を返します
 carbon.MaxValue().ToString() // 9999-12-31 23:59:59.999999999 +0000 UTC
-// Carbonの最小値を戻す
+// Carbon の最小値を返します
 carbon.MinValue().ToString() // 0001-01-01 00:00:00 +0000 UTC
 
 // 期間の最大値を返します
 carbon.MaxDuration().Seconds() // 9.223372036854776e+09
-// 最小の持続時間値を返します
+// Duration の最小値を返します
 carbon.MinDuration().Seconds() // -9.223372036854776e+09
 ```

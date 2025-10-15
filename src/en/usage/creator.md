@@ -5,7 +5,7 @@ head:
       content: Creator | A simple, semantic and developer-friendly time package for golang
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 创建
+      content: carbon, go-carbon, create, timestamp, datetime
 ---
 
 # Creator
@@ -18,11 +18,11 @@ carbon.CreateFromTimestamp(0).ToString() // 1970-01-01 00:00:00 +0000 UTC
 carbon.CreateFromTimestamp(1).ToString() // 1970-01-01 00:00:01 +0000 UTC
 carbon.CreateFromTimestamp(1596633255).ToString() // 2020-08-05 13:14:15 +0000 UTC
 // Create a Carbon instance from a given timestamp with millisecond precision
-carbon.CreateFromTimestampMilli(1596633255999999).ToString() // 2020-08-05 13:14:15.999 +0000 UTC
+carbon.CreateFromTimestampMilli(1596604455999).ToString() // 2020-08-05 13:14:15.999 +0000 UTC
 // Create a Carbon instance from a given timestamp with microsecond precision
-carbon.CreateFromTimestampMicro(1596633255999999).ToString() // 2020-08-05 13:14:15.999999 +0000 UTC
+carbon.CreateFromTimestampMicro(1596604455999999).ToString() // 2020-08-05 13:14:15.999999 +0000 UTC
 // Create a Carbon instance from a given timestamp with nanosecond precision
-carbon.CreateFromTimestampNano(1596633255999999999).ToString() // 2020-08-05 13:14:15.999999999 +0000 UTC
+carbon.CreateFromTimestampNano(1596604455999999999).ToString() // 2020-08-05 13:14:15.999999999 +0000 UTC
 ```
 
 ## Create from datetime
@@ -45,12 +45,12 @@ carbon.CreateFromDateMicro(2020, 8, 5, 999999).ToString() // 2020-08-05 00:00:00
 // Create a Carbon instance from a given year, month and day with nanosecond
 carbon.CreateFromDateNano(2020, 8, 5, 999999999).ToString() // 2020-08-05 00:00:00.999999999 +0000 UTC
 
-// Create a Carbon instance from a given hour, minute and second
+// Create a Carbon instance from a given hour, minute and second (year, month, day default to current)
 carbon.CreateFromTime(13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC
-// Create a Carbon instance from a given hour, minute and second with millisecond
+// Create a Carbon instance from a given hour, minute and second with millisecond (year, month, day default to current)
 carbon.CreateFromTimeMilli(13, 14, 15, 999).ToString() // 2020-08-05 13:14:15.999 +0000 UTC
-// Create a Carbon instance from a given hour, minute and second with microsecond
+// Create a Carbon instance from a given hour, minute and second with microsecond (year, month, day default to current)
 carbon.CreateFromTimeMicro(13, 14, 15, 999999).ToString() // 2020-08-05 13:14:15.999999 +0000 UTC
-// Create a Carbon instance from a given hour, minute and second with nanosecond
+// Create a Carbon instance from a given hour, minute and second with nanosecond (year, month, day default to current)
 carbon.CreateFromTimeNano(13, 14, 15, 999999999).ToString() // 2020-08-05 13:14:15.999999999 +0000 UTC
 ```

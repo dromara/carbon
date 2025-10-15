@@ -1,6 +1,16 @@
-# `carbon`、`time.Time` の間で相互に回転する
+---
+head:
+  - - meta
+    - name: description
+      content: carbon、time.Time 間の相互変換|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 変換, time.Time
+---
 
-## `time.Time` を `carbon` に変換
+# `carbon`、`time.Time` 間の相互変換
+
+## 標準 `time.Time` を `carbon` に変換
 
 ```go
 carbon.NewCarbon(time.Now())
@@ -12,7 +22,7 @@ carbon.CreateFromStdTime(time.Now())
 carbon.CreateFromStdTime(time.Now().In(time.Local))
 ```
 
-## `carbon` を `time.Time` に変換
+## `carbon` を標準 `time.Time` に変換
 
 ```go
 carbon.Now().StdTime()

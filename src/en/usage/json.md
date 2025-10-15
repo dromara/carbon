@@ -10,7 +10,7 @@ head:
 
 # JSON
 
-## Builtin type
+## Built-in field types
 
 ```go
 type User struct {
@@ -69,7 +69,7 @@ user.DeletedAt = carbon.NewTimestamp(c)
 
 data, err := json.Marshal(&user)
 if err != nil {
-  // Error handle...
+  // Error handling
   log.Fatal(err)
 }
 fmt.Printf("%s\n", data)
@@ -99,7 +99,7 @@ fmt.Printf("%s\n", data)
 var person User
 err := json.Unmarshal(data, &person)
 if err != nil {
-  // Error handle...
+  // Error handling
   log.Fatal(err)
 }
 
@@ -108,7 +108,7 @@ fmt.Printf("person: %+v\n", person)
 person: {Date:2020-08-05 DateMilli:2020-08-05.999 DateMicro:2020-08-05.999999 DateNano:2020-08-05.999999999 Time:13:14:15 TimeMilli:13:14:15.999 TimeMicro:13:14:15.999999 TimeNano:13:14:15.999999999 DateTime:2020-08-05 13:14:15 DateTimeMilli:2020-08-05 13:14:15.999 DateTimeMicro:2020-08-05 13:14:15.999999 DateTimeNano:2020-08-05 13:14:15.999999999 Timestamp:1596633255 TimestampMilli:1596633255999 TimestampMicro:1596633255999999 TimestampNano:1596633255999999999 CreatedAt:2020-08-05 13:14:15 UpdatedAt:2020-08-05 13:14:15 DeletedAt:1596633255}
 ```
 
-## Customize type
+## Custom field types
 ```go
 type RFC3339Type string
 func (RFC3339Type) Layout() string {
@@ -134,8 +134,8 @@ user.Customer2 = carbon.NewFormatType[ISO8601Type](c)
 
 data, err := json.Marshal(&user)
 if err != nil {
-  // Error handle...
-  log.Fatal(err)
+  // Error handling
+  //log.Fatal(err)
 }
 fmt.Printf("%s\n", data)
 // Output
@@ -144,7 +144,7 @@ fmt.Printf("%s\n", data)
 var person User
 err := json.Unmarshal(data, &person)
 if err != nil {
-  // Error handle...
+  // Error handling
   log.Fatal(err)
 }
 

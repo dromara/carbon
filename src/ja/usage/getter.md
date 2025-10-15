@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: 時間取得|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 時間取得
+---
+
 # 時間取得
 
 ```go
@@ -100,16 +110,16 @@ carbon.SetTimezone(carbon.PRC).ZoneOffset() // 28800
 carbon.SetTimezone(carbon.Tokyo).ZoneOffset() // 32400
 
 // ロケール名を取得
-carbon.Now().Locale() // ja
+carbon.Now().Locale() // zh-CN
 carbon.Now().SetLocale("en").Locale() // en
 
 // 星座を取得
-carbon.Now().Constellation() // しし座
+carbon.Now().Constellation() // 狮子座
 carbon.Now().SetLocale("en").Constellation() // Leo
 carbon.Now().SetLocale("ja").Constellation() // しし座
 
 // 季節を取得
-carbon.Now().Season() // 夏
+carbon.Now().Season() // 夏季
 carbon.Now().SetLocale("en").Season() // Summer
 carbon.Now().SetLocale("ja").Season() // 夏
 
