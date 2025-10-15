@@ -6,6 +6,10 @@ head:
 ---
 
 # 更新日志
+## [v2.6.13](https://github.com/dromara/carbon/compare/v2.6.12...v2.6.13) (2025-10-15)
+
+- 在 `language.go` 的 `SetLocale` 方法中使用 `sync.Once` 确保语言文件只加载一次，使用 `sync.Map` 进行线程安全的缓存。
+- 在 `helper.go` 的 `format2layout` 方法中为转义字符处理添加边界检查, 防止越界访问导致的 `panic`
 
 ## [v2.6.12](https://github.com/dromara/carbon/compare/v2.6.11...v2.6.12) (2025-09-16)
 

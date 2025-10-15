@@ -1,5 +1,10 @@
 # 업데이트 로그
 
+## [v2.6.13](https://github.com/dromara/carbon/compare/v2.6.12...v2.6.13) (2025-10-15)
+
+- `language.go`의 `SetLocale` 메서드에서 `sync.Once`를 사용하여 언어 파일이 한 번만 로드되도록 보장하고, `sync.Map`을 사용하여 스레드 안전한 캐싱을 구현
+- `helper.go`의 `format2layout` 메서드에서 이스케이프 문자 처리에 대한 경계 검사를 추가하여 범위를 벗어난 접근으로 인한 `panic`을 방지
+
 ## [v2.6.12](https://github.com/dromara/carbon/compare/v2.6.11...v2.6.12) (2025-09-16)
 
 - `golang` 환경 의존성을 `1.21`에서 `1.18`로 낮춤

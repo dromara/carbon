@@ -7,6 +7,11 @@ head:
 
 # Change Log
 
+## [v2.6.13](https://github.com/dromara/carbon/compare/v2.6.12...v2.6.13) (2025-10-15)
+
+- Use `sync.Once` in `SetLocale` method of `language.go` to ensure language files are loaded only once, and use `sync.Map` for thread-safe caching
+- Add boundary checks for escape character handling in `format2layout` method of `helper.go` to prevent `panic` caused by out-of-bounds access
+
 ## [v2.6.12](https://github.com/dromara/carbon/compare/v2.6.11...v2.6.12) (2025-09-16)
 
 - Lower `golang` environment dependency from `1.21` to `1.18`

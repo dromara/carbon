@@ -1,5 +1,10 @@
 # 変更履歴
 
+## [v2.6.13](https://github.com/dromara/carbon/compare/v2.6.12...v2.6.13) (2025-10-15)
+
+- `language.go` の `SetLocale` メソッドで `sync.Once` を使用して言語ファイルが一度だけ読み込まれることを保証し、`sync.Map` を使用してスレッドセーフなキャッシュを実装
+- `helper.go` の `format2layout` メソッドでエスケープ文字処理の境界チェックを追加し、範囲外アクセスによる `panic` を防止
+
 ## [v2.6.12](https://github.com/dromara/carbon/compare/v2.6.11...v2.6.12) (2025-09-16)
 
 - `golang` 環境依存を `1.21` から `1.18` に下げる
