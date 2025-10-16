@@ -9,7 +9,10 @@ head:
 ---
 
 # 시간 여행
-이 시리즈의 메서드는 원본 값을 변경합니다. 원본 값을 변경하고 싶지 않다면 `Clone` 메서드를 사용하세요
+이 시리즈의 메서드는 원본 값을 변경합니다. 원본 값을 변경하고 싶지 않다면 `Copy` 메서드를 사용하세요. 예:
+```go
+carbon.Parse("2020-02-29 13:14:15").Copy().AddCenturies(3)
+```
 
 ## 세기 여행
 ```go
@@ -139,14 +142,14 @@ carbon.Parse("2020-08-05 13:14:15").SubDay().ToDateTimeString() // 2020-08-04 13
 ```go
 // 3시간 후
 carbon.Parse("2020-08-05 13:14:15").AddHours(3).ToDateTimeString() // 2020-08-05 16:14:15
-// 2시간 30분 후
+// 2시간 반 후
 carbon.Parse("2020-08-05 13:14:15").AddDuration("2.5h").ToDateTimeString() // 2020-08-05 15:44:15
 carbon.Parse("2020-08-05 13:14:15").AddDuration("2h30m").ToDateTimeString() // 2020-08-05 15:44:15
 // 1시간 후
 carbon.Parse("2020-08-05 13:14:15").AddHour().ToDateTimeString() // 2020-08-05 14:14:15
 // 3시간 전
 carbon.Parse("2020-08-05 13:14:15").SubHours(3).ToDateTimeString() // 2020-08-05 10:14:15
-// 2시간 30분 전
+// 2시간 반 전
 carbon.Parse("2020-08-05 13:14:15").SubDuration("2.5h").ToDateTimeString() // 2020-08-05 10:44:15
 carbon.Parse("2020-08-05 13:14:15").SubDuration("2h30m").ToDateTimeString() // 2020-08-05 10:44:15
 // 1시간 전
@@ -157,14 +160,14 @@ carbon.Parse("2020-08-05 13:14:15").SubHour().ToDateTimeString() // 2020-08-05 1
 ```go
 // 3분 후
 carbon.Parse("2020-08-05 13:14:15").AddMinutes(3).ToDateTimeString() // 2020-08-05 13:17:15
-// 2분 30초 후
+// 2분 반 후
 carbon.Parse("2020-08-05 13:14:15").AddDuration("2.5m").ToDateTimeString() // 2020-08-05 13:16:45
 carbon.Parse("2020-08-05 13:14:15").AddDuration("2m30s").ToDateTimeString() // 2020-08-05 13:16:45
 // 1분 후
 carbon.Parse("2020-08-05 13:14:15").AddMinute().ToDateTimeString() // 2020-08-05 13:15:15
 // 3분 전
 carbon.Parse("2020-08-05 13:14:15").SubMinutes(3).ToDateTimeString() // 2020-08-05 13:11:15
-// 2분 30초 전
+// 2분 반 전
 carbon.Parse("2020-08-05 13:14:15").SubDuration("2.5m").ToDateTimeString() // 2020-08-05 13:11:45
 carbon.Parse("2020-08-05 13:14:15").SubDuration("2m30s").ToDateTimeString() // 2020-08-05 13:11:45
 // 1분 전
@@ -175,13 +178,13 @@ carbon.Parse("2020-08-05 13:14:15").SubMinute().ToDateTimeString() // 2020-08-05
 ```go
 // 3초 후
 carbon.Parse("2020-08-05 13:14:15").AddSeconds(3).ToDateTimeString() // 2020-08-05 13:14:18
-// 2.5초 후
+// 2초 반 후
 carbon.Parse("2020-08-05 13:14:15").AddDuration("2.5s").ToDateTimeString() // 2020-08-05 13:14:17
 // 1초 후
 carbon.Parse("2020-08-05 13:14:15").AddSecond().ToDateTimeString() // 2020-08-05 13:14:16
 // 3초 전
 carbon.Parse("2020-08-05 13:14:15").SubSeconds(3).ToDateTimeString() // 2020-08-05 13:14:12
-// 2.5초 전
+// 2초 반 전
 carbon.Parse("2020-08-05 13:14:15").SubDuration("2.5s").ToDateTimeString() // 2020-08-05 13:14:12
 // 1초 전
 carbon.Parse("2020-08-05 13:14:15").SubSecond().ToDateTimeString() // 2020-08-05 13:14:14

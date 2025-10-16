@@ -5,11 +5,14 @@ head:
       content: Traveler | A simple, semantic and developer-friendly time package for golang
   - - meta
     - name: keywords
-      content: carbon, go-carbon, century travel, decade travel, year travel, quarter travel, month travel, week travel, day travel, hour travel, minute travel, second travel, time travel
+      content: carbon, go-carbon, century travel, decade travel, year travel, quarter travel, month travel, week travel, day travel, hour travel, minute travel, second travel, millisecond travel, microsecond travel, nanosecond travel, time travel
 ---
 
 # Traveler
-These methods will change the original value. If you don't want to change the original value, please use the `Clone` method
+These methods will change the original value. If you don't want to change the original value, please use the `Copy` method, such as
+```go
+carbon.Parse("2020-02-29 13:14:15").Copy().AddCenturies(3)
+```
 
 ## Century travel
 ```go
