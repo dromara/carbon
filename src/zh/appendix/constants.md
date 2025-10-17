@@ -12,7 +12,7 @@ head:
 
 ## 版本常量
 ```go
-carbon.Version // 2.6.10
+carbon.Version // 2.6.13
 ```
 
 ## 时区常量

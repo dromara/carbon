@@ -2,7 +2,7 @@
 
 ## バージョン定数
 ```go
-carbon.Version // 2.6.10
+carbon.Version // 2.6.13
 ```
 
 ## タイムゾーン定数

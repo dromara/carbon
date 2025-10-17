@@ -2,7 +2,7 @@
 
 ## Version constants
 ```go
-carbon.Version // 2.6.10
+carbon.Version // 2.6.13
 ```
 
 ## Timezone constants

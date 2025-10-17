@@ -12,7 +12,7 @@ head:
 
 ## 버전 상수
 ```go
-carbon.Version // 2.6.10
+carbon.Version // 2.6.13
 ```
 
 ## 시간대 상수
