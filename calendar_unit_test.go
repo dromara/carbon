@@ -196,8 +196,7 @@ func (s *CalendarSuite) TestCreateFromHebrew() {
 	s.Run("error hebrew", func() {
 		// Test invalid Hebrew date that would cause error
 		c := CreateFromHebrew(10000, 13, 1)
-		s.True(c.IsEmpty())
-		s.False(c.HasError())
+		s.Error(c.Error)
 	})
 
 	s.Run("valid hebrew", func() {
