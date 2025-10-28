@@ -1,15 +1,13 @@
 package carbon
 
 import (
-	"math"
 	"strings"
 	"time"
 )
 
 // DiffInYears gets the difference in years.
 func (c *Carbon) DiffInYears(carbon ...*Carbon) int64 {
-	start := c
-	if start.IsInvalid() {
+	if c.IsInvalid() {
 		return 0
 	}
 	var end *Carbon
@@ -21,14 +19,18 @@ func (c *Carbon) DiffInYears(carbon ...*Carbon) int64 {
 	if end.IsInvalid() {
 		return 0
 	}
-	dy, dm, dd := end.Year()-start.Year(), end.Month()-start.Month(), end.Day()-start.Day()
-	if dm < 0 || (dm == 0 && dd < 0) {
-		dy--
+	sign := int64(1)
+	s, e := c, end
+	if e.Lt(s) {
+		s, e = e, s
+		sign = -1
 	}
-	if dy < 0 && (dd != 0 || dm != 0) {
-		dy++
+
+	years := e.Year() - s.Year()
+	if s.StdTime().AddDate(years, 0, 0).After(e.StdTime()) {
+		years--
 	}
-	return int64(dy)
+	return int64(years) * sign
 }
 
 // DiffAbsInYears gets the difference in years with absolute value.
@@ -38,8 +40,7 @@ func (c *Carbon) DiffAbsInYears(carbon ...*Carbon) int64 {
 
 // DiffInMonths gets the difference in months.
 func (c *Carbon) DiffInMonths(carbon ...*Carbon) int64 {
-	start := c
-	if start.IsInvalid() {
+	if c.IsInvalid() {
 		return 0
 	}
 	var end *Carbon
@@ -51,17 +52,17 @@ func (c *Carbon) DiffInMonths(carbon ...*Carbon) int64 {
 	if end.IsInvalid() {
 		return 0
 	}
-	if start.Month() == end.Month() && start.Year() == end.Year() {
-		return 0
-	}
-	dd := start.DiffInDays(end)
-	sign := 1
-	if dd <= 0 {
-		start, end = end, start
+	sign := int64(1)
+	s, e := c, end
+	if e.Lt(s) {
+		s, e = e, s
 		sign = -1
 	}
-	months := getDiffInMonths(start, end)
-	return months * int64(sign)
+	months := (e.Year()-s.Year())*12 + (e.Month() - s.Month())
+	if s.StdTime().AddDate(0, months, 0).After(e.StdTime()) {
+		months--
+	}
+	return int64(months) * sign
 }
 
 // DiffAbsInMonths gets the difference in months with absolute value.
@@ -71,8 +72,7 @@ func (c *Carbon) DiffAbsInMonths(carbon ...*Carbon) int64 {
 
 // DiffInWeeks gets the difference in weeks.
 func (c *Carbon) DiffInWeeks(carbon ...*Carbon) int64 {
-	start := c
-	if start.IsInvalid() {
+	if c.IsInvalid() {
 		return 0
 	}
 	var end *Carbon
@@ -84,7 +84,7 @@ func (c *Carbon) DiffInWeeks(carbon ...*Carbon) int64 {
 	if end.IsInvalid() {
 		return 0
 	}
-	return int64(math.Floor(float64((end.Timestamp() - start.Timestamp()) / (DaysPerWeek * HoursPerDay * SecondsPerHour))))
+	return (end.Timestamp() - c.Timestamp()) / SecondsPerWeek
 }
 
 // DiffAbsInWeeks gets the difference in weeks with absolute value.
@@ -94,8 +94,7 @@ func (c *Carbon) DiffAbsInWeeks(carbon ...*Carbon) int64 {
 
 // DiffInDays gets the difference in days.
 func (c *Carbon) DiffInDays(carbon ...*Carbon) int64 {
-	start := c
-	if start.IsInvalid() {
+	if c.IsInvalid() {
 		return 0
 	}
 	var end *Carbon
@@ -107,7 +106,7 @@ func (c *Carbon) DiffInDays(carbon ...*Carbon) int64 {
 	if end.IsInvalid() {
 		return 0
 	}
-	return int64(math.Floor(float64((end.Timestamp() - start.Timestamp()) / (HoursPerDay * SecondsPerHour))))
+	return (end.Timestamp() - c.Timestamp()) / SecondsPerDay
 }
 
 // DiffAbsInDays gets the difference in days with absolute value.
@@ -117,8 +116,7 @@ func (c *Carbon) DiffAbsInDays(carbon ...*Carbon) int64 {
 
 // DiffInHours gets the difference in hours.
 func (c *Carbon) DiffInHours(carbon ...*Carbon) int64 {
-	start := c
-	if start.IsInvalid() {
+	if c.IsInvalid() {
 		return 0
 	}
 	var end *Carbon
@@ -130,7 +128,7 @@ func (c *Carbon) DiffInHours(carbon ...*Carbon) int64 {
 	if end.IsInvalid() {
 		return 0
 	}
-	return start.DiffInSeconds(end) / SecondsPerHour
+	return c.DiffInSeconds(end) / SecondsPerHour
 }
 
 // DiffAbsInHours gets the difference in hours with absolute value.
@@ -140,8 +138,7 @@ func (c *Carbon) DiffAbsInHours(carbon ...*Carbon) int64 {
 
 // DiffInMinutes gets the difference in minutes.
 func (c *Carbon) DiffInMinutes(carbon ...*Carbon) int64 {
-	start := c
-	if start.IsInvalid() {
+	if c.IsInvalid() {
 		return 0
 	}
 	var end *Carbon
@@ -153,7 +150,7 @@ func (c *Carbon) DiffInMinutes(carbon ...*Carbon) int64 {
 	if end.IsInvalid() {
 		return 0
 	}
-	return start.DiffInSeconds(end) / SecondsPerMinute
+	return c.DiffInSeconds(end) / SecondsPerMinute
 }
 
 // DiffAbsInMinutes gets the difference in minutes with absolute value.
@@ -163,8 +160,7 @@ func (c *Carbon) DiffAbsInMinutes(carbon ...*Carbon) int64 {
 
 // DiffInSeconds gets the difference in seconds.
 func (c *Carbon) DiffInSeconds(carbon ...*Carbon) int64 {
-	start := c
-	if start.IsInvalid() {
+	if c.IsInvalid() {
 		return 0
 	}
 	var end *Carbon
@@ -176,7 +172,7 @@ func (c *Carbon) DiffInSeconds(carbon ...*Carbon) int64 {
 	if end.IsInvalid() {
 		return 0
 	}
-	return end.Timestamp() - start.Timestamp()
+	return end.Timestamp() - c.Timestamp()
 }
 
 // DiffAbsInSeconds gets the difference in seconds with absolute value.
@@ -186,8 +182,7 @@ func (c *Carbon) DiffAbsInSeconds(carbon ...*Carbon) int64 {
 
 // DiffInString gets the difference in string, i18n is supported.
 func (c *Carbon) DiffInString(carbon ...*Carbon) string {
-	start := c
-	if start.IsInvalid() || start.lang == nil {
+	if c.IsInvalid() || c.lang == nil {
 		return ""
 	}
 	var end *Carbon
@@ -199,15 +194,13 @@ func (c *Carbon) DiffInString(carbon ...*Carbon) string {
 	if end.IsInvalid() {
 		return ""
 	}
-
-	unit, value := start.diff(end)
+	unit, value := c.diff(end)
 	return c.lang.translate(unit, value)
 }
 
 // DiffAbsInString gets the difference in string with absolute value, i18n is supported.
 func (c *Carbon) DiffAbsInString(carbon ...*Carbon) string {
-	start := c
-	if start.IsInvalid() || start.lang == nil {
+	if c.IsInvalid() || c.lang == nil {
 		return ""
 	}
 	var end *Carbon
@@ -219,14 +212,13 @@ func (c *Carbon) DiffAbsInString(carbon ...*Carbon) string {
 	if end.IsInvalid() {
 		return ""
 	}
-	unit, value := start.diff(end)
+	unit, value := c.diff(end)
 	return c.lang.translate(unit, getAbsValue(value))
 }
 
 // DiffInDuration gets the difference in duration.
 func (c *Carbon) DiffInDuration(carbon ...*Carbon) Duration {
-	start := c
-	if start.IsInvalid() {
+	if c.IsInvalid() {
 		return 0
 	}
 	var end *Carbon
@@ -238,7 +230,7 @@ func (c *Carbon) DiffInDuration(carbon ...*Carbon) Duration {
 	if end.IsInvalid() {
 		return 0
 	}
-	return end.StdTime().Sub(start.StdTime())
+	return end.StdTime().Sub(c.StdTime())
 }
 
 // DiffAbsInDuration gets the difference in duration with absolute value.
@@ -248,38 +240,45 @@ func (c *Carbon) DiffAbsInDuration(carbon ...*Carbon) Duration {
 
 // DiffForHumans gets the difference in a human-readable format, i18n is supported.
 func (c *Carbon) DiffForHumans(carbon ...*Carbon) string {
-	start := c
-	if start.IsInvalid() || start.lang == nil {
+	if c.IsInvalid() || c.lang == nil {
 		return ""
 	}
-	var end *Carbon
-	if len(carbon) > 0 {
-		end = carbon[0]
-	} else {
-		end = Now().SetLocation(c.loc)
-	}
+	end := func() *Carbon {
+		if len(carbon) > 0 {
+			return carbon[0]
+		}
+		return Now().SetLocation(c.loc)
+	}()
 	if end.IsInvalid() {
 		return ""
 	}
 
-	unit, value := start.diff(end)
+	unit, value := c.diff(end)
 	translation := c.lang.translate(unit, getAbsValue(value))
 	if unit == "now" {
 		return translation
 	}
 
+	// Concurrent-safe access to language resources
+	c.lang.rw.RLock()
 	resources := c.lang.resources
+	ago := resources["ago"]
+	before := resources["before"]
+	fromNow := resources["from_now"]
+	after := resources["after"]
+	c.lang.rw.RUnlock()
+
 	isBefore := value > 0
 	if isBefore && len(carbon) == 0 {
-		return strings.Replace(resources["ago"], "%s", translation, 1)
+		return strings.Replace(ago, "%s", translation, 1)
 	}
 	if isBefore && len(carbon) > 0 {
-		return strings.Replace(resources["before"], "%s", translation, 1)
+		return strings.Replace(before, "%s", translation, 1)
 	}
 	if !isBefore && len(carbon) == 0 {
-		return strings.Replace(resources["from_now"], "%s", translation, 1)
+		return strings.Replace(fromNow, "%s", translation, 1)
 	}
-	return strings.Replace(resources["after"], "%s", translation, 1)
+	return strings.Replace(after, "%s", translation, 1)
 }
 
 // gets the difference for unit and value.
@@ -330,14 +329,19 @@ func (c *Carbon) diff(end *Carbon) (unit string, value int64) {
 }
 
 // gets the difference in months.
+// Nil and invalid inputs return 0 to match existing tests.
 func getDiffInMonths(start, end *Carbon) int64 {
+	if start == nil || end == nil {
+		return 0
+	}
 	if start.IsInvalid() || end.IsInvalid() {
 		return 0
 	}
 	sy, sm, d, h, i, s, ns := start.DateTimeNano()
 	ey, em, _ := end.Date()
 	dm := (ey-sy)*12 + (em - sm)
-	if time.Date(sy, time.Month(sm+dm), d, h, i, s, ns, start.StdTime().Location()).After(end.StdTime()) {
+	loc := start.StdTime().Location()
+	if time.Date(sy, time.Month(sm+dm), d, h, i, s, ns, loc).After(end.StdTime()) {
 		return int64(dm - 1)
 	}
 	return int64(dm)
