@@ -337,4 +337,28 @@ func (s *LanguageSuite) TestLanguage_translate() {
 		})
 		s.Equal("-months", lang.translate("month", -2))
 	})
+
+	s.Run("test nil check after SetLocale with error", func() {
+		// Create a lang with error state that prevents SetLocale from loading
+		lang := NewLanguage()
+		lang.Error = fmt.Errorf("test error")
+		lang.resources = make(map[string]string, 0) // Empty map
+
+		// When translate is called, it will:
+		// 1. Find empty resources
+		// 2. Call SetLocale(DefaultLocale)
+		// 3. But SetLocale will return early because Error != nil (line 72-74)
+		// 4. Resources remains empty
+		// 5. Second nil check at line 161-163 returns ""
+		result := lang.translate("month", 1)
+		s.Empty(result)
+	})
+
+	s.Run("test normal flow after SetLocale loads successfully", func() {
+		// Normal case where SetLocale successfully loads resources
+		lang := NewLanguage()
+		lang.resources = make(map[string]string, 0) // Start with empty
+		result := lang.translate("month", 1)
+		s.NotEmpty(result) // Should have loaded default locale successfully
+	})
 }

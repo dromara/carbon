@@ -157,6 +157,9 @@ func (lang *Language) translate(unit string, value int64) string {
 		resources = lang.resources
 		lang.rw.RUnlock()
 	}
+	if resources == nil || len(resources) == 0 {
+		return ""
+	}
 	resource, exists := resources[unit]
 	if !exists {
 		return ""
