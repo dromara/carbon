@@ -1,0 +1,24 @@
+{
+  "name": "Finnish",
+  "author": "https://cursor.com/",
+  "months": "Tammikuu|Helmikuu|Maaliskuu|Huhtikuu|Toukokuu|Kesäkuu|Heinäkuu|Elokuu|Syyskuu|Lokakuu|Marraskuu|Joulukuu",
+  "short_months": "Tam|Hel|Maa|Huh|Tou|Kes|Hei|Elo|Syy|Lok|Mar|Jou",
+  "weeks": "Sunnuntai|Maanantai|Tiistai|Keskiviikko|Torstai|Perjantai|Lauantai",
+  "short_weeks": "Su|Ma|Ti|Ke|To|Pe|La",
+  "seasons": "Kevät|Kesä|Syksy|Talvi",
+  "constellations": "Oinas|Härkä|Kaksoset|Rapu|Leijona|Neitsyt|Vaaka|Skorpioni|Jousimies|Kauris|Vesimies|Kalat",
+  "year": "1 vuosi|%d vuotta",
+  "month": "1 kuukausi|%d kuukautta",
+  "week": "1 viikko|%d viikkoa",
+  "day": "1 päivä|%d päivää",
+  "hour": "1 tunti|%d tuntia",
+  "minute": "1 minuutti|%d minuuttia",
+  "second": "1 sekunti|%d sekuntia",
+  "now": "juuri nyt",
+  "ago": "%s sitten",
+  "from_now": "%s päästä",
+  "before": "%s ennen",
+  "after": "%s jälkeen"
+}
+
+
