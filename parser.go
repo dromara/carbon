@@ -12,13 +12,7 @@ func Parse(value string, timezone ...string) *Carbon {
 	if value == "" {
 		return &Carbon{isEmpty: true}
 	}
-	var tz string
-	if len(timezone) > 0 {
-		tz = timezone[0]
-	} else {
-		tz = DefaultTimezone
-	}
-	loc, err := parseTimezone(tz)
+	loc, err := getLocation(timezone...)
 	if err != nil {
 		return &Carbon{Error: err}
 	}
@@ -55,13 +49,7 @@ func ParseByLayout(value, layout string, timezone ...string) *Carbon {
 		return &Carbon{Error: ErrEmptyLayout()}
 	}
 
-	var tz string
-	if len(timezone) > 0 {
-		tz = timezone[0]
-	} else {
-		tz = DefaultTimezone
-	}
-	loc, err := parseTimezone(tz)
+	loc, err := getLocation(timezone...)
 	if err != nil {
 		return &Carbon{Error: err}
 	}
@@ -88,13 +76,7 @@ func ParseByFormat(value, format string, timezone ...string) *Carbon {
 	if format == "" {
 		return &Carbon{Error: ErrEmptyFormat()}
 	}
-	var tz string
-	if len(timezone) > 0 {
-		tz = timezone[0]
-	} else {
-		tz = DefaultTimezone
-	}
-	loc, err := parseTimezone(tz)
+	loc, err := getLocation(timezone...)
 	if err != nil {
 		return &Carbon{Error: err}
 	}
@@ -123,13 +105,7 @@ func ParseByLayouts(value string, layouts []string, timezone ...string) *Carbon 
 		return &Carbon{Error: ErrEmptyLayout()}
 	}
 
-	var tz string
-	if len(timezone) > 0 {
-		tz = timezone[0]
-	} else {
-		tz = DefaultTimezone
-	}
-	loc, err := parseTimezone(tz)
+	loc, err := getLocation(timezone...)
 	if err != nil {
 		return &Carbon{Error: err}
 	}
@@ -157,13 +133,7 @@ func ParseByFormats(value string, formats []string, timezone ...string) *Carbon 
 		return &Carbon{Error: ErrEmptyFormat()}
 	}
 
-	var tz string
-	if len(timezone) > 0 {
-		tz = timezone[0]
-	} else {
-		tz = DefaultTimezone
-	}
-	loc, err := parseTimezone(tz)
+	loc, err := getLocation(timezone...)
 	if err != nil {
 		return &Carbon{Error: err}
 	}
@@ -179,4 +149,15 @@ func ParseByFormats(value string, formats []string, timezone ...string) *Carbon 
 	}
 	c.Error = ErrFailedParse(value)
 	return c
+}
+
+// getLocation parses and returns location from timezone parameter with fallback to default.
+func getLocation(timezone ...string) (*Location, error) {
+	var tz string
+	if len(timezone) > 0 {
+		tz = timezone[0]
+	} else {
+		tz = DefaultTimezone
+	}
+	return parseTimezone(tz)
 }
