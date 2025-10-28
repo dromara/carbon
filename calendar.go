@@ -90,7 +90,7 @@ func (c *Carbon) Hebrew() *hebrew.Hebrew {
 func CreateFromHebrew(year, month, day int) *Carbon {
 	h := hebrew.NewHebrew(year, month, day)
 	if h.Error != nil {
-		return &Carbon{isEmpty: true}
+		return &Carbon{Error: h.Error}
 	}
 	return NewCarbon(h.ToGregorian(DefaultTimezone).Time)
 }
