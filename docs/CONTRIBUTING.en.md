@@ -1,14 +1,14 @@
-# Carbon Language Contribution Guide
+# Carbon Localized Language Contribution Guide
 
-## How to Add New Language Support to Carbon
+## How to Add New Localized Language Support to Carbon
 
 ### Step 1: Copy Language Template File
 
-```bash
-# Copy from lang/en.json as template
-cp lang/en.json lang/xx.json
-```
-Where `xx` is the `ISO 639-1` language code for the language you want to add (e.g., `zh-CN`, `ja`, `ko`, etc.)
+ ```bash
+ # Copy from lang/en.json as template
+ cp lang/en.json lang/xx.json
+ ```
+ Where `xx` is the `ISO 639-1` language code for the language you want to add (e.g., `zh-CN`, `ja`, `ko`, etc.)
 
 ### Step 2: Update Template File Content
 

@@ -1,16 +1,16 @@
-# Carbon 언어 기여 가이드
+# Carbon 로컬라이즈드 언어 기여 가이드
 
-## Carbon에 새로운 언어 지원을 추가하는 방법
+## Carbon에 새로운 로컬라이즈드 언어 지원을 추가하는 방법
 
-### 1단계: 언어 템플릿 파일 복사
+### 一、언어 템플릿 파일 복사
 
-```bash
-# lang/en.json을 템플릿으로 복사
-cp lang/en.json lang/xx.json
-```
-`xx`는 추가하려는 언어의 `ISO 639-1` 언어 코드입니다 (예: `zh-CN`, `ja`, `ko` 등)
+ ```bash
+ # lang/en.json을 템플릿으로 복사
+ cp lang/en.json lang/xx.json
+ ```
+ `xx`는 추가하려는 언어의 `ISO 639-1` 언어 코드입니다 (예: `zh-CN`, `ja`, `ko` 등)
 
-### 2단계: 템플릿 파일 내용 업데이트
+### 二、템플릿 파일 내용 업데이트
 
 새로 생성한 `lang/xx.json` 파일을 편집하여 모든 영어 내용을 대상 언어로 번역합니다. 다음은 `한국어` 언어 파일의 완전한 예시입니다:
 
@@ -83,7 +83,7 @@ cp lang/en.json lang/xx.json
    "year": "1 год|2 года|3 года|4 года|%d лет"
    ```
 
-### 3단계: Pull Request 제출
+### 三、Pull Request 제출
 
 1. **브랜치 생성**
    ```bash
@@ -106,7 +106,7 @@ cp lang/en.json lang/xx.json
    Add XX Language Support #39
    ```
 
-### 4단계: 테스트 검증
+### 四、테스트 검증
 
 제출하기 전에 다음을 확인하세요:
 
