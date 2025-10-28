@@ -6,6 +6,13 @@ head:
 ---
 
 # 更新日志
+## [v2.6.14](https://github.com/dromara/carbon/compare/v2.6.12...v2.6.13) (2025-10-28)
+
+- 重构 `traveler.go` 文件里时间增减系列方法通过复制实例来保证不可变性，以避免修改原始实例
+- 增加对 `希腊语` 的本地化语言支持
+- 增加对 `芬兰语` 的本地化语言支持
+- 增加对 `缅甸语` 的本地化语言支持
+
 ## [v2.6.13](https://github.com/dromara/carbon/compare/v2.6.12...v2.6.13) (2025-10-15)
 
 - 在 `language.go` 的 `SetLocale` 方法中使用 `sync.Once` 确保语言文件只加载一次，使用 `sync.Map` 进行线程安全的缓存
@@ -147,11 +154,11 @@ head:
 - 新增 `DateTimeMilli`、`DateTimeMicro`、`DateTimeNano` 字段类型
 - 新增 `DateMilli`、`DateMicro`、`DateNano` 字段类型
 - 新增 `TimeMilli`、`TimeMicro`、`TimeNano` 字段类型
--  修复 `IsDST` 方法丢失时区的 bug
--  修复 `StartOfXXX`、`EndOfXXX` 部分方法丢失时区的 bug
--  修复其他日历转化为公历时缺失时区的 bug
--  设置默认时区时不再同步更新  `time.Local`
--  新增 `MaxDuration`、`MinDuration` 方法
+- 修复 `IsDST` 方法丢失时区的 bug
+- 修复 `StartOfXXX`、`EndOfXXX` 部分方法丢失时区的 bug
+- 修复其他日历转化为公历时缺失时区的 bug
+- 设置默认时区时不再同步更新  `time.Local`
+- 新增 `MaxDuration`、`MinDuration` 方法
 
 ## [v2.6.1](https://github.com/dromara/carbon/compare/v2.6.0...v2.6.1) (2025-03-27)
 
@@ -180,7 +187,7 @@ head:
 -  `UnSetTestNow ` 方法更名为 `CleanTestNow`
 -  移除 `Location` 方法，由 `Timezone` 方法替代
 -  更改 `IsValid` 和 `IsInvalid` 方法判断逻辑，`zero time` 不再视为无效时间
-- 设置全局默认时区时同步更新 `time.Local`
-- 重构 `database.go`，移除 `carbon.DateTime`、`carbon. DateTimeMilli `、 `carbon.DateTimeMicro`、`carbon.DateTimeNano`、 `carbon. Date`、`carbon.DateMilli`、 `carbon.DateMicro`、 `carbon.DateNano`、 `carbon.Time`、 `carbon.TimeMilli`、 `carbon.TimeMicro`、  `carbon.TimeNano`、`carbon.Timestamp` 、`carbon.TimestampMilli ` 、`carbon.TimestampMicro`、`carbon.TimestampNano` 字段类型, 使用泛型字段替代以实现 `MarshalJSON/UnmarshalJSON` 时自定义输出格式
+-  设置全局默认时区时同步更新 `time.Local`
+-  重构 `database.go`，移除 `carbon.DateTime`、`carbon. DateTimeMilli `、 `carbon.DateTimeMicro`、`carbon.DateTimeNano`、 `carbon. Date`、`carbon.DateMilli`、 `carbon.DateMicro`、 `carbon.DateNano`、 `carbon.Time`、 `carbon.TimeMilli`、 `carbon.TimeMicro`、  `carbon.TimeNano`、`carbon.Timestamp` 、`carbon.TimestampMilli ` 、`carbon.TimestampMicro`、`carbon.TimestampNano` 字段类型, 使用泛型字段替代以实现 `MarshalJSON/UnmarshalJSON` 时自定义输出格式
 
 有关更早版本的更新日志，请参阅 <a href="https://github.com/dromara/carbon/releases" target="_blank" rel="noreferrer">releases</a>
