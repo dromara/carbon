@@ -5,7 +5,7 @@ import (
 )
 
 // Version current version
-const Version = "2.6.13"
+const Version = "2.6.14"
 
 // timezone constants
 const (
