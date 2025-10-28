@@ -106,6 +106,37 @@ func (s *ParserSuite) TestParse() {
 		s.Equal("2020-08-05 05:14:15.9999999 +0000 UTC", Parse("2020-08-05 13:14:15.9999999 +08:00").ToString())
 	})
 
+	s.Run("diverse separators and timezone variants", func() {
+		cases := [][2]string{
+			{"2020-08-05 13:14:15", "2020/8/5 13:14:15"},          // slash
+			{"2020-08-05 13:14:15", "2020.8.5 13:14:15"},          // dot
+			{"2020-08-05 13:14:15", "2020-08-05T13:14:15"},        // with T
+			{"2020-08-05T13:14:15Z", "2020-08-05T13:14:15+00:00"}, // Z vs +00:00
+			{"2020-08-05T13:14:15+02:00", "2020-08-05T11:14:15Z"}, // with offset
+			{"2020-08-05T13:14:15-0700", "2020-08-05T20:14:15Z"},  // numeric offset
+		}
+		for _, pair := range cases {
+			left := Parse(pair[0])
+			right := Parse(pair[1])
+			s.False(left.HasError())
+			s.False(right.HasError())
+			s.Equal(left.Timestamp(), right.Timestamp())
+		}
+
+		withTz := [][2]string{
+			{"2020-08-05 13:14:15", "2020/8/5 13:14:15"},
+			{"2020-08-05T13:14:15Z", "2020-08-05T21:14:15+08:00"},
+			{"2020-08-05T13:14:15+02:00", "2020-08-05T19:14:15+08:00"},
+		}
+		for _, pair := range withTz {
+			left := Parse(pair[0], PRC)
+			right := Parse(pair[1], PRC)
+			s.False(left.HasError())
+			s.False(right.HasError())
+			s.Equal(left.Timestamp(), right.Timestamp())
+		}
+	})
+
 	// https://github.com/dromara/carbon/issues/202
 	s.Run("issue202", func() {
 		s.Equal("2023-01-08 09:02:48 +0000 UTC", Parse("2023-01-08T09:02:48").ToString())
