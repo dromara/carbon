@@ -96,7 +96,7 @@ carbon.IsTestNow() // false
 
 <a href="https://github.com/dromara/carbon/graphs/contributors"><img src="https://contrib.rocks/image?repo=dromara/carbon&max=100&columns=16"/></a>
 
-[Carbon に新しい言語サポートを追加する方法](docs/CONTRIBUTING.ja.md)
+[Carbon に新しいローカライズ言語サポートを追加する方法](docs/CONTRIBUTING.ja.md)
 
 ## スポンサー
 

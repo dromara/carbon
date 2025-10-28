@@ -100,7 +100,7 @@ Thanks to all the following who contributed to `Carbon`:
 
 <a href="https://github.com/dromara/carbon/graphs/contributors"><img src="https://contrib.rocks/image?repo=dromara/carbon&max=100&columns=16" /></a>
 
-[How to add new language support to carbon](docs/CONTRIBUTING.en.md)
+[How to add new localized language support to carbon](docs/CONTRIBUTING.en.md)
 
 ## Sponsors
 
