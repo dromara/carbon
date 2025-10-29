@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: JSON | A simple, semantic and developer-friendly time package for golang
+      content: JSON | JSON encode/decode (Marshal/Unmarshal) for built-in and custom time field types, covering Date/Time/DateTime/Timestamp with ms/us/ns precision; supports layout/format-based generic types and ORM integration
   - - meta
     - name: keywords
       content: carbon, go-carbon, json, Marshal, Unmarshal, orm, grom, xorm

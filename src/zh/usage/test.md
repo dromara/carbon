@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 冻结测试|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 测试|提供 SetTestNow/IsTestNow/ClearTestNow 方法，支持冻结固定时间用于单元测试，使时间相关操作基于模拟时间运行
   - - meta
     - name: keywords
       content: carbon, go-carbon, 测试时间, 冻结时间

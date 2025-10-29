@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Getter | A simple, semantic and developer-friendly time package for golang
+      content: Getter | Provides components (year/month/day/hour/minute/second), ordinal indices (in year/month/week), timestamps (sec/ms/us/ns), timezone info (location/name/offset), locale, localized constellation and season, week starts/ends, current layout, and age
   - - meta
     - name: keywords
       content: carbon, go-carbon, getter

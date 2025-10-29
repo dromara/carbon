@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 昨日、今日、明日|軽量、セマンティック、開発者フレンドリーな golang 時間処理ライブラリ
+      content: 昨日、今日、明日 | Yesterday/Now/Tomorrow の取得とフォーマットを提供し、現在時刻・日付・時間および秒/ミリ秒/マイクロ秒/ナノ秒のタイムスタンプをサポート、タイムゾーン指定に対応
   - - meta
     - name: keywords
       content: carbon, go-carbon, 昨日, 今日, 明日

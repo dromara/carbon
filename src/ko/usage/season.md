@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 계절|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 계절 | Season으로 계절 이름 조회(지역화 지원), StartOfSeason/EndOfSeason로 계절 경계 조회, IsSpring/IsSummer/IsAutumn/IsWinter 등 계절 판단 제공
   - - meta
     - name: keywords
       content: carbon, go-carbon, 계절, 봄, 여름, 가을, 겨울, 계절 경계, 계절 판단

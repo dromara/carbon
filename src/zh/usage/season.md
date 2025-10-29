@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 季节|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 季节|提供 Season 获取季节名称（支持本地化），支持 StartOfSeason/EndOfSeason 获取季节边界，IsSpring/IsSummer/IsAutumn/IsWinter 等季节判断
   - - meta
     - name: keywords
       content: carbon, go-carbon, 季节, 春季, 夏季, 秋季, 冬季, 季节边界, 季节判断

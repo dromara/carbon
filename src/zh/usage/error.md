@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 错误处理|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 错误处理|提供 HasError/Error 错误检测与获取，多个错误仅返回首个错误，覆盖解析与时区设置等常见场景
   - - meta
     - name: keywords
       content: carbon, go-carbon, 错误

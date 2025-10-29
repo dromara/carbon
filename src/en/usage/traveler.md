@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Traveler | A simple, semantic and developer-friendly time package for golang
+      content: Time Travel | Provides add/subtract for centuries/decades/years/quarters/months/weeks/days/hours/minutes/seconds/milliseconds/microseconds/nanoseconds with non-overflow variants, and supports Duration-based adjustments
   - - meta
     - name: keywords
       content: carbon, go-carbon, century travel, decade travel, year travel, quarter travel, month travel, week travel, day travel, hour travel, minute travel, second travel, millisecond travel, microsecond travel, nanosecond travel, time travel

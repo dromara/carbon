@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Difference | A simple, semantic and developer-friendly time package for golang
+      content: Difference | Provides relative differences DiffInYears/Months/Weeks/Days/Hours/Minutes/Seconds, absolute differences DiffAbsInXXX, humanized DiffForHumans, and supports DiffInString/Duration
   - - meta
     - name: keywords
       content: carbon, go-carbon, relative difference, absolute difference, humanized difference

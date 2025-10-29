@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: JSON|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: JSON|提供内置与自定义时间字段类型的 JSON 编解码（Marshal/Unmarshal），覆盖 Date/Time/DateTime/Timestamp 及毫秒/微秒/纳秒精度，支持基于布局/格式的泛型类型，便于与 ORM 集成
   - - meta
     - name: keywords
       content: carbon, go-carbon, json, Marshal, Unmarshal, orm, grom, xorm

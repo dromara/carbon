@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: carbon 、 time.Time 之间互转|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: carbon 与 time.Time 互转|提供 CreateFromStdTime/NewCarbon 将 time.Time 转为 carbon，提供 StdTime 导出标准 time.Time，支持指定时区
   - - meta
     - name: keywords
       content: carbon, go-carbon, 转换, time.Time

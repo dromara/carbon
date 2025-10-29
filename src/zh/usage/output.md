@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 时间输出|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 时间输出|提供日期/时间/日期时间及其简写的多精度输出(毫秒/微秒/纳秒)，支持 ISO8601/RFC/Ansic/Kitchen/Cookie 等标准格式，并支持 Layout/Format 自定义格式化
 ---
 
 # 时间输出

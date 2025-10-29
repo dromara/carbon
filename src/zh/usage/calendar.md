@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 日历|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 日历|支持儒略日/简化儒略日、中国农历、波斯历、希伯来历，提供与公历互转、格式化（月/周/日字符串）、有效性与闰年判断等
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 日历, 公历, 格里历, 儒略日, 简化儒略日, 中国农历, 波斯历, 伊朗历
+      content: carbon, go-carbon, 日历, 公历, 格里历, 儒略日, 简化儒略日, 中国农历, 波斯历, 伊朗历，希伯来历(犹太历)
 ---
 
 # 日历

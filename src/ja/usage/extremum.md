@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 時間極値|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+      content: 時間極値 | 最大/最小を取得する Max/Min、最も近い/遠いを取得する Closest/Farthest、境界値の MaxValue/MinValue、Duration 極値の MaxDuration/MinDuration を提供
   - - meta
     - name: keywords
       content: carbon, go-carbon, 極値判定, 極値境界

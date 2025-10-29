@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 오류 처리|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 오류 처리 | HasError/Error 로 오류 감지 및 조회 제공, 여러 오류 발생 시 첫 번째 오류만 반환, 파싱/시간대 설정 등 일반 시나리오 포함
   - - meta
     - name: keywords
       content: carbon, go-carbon, 오류

@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 전역 기본값 설정|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 전역 기본값 설정 | SetLayout/SetTimezone/SetLocale/SetWeekStartsAt/SetWeekendDays 단일 설정과 SetDefault 일괄 설정 제공, ResetDefault 로 초기화 지원(테스트 분리에 유용)
   - - meta
     - name: keywords
       content: carbon, go-carbon, 단일 기본값 설정, 여러 기본값 설정, 기본값 재설정

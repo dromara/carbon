@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Constellation | A simple, semantic and developer-friendly time package for golang
+      content: Constellation | Provides Constellation to get constellation name (localized), and predicate methods like IsAries/IsTaurus/IsGemini
   - - meta
     - name: keywords
       content: carbon, go-carbon, constellation name, constellation compare

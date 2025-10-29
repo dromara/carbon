@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: グローバル・デフォルトの設定|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+      content: グローバル・デフォルトの設定 | SetLayout/SetTimezone/SetLocale/SetWeekStartsAt/SetWeekendDays の個別設定と、SetDefault による一括設定を提供。ResetDefault でリセット可能、テストの分離に有用
   - - meta
     - name: keywords
       content: carbon, go-carbon, 単一のデフォルト値設定, 複数のデフォルト値設定, デフォルト値リセット

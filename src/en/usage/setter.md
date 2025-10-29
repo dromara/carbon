@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Setter | A simple, semantic and developer-friendly time package for golang
+      content: Setter | Provides SetTimezone/SetLocation/SetLocale and SetDateTime/SetDate/SetTime with millisecond/microsecond/nanosecond variants, supports year/month no-overflow setters, week start and weekend configuration, and individual setters for year/month/day/hour/minute/second/millisecond/microsecond/nanosecond
   - - meta
     - name: keywords
       content: carbon, go-carbon, set timezone, set location, set region, set year month day hour minute second, set year, set month, set week start day, set week weekend day, set day, set hour, set minute, set second, set millisecond, set microsecond, set nanosecond

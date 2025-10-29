@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 時間境界|軽量で、セマンティックで、開発者に優しい golang 時間処理ライブラリ
+      content: 時間境界 | 世紀/年代/年/四半期/月/週/日/時間/分/秒の開始・終了時刻を取得し、週の開始日の設定をサポート
   - - meta
     - name: keywords
       content: carbon, go-carbon, 世紀境界, 年代境界, 年境界, 四半期境界, 月境界, 週境界, 日境界, 時間境界, 分境界, 秒境界

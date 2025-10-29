@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 어제, 오늘, 내일|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 어제, 오늘, 내일 | Yesterday/Now/Tomorrow 조회와 포맷을 제공하며, 현재 시각/날짜/시간 및 초/밀리초/마이크로초/나노초 타임스탬프를 지원하고, 시간대 지정을 지원합니다
   - - meta
     - name: keywords
       content: carbon, go-carbon, 어제, 오늘, 내일

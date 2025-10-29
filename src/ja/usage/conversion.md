@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: carbon、time.Time 間の相互変換|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+      content: carbon と time.Time の相互変換 | CreateFromStdTime/NewCarbon で time.Time から carbon へ、StdTime で標準 time.Time へ出力、タイムゾーン指定に対応
   - - meta
     - name: keywords
       content: carbon, go-carbon, 変換, time.Time

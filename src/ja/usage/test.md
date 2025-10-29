@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: テスト|軽量、セマンティック、開発者フレンドリーな golang 時間処理ライブラリ
+      content: テスト | SetTestNow/IsTestNow/ClearTestNow を提供し、固定時刻の凍結によるユニットテストをサポート、時間関連の処理をシミュレーション時刻に基づいて実行
   - - meta
     - name: keywords
       content: carbon, go-carbon, テスト時間, 凍結時間

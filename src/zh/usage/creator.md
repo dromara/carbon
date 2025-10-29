@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 创建 Carbon 实例|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 创建 Carbon 实例|提供从时间戳(秒/毫秒/微秒/纳秒)与从日期时间/日期/时间创建实例的方法：CreateFromTimestamp/DateTime/Date/Time 及其精度变体
   - - meta
     - name: keywords
       content: carbon, go-carbon, 从时间戳创建Carbon实例, 从日期创建Carbon实例

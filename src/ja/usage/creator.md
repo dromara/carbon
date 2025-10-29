@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Carbon インスタンスの作成|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+      content: Carbon インスタンスの作成 | タイムスタンプ(秒/ミリ秒/マイクロ秒/ナノ秒)および 日時/日付/時間 から作成：CreateFromTimestamp/DateTime/Date/Time と各精度バリアントを提供
   - - meta
     - name: keywords
       content: carbon, go-carbon, タイムスタンプからCarbonインスタンス作成, 日付からCarbonインスタンス作成

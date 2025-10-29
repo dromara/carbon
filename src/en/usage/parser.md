@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Parser | A simple, semantic and developer-friendly time package for golang
+      content: "Parser | Provides parsing methods: Parse by default layout, ParseByLayout (single layout), ParseByFormat (single format), ParseByLayouts (multiple layouts), and ParseByFormats (multiple formats). Timestamp strings are not parsed directly"
   - - meta
     - name: keywords
       content: carbon, go-carbon, parse

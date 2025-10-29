@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 時間設定|軽量、セマンティック、開発者フレンドリーな golang 時間処理ライブラリ
+      content: 時間設定 | SetTimezone/SetLocation/SetLocale と SetDateTime/SetDate/SetTime（ミリ秒/マイクロ秒/ナノ秒の各バリアント）を提供し、年・月のオーバーフローなし設定、週の開始日・週末日の設定、年/月/日/時/分/秒/ミリ秒/マイクロ秒/ナノ秒の個別設定をサポート
   - - meta
     - name: keywords
       content: carbon, go-carbon, タイムゾーン設定, 位置設定, 地域設定, 年月日時分秒設定, 年設定, 月設定, 週開始日設定, 週末日設定, 日設定, 時設定, 分設定, 秒設定, ミリ秒設定, マイクロ秒設定, ナノ秒設定

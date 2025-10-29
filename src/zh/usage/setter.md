@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 时间设置|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 时间设置|提供 SetTimezone/SetLocation/SetLocale 及 SetDateTime/SetDate/SetTime 与毫秒/微秒/纳秒精度变体，支持年份/月分不溢出设置、周起始与周末设置，以及单项设置年/月/日/时/分/秒/毫秒/微秒/纳秒
   - - meta
     - name: keywords
       content: carbon, go-carbon, 设置时区, 设置位置, 设置区域, 设置年、月、日、时、分、秒, 设置年份, 设置月份, 设置一周的开始日期, 设置一周的周末日期, 设置日期, 设置小时, 设置分钟, 设置秒, 设置毫秒, 设置微妙, 设置纳秒

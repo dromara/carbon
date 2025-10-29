@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 시간 판단|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 시간 판단 | 오류/유효/영값/에포크/AM-PM/어제·오늘·내일/동일 기간 판단을 제공하고, 크기/등호 비교와 Between(시작/종료 포함 여부 선택) 지원
   - - meta
     - name: keywords
       content: carbon, go-carbon, 포함 판단, 여부 판단, 수학 판단, 거리 판단

@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Extremum | A simple, semantic and developer-friendly time package for golang
+      content: Extremum | Provides Max/Min for maximum/minimum time, Closest/Farthest for nearest/farthest time, MaxValue/MinValue for boundaries, and MaxDuration/MinDuration for duration extrema
   - - meta
     - name: keywords
       content: carbon, go-carbon, extremum boundary, extremum compare

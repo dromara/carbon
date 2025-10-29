@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 시간 차이|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 시간 차이 | DiffInYears/Months/Weeks/Days/Hours/Minutes/Seconds 상대 차이, DiffAbsInXXX 절대 차이, DiffForHumans 인간 친화적 차이 제공, DiffInString/Duration 지원
   - - meta
     - name: keywords
       content: carbon, go-carbon, 상대 차이, 절대 차이, 인간 친화적 차이

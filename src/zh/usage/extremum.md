@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 时间极值|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 时间极值|提供 Max/Min 获取最大/最小时间、Closest/Farthest 获取最近/最远时间、MaxValue/MinValue 获取边界值、MaxDuration/MinDuration 获取 Duration 极值
   - - meta
     - name: keywords
       content: carbon, go-carbon, 极值判断, 极值边界

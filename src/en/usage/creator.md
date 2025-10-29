@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Creator | A simple, semantic and developer-friendly time package for golang
+      content: "Creator | Create Carbon instances from timestamps (sec/ms/us/ns) and from datetime/date/time: CreateFromTimestamp/DateTime/Date/Time with precision variants"
   - - meta
     - name: keywords
       content: carbon, go-carbon, create, timestamp, datetime

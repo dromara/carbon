@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 时间差值|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 时间差值|提供 DiffInYears/Months/Weeks/Days/Hours/Minutes/Seconds 相对差值、DiffAbsInXXX 绝对差值、DiffForHumans 人性化差值，支持 DiffInString/Duration
   - - meta
     - name: keywords
       content: carbon, go-carbon, 相对差值, 绝对差值, 人性化差值

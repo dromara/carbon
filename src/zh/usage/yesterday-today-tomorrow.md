@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 昨天、今天、明天|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 昨天、今天、明天|提供 Yesterday/Now/Tomorrow 的获取与格式化，支持当前时刻、日期、时间与秒/毫秒/微秒/纳秒时间戳，支持指定时区
   - - meta
     - name: keywords
       content: carbon, go-carbon, 昨天, 今天, 明天

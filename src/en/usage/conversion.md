@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Conversion | A simple, semantic and developer-friendly time package for golang
+      content: "Conversion | Convert between carbon and time.Time: use CreateFromStdTime/NewCarbon to carbon, use StdTime to export standard time.Time, supports specifying timezone"
   - - meta
     - name: keywords
       content: carbon, go-carbon, conversion, convert, time.Time

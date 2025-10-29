@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 時間出力|軽量で意味論的で開発者に優しい golang 時間処理ライブラリ
+      content: 時間出力 | 日付/時間/日時およびその省略形式の多精度出力（ミリ/マイクロ/ナノ）を提供し、ISO8601/RFC/Ansic/Kitchen/Cookie などの標準フォーマットをサポートし、Layout/Format によるカスタム書式にも対応
   - - meta
     - name: keywords
       content: carbon, go-carbon, ansic, atom, iso8601, iso8601zulu, rfc822, rfc822z, rfc850, rfc1036, rss, w3c, daydatetime, cookie, kitchen, rubydate, atom, unixdate, rfc822zulu, rfc822z, rfc850z, rfc1036z, rfc822zulu, rfc822z, rfc850z, rfc1036z, rfc822zulu, rfc822z, rfc850z

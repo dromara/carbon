@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 시간 극값|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 시간 극값 | 최대/최소 시간 Max/Min, 가장 가까움/가장 멂 Closest/Farthest, 경계값 MaxValue/MinValue, Duration 극값 MaxDuration/MinDuration 제공
   - - meta
     - name: keywords
       content: carbon, go-carbon, 극값 판단, 극값 경계

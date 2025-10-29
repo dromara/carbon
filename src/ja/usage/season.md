@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 季節|軽量、セマンティック、開発者フレンドリーな golang 時間処理ライブラリ
+      content: 季節 | Season で季節名を取得（ローカライズ対応）、StartOfSeason/EndOfSeason で季節の境界を取得し、IsSpring/IsSummer/IsAutumn/IsWinter などの季節判定を提供
   - - meta
     - name: keywords
       content: carbon, go-carbon, 季節, 春季, 夏季, 秋季, 冬季, 季節境界, 季節判断

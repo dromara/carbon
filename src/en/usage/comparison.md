@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Comparison | A simple, semantic and developer-friendly time package for golang
+      content: Comparison | Provides checks for error/valid/zero/epoch/AM-PM/yesterday-today-tomorrow/same-period, supports maths compares (>, <, =, !=, >=, <=) and Between variants (exclusive/inclusive start/end)
   - - meta
     - name: keywords
       content: carbon, go-carbon, has compare, is compare, maths compare, between compare

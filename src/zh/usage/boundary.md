@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 时间边界|一个轻量级、语义化、对开发者友好的 golang 时间处理库,
+      content: 时间边界|提供世纪/年代/年/季度/月/周/日/时/分/秒的起始与结束时间获取，支持配置一周起始日
   - - meta
     - name: keywords
       content: carbon, go-carbon, 世纪边界, 年代边界, 年份边界, 季度边界, 月份边界, 周边界, 日边界, 小时边界, 分钟边界, 秒钟边界

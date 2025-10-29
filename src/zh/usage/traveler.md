@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 时间旅行|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 时间旅行|提供世纪/年代/年/季度/月/周/天/时/分/秒/毫秒/微秒/纳秒的时间加减与不溢出变体，支持基于 Duration 的增减
   - - meta
     - name: keywords
       content: carbon, go-carbon, 世纪旅行, 年代旅行, 年份旅行, 季度旅行, 月份旅行, 周旅行, 天旅行, 小时旅行, 分钟旅行, 秒旅行, 毫秒旅行, 微秒旅行, 纳秒旅行

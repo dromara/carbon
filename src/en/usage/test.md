@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Testing | A simple, semantic and developer-friendly time package for golang
+      content: Testing | Provides SetTestNow/IsTestNow/ClearTestNow to freeze a fixed time for unit tests, making time-related operations run based on simulated time
   - - meta
     - name: keywords
       content: carbon, go-carbon, test time, freeze time, SetTestNow, IsTestNow, ClearTestNow

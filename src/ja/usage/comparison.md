@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 時間比較|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+      content: 時間比較 | エラー/有効/ゼロ/エポック/AM・PM/昨日・今日・明日/同一期間の判定を提供し、大小・等号比較および Between（開始/終了の包含可否）をサポート
   - - meta
     - name: keywords
       content: carbon, go-carbon, 含有判定, 判定, 数学判定, 距離判定

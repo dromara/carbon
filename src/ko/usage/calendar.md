@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 달력|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 달력 | 율리우스일/수정 율리우스일, 중국 음력, 페르시아력, 히브리력 지원; 그레고리력과의 상호 변환, 월/주/일 문자열 포맷, 유효성 및 윤년 판단 제공
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 달력, 공력, 그레고리력, 율리우스일, 수정율리우스일, 중국음력, 페르시아력, 이란력, 히브리력, 유대력
+      content: carbon, go-carbon, gregorian, julian day, modified julian day, chinese lunar, persian, jalaali, hebrew, jewish
 ---
 
 # 달력

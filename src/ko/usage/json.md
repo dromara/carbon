@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: JSON|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: JSON | 내장/사용자 정의 시간 필드 타입의 JSON 인코딩/디코딩(Marshal/Unmarshal) 제공. Date/Time/DateTime/Timestamp 및 밀리/마이크로/나노 정밀도 포함, 레이아웃/포맷 기반 제네릭 타입과 ORM 연동 지원
   - - meta
     - name: keywords
       content: carbon, go-carbon, json, Marshal, Unmarshal, orm, grom, xorm

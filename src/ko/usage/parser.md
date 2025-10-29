@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 시간 파싱|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 시간 파싱 | 기본 레이아웃 기반 Parse, 단일 레이아웃 ParseByLayout, 단일 포맷 ParseByFormat, 다중 레이아웃 ParseByLayouts, 다중 포맷 ParseByFormats 등 파싱 메서드 제공(타임스탬프 문자열 직접 파싱은 미지원)
   - - meta
     - name: keywords
       content: carbon, go-carbon, 기본 레이아웃 템플릿, 레이아웃 템플릿, 포맷 템플릿

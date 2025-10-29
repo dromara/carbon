@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Error handling | A simple, semantic and developer-friendly time package for golang
+      content: Error handling | Provide HasError/Error for error detection and retrieval; when multiple errors occur, only the first is returned; covers common scenarios like parsing and timezone setting
   - - meta
     - name: keywords
       content: carbon, go-carbon, error

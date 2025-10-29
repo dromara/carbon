@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 시간 출력|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 시간 출력 | 날짜/시간/날짜시간 및 그 축약형에 대한 다중 정밀도 출력(밀리초/마이크로초/나노초)을 제공하고, ISO8601/RFC/Ansic/Kitchen/Cookie 등 표준 포맷을 지원하며, Layout/Format 기반 사용자 지정 서식도 지원합니다
 ---
 
 # 시간 출력

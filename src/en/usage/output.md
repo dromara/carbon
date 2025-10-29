@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Output | A simple, semantic and developer-friendly time package for golang
+      content: Output | Provides multi-precision outputs (millisecond/microsecond/nanosecond) for date/time/datetime and their short forms, supports standard formats such as ISO8601/RFC/Ansic/Kitchen/Cookie, and custom formatting via Layout/Format
   - - meta
     - name: keywords
-      content: carbon, go-carbon, ansic, atom, iso8601, iso8601zulu, rfc822, rfc822z, rfc850, rfc1036, rss, w3c, daydatetime, cookie, kitchen, rubydate, atom, unixdate, rfc822zulu, rfc822z, rfc850z, rfc1036z, rfc822zulu, rfc822z, rfc850z, rfc1036z, rfc822zulu, rfc822z, rfc850z
+      content: carbon, go-carbon, ansic, atom, iso8601, iso8601zulu, rfc822, rfc822z, rfc850, rfc1036, rss, w3c, daydatetime, cookie, kitchen, rubydate, atom, unixdate, rfc822zulu, rfc822z, rfc850z, rfc1036z, rfc822zulu, rfc822z, rfc850z
 ---
 
 # Output

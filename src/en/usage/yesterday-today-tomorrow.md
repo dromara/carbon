@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Yesterday、Today、Tomorrow | A simple, semantic and developer-friendly time package for golang
+      content: Yesterday, Today, Tomorrow | Provides retrieval and formatting of Yesterday/Now/Tomorrow, supports current datetime, date, time and second/millisecond/microsecond/nanosecond timestamps, and supports specifying timezone
   - - meta
     - name: keywords
       content: carbon, go-carbon, yesterday, today, tomorrow

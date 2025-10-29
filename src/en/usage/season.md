@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Season | A simple, semantic and developer-friendly time package for golang
+      content: Season | Provides Season to get season names (with localization), supports StartOfSeason/EndOfSeason to get season boundaries, and season checks such as IsSpring/IsSummer/IsAutumn/IsWinter
   - - meta
     - name: keywords
       content: carbon, go-carbon, season, spring, summer, autumn, winter, season boundary, season judgment

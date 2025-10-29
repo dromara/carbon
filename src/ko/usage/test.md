@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 테스트 동결|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 테스트 | SetTestNow/IsTestNow/ClearTestNow 제공, 고정 시간을 동결해 단위 테스트를 지원하고 시간 관련 동작을 시뮬레이션 시간 기준으로 실행
   - - meta
     - name: keywords
       content: carbon, go-carbon, 테스트 시간, 동결 시간

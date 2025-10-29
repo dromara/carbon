@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: エラー処理|軽量で、意味的に、開発者に優しい golang 時間処理ライブラリ
+      content: エラー処理 | HasError/Error によるエラー検出と取得を提供。複数エラー時は先頭のみ返却。解析やタイムゾーン設定など一般的な場面をカバー
   - - meta
     - name: keywords
       content: carbon, go-carbon, エラー

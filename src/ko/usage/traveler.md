@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 시간 여행|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: 시간 여행 | 세기/연대/연/분기/월/주/일/시/분/초/밀리초/마이크로초/나노초의 가감 및 오버플로 없는 변형을 제공하며, Duration 기반 증감을 지원합니다
   - - meta
     - name: keywords
       content: carbon, go-carbon, 세기 여행, 연대 여행, 연도 여행, 분기 여행, 월 여행, 주 여행, 일 여행, 시간 여행, 분 여행, 초 여행, 밀리초 여행, 마이크로초 여행, 나노초 여행
