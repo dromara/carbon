@@ -102,9 +102,12 @@ carbon.IsTestNow() // false
 
 <a href="https://github.com/dromara/carbon/graphs/contributors"><img src="https://contrib.rocks/image?repo=dromara/carbon&max=100&columns=16"/></a>
 
-[如何为 carbon 添加新的本地化语言支持](docs/CONTRIBUTING.cn.md)
-## 赞助
+## 翻译者
+欢迎帮助将 `Carbon` 翻译为更多本地化语言
 
+[如何为 carbon 添加新的本地化语言支持](docs/CONTRIBUTING.cn.md)
+
+## 赞助
 `Carbon` 是一个非商业开源项目, 如果你想支持 `Carbon`,
 你可以为开发者 [购买一杯咖啡](https://carbon.go-pkg.com/zh/sponsor.html)
 
