@@ -3,9 +3,10 @@ import {type DefaultTheme, defineConfig} from 'vitepress'
 export const zh = defineConfig({
     lang: 'zh-Hans',
     title: 'carbon',
+    titleTemplate: '一个轻量级、语义化、对开发者友好的 golang 时间处理库',
     description: '一个轻量级、语义化、对开发者友好的 golang 时间处理库',
     head: [
-        ['meta', { name: 'keywords', content: 'golang, carbon, 时间处理, 星座, 季节, 格里历, 农历, 儒略日, 简化儒略日, 波斯历, 伊朗历' }],
+        ['meta', { name: 'keywords', content: 'golang, carbon, go-carbon, time, 时间处理, 星座, 季节, 格里历, 农历, 儒略日, 简化儒略日, 波斯历, 伊朗历' }],
     ],
     themeConfig: {
         nav: nav(),

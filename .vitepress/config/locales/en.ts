@@ -3,6 +3,7 @@ import {type DefaultTheme, defineConfig} from 'vitepress'
 export const en = defineConfig({
   lang: 'en-US',
   title: 'carbon',
+  titleTemplate: 'A simple, semantic and developer-friendly time package for golang',
   description: 'A simple, semantic and developer-friendly time package for golang',
   head: [
     ['meta', { name: 'keywords', content: 'golang, carbon, datetime, date, time, calendar, Gregorian, Julian Day, Modified Julian Day, Lunar, Persian, Jalaali' }],

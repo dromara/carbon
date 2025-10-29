@@ -3,6 +3,7 @@ import {type DefaultTheme, defineConfig} from 'vitepress'
 export const ko = defineConfig({
     lang: 'ko-KR',
     title: 'carbon',
+    titleTemplate: '가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리',
     description: '가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리',
     head: [
         ['meta', { name: 'keywords', content: 'golang, carbon, 시간 처리, 별자리, 계절, 그레고리력, 음력, 율리우스일, 단순 율리우스일, 페르시아력, 이란력' }],
