@@ -9,7 +9,7 @@ head:
 
 ## [v2.6.14](https://github.com/dromara/carbon/compare/v2.6.13...v2.6.14) (2025-10-28)
 
-- Refactor time addition and subtraction series methods in `traveler.go` file to ensure immutability by copying instances to avoid modifying the original instance
+- Optimize time addition and subtraction series methods in `traveler.go` file to ensure immutability by copying instances to avoid modifying the original instance
 - Add `Greek` localised language support
 - Add `Finnish` localised language support
 - Add `Myanmar` localised language support
