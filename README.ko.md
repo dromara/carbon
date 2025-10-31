@@ -15,7 +15,7 @@
 
 `Carbon` 은 가벼우면서도 의미론적이고 개발자 친화적인 `golang` 시간 처리 라이브러리로, `어떤` 서드파티 라이브러리에도 의존하지 않으며, `100%` 단위 테스트 커버리지를 가지고 있으며, [docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker")에 공식적으로 사용되고 있고 [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 와 [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github")에도 수록되어 있습니다.
 
-<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="/docker.jpg" width="100%" alt="docker"/></a>
+<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="https://carbon.go-pkg.com/docker.jpg" width="100%" alt="docker"/></a>
 
 ## 저장소
 
