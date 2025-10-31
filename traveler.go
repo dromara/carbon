@@ -7,16 +7,10 @@ import (
 // Now returns a Carbon instance for now.
 func Now(timezone ...string) *Carbon {
 	var (
-		tz  string
 		loc *Location
 		err error
 	)
-	if len(timezone) > 0 {
-		tz = timezone[0]
-	} else {
-		tz = DefaultTimezone
-	}
-	if loc, err = parseTimezone(tz); err != nil {
+	if loc, err = parseTimezone(timezone...); err != nil {
 		return &Carbon{Error: err}
 	}
 	if IsTestNow() {

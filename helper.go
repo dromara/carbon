@@ -131,24 +131,30 @@ func format2layout(format string) string {
 // timezoneCache caches parsed timezone locations to avoid repeated parsing
 var timezoneCache sync.Map
 
-// parses a timezone string as a time.Location instance.
-func parseTimezone(timezone string) (loc *Location, err error) {
-	if timezone == "" {
+// parses timezone strings as a time.Location instance.
+func parseTimezone(timezone ...string) (loc *Location, err error) {
+	var tz string
+	if len(timezone) > 0 {
+		tz = timezone[0]
+	} else {
+		tz = DefaultTimezone
+	}
+	if tz == "" {
 		return nil, ErrEmptyTimezone()
 	}
 
 	// Check cache first
-	if cached, exists := timezoneCache.Load(timezone); exists {
+	if cached, exists := timezoneCache.Load(tz); exists {
 		return cached.(*Location), nil
 	}
 
-	if loc, err = time.LoadLocation(timezone); err != nil {
-		err = fmt.Errorf("%w: %w", ErrInvalidTimezone(timezone), err)
+	if loc, err = time.LoadLocation(tz); err != nil {
+		err = fmt.Errorf("%w: %w", ErrInvalidTimezone(tz), err)
 		return
 	}
 
 	// Cache the successful result
-	timezoneCache.Store(timezone, loc)
+	timezoneCache.Store(tz, loc)
 	return
 }
 
