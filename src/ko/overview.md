@@ -7,7 +7,9 @@ head:
 
 # 프로젝트 소개
 
-`carbon`은 가벼우면서도 의미론적이고 개발자 친화적인 `golang` 시간 처리 라이브러리로, `어떤` 서드파티 라이브러리에도 의존하지 않으며, `100%` 단위 테스트 커버리지를 가지고 있습니다. 
+`carbon`은 가벼우면서도 의미론적이고 개발자 친화적인 `golang` 시간 처리 라이브러리로, `어떤` 서드파티 라이브러리에도 의존하지 않으며, `100%` 단위 테스트 커버리지를 가지고 있으며, [docker](https://github.com/docker/docker-language-server/blob/main/go.mod "docker")에 공식적으로 사용되고 있고 [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 와 [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github")에도 수록되어 있습니다.
+
+<img src="/docker.jpg" width="100%" alt="docker"/>
 
 ## 프로젝트 특징
 - 가벼움 & 제로 의존성: 단위 테스트를 제외하고는 `어떤` 서드파티 라이브러리에도 의존하지 않으며, `100%` 단위 테스트 커버리지로 코드 품질과 안정성을 보장합니다
@@ -26,4 +28,4 @@ head:
 
 [gitee.com/dromara/carbon](https://gitee.com/dromara/carbon "gitee.com/dromara/carbon")
 
-[gitcode.com/dromara/carbon](https://gitcode.com/dromara/carbon "gitcode.com/dromara/carbon") 
+[gitcode.com/dromara/carbon](https://gitcode.com/dromara/carbon "gitcode.com/dromara/carbon")

@@ -2,12 +2,14 @@
 head:
   - - meta
     - name: description
-      content: Overview | A simple, semantic and developer-friendly time package for golang
+      content: Overview | A simple, semantic and developer-friendly golang time processing library
 ---
 
 # Overview
 
-Carbon is a simple, semantic and developer-friendly time package for `golang`, `100%` unit test coverage, doesn't depend on `any` third-party package and has been included by [awesome-go](https://github.com/avelino/awesome-go#date-and-time "awesome-go") and [hello-github](https://hellogithub.com/en/repository/dromara/carbon "hello-github").
+`Carbon` is a lightweight, semantic, and developer-friendly `golang` time package that doesn't depend on `any` third-party package, has `100%` unit test coverage, and has been officially used by [docker](https://github.com/docker/docker-language-server/blob/main/go.mod "docker") as well as included by [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") and [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github").
+
+<img src="/docker.jpg" width="100%" alt="docker"/>
 
 ## Feature
 - Lightweight & zero dependency：pure `go` implementation, doesn't depend on `any` third-party package, `100%` unit test coverage
