@@ -9,7 +9,7 @@ head:
 
 `Carbon` is a lightweight, semantic, and developer-friendly `golang` time package that doesn't depend on `any` third-party package, has `100%` unit test coverage, and has been officially used by [docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker") as well as included by [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") and [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github").
 
-<img src="/docker.jpg" width="100%" alt="docker"/>
+<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="/docker.jpg" width="100%" alt="docker"/></a>
 
 ## Feature
 - Lightweight & zero dependency：pure `go` implementation, doesn't depend on `any` third-party package, `100%` unit test coverage

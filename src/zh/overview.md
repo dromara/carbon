@@ -10,9 +10,9 @@ head:
 `Carbon`  是一个轻量级、语义化、对开发者友好的 `golang` 时间处理库，不依赖于 `任何` 第三方库， `100%` 单元测试覆盖率，已被 [docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L1 "docker") 官方使用以及被 [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 和 [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github") 收录，并获得
 `gitee` 2024 年最有价值项目（`GVP`）和 `gitcode` 2024 年度开源摘星计划 (`G-Star`) 项目
 
-<img src="/docker.jpg" width="100%" alt="docker"/>
-<img src="/gvp.jpg" width="100%" alt="gvp"/>
-<img src="/gstar.jpg" width="100%" alt="g-star"/>
+<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="/docker.jpg" width="100%" alt="docker"/></a>
+<a href="https://gitee.com/dromara/carbon" target="_blank"><img src="/gvp.jpg" width="100%" alt="gvp"/></a>
+<a href="https://gitcode.com/dromara/carbon" target="_blank"><img src="/gstar.jpg" width="100%" alt="g-star"/></a>
 
 ## 项目特性
 - 轻量级 & 零依赖：除单元测试外，不依赖`任何`第三方库，`100%` 单元测试覆盖率，保证代码质量和稳定性
