@@ -13,7 +13,9 @@ English | [简体中文](README.cn.md) | [日本語](README.ja.md) | [한국어]
 
 ## Introduction
 
-`Carbon` is a simple, semantic and developer-friendly time package for `golang`, `100%` unit test coverage, doesn't depend on `any` third-party package and has been included by [awesome-go](https://github.com/avelino/awesome-go#date-and-time "awesome-go") and [hello-github](https://hellogithub.com/en/repository/dromara/carbon "hello-github")
+`Carbon` is a lightweight, semantic, and developer-friendly `golang` time package that doesn't depend on `any` third-party package, has `100%` unit test coverage, and has been officially used by [docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker") as well as included by [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") and [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github").
+
+<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="/docker.jpg" width="100%" alt="docker"/></a>
 
 ## Repository
 
@@ -29,15 +31,15 @@ English | [简体中文](README.cn.md) | [日本語](README.ja.md) | [한국어]
 > go version >= 1.18
 
 ```go
-// By github
+// Via github
 go get -u github.com/dromara/carbon/v2
 import "github.com/dromara/carbon/v2"
 
-// By gitee
+// Via gitee
 go get -u gitee.com/dromara/carbon/v2
 import "gitee.com/dromara/carbon/v2"
 
-// By gitcode
+// Via gitcode
 go get -u gitcode.com/dromara/carbon/v2
 import "gitee.com/dromara/gitcode/v2"
 ```

@@ -13,7 +13,9 @@
 
 ## イントロ
 
-`Carbon` は軽量、セマンティック、開発者に優しい `golang` 時間処理ライブラリ, `いかなる`第三者ライブラリにも依存せず、`100%`ユニットテストカバレッジ率は、[awesome-go](https://github.com/avelino/awesome-go#date-and-time "awesome-go") と [hello-github](https://hellogithub.com/en/repository/dromara/carbon "hello-github") 収録
+`Carbon` は軽量でセマンティックで開発者に優しい `golang` 時間処理ライブラリで、サードパーティ製ライブラリに依存せず、ユニットテストのカバー率は `100%` で、[docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker") に公式採用され、[awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") と [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github") にも収録されています。
+
+<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="/docker.jpg" width="100%" alt="docker"/></a>
 
 ## リポジトリ
 
