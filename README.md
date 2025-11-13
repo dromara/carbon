@@ -13,7 +13,7 @@ English | [简体中文](README.cn.md) | [日本語](README.ja.md) | [한국어]
 
 ## Introduction
 
-`Carbon` is a lightweight, semantic, and developer-friendly `golang` time package that doesn't depend on `any` third-party package, has `100%` unit test coverage, and has been officially used by [docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker") as well as included by [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") and [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github").
+`Carbon` is a lightweight, semantic, and developer-friendly `golang` time package that doesn't depend on `any` third-party package, has `100%` unit test coverage, and has been used by [docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker") organization as well as included by [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") and [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github").
 
 <a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="https://carbon.go-pkg.com/docker.jpg" width="100%" alt="docker"/></a>
 
@@ -28,7 +28,7 @@ English | [简体中文](README.cn.md) | [日本語](README.ja.md) | [한국어]
 ## Quick Start
 
 ### Installation
-> go version >= 1.18
+> go version >= 1.19
 
 ```go
 // Via github
@@ -41,7 +41,7 @@ import "gitee.com/dromara/carbon/v2"
 
 // Via gitcode
 go get -u gitcode.com/dromara/carbon/v2
-import "gitee.com/dromara/gitcode/v2"
+import "gitcode.com/dromara/gitcode/v2"
 ```
 
 `Carbon` was donated to the [dromara](https://dromara.org/ "dromara") organization, the repository URL has changed. If

@@ -13,7 +13,7 @@
 
 ## 项目简介
 
-`Carbon` 是一个轻量级、语义化、对开发者友好的 `golang` 时间处理库，不依赖于 `任何` 第三方库， `100%` 单元测试覆盖率，已被 [docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker") 官方使用以及被 [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 和 [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github") 收录，并获得
+`Carbon` 是一个轻量级、语义化、对开发者友好的 `golang` 时间处理库，不依赖于 `任何` 第三方库， `100%` 单元测试覆盖率，已被 [docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker") 组织使用以及被 [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 和 [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github") 收录，并获得
 `gitee` 2024 年最有价值项目（`GVP`）和 `gitcode` 2024 年度开源摘星计划 (`G-Star`) 项目
 
 <a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="https://carbon.go-pkg.com/docker.jpg" width="100%" alt="docker"/></a>
@@ -32,7 +32,7 @@
 
 ### 安装使用
 
-> go version >= 1.18
+> go version >= 1.19
 
 ```go
 // 使用 github 库

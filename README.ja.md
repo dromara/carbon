@@ -28,7 +28,7 @@
 ## クイックスタート
 
 ### インストール
-> go version >= 1.18
+> go version >= 1.19
 
 ```go
 // github から使う
@@ -41,13 +41,13 @@ import "gitee.com/dromara/carbon/v2"
 
 // gitcode から使う
 go get -u gitcode.com/dromara/carbon/v2
-import "gitcode.com/dromara/carbon/v2"
+import "gitcode.com/dromara/gitcode/v2"
 ```
 
 `Carbon` は [dromara](https://dromara.org/ "dromara") 組織に寄付されたためリポジトリのURLが変更されました。以前のリポジトリ `golang-module/carbon` を使用している場合は`go.mod`で新しいリポジトリURLに変更するか下記コマンドを実行します
 
 ```go
-go mod edit -replace github.com/golang-module/carbon/v2=github.com/dromara/carbon/v2
+go mod edit -replace github.com/golang-module/carbon/v2 = github.com/dromara/carbon/v2
 ```
 
 ### 使い方と例
@@ -73,14 +73,14 @@ carbon.CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToString() // 2020-08-05 13:14
 carbon.CreateFromTimestamp(1596633255).ToString() // 2020-08-05 13:14:15 +0000 UTC
 
 carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month before
-carbon.Parse("2020-07-05 13:14:15").SetLocale("jp").DiffForHumans() // 1 ヶ月前
+carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月前
 
 carbon.ClearTestNow()
 carbon.IsTestNow() // false
 ```
-詳細については <a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>
+より多くの使用例については、<a href="https://carbon.go-pkg.com" target="_blank">公式ドキュメント</a>をご覧ください。
 
-より多くの使用例については、<a href="https://carbon.go-pkg.com/ja" target="_blank">公式ドキュメント</a>をご覧ください。性能テストレポートについては、[分析レポート](docs/BENCHMARK.ja.md)をご参照ください
+性能テストレポートについては、[ベンチマークレポート](docs/BENCHMARK.ja.md)をご参照ください
 
 ## リファレンス
 

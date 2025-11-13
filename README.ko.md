@@ -9,7 +9,7 @@
 [![HelloGitHub](https://api.hellogithub.com/v1/widgets/recommend.svg?rid=0eddd8c3469549b7b246f85a83d1c42e&claim_uid=kKBvMpyxSgLhmJO&theme=small)](https://hellogithub.com/en/repository/dromara/carbon)
 [![License](https://img.shields.io/github/license/dromara/carbon)](https://github.com/dromara/carbon/blob/master/LICENSE)
 
-한국어 | [English](README.md) | [简体中文](README.zh.md) | [日本語](README.ja.md)
+한국어 | [English](README.md) | [简体中文](README.cn.md) | [日本語](README.ja.md)
 
 ## 소개
 
@@ -28,7 +28,7 @@
 ## 빠른 시작
 
 ### 설치
-> go version >= 1.18
+> go version >= 1.19
 
 ```go
 // GitHub를 통해
@@ -41,7 +41,7 @@ import "gitee.com/dromara/carbon/v2"
 
 // GitCode를 통해
 go get -u gitcode.com/dromara/carbon/v2
-import "gitee.com/dromara/gitcode/v2"
+import "gitcode.com/dromara/gitcode/v2"
 ```
 
 `Carbon`은 [dromara](https://dromara.org/ "dromara") 조직에 기부되었으며, 저장소 URL이 변경되었습니다. 이전에 사용하던 저장소가 `golang-module/carbon`이었다면, `go.mod`에서 원래 저장소를 새 저장소로 교체하거나 다음 명령을 실행하세요:
@@ -79,7 +79,9 @@ carbon.ClearTestNow()
 carbon.IsTestNow() // false
 ```
 
-더 많은 사용 예시는 <a href="https://carbon.go-pkg.com/ko" target="_blank">공식 문서</a>를 참조하세요. 성능 테스트 보고서는 [분석 보고서](docs/BENCHMARK.ko.md)를 참조하세요.
+더 많은 사용 예시는 <a href="https://carbon.go-pkg.com" target="_blank">공식 문서</a>를 참조하세요.
+
+성능 테스트 보고서는 [벤치마크 보고서](docs/BENCHMARK.ko.md)를 참조하세요.
 
 ## 참고 자료
 
