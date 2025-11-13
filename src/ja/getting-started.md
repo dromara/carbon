@@ -1,5 +1,5 @@
 # クイックスタート
-> go version >= 1.18
+> go version >= 1.19
 
 ```go
 // github から使う
