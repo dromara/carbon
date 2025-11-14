@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Yesterday, Today, Tomorrow | Provides retrieval and formatting of Yesterday/Now/Tomorrow, supports current datetime, date, time and second/millisecond/microsecond/nanosecond timestamps, and supports specifying timezone
+      content: Carbon yesterday today tomorrow feature detailed explanation, provides three convenient methods Yesterday/Now/Tomorrow to get relative time, supports datetime formatting, multi-precision timestamps (second/millisecond/microsecond/nanosecond) and specified timezone, equivalent to Now().SubDay() and Now().AddDay()
   - - meta
     - name: keywords
-      content: carbon, go-carbon, yesterday, today, tomorrow
+      content: carbon, go-carbon, yesterday, today, tomorrow, Yesterday, Now, Tomorrow, relative time, timestamp, timezone setting, date formatting
 ---
 
 # Yesterday、Today、Tomorrow

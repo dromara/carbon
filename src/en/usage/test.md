@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Testing | Provides SetTestNow/IsTestNow/ClearTestNow to freeze a fixed time for unit tests, making time-related operations run based on simulated time
+      content: Carbon testing feature detailed explanation, provides SetTestNow/IsTestNow/ClearTestNow methods, supports freezing fixed time for unit tests, making time-related operations run based on simulated time, convenient for testing time-dependent code
   - - meta
     - name: keywords
-      content: carbon, go-carbon, test time, freeze time, SetTestNow, IsTestNow, ClearTestNow
+      content: carbon, go-carbon, test time, freeze time, simulated time, SetTestNow, IsTestNow, ClearTestNow, unit test, time testing, testing tool
 ---
 
 # Testing

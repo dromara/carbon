@@ -2,12 +2,15 @@
 head:
   - - meta
     - name: description
-      content: Installation | A simple, semantic and developer-friendly time package for golang
+      content: Carbon Getting Started Guide, providing installation and configuration instructions (supporting GitHub/Gitee/Gitcode repositories), import methods, system requirements (Go >= 1.18) and repository migration guide (from golang-module/carbon to dromara/carbon)
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, getting started, installation guide, configuration, Go installation, go get, repository URL, GitHub, Gitee, Gitcode, dromara, migration guide, system requirements
 ---
 
 # Installation
 
-> go version >= 1.19
+> go version >= 1.18
 
 ```go
 // Via github

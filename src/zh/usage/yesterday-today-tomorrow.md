@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 昨天、今天、明天|提供 Yesterday/Now/Tomorrow 的获取与格式化，支持当前时刻、日期、时间与秒/毫秒/微秒/纳秒时间戳，支持指定时区
+      content: Carbon 昨天今天明天功能详解，提供 Yesterday/Now/Tomorrow 三个便捷方法获取相对时间，支持日期时间格式化、多精度时间戳（秒/毫秒/微秒/纳秒）和指定时区，等价于 Now().SubDay() 和 Now().AddDay()
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 昨天, 今天, 明天
+      content: carbon, go-carbon, 昨天, 今天, 明天, Yesterday, Now, Tomorrow, 相对时间, 时间戳, 时区设置, 日期格式化
 ---
 
 # 昨天、今天、明天

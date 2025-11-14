@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Boundary | Provides start and end times for century/decade/year/quarter/month/week/day/hour/minute/second, supports configuring the week start day
+      content: Provides start and end times for century/decade/year/quarter/month/week/day/hour/minute/second, supports configuring the week start day
   - - meta
     - name: keywords
       content: carbon, go-carbon, century boundary, decade boundary, year boundary, quarter boundary, month boundary, week boundary, day boundary, hour boundary, minute boundary, second boundary

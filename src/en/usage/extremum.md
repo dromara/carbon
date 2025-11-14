@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Extremum | Provides Max/Min for maximum/minimum time, Closest/Farthest for nearest/farthest time, MaxValue/MinValue for boundaries, and MaxDuration/MinDuration for duration extrema
+      content: Carbon provides Max/Min to get maximum/minimum time, Closest/Farthest to get nearest/farthest time, MaxValue/MinValue to get boundary values, MaxDuration/MinDuration to get Duration extrema
   - - meta
     - name: keywords
-      content: carbon, go-carbon, extremum boundary, extremum compare
+      content: carbon, go-carbon, extremum judgment, extremum boundary
 ---
 
 # Extremum

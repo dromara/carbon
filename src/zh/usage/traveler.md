@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 时间旅行|提供世纪/年代/年/季度/月/周/天/时/分/秒/毫秒/微秒/纳秒的时间加减与不溢出变体，支持基于 Duration 的增减
+      content: Carbon 时间旅行功能详解，提供 50+ 种时间增减方法，支持世纪/年代/年/季度/月/周/天/时/分/秒/毫秒/微秒/纳秒的时间加减与不溢出变体，支持基于 Duration 的精确增减
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 世纪旅行, 年代旅行, 年份旅行, 季度旅行, 月份旅行, 周旅行, 天旅行, 小时旅行, 分钟旅行, 秒旅行, 毫秒旅行, 微秒旅行, 纳秒旅行
+      content: carbon, go-carbon, 时间旅行, 时间增减, Add, Sub, 不溢出, NoOverflow, Duration, 时间计算, 时间加减, 多精度时间操作
 ---
 
 # 时间旅行

@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 시간 차이 | DiffInYears/Months/Weeks/Days/Hours/Minutes/Seconds 상대 차이, DiffAbsInXXX 절대 차이, DiffForHumans 인간 친화적 차이 제공, DiffInString/Duration 지원
+      content: DiffInYears/Months/Weeks/Days/Hours/Minutes/Seconds 상대 차이, DiffAbsInXXX 절대 차이, DiffForHumans 인간 친화적 차이 제공, DiffInString/Duration 지원
   - - meta
     - name: keywords
       content: carbon, go-carbon, 상대 차이, 절대 차이, 인간 친화적 차이

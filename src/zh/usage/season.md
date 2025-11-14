@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 季节|提供 Season 获取季节名称（支持本地化），支持 StartOfSeason/EndOfSeason 获取季节边界，IsSpring/IsSummer/IsAutumn/IsWinter 等季节判断
+      content: Carbon 季节功能详解，提供 Season 获取季节名称（支持本地化），StartOfSeason/EndOfSeason 获取季节边界，IsSpring/IsSummer/IsAutumn/IsWinter 季节判断，按照气象划分（3-5 月春季、6-8 月夏季、9-11 月秋季、12-2 月冬季）
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 季节, 春季, 夏季, 秋季, 冬季, 季节边界, 季节判断
+      content: carbon, go-carbon, 季节, 春季, 夏季, 秋季, 冬季, 季节边界, 季节判断, Season, StartOfSeason, EndOfSeason, 本地化
 ---
 
 # 季节

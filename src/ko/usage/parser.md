@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 시간 파싱 | 기본 레이아웃 기반 Parse, 단일 레이아웃 ParseByLayout, 단일 포맷 ParseByFormat, 다중 레이아웃 ParseByLayouts, 다중 포맷 ParseByFormats 등 파싱 메서드 제공(타임스탬프 문자열 직접 파싱은 미지원)
+      content: Carbon 시간 파싱 메서드 상세 설명, 5 가지 파싱 방법 제공: 기본 레이아웃 Parse, 단일 레이아웃 ParseByLayout, 단일 포맷 ParseByFormat, 다중 레이아웃 ParseByLayouts, 다중 포맷 ParseByFormats, 다양한 시간 문자열 형식 및 타임존 설정 지원
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 기본 레이아웃 템플릿, 레이아웃 템플릿, 포맷 템플릿
+      content: carbon, go-carbon, 시간 파싱, Parse, ParseByLayout, ParseByFormat, 레이아웃 템플릿, 포맷 템플릿, 시간 문자열 파싱, 다중 포맷 파싱, 타임존 파싱
 ---
 
 # 시간 파싱

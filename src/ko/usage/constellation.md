@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 별자리 | Constellation 으로 별자리 이름 조회(로컬라이즈 지원), IsAries/IsTaurus/IsGemini 등 별자리 판단 메서드 제공
+      content: Constellation 으로 별자리 이름 조회(로컬라이즈 지원), IsAries/IsTaurus/IsGemini 등 별자리 판단 메서드 제공
   - - meta
     - name: keywords
       content: carbon, go-carbon, 별자리, 양자리, 황소자리, 쌍둥이자리, 게자리, 사자자리, 처녀자리, 천칭자리, 전갈자리, 궁수자리, 염소자리, 물병자리, 물고기자리

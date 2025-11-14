@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 테스트 | SetTestNow/IsTestNow/ClearTestNow 제공, 고정 시간을 동결해 단위 테스트를 지원하고 시간 관련 동작을 시뮬레이션 시간 기준으로 실행
+      content: Carbon 테스트 기능 상세 설명, SetTestNow/IsTestNow/ClearTestNow 메서드 제공, 단위 테스트용 고정 시간 동결 지원, 시간 관련 동작을 시뮬레이션 시간 기준으로 실행, 시간 의존 코드 테스트에 편리
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 테스트 시간, 동결 시간
+      content: carbon, go-carbon, 테스트 시간, 동결 시간, 시뮬레이션 시간, SetTestNow, IsTestNow, ClearTestNow, 단위 테스트, 시간 테스트, 테스트 도구
 ---
 
 # 테스트

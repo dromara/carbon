@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 時間比較 | エラー/有効/ゼロ/エポック/AM・PM/昨日・今日・明日/同一期間の判定を提供し、大小・等号比較および Between（開始/終了の包含可否）をサポート
+      content: エラー/有効性/ゼロ値/エポック/AM-PM/昨日-今日-明日/同一期間などの判定を提供し、大小/等号比較と Between（開始/終了境界の選択可能）などの距離判定をサポート
   - - meta
     - name: keywords
       content: carbon, go-carbon, 含有判定, 判定, 数学判定, 距離判定

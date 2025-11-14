@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Format と ParseByFormat メソッドでサポートされている時間日付フォーマット記号の詳細説明、記号の説明、長さ、範囲、例を含む
+  - - meta
+    - name: keywords
+      content: フォーマット記号, Format, ParseByFormat, 時間フォーマット, 日付フォーマット, golang, carbon, 時間処理
+---
+
 # 書式設定記号
 `Format` と `ParseByFormat`メソッドは完全に可逆的ではありません。`Format` メソッドは以下のすべてのシンボルをサポートしています，`ParseByFormat`メソッドは、`K`，`W`，`N`，`L`，`w`，`t`，`o`，`q`，`c`をサポートしていません。これらの記号はカスタマイズされており、標準タイムライブラリには対応する記号がありません。
 

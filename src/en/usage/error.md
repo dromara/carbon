@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Error handling | Provide HasError/Error for error detection and retrieval; when multiple errors occur, only the first is returned; covers common scenarios like parsing and timezone setting
+      content: Carbon error handling feature detailed explanation, provides HasError for error detection and Error for error retrieval, multiple errors only return the first error, covers common error scenarios like time parsing and timezone setting, includes complete error handling examples
   - - meta
     - name: keywords
-      content: carbon, go-carbon, error
+      content: carbon, go-carbon, error handling, HasError, Error, error detection, error retrieval, time parsing error, timezone error, exception handling
 ---
 
 # Error handling

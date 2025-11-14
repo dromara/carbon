@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 星座 | Constellation で星座名を取得（ローカライズ対応）、IsAries/IsTaurus/IsGemini などの星座判定を提供
+      content: Constellation で星座名を取得（ローカライズ対応）、IsAries/IsTaurus/IsGemini などの星座判定メソッドを提供
   - - meta
     - name: keywords
       content: carbon, go-carbon, 星座, おひつじ座, おうし座, ふたご座, かに座, しし座, おとめ座, てんびん座, さそり座, いて座, やぎ座, みずがめ座, うお座

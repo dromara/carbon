@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Calendar | Supports Julian Day/Modified Julian Day, Chinese Lunar, Persian, and Hebrew; provides conversion with Gregorian, month/week/day string formatting, and validation including leap-year checks
+      content: Supports Julian Day/Modified Julian Day, Chinese Lunar, Persian, and Hebrew calendars; provides conversion with Gregorian calendar, formatting (month/week/day strings), validation and leap year checks
   - - meta
     - name: keywords
-      content: carbon, go-carbon, gregorian, julian day, modified julian day, chinese lunar, persian, jalaali, hebrew, jewish
+      content: carbon, go-carbon, calendar, gregorian calendar, julian day, modified julian day, chinese lunar, persian calendar, iranian calendar, hebrew calendar, jewish calendar
 ---
 
 # Calendar

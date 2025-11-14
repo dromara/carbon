@@ -2,11 +2,14 @@
 head:
   - - meta
     - name: description
-      content: 빠른 시작|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: Carbon 빠른 시작 가이드, 설치 및 설정 설명(GitHub/Gitee/Gitcode 저장소 지원), 가져오기 방법, 시스템 요구사항(Go >= 1.18) 및 저장소 마이그레이션 가이드(golang-module/carbon에서 dromara/carbon으로) 제공
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 빠른 시작, 설치 가이드, 설정 설명, Go 설치, go get, 저장소 주소, GitHub, Gitee, Gitcode, dromara, 마이그레이션 가이드, 시스템 요구사항
 ---
 
 # 빠른 시작
-> go version >= 1.19
+> go version >= 1.18
 
 ```go
 // github 라이브러리 사용

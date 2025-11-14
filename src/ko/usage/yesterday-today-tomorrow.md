@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 어제, 오늘, 내일 | Yesterday/Now/Tomorrow 조회와 포맷을 제공하며, 현재 시각/날짜/시간 및 초/밀리초/마이크로초/나노초 타임스탬프를 지원하고, 시간대 지정을 지원합니다
+      content: Carbon 어제 오늘 내일 기능 상세 설명, Yesterday/Now/Tomorrow 세 가지 편리한 메서드 제공하여 상대 시간 조회, 날짜시간 포맷팅, 다정밀도 타임스탬프(초/밀리초/마이크로초/나노초) 및 지정 타임존 지원, Now().SubDay() 및 Now().AddDay() 와 동일
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 어제, 오늘, 내일
+      content: carbon, go-carbon, 어제, 오늘, 내일, Yesterday, Now, Tomorrow, 상대 시간, 타임스탬프, 타임존 설정, 날짜 포맷팅
 ---
 
 # 어제, 오늘, 내일

@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 時間境界 | 世紀/年代/年/四半期/月/週/日/時間/分/秒の開始・終了時刻を取得し、週の開始日の設定をサポート
+      content: 世紀/年代/年/四半期/月/週/日/時間/分/秒の開始・終了時刻を取得し、週の開始日の設定をサポート
   - - meta
     - name: keywords
       content: carbon, go-carbon, 世紀境界, 年代境界, 年境界, 四半期境界, 月境界, 週境界, 日境界, 時間境界, 分境界, 秒境界
@@ -32,7 +32,7 @@ carbon.Parse("2029-08-05 13:14:15").EndOfDecade().ToDateTimeString() // 2029-12-
 
 ## 年境界
 ```go
-// 本年开始時間
+// 本年開始時間
 carbon.Parse("2020-08-05 13:14:15").StartOfYear().ToDateTimeString() // 2020-01-01 00:00:00
 // 本年終了時間
 carbon.Parse("2020-08-05 13:14:15").EndOfYear().ToDateTimeString() // 2020-12-31 23:59:59

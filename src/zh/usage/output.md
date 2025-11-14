@@ -2,7 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 时间输出|提供日期/时间/日期时间及其简写的多精度输出(毫秒/微秒/纳秒)，支持 ISO8601/RFC/Ansic/Kitchen/Cookie 等标准格式，并支持 Layout/Format 自定义格式化
+      content: Carbon 时间输出方法大全，提供 40+ 种时间格式化方法，支持日期时间及简写的多精度输出（毫秒/微秒/纳秒），涵盖 ISO8601、RFC 系列、Ansic、Kitchen、Cookie 等标准格式，支持 Layout 和 Format 自定义格式化
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 时间输出, 格式化, 多精度输出, ISO8601, RFC格式, 标准格式, Layout, Format, 自定义格式, 时间字符串
 ---
 
 # 时间输出

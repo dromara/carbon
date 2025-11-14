@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Set default | Provide single setters SetLayout/SetTimezone/SetLocale/SetWeekStartsAt/SetWeekendDays and batch setter SetDefault; support ResetDefault to restore defaults, useful for test isolation
+      content: Provides single setters SetLayout/SetTimezone/SetLocale/SetWeekStartsAt/SetWeekendDays and batch setter SetDefault, supports ResetDefault to reset defaults, useful for test isolation
   - - meta
     - name: keywords
       content: carbon, go-carbon, set single default, set multiple default, reset default

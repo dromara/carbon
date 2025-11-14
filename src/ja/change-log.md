@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Carbon 変更履歴、歴史バージョンからのすべての更新内容を詳細に記録、新機能、パフォーマンス最適化、Bug修正、API変更、依存関係のアップグレード、互換性の説明を含む
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 変更履歴, バージョン履歴, 変更記録, 機能更新, Bug修正, パフォーマンス最適化, API変更, リリースノート, バージョン更新
+---
+
 # 変更履歴
 
 ## [v2.6.14](https://github.com/dromara/carbon/compare/v2.6.13...v2.6.14) (2025-10-28)

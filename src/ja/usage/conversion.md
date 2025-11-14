@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: carbon と time.Time の相互変換 | CreateFromStdTime/NewCarbon で time.Time から carbon へ、StdTime で標準 time.Time へ出力、タイムゾーン指定に対応
+      content: CreateFromStdTime/NewCarbon で time.Time を carbon に変換、StdTime で標準 time.Time をエクスポート、タイムゾーン指定をサポート
   - - meta
     - name: keywords
       content: carbon, go-carbon, 変換, time.Time

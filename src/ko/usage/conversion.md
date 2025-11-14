@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: carbon ↔ time.Time 변환 | CreateFromStdTime/NewCarbon 으로 time.Time→carbon, StdTime 으로 표준 time.Time 내보내기, 타임존 지정 지원
+      content: CreateFromStdTime/NewCarbon 으로 time.Time 을 carbon 으로 변환, StdTime 으로 표준 time.Time 내보내기, 타임존 지정 지원
   - - meta
     - name: keywords
       content: carbon, go-carbon, 변환, time.Time

@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Comparison | Provides checks for error/valid/zero/epoch/AM-PM/yesterday-today-tomorrow/same-period, supports maths compares (>, <, =, !=, >=, <=) and Between variants (exclusive/inclusive start/end)
+      content: Provides checks for error/validity/zero/epoch/AM-PM/yesterday-today-tomorrow/same-period, supports greater/equal comparison and Between (with optional start/end boundaries) distance checks
   - - meta
     - name: keywords
-      content: carbon, go-carbon, has compare, is compare, maths compare, between compare
+      content: carbon, go-carbon, has check, is check, maths check, distance check
 ---
 
 # Comparison

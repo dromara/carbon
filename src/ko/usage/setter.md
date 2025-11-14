@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 시간 설정 | SetTimezone/SetLocation/SetLocale 및 SetDateTime/SetDate/SetTime(밀리초/마이크로초/나노초 변형) 제공, 연/월 무오버플로 설정, 주 시작일/주말일 설정, 연/월/일/시/분/초/밀리초/마이크로초/나노초 개별 설정 지원
+      content: Carbon 시간 설정 메서드 대전, 30+ 가지 설정 메서드 제공, 타임존 위치 지역 설정, 날짜시간 다정밀도 설정, 개별 시간 구성 요소 설정, 오버플로우 없음 설정, 주 시작일 및 주말일 설정 포함, 밀리초/마이크로초/나노초 정밀도 지원
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 시간대 설정, 위치 설정, 지역 설정, 연도월일시분초 설정, 연도 설정, 월 설정, 주 시작일 설정, 주말일 설정, 날짜 설정, 시간 설정, 분 설정, 초 설정, 밀리초 설정, 마이크로초 설정, 나노초 설정
+      content: carbon, go-carbon, 시간 설정, SetTimezone, SetLocation, SetLocale, SetDateTime, SetDate, SetTime, 개별 설정, 오버플로우 없음 설정, 주 설정, 다정밀도 설정, 밀리초, 마이크로초, 나노초
 ---
 
 # 시간 설정

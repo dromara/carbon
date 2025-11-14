@@ -2,7 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 格式符号|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: 详细介绍 Format 和 ParseByFormat 方法支持的时间日期格式符号，包含符号描述、长度、范围和示例
+  - - meta
+    - name: keywords
+      content: 格式符号, Format, ParseByFormat, 时间格式, 日期格式, golang, carbon, 时间处理
 ---
 
 # 格式符号
@@ -13,7 +16,7 @@ head:
 | d  |        月份中的第几天，有前导零        |  2  |      01-31       |         02          |
 | D  |         缩写单词表示的周几          |  3  |     Mon-Sun      |         Mon         |
 | j  |       月份中的第几天，没有前导零        |  -  |       1-31       |          2          |
-| K  |   第几天的英文缩写后缀，一般和 `j` 配合使用    |  2  |   st/nd/rd/th    |         th          |
+| K  |  第几天的英文缩写后缀，一般和 `j` 配合使用   |  2  |   st/nd/rd/th    |         th          |
 | l  |         完整单词表示的周几          |  -  |  Monday-Sunday   |       Monday        |
 | F  |         完整单词表示的月份          |  -  | January-December |       January       |
 | m  |        数字表示的月份，有前导零        |  2  |      01-12       |         01          |
@@ -48,3 +51,4 @@ head:
 | o  |           时区偏移量            |  -  |        -         |        28800        |
 | q  |            当前季节            |  1  |       1-4        |          1          |
 | c  |           当前世纪数            |  -  |       0-99       |         21          |
+]()

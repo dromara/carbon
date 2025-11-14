@@ -2,13 +2,13 @@
 head:
   - - meta
     - name: description
-      content: 時間解析 | デフォルトレイアウトに基づく Parse、単一レイアウトの ParseByLayout、単一フォーマットの ParseByFormat、複数レイアウトの ParseByLayouts、複数フォーマットの ParseByFormats などの解析方法を提供（タイムスタンプ文字列の直接解析は非対応）
+      content: Carbon 時間解析メソッドの詳細説明、5 種類の解析方法を提供：デフォルトレイアウト Parse、単一レイアウト ParseByLayout、単一フォーマット ParseByFormat、複数レイアウト ParseByLayouts、複数フォーマット ParseByFormats、様々な時間文字列フォーマットとタイムゾーン設定をサポート
   - - meta
     - name: keywords
-      content: carbon, go-carbon, デフォルトテンプレート, レイアウトテンプレート, フォーマットテンプレート
+      content: carbon, go-carbon, 時間解析, Parse, ParseByLayout, ParseByFormat, レイアウトテンプレート, フォーマットテンプレート, 時間文字列解析, 多フォーマット解析, タイムゾーン解析
 ---
 
-# 时间解析
+# 時間解析
 この一連のメソッドは `タイムスタンプ` 文字列の解析をサポートしていません。タイムスタンプを解析するには、`CreateFromTimestamp`、`CreateFromTimestampMilli`、`CreateFromTimestampMicro`、`CreateFromTimestampNano` メソッドを使用してください
 
 ## デフォルトの `レイアウトテンプレート` による解析

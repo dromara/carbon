@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 시간 경계 | 세기/연대/연도/분기/월/주/일/시간/분/초의 시작·종료 시각 제공, 주 시작일 설정 지원
+      content: 세기/연대/연도/분기/월/주/일/시간/분/초의 시작·종료 시각 제공, 주 시작일 설정 지원
   - - meta
     - name: keywords
       content: carbon, go-carbon, 세기 경계, 연대 경계, 연도 경계, 분기 경계, 월 경계, 주 경계, 일 경계, 시간 경계, 분 경계, 초 경계

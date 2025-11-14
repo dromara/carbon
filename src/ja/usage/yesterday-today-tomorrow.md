@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 昨日、今日、明日 | Yesterday/Now/Tomorrow の取得とフォーマットを提供し、現在時刻・日付・時間および秒/ミリ秒/マイクロ秒/ナノ秒のタイムスタンプをサポート、タイムゾーン指定に対応
+      content: Carbon 昨日今日明日機能の詳細説明、Yesterday/Now/Tomorrow の3つの便利なメソッドを提供して相対時間を取得、日時フォーマット、多精度タイムスタンプ（秒/ミリ秒/マイクロ秒/ナノ秒）と指定タイムゾーンをサポート、Now().SubDay() と Now().AddDay() と同等
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 昨日, 今日, 明日
+      content: carbon, go-carbon, 昨日, 今日, 明日, Yesterday, Now, Tomorrow, 相対時間, タイムスタンプ, タイムゾーン設定, 日付フォーマット
 ---
 
 # 昨日、今日、明日

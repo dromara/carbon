@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 时间解析|提供基于默认布局的 Parse、单一布局 ParseByLayout、单一格式 ParseByFormat、多个布局 ParseByLayouts、多个格式 ParseByFormats 等解析方法（不支持直接解析时间戳字符串）
+      content: Carbon 时间解析方法详解，提供 5 种解析方式：默认布局 Parse、单一布局 ParseByLayout、单一格式 ParseByFormat、多布局 ParseByLayouts、多格式 ParseByFormats，支持多种时间字符串格式和时区设置
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 默认模板, 布局模板, 格式模板
+      content: carbon, go-carbon, 时间解析, Parse, ParseByLayout, ParseByFormat, 布局模板, 格式模板, 时间字符串解析, 多格式解析, 时区解析
 ---
 
 # 时间解析

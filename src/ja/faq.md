@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Carbon よくある質問、バージョン差異の説明（v2.5.x と v2.6.x）、Windows システムのタイムゾーンエラー解決方法、Docker コンテナデプロイ時のタイムゾーン設定などの一般的な使用上の問題をカバー
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, よくある質問, FAQ, バージョン差異, タイムゾーンエラー, Windows デプロイ, Docker デプロイ, タイムゾーン設定, 問題解決, トラブルシューティング
+---
+
 # よくある質問
 
 1. v2.5.x と v2.6.x のバージョンの違いは何ですか?

@@ -2,7 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 常见问题|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: Carbon 常见问题解答，涵盖版本差异说明（v2.5.x 与 v2.6.x）、Windows 系统时区报错解决方案、Docker 容器部署时区配置等常见使用问题
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 常见问题, FAQ, 版本差异, 时区报错, Windows 部署, Docker 部署, 时区配置, 问题解答, 故障排除
 ---
 
 # 常见问题

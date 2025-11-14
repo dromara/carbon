@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: JSON | 組み込み/カスタム時間フィールド型の JSON エンコード/デコード（Marshal/Unmarshal）を提供。Date/Time/DateTime/Timestamp とミリ/マイクロ/ナノ精度をカバーし、レイアウト/フォーマットに基づくジェネリック型や ORM 連携をサポート
+      content: Carbon JSON シリアライゼーション機能の詳細説明、16 種類の組み込み時間フィールド型とカスタムジェネリック型の JSON エンコード/デコードを提供、Date、Time、DateTime、Timestamp および多精度フォーマットをサポート、完全な Marshal/Unmarshal 例を含む
   - - meta
     - name: keywords
-      content: carbon, go-carbon, json, Marshal, Unmarshal, orm, grom, xorm
+      content: carbon, go-carbon, JSON シリアライゼーション, Marshal, Unmarshal, 時間フィールド型, 組み込み型, カスタム型, ジェネリック型, 多精度, ORM 統合
 ---
 
 # JSON

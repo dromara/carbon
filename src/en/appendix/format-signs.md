@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Detailed introduction to time and date format symbols supported by Format and ParseByFormat methods, including symbol description, length, range and examples
+  - - meta
+    - name: keywords
+      content: format signs, Format, ParseByFormat, time format, date format, golang, carbon, time processing
+---
+
 # Format signs
 `Format` and `ParseByFormat` methods are not completely reversible. `Format` method supports all of the following signs, while `ParseByFormat` method does not support `K`, `W`, `N`, `L`, `w`, `t`, `o`, `q`, `c` because these signs are custom and do not have corresponding signs in the standard time package.
 
@@ -25,7 +35,7 @@
 |  O   |               Difference to Greenwich time (GMT) without colon between hours and minutes               |   -    |        -         |        -0700        |
 |  P   |                Difference to Greenwich time (GMT) with colon between hours and minutes                 |   -    |        -         |       -07:00        |
 |  Z   |                                               Zone name                                                |   -    |        -         |         MST         |
-|  W   |                               week of the year                                                         |   -    |       1-52       |          1          |
+|  W   |                                            week of the year                                            |   -    |       1-52       |          1          |
 |  N   |                                            day of the week                                             |   1    |       1-7        |          2          |
 |  L   |                                        Whether it's a leap year                                        |   1    |       0-1        |          0          |
 |  S   |                                       Unix timestamp with second                                       |   -    |        -         |     1596604455      |

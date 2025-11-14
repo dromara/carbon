@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: Difference | Provides relative differences DiffInYears/Months/Weeks/Days/Hours/Minutes/Seconds, absolute differences DiffAbsInXXX, humanized DiffForHumans, and supports DiffInString/Duration
+      content: Provides relative differences DiffInYears/Months/Weeks/Days/Hours/Minutes/Seconds, absolute differences DiffAbsInXXX, humanized DiffForHumans, supports DiffInString/Duration
   - - meta
     - name: keywords
       content: carbon, go-carbon, relative difference, absolute difference, humanized difference

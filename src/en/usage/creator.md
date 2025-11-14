@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: "Creator | Create Carbon instances from timestamps (sec/ms/us/ns) and from datetime/date/time: CreateFromTimestamp/DateTime/Date/Time with precision variants"
+      content: Provides methods to create instances from timestamps (second/millisecond/microsecond/nanosecond) and from datetime/date/time: CreateFromTimestamp/DateTime/Date/Time and their precision variants
   - - meta
     - name: keywords
-      content: carbon, go-carbon, create, timestamp, datetime
+      content: carbon, go-carbon, create Carbon instance from timestamp, create Carbon instance from date
 ---
 
 # Creator

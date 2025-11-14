@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: JSON | 내장/사용자 정의 시간 필드 타입의 JSON 인코딩/디코딩(Marshal/Unmarshal) 제공. Date/Time/DateTime/Timestamp 및 밀리/마이크로/나노 정밀도 포함, 레이아웃/포맷 기반 제네릭 타입과 ORM 연동 지원
+      content: Carbon JSON 직렬화 기능 상세 설명, 16 가지 내장 시간 필드 타입과 사용자 정의 제네릭 타입의 JSON 인코딩/디코딩 제공, Date, Time, DateTime, Timestamp 및 다정밀도 형식 지원, 완전한 Marshal/Unmarshal 예제 포함
   - - meta
     - name: keywords
-      content: carbon, go-carbon, json, Marshal, Unmarshal, orm, grom, xorm
+      content: carbon, go-carbon, JSON 직렬화, Marshal, Unmarshal, 시간 필드 타입, 내장 타입, 사용자 정의 타입, 제네릭 타입, 다정밀도, ORM 통합
 ---
 
 # JSON

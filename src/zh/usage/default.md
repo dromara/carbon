@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 设置全局默认值|提供 SetLayout/SetTimezone/SetLocale/SetWeekStartsAt/SetWeekendDays 单个设置与 SetDefault 批量设置，支持 ResetDefault 重置，便于测试隔离
+      content: 提供 SetLayout/SetTimezone/SetLocale/SetWeekStartsAt/SetWeekendDays 单个设置与 SetDefault 批量设置，支持 ResetDefault 重置，便于测试隔离
   - - meta
     - name: keywords
       content: carbon, go-carbon, 设置单个默认值, 设置多个默认值, 重置默认值

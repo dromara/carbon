@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 時間出力 | 日付/時間/日時およびその省略形式の多精度出力（ミリ/マイクロ/ナノ）を提供し、ISO8601/RFC/Ansic/Kitchen/Cookie などの標準フォーマットをサポートし、Layout/Format によるカスタム書式にも対応
+      content: Carbon 時間出力メソッド大全、40+ 種類の時間フォーマットメソッドを提供、日時および省略形式の多精度出力（ミリ秒/マイクロ秒/ナノ秒）をサポート、ISO8601、RFC シリーズ、Ansic、Kitchen、Cookie などの標準フォーマットをカバー、Layout と Format によるカスタムフォーマットをサポート
   - - meta
     - name: keywords
-      content: carbon, go-carbon, ansic, atom, iso8601, iso8601zulu, rfc822, rfc822z, rfc850, rfc1036, rss, w3c, daydatetime, cookie, kitchen, rubydate, atom, unixdate, rfc822zulu, rfc822z, rfc850z, rfc1036z, rfc822zulu, rfc822z, rfc850z, rfc1036z, rfc822zulu, rfc822z, rfc850z
+      content: carbon, go-carbon, 時間出力, フォーマット, 多精度出力, ISO8601, RFCフォーマット, 標準フォーマット, Layout, Format, カスタムフォーマット, 時間文字列
 ---
 
 # 時間出力

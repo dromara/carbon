@@ -2,7 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 赞助支持|一个轻量级、语义化、对开发者友好的 golang 时间处理库
+      content: Carbon 赞助支持页面，非商业开源项目需要您的支持，赞助将用于官网服务器及域名费用、新功能开发迭代维护和项目推广，支持支付宝、微信、QQ、Gitee、OpenCollective 等多种赞助渠道
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 赞助支持, 开源赞助, 项目支持, 捐赠, 支付宝, 微信, QQ, Gitee, OpenCollective, 开源项目, 非商业项目
 ---
 
 # 赞助支持

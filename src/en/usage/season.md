@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Season | Provides Season to get season names (with localization), supports StartOfSeason/EndOfSeason to get season boundaries, and season checks such as IsSpring/IsSummer/IsAutumn/IsWinter
+      content: Carbon season feature detailed explanation, provides Season to get season names (with localization support), StartOfSeason/EndOfSeason to get season boundaries, IsSpring/IsSummer/IsAutumn/IsWinter for season judgment, divided according to meteorological definition (March-May spring, June-August summer, September-November autumn, December-February winter)
   - - meta
     - name: keywords
-      content: carbon, go-carbon, season, spring, summer, autumn, winter, season boundary, season judgment
+      content: carbon, go-carbon, season, spring, summer, autumn, winter, season boundary, season judgment, Season, StartOfSeason, EndOfSeason, localization
 ---
 
 # Season

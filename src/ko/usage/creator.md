@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: "Carbon 인스턴스 생성 | 타임스탬프(초/밀리초/마이크로초/나노초)와 날짜시간/날짜/시간에서 생성: CreateFromTimestamp/DateTime/Date/Time 및 정밀도 변형 제공"
+      content: 타임스탬프(초/밀리초/마이크로초/나노초)와 날짜시간/날짜/시간에서 인스턴스를 생성하는 메서드 제공: CreateFromTimestamp/DateTime/Date/Time 및 정밀도 변형
   - - meta
     - name: keywords
       content: carbon, go-carbon, 타임스탬프에서 Carbon 인스턴스 생성, 날짜에서 Carbon 인스턴스 생성

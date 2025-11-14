@@ -2,7 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Sponsor | A simple, semantic and developer-friendly time package for golang
+      content: Carbon Sponsor Support Page, non-commercial open source project needs your support, sponsorship will be used for website server and domain fees, new feature development iteration maintenance and project promotion, supports multiple sponsorship channels including Alipay, WeChat, QQ, Gitee and OpenCollective
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, sponsor support, open source sponsorship, project support, donation, Alipay, WeChat, QQ, Gitee, OpenCollective, open source project, non-commercial project
 ---
 
 # Sponsor 

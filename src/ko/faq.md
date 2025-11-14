@@ -2,7 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 자주 묻는 질문|가벼우면서도 의미론적이고 개발자 친화적인 golang 시간 처리 라이브러리
+      content: Carbon 자주 묻는 질문, 버전 차이 설명(v2.5.x 와 v2.6.x), Windows 시스템 타임존 오류 해결 방법, Docker 컨테이너 배포 타임존 설정 등 일반적인 사용 문제 포함
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, 자주 묻는 질문, FAQ, 버전 차이, 타임존 오류, Windows 배포, Docker 배포, 타임존 설정, 문제 해결, 트러블슈팅
 ---
 
 # 자주 묻는 질문

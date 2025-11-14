@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 时间设置|提供 SetTimezone/SetLocation/SetLocale 及 SetDateTime/SetDate/SetTime 与毫秒/微秒/纳秒精度变体，支持年份/月分不溢出设置、周起始与周末设置，以及单项设置年/月/日/时/分/秒/毫秒/微秒/纳秒
+      content: Carbon 时间设置方法大全，提供 30+ 种设置方法，包括时区位置区域设置、日期时间多精度设置、单项时间组件设置、不溢出设置、周起始和周末设置，支持毫秒/微秒/纳秒精度
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 设置时区, 设置位置, 设置区域, 设置年、月、日、时、分、秒, 设置年份, 设置月份, 设置一周的开始日期, 设置一周的周末日期, 设置日期, 设置小时, 设置分钟, 设置秒, 设置毫秒, 设置微妙, 设置纳秒
+      content: carbon, go-carbon, 时间设置, SetTimezone, SetLocation, SetLocale, SetDateTime, SetDate, SetTime, 单项设置, 不溢出设置, 周设置, 多精度设置, 毫秒, 微秒, 纳秒
 ---
 
 # 时间设置

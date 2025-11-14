@@ -2,7 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Change Log | A simple, semantic and developer-friendly time package for golang
+      content: Carbon Change Log, detailed records of all updates from historical versions, including new features, performance optimizations, bug fixes, API changes, dependency upgrades and compatibility notes
+  - - meta
+    - name: keywords
+      content: carbon, go-carbon, change log, version history, changelog, feature updates, bug fixes, performance optimization, API changes, release notes, version updates
 ---
 
 # Change Log

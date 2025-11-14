@@ -2,7 +2,7 @@
 head:
   - - meta
     - name: description
-      content: 시간 극값 | 최대/최소 시간 Max/Min, 가장 가까움/가장 멂 Closest/Farthest, 경계값 MaxValue/MinValue, Duration 극값 MaxDuration/MinDuration 제공
+      content: Carbon 은 Max/Min 으로 최대/최소 시간 조회, Closest/Farthest 로 가장 가까운/먼 시간 조회, MaxValue/MinValue 로 경계값 조회, MaxDuration/MinDuration 으로 Duration 극값 조회 기능 제공
   - - meta
     - name: keywords
       content: carbon, go-carbon, 극값 판단, 극값 경계

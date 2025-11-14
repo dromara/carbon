@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Getter | Provides components (year/month/day/hour/minute/second), ordinal indices (in year/month/week), timestamps (sec/ms/us/ns), timezone info (location/name/offset), locale, localized constellation and season, week starts/ends, current layout, and age
+      content: Carbon time retrieval methods comprehensive guide, provides 30+ retrieval methods including year/month/day/hour/minute/second components, ordinal indices within year/month/week, multi-precision timestamps, timezone information, localized constellation and season, week start/end dates, layout templates and age calculation
   - - meta
     - name: keywords
-      content: carbon, go-carbon, getter
+      content: carbon, go-carbon, time retrieval, getter methods, year month day, hour minute second, timestamp, timezone information, localization, constellation, season, age calculation
 ---
 
 # Getter

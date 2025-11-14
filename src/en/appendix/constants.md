@@ -1,3 +1,13 @@
+---
+head:
+  - - meta
+    - name: description
+      content: Carbon Library Built-in Constants Reference Manual, including version, timezone, month, season, constellation, weekday, numeric constants and complete layout template and format constants, covering international standard formats such as RFC and ISO8601
+  - - meta
+    - name: keywords
+      content: version constants, timezone constants, month constants, season constants, constellation constants, weekday constants, numeric constants, layout template constants, RFC format, ISO8601 format, time formatting
+---
+
 # Constants
 
 ## Version constants

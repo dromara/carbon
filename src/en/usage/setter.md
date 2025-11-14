@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Setter | Provides SetTimezone/SetLocation/SetLocale and SetDateTime/SetDate/SetTime with millisecond/microsecond/nanosecond variants, supports year/month no-overflow setters, week start and weekend configuration, and individual setters for year/month/day/hour/minute/second/millisecond/microsecond/nanosecond
+      content: Carbon time setting methods comprehensive guide, provides 30+ setting methods, including timezone location locale settings, datetime multi-precision settings, individual time component settings, no-overflow settings, week start and weekend settings, supports millisecond/microsecond/nanosecond precision
   - - meta
     - name: keywords
-      content: carbon, go-carbon, set timezone, set location, set region, set year month day hour minute second, set year, set month, set week start day, set week weekend day, set day, set hour, set minute, set second, set millisecond, set microsecond, set nanosecond
+      content: carbon, go-carbon, time setting, SetTimezone, SetLocation, SetLocale, SetDateTime, SetDate, SetTime, individual setting, no-overflow setting, week setting, multi-precision setting, millisecond, microsecond, nanosecond
 ---
 
 # Setter
