@@ -181,6 +181,7 @@ carbon.RssLayout      // Mon, 02 Jan 2006 15:04:05 -0700
 carbon.RubyDateLayout // Mon Jan 02 15:04:05 -0700 2006
 carbon.UnixDateLayout // Mon Jan _2 15:04:05 MST 2006
 carbon.W3cLayout      // 2006-01-02T15:04:05Z07:00
+carbon.HttpLayout     // Mon, 02 Jan 2006 15:04:05 GMT
 
 carbon.RFC1036Layout      // Mon, 02 Jan 06 15:04:05 -0700
 carbon.RFC1123Layout      // Mon, 02 Jan 2006 15:04:05 MST
@@ -198,4 +199,118 @@ carbon.RFC850Layout       // Monday, 02-Jan-06 15:04:05 MST
 carbon.ISO8601Layout      // 2006-01-02T15:04:05-07:00
 carbon.ISO8601MilliLayout // 2006-01-02T15:04:05.999-07:00
 carbon.ISO8601MicroLayout // 2006-01-02T15:04:05.999999-07:00
+carbon.ISO8601NanoLayout  // 2006-01-02T15:04:05.999999999-07:00
+
+carbon.ISO8601ZuluLayout      // 2006-01-02T15:04:05Z
+carbon.ISO8601ZuluMilliLayout // 2006-01-02T15:04:05.999Z
+carbon.ISO8601ZuluMicroLayout // 2006-01-02T15:04:05.999999Z
+carbon.ISO8601ZuluNanoLayout  // 2006-01-02T15:04:05.999999999Z
+
+carbon.FormattedDateLayout    // Jan 2, 2006
+carbon.FormattedDayDateLayout // Mon, Jan 2, 2006
+
+carbon.DayDateTimeLayout        // Mon, Jan 2, 2006 3:04 PM
+carbon.DateTimeLayout           // 2006-01-02 15:04:05
+carbon.DateTimeMilliLayout      // 2006-01-02 15:04:05.999
+carbon.DateTimeMicroLayout      // 2006-01-02 15:04:05.999999
+carbon.DateTimeNanoLayout       // 2006-01-02 15:04:05.999999999
+carbon.ShortDateTimeLayout      // 20060102150405
+carbon.ShortDateTimeMilliLayout // 20060102150405.999
+carbon.ShortDateTimeMicroLayout // 20060102150405.999999
+carbon.ShortDateTimeNanoLayout  // 20060102150405.999999999
+
+carbon.DateLayout           // 2006-01-02
+carbon.DateMilliLayout      // 2006-01-02.999
+carbon.DateMicroLayout      // 2006-01-02.999999
+carbon.DateNanoLayout       // 2006-01-02.999999999
+carbon.ShortDateLayout      // 20060102
+carbon.ShortDateMilliLayout // 20060102.999
+carbon.ShortDateMicroLayout // 20060102.999999
+carbon.ShortDateNanoLayout  // 20060102.999999999
+
+carbon.TimeLayout           // 15:04:05
+carbon.TimeMilliLayout      // 15:04:05.999
+carbon.TimeMicroLayout      // 15:04:05.999999
+carbon.TimeNanoLayout       // 15:04:05.999999999
+carbon.ShortTimeLayout      // 150405
+carbon.ShortTimeMilliLayout // 150405.999
+carbon.ShortTimeMicroLayout // 150405.999999
+carbon.ShortTimeNanoLayout  // 150405.999999999
+
+carbon.TimestampLayout      // unix
+carbon.TimestampMilliLayout // unixMilli
+carbon.TimestampMicroLayout // unixMicro
+carbon.TimestampNanoLayout  // unixNano
+```
+
+## 형식 상수
+```go
+carbon.AtomFormat     // Y-m-d\\TH:i:sR
+carbon.ANSICFormat    // D M  j H:i:s Y
+carbon.CookieFormat   // l, d-M-Y H:i:s Z
+carbon.KitchenFormat  // g:iA
+carbon.RssFormat      // D, d M Y H:i:s O
+carbon.RubyDateFormat // D M d H:i:s O Y
+carbon.UnixDateFormat // D M  j H:i:s Z Y
+carbon.W3cFormat      // Y-m-d\\TH:i:sR
+carbon.HttpFormat     // D, d M Y H:i:s GMT
+
+carbon.RFC1036Format      // D, d M y H:i:s O
+carbon.RFC1123Format      // D, d M Y H:i:s Z
+carbon.RFC1123ZFormat     // D, d M Y H:i:s O
+carbon.RFC2822Format      // D, d M Y H:i:s O
+carbon.RFC3339Format      // Y-m-d\\TH:i:sR
+carbon.RFC3339MilliFormat // Y-m-d\\TH:i:s.uR
+carbon.RFC3339MicroFormat // Y-m-d\\TH:i:s.vR
+carbon.RFC3339NanoFormat  // Y-m-d\\TH:i:s.xR
+carbon.RFC7231Format      // D, d M Y H:i:s Z
+carbon.RFC822Format       // d M y H:i Z
+carbon.RFC822ZFormat      // d M y H:i O
+carbon.RFC850Format       // l, d-M-y H:i:s Z
+
+carbon.ISO8601Format      // Y-m-d\\TH:i:sP
+carbon.ISO8601MilliFormat // Y-m-d\\TH:i:s.uP
+carbon.ISO8601MicroFormat // Y-m-d\\TH:i:s.vP
+carbon.ISO8601NanoFormat  // Y-m-d\\TH:i:s.xP
+
+carbon.ISO8601ZuluFormat      // Y-m-d\\TH:i:s\\Z
+carbon.ISO8601ZuluMilliFormat // Y-m-d\\TH:i:s.u\\Z
+carbon.ISO8601ZuluMicroFormat // Y-m-d\\TH:i:s.v\\Z
+carbon.ISO8601ZuluNanoFormat  // Y-m-d\\TH:i:s.x\\Z
+
+carbon.FormattedDateFormat    // M j, Y
+carbon.FormattedDayDateFormat // D, M j, Y
+
+carbon.DayDateTimeFormat        // D, M j, Y g:i A
+carbon.DateTimeFormat           // Y-m-d H:i:s
+carbon.DateTimeMilliFormat      // Y-m-d H:i:s.u
+carbon.DateTimeMicroFormat      // Y-m-d H:i:s.v
+carbon.DateTimeNanoFormat       // Y-m-d H:i:s.x
+carbon.ShortDateTimeFormat      // YmdHis
+carbon.ShortDateTimeMilliFormat // YmdHis.u
+carbon.ShortDateTimeMicroFormat // YmdHis.v
+carbon.ShortDateTimeNanoFormat  // YmdHis.x
+
+carbon.DateFormat           // Y-m-d
+carbon.DateMilliFormat      // Y-m-d.u
+carbon.DateMicroFormat      // Y-m-d.v
+carbon.DateNanoFormat       // Y-m-d.x
+carbon.ShortDateFormat      // Ymd
+carbon.ShortDateMilliFormat // Ymd.u
+carbon.ShortDateMicroFormat // Ymd.v
+carbon.ShortDateNanoFormat  // Ymd.x
+
+carbon.TimeFormat           // H:i:s
+carbon.TimeMilliFormat      // H:i:s.u
+carbon.TimeMicroFormat      // H:i:s.v
+carbon.TimeNanoFormat       // H:i:s.x
+carbon.ShortTimeFormat      // His
+carbon.ShortTimeMilliFormat // His.u
+carbon.ShortTimeMicroFormat // His.v
+carbon.ShortTimeNanoFormat  // His.x
+
+carbon.TimestampFormat      // S
+carbon.TimestampMilliFormat // U
+carbon.TimestampMicroFormat // V
+carbon.TimestampNanoFormat  // X
 ``` 

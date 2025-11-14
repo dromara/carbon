@@ -181,6 +181,7 @@ carbon.RssLayout      // Mon, 02 Jan 2006 15:04:05 -0700
 carbon.RubyDateLayout // Mon Jan 02 15:04:05 -0700 2006
 carbon.UnixDateLayout // Mon Jan _2 15:04:05 MST 2006
 carbon.W3cLayout      // 2006-01-02T15:04:05Z07:00
+carbon.HttpLayout     // Mon, 02 Jan 2006 15:04:05 GMT
 
 carbon.RFC1036Layout      // Mon, 02 Jan 06 15:04:05 -0700
 carbon.RFC1123Layout      // Mon, 02 Jan 2006 15:04:05 MST
@@ -251,6 +252,8 @@ carbon.KitchenFormat  // g:iA
 carbon.RssFormat      // D, d M Y H:i:s O
 carbon.RubyDateFormat // D M d H:i:s O Y
 carbon.UnixDateFormat // D M  j H:i:s Z Y
+carbon.W3cFormat      // Y-m-d\\TH:i:sR
+carbon.HttpFormat     // D, d M Y H:i:s GMT
 
 carbon.RFC1036Format      // D, d M y H:i:s O
 carbon.RFC1123Format      // D, d M Y H:i:s Z
