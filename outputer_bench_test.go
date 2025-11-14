@@ -1315,6 +1315,37 @@ func BenchmarkCarbon_ToKitchenString(b *testing.B) {
 	})
 }
 
+func BenchmarkCarbon_ToHttpString(b *testing.B) {
+	b.Run("sequential", func(b *testing.B) {
+		c := Now()
+		b.ResetTimer()
+		for i := 0; i < b.N/10; i++ {
+			c.ToHttpString(PRC)
+		}
+	})
+	b.Run("concurrent", func(b *testing.B) {
+		var wg sync.WaitGroup
+		c := Now()
+		b.ResetTimer()
+		for i := 0; i < b.N/10; i++ {
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				c.ToHttpString(PRC)
+			}()
+		}
+		wg.Wait()
+	})
+	b.Run("parallel", func(b *testing.B) {
+		c := Now()
+		b.ResetTimer()
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				c.ToHttpString(PRC)
+			}
+		})
+	})
+}
 func BenchmarkCarbon_ToIso8601String(b *testing.B) {
 	b.Run("sequential", func(b *testing.B) {
 		c := Now()

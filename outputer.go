@@ -494,6 +494,17 @@ func (c *Carbon) ToKitchenString(timezone ...string) string {
 	return c.StdTime().Format(KitchenLayout)
 }
 
+// ToHttpString outputs a string in "Mon, 02 Jan 2006 15:04:05 GMT" layout.
+func (c *Carbon) ToHttpString(timezone ...string) string {
+	if len(timezone) > 0 {
+		c.loc, c.Error = parseTimezone(timezone...)
+	}
+	if c.IsInvalid() {
+		return ""
+	}
+	return c.StdTime().Format(HttpLayout)
+}
+
 // ToIso8601String outputs a string in "2006-01-02T15:04:05-07:00" layout.
 func (c *Carbon) ToIso8601String(timezone ...string) string {
 	if len(timezone) > 0 {

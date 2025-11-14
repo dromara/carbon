@@ -417,6 +417,15 @@ func ExampleCarbon_ToKitchenString() {
 	// 12:00AM
 }
 
+func ExampleCarbon_ToHttpString() {
+	fmt.Println(carbon.Parse("2020-08-05T13:14:15.999999999+00:00").ToHttpString())
+	fmt.Println(carbon.Parse("2020-08-05", carbon.PRC).ToHttpString())
+
+	// Output:
+	// Wed, 05 Aug 2020 13:14:15 GMT
+	// Wed, 05 Aug 2020 00:00:00 GMT
+}
+
 func ExampleCarbon_ToIso8601String() {
 	fmt.Println(carbon.Parse("2020-08-05T13:14:15.999999999+00:00").ToIso8601String())
 	fmt.Println(carbon.Parse("2020-08-05", carbon.PRC).ToIso8601String())

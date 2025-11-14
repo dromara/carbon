@@ -1107,6 +1107,31 @@ func (s *OutputerSuite) TestCarbon_ToKitchenString() {
 	})
 }
 
+func (s *OutputerSuite) TestCarbon_ToHttpString() {
+	s.Run("nil carbon", func() {
+		var c *Carbon
+		s.Empty(c.ToHttpString())
+	})
+
+	s.Run("zero carbon", func() {
+		s.Equal("Mon, 01 Jan 0001 00:00:00 GMT", NewCarbon().ToHttpString())
+	})
+
+	s.Run("empty carbon", func() {
+		s.Empty(Parse("").ToHttpString())
+	})
+
+	s.Run("error carbon", func() {
+		s.Empty(Parse("xxx").ToHttpString())
+	})
+
+	s.Run("valid carbon", func() {
+		s.Equal("Wed, 05 Aug 2020 13:14:15 GMT", Parse("2020-08-05 13:14:15").ToHttpString())
+		s.Equal("Wed, 05 Aug 2020 13:14:15 GMT", Parse("2020-08-05T13:14:15.999999999+00:00").ToHttpString())
+		s.Equal("Wed, 05 Aug 2020 00:00:00 GMT", Parse("2020-08-05", PRC).ToHttpString(PRC))
+	})
+}
+
 func (s *OutputerSuite) TestCarbon_ToIso8601String() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
