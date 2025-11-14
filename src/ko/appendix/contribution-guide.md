@@ -8,9 +8,9 @@ head:
       content: "기여 가이드, 현지화, 언어 지원, i18n, 국제화, Carbon, golang, 오픈소스 기여, 번역, Pull Request"
 ---
 
-# Carbon 현지화 언어 기여 가이드
+# 현지화 언어 기여 가이드
 
-## Carbon에 새로운 현지화 언어 지원을 추가하는 방법
+## 새로운 현지화 언어 지원을 추가하는 방법
 
 전체 `ISO639-1` 언어 코드 및 언어명은 [부록](language-codes.md)을 참조하세요.
 

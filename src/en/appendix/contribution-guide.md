@@ -8,9 +8,9 @@ head:
       content: "contribution guide, localization, language support, i18n, internationalization, Carbon, golang, open source contribution, translation, Pull Request"
 ---
 
-# Carbon Localization Language Contribution Guide
+# Localization Language Contribution Guide
 
-## How to Add New Localized Language Support to Carbon
+## How to Add New Localized Language Support
 
 For full `ISO639-1` language codes, please refer to the [Appendix](./language-codes.md).
 

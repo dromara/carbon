@@ -8,9 +8,9 @@ head:
       content: "贡献指南, 本地化, 语言支持, i18n, 国际化, Carbon, golang, 开源贡献, 翻译, Pull Request"
 ---
 
-# Carbon 本地化语言贡献指南
+# 本地化语言贡献指南
 
-## 如何为 Carbon 添加新的本地化语言支持
+## 如何添加新的本地化语言支持
 
 完整 `ISO639-1` 语言代码和语言名称请查阅 [附录](language-codes.md)
 
