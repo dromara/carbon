@@ -235,7 +235,15 @@ func (c *Carbon) DiffInDuration(carbon ...*Carbon) Duration {
 
 // DiffAbsInDuration gets the difference in duration with absolute value.
 func (c *Carbon) DiffAbsInDuration(carbon ...*Carbon) Duration {
-	return c.DiffInDuration(carbon...).Abs()
+	d := c.DiffInDuration(carbon...)
+	switch {
+	case d >= 0:
+		return d
+	case d == minDuration:
+		return maxDuration
+	default:
+		return -d
+	}
 }
 
 // DiffForHumans gets the difference in a human-readable format, i18n is supported.
