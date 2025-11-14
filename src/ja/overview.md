@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon プロジェクト概要、軽量ゼロ依存の golang 時間処理ライブラリ、100% ユニットテストカバー率、30+ 種類のローカライズ言語をサポート、意味化 API、強力な時間操作、豊富な取得方法、多様な出力フォーマット、テストに友好的、タイムゾーン処理とエラー処理を提供、docker に使用され、GVP と G-Star の栄誉を獲得
+      content: "Carbon プロジェクト概要、軽量ゼロ依存の golang 時間処理ライブラリ、100% ユニットテストカバー率、30+ 種類のローカライズ言語をサポート、意味化 API、強力な時間操作、豊富な取得方法、多様な出力フォーマット、テストに友好的、タイムゾーン処理とエラー処理を提供、docker に使用され、GVP と G-Star の栄誉を獲得"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, プロジェクト概要, 時間処理ライブラリ, golang, 軽量, ゼロ依存, 意味化 API, チェーンコール, 時間操作, ローカライズ, 国際化, i18n, タイムゾーン処理, ユニットテスト, GVP, G-Star, docker, awesome-go
+      content: "carbon, go-carbon, プロジェクト概要, 時間処理ライブラリ, golang, 軽量, ゼロ依存, 意味化 API, チェーンコール, 時間操作, ローカライズ, 国際化, i18n, タイムゾーン処理, ユニットテスト, GVP, G-Star, docker, awesome-go"
 ---
 
 # プロジェクトの概要

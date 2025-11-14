@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon プロジェクトに新しいローカライズ言語サポートを追加する方法の詳細ガイド、言語ファイル作成、翻訳仕様、提出プロセス、テスト検証を含む
+      content: "Carbon プロジェクトに新しいローカライズ言語サポートを追加する方法の詳細ガイド、言語ファイル作成、翻訳仕様、提出プロセス、テスト検証を含む"
   - - meta
     - name: keywords
-      content: 貢献ガイド, ローカライズ, 言語サポート, i18n, 国際化, Carbon, golang, オープンソース貢献, 翻訳, Pull Request
+      content: "貢献ガイド, ローカライズ, 言語サポート, i18n, 国際化, Carbon, golang, オープンソース貢献, 翻訳, Pull Request"
 ---
 
 # Carbon ローカライズ言語貢献ガイド

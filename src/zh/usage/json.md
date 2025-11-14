@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon JSON序列化功能详解，提供 16 种内置时间字段类型和自定义泛型类型的 JSON 编解码，支持 Date、Time、DateTime、Timestamp 及多精度格式，包含完整的 Marshal/Unmarshal 示例
+      content: "Carbon JSON序列化功能详解，提供 16 种内置时间字段类型和自定义泛型类型的 JSON 编解码，支持 Date、Time、DateTime、Timestamp 及多精度格式，包含完整的 Marshal/Unmarshal 示例"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, JSON序列化, Marshal, Unmarshal, 时间字段类型, 内置类型, 自定义类型, 泛型, 多精度, ORM集成
+      content: "carbon, go-carbon, JSON序列化, Marshal, Unmarshal, 时间字段类型, 内置类型, 自定义类型, 泛型, 多精度, ORM集成"
 ---
 
 # JSON

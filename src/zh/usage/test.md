@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 测试功能详解，提供 SetTestNow/IsTestNow/ClearTestNow 方法，支持冻结固定时间用于单元测试，使时间相关操作基于模拟时间运行，便于测试时间依赖代码
+      content: "Carbon 测试功能详解，提供 SetTestNow/IsTestNow/ClearTestNow 方法，支持冻结固定时间用于单元测试，使时间相关操作基于模拟时间运行，便于测试时间依赖代码"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 测试时间, 冻结时间, 模拟时间, SetTestNow, IsTestNow, ClearTestNow, 单元测试, 时间测试, 测试工具
+      content: "carbon, go-carbon, 测试时间, 冻结时间, 模拟时间, SetTestNow, IsTestNow, ClearTestNow, 单元测试, 时间测试, 测试工具"
 ---
 
 # 测试

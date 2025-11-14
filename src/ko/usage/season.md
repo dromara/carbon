@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 계절 기능 상세 설명, Season으로 계절 이름 조회(지역화 지원), StartOfSeason/EndOfSeason로 계절 경계 조회, IsSpring/IsSummer/IsAutumn/IsWinter 계절 판단, 기상 구분에 따른(3-5 월 봄, 6-8 월 여름, 9-11 월 가을, 12-2 월 겨울)
+      content: "Carbon 계절 기능 상세 설명, Season으로 계절 이름 조회(지역화 지원), StartOfSeason/EndOfSeason로 계절 경계 조회, IsSpring/IsSummer/IsAutumn/IsWinter 계절 판단, 기상 구분에 따른(3-5 월 봄, 6-8 월 여름, 9-11 월 가을, 12-2 월 겨울)"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 계절, 봄, 여름, 가을, 겨울, 계절 경계, 계절 판단, Season, StartOfSeason, EndOfSeason, 지역화
+      content: "carbon, go-carbon, 계절, 봄, 여름, 가을, 겨울, 계절 경계, 계절 판단, Season, StartOfSeason, EndOfSeason, 지역화"
 ---
 
 # 계절

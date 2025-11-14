@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 프로젝트에 새로운 현지화 언어 지원을 추가하는 방법에 대한 상세 가이드, 언어 파일 생성, 번역 규격, 제출 프로세스 및 테스트 검증 포함
+      content: "Carbon 프로젝트에 새로운 현지화 언어 지원을 추가하는 방법에 대한 상세 가이드, 언어 파일 생성, 번역 규격, 제출 프로세스 및 테스트 검증 포함"
   - - meta
     - name: keywords
-      content: 기여 가이드, 현지화, 언어 지원, i18n, 국제화, Carbon, golang, 오픈소스 기여, 번역, Pull Request
+      content: "기여 가이드, 현지화, 언어 지원, i18n, 국제화, Carbon, golang, 오픈소스 기여, 번역, Pull Request"
 ---
 
 # Carbon 현지화 언어 기여 가이드

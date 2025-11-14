@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon time parsing methods detailed explanation, provides 5 parsing methods: default layout Parse, single layout ParseByLayout, single format ParseByFormat, multiple layouts ParseByLayouts, multiple formats ParseByFormats, supports various time string formats and timezone settings
+      content: "Carbon time parsing methods detailed explanation, provides 5 parsing methods: default layout Parse, single layout ParseByLayout, single format ParseByFormat, multiple layouts ParseByLayouts, multiple formats ParseByFormats, supports various time string formats and timezone settings"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, time parsing, Parse, ParseByLayout, ParseByFormat, layout template, format template, time string parsing, multi-format parsing, timezone parsing
+      content: "carbon, go-carbon, time parsing, Parse, ParseByLayout, ParseByFormat, layout template, format template, time string parsing, multi-format parsing, timezone parsing"
 ---
 
 # Parser

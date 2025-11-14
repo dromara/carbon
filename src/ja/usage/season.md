@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 季節機能の詳細説明、Season で季節名を取得（ローカライズ対応）、StartOfSeason/EndOfSeason で季節の境界を取得、IsSpring/IsSummer/IsAutumn/IsWinter で季節判定、気象区分に基づく（3-5 月春季、6-8 月夏季、9-11 月秋季、12-2 月冬季）
+      content: "Carbon 季節機能の詳細説明、Season で季節名を取得（ローカライズ対応）、StartOfSeason/EndOfSeason で季節の境界を取得、IsSpring/IsSummer/IsAutumn/IsWinter で季節判定、気象区分に基づく（3-5 月春季、6-8 月夏季、9-11 月秋季、12-2 月冬季）"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 季節, 春季, 夏季, 秋季, 冬季, 季節境界, 季節判断, Season, StartOfSeason, EndOfSeason, ローカライズ
+      content: "carbon, go-carbon, 季節, 春季, 夏季, 秋季, 冬季, 季節境界, 季節判断, Season, StartOfSeason, EndOfSeason, ローカライズ"
 ---
 
 # 季節

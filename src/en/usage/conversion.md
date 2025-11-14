@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Provides CreateFromStdTime/NewCarbon to convert time.Time to carbon, provides StdTime to export standard time.Time, supports specifying timezone
+      content: "Provides CreateFromStdTime/NewCarbon to convert time.Time to carbon, provides StdTime to export standard time.Time, supports specifying timezone"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, conversion, time.Time
+      content: "carbon, go-carbon, conversion, time.Time"
 ---
 
 # Convert between `carbon` and `time.Time`

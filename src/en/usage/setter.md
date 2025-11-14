@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon time setting methods comprehensive guide, provides 30+ setting methods, including timezone location locale settings, datetime multi-precision settings, individual time component settings, no-overflow settings, week start and weekend settings, supports millisecond/microsecond/nanosecond precision
+      content: "Carbon time setting methods comprehensive guide, provides 30+ setting methods, including timezone location locale settings, datetime multi-precision settings, individual time component settings, no-overflow settings, week start and weekend settings, supports millisecond/microsecond/nanosecond precision"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, time setting, SetTimezone, SetLocation, SetLocale, SetDateTime, SetDate, SetTime, individual setting, no-overflow setting, week setting, multi-precision setting, millisecond, microsecond, nanosecond
+      content: "carbon, go-carbon, time setting, SetTimezone, SetLocation, SetLocale, SetDateTime, SetDate, SetTime, individual setting, no-overflow setting, week setting, multi-precision setting, millisecond, microsecond, nanosecond"
 ---
 
 # Setter

@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Detailed introduction to time and date format symbols supported by Format and ParseByFormat methods, including symbol description, length, range and examples
+      content: "Detailed introduction to time and date format symbols supported by Format and ParseByFormat methods, including symbol description, length, range and examples"
   - - meta
     - name: keywords
-      content: format signs, Format, ParseByFormat, time format, date format, golang, carbon, time processing
+      content: "format signs, Format, ParseByFormat, time format, date format, golang, carbon, time processing"
 ---
 
 # Format signs

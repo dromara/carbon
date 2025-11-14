@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 详细介绍如何为 Carbon 项目添加新的本地化语言支持，包含语言文件创建、翻译规范、提交流程和测试验证
+      content: "详细介绍如何为 Carbon 项目添加新的本地化语言支持，包含语言文件创建、翻译规范、提交流程和测试验证"
   - - meta
     - name: keywords
-      content: 贡献指南, 本地化, 语言支持, i18n, 国际化, Carbon, golang, 开源贡献, 翻译, Pull Request
+      content: "贡献指南, 本地化, 语言支持, i18n, 国际化, Carbon, golang, 开源贡献, 翻译, Pull Request"
 ---
 
 # Carbon 本地化语言贡献指南

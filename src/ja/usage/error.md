@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon エラー処理機能の詳細説明、HasError によるエラー検出と Error によるエラー取得メソッドを提供、複数のエラーは最初のエラーのみを返す、時間解析やタイムゾーン設定などの一般的なエラーシナリオをカバー、完全なエラー処理例を含む
+      content: "Carbon エラー処理機能の詳細説明、HasError によるエラー検出と Error によるエラー取得メソッドを提供、複数のエラーは最初のエラーのみを返す、時間解析やタイムゾーン設定などの一般的なエラーシナリオをカバー、完全なエラー処理例を含む"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, エラー処理, HasError, Error, エラー検出, エラー取得, 時間解析エラー, タイムゾーンエラー, 例外処理
+      content: "carbon, go-carbon, エラー処理, HasError, Error, エラー検出, エラー取得, 時間解析エラー, タイムゾーンエラー, 例外処理"
 ---
 
 # エラー処理

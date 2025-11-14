@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 時間旅行機能の詳細説明、50+ 種類の時間加減メソッドを提供、世紀/年代/年/四半期/月/週/日/時/分/秒/ミリ秒/マイクロ秒/ナノ秒の時間加減とオーバーフローなしバリアントをサポート、Duration に基づく精密な加減をサポート
+      content: "Carbon 時間旅行機能の詳細説明、50+ 種類の時間加減メソッドを提供、世紀/年代/年/四半期/月/週/日/時/分/秒/ミリ秒/マイクロ秒/ナノ秒の時間加減とオーバーフローなしバリアントをサポート、Duration に基づく精密な加減をサポート"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 時間旅行, 時間加減, Add, Sub, オーバーフローなし, NoOverflow, Duration, 時間計算, 時間加減, 多精度時間操作
+      content: "carbon, go-carbon, 時間旅行, 時間加減, Add, Sub, オーバーフローなし, NoOverflow, Duration, 時間計算, 時間加減, 多精度時間操作"
 ---
 
 # タイムトラベル

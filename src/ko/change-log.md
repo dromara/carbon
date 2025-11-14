@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 업데이트 로그, 역사 버전부터의 모든 업데이트 내용을 상세히 기록, 신기능, 성능 최적화, Bug 수정, API 변경, 의존성 업그레이드 및 호환성 설명 포함
+      content: "Carbon 업데이트 로그, 역사 버전부터의 모든 업데이트 내용을 상세히 기록, 신기능, 성능 최적화, Bug 수정, API 변경, 의존성 업그레이드 및 호환성 설명 포함"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 업데이트 로그, 버전 역사, 변경 기록, 기능 업데이트, Bug 수정, 성능 최적화, API 변경, 릴리스 노트, 버전 업데이트
+      content: "carbon, go-carbon, 업데이트 로그, 버전 역사, 변경 기록, 기능 업데이트, Bug 수정, 성능 최적화, API 변경, 릴리스 노트, 버전 업데이트"
 ---
 
 # 업데이트 로그

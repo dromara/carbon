@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon スポンサーサポートページ、非商用オープンソースプロジェクトはあなたのサポートが必要です。スポンサーは公式サイトのサーバーおよびドメイン名の料金、新機能の開発反復メンテナンス、プロジェクトの展開に使用され、Alipay、WeChat、QQ、Gitee、OpenCollective などの複数のスポンサーチャネルをサポート
+      content: "Carbon スポンサーサポートページ、非商用オープンソースプロジェクトはあなたのサポートが必要です。スポンサーは公式サイトのサーバーおよびドメイン名の料金、新機能の開発反復メンテナンス、プロジェクトの展開に使用され、Alipay、WeChat、QQ、Gitee、OpenCollective などの複数のスポンサーチャネルをサポート"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, スポンサーサポート, オープンソーススポンサー, プロジェクトサポート, 寄付, Alipay, WeChat, QQ, Gitee, OpenCollective, オープンソースプロジェクト, 非商用プロジェクト
+      content: "carbon, go-carbon, スポンサーサポート, オープンソーススポンサー, プロジェクトサポート, 寄付, Alipay, WeChat, QQ, Gitee, OpenCollective, オープンソースプロジェクト, 非商用プロジェクト"
 ---
 
 # スポンサー人

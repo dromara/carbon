@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 提供错误/有效性/零值/纪元/AM-PM/昨天-今天-明天/同一时期等判断，支持大小/等于比较与 Between（含起止边界可选）等距离判断
+      content: "提供错误/有效性/零值/纪元/AM-PM/昨天-今天-明天/同一时期等判断，支持大小/等于比较与 Between（含起止边界可选）等距离判断"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 含有判断, 是否判断, 数学判断, 距离判断
+      content: "carbon, go-carbon, 含有判断, 是否判断, 数学判断, 距离判断"
 ---
 
 # 时间判断

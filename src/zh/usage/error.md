@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 错误处理功能详解，提供 HasError 错误检测和 Error 错误获取方法，多个错误仅返回首个错误，覆盖时间解析、时区设置等常见错误场景，包含完整的错误处理示例
+      content: "Carbon 错误处理功能详解，提供 HasError 错误检测和 Error 错误获取方法，多个错误仅返回首个错误，覆盖时间解析、时区设置等常见错误场景，包含完整的错误处理示例"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 错误处理, HasError, Error, 错误检测, 错误获取, 时间解析错误, 时区错误, 异常处理
+      content: "carbon, go-carbon, 错误处理, HasError, Error, 错误检测, 错误获取, 时间解析错误, 时区错误, 异常处理"
 ---
 
 # 错误处理

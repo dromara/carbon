@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 時間解析メソッドの詳細説明、5 種類の解析方法を提供：デフォルトレイアウト Parse、単一レイアウト ParseByLayout、単一フォーマット ParseByFormat、複数レイアウト ParseByLayouts、複数フォーマット ParseByFormats、様々な時間文字列フォーマットとタイムゾーン設定をサポート
+      content: "Carbon 時間解析メソッドの詳細説明、5 種類の解析方法を提供：デフォルトレイアウト Parse、単一レイアウト ParseByLayout、単一フォーマット ParseByFormat、複数レイアウト ParseByLayouts、複数フォーマット ParseByFormats、様々な時間文字列フォーマットとタイムゾーン設定をサポート"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 時間解析, Parse, ParseByLayout, ParseByFormat, レイアウトテンプレート, フォーマットテンプレート, 時間文字列解析, 多フォーマット解析, タイムゾーン解析
+      content: "carbon, go-carbon, 時間解析, Parse, ParseByLayout, ParseByFormat, レイアウトテンプレート, フォーマットテンプレート, 時間文字列解析, 多フォーマット解析, タイムゾーン解析"
 ---
 
 # 時間解析

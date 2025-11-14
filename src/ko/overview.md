@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 프로젝트 소개, 가벼운 제로 의존성 golang 시간 처리 라이브러리, 100% 단위 테스트 커버리지, 30+ 개의 현지화 언어 지원, 의미론적 API, 강력한 시간 작업, 풍부한 검색 방법, 다양한 출력 형식, 테스트 친화적, 타임존 처리 및 오류 처리 제공, docker에서 사용되며 GVP 및 G-Star 영예 수상
+      content: "Carbon 프로젝트 소개, 가벼운 제로 의존성 golang 시간 처리 라이브러리, 100% 단위 테스트 커버리지, 30+ 개의 현지화 언어 지원, 의미론적 API, 강력한 시간 작업, 풍부한 검색 방법, 다양한 출력 형식, 테스트 친화적, 타임존 처리 및 오류 처리 제공, docker에서 사용되며 GVP 및 G-Star 영예 수상"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 프로젝트 소개, 시간 처리 라이브러리, golang, 가벼움, 제로 의존성, 의미론적 API, 체인 호출, 시간 작업, 현지화, 국제화, i18n, 타임존 처리, 단위 테스트, GVP, G-Star, docker, awesome-go
+      content: "carbon, go-carbon, 프로젝트 소개, 시간 처리 라이브러리, golang, 가벼움, 제로 의존성, 의미론적 API, 체인 호출, 시간 작업, 현지화, 국제화, i18n, 타임존 처리, 단위 테스트, GVP, G-Star, docker, awesome-go"
 ---
 
 # 프로젝트 소개

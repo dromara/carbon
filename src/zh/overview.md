@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 项目简介，轻量级零依赖的 golang 时间处理库，100% 单元测试覆盖率，支持 30+ 种本地化语言，提供语义化 API、强大的时间操作、丰富的获取方式、多样化输出格式、测试友好、时区处理和错误处理，已被 docker 使用并获得 GVP 和 G-Star 荣誉
+      content: "Carbon 项目简介，轻量级零依赖的 golang 时间处理库，100% 单元测试覆盖率，支持 30+ 种本地化语言，提供语义化 API、强大的时间操作、丰富的获取方式、多样化输出格式、测试友好、时区处理和错误处理，已被 docker 使用并获得 GVP 和 G-Star 荣誉"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 项目简介, 时间处理库, golang, 轻量级, 零依赖, 语义化 API, 链式调用, 时间操作, 本地化, 国际化, i18n, 时区处理, 单元测试, GVP, G-Star, docker, awesome-go
+      content: "carbon, go-carbon, 项目简介, 时间处理库, golang, 轻量级, 零依赖, 语义化 API, 链式调用, 时间操作, 本地化, 国际化, i18n, 时区处理, 单元测试, GVP, G-Star, docker, awesome-go"
 ---
 
 # 项目简介

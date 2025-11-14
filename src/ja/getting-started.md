@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon クイックスタートガイド、インストールと設定の説明（GitHub/Gitee/Gitcode リポジトリをサポート）、インポート方法、システム要件（Go >= 1.18）およびリポジトリ移行ガイド（golang-module/carbon から dromara/carbon へ）を提供
+      content: "Carbon クイックスタートガイド、インストールと設定の説明（GitHub/Gitee/Gitcode リポジトリをサポート）、インポート方法、システム要件（Go >= 1.18）およびリポジトリ移行ガイド（golang-module/carbon から dromara/carbon へ）を提供"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, クイックスタート, インストールガイド, 設定説明, Go インストール, go get, リポジトリアドレス, GitHub, Gitee, Gitcode, dromara, 移行ガイド, システム要件
+      content: "carbon, go-carbon, クイックスタート, インストールガイド, 設定説明, Go インストール, go get, リポジトリアドレス, GitHub, Gitee, Gitcode, dromara, 移行ガイド, システム要件"
 ---
 
 # クイックスタート

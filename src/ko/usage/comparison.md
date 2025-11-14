@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 오류/유효성/영값/에포크/AM-PM/어제-오늘-내일/동일 기간 등의 판단을 제공하고, 크기/등호 비교와 Between(시작/종료 경계 선택 가능) 등의 거리 판단을 지원합니다
+      content: "오류/유효성/영값/에포크/AM-PM/어제-오늘-내일/동일 기간 등의 판단을 제공하고, 크기/등호 비교와 Between(시작/종료 경계 선택 가능) 등의 거리 판단을 지원합니다"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 포함 판단, 여부 판단, 수학 판단, 거리 판단
+      content: "carbon, go-carbon, 포함 판단, 여부 판단, 수학 판단, 거리 판단"
 ---
 
 # 시간 판단

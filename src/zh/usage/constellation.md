@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 提供 Constellation 获取星座名称（支持本地化），并提供 IsAries/IsTaurus/IsGemini 等星座判断方法
+      content: "提供 Constellation 获取星座名称（支持本地化），并提供 IsAries/IsTaurus/IsGemini 等星座判断方法"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 星座, 白羊座, 金牛座, 双子座, 巨蟹座, 狮子座, 处女座, 天秤座, 天蝎座, 射手座, 摩羯座, 水瓶座, 双鱼座
+      content: "carbon, go-carbon, 星座, 白羊座, 金牛座, 双子座, 巨蟹座, 狮子座, 处女座, 天秤座, 天蝎座, 射手座, 摩羯座, 水瓶座, 双鱼座"
 ---
 
 # 星座

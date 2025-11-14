@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon は Max/Min で最大/最小時間を取得、Closest/Farthest で最も近い/遠い時間を取得、MaxValue/MinValue で境界値を取得、MaxDuration/MinDuration で Duration 極値を取得する機能を提供
+      content: "Carbon は Max/Min で最大/最小時間を取得、Closest/Farthest で最も近い/遠い時間を取得、MaxValue/MinValue で境界値を取得、MaxDuration/MinDuration で Duration 極値を取得する機能を提供"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 極値判定, 極値境界
+      content: "carbon, go-carbon, 極値判定, 極値境界"
 ---
 
 # 時間極値

@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Format 및 ParseByFormat 메서드에서 지원하는 시간 날짜 형식 기호에 대한 상세 설명, 기호 설명, 길이, 범위 및 예제 포함
+      content: "Format 및 ParseByFormat 메서드에서 지원하는 시간 날짜 형식 기호에 대한 상세 설명, 기호 설명, 길이, 범위 및 예제 포함"
   - - meta
     - name: keywords
-      content: 형식 기호, Format, ParseByFormat, 시간 형식, 날짜 형식, golang, carbon, 시간 처리
+      content: "형식 기호, Format, ParseByFormat, 시간 형식, 날짜 형식, golang, carbon, 시간 처리"
 ---
 
 # 형식 기호

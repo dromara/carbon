@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Provides Constellation to get constellation name (supports localization), and provides constellation check methods like IsAries/IsTaurus/IsGemini
+      content: "Provides Constellation to get constellation name (supports localization), and provides constellation check methods like IsAries/IsTaurus/IsGemini"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, constellation, Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn, Aquarius, Pisces
+      content: "carbon, go-carbon, constellation, Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn, Aquarius, Pisces"
 ---
 
 # Constellation

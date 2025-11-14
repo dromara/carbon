@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 提供 DiffInYears/Months/Weeks/Days/Hours/Minutes/Seconds 相对差值、DiffAbsInXXX 绝对差值、DiffForHumans 人性化差值，支持 DiffInString/Duration
+      content: "提供 DiffInYears/Months/Weeks/Days/Hours/Minutes/Seconds 相对差值、DiffAbsInXXX 绝对差值、DiffForHumans 人性化差值，支持 DiffInString/Duration"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 相对差值, 绝对差值, 人性化差值
+      content: "carbon, go-carbon, 相对差值, 绝对差值, 人性化差值"
 ---
 
 # 时间差值

@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon time output methods comprehensive guide, provides 40+ time formatting methods, supports multi-precision output (millisecond/microsecond/nanosecond) for datetime and short forms, covers ISO8601, RFC series, Ansic, Kitchen, Cookie and other standard formats, supports Layout and Format custom formatting
+      content: "Carbon time output methods comprehensive guide, provides 40+ time formatting methods, supports multi-precision output (millisecond/microsecond/nanosecond) for datetime and short forms, covers ISO8601, RFC series, Ansic, Kitchen, Cookie and other standard formats, supports Layout and Format custom formatting"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, time output, formatting, multi-precision output, ISO8601, RFC format, standard format, Layout, Format, custom format, time string
+      content: "carbon, go-carbon, time output, formatting, multi-precision output, ISO8601, RFC format, standard format, Layout, Format, custom format, time string"
 ---
 
 # Output

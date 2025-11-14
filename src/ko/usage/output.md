@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 시간 출력 메서드 대전, 40+ 가지 시간 포맷팅 메서드 제공, 날짜시간 및 축약형의 다정밀도 출력(밀리초/마이크로초/나노초) 지원, ISO8601, RFC 시리즈, Ansic, Kitchen, Cookie 등 표준 포맷 포함, Layout 및 Format 사용자 정의 포맷팅 지원
+      content: "Carbon 시간 출력 메서드 대전, 40+ 가지 시간 포맷팅 메서드 제공, 날짜시간 및 축약형의 다정밀도 출력(밀리초/마이크로초/나노초) 지원, ISO8601, RFC 시리즈, Ansic, Kitchen, Cookie 등 표준 포맷 포함, Layout 및 Format 사용자 정의 포맷팅 지원"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 시간 출력, 포맷팅, 다정밀도 출력, ISO8601, RFC 포맷, 표준 포맷, Layout, Format, 사용자 정의 포맷, 시간 문자열
+      content: "carbon, go-carbon, 시간 출력, 포맷팅, 다정밀도 출력, ISO8601, RFC 포맷, 표준 포맷, Layout, Format, 사용자 정의 포맷, 시간 문자열"
 ---
 
 # 시간 출력

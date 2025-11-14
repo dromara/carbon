@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 時間設定メソッド大全、30+ 種類の設定メソッドを提供、タイムゾーン位置地域設定、日時多精度設定、個別時間コンポーネント設定、オーバーフローなし設定、週開始日と週末日設定を含む、ミリ秒/マイクロ秒/ナノ秒精度をサポート
+      content: "Carbon 時間設定メソッド大全、30+ 種類の設定メソッドを提供、タイムゾーン位置地域設定、日時多精度設定、個別時間コンポーネント設定、オーバーフローなし設定、週開始日と週末日設定を含む、ミリ秒/マイクロ秒/ナノ秒精度をサポート"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 時間設定, SetTimezone, SetLocation, SetLocale, SetDateTime, SetDate, SetTime, 個別設定, オーバーフローなし設定, 週設定, 多精度設定, ミリ秒, マイクロ秒, ナノ秒
+      content: "carbon, go-carbon, 時間設定, SetTimezone, SetLocation, SetLocale, SetDateTime, SetDate, SetTime, 個別設定, オーバーフローなし設定, 週設定, 多精度設定, ミリ秒, マイクロ秒, ナノ秒"
 ---
 
 # 時間設定

@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 提供从时间戳(秒/毫秒/微秒/纳秒)与从日期时间/日期/时间创建实例的方法：CreateFromTimestamp/DateTime/Date/Time 及其精度变体
+      content: "提供从时间戳(秒/毫秒/微秒/纳秒)与从日期时间/日期/时间创建实例的方法：CreateFromTimestamp/DateTime/Date/Time 及其精度变体"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 从时间戳/日期创建 Carbon 实例
+      content: "carbon, go-carbon, 从时间戳/日期创建 Carbon 实例"
 ---
 
 # 创建 `Carbon` 实例

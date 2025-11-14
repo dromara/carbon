@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon provides Max/Min to get maximum/minimum time, Closest/Farthest to get nearest/farthest time, MaxValue/MinValue to get boundary values, MaxDuration/MinDuration to get Duration extrema
+      content: "Carbon provides Max/Min to get maximum/minimum time, Closest/Farthest to get nearest/farthest time, MaxValue/MinValue to get boundary values, MaxDuration/MinDuration to get Duration extrema"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, extremum judgment, extremum boundary
+      content: "carbon, go-carbon, extremum judgment, extremum boundary"
 ---
 
 # Extremum

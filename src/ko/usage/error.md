@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 오류 처리 기능 상세 설명, HasError 오류 감지 및 Error 오류 조회 메서드 제공, 여러 오류는 첫 번째 오류만 반환, 시간 파싱 및 타임존 설정 등 일반적인 오류 시나리오 포함, 완전한 오류 처리 예제 포함
+      content: "Carbon 오류 처리 기능 상세 설명, HasError 오류 감지 및 Error 오류 조회 메서드 제공, 여러 오류는 첫 번째 오류만 반환, 시간 파싱 및 타임존 설정 등 일반적인 오류 시나리오 포함, 완전한 오류 처리 예제 포함"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 오류 처리, HasError, Error, 오류 감지, 오류 조회, 시간 파싱 오류, 타임존 오류, 예외 처리
+      content: "carbon, go-carbon, 오류 처리, HasError, Error, 오류 감지, 오류 조회, 시간 파싱 오류, 타임존 오류, 예외 처리"
 ---
 
 # 오류 처리

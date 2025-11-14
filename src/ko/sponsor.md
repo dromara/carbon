@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 후원 지원 페이지, 비상업적 오픈소스 프로젝트는 귀하의 지원이 필요합니다. 후원은 공식 사이트 서버 및 도메인 비용, 신기능 개발 반복 유지보수 및 프로젝트 홍보에 사용되며, Alipay, WeChat, QQ, Gitee, OpenCollective 등 다양한 후원 채널을 지원합니다
+      content: "Carbon 후원 지원 페이지, 비상업적 오픈소스 프로젝트는 귀하의 지원이 필요합니다. 후원은 공식 사이트 서버 및 도메인 비용, 신기능 개발 반복 유지보수 및 프로젝트 홍보에 사용되며, Alipay, WeChat, QQ, Gitee, OpenCollective 등 다양한 후원 채널을 지원합니다"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 후원 지원, 오픈소스 후원, 프로젝트 지원, 기부, Alipay, WeChat, QQ, Gitee, OpenCollective, 오픈소스 프로젝트, 비상업적 프로젝트
+      content: "carbon, go-carbon, 후원 지원, 오픈소스 후원, 프로젝트 지원, 기부, Alipay, WeChat, QQ, Gitee, OpenCollective, 오픈소스 프로젝트, 비상업적 프로젝트"
 ---
 
 # 후원 지원

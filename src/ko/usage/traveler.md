@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 시간 여행 기능 상세 설명, 50+ 가지 시간 가감 메서드 제공, 세기/연대/연/분기/월/주/일/시/분/초/밀리초/마이크로초/나노초의 시간 가감 및 오버플로우 없는 변형 지원, Duration 기반 정밀 가감 지원
+      content: "Carbon 시간 여행 기능 상세 설명, 50+ 가지 시간 가감 메서드 제공, 세기/연대/연/분기/월/주/일/시/분/초/밀리초/마이크로초/나노초의 시간 가감 및 오버플로우 없는 변형 지원, Duration 기반 정밀 가감 지원"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 시간 여행, 시간 가감, Add, Sub, 오버플로우 없음, NoOverflow, Duration, 시간 계산, 시간 가감, 다정밀도 시간 작업
+      content: "carbon, go-carbon, 시간 여행, 시간 가감, Add, Sub, 오버플로우 없음, NoOverflow, Duration, 시간 계산, 시간 가감, 다정밀도 시간 작업"
 ---
 
 # 시간 여행

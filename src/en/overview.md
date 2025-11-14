@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon Overview, lightweight zero-dependency golang time processing library, 100% unit test coverage, supports 30+ localized languages, provides semantic API, powerful time operations, rich retrieval methods, diversified output formats, test-friendly, timezone handling and error handling, used by docker and awarded GVP and G-Star honors
+      content: "Carbon Overview, lightweight zero-dependency golang time processing library, 100% unit test coverage, supports 30+ localized languages, provides semantic API, powerful time operations, rich retrieval methods, diversified output formats, test-friendly, timezone handling and error handling, used by docker and awarded GVP and G-Star honors"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, overview, time processing library, golang, lightweight, zero dependency, semantic API, chain calls, time operations, localization, internationalization, i18n, timezone handling, unit testing, GVP, G-Star, docker, awesome-go
+      content: "carbon, go-carbon, overview, time processing library, golang, lightweight, zero dependency, semantic API, chain calls, time operations, localization, internationalization, i18n, timezone handling, unit testing, GVP, G-Star, docker, awesome-go"
 ---
 
 # Overview

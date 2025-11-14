@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon JSON serialization feature detailed explanation, provides JSON encoding/decoding for 16 built-in time field types and custom generic types, supports Date, Time, DateTime, Timestamp and multi-precision formats, includes complete Marshal/Unmarshal examples
+      content: "Carbon JSON serialization feature detailed explanation, provides JSON encoding/decoding for 16 built-in time field types and custom generic types, supports Date, Time, DateTime, Timestamp and multi-precision formats, includes complete Marshal/Unmarshal examples"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, JSON serialization, Marshal, Unmarshal, time field types, built-in types, custom types, generic types, multi-precision, ORM integration
+      content: "carbon, go-carbon, JSON serialization, Marshal, Unmarshal, time field types, built-in types, custom types, generic types, multi-precision, ORM integration"
 ---
 
 # JSON

@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 详细介绍 Format 和 ParseByFormat 方法支持的时间日期格式符号，包含符号描述、长度、范围和示例
+      content: "详细介绍 Format 和 ParseByFormat 方法支持的时间日期格式符号，包含符号描述、长度、范围和示例"
   - - meta
     - name: keywords
-      content: 格式符号, Format, ParseByFormat, 时间格式, 日期格式, golang, carbon, 时间处理
+      content: "格式符号, Format, ParseByFormat, 时间格式, 日期格式, golang, carbon, 时间处理"
 ---
 
 # 格式符号

@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: タイムスタンプ(秒/ミリ秒/マイクロ秒/ナノ秒)および日時/日付/時間からインスタンスを作成するメソッドを提供：CreateFromTimestamp/DateTime/Date/Time とその精度バリアント
+      content: "タイムスタンプ(秒/ミリ秒/マイクロ秒/ナノ秒)および日時/日付/時間からインスタンスを作成するメソッドを提供：CreateFromTimestamp/DateTime/Date/Time とその精度バリアント"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, タイムスタンプからCarbonインスタンス作成, 日付からCarbonインスタンス作成
+      content: "carbon, go-carbon, タイムスタンプからCarbonインスタンス作成, 日付からCarbonインスタンス作成"
 ---
 
 # `Carbon` インスタンスの作成

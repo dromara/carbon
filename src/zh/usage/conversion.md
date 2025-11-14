@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: 提供 CreateFromStdTime/NewCarbon 将 time.Time 转为 carbon，提供 StdTime 导出标准 time.Time，支持指定时区
+      content: "提供 CreateFromStdTime/NewCarbon 将 time.Time 转为 carbon，提供 StdTime 导出标准 time.Time，支持指定时区"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 转换, time.Time
+      content: "carbon, go-carbon, 转换, time.Time"
 ---
 
 # `carbon` 、 `time.Time` 之间互转

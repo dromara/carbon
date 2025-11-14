@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon Getting Started Guide, providing installation and configuration instructions (supporting GitHub/Gitee/Gitcode repositories), import methods, system requirements (Go >= 1.18) and repository migration guide (from golang-module/carbon to dromara/carbon)
+      content: "Carbon Getting Started Guide, providing installation and configuration instructions (supporting GitHub/Gitee/Gitcode repositories), import methods, system requirements (Go >= 1.18) and repository migration guide (from golang-module/carbon to dromara/carbon)"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, getting started, installation guide, configuration, Go installation, go get, repository URL, GitHub, Gitee, Gitcode, dromara, migration guide, system requirements
+      content: "carbon, go-carbon, getting started, installation guide, configuration, Go installation, go get, repository URL, GitHub, Gitee, Gitcode, dromara, migration guide, system requirements"
 ---
 
 # Installation

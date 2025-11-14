@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Detailed guide on how to add new localized language support to the Carbon project, including language file creation, translation specifications, submission process and test verification
+      content: "Detailed guide on how to add new localized language support to the Carbon project, including language file creation, translation specifications, submission process and test verification"
   - - meta
     - name: keywords
-      content: contribution guide, localization, language support, i18n, internationalization, Carbon, golang, open source contribution, translation, Pull Request
+      content: "contribution guide, localization, language support, i18n, internationalization, Carbon, golang, open source contribution, translation, Pull Request"
 ---
 
 # Carbon Localization Language Contribution Guide

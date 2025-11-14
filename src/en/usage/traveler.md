@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon time travel feature detailed explanation, provides 50+ time addition/subtraction methods, supports time addition/subtraction for century/decade/year/quarter/month/week/day/hour/minute/second/millisecond/microsecond/nanosecond with no-overflow variants, supports Duration-based precise addition/subtraction
+      content: "Carbon time travel feature detailed explanation, provides 50+ time addition/subtraction methods, supports time addition/subtraction for century/decade/year/quarter/month/week/day/hour/minute/second/millisecond/microsecond/nanosecond with no-overflow variants, supports Duration-based precise addition/subtraction"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, time travel, time addition/subtraction, Add, Sub, no-overflow, NoOverflow, Duration, time calculation, time addition/subtraction, multi-precision time operations
+      content: "carbon, go-carbon, time travel, time addition/subtraction, Add, Sub, no-overflow, NoOverflow, Duration, time calculation, time addition/subtraction, multi-precision time operations"
 ---
 
 # Traveler

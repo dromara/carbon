@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: SetLayout/SetTimezone/SetLocale/SetWeekStartsAt/SetWeekendDays の個別設定と SetDefault による一括設定を提供、ResetDefault でデフォルト値をリセット可能、テストの分離に便利
+      content: "SetLayout/SetTimezone/SetLocale/SetWeekStartsAt/SetWeekendDays の個別設定と SetDefault による一括設定を提供、ResetDefault でデフォルト値をリセット可能、テストの分離に便利"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 単一のデフォルト値設定, 複数のデフォルト値設定, デフォルト値リセット
+      content: "carbon, go-carbon, 単一のデフォルト値設定, 複数のデフォルト値設定, デフォルト値リセット"
 ---
 
 # グローバル・デフォルトの設定

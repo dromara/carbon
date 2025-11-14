@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 时间设置方法大全，提供 30+ 种设置方法，包括时区位置区域设置、日期时间多精度设置、单项时间组件设置、不溢出设置、周起始和周末设置，支持毫秒/微秒/纳秒精度
+      content: "Carbon 时间设置方法大全，提供 30+ 种设置方法，包括时区位置区域设置、日期时间多精度设置、单项时间组件设置、不溢出设置、周起始和周末设置，支持毫秒/微秒/纳秒精度"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 时间设置, SetTimezone, SetLocation, SetLocale, SetDateTime, SetDate, SetTime, 单项设置, 不溢出设置, 周设置, 多精度设置, 毫秒, 微秒, 纳秒
+      content: "carbon, go-carbon, 时间设置, SetTimezone, SetLocation, SetLocale, SetDateTime, SetDate, SetTime, 单项设置, 不溢出设置, 周设置, 多精度设置, 毫秒, 微秒, 纳秒"
 ---
 
 # 时间设置

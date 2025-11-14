@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon FAQ, covering version differences (v2.5.x vs v2.6.x), Windows system timezone error solutions, Docker container deployment timezone configuration and other common usage issues
+      content: "Carbon FAQ, covering version differences (v2.5.x vs v2.6.x), Windows system timezone error solutions, Docker container deployment timezone configuration and other common usage issues"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, FAQ, frequently asked questions, version differences, timezone error, Windows deployment, Docker deployment, timezone configuration, troubleshooting, problem solving
+      content: "carbon, go-carbon, FAQ, frequently asked questions, version differences, timezone error, Windows deployment, Docker deployment, timezone configuration, troubleshooting, problem solving"
 ---
 
 # FAQ

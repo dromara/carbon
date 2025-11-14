@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon テスト機能の詳細説明、SetTestNow/IsTestNow/ClearTestNow メソッドを提供、ユニットテスト用の固定時刻の凍結をサポート、時間関連の処理をシミュレーション時刻に基づいて実行、時間依存コードのテストに便利
+      content: "Carbon テスト機能の詳細説明、SetTestNow/IsTestNow/ClearTestNow メソッドを提供、ユニットテスト用の固定時刻の凍結をサポート、時間関連の処理をシミュレーション時刻に基づいて実行、時間依存コードのテストに便利"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, テスト時間, 凍結時間, シミュレーション時間, SetTestNow, IsTestNow, ClearTestNow, ユニットテスト, 時間テスト, テストツール
+      content: "carbon, go-carbon, テスト時間, 凍結時間, シミュレーション時間, SetTestNow, IsTestNow, ClearTestNow, ユニットテスト, 時間テスト, テストツール"
 ---
 
 # テスト

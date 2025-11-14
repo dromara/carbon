@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 時間出力メソッド大全、40+ 種類の時間フォーマットメソッドを提供、日時および省略形式の多精度出力（ミリ秒/マイクロ秒/ナノ秒）をサポート、ISO8601、RFC シリーズ、Ansic、Kitchen、Cookie などの標準フォーマットをカバー、Layout と Format によるカスタムフォーマットをサポート
+      content: "Carbon 時間出力メソッド大全、40+ 種類の時間フォーマットメソッドを提供、日時および省略形式の多精度出力（ミリ秒/マイクロ秒/ナノ秒）をサポート、ISO8601、RFC シリーズ、Ansic、Kitchen、Cookie などの標準フォーマットをカバー、Layout と Format によるカスタムフォーマットをサポート"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 時間出力, フォーマット, 多精度出力, ISO8601, RFCフォーマット, 標準フォーマット, Layout, Format, カスタムフォーマット, 時間文字列
+      content: "carbon, go-carbon, 時間出力, フォーマット, 多精度出力, ISO8601, RFCフォーマット, 標準フォーマット, Layout, Format, カスタムフォーマット, 時間文字列"
 ---
 
 # 時間出力

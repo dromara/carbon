@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: DiffInYears/Months/Weeks/Days/Hours/Minutes/Seconds の相対差、DiffAbsInXXX の絶対差、DiffForHumans のヒューマナイズ差を提供し、DiffInString/Duration をサポート
+      content: "DiffInYears/Months/Weeks/Days/Hours/Minutes/Seconds の相対差、DiffAbsInXXX の絶対差、DiffForHumans のヒューマナイズ差を提供し、DiffInString/Duration をサポート"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 相対差, 絶対差, ヒューマナイズ差
+      content: "carbon, go-carbon, 相対差, 絶対差, ヒューマナイズ差"
 ---
 
 # 時間差

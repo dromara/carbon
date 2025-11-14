@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: Carbon 更新日志，详细记录历史版本的所有更新内容，包括新功能、性能优化、Bug 修复、API 变更、依赖升级和兼容性说明
+      content: "Carbon 更新日志，详细记录历史版本的所有更新内容，包括新功能、性能优化、Bug 修复、API 变更、依赖升级和兼容性说明"
   - - meta
     - name: keywords
-      content: carbon, go-carbon, 更新日志, 版本历史, 变更记录, 功能更新, Bug修复, 性能优化, API变更, 发布记录, 版本更新
+      content: "carbon, go-carbon, 更新日志, 版本历史, 变更记录, 功能更新, Bug修复, 性能优化, API变更, 发布记录, 版本更新"
 ---
 
 # 更新日志
