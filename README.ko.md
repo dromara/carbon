@@ -102,7 +102,7 @@ carbon.IsTestNow() // false
 ## 번역자
 `Carbon` 을 더 많은 로컬라이즈드 언어로 번역하는 데 도움을 요청드립니다
 
-[Carbon에 새로운 로컬라이즈드 언어 지원을 추가하는 방법](docs/CONTRIBUTING.ko.md)
+[Carbon에 새로운 로컬라이즈드 언어 지원을 추가하는 방법](https://carbon.go-pkg.com/ko/appendix/contribution-guide.html)
 
 ## 스폰서
 

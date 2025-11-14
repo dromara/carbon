@@ -101,7 +101,7 @@ carbon.IsTestNow() // false
 ## 翻訳者
 `Carbon` を他のローカライズ言語に翻訳してくださる方を募集しています
 
-[Carbon に新しいローカライズ言語サポートを追加する方法](docs/CONTRIBUTING.ja.md)
+[Carbon に新しいローカライズ言語サポートを追加する方法](https://carbon.go-pkg.com/ja/appendix/contribution-guide.html)
 
 ## スポンサー
 

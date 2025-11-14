@@ -106,7 +106,7 @@ carbon.IsTestNow() // false
 ## 翻译者
 欢迎帮助将 `Carbon` 翻译为更多本地化语言
 
-[如何为 carbon 添加新的本地化语言支持](docs/CONTRIBUTING.cn.md)
+[如何为 carbon 添加新的本地化语言支持](https://carbon.go-pkg.com/zh/appendix/contribution-guide.html)
 
 ## 赞助
 `Carbon` 是一个非商业开源项目, 如果你想支持 `Carbon`,

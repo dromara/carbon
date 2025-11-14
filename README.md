@@ -105,7 +105,7 @@ Thanks to all the following who contributed to `Carbon`:
 ## Translators
 Ask for help to translate `Carbon` in other localized languages
 
-[How to add new localized language support to carbon](docs/CONTRIBUTING.en.md)
+[How to add new localized language support to carbon](https://carbon.go-pkg.com/appendix/contribution-guide.html)
 
 ## Sponsors
 
