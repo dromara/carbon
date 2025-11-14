@@ -251,6 +251,7 @@ const (
 	RssFormat      = "D, d M Y H:i:s O"
 	RubyDateFormat = "D M d H:i:s O Y"
 	UnixDateFormat = "D M  j H:i:s Z Y"
+	W3cFormat      = RFC3339Format
 	HttpFormat     = "D, d M Y H:i:s \\G\\M\\T"
 
 	RFC1036Format      = "D, d M y H:i:s O"
