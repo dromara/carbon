@@ -2,15 +2,15 @@
 head:
   - - meta
     - name: description
-      content: "Complete ISO 639-1 two-letter language code reference manual, containing 184 major world languages and 63 regional variant codes, providing language codes, English names, native names and original language names"
+      content: "Complete ISO639-1 two-letter language code reference manual, containing 184 major world languages and 63 regional variant codes, providing language codes, English names, native names and original language names"
   - - meta
     - name: keywords
-      content: "ISO6391, ISO 639-1, language codes, internationalization, i18n, language standards, two-letter codes, regional variants, language localization, multilingual support"
+      content: "ISO6391, ISO639-1, language codes, internationalization, i18n, language standards, two-letter codes, regional variants, language localization, multilingual support"
 ---
 
 # ISO6391 Language Code Reference
 
-According to the ISO 639-1 standard, here is the complete two-letter language code reference table:
+According to the `ISO639-1` standard, here is the complete two-letter language code reference table:
 
 | ISO Code | ISO Name            | English Name        | Native Name          |
 |----------|---------------------|---------------------|----------------------|
