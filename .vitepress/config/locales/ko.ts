@@ -133,8 +133,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             items: [
                 {text: '내장 상수', link: 'appendix/constants'},
                 {text: '형식 기호', link: 'appendix/format-signs'},
-                {text: '공헌도 가이드', link: 'appendix/contribution-guide'},
                 {text: '언어 코드', link: 'appendix/language-codes'},
+                {text: '공헌도 가이드', link: 'appendix/contribution-guide'},
                 {base:'https://', text: '테스트 보고서', link: 'github.com/dromara/carbon/blob/master/docs/BENCHMARK.ko.md', target: '_blank'},
             ]
         },
