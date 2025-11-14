@@ -12,19 +12,17 @@ head:
 
 ## How to Add New Localized Language Support
 
-For full `ISO639-1` language codes, please refer to the [Appendix](./language-codes.md).
-
 ### Step 1: Copy Language Template File
 
  ```bash
  # Copy lang/en.json as template
  cp lang/en.json lang/xx.json
  ```
-Where `xx` is the `ISO 639-1` language code for the language you want to add (such as `zh-CN`, `ja`, `ko`, etc.).
+Where `xx` is the `ISO639-1` language code for the language you want to add (such as `zh-CN`, `ja`, `ko`, etc.). For full language codes and language names, please refer to the appendix [Language Codes](language-codes.md).
 
 ### Step 2: Update Template File Content
 
-Edit the newly created `lang/xx.json` file and translate all English content into the target language. Below is a complete example of an `English` language file (lang/en.json):
+Edit the newly created `lang/xx.json` file such as `lang/en.json`, and translate all English content into the target language. Below is a complete example of an `English` language file:
 
  ```json
 {

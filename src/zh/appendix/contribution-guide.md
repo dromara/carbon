@@ -12,19 +12,17 @@ head:
 
 ## 如何添加新的本地化语言支持
 
-完整 `ISO639-1` 语言代码和语言名称请查阅 [附录](language-codes.md)
-
 ### 一、复制语言模板文件
 
  ```bash
  # 从 lang/en.json 复制作为模板
  cp lang/en.json lang/xx.json
  ```
-其中 `xx` 是您要添加的语言的 `ISO 639-1` 语言代码（如 `zh-CN`、`ja`、`ko` 等）
+其中 `xx` 是您要添加的语言的 `ISO639-1` 语言代码（如 `zh-CN`、`ja`、`ko` 等）, 完整语言代码和语言名称请查阅附录 [语言代码](language-codes.md)
 
 ### 二、更新模板文件内容
 
-编辑新创建的 `lang/xx.json` 文件，将所有英文内容翻译为目标语言，以下是一个完整的 `简体中文` 语言文件(`lang/zh-CN.json`)示例：
+编辑新创建的 `lang/xx.json` 文件比如`lang/zh-CN.json`，将所有英文内容翻译为目标语言，以下是一个完整的 `简体中文` 语言文件示例：
 
  ```json
  {
