@@ -5,7 +5,7 @@ import (
 )
 
 // Version current version
-const Version = "2.6.14"
+const Version = "2.6.15"
 
 // timezone constants
 const (
@@ -180,6 +180,7 @@ const (
 	RubyDateLayout = time.RubyDate
 	UnixDateLayout = time.UnixDate
 	W3cLayout      = RFC3339Layout
+	HttpLayout     = "Mon, 02 Jan 2006 15:04:05 GMT"
 
 	RFC1036Layout      = "Mon, 02 Jan 06 15:04:05 -0700"
 	RFC1123Layout      = time.RFC1123
@@ -250,6 +251,7 @@ const (
 	RssFormat      = "D, d M Y H:i:s O"
 	RubyDateFormat = "D M d H:i:s O Y"
 	UnixDateFormat = "D M  j H:i:s Z Y"
+	HttpFormat     = "D, d M Y H:i:s \\G\\M\\T"
 
 	RFC1036Format      = "D, d M y H:i:s O"
 	RFC1123Format      = "D, d M Y H:i:s Z"
