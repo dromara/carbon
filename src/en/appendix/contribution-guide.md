@@ -16,18 +16,18 @@ head:
 
  ```bash
  # Copy lang/en.json as template
- cp lang/en.json lang/xx.json
+ cp lang/en.json lang/xx-YY.json
  ```
-Where `xx` is the `ISO639-1` language code for the language you want to add (such as `zh-CN`, `ja`, `ko`, etc.). For full language codes and language names, please refer to the appendix [Language Codes](language-codes.md).
+Where `xx` is the language code (such as `zh`, `en`, `ja`), and `YY` is the country or region code (such as `CN`, `US`, `CA`). If the language code and country code are the same, the country code can be omitted (e.g., `ru-RU` can be abbreviated as `ru`). For complete language codes and country codes, please refer to [Language Codes](language-codes.md).
 
 ### Step 2: Update Template File Content
 
 Edit the newly created `lang/xx.json` file such as `lang/en.json`, and translate all English content into the target language. Below is a complete example of an `English` language file:
 
  ```json
-{
+ {
    "name": "English",
-   "author": "https://github.com/gouguoyin",
+   "author": "https://github.com/your-username",
    "months": "January|February|March|April|May|June|July|August|September|October|November|December",
    "short_months": "Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec",
    "weeks": "Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday",
@@ -46,14 +46,14 @@ Edit the newly created `lang/xx.json` file such as `lang/en.json`, and translate
    "from_now": "%s from now",
    "before": "%s before",
    "after": "%s after"
-}
+ }
  ```
 
 #### Field Description
 
 | Field            | Description                             | Example                            |
 |------------------|-----------------------------------------|------------------------------------|
-| `name`           | ISO name                                | "English"                          |
+| `name`           | ISO language name                       | "English"                          |
 | `author`         | Contributor's link                      | "https://github.com/your-username" |
 | `months`         | Full month names, separated by `\|`     | "January\|February\|March..."      |
 | `short_months`   | Short month names, separated by `\|`    | "Jan\|Feb\|Mar..."                 |

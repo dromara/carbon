@@ -2,13 +2,13 @@
 head:
   - - meta
     - name: description
-      content: "完全な ISO639-1 2文字言語コードリファレンスマニュアル、184 種類の世界主要言語と 63 種類の地域バリアントコードを含み、言語コード、英語名、日本語名、原語名を提供"
+      content: "完全な ISO639-1 2文字言語コードリファレンスマニュアル、184 種類の世界主要言語と 125 種類の地域バリアントコードを含み、言語コード、英語名、日本語名、原語名を提供"
   - - meta
     - name: keywords
-      content: "ISO6391, ISO639-1, 言語コード, 国際化, i18n, 言語標準, 2文字コード, 地域バリアント, 言語ローカライズ, 多言語サポート"
+      content: "ISO6391, ISO639-1, ISO3166, 言語コード, 国際化, i18n, 言語標準, 2文字コード, 地域バリアント, 言語ローカライズ, 多言語サポート"
 ---
 
-# ISO6391 言語コード対照表
+# 言語コード対照表
 
 `ISO639-1` 標準に基づく、一般的な2文字言語コードの対照表：
 
@@ -200,71 +200,132 @@ head:
 | zh    | Chinese             | 中国語          | 中文                   |
 | zu    | Zulu                | ズールー語        | isiZulu              |
 
-一部の言語には地域バリエーションが存在し、`言語コード-国コード` の形式を使用します：
+`ISO3166` 標準に基づき、一部の言語には地域バリエーションが存在し、`言語コード-国コード` の形式を使用します：
 
-| 言語コード | 言語名                    | 日本語名            | 地域      |
-|-------|------------------------|-----------------|---------|
-| zh-CN | Chinese (China)        | 中国語(中国)         | 中国本土    |
-| zh-TW | Chinese (Taiwan)       | 中国語(台湾)         | 中国台湾    |
-| zh-HK | Chinese (Hong Kong)    | 中国語(香港)         | 中国香港    |
-| en-US | English (US)           | 英語(アメリカ)        | アメリカ合衆国 |
-| en-GB | English (UK)           | 英語(イギリス)        | イギリス    |
-| en-AU | English (Australia)    | 英語(オーストラリア)     | オーストラリア |
-| en-CA | English (Canada)       | 英語(カナダ)         | カナダ     |
-| es-ES | Spanish (Spain)        | スペイン語(スペイン)     | スペイン    |
-| es-MX | Spanish (Mexico)       | スペイン語(メキシコ)     | メキシコ    |
-| pt-BR | Portuguese (Brazil)    | ポルトガル語(ブラジル)    | ブラジル    |
-| pt-PT | Portuguese (Portugal)  | ポルトガル語(ポルトガル)   | ポルトガル   |
-| fr-FR | French (France)        | フランス語(フランス)     | フランス    |
-| fr-CA | French (Canada)        | フランス語(カナダ)      | カナダ     |
-| fr-CH | French (Switzerland)   | フランス語(スイス)      | スイス     |
-| fr-BE | French (Belgium)       | フランス語(ベルギー)     | ベルギー    |
-| de-DE | German (Germany)       | ドイツ語(ドイツ)       | ドイツ     |
-| de-AT | German (Austria)       | ドイツ語(オーストリア)    | オーストリア  |
-| de-CH | German (Switzerland)   | ドイツ語(スイス)       | スイス     |
-| it-IT | Italian (Italy)        | イタリア語(イタリア)     | イタリア    |
-| it-CH | Italian (Switzerland)  | イタリア語(スイス)      | スイス     |
-| ru-RU | Russian (Russia)       | ロシア語(ロシア)       | ロシア     |
-| ru-UA | Russian (Ukraine)      | ロシア語(ウクライナ)     | ウクライナ   |
-| ja-JP | Japanese (Japan)       | 日本語(日本)         | 日本      |
-| ko-KR | Korean (South Korea)   | 韓国語(韓国)         | 韓国      |
-| ko-KP | Korean (North Korea)   | 韓国語(北朝鮮)        | 北朝鮮     |
-| ar-SA | Arabic (Saudi Arabia)  | アラビア語(サウジアラビア)  | サウジアラビア |
-| ar-EG | Arabic (Egypt)         | アラビア語(エジプト)     | エジプト    |
-| ar-AE | Arabic (UAE)           | アラビア語(UAE)      | UAE     |
-| ar-JO | Arabic (Jordan)        | アラビア語(ヨルダン)     | ヨルダン    |
-| ar-LB | Arabic (Lebanon)       | アラビア語(レバノン)     | レバノン    |
-| hi-IN | Hindi (India)          | ヒンディー語(インド)     | インド     |
-| bn-BD | Bengali (Bangladesh)   | ベンガル語(バングラデシュ)  | バングラデシュ |
-| bn-IN | Bengali (India)        | ベンガル語(インド)      | インド     |
-| ms-MY | Malay (Malaysia)       | マレー語(マレーシア)     | マレーシア   |
-| ms-SG | Malay (Singapore)      | マレー語(シンガポール)    | シンガポール  |
-| th-TH | Thai (Thailand)        | タイ語(タイ)         | タイ      |
-| vi-VN | Vietnamese (Vietnam)   | ベトナム語(ベトナム)     | ベトナム    |
-| tr-TR | Turkish (Turkey)       | トルコ語(トルコ)       | トルコ     |
-| pl-PL | Polish (Poland)        | ポーランド語(ポーランド)   | ポーランド   |
-| nl-NL | Dutch (Netherlands)    | オランダ語(オランダ)     | オランダ    |
-| nl-BE | Dutch (Belgium)        | オランダ語(ベルギー)     | ベルギー    |
-| sv-SE | Swedish (Sweden)       | スウェーデン語(スウェーデン) | スウェーデン  |
-| da-DK | Danish (Denmark)       | デンマーク語(デンマーク)   | デンマーク   |
-| no-NO | Norwegian (Norway)     | ノルウェー語(ノルウェー)   | ノルウェー   |
-| fi-FI | Finnish (Finland)      | フィンランド語(フィンランド) | フィンランド  |
-| el-GR | Greek (Greece)         | ギリシャ語(ギリシャ)     | ギリシャ    |
-| he-IL | Hebrew (Israel)        | ヘブライ語(イスラエル)    | イスラエル   |
-| cs-CZ | Czech (Czech Republic) | チェコ語(チェコ)       | チェコ     |
-| sk-SK | Slovak (Slovakia)      | スロバキア語(スロバキア)   | スロバキア   |
-| hu-HU | Hungarian (Hungary)    | ハンガリー語(ハンガリー)   | ハンガリー   |
-| ro-RO | Romanian (Romania)     | ルーマニア語(ルーマニア)   | ルーマニア   |
-| bg-BG | Bulgarian (Bulgaria)   | ブルガリア語(ブルガリア)   | ブルガリア   |
-| hr-HR | Croatian (Croatia)     | クロアチア語(クロアチア)   | クロアチア   |
-| sr-RS | Serbian (Serbia)       | セルビア語(セルビア)     | セルビア    |
-| sl-SI | Slovenian (Slovenia)   | スロベニア語(スロベニア)   | スロベニア   |
-| et-EE | Estonian (Estonia)     | エストニア語(エストニア)   | エストニア   |
-| lv-LV | Latvian (Latvia)       | ラトビア語(ラトビア)     | ラトビア    |
-| lt-LT | Lithuanian (Lithuania) | リトアニア語(リトアニア)   | リトアニア   |
-| uk-UA | Ukrainian (Ukraine)    | ウクライナ語(ウクライナ)   | ウクライナ   |
-| be-BY | Belarusian (Belarus)   | ベラルーシ語(ベラルーシ)   | ベラルーシ   |
-| id-ID | Indonesian (Indonesia) | インドネシア語(インドネシア) | インドネシア  |
-| tl-PH | Tagalog (Philippines)  | タガログ語(フィリピン)    | フィリピン   |
-| fa-IR | Persian (Iran)         | ペルシア語(イラン)      | イラン     |
-| ur-PK | Urdu (Pakistan)        | ウルドゥー語(パキスタン)   | パキスタン   |
+| 言語コード | 言語名                                | 日本語名                | 地域         |
+|-------|------------------------------------|---------------------|------------|
+| zh-CN | Chinese (China)                    | 中国語(中国)             | 中国本土       |
+| zh-TW | Chinese (Taiwan)                   | 中国語(台湾)             | 中国台湾       |
+| zh-HK | Chinese (Hong Kong)                | 中国語(香港)             | 中国香港       |
+| zh-SG | Chinese (Singapore)                | 中国語(シンガポール)         | シンガポール     |
+| zh-MO | Chinese (Macau)                    | 中国語(マカオ)            | マカオ        |
+| en-US | English (US)                       | 英語(アメリカ)            | アメリカ合衆国    |
+| en-GB | English (UK)                       | 英語(イギリス)            | イギリス       |
+| en-AU | English (Australia)                | 英語(オーストラリア)         | オーストラリア    |
+| en-CA | English (Canada)                   | 英語(カナダ)             | カナダ        |
+| en-NZ | English (New Zealand)              | 英語(ニュージーランド)        | ニュージーランド   |
+| en-IE | English (Ireland)                  | 英語(アイルランド)          | アイルランド     |
+| en-ZA | English (South Africa)             | 英語(南アフリカ)           | 南アフリカ      |
+| en-IN | English (India)                    | 英語(インド)             | インド        |
+| en-SG | English (Singapore)                | 英語(シンガポール)          | シンガポール     |
+| en-MY | English (Malaysia)                 | 英語(マレーシア)           | マレーシア      |
+| en-PH | English (Philippines)              | 英語(フィリピン)           | フィリピン      |
+| en-HK | English (Hong Kong)                | 英語(香港)              | 中国香港       |
+| es-MX | Spanish (Mexico)                   | スペイン語(メキシコ)         | メキシコ       |
+| es-AR | Spanish (Argentina)                | スペイン語(アルゼンチン)       | アルゼンチン     |
+| es-CO | Spanish (Colombia)                 | スペイン語(コロンビア)        | コロンビア      |
+| es-CL | Spanish (Chile)                    | スペイン語(チリ)           | チリ         |
+| es-PE | Spanish (Peru)                     | スペイン語(ペルー)          | ペルー        |
+| es-VE | Spanish (Venezuela)                | スペイン語(ベネズエラ)        | ベネズエラ      |
+| es-EC | Spanish (Ecuador)                  | スペイン語(エクアドル)        | エクアドル      |
+| es-UY | Spanish (Uruguay)                  | スペイン語(ウルグアイ)        | ウルグアイ      |
+| es-PY | Spanish (Paraguay)                 | スペイン語(パラグアイ)        | パラグアイ      |
+| es-BO | Spanish (Bolivia)                  | スペイン語(ボリビア)         | ボリビア       |
+| es-CR | Spanish (Costa Rica)               | スペイン語(コスタリカ)        | コスタリカ      |
+| es-PA | Spanish (Panama)                   | スペイン語(パナマ)          | パナマ        |
+| es-DO | Spanish (Dominican Republic)       | スペイン語(ドミニカ共和国)      | ドミニカ共和国    |
+| es-GT | Spanish (Guatemala)                | スペイン語(グアテマラ)        | グアテマラ      |
+| es-HN | Spanish (Honduras)                 | スペイン語(ホンジュラス)       | ホンジュラス     |
+| es-NI | Spanish (Nicaragua)                | スペイン語(ニカラグア)        | ニカラグア      |
+| es-SV | Spanish (El Salvador)              | スペイン語(エルサルバドル)      | エルサルバドル    |
+| es-CU | Spanish (Cuba)                     | スペイン語(キューバ)         | キューバ       |
+| es-PR | Spanish (Puerto Rico)              | スペイン語(プエルトリコ)       | プエルトリコ     |
+| pt-BR | Portuguese (Brazil)                | ポルトガル語(ブラジル)        | ブラジル       |
+| pt-PT | Portuguese (Portugal)              | ポルトガル語(ポルトガル)       | ポルトガル      |
+| pt-AO | Portuguese (Angola)                | ポルトガル語(アンゴラ)        | アンゴラ       |
+| pt-MZ | Portuguese (Mozambique)            | ポルトガル語(モザンビーク)      | モザンビーク     |
+| pt-GW | Portuguese (Guinea-Bissau)         | ポルトガル語(ギニアビサウ)      | ギニアビサウ     |
+| pt-CV | Portuguese (Cape Verde)            | ポルトガル語(カーボベルデ)      | カーボベルデ     |
+| pt-ST | Portuguese (São Tomé and Príncipe) | ポルトガル語(サントメ・プリンシペ)  | サントメ・プリンシペ |
+| pt-TL | Portuguese (Timor-Leste)           | ポルトガル語(東ティモール)      | 東ティモール     |
+| fr-CA | French (Canada)                    | フランス語(カナダ)          | カナダ        |
+| fr-CH | French (Switzerland)               | フランス語(スイス)          | スイス        |
+| fr-BE | French (Belgium)                   | フランス語(ベルギー)         | ベルギー       |
+| fr-LU | French (Luxembourg)                | フランス語(ルクセンブルク)      | ルクセンブルク    |
+| fr-MC | French (Monaco)                    | フランス語(モナコ)          | モナコ        |
+| fr-MA | French (Morocco)                   | フランス語(モロッコ)         | モロッコ       |
+| fr-DZ | French (Algeria)                   | フランス語(アルジェリア)       | アルジェリア     |
+| fr-TN | French (Tunisia)                   | フランス語(チュニジア)        | チュニジア      |
+| fr-SN | French (Senegal)                   | フランス語(セネガル)         | セネガル       |
+| fr-CI | French (Ivory Coast)               | フランス語(コートジボワール)     | コートジボワール   |
+| de-AT | German (Austria)                   | ドイツ語(オーストリア)        | オーストリア     |
+| de-CH | German (Switzerland)               | ドイツ語(スイス)           | スイス        |
+| de-LI | German (Liechtenstein)             | ドイツ語(リヒテンシュタイン)     | リヒテンシュタイン  |
+| it-CH | Italian (Switzerland)              | イタリア語(スイス)          | スイス        |
+| it-SM | Italian (San Marino)               | イタリア語(サンマリノ)        | サンマリノ      |
+| it-VA | Italian (Vatican)                  | イタリア語(バチカン)         | バチカン       |
+| ru-UA | Russian (Ukraine)                  | ロシア語(ウクライナ)         | ウクライナ      |
+| ru-KZ | Russian (Kazakhstan)               | ロシア語(カザフスタン)        | カザフスタン     |
+| ru-BY | Russian (Belarus)                  | ロシア語(ベラルーシ)         | ベラルーシ      |
+| ru-KG | Russian (Kyrgyzstan)               | ロシア語(キルギス)          | キルギス       |
+| ar-EG | Arabic (Egypt)                     | アラビア語(エジプト)         | エジプト       |
+| ar-AE | Arabic (UAE)                       | アラビア語(UAE)          | UAE        |
+| ar-JO | Arabic (Jordan)                    | アラビア語(ヨルダン)         | ヨルダン       |
+| ar-LB | Arabic (Lebanon)                   | アラビア語(レバノン)         | レバノン       |
+| ar-MA | Arabic (Morocco)                   | アラビア語(モロッコ)         | モロッコ       |
+| ar-TN | Arabic (Tunisia)                   | アラビア語(チュニジア)        | チュニジア      |
+| ar-DZ | Arabic (Algeria)                   | アラビア語(アルジェリア)       | アルジェリア     |
+| ar-IQ | Arabic (Iraq)                      | アラビア語(イラク)          | イラク        |
+| ar-SY | Arabic (Syria)                     | アラビア語(シリア)          | シリア        |
+| ar-YE | Arabic (Yemen)                     | アラビア語(イエメン)         | イエメン       |
+| ar-LY | Arabic (Libya)                     | アラビア語(リビア)          | リビア        |
+| ar-SD | Arabic (Sudan)                     | アラビア語(スーダン)         | スーダン       |
+| ar-MR | Arabic (Mauritania)                | アラビア語(モーリタニア)       | モーリタニア     |
+| ar-KW | Arabic (Kuwait)                    | アラビア語(クウェート)        | クウェート      |
+| ar-QA | Arabic (Qatar)                     | アラビア語(カタール)         | カタール       |
+| ar-BH | Arabic (Bahrain)                   | アラビア語(バーレーン)        | バーレーン      |
+| ar-OM | Arabic (Oman)                      | アラビア語(オマーン)         | オマーン       |
+| bn-BD | Bengali (Bangladesh)               | ベンガル語(バングラデシュ)      | バングラデシュ    |
+| bn-IN | Bengali (India)                    | ベンガル語(インド)          | インド        |
+| ur-PK | Urdu (Pakistan)                    | ウルドゥー語(パキスタン)       | パキスタン      |
+| ur-IN | Urdu (India)                       | ウルドゥー語(インド)         | インド        |
+| sw-KE | Swahili (Kenya)                    | スワヒリ語(ケニア)          | ケニア        |
+| sw-TZ | Swahili (Tanzania)                 | スワヒリ語(タンザニア)        | タンザニア      |
+| sw-UG | Swahili (Uganda)                   | スワヒリ語(ウガンダ)         | ウガンダ       |
+| se-NO | Northern Sami (Norway)             | 北サーミ語(ノルウェー)        | ノルウェー      |
+| se-SE | Northern Sami (Sweden)             | 北サーミ語(スウェーデン)       | スウェーデン     |
+| se-FI | Northern Sami (Finland)            | 北サーミ語(フィンランド)       | フィンランド     |
+| li-NL | Limburgish (Netherlands)           | リンブルフ語(オランダ)        | オランダ       |
+| li-BE | Limburgish (Belgium)               | リンブルフ語(ベルギー)        | ベルギー       |
+| yi-US | Yiddish (US)                       | イディッシュ語(アメリカ)       | アメリカ合衆国    |
+| yi-IL | Yiddish (Israel)                   | イディッシュ語(イスラエル)      | イスラエル      |
+| qu-PE | Quechua (Peru)                     | ケチュア語(ペルー)          | ペルー        |
+| qu-BO | Quechua (Bolivia)                  | ケチュア語(ボリビア)         | ボリビア       |
+| qu-EC | Quechua (Ecuador)                  | ケチュア語(エクアドル)        | エクアドル      |
+| ay-BO | Aymara (Bolivia)                   | アイマラ語(ボリビア)         | ボリビア       |
+| ay-PE | Aymara (Peru)                      | アイマラ語(ペルー)          | ペルー        |
+| ti-ER | Tigrinya (Eritrea)                 | ティグリニャ語(エリトリア)      | エリトリア      |
+| ti-ET | Tigrinya (Ethiopia)                | ティグリニャ語(エチオピア)      | エチオピア      |
+| so-DJ | Somali (Djibouti)                  | ソマリ語(ジブチ)           | ジブチ        |
+| so-ET | Somali (Ethiopia)                  | ソマリ語(エチオピア)         | エチオピア      |
+| so-KE | Somali (Kenya)                     | ソマリ語(ケニア)           | ケニア        |
+| ny-MW | Chichewa (Malawi)                  | チェチェワ語(マラウィ)        | マラウィ       |
+| ny-ZW | Chichewa (Zimbabwe)                | チェチェワ語(ジンバブエ)       | ジンバブエ      |
+| st-ZA | Southern Sotho (South Africa)      | 南部ソト語(南アフリカ)        | 南アフリカ      |
+| st-LS | Southern Sotho (Lesotho)           | 南部ソト語(レソト)          | レソト        |
+| tn-ZA | Tswana (South Africa)              | ツワナ語(南アフリカ)         | 南アフリカ      |
+| tn-BW | Tswana (Botswana)                  | ツワナ語(ボツワナ)          | ボツワナ       |
+| ta-IN | Tamil (India)                      | タミル語(インド)           | インド        |
+| ta-LK | Tamil (Sri Lanka)                  | タミル語(スリランカ)         | スリランカ      |
+| ta-SG | Tamil (Singapore)                  | タミル語(シンガポール)        | シンガポール     |
+| ta-MY | Tamil (Malaysia)                   | タミル語(マレーシア)         | マレーシア      |
+| pa-IN | Panjabi (India)                    | パンジャブ語(インド)         | インド        |
+| pa-PK | Panjabi (Pakistan)                 | パンジャブ語(パキスタン)       | パキスタン      |
+| bo-CN | Tibetan (China)                    | チベット語(中国)           | 中国         |
+| bo-IN | Tibetan (India)                    | チベット語(インド)          | インド        |
+| sq-AL | Albanian (Albania)                 | アルバニア語(アルバニア)       | アルバニア      |
+| sq-XK | Albanian (Kosovo)                  | アルバニア語(コソボ)         | コソボ        |
+| sq-MK | Albanian (Macedonia)               | アルバニア語(マケドニア)       | マケドニア      |
+| sh-BA | Serbo-Croatian (Bosnia)            | セルビア・クロアチア語(ボスニア)   | ボスニア       |
+| sh-HR | Serbo-Croatian (Croatia)           | セルビア・クロアチア語(クロアチア)  | クロアチア      |
+| sh-ME | Serbo-Croatian (Montenegro)        | セルビア・クロアチア語(モンテネグロ) | モンテネグロ     |

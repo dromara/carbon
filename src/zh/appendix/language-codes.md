@@ -2,13 +2,13 @@
 head:
   - - meta
     - name: description
-      content: "完整的 ISO639-1 双字母语言代码参考手册，包含 184 种世界主要语言和 63 种地区变体代码，提供语言代码、英文名称、中文名称和原语名称"
+      content: "完整的 ISO639-1 双字母语言代码参考手册，包含 184 种世界主要语言和 125 种地区变体代码，提供语言代码、英文名称、中文名称和原语名称"
   - - meta
     - name: keywords
-      content: "ISO6391, ISO639-1, 语言代码, 国际化, i18n, 语言标准, 双字母代码, 地区变体, 语言本地化, 多语言支持"
+      content: "ISO6391, ISO639-1, ISO3166, 语言代码, 国际化, i18n, 语言标准, 双字母代码, 地区变体, 语言本地化, 多语言支持"
 ---
 
-# ISO6391 语言代码对照表
+# 语言代码对照表
 
 根据 `ISO639-1` 标准，以下是常用的双字母语言代码对照表：
 
@@ -200,71 +200,132 @@ head:
 | zh   | Chinese             | 中文         | 中文                   |
 | zu   | Zulu                | 祖鲁语        | isiZulu              |
 
-对于某些语言存在地区变体，使用 `语言代码-国家代码` 的格式：
+根据 `ISO3166` 标准, 对于某些语言存在地区变体，使用 `语言代码-国家代码` 的格式：
 
-| 语言代码  | 语言名称                   | 中文名称          | 地区    |
-|-------|------------------------|---------------|-------|
-| zh-CN | Chinese (China)        | 中文(中国)        | 中国大陆  |
-| zh-TW | Chinese (Taiwan)       | 中文(台湾)        | 中国台湾  |
-| zh-HK | Chinese (Hong Kong)    | 中文(香港)        | 中国香港  |
-| en-US | English (US)           | 英语(美国)        | 美国    |
-| en-GB | English (UK)           | 英语(英国)        | 英国    |
-| en-AU | English (Australia)    | 英语(澳大利亚)      | 澳大利亚  |
-| en-CA | English (Canada)       | 英语(加拿大)       | 加拿大   |
-| es-ES | Spanish (Spain)        | 西班牙语(西班牙)     | 西班牙   |
-| es-MX | Spanish (Mexico)       | 西班牙语(墨西哥)     | 墨西哥   |
-| pt-BR | Portuguese (Brazil)    | 葡萄牙语(巴西)      | 巴西    |
-| pt-PT | Portuguese (Portugal)  | 葡萄牙语(葡萄牙)     | 葡萄牙   |
-| fr-FR | French (France)        | 法语(法国)        | 法国    |
-| fr-CA | French (Canada)        | 法语(加拿大)       | 加拿大   |
-| fr-CH | French (Switzerland)   | 法语(瑞士)        | 瑞士    |
-| fr-BE | French (Belgium)       | 法语(比利时)       | 比利时   |
-| de-DE | German (Germany)       | 德语(德国)        | 德国    |
-| de-AT | German (Austria)       | 德语(奥地利)       | 奥地利   |
-| de-CH | German (Switzerland)   | 德语(瑞士)        | 瑞士    |
-| it-IT | Italian (Italy)        | 意大利语(意大利)     | 意大利   |
-| it-CH | Italian (Switzerland)  | 意大利语(瑞士)      | 瑞士    |
-| ru-RU | Russian (Russia)       | 俄语(俄罗斯)       | 俄罗斯   |
-| ru-UA | Russian (Ukraine)      | 俄语(乌克兰)       | 乌克兰   |
-| ja-JP | Japanese (Japan)       | 日语(日本)        | 日本    |
-| ko-KR | Korean (South Korea)   | 韩语(韩国)        | 韩国    |
-| ko-KP | Korean (North Korea)   | 韩语(朝鲜)        | 朝鲜    |
-| ar-SA | Arabic (Saudi Arabia)  | 阿拉伯语(沙特阿拉伯)   | 沙特阿拉伯 |
-| ar-EG | Arabic (Egypt)         | 阿拉伯语(埃及)      | 埃及    |
-| ar-AE | Arabic (UAE)           | 阿拉伯语(阿联酋)     | 阿联酋   |
-| ar-JO | Arabic (Jordan)        | 阿拉伯语(约旦)      | 约旦    |
-| ar-LB | Arabic (Lebanon)       | 阿拉伯语(黎巴嫩)     | 黎巴嫩   |
-| hi-IN | Hindi (India)          | 印地语(印度)       | 印度    |
-| bn-BD | Bengali (Bangladesh)   | 孟加拉语(孟加拉国)    | 孟加拉国  |
-| bn-IN | Bengali (India)        | 孟加拉语(印度)      | 印度    |
-| ms-MY | Malay (Malaysia)       | 马来语(马来西亚)     | 马来西亚  |
-| ms-SG | Malay (Singapore)      | 马来语(新加坡)      | 新加坡   |
-| th-TH | Thai (Thailand)        | 泰语(泰国)        | 泰国    |
-| vi-VN | Vietnamese (Vietnam)   | 越南语(越南)       | 越南    |
-| tr-TR | Turkish (Turkey)       | 土耳其语(土耳其)     | 土耳其   |
-| pl-PL | Polish (Poland)        | 波兰语(波兰)       | 波兰    |
-| nl-NL | Dutch (Netherlands)    | 荷兰语(荷兰)       | 荷兰    |
-| nl-BE | Dutch (Belgium)        | 荷兰语(比利时)      | 比利时   |
-| sv-SE | Swedish (Sweden)       | 瑞典语(瑞典)       | 瑞典    |
-| da-DK | Danish (Denmark)       | 丹麦语(丹麦)       | 丹麦    |
-| no-NO | Norwegian (Norway)     | 挪威语(挪威)       | 挪威    |
-| fi-FI | Finnish (Finland)      | 芬兰语(芬兰)       | 芬兰    |
-| el-GR | Greek (Greece)         | 希腊语(希腊)       | 希腊    |
-| he-IL | Hebrew (Israel)        | 希伯来语(以色列)     | 以色列   |
-| cs-CZ | Czech (Czech Republic) | 捷克语(捷克)       | 捷克    |
-| sk-SK | Slovak (Slovakia)      | 斯洛伐克语(斯洛伐克)   | 斯洛伐克  |
-| hu-HU | Hungarian (Hungary)    | 匈牙利语(匈牙利)     | 匈牙利   |
-| ro-RO | Romanian (Romania)     | 罗马尼亚语(罗马尼亚)   | 罗马尼亚  |
-| bg-BG | Bulgarian (Bulgaria)   | 保加利亚语(保加利亚)   | 保加利亚  |
-| hr-HR | Croatian (Croatia)     | 克罗地亚语(克罗地亚)   | 克罗地亚  |
-| sr-RS | Serbian (Serbia)       | 塞尔维亚语(塞尔维亚)   | 塞尔维亚  |
-| sl-SI | Slovenian (Slovenia)   | 斯洛文尼亚语(斯洛文尼亚) | 斯洛文尼亚 |
-| et-EE | Estonian (Estonia)     | 爱沙尼亚语(爱沙尼亚)   | 爱沙尼亚  |
-| lv-LV | Latvian (Latvia)       | 拉脱维亚语(拉脱维亚)   | 拉脱维亚  |
-| lt-LT | Lithuanian (Lithuania) | 立陶宛语(立陶宛)     | 立陶宛   |
-| uk-UA | Ukrainian (Ukraine)    | 乌克兰语(乌克兰)     | 乌克兰   |
-| be-BY | Belarusian (Belarus)   | 白俄罗斯语(白俄罗斯)   | 白俄罗斯  |
-| id-ID | Indonesian (Indonesia) | 印尼语(印度尼西亚)    | 印度尼西亚 |
-| tl-PH | Tagalog (Philippines)  | 他加禄语(菲律宾)     | 菲律宾   |
-| fa-IR | Persian (Iran)         | 波斯语(伊朗)       | 伊朗    |
-| ur-PK | Urdu (Pakistan)        | 乌尔都语(巴基斯坦)    | 巴基斯坦  |
+| 语言代码  | 语言名称                               | 中文名称             | 地区       |
+|-------|------------------------------------|------------------|----------|
+| zh-CN | Chinese (China)                    | 中文(中国)           | 中国大陆     |
+| zh-TW | Chinese (Taiwan)                   | 中文(台湾)           | 中国台湾     |
+| zh-HK | Chinese (Hong Kong)                | 中文(香港)           | 中国香港     |
+| zh-SG | Chinese (Singapore)                | 中文(新加坡)          | 新加坡      |
+| zh-MO | Chinese (Macau)                    | 中文(澳门)           | 中国澳门     |
+| en-US | English (US)                       | 英语(美国)           | 美国       |
+| en-GB | English (UK)                       | 英语(英国)           | 英国       |
+| en-AU | English (Australia)                | 英语(澳大利亚)         | 澳大利亚     |
+| en-CA | English (Canada)                   | 英语(加拿大)          | 加拿大      |
+| en-NZ | English (New Zealand)              | 英语(新西兰)          | 新西兰      |
+| en-IE | English (Ireland)                  | 英语(爱尔兰)          | 爱尔兰      |
+| en-ZA | English (South Africa)             | 英语(南非)           | 南非       |
+| en-IN | English (India)                    | 英语(印度)           | 印度       |
+| en-SG | English (Singapore)                | 英语(新加坡)          | 新加坡      |
+| en-MY | English (Malaysia)                 | 英语(马来西亚)         | 马来西亚     |
+| en-PH | English (Philippines)              | 英语(菲律宾)          | 菲律宾      |
+| en-HK | English (Hong Kong)                | 英语(香港)           | 中国香港     |
+| es-MX | Spanish (Mexico)                   | 西班牙语(墨西哥)        | 墨西哥      |
+| es-AR | Spanish (Argentina)                | 西班牙语(阿根廷)        | 阿根廷      |
+| es-CO | Spanish (Colombia)                 | 西班牙语(哥伦比亚)       | 哥伦比亚     |
+| es-CL | Spanish (Chile)                    | 西班牙语(智利)         | 智利       |
+| es-PE | Spanish (Peru)                     | 西班牙语(秘鲁)         | 秘鲁       |
+| es-VE | Spanish (Venezuela)                | 西班牙语(委内瑞拉)       | 委内瑞拉     |
+| es-EC | Spanish (Ecuador)                  | 西班牙语(厄瓜多尔)       | 厄瓜多尔     |
+| es-UY | Spanish (Uruguay)                  | 西班牙语(乌拉圭)        | 乌拉圭      |
+| es-PY | Spanish (Paraguay)                 | 西班牙语(巴拉圭)        | 巴拉圭      |
+| es-BO | Spanish (Bolivia)                  | 西班牙语(玻利维亚)       | 玻利维亚     |
+| es-CR | Spanish (Costa Rica)               | 西班牙语(哥斯达黎加)      | 哥斯达黎加    |
+| es-PA | Spanish (Panama)                   | 西班牙语(巴拿马)        | 巴拿马      |
+| es-DO | Spanish (Dominican Republic)       | 西班牙语(多米尼加)       | 多米尼加     |
+| es-GT | Spanish (Guatemala)                | 西班牙语(危地马拉)       | 危地马拉     |
+| es-HN | Spanish (Honduras)                 | 西班牙语(洪都拉斯)       | 洪都拉斯     |
+| es-NI | Spanish (Nicaragua)                | 西班牙语(尼加拉瓜)       | 尼加拉瓜     |
+| es-SV | Spanish (El Salvador)              | 西班牙语(萨尔瓦多)       | 萨尔瓦多     |
+| es-CU | Spanish (Cuba)                     | 西班牙语(古巴)         | 古巴       |
+| es-PR | Spanish (Puerto Rico)              | 西班牙语(波多黎各)       | 波多黎各     |
+| pt-BR | Portuguese (Brazil)                | 葡萄牙语(巴西)         | 巴西       |
+| pt-PT | Portuguese (Portugal)              | 葡萄牙语(葡萄牙)        | 葡萄牙      |
+| pt-AO | Portuguese (Angola)                | 葡萄牙语(安哥拉)        | 安哥拉      |
+| pt-MZ | Portuguese (Mozambique)            | 葡萄牙语(莫桑比克)       | 莫桑比克     |
+| pt-GW | Portuguese (Guinea-Bissau)         | 葡萄牙语(几内亚比绍)      | 几内亚比绍    |
+| pt-CV | Portuguese (Cape Verde)            | 葡萄牙语(佛得角)        | 佛得角      |
+| pt-ST | Portuguese (São Tomé and Príncipe) | 葡萄牙语(圣多美和普林西比)   | 圣多美和普林西比 |
+| pt-TL | Portuguese (Timor-Leste)           | 葡萄牙语(东帝汶)        | 东帝汶      |
+| fr-CA | French (Canada)                    | 法语(加拿大)          | 加拿大      |
+| fr-CH | French (Switzerland)               | 法语(瑞士)           | 瑞士       |
+| fr-BE | French (Belgium)                   | 法语(比利时)          | 比利时      |
+| fr-LU | French (Luxembourg)                | 法语(卢森堡)          | 卢森堡      |
+| fr-MC | French (Monaco)                    | 法语(摩纳哥)          | 摩纳哥      |
+| fr-MA | French (Morocco)                   | 法语(摩洛哥)          | 摩洛哥      |
+| fr-DZ | French (Algeria)                   | 法语(阿尔及利亚)        | 阿尔及利亚    |
+| fr-TN | French (Tunisia)                   | 法语(突尼斯)          | 突尼斯      |
+| fr-SN | French (Senegal)                   | 法语(塞内加尔)         | 塞内加尔     |
+| fr-CI | French (Ivory Coast)               | 法语(科特迪瓦)         | 科特迪瓦     |
+| de-AT | German (Austria)                   | 德语(奥地利)          | 奥地利      |
+| de-CH | German (Switzerland)               | 德语(瑞士)           | 瑞士       |
+| de-LI | German (Liechtenstein)             | 德语(列支敦士登)        | 列支敦士登    |
+| it-CH | Italian (Switzerland)              | 意大利语(瑞士)         | 瑞士       |
+| it-SM | Italian (San Marino)               | 意大利语(圣马力诺)       | 圣马力诺     |
+| it-VA | Italian (Vatican)                  | 意大利语(梵蒂冈)        | 梵蒂冈      |
+| ru-UA | Russian (Ukraine)                  | 俄语(乌克兰)          | 乌克兰      |
+| ru-KZ | Russian (Kazakhstan)               | 俄语(哈萨克斯坦)        | 哈萨克斯坦    |
+| ru-BY | Russian (Belarus)                  | 俄语(白俄罗斯)         | 白俄罗斯     |
+| ru-KG | Russian (Kyrgyzstan)               | 俄语(吉尔吉斯斯坦)       | 吉尔吉斯斯坦   |
+| ar-EG | Arabic (Egypt)                     | 阿拉伯语(埃及)         | 埃及       |
+| ar-AE | Arabic (UAE)                       | 阿拉伯语(阿联酋)        | 阿联酋      |
+| ar-JO | Arabic (Jordan)                    | 阿拉伯语(约旦)         | 约旦       |
+| ar-LB | Arabic (Lebanon)                   | 阿拉伯语(黎巴嫩)        | 黎巴嫩      |
+| ar-MA | Arabic (Morocco)                   | 阿拉伯语(摩洛哥)        | 摩洛哥      |
+| ar-TN | Arabic (Tunisia)                   | 阿拉伯语(突尼斯)        | 突尼斯      |
+| ar-DZ | Arabic (Algeria)                   | 阿拉伯语(阿尔及利亚)      | 阿尔及利亚    |
+| ar-IQ | Arabic (Iraq)                      | 阿拉伯语(伊拉克)        | 伊拉克      |
+| ar-SY | Arabic (Syria)                     | 阿拉伯语(叙利亚)        | 叙利亚      |
+| ar-YE | Arabic (Yemen)                     | 阿拉伯语(也门)         | 也门       |
+| ar-LY | Arabic (Libya)                     | 阿拉伯语(利比亚)        | 利比亚      |
+| ar-SD | Arabic (Sudan)                     | 阿拉伯语(苏丹)         | 苏丹       |
+| ar-MR | Arabic (Mauritania)                | 阿拉伯语(毛里塔尼亚)      | 毛里塔尼亚    |
+| ar-KW | Arabic (Kuwait)                    | 阿拉伯语(科威特)        | 科威特      |
+| ar-QA | Arabic (Qatar)                     | 阿拉伯语(卡塔尔)        | 卡塔尔      |
+| ar-BH | Arabic (Bahrain)                   | 阿拉伯语(巴林)         | 巴林       |
+| ar-OM | Arabic (Oman)                      | 阿拉伯语(阿曼)         | 阿曼       |
+| bn-BD | Bengali (Bangladesh)               | 孟加拉语(孟加拉国)       | 孟加拉国     |
+| bn-IN | Bengali (India)                    | 孟加拉语(印度)         | 印度       |
+| ur-PK | Urdu (Pakistan)                    | 乌尔都语(巴基斯坦)       | 巴基斯坦     |
+| ur-IN | Urdu (India)                       | 乌尔都语(印度)         | 印度       |
+| sw-KE | Swahili (Kenya)                    | 斯瓦希里语(肯尼亚)       | 肯尼亚      |
+| sw-TZ | Swahili (Tanzania)                 | 斯瓦希里语(坦桑尼亚)      | 坦桑尼亚     |
+| sw-UG | Swahili (Uganda)                   | 斯瓦希里语(乌干达)       | 乌干达      |
+| se-NO | Northern Sami (Norway)             | 北萨米语(挪威)         | 挪威       |
+| se-SE | Northern Sami (Sweden)             | 北萨米语(瑞典)         | 瑞典       |
+| se-FI | Northern Sami (Finland)            | 北萨米语(芬兰)         | 芬兰       |
+| li-NL | Limburgish (Netherlands)           | 林堡语(荷兰)          | 荷兰       |
+| li-BE | Limburgish (Belgium)               | 林堡语(比利时)         | 比利时      |
+| yi-US | Yiddish (US)                       | 依地语(美国)          | 美国       |
+| yi-IL | Yiddish (Israel)                   | 依地语(以色列)         | 以色列      |
+| qu-PE | Quechua (Peru)                     | 克丘亚语(秘鲁)         | 秘鲁       |
+| qu-BO | Quechua (Bolivia)                  | 克丘亚语(玻利维亚)       | 玻利维亚     |
+| qu-EC | Quechua (Ecuador)                  | 克丘亚语(厄瓜多尔)       | 厄瓜多尔     |
+| ay-BO | Aymara (Bolivia)                   | 艾马拉语(玻利维亚)       | 玻利维亚     |
+| ay-PE | Aymara (Peru)                      | 艾马拉语(秘鲁)         | 秘鲁       |
+| ti-ER | Tigrinya (Eritrea)                 | 提格雷尼亚语(厄立特里亚)    | 厄立特里亚    |
+| ti-ET | Tigrinya (Ethiopia)                | 提格雷尼亚语(埃塞俄比亚)    | 埃塞俄比亚    |
+| so-DJ | Somali (Djibouti)                  | 索马里语(吉布提)        | 吉布提      |
+| so-ET | Somali (Ethiopia)                  | 索马里语(埃塞俄比亚)      | 埃塞俄比亚    |
+| so-KE | Somali (Kenya)                     | 索马里语(肯尼亚)        | 肯尼亚      |
+| ny-MW | Chichewa (Malawi)                  | 尼扬扎语(马拉维)        | 马拉维      |
+| ny-ZW | Chichewa (Zimbabwe)                | 尼扬扎语(津巴布韦)       | 津巴布韦     |
+| st-ZA | Southern Sotho (South Africa)      | 塞索托语(南非)         | 南非       |
+| st-LS | Southern Sotho (Lesotho)           | 塞索托语(莱索托)        | 莱索托      |
+| tn-ZA | Tswana (South Africa)              | 茨瓦纳语(南非)         | 南非       |
+| tn-BW | Tswana (Botswana)                  | 茨瓦纳语(博茨瓦纳)       | 博茨瓦纳     |
+| ta-IN | Tamil (India)                      | 泰米尔语(印度)         | 印度       |
+| ta-LK | Tamil (Sri Lanka)                  | 泰米尔语(斯里兰卡)       | 斯里兰卡     |
+| ta-SG | Tamil (Singapore)                  | 泰米尔语(新加坡)        | 新加坡      |
+| ta-MY | Tamil (Malaysia)                   | 泰米尔语(马来西亚)       | 马来西亚     |
+| pa-IN | Panjabi (India)                    | 旁遮普语(印度)         | 印度       |
+| pa-PK | Panjabi (Pakistan)                 | 旁遮普语(巴基斯坦)       | 巴基斯坦     |
+| bo-CN | Tibetan (China)                    | 藏语(中国)           | 中国       |
+| bo-IN | Tibetan (India)                    | 藏语(印度)           | 印度       |
+| sq-AL | Albanian (Albania)                 | 阿尔巴尼亚语(阿尔巴尼亚)    | 阿尔巴尼亚    |
+| sq-XK | Albanian (Kosovo)                  | 阿尔巴尼亚语(科索沃)      | 科索沃      |
+| sq-MK | Albanian (Macedonia)               | 阿尔巴尼亚语(马其顿)      | 马其顿      |
+| sh-BA | Serbo-Croatian (Bosnia)            | 塞尔维亚-克罗地亚语(波黑)   | 波黑       |
+| sh-HR | Serbo-Croatian (Croatia)           | 塞尔维亚-克罗地亚语(克罗地亚) | 克罗地亚     |
+| sh-ME | Serbo-Croatian (Montenegro)        | 塞尔维亚-克罗地亚语(黑山)   | 黑山       |

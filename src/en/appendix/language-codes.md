@@ -2,13 +2,13 @@
 head:
   - - meta
     - name: description
-      content: "Complete ISO639-1 two-letter language code reference manual, containing 184 major world languages and 63 regional variant codes, providing language codes, English names, native names and original language names"
+      content: "Complete ISO639-1 two-letter language code reference manual, containing 184 major world languages and 125 regional variant codes, providing language codes, English names, native names and original language names"
   - - meta
     - name: keywords
-      content: "ISO6391, ISO639-1, language codes, internationalization, i18n, language standards, two-letter codes, regional variants, language localization, multilingual support"
+      content: "ISO6391, ISO639-1, ISO3166, language codes, internationalization, i18n, language standards, two-letter codes, regional variants, language localization, multilingual support"
 ---
 
-# ISO6391 Language Code Reference
+# Language Code Reference
 
 According to the `ISO639-1` standard, here is the complete two-letter language code reference table:
 
@@ -200,71 +200,132 @@ According to the `ISO639-1` standard, here is the complete two-letter language c
 | zh       | Chinese             | Chinese             | 中文                   |
 | zu       | Zulu                | Zulu                | isiZulu              |
 
-For some languages with regional variants, use the format `language-code-country-code`:
+According to the `ISO3166` standard, for some languages with regional variants, use the format `language code-country code`:
 
-| ISO Code | ISO Name               | English Name           | Region         |
-|----------|------------------------|------------------------|----------------|
-| zh-CN    | Chinese (China)        | Chinese (China)        | Mainland China |
-| zh-TW    | Chinese (Taiwan)       | Chinese (Taiwan)       | Taiwan         |
-| zh-HK    | Chinese (Hong Kong)    | Chinese (Hong Kong)    | Hong Kong      |
-| en-US    | English (US)           | English (US)           | United States  |
-| en-GB    | English (UK)           | English (UK)           | United Kingdom |
-| en-AU    | English (Australia)    | English (Australia)    | Australia      |
-| en-CA    | English (Canada)       | English (Canada)       | Canada         |
-| es-ES    | Spanish (Spain)        | Spanish (Spain)        | Spain          |
-| es-MX    | Spanish (Mexico)       | Spanish (Mexico)       | Mexico         |
-| pt-BR    | Portuguese (Brazil)    | Portuguese (Brazil)    | Brazil         |
-| pt-PT    | Portuguese (Portugal)  | Portuguese (Portugal)  | Portugal       |
-| fr-FR    | French (France)        | French (France)        | France         |
-| fr-CA    | French (Canada)        | French (Canada)        | Canada         |
-| fr-CH    | French (Switzerland)   | French (Switzerland)   | Switzerland    |
-| fr-BE    | French (Belgium)       | French (Belgium)       | Belgium        |
-| de-DE    | German (Germany)       | German (Germany)       | Germany        |
-| de-AT    | German (Austria)       | German (Austria)       | Austria        |
-| de-CH    | German (Switzerland)   | German (Switzerland)   | Switzerland    |
-| it-IT    | Italian (Italy)        | Italian (Italy)        | Italy          |
-| it-CH    | Italian (Switzerland)  | Italian (Switzerland)  | Switzerland    |
-| ru-RU    | Russian (Russia)       | Russian (Russia)       | Russia         |
-| ru-UA    | Russian (Ukraine)      | Russian (Ukraine)      | Ukraine        |
-| ja-JP    | Japanese (Japan)       | Japanese (Japan)       | Japan          |
-| ko-KR    | Korean (South Korea)   | Korean (South Korea)   | South Korea    |
-| ko-KP    | Korean (North Korea)   | Korean (North Korea)   | North Korea    |
-| ar-SA    | Arabic (Saudi Arabia)  | Arabic (Saudi Arabia)  | Saudi Arabia   |
-| ar-EG    | Arabic (Egypt)         | Arabic (Egypt)         | Egypt          |
-| ar-AE    | Arabic (UAE)           | Arabic (UAE)           | UAE            |
-| ar-JO    | Arabic (Jordan)        | Arabic (Jordan)        | Jordan         |
-| ar-LB    | Arabic (Lebanon)       | Arabic (Lebanon)       | Lebanon        |
-| hi-IN    | Hindi (India)          | Hindi (India)          | India          |
-| bn-BD    | Bengali (Bangladesh)   | Bengali (Bangladesh)   | Bangladesh     |
-| bn-IN    | Bengali (India)        | Bengali (India)        | India          |
-| ms-MY    | Malay (Malaysia)       | Malay (Malaysia)       | Malaysia       |
-| ms-SG    | Malay (Singapore)      | Malay (Singapore)      | Singapore      |
-| th-TH    | Thai (Thailand)        | Thai (Thailand)        | Thailand       |
-| vi-VN    | Vietnamese (Vietnam)   | Vietnamese (Vietnam)   | Vietnam        |
-| tr-TR    | Turkish (Turkey)       | Turkish (Turkey)       | Turkey         |
-| pl-PL    | Polish (Poland)        | Polish (Poland)        | Poland         |
-| nl-NL    | Dutch (Netherlands)    | Dutch (Netherlands)    | Netherlands    |
-| nl-BE    | Dutch (Belgium)        | Dutch (Belgium)        | Belgium        |
-| sv-SE    | Swedish (Sweden)       | Swedish (Sweden)       | Sweden         |
-| da-DK    | Danish (Denmark)       | Danish (Denmark)       | Denmark        |
-| no-NO    | Norwegian (Norway)     | Norwegian (Norway)     | Norway         |
-| fi-FI    | Finnish (Finland)      | Finnish (Finland)      | Finland        |
-| el-GR    | Greek (Greece)         | Greek (Greece)         | Greece         |
-| he-IL    | Hebrew (Israel)        | Hebrew (Israel)        | Israel         |
-| cs-CZ    | Czech (Czech Republic) | Czech (Czech Republic) | Czech Republic |
-| sk-SK    | Slovak (Slovakia)      | Slovak (Slovakia)      | Slovakia       |
-| hu-HU    | Hungarian (Hungary)    | Hungarian (Hungary)    | Hungary        |
-| ro-RO    | Romanian (Romania)     | Romanian (Romania)     | Romania        |
-| bg-BG    | Bulgarian (Bulgaria)   | Bulgarian (Bulgaria)   | Bulgaria       |
-| hr-HR    | Croatian (Croatia)     | Croatian (Croatia)     | Croatia        |
-| sr-RS    | Serbian (Serbia)       | Serbian (Serbia)       | Serbia         |
-| sl-SI    | Slovenian (Slovenia)   | Slovenian (Slovenia)   | Slovenia       |
-| et-EE    | Estonian (Estonia)     | Estonian (Estonia)     | Estonia        |
-| lv-LV    | Latvian (Latvia)       | Latvian (Latvia)       | Latvia         |
-| lt-LT    | Lithuanian (Lithuania) | Lithuanian (Lithuania) | Lithuania      |
-| uk-UA    | Ukrainian (Ukraine)    | Ukrainian (Ukraine)    | Ukraine        |
-| be-BY    | Belarusian (Belarus)   | Belarusian (Belarus)   | Belarus        |
-| id-ID    | Indonesian (Indonesia) | Indonesian (Indonesia) | Indonesia      |
-| tl-PH    | Tagalog (Philippines)  | Tagalog (Philippines)  | Philippines    |
-| fa-IR    | Persian (Iran)         | Persian (Iran)         | Iran           |
-| ur-PK    | Urdu (Pakistan)        | Urdu (Pakistan)        | Pakistan       |
+| Language Code | Language Name                      | English Name                       | Region                |
+|---------------|------------------------------------|------------------------------------|-----------------------|
+| zh-CN         | Chinese (China)                    | Chinese (China)                    | Mainland China        |
+| zh-TW         | Chinese (Taiwan)                   | Chinese (Taiwan)                   | Taiwan                |
+| zh-HK         | Chinese (Hong Kong)                | Chinese (Hong Kong)                | Hong Kong             |
+| zh-SG         | Chinese (Singapore)                | Chinese (Singapore)                | Singapore             |
+| zh-MO         | Chinese (Macau)                    | Chinese (Macau)                    | Macau                 |
+| en-US         | English (US)                       | English (US)                       | United States         |
+| en-GB         | English (UK)                       | English (UK)                       | United Kingdom        |
+| en-AU         | English (Australia)                | English (Australia)                | Australia             |
+| en-CA         | English (Canada)                   | English (Canada)                   | Canada                |
+| en-NZ         | English (New Zealand)              | English (New Zealand)              | New Zealand           |
+| en-IE         | English (Ireland)                  | English (Ireland)                  | Ireland               |
+| en-ZA         | English (South Africa)             | English (South Africa)             | South Africa          |
+| en-IN         | English (India)                    | English (India)                    | India                 |
+| en-SG         | English (Singapore)                | English (Singapore)                | Singapore             |
+| en-MY         | English (Malaysia)                 | English (Malaysia)                 | Malaysia              |
+| en-PH         | English (Philippines)              | English (Philippines)              | Philippines           |
+| en-HK         | English (Hong Kong)                | English (Hong Kong)                | Hong Kong             |
+| es-MX         | Spanish (Mexico)                   | Spanish (Mexico)                   | Mexico                |
+| es-AR         | Spanish (Argentina)                | Spanish (Argentina)                | Argentina             |
+| es-CO         | Spanish (Colombia)                 | Spanish (Colombia)                 | Colombia              |
+| es-CL         | Spanish (Chile)                    | Spanish (Chile)                    | Chile                 |
+| es-PE         | Spanish (Peru)                     | Spanish (Peru)                     | Peru                  |
+| es-VE         | Spanish (Venezuela)                | Spanish (Venezuela)                | Venezuela             |
+| es-EC         | Spanish (Ecuador)                  | Spanish (Ecuador)                  | Ecuador               |
+| es-UY         | Spanish (Uruguay)                  | Spanish (Uruguay)                  | Uruguay               |
+| es-PY         | Spanish (Paraguay)                 | Spanish (Paraguay)                 | Paraguay              |
+| es-BO         | Spanish (Bolivia)                  | Spanish (Bolivia)                  | Bolivia               |
+| es-CR         | Spanish (Costa Rica)               | Spanish (Costa Rica)               | Costa Rica            |
+| es-PA         | Spanish (Panama)                   | Spanish (Panama)                   | Panama                |
+| es-DO         | Spanish (Dominican Republic)       | Spanish (Dominican Republic)       | Dominican Republic    |
+| es-GT         | Spanish (Guatemala)                | Spanish (Guatemala)                | Guatemala             |
+| es-HN         | Spanish (Honduras)                 | Spanish (Honduras)                 | Honduras              |
+| es-NI         | Spanish (Nicaragua)                | Spanish (Nicaragua)                | Nicaragua             |
+| es-SV         | Spanish (El Salvador)              | Spanish (El Salvador)              | El Salvador           |
+| es-CU         | Spanish (Cuba)                     | Spanish (Cuba)                     | Cuba                  |
+| es-PR         | Spanish (Puerto Rico)              | Spanish (Puerto Rico)              | Puerto Rico           |
+| pt-BR         | Portuguese (Brazil)                | Portuguese (Brazil)                | Brazil                |
+| pt-PT         | Portuguese (Portugal)              | Portuguese (Portugal)              | Portugal              |
+| pt-AO         | Portuguese (Angola)                | Portuguese (Angola)                | Angola                |
+| pt-MZ         | Portuguese (Mozambique)            | Portuguese (Mozambique)            | Mozambique            |
+| pt-GW         | Portuguese (Guinea-Bissau)         | Portuguese (Guinea-Bissau)         | Guinea-Bissau         |
+| pt-CV         | Portuguese (Cape Verde)            | Portuguese (Cape Verde)            | Cape Verde            |
+| pt-ST         | Portuguese (São Tomé and Príncipe) | Portuguese (São Tomé and Príncipe) | São Tomé and Príncipe |
+| pt-TL         | Portuguese (Timor-Leste)           | Portuguese (Timor-Leste)           | Timor-Leste           |
+| fr-CA         | French (Canada)                    | French (Canada)                    | Canada                |
+| fr-CH         | French (Switzerland)               | French (Switzerland)               | Switzerland           |
+| fr-BE         | French (Belgium)                   | French (Belgium)                   | Belgium               |
+| fr-LU         | French (Luxembourg)                | French (Luxembourg)                | Luxembourg            |
+| fr-MC         | French (Monaco)                    | French (Monaco)                    | Monaco                |
+| fr-MA         | French (Morocco)                   | French (Morocco)                   | Morocco               |
+| fr-DZ         | French (Algeria)                   | French (Algeria)                   | Algeria               |
+| fr-TN         | French (Tunisia)                   | French (Tunisia)                   | Tunisia               |
+| fr-SN         | French (Senegal)                   | French (Senegal)                   | Senegal               |
+| fr-CI         | French (Ivory Coast)               | French (Ivory Coast)               | Ivory Coast           |
+| de-AT         | German (Austria)                   | German (Austria)                   | Austria               |
+| de-CH         | German (Switzerland)               | German (Switzerland)               | Switzerland           |
+| de-LI         | German (Liechtenstein)             | German (Liechtenstein)             | Liechtenstein         |
+| it-CH         | Italian (Switzerland)              | Italian (Switzerland)              | Switzerland           |
+| it-SM         | Italian (San Marino)               | Italian (San Marino)               | San Marino            |
+| it-VA         | Italian (Vatican)                  | Italian (Vatican)                  | Vatican               |
+| ru-UA         | Russian (Ukraine)                  | Russian (Ukraine)                  | Ukraine               |
+| ru-KZ         | Russian (Kazakhstan)               | Russian (Kazakhstan)               | Kazakhstan            |
+| ru-BY         | Russian (Belarus)                  | Russian (Belarus)                  | Belarus               |
+| ru-KG         | Russian (Kyrgyzstan)               | Russian (Kyrgyzstan)               | Kyrgyzstan            |
+| ar-EG         | Arabic (Egypt)                     | Arabic (Egypt)                     | Egypt                 |
+| ar-AE         | Arabic (UAE)                       | Arabic (UAE)                       | UAE                   |
+| ar-JO         | Arabic (Jordan)                    | Arabic (Jordan)                    | Jordan                |
+| ar-LB         | Arabic (Lebanon)                   | Arabic (Lebanon)                   | Lebanon               |
+| ar-MA         | Arabic (Morocco)                   | Arabic (Morocco)                   | Morocco               |
+| ar-TN         | Arabic (Tunisia)                   | Arabic (Tunisia)                   | Tunisia               |
+| ar-DZ         | Arabic (Algeria)                   | Arabic (Algeria)                   | Algeria               |
+| ar-IQ         | Arabic (Iraq)                      | Arabic (Iraq)                      | Iraq                  |
+| ar-SY         | Arabic (Syria)                     | Arabic (Syria)                     | Syria                 |
+| ar-YE         | Arabic (Yemen)                     | Arabic (Yemen)                     | Yemen                 |
+| ar-LY         | Arabic (Libya)                     | Arabic (Libya)                     | Libya                 |
+| ar-SD         | Arabic (Sudan)                     | Arabic (Sudan)                     | Sudan                 |
+| ar-MR         | Arabic (Mauritania)                | Arabic (Mauritania)                | Mauritania            |
+| ar-KW         | Arabic (Kuwait)                    | Arabic (Kuwait)                    | Kuwait                |
+| ar-QA         | Arabic (Qatar)                     | Arabic (Qatar)                     | Qatar                 |
+| ar-BH         | Arabic (Bahrain)                   | Arabic (Bahrain)                   | Bahrain               |
+| ar-OM         | Arabic (Oman)                      | Arabic (Oman)                      | Oman                  |
+| bn-BD         | Bengali (Bangladesh)               | Bengali (Bangladesh)               | Bangladesh            |
+| bn-IN         | Bengali (India)                    | Bengali (India)                    | India                 |
+| ur-PK         | Urdu (Pakistan)                    | Urdu (Pakistan)                    | Pakistan              |
+| ur-IN         | Urdu (India)                       | Urdu (India)                       | India                 |
+| sw-KE         | Swahili (Kenya)                    | Swahili (Kenya)                    | Kenya                 |
+| sw-TZ         | Swahili (Tanzania)                 | Swahili (Tanzania)                 | Tanzania              |
+| sw-UG         | Swahili (Uganda)                   | Swahili (Uganda)                   | Uganda                |
+| se-NO         | Northern Sami (Norway)             | Northern Sami (Norway)             | Norway                |
+| se-SE         | Northern Sami (Sweden)             | Northern Sami (Sweden)             | Sweden                |
+| se-FI         | Northern Sami (Finland)            | Northern Sami (Finland)            | Finland               |
+| li-NL         | Limburgish (Netherlands)           | Limburgish (Netherlands)           | Netherlands           |
+| li-BE         | Limburgish (Belgium)               | Limburgish (Belgium)               | Belgium               |
+| yi-US         | Yiddish (US)                       | Yiddish (US)                       | United States         |
+| yi-IL         | Yiddish (Israel)                   | Yiddish (Israel)                   | Israel                |
+| qu-PE         | Quechua (Peru)                     | Quechua (Peru)                     | Peru                  |
+| qu-BO         | Quechua (Bolivia)                  | Quechua (Bolivia)                  | Bolivia               |
+| qu-EC         | Quechua (Ecuador)                  | Quechua (Ecuador)                  | Ecuador               |
+| ay-BO         | Aymara (Bolivia)                   | Aymara (Bolivia)                   | Bolivia               |
+| ay-PE         | Aymara (Peru)                      | Aymara (Peru)                      | Peru                  |
+| ti-ER         | Tigrinya (Eritrea)                 | Tigrinya (Eritrea)                 | Eritrea               |
+| ti-ET         | Tigrinya (Ethiopia)                | Tigrinya (Ethiopia)                | Ethiopia              |
+| so-DJ         | Somali (Djibouti)                  | Somali (Djibouti)                  | Djibouti              |
+| so-ET         | Somali (Ethiopia)                  | Somali (Ethiopia)                  | Ethiopia              |
+| so-KE         | Somali (Kenya)                     | Somali (Kenya)                     | Kenya                 |
+| ny-MW         | Chichewa (Malawi)                  | Chichewa (Malawi)                  | Malawi                |
+| ny-ZW         | Chichewa (Zimbabwe)                | Chichewa (Zimbabwe)                | Zimbabwe              |
+| st-ZA         | Southern Sotho (South Africa)      | Southern Sotho (South Africa)      | South Africa          |
+| st-LS         | Southern Sotho (Lesotho)           | Southern Sotho (Lesotho)           | Lesotho               |
+| tn-ZA         | Tswana (South Africa)              | Tswana (South Africa)              | South Africa          |
+| tn-BW         | Tswana (Botswana)                  | Tswana (Botswana)                  | Botswana              |
+| ta-IN         | Tamil (India)                      | Tamil (India)                      | India                 |
+| ta-LK         | Tamil (Sri Lanka)                  | Tamil (Sri Lanka)                  | Sri Lanka             |
+| ta-SG         | Tamil (Singapore)                  | Tamil (Singapore)                  | Singapore             |
+| ta-MY         | Tamil (Malaysia)                   | Tamil (Malaysia)                   | Malaysia              |
+| pa-IN         | Panjabi (India)                    | Panjabi (India)                    | India                 |
+| pa-PK         | Panjabi (Pakistan)                 | Panjabi (Pakistan)                 | Pakistan              |
+| bo-CN         | Tibetan (China)                    | Tibetan (China)                    | China                 |
+| bo-IN         | Tibetan (India)                    | Tibetan (India)                    | India                 |
+| sq-AL         | Albanian (Albania)                 | Albanian (Albania)                 | Albania               |
+| sq-XK         | Albanian (Kosovo)                  | Albanian (Kosovo)                  | Kosovo                |
+| sq-MK         | Albanian (Macedonia)               | Albanian (Macedonia)               | Macedonia             |
+| sh-BA         | Serbo-Croatian (Bosnia)            | Serbo-Croatian (Bosnia)            | Bosnia                |
+| sh-HR         | Serbo-Croatian (Croatia)           | Serbo-Croatian (Croatia)           | Croatia               |
+| sh-ME         | Serbo-Croatian (Montenegro)        | Serbo-Croatian (Montenegro)        | Montenegro            |

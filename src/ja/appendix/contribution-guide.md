@@ -16,9 +16,9 @@ head:
 
  ```bash
  # lang/en.json をテンプレートとしてコピー
- cp lang/en.json lang/xx.json
+ cp lang/en.json lang/xx-YY.json
  ```
-ここで `xx` は追加する言語の `ISO639-1` 言語コード（`zh-CN`、`ja`、`ko` など）です。完全な言語コードと言語名については、付録 [言語コード](language-codes.md) を参照してください。
+ここで `xx` は言語コード（`zh`、`en`、`ja` など）、`YY` は国または地域コード（`CN`、`US`、`CA` など）です。言語コードと国コードが同じ場合は、国コードを省略できます（例：`ru-RU` は `ru` と省略可能）。完全な言語コードと国コードについては、[言語コード](language-codes.md) を参照してください。
 
 ### ステップ 2: テンプレートファイルの内容を更新
 
