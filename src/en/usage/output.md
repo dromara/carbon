@@ -83,6 +83,8 @@ carbon.Parse("2020-08-05 13:14:15").ToDayDateTimeString() // Wed, Aug 5, 2020 1:
 carbon.Parse("2020-08-05 13:14:15").ToRssString() // Wed, 05 Aug 2020 13:14:15 +0000
 // Output W3C format string
 carbon.Parse("2020-08-05 13:14:15").ToW3cString() // 2020-08-05T13:14:15+00:00
+// Output Http format string, such as Last-Modified format
+carbon.Parse("2020-08-05 13:14:15").ToHttpString() // Wed, 05 Aug 2020 13:14:15 GMT
 
 // Output ISO8601 format string
 carbon.Parse("2020-08-05 13:14:15.999999999").ToIso8601String() // 2020-08-05T13:14:15+00:00

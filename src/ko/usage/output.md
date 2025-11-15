@@ -83,6 +83,8 @@ carbon.Parse("2020-08-05 13:14:15").ToDayDateTimeString() // Wed, Aug 5, 2020 1:
 carbon.Parse("2020-08-05 13:14:15").ToRssString() // Wed, 05 Aug 2020 13:14:15 +0000
 // W3C 형식 문자열 출력
 carbon.Parse("2020-08-05 13:14:15").ToW3cString() // 2020-08-05T13:14:15+00:00
+// Http 형식 문자열 출력, Last-Modified 형식 등
+carbon.Parse("2020-08-05 13:14:15").ToHttpString() // Wed, 05 Aug 2020 13:14:15 GMT
 
 // ISO8601 형식 문자열 출력
 carbon.Parse("2020-08-05 13:14:15.999999999").ToIso8601String() // 2020-08-05T13:14:15+00:00
