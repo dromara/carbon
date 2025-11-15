@@ -1,0 +1,22 @@
+{
+  "name": "Afrikaans",
+  "author": "https://cursor.com/",
+  "months": "Januarie|Februarie|Maart|April|Mei|Junie|Julie|Augustus|September|Oktober|November|Desember",
+  "short_months": "Jan|Feb|Mrt|Apr|Mei|Jun|Jul|Aug|Sep|Okt|Nov|Des",
+  "weeks": "Sondag|Maandag|Dinsdag|Woensdag|Donderdag|Vrydag|Saterdag",
+  "short_weeks": "So|Ma|Di|Wo|Do|Vr|Sa",
+  "seasons": "Lente|Somer|Herfs|Winter",
+  "constellations": "Ram|Bul|Tweelinge|Kreef|Leeu|Maagd|Weegskaal|Skerpioen|Boogskutter|Steenbok|Waterdraer|Visse",
+  "year": "1 jaar|%d jare",
+  "month": "1 maand|%d maande",
+  "week": "1 week|%d weke",
+  "day": "1 dag|%d dae",
+  "hour": "1 uur|%d ure",
+  "minute": "1 minuut|%d minute",
+  "second": "1 sekonde|%d sekondes",
+  "now": "nou net",
+  "ago": "%s gelede",
+  "from_now": "%s van nou af",
+  "before": "%s voor",
+  "after": "%s na"
+}
