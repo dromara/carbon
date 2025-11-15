@@ -9,13 +9,20 @@ head:
 ---
 
 # Change Log
+## [v2.6.15](https://github.com/dromara/carbon/compare/v2.6.14...v2.6.15) (2025-11-15)
+
+- Remove the `Abs` method used in the `DiffAbsInDuration` method of the `difference.go` file, which is only available from `go1.19`
+- Fix duplicate `Zondag` error in the `weeks` field of the `Dutch` localised language file (lang/nl.json)
+- Add `HttpLayout`, `HttpFormat` constants and `ToHttpString` method
+- Add `Mongolian` localised language support(lang/mn.json)
+- Add `Afrikaans` localised language support(lang/af.json)
 
 ## [v2.6.14](https://github.com/dromara/carbon/compare/v2.6.13...v2.6.14) (2025-10-28)
 
 - Optimize time addition and subtraction series methods in `traveler.go` file to ensure immutability by copying instances to avoid modifying the original instance
-- Add `Greek` localised language support
-- Add `Finnish` localised language support
-- Add `Myanmar` localised language support
+- Add `Greek` localised language support(lang/el.json)
+- Add `Finnish` localised language support(lang/fi.json)
+- Add `Myanmar` localised language support(lang/my.json)
 
 ## [v2.6.13](https://github.com/dromara/carbon/compare/v2.6.12...v2.6.13) (2025-10-15)
 

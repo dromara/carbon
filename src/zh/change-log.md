@@ -9,12 +9,20 @@ head:
 ---
 
 # 更新日志
-## [v2.6.14](https://github.com/dromara/carbon/compare/v2.6.12...v2.6.13) (2025-10-28)
+## [v2.6.15](https://github.com/dromara/carbon/compare/v2.6.14...v2.6.15) (2025-11-15)
+
+- 移除 `difference.go` 文件的 `DiffAbsInDuration` 方法里使用的从 `go1.19` 才有的 `Abs` 方法
+- 修复 `荷兰语` 本地化语言文件(lang/nl.json)里 `weeks` 字段里重复的 `Zondag` 错误
+- 增加 `HttpLayout`, `HttpFormat` 常量以及 `ToHttpString` 方法
+- 增加对 `蒙古语` 的本地化语言支持(lang/mn.json)
+- 增加对 `南非语` 的本地化语言支持(lang/af.json)
+
+## [v2.6.14](https://github.com/dromara/carbon/compare/v2.6.13...v2.6.14) (2025-10-28)
 
 - 优化 `traveler.go` 文件里时间增减系列方法通过复制实例来保证不可变性，以避免修改原始实例
-- 增加对 `希腊语` 的本地化语言支持
-- 增加对 `芬兰语` 的本地化语言支持
-- 增加对 `缅甸语` 的本地化语言支持
+- 增加对 `希腊语` 的本地化语言支持(lang/el.json)
+- 增加对 `芬兰语` 的本地化语言支持(lang/fi.json)
+- 增加对 `缅甸语` 的本地化语言支持(lang/my.json)
 
 ## [v2.6.13](https://github.com/dromara/carbon/compare/v2.6.12...v2.6.13) (2025-10-15)
 

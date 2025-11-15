@@ -9,13 +9,20 @@ head:
 ---
 
 # 업데이트 로그
+## [v2.6.15](https://github.com/dromara/carbon/compare/v2.6.14...v2.6.15) (2025-11-15)
+
+- `difference.go` 파일의 `DiffAbsInDuration` 메서드에서 사용된 `go1.19`부터만 사용 가능한 `Abs` 메서드 제거
+- `HttpLayout`, `HttpFormat` 상수 및 `ToHttpString` 메서드 추가
+- `네덜란드어` 로컬라이즈 언어 파일(lang/nl.json)의 `weeks` 필드에서 중복된 `Zondag` 오류 수정
+- `몽골어` 로컬라이즈 언어 지원 추가(lang/mn.json)
+- `아프리칸스어` 로컬라이즈 언어 지원 추가(lang/af.json)
 
 ## [v2.6.14](https://github.com/dromara/carbon/compare/v2.6.13...v2.6.14) (2025-10-28)
 
 - `traveler.go` 파일의 시간 증감 시리즈 메서드를 최적화하여 인스턴스를 복사함으로써 불변성을 보장하여 원본 인스턴스의 수정을 방지
-- `그리스어` 로컬라이즈 언어 지원 추가
-- `핀란드어` 로컬라이즈 언어 지원 추가
-- `미얀마어` 로컬라이즈 언어 지원 추가
+- `그리스어` 로컬라이즈 언어 지원 추가(lang/el.json)
+- `핀란드어` 로컬라이즈 언어 지원 추가(lang/fi.json)
+- `미얀마어` 로컬라이즈 언어 지원 추가(lang/my.json)
 
 ## [v2.6.13](https://github.com/dromara/carbon/compare/v2.6.12...v2.6.13) (2025-10-15)
 
