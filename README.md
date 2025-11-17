@@ -28,7 +28,7 @@ English | [简体中文](README.cn.md) | [日本語](README.ja.md) | [한국어]
 ## Quick Start
 
 ### Installation
-> go version >= 1.19
+> go version >= 1.18
 
 ```go
 // Via github

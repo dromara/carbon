@@ -28,7 +28,7 @@
 ## 빠른 시작
 
 ### 설치
-> go version >= 1.19
+> go version >= 1.18
 
 ```go
 // GitHub를 통해
