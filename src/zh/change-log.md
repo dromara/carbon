@@ -9,6 +9,11 @@ head:
 ---
 
 # 更新日志
+## [v2.6.16](https://github.com/dromara/carbon/compare/v2.6.15...v2.6.16) (2026-01-28)
+
+- 修复 `Format` 方法中`u`、`v`、`x`符号解析错误的 bug
+- 将 `actions/checkout`  从 `v5` 升级到 `v6`
+
 ## [v2.6.15](https://github.com/dromara/carbon/compare/v2.6.14...v2.6.15) (2025-11-15)
 
 - 移除 `difference.go` 文件的 `DiffAbsInDuration` 方法里使用的从 `go1.19` 才有的 `Abs` 方法

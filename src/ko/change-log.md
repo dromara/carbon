@@ -9,6 +9,11 @@ head:
 ---
 
 # 업데이트 로그
+## [v2.6.16](https://github.com/dromara/carbon/compare/v2.6.15...v2.6.16) (2026-01-28)
+
+- `Format` 메서드에서 `u`, `v`, `x` 기호 파싱 오류 bug 수정
+- `actions/checkout`을 `v5`에서 `v6`로 업그레이드
+
 ## [v2.6.15](https://github.com/dromara/carbon/compare/v2.6.14...v2.6.15) (2025-11-15)
 
 - `difference.go` 파일의 `DiffAbsInDuration` 메서드에서 사용된 `go1.19`부터만 사용 가능한 `Abs` 메서드 제거

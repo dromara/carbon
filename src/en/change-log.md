@@ -9,6 +9,11 @@ head:
 ---
 
 # Change Log
+## [v2.6.16](https://github.com/dromara/carbon/compare/v2.6.15...v2.6.16) (2026-01-28)
+
+- Fix the bug in the parsing of `u`, `v`, and `x` symbols in the `Format` method #328
+- Upgrade `actions/checkout` from `v5` to `v6`
+
 ## [v2.6.15](https://github.com/dromara/carbon/compare/v2.6.14...v2.6.15) (2025-11-15)
 
 - Remove the `Abs` method used in the `DiffAbsInDuration` method of the `difference.go` file, which is only available from `go1.19`
