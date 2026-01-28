@@ -18,7 +18,7 @@ head:
  # 从 lang/en.json 复制作为模板
  cp lang/en.json lang/xx-YY.json
  ```
-其中 `xx` 是语言代码（如 `zh`, `en`, `ja`），`YY` 是国家或地区代码（如 `CN`, `US`, `CA`）, 如果语言代码和国家代码相同，则省略国家代码(如 `ru-RU` 可省略为 `ru`）。完整语言代码和国家代码请查阅 [语言代码](language-codes.md)
+其中 `xx` 是语言代码（如 `zh`, `en`, `ja`），`YY` 是国家/地区代码（如 `CN`, `US`, `CA`）, 如果语言代码和国家/地区代码相同，则省略国家/地区代码(如 `ru-RU` 可省略为 `ru`）。完整语言代码和国家/地区代码请查阅 [语言代码](language-codes.md)
 
 ### 二、更新模板文件内容
 

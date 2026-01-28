@@ -18,7 +18,7 @@ head:
  # Copy lang/en.json as template
  cp lang/en.json lang/xx-YY.json
  ```
-Where `xx` is the language code (such as `zh`, `en`, `ja`), and `YY` is the country or region code (such as `CN`, `US`, `CA`). If the language code and country code are the same, the country code can be omitted (e.g., `ru-RU` can be abbreviated as `ru`). For complete language codes and country codes, please refer to [Language Codes](language-codes.md).
+Where `xx` is the language code (such as `zh`, `en`, `ja`), and `YY` is the country/region code (such as `CN`, `US`, `CA`). If the language code and country/region code are the same, the country/region code can be omitted (e.g., `ru-RU` can be abbreviated as `ru`). For complete language codes and country/region codes, please refer to [Language Codes](language-codes.md).
 
 ### Step 2: Update Template File Content
 
