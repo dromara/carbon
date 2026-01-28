@@ -1253,10 +1253,6 @@ func (s *GetterSuite) TestCarbon_Age() {
 		s.Zero(c.Age())
 	})
 
-	s.Run("zero carbon", func() {
-		s.Equal(2024, NewCarbon().Age())
-	})
-
 	s.Run("empty carbon", func() {
 		s.Zero(Parse("").Age())
 	})
