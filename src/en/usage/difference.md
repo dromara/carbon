@@ -46,8 +46,8 @@ carbon.Now().SubYearsNoOverflow(1).DiffInString() // 1 year
 // Difference in duration
 now := carbon.Now()
 now.DiffInDuration(now).String() // 0s
-now.Copy().AddHour().DiffInDuration(now).String() // 1h0m0s
-now.Copy().SubHour().DiffInDuration(now).String() // -1h0m0s
+now.AddHour().DiffInDuration(now).String() // 1h0m0s
+now.SubHour().DiffInDuration(now).String() // -1h0m0s
 ```
 
 ## Absolute difference
@@ -80,8 +80,8 @@ carbon.Now().SubYearsNoOverflow(1).DiffAbsInString(carbon.Now()) // 1 year
 
 // Difference in duration with absolute value
 now.DiffAbsInDuration(now).String() // 0s
-now.Copy().AddHour().DiffAbsInDuration(now).String() // 1h0m0s
-now.Copy().SubHour().DiffAbsInDuration(now).String() // 1h0m0s
+now.AddHour().DiffAbsInDuration(now).String() // 1h0m0s
+now.SubHour().DiffAbsInDuration(now).String() // 1h0m0s
 ```
 
 ## Humanized difference
