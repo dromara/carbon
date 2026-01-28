@@ -2,6 +2,7 @@ package carbon
 
 import (
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/suite"
 )
@@ -1777,6 +1778,16 @@ func (s *OutputerSuite) TestCarbon_Format() {
 		s.Equal("1596633255999", Parse("2020-08-05 13:14:15.999999999").Format(TimestampMilliFormat))
 		s.Equal("1596633255999999", Parse("2020-08-05 13:14:15.999999999").Format(TimestampMicroFormat))
 		s.Equal("1596633255999999999", Parse("2020-08-05 13:14:15.999999999").Format(TimestampNanoFormat))
+	})
+
+	// https://github.com/dromara/carbon/issues/328
+	s.Run("issue328", func() {
+		inputTime := time.Date(2026, 1, 22, 11, 30, 52, 624_225_666, time.UTC)
+		c := CreateFromStdTime(inputTime)
+
+		s.Equal(inputTime.Format("2006-01-02 15:04:05.999"), c.Format("Y-m-d H:i:s.u"))
+		s.Equal(inputTime.Format("2006-01-02 15:04:05.999999"), c.Format("Y-m-d H:i:s.v"))
+		s.Equal(inputTime.Format("2006-01-02 15:04:05.999999999"), c.Format("Y-m-d H:i:s.x"))
 	})
 }
 

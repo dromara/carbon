@@ -794,6 +794,12 @@ func (c *Carbon) Format(format string, timezone ...string) string {
 				buffer.WriteString(strconv.FormatInt(c.TimestampMicro(), 10))
 			case 'X': // timestamp with nanoseconds, such as 1596604455000000000
 				buffer.WriteString(strconv.FormatInt(c.TimestampNano(), 10))
+			case 'u':
+				buffer.WriteString(fmt.Sprintf("%03d", c.Millisecond()))
+			case 'v':
+				buffer.WriteString(fmt.Sprintf("%06d", c.Microsecond()))
+			case 'x':
+				buffer.WriteString(fmt.Sprintf("%09d", c.Nanosecond()))
 			default: // common symbols
 				buffer.WriteString(c.StdTime().Format(layout))
 			}
