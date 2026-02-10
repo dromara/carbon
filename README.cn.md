@@ -114,7 +114,7 @@ carbon.IsTestNow() // false
 
 - **雨云**  
   KVM高配版，4核 8G 300M，仅需68元/月起，半年付八折，年付七折，七天无理由退订（送5折券）  
-  [点击购买](https://www.rainyun.com/gocarbon_?s=web)
+  [点击购买](https://www.rainyun.com/gopkg_?s=github)
 
 - **林枫云**  
   9950X高防，4核 8G 10M，仅需168元/月，续费同价  
