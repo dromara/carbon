@@ -1,22 +1,23 @@
 <template>
   <div v-if="shouldShowBanner" class="home-banner">
     <span class="banner-text">雨云——新一代云服务提供商，用稳定和性价比，助力您快速上云</span>
-    <a :href="bannerLink" target="_blank" rel="noopener noreferrer" class="banner-link">
+    <a :href="bannerLink" class="banner-link" rel="noopener noreferrer" target="_blank">
       点击前往 →
     </a>
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vitepress'
+<script lang="ts" setup>
+import {computed} from 'vue'
+import {useData} from 'vitepress'
 
-const route = useRoute()
+const { page } = useData()
 
 const shouldShowBanner = computed(() => {
-  const path = route.path
+  // 使用 page.relativePath 来判断，这个在首次加载时就是准确的
+  const relativePath = page.value.relativePath
   // 只在中文版首页显示
-  return path === '/zh/' || path === '/zh/index.html' || path.startsWith('/zh/index')
+  return relativePath === 'zh/index.md' || relativePath.startsWith('zh/index')
 })
 
 const bannerLink = 'https://www.rainyun.com/gocarbon_?s=web'
