@@ -20,7 +20,7 @@ const shouldShowBanner = computed(() => {
   return relativePath === 'zh/index.md' || relativePath.startsWith('zh/index')
 })
 
-const bannerLink = 'https://www.rainyun.com/gocarbon_?s=web'
+const bannerLink = 'https://www.rainyun.com/gopkg_?s=carbon'
 </script>
 
 <style scoped>

@@ -5,9 +5,9 @@
         v-for="(ad, index) in adList" 
         :key="index"
         :href="ad.link" 
-        target="_blank" 
-        rel="noopener noreferrer" 
         class="ad-item"
+        rel="noopener noreferrer" 
+        target="_blank"
       >
         <div class="ad-item-header">
           <span class="ad-title">{{ ad.title }}</span>
@@ -21,9 +21,9 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vitepress'
+<script lang="ts" setup>
+import {computed} from 'vue'
+import {useRoute} from 'vitepress'
 
 const route = useRoute()
 
@@ -36,7 +36,7 @@ const adList = [
   {
     title: '雨云',
     desc: 'KVM高配版，4核 8G 300M，仅需68元/月起，半年付八折，年付七折，七天无理由退订（送5折券）',
-    link: 'https://www.rainyun.com/gocarbon_?s=web',
+    link: 'https://www.rainyun.com/gopkg_?s=carbon',
   },
   {
     title: '林枫云',

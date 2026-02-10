@@ -1,22 +1,22 @@
 <template>
   <div v-if="shouldShowBanner" class="top-banner">
     <div class="banner-content">
-      <svg class="banner-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="banner-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
       </svg>
       <span class="banner-text">
         雨云——新一代云服务提供商，用稳定和性价比，助力您快速上云
       </span>
-      <a :href="bannerLink" target="_blank" rel="noopener noreferrer" class="banner-link">
+      <a :href="bannerLink" class="banner-link" rel="noopener noreferrer" target="_blank">
         点击前往 →
       </a>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vitepress'
+<script lang="ts" setup>
+import {computed} from 'vue'
+import {useRoute} from 'vitepress'
 
 const route = useRoute()
 
@@ -26,7 +26,7 @@ const shouldShowBanner = computed(() => {
   return path.startsWith('/zh/') && path !== '/zh/' && path !== '/zh/index.html'
 })
 
-const bannerLink = 'https://www.rainyun.com/gocarbon_?s=web'
+const bannerLink = 'https://www.rainyun.com/gopkg_?s=carbon'
 </script>
 
 <style scoped>
