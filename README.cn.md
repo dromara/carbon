@@ -110,8 +110,19 @@ carbon.IsTestNow() // false
 
 ## 赞助
 `Carbon` 是一个非商业开源项目, 如果你想支持 `Carbon`,
-你可以为开发者 [购买一杯咖啡](https://carbon.go-pkg.com/zh/sponsor.html)
+你可以为开发者 [购买一杯咖啡](https://carbon.go-pkg.com/zh/sponsor.html) 或 点击以下赞助广告
 
+- **雨云**  
+  KVM高配版，4核 8G 300M，仅需68元/月起，半年付八折，年付七折，七天无理由退订（送5折券）  
+  [点击购买](https://www.rainyun.com/gocarbon_?s=web)
+
+- **林枫云**  
+  9950X高防，4核 8G 10M，仅需168元/月，续费同价  
+  [点击购买](https://www.dkdun.cn/aff/NVHPHCEF)
+
+- **莱卡云**  
+  浙江电信云，2核 4G 10M，仅需38元/月，续费同价  
+  [点击购买](https://www.lcayun.com/aff/MBVNVNFX)
 ## 致谢
 
 `Carbon`已获取免费的 JetBrains 开源许可证，在此表示感谢
