@@ -21,7 +21,7 @@ export const zh = defineConfig({
         },
 
         footer: {
-            message: '由<a style="margin: 0 5px;text-decoration: none;" href="https://www.rainyun.com/OTE5MDYw_?s=carbon.go-pkg.com" target="_blank">雨云</a>提供云服务支持，未经许可禁止任何形式的转载',
+            message: '由<a style="margin: 0 5px;text-decoration: none;" href="https://www.rainyun.com/gocarbon_?s=web" target="_blank">雨云</a>提供云服务支持，未经许可禁止任何形式的转载',
             copyright: `版权所有 © 2024-${new Date().getFullYear()} carbon team <a href="https://beian.miit.gov.cn" target="_blank">京ICP备19041346号-7</a>`
         },
 
