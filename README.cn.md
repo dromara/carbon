@@ -112,6 +112,10 @@ carbon.IsTestNow() // false
 `Carbon` 是一个非商业开源项目, 如果你想支持 `Carbon`,
 你可以为开发者 [购买一杯咖啡](https://carbon.go-pkg.com/zh/sponsor.html) 或 点击以下赞助广告
 
+- **Easysearch**  
+  企业级的分布式搜索型数据库，ES 国产化的首选替代方案
+ <a href="https://easysearch.cn/" target="_blank"><img src="https://easysearch.cn/img/header/logo.svg" height="50" alt="Easysearch"/></a>
+
 - **雨云**  
   KVM高配版，4核 8G 300M，仅需68元/月起，半年付八折，年付七折，七天无理由退订（送5折券）  
   [点击购买](https://www.rainyun.com/gopkg_?s=github)
