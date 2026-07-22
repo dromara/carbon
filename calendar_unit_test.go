@@ -187,7 +187,7 @@ func (s *CalendarSuite) TestCarbon_Hebrew() {
 	s.Run("valid carbon", func() {
 		s.Equal("5784-10-20", Parse("2024-01-01 00:00:00").Hebrew().String())
 		s.Equal("5784-05-01", Parse("2024-08-05 00:00:00").Hebrew().String())
-		s.Equal("5786-07-10", Parse("2025-10-03 00:00:00").Hebrew().String())
+		s.Equal("5786-07-11", Parse("2025-10-03 00:00:00").Hebrew().String())
 		s.Empty(Parse("0001-01-01 00:00:00").Hebrew().String())
 	})
 }
@@ -200,20 +200,20 @@ func (s *CalendarSuite) TestCreateFromHebrew() {
 	})
 
 	s.Run("valid hebrew", func() {
-		s.Equal("2023-12-17 12:00:00 +0000 UTC", CreateFromHebrew(5784, 10, 20).ToString())
-		s.Equal("2024-07-21 12:00:00 +0000 UTC", CreateFromHebrew(5784, 5, 1).ToString())
-		s.Equal("2025-09-18 12:00:00 +0000 UTC", CreateFromHebrew(5786, 7, 10).ToString())
+		s.Equal("2024-01-01 12:00:00 +0000 UTC", CreateFromHebrew(5784, 10, 20).ToString())
+		s.Equal("2024-08-05 12:00:00 +0000 UTC", CreateFromHebrew(5784, 5, 1).ToString())
+		s.Equal("2025-10-02 12:00:00 +0000 UTC", CreateFromHebrew(5786, 7, 10).ToString())
 		s.Equal("0001-01-01 12:00:00 +0000 UTC", CreateFromHebrew(3761, 10, 18).ToString())
 	})
 
 	s.Run("leap year hebrew", func() {
 		// Test leap year with Adar Bet (month 13)
-		s.Equal("2024-02-25 12:00:00 +0000 UTC", CreateFromHebrew(5784, 13, 1).ToString())
+		s.Equal("2024-03-11 12:00:00 +0000 UTC", CreateFromHebrew(5784, 13, 1).ToString())
 	})
 
 	s.Run("boundary hebrew", func() {
 		// Test boundary values
-		s.Equal("-3759-04-01 12:00:00 +0000 UTC", CreateFromHebrew(1, 1, 1).ToString())
-		s.Equal("2024-03-25 12:00:00 +0000 UTC", CreateFromHebrew(5784, 1, 1).ToString())
+		s.Equal("-3759-03-04 12:00:00 +0000 UTC", CreateFromHebrew(1, 1, 1).ToString())
+		s.Equal("2024-04-09 12:00:00 +0000 UTC", CreateFromHebrew(5784, 1, 1).ToString())
 	})
 }

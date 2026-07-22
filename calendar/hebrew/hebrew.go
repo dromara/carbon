@@ -2,7 +2,6 @@ package hebrew
 
 import (
 	"fmt"
-	"math"
 	"time"
 
 	"github.com/dromara/carbon/v2/calendar"
@@ -14,7 +13,13 @@ const (
 	EnLocale      Locale = "en"
 	HeLocale      Locale = "he"
 	defaultLocale        = EnLocale
-	hebrewEpoch          = 347995.5
+
+	// hebrewEpochRD is the Rata Die (fixed day) number of 1 Tishri of Hebrew
+	// year 1, and jdnRataDie is the Julian Day Number at noon of Rata Die day 1
+	// (1 January 1 CE in the proleptic Gregorian calendar). Together they place
+	// the Hebrew and Gregorian conversions on the same integer Julian Day axis.
+	hebrewEpochRD = -1373427
+	jdnRataDie    = 1721425
 )
 
 var (
@@ -44,12 +49,6 @@ func FromStdTime(t time.Time) *Hebrew {
 		return nil
 	}
 
-	// Special handling for January 1, 1 CE
-	if t.Year() == 1 && t.Month() == 1 && t.Day() == 1 {
-		return &Hebrew{year: 3761, month: 10, day: 18}
-	}
-
-	// Authoritative implementation: directly use Julian Day Number
 	jdn := gregorian2jdn(t.Year(), int(t.Month()), t.Day())
 	y, m, d := jdn2hebrew(jdn)
 	return &Hebrew{year: y, month: m, day: d}
@@ -68,8 +67,7 @@ func (h *Hebrew) ToGregorian(timezone ...string) *calendar.Gregorian {
 	if g.Error != nil {
 		return g
 	}
-	jd := hebrew2jdn(h.year, h.month, h.day)
-	year, month, day := jdn2gregorian(int(jd))
+	year, month, day := jdn2gregorian(hebrew2jdn(h.year, h.month, h.day))
 	g.Time = time.Date(year, time.Month(month), day, 12, 0, 0, 0, loc)
 	return g
 }
@@ -166,8 +164,8 @@ func (h *Hebrew) ToWeekString(locale ...Locale) string {
 	if len(locale) > 0 {
 		loc = locale[0]
 	}
-	jdn := hebrew2jdn(h.year, h.month, h.day)
-	weekday := int(math.Mod(jdn+17, 7))
+	// JDN at noon modulo 7: 0 = Monday, so +1 shifts to a Sunday-based index.
+	weekday := (hebrew2jdn(h.year, h.month, h.day) + 1) % 7
 	switch loc {
 	case EnLocale:
 		return EnWeeks[weekday]
@@ -177,79 +175,59 @@ func (h *Hebrew) ToWeekString(locale ...Locale) string {
 	return ""
 }
 
-// gregorian2jdn converts Gregorian date to Julian Day Number
-func gregorian2jdn(year, month, day int) float64 {
-	if month <= 2 {
-		month += 12
-		year--
-	}
-	jd := math.Floor(365.25*float64(year+4716)) +
-		math.Floor(30.6001*float64(month+1)) +
-		float64(day) - 1524.0
-	if year*372+month*31+day >= 588829 {
-		century := year / 100
-		jd += float64(2 - century + century/4)
-	}
-	return jd - 1
+// gregorian2jdn converts a Gregorian date to its Julian Day Number (at noon).
+func gregorian2jdn(year, month, day int) int {
+	a := (14 - month) / 12
+	y := year + 4800 - a
+	m := month + 12*a - 3
+	return day + (153*m+2)/5 + 365*y + y/4 - y/100 + y/400 - 32045
 }
 
-// jdn2gregorian converts Julian Day Number to Gregorian date
+// jdn2gregorian converts a Julian Day Number to a Gregorian date.
 func jdn2gregorian(jdn int) (year, month, day int) {
-	jd := float64(jdn)
-	a := int(jd)
-	b := a + 1524
-	c := int((float64(b) - 122.1) / 365.25)
-	d := int(365.25 * float64(c))
-	e := int((float64(b - d)) / 30.6001)
-	day = b - d - int(30.6001*float64(e))
-	if e < 14 {
-		month = e - 1
-	} else {
-		month = e - 13
-	}
-	if month > 2 {
-		year = c - 4716
-	} else {
-		year = c - 4715
-	}
+	a := jdn + 32044
+	b := (4*a + 3) / 146097
+	c := a - 146097*b/4
+	d := (4*c + 3) / 1461
+	e := c - 1461*d/4
+	m := (5*e + 2) / 153
+	day = e - (153*m+2)/5 + 1
+	month = m + 3 - 12*(m/10)
+	year = 100*b + d - 4800 + m/10
 	return
 }
 
-// jdn2hebrew converts Julian Day Number to Hebrew date
-func jdn2hebrew(jdn float64) (year, month, day int) {
-	// Estimate year
-	approx := int((jdn - hebrewEpoch) / 365.25)
-	// Precisely locate year
-	year = approx
-	for jdn >= getJDNInYear(year+1) {
+// jdn2hebrew converts a Julian Day Number to a Hebrew date.
+func jdn2hebrew(jdn int) (year, month, day int) {
+	// Estimate the year, then correct it against the true Rosh Hashanah bounds.
+	year = (jdn - jdnRataDie - hebrewEpochRD) / 365
+	if year < 1 {
+		year = 1
+	}
+	for getJDNInYear(year+1) <= jdn {
 		year++
 	}
-
-	// Determine month
-	firstMonth := 1
-	if jdn < hebrew2jdn(year, 1, 1) {
-		firstMonth = 7
+	for getJDNInYear(year) > jdn {
+		year--
 	}
-	month = firstMonth
 
+	// Months run Tishri (7) .. Adar/Adar Bet, then Nisan (1) .. Elul (6).
 	maxMonth := getMonthsInYear(year)
-	for month < maxMonth && jdn >= hebrew2jdn(year, month, getDaysInMonth(year, month)) {
-		month++
+	month = 7
+	for month != 6 && jdn >= hebrew2jdn(year, month, 1)+getDaysInMonth(year, month) {
+		if month == maxMonth {
+			month = 1
+		} else {
+			month++
+		}
 	}
 
-	day = int(jdn-hebrew2jdn(year, month, 1)) + 1
-	maxDay := getDaysInMonth(year, month)
-	if day > maxDay {
-		day = maxDay
-	}
-	if day < 1 {
-		day = 1
-	}
+	day = jdn - hebrew2jdn(year, month, 1) + 1
 	return year, month, day
 }
 
-// hebrew2jdn converts Hebrew date to Julian Day Number using authoritative algorithm
-func hebrew2jdn(year, month, day int) float64 {
+// hebrew2jdn converts a Hebrew date to its Julian Day Number (at noon).
+func hebrew2jdn(year, month, day int) int {
 	jdn := getJDNInYear(year)
 
 	monthOffset := 0
@@ -266,7 +244,7 @@ func hebrew2jdn(year, month, day int) float64 {
 		}
 	}
 
-	return jdn + float64(monthOffset) + float64(day-1)
+	return jdn + monthOffset + (day - 1)
 }
 
 // isLeapYear checks if the Hebrew year is a leap year
@@ -281,30 +259,34 @@ func getMonthsFromEpoch(year int) int {
 	return 235*cycles + 12*yearInCycle + (7*yearInCycle+1)/19
 }
 
-// getJDNInYear calculates the Julian Day Number of Hebrew New Year (Tishri 1)
-func getJDNInYear(year int) float64 {
+// getElapsedDays returns the number of days from the Hebrew epoch to Tishri 1
+// of the given year, applying the molad-zaken and ADU postponements.
+func getElapsedDays(year int) int {
 	months := getMonthsFromEpoch(year)
-	parts := 204 + 793*(months%1080)
-	hours := 5 + 12*months + 793*(months/1080) + (parts / 1080)
-	day := 1 + 29*months + (hours / 24)
-	parts = 1080*(hours%24) + (parts % 1080)
-
-	if parts >= 19440 {
+	parts := 12084 + 13753*months
+	day := 29*months + parts/25920
+	// If the molad falls at or after the relevant hour, Rosh Hashanah is
+	// postponed a day (combines molad zaken with the lo ADU rosh rule).
+	if (3*(day+1))%7 < 3 {
 		day++
 	}
+	return day
+}
 
-	if (day%7 == 0) || (day%7 == 3) || (day%7 == 5) {
-		day++
+// getJDNInYear returns the Julian Day Number (at noon) of Hebrew New Year
+// (Tishri 1) for the given year.
+func getJDNInYear(year int) int {
+	elapsed := getElapsedDays(year)
+	// Length-based postponements: a 356-day span forces a two-day delay and a
+	// 382-day span a one-day delay, keeping every year a legal length.
+	correction := 0
+	switch {
+	case getElapsedDays(year+1)-elapsed == 356:
+		correction = 2
+	case elapsed-getElapsedDays(year-1) == 382:
+		correction = 1
 	}
-
-	if (day%7 == 2) && (parts >= 9924) && !isLeapYear(year) {
-		day++
-	}
-	if (day%7 == 1) && (parts >= 16789) && isLeapYear(year-1) {
-		day++
-	}
-
-	return float64(day) + hebrewEpoch
+	return hebrewEpochRD + elapsed + correction + jdnRataDie
 }
 
 // getMonthsInYear calculates the number of months in a year
@@ -328,9 +310,9 @@ func getDaysInMonth(year, month int) int {
 	}
 
 	// Calculate total days in the year
-	yearDays := int(getJDNInYear(year+1) - getJDNInYear(year))
+	yearDays := getJDNInYear(year+1) - getJDNInYear(year)
 
-	// Heshvan (month 8)
+	// Heshvan (month 8) is long only in a complete year (355 or 385 days).
 	if month == 8 {
 		if yearDays == 355 || yearDays == 385 {
 			return 30
@@ -338,9 +320,9 @@ func getDaysInMonth(year, month int) int {
 		return 29
 	}
 
-	// Kislev (month 9)
+	// Kislev (month 9) is short only in a deficient year (353 or 383 days).
 	if month == 9 {
-		if yearDays == 354 || yearDays == 383 {
+		if yearDays == 353 || yearDays == 383 {
 			return 29
 		}
 		return 30

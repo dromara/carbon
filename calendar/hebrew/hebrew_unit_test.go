@@ -21,8 +21,17 @@ func TestFromStdTime(t *testing.T) {
 	t.Run("valid time", func(t *testing.T) {
 		assert.Equal(t, "5784-10-20", FromStdTime(time.Date(2024, 1, 1, 12, 0, 0, 0, time.UTC)).String())
 		assert.Equal(t, "5784-05-01", FromStdTime(time.Date(2024, 8, 5, 12, 0, 0, 0, time.UTC)).String())
-		assert.Equal(t, "5786-07-10", FromStdTime(time.Date(2025, 10, 3, 12, 0, 0, 0, time.UTC)).String())
+		assert.Equal(t, "5786-07-11", FromStdTime(time.Date(2025, 10, 3, 12, 0, 0, 0, time.UTC)).String())
 		assert.Equal(t, "5784-07-01", FromStdTime(time.Date(2023, 9, 16, 12, 0, 0, 0, time.UTC)).String())
+	})
+
+	t.Run("rosh hashanah anchors", func(t *testing.T) {
+		// 1 Tishri (month 7) of each Hebrew year is a fixed historical date.
+		assert.Equal(t, "5780-07-01", FromStdTime(time.Date(2019, 9, 30, 12, 0, 0, 0, time.UTC)).String())
+		assert.Equal(t, "5784-07-01", FromStdTime(time.Date(2023, 9, 16, 12, 0, 0, 0, time.UTC)).String())
+		assert.Equal(t, "5785-07-01", FromStdTime(time.Date(2024, 10, 3, 12, 0, 0, 0, time.UTC)).String())
+		// 1 Nisan (month 1) 5780.
+		assert.Equal(t, "5780-01-01", FromStdTime(time.Date(2020, 3, 26, 12, 0, 0, 0, time.UTC)).String())
 	})
 }
 
@@ -39,10 +48,11 @@ func TestHebrew_Gregorian(t *testing.T) {
 	})
 
 	t.Run("without timezone", func(t *testing.T) {
-		assert.NotEmpty(t, NewHebrew(5784, 1, 1).ToGregorian().String())
-		assert.NotEmpty(t, NewHebrew(5784, 4, 15).ToGregorian().String())
-		assert.NotEmpty(t, NewHebrew(5784, 11, 3).ToGregorian().String())
-		assert.NotEmpty(t, NewHebrew(5785, 4, 15).ToGregorian().String())
+		fmtDate := func(h *Hebrew) string { return h.ToGregorian("UTC").Time.Format("2006-01-02") }
+		assert.Equal(t, "2024-04-09", fmtDate(NewHebrew(5784, 1, 1)))
+		assert.Equal(t, "2024-07-21", fmtDate(NewHebrew(5784, 4, 15)))
+		assert.Equal(t, "2024-01-13", fmtDate(NewHebrew(5784, 11, 3)))
+		assert.Equal(t, "2025-07-11", fmtDate(NewHebrew(5785, 4, 15)))
 	})
 
 	t.Run("with timezone", func(t *testing.T) {
@@ -420,37 +430,23 @@ func TestJdn2gregorian(t *testing.T) {
 			month int
 			day   int
 		}{
-			{1721426, 1, 1, 3},      // Python authoritative: 0001-01-03
-			{2451545, 1999, 12, 19}, // Python authoritative: 1999-12-19
-			{2459580, 2021, 12, 18}, // Python authoritative: 2021-12-18
-			{2459581, 2021, 12, 19}, // Python authoritative: 2021-12-19
-			{2460100, 2023, 5, 22},  // Python authoritative: 2023-05-22
-			{2460141, 2023, 7, 2},   // Python authoritative: 2023-07-02
-			{2488434, 2100, 12, 17}, // Python authoritative: 2100-12-17
+			{1721426, 1, 1, 1},    // Rata Die day 1
+			{2451545, 2000, 1, 1}, // J2000.0 epoch (noon)
+			{2459580, 2021, 12, 31},
+			{2459581, 2022, 1, 1},
+			{2460100, 2023, 6, 4},
+			{2460141, 2023, 7, 15},
+			{2488434, 2100, 12, 31},
 		}
 		for _, c := range cases {
 			y, m, d := jdn2gregorian(c.jdn)
-			assert.True(t, y >= 1 && y <= 9999, "JDN %d year %d out of range", c.jdn, y)
-			assert.True(t, m >= 1 && m <= 12, "JDN %d month %d out of range", c.jdn, m)
-			assert.True(t, d >= 1 && d <= 31, "JDN %d day %d out of range", c.jdn, d)
-			if c.jdn >= 2451545 {
-				assert.True(t, abs(y-c.year) <= 1, "JDN %d year %d vs expected %d", c.jdn, y, c.year)
-				assert.True(t, abs(m-c.month) <= 1, "JDN %d month %d vs expected %d", c.jdn, m, c.month)
-				assert.True(t, abs(d-c.day) <= 1, "JDN %d day %d vs expected %d", c.jdn, d, c.day)
-			} else {
-				assert.Equal(t, c.year, y, "JDN %d year", c.jdn)
-				assert.Equal(t, c.month, m, "JDN %d month", c.jdn)
-				assert.Equal(t, c.day, d, "JDN %d day", c.jdn)
-			}
+			assert.Equal(t, c.year, y, "JDN %d year", c.jdn)
+			assert.Equal(t, c.month, m, "JDN %d month", c.jdn)
+			assert.Equal(t, c.day, d, "JDN %d day", c.jdn)
+			// Gregorian -> JDN must invert JDN -> Gregorian.
+			assert.Equal(t, c.jdn, gregorian2jdn(y, m, d), "round-trip JDN %d", c.jdn)
 		}
 	})
-}
-
-func abs(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
 }
 
 func TestHebrew_AuthorityData(t *testing.T) {
@@ -483,196 +479,81 @@ func TestHebrew_AuthorityData(t *testing.T) {
 
 	t.Logf("Loaded %d test cases from authority data", len(testCases))
 
-	// Test a subset of cases to verify basic functionality
-	// Focus on key dates and festivals that are more likely to be consistent
-	// Exclude boundary years (5900, 6000) that may have implementation differences
-	keyTestCases := []int{0, 1, 2, 3, 4, 5, 9, 12, 13, 14, 15, 17, 18, 21, 35, 36, 37, 38, 39, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 157, 158, 159, 160, 161, 162, 163, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 275, 276, 277, 278, 279, 281, 282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313, 314, 318, 319, 320, 321, 322, 331, 332, 333, 334, 335, 336, 338, 339, 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 353, 354, 355, 356, 357, 359, 360, 361, 362, 363, 364, 365, 366, 367, 368, 369, 370, 371, 372, 373, 374, 375, 376}
-
-	for _, idx := range keyTestCases {
-		if idx >= len(testCases) {
-			continue
-		}
-		tc := testCases[idx]
-
-		// Skip boundary years that may have implementation differences
-		if tc.Hebrew.Year >= 5900 {
-			continue
-		}
+	// Every record carries the authoritative Gregorian date for a Hebrew date;
+	// assert both conversion directions match it exactly.
+	for idx, tc := range testCases {
 		t.Run(fmt.Sprintf("Case_%d_%s", idx+1, tc.Description), func(t *testing.T) {
-			// Test Hebrew to Gregorian conversion
-			h := NewHebrew(tc.Hebrew.Year, tc.Hebrew.Month, tc.Hebrew.Day)
-			g := h.ToGregorian()
+			wantGreg := fmt.Sprintf("%04d-%02d-%02d", tc.Gregorian.Year, tc.Gregorian.Month, tc.Gregorian.Day)
 
-			// Verify the conversion produces valid results
-			// 允许公历年份范围：1（希伯来3761年对应）到9999
-			assert.True(t, g.Time.Year() >= 1 && g.Time.Year() <= 9999,
-				"Hebrew %d-%d-%d: Invalid year %d", tc.Hebrew.Year, tc.Hebrew.Month, tc.Hebrew.Day, g.Time.Year())
-			assert.True(t, int(g.Time.Month()) >= 1 && int(g.Time.Month()) <= 12,
-				"Hebrew %d-%d-%d: Invalid month %d", tc.Hebrew.Year, tc.Hebrew.Month, tc.Hebrew.Day, int(g.Time.Month()))
-			assert.True(t, g.Time.Day() >= 1 && g.Time.Day() <= 31,
-				"Hebrew %d-%d-%d: Invalid day %d", tc.Hebrew.Year, tc.Hebrew.Month, tc.Hebrew.Day, g.Time.Day())
+			// Hebrew -> Gregorian.
+			g := NewHebrew(tc.Hebrew.Year, tc.Hebrew.Month, tc.Hebrew.Day).ToGregorian("UTC")
+			assert.Equal(t, wantGreg, g.Time.Format("2006-01-02"),
+				"Hebrew %d-%d-%d -> Gregorian", tc.Hebrew.Year, tc.Hebrew.Month, tc.Hebrew.Day)
 
-			// Test Gregorian to Hebrew conversion (round-trip test)
-			gregorianTime := time.Date(tc.Gregorian.Year, time.Month(tc.Gregorian.Month), tc.Gregorian.Day, tc.Gregorian.Hour, tc.Gregorian.Minute, tc.Gregorian.Second, 0, time.UTC)
-			h2 := FromStdTime(gregorianTime)
-
-			// Verify the round-trip conversion produces valid results
-			// 允许希伯来年份范围：3761（公元1年）到9999
-			assert.True(t, h2.Year() >= 3761 && h2.Year() <= 9999,
-				"Gregorian %d-%d-%d: Invalid Hebrew year %d", tc.Gregorian.Year, tc.Gregorian.Month, tc.Gregorian.Day, h2.Year())
-			assert.True(t, h2.Month() >= 1 && h2.Month() <= 13,
-				"Gregorian %d-%d-%d: Invalid Hebrew month %d", tc.Gregorian.Year, tc.Gregorian.Month, tc.Gregorian.Day, h2.Month())
-			assert.True(t, h2.Day() >= 1 && h2.Day() <= 30,
-				"Gregorian %d-%d-%d: Invalid Hebrew day %d", tc.Gregorian.Year, tc.Gregorian.Month, tc.Gregorian.Day, h2.Day())
-
-			// Log the actual conversions for debugging
-			t.Logf("Hebrew %d-%d-%d -> Gregorian %d-%d-%d",
-				tc.Hebrew.Year, tc.Hebrew.Month, tc.Hebrew.Day,
-				g.Time.Year(), int(g.Time.Month()), g.Time.Day())
-			t.Logf("Gregorian %d-%d-%d -> Hebrew %d-%d-%d",
-				tc.Gregorian.Year, tc.Gregorian.Month, tc.Gregorian.Day,
-				h2.Year(), h2.Month(), h2.Day())
+			// Gregorian -> Hebrew.
+			h2 := FromStdTime(time.Date(tc.Gregorian.Year, time.Month(tc.Gregorian.Month), tc.Gregorian.Day, tc.Gregorian.Hour, tc.Gregorian.Minute, tc.Gregorian.Second, 0, time.UTC))
+			assert.Equal(t, tc.Hebrew.Year, h2.Year(), "Gregorian %s -> Hebrew year", wantGreg)
+			assert.Equal(t, tc.Hebrew.Month, h2.Month(), "Gregorian %s -> Hebrew month", wantGreg)
+			assert.Equal(t, tc.Hebrew.Day, h2.Day(), "Gregorian %s -> Hebrew day", wantGreg)
 		})
 	}
 }
 
 func TestHebrew_jdn2hebrew(t *testing.T) {
 
-	t.Run("valid_jdn_values", func(t *testing.T) {
-		// Test various JDN values
-		testCases := []struct {
-			jdn           float64
-			expectedYear  int
-			expectedMonth int
-			expectedDay   int
+	t.Run("known_jdn_values", func(t *testing.T) {
+		// Julian Day Number (at noon) -> Hebrew date, verified against pyluach
+		// and convertdate.hebrew.
+		cases := []struct {
+			jdn   int
+			year  int
+			month int
+			day   int
 		}{
-			{1721425.5, 3761, 10, 19}, // Hebrew 3761-10-19 (actual result)
-			{2459580.5, 5782, 11, 1},  // Hebrew 5782-11-1 (actual result)
-			{2460100.5, 5783, 3, 17},  // Hebrew 5783-3-17 (actual result)
+			{1721426, 3761, 10, 18}, // 0001-01-01
+			{2458935, 5780, 1, 1},   // 2020-03-26, 1 Nisan
+			{2459580, 5782, 10, 27}, // 2021-12-31
+			{2460204, 5784, 7, 1},   // 2023-09-16, Rosh Hashanah
 		}
-
-		for _, tc := range testCases {
-			year, month, day := jdn2hebrew(tc.jdn)
-			assert.Equal(t, tc.expectedYear, year, "JDN %.1f year", tc.jdn)
-			assert.Equal(t, tc.expectedMonth, month, "JDN %.1f month", tc.jdn)
-			assert.Equal(t, tc.expectedDay, day, "JDN %.1f day", tc.jdn)
+		for _, c := range cases {
+			year, month, day := jdn2hebrew(c.jdn)
+			assert.Equal(t, c.year, year, "JDN %d year", c.jdn)
+			assert.Equal(t, c.month, month, "JDN %d month", c.jdn)
+			assert.Equal(t, c.day, day, "JDN %d day", c.jdn)
 		}
 	})
 
-	t.Run("boundary_jdn_values", func(t *testing.T) {
-		// Test boundary JDN values
-		year, month, day := jdn2hebrew(347995.5) // Hebrew year 1
-		t.Logf("JDN 347995.5 -> Hebrew: %d-%d-%d", year, month, day)
-		assert.Equal(t, 0, year)  // Actual result
-		assert.Equal(t, 6, month) // Actual result
-		assert.Equal(t, 1, day)   // Actual result
-
-		// Test very large JDN values
-		year, month, day = jdn2hebrew(5373483.5) // Hebrew year 9999
-		t.Logf("JDN 5373483.5 -> Hebrew: %d-%d-%d", year, month, day)
-		assert.True(t, year >= 10000 && year <= 20000) // Actual result is 13760
-		assert.True(t, month >= 1 && month <= 13)
-		assert.True(t, day >= 1 && day <= 30)
+	t.Run("first_day_of_every_month", func(t *testing.T) {
+		// jdn2hebrew must invert hebrew2jdn for the first day of every month of
+		// both a common (5785) and a leap (5784) year.
+		for _, y := range []int{5784, 5785} {
+			for m := 1; m <= getMonthsInYear(y); m++ {
+				year, month, day := jdn2hebrew(hebrew2jdn(y, m, 1))
+				assert.Equal(t, [3]int{y, m, 1}, [3]int{year, month, day}, "first day of %d-%d", y, m)
+			}
+		}
 	})
+}
 
-	t.Run("fractional_jdn_values", func(t *testing.T) {
-		// Test JDN values with fractional parts
-		year, month, day := jdn2hebrew(2459580.75)
-		assert.True(t, year >= 5780 && year <= 5785)
-		assert.True(t, month >= 1 && month <= 13)
-		assert.True(t, day >= 1 && day <= 30)
-	})
-
-	t.Run("month_overflow_protection", func(t *testing.T) {
-		// Test the month overflow protection branch
-		// Use extreme JDN values that might trigger month calculation issues
-		year, month, day := jdn2hebrew(5373483.5) // Very large JDN
-		t.Logf("Extreme JDN 5373483.5 -> Hebrew: %d-%d-%d", year, month, day)
-		assert.True(t, month >= 1 && month <= 13, "Month should be within valid range")
-
-		// Test with another extreme value
-		year, month, day = jdn2hebrew(347995.5) // Very small JDN
-		t.Logf("Extreme JDN 347995.5 -> Hebrew: %d-%d-%d", year, month, day)
-		assert.True(t, month >= 1 && month <= 12, "Month should be within valid range")
-	})
-
-	t.Run("day_overflow_protection", func(t *testing.T) {
-		// Test the day overflow protection branches
-		// Use JDN values that might trigger day calculation issues
-		year, month, day := jdn2hebrew(2459580.5) // Normal JDN
-		t.Logf("Normal JDN 2459580.5 -> Hebrew: %d-%d-%d", year, month, day)
-		assert.True(t, day >= 1 && day <= 30, "Day should be within valid range")
-
-		// Test with fractional JDN that might cause day calculation issues
-		year, month, day = jdn2hebrew(2459580.99) // High fractional part
-		t.Logf("High fractional JDN 2459580.99 -> Hebrew: %d-%d-%d", year, month, day)
-		assert.True(t, day >= 1 && day <= 30, "Day should be within valid range")
-
-		// Test with very low fractional part
-		year, month, day = jdn2hebrew(2459580.01) // Low fractional part
-		t.Logf("Low fractional JDN 2459580.01 -> Hebrew: %d-%d-%d", year, month, day)
-		assert.True(t, day >= 1 && day <= 30, "Day should be within valid range")
-	})
-
-	t.Run("edge_case_protection", func(t *testing.T) {
-		// Test edge cases that might trigger all protection branches
-		// Use JDN values at the boundaries of Hebrew calendar
-		year, month, day := jdn2hebrew(hebrewEpoch) // Hebrew epoch
-		t.Logf("Hebrew epoch JDN %.1f -> Hebrew: %d-%d-%d", hebrewEpoch, year, month, day)
-		assert.True(t, month >= 1 && month <= 13, "Month should be within valid range")
-		assert.True(t, day >= 1 && day <= 30, "Day should be within valid range")
-
-		// Test with JDN just before Hebrew epoch
-		year, month, day = jdn2hebrew(hebrewEpoch - 0.5)
-		t.Logf("Before epoch JDN %.1f -> Hebrew: %d-%d-%d", hebrewEpoch-0.5, year, month, day)
-		assert.True(t, month >= 1 && month <= 13, "Month should be within valid range")
-		assert.True(t, day >= 1 && day <= 30, "Day should be within valid range")
-	})
-
-	t.Run("force_protection_branches", func(t *testing.T) {
-		// Force test cases to trigger protection branches
-		// Test with very large JDN values that might cause calculation issues
-		year, month, day := jdn2hebrew(9999999.5) // Extremely large JDN
-		t.Logf("Extremely large JDN 9999999.5 -> Hebrew: %d-%d-%d", year, month, day)
-		assert.True(t, month >= 1 && month <= 13, "Month should be within valid range")
-		assert.True(t, day >= 1 && day <= 30, "Day should be within valid range")
-
-		// Test with very small JDN values
-		year, month, day = jdn2hebrew(100000.5) // Very small JDN
-		t.Logf("Very small JDN 100000.5 -> Hebrew: %d-%d-%d", year, month, day)
-		assert.True(t, month >= 1 && month <= 13, "Month should be within valid range")
-		assert.True(t, day >= 1 && day <= 30, "Day should be within valid range")
-
-		// Test with JDN values that might cause floating point precision issues
-		year, month, day = jdn2hebrew(2459580.999999) // Very high precision
-		t.Logf("High precision JDN 2459580.999999 -> Hebrew: %d-%d-%d", year, month, day)
-		assert.True(t, month >= 1 && month <= 13, "Month should be within valid range")
-		assert.True(t, day >= 1 && day <= 30, "Day should be within valid range")
-
-		year, month, day = jdn2hebrew(2459580.000001) // Very low precision
-		t.Logf("Low precision JDN 2459580.000001 -> Hebrew: %d-%d-%d", year, month, day)
-		assert.True(t, month >= 1 && month <= 13, "Month should be within valid range")
-		assert.True(t, day >= 1 && day <= 30, "Day should be within valid range")
-	})
-
-	// dehiyyot_rules
-	testCases := []struct {
-		year     int
-		expected float64
+func TestHebrew_getJDNInYear(t *testing.T) {
+	// Rosh Hashanah (Tishri 1) Julian Day Number at noon, verified against
+	// convertdate.hebrew for years exercising each postponement rule.
+	cases := []struct {
+		year int
+		jdn  int
 	}{
-		{1, 347996.5},     // Hebrew year 1 (actual result)
-		{5780, 2458755.5}, // Hebrew year 5780 (actual result)
-		{5784, 2460202.5}, // Hebrew year 5784 (leap year, actual result)
-		{9999, 3999721.5}, // Hebrew year 9999 (actual result)
-		{5765, 2453372.5}, // parts >= 19440
-		{5766, 2453737.5}, // day%7==0
-		{5767, 2454102.5}, // day%7==3
-		{5768, 2454467.5}, // day%7==5
-		{5769, 2454832.5}, // day%7==2 && parts>=9924 && !isLeapYear(year)
-		{5770, 2455197.5}, // day%7==1 && parts>=16789 && isLeapYear(year-1)
+		{1, 347998},
+		{5765, 2453265},
+		{5766, 2453648},
+		{5767, 2454002},
+		{5768, 2454357},
+		{5769, 2454740},
+		{5770, 2455094},
+		{5780, 2458757},
+		{5784, 2460204},
+		{9999, 3999723},
 	}
-	for _, tc := range testCases {
-		result := getJDNInYear(tc.year)
-		assert.True(t, result > 0 && result < 1e8, "Year %d: got %.1f", tc.year, result)
+	for _, c := range cases {
+		assert.Equal(t, c.jdn, getJDNInYear(c.year), "Rosh Hashanah JDN for year %d", c.year)
 	}
 }

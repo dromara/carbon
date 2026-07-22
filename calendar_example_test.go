@@ -77,7 +77,7 @@ func ExampleCarbon_Hebrew() {
 	// Output:
 	// 5784-10-20
 	// 5784-05-01
-	// 5786-07-10
+	// 5786-07-11
 }
 
 func ExampleCreateFromHebrew() {
@@ -86,7 +86,7 @@ func ExampleCreateFromHebrew() {
 	fmt.Println(carbon.CreateFromHebrew(5786, 7, 10).ToDateString())
 
 	// Output:
-	// 2023-12-17
-	// 2024-07-21
-	// 2025-09-18
+	// 2024-01-01
+	// 2024-08-05
+	// 2025-10-02
 }

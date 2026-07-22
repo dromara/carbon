@@ -222,28 +222,21 @@ func BenchmarkJdn2gregorian(b *testing.B) {
 
 func BenchmarkJdn2hebrew(b *testing.B) {
 	b.Run("normal_jdn", func(b *testing.B) {
-		jdn := 2459580.5 // Hebrew 5782-11-1
+		jdn := 2459580 // Hebrew 5782-10-27
 		for i := 0; i < b.N; i++ {
 			jdn2hebrew(jdn)
 		}
 	})
 
 	b.Run("early_jdn", func(b *testing.B) {
-		jdn := 347995.5 // Hebrew year 1
+		jdn := 1721426 // Hebrew 3761-10-18
 		for i := 0; i < b.N; i++ {
 			jdn2hebrew(jdn)
 		}
 	})
 
 	b.Run("late_jdn", func(b *testing.B) {
-		jdn := 5373483.5 // Hebrew year 9999
-		for i := 0; i < b.N; i++ {
-			jdn2hebrew(jdn)
-		}
-	})
-
-	b.Run("fractional_jdn", func(b *testing.B) {
-		jdn := 2459580.75
+		jdn := 5373484 // Hebrew 13760-08-28
 		for i := 0; i < b.N; i++ {
 			jdn2hebrew(jdn)
 		}
