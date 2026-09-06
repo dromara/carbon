@@ -1789,6 +1789,15 @@ func (s *OutputerSuite) TestCarbon_Format() {
 		s.Equal(inputTime.Format("2006-01-02 15:04:05.999999"), c.Format("Y-m-d H:i:s.v"))
 		s.Equal(inputTime.Format("2006-01-02 15:04:05.999999999"), c.Format("Y-m-d H:i:s.x"))
 	})
+
+	// https://github.com/dromara/carbon/issues/347
+	s.Run("issue347", func() {
+		c := Parse("2020-08-05 13:14:15")
+
+		s.Equal("2020-08-05", c.Format("Y-m-d\\"))
+		s.Empty(c.Format("\\"))
+		s.Equal("2020-08-05\\", c.Format("Y-m-d\\\\"))
+	})
 }
 
 func (s *OutputerSuite) TestFormat2Layout() {
