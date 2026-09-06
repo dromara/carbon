@@ -191,6 +191,19 @@ func (s *LanguageSuite) TestLanguage_SetResources() {
 		s.Equal("Wed", Parse("2020-08-05").SetLanguage(lang).ToShortWeekString())
 	})
 
+	// https://github.com/dromara/carbon/issues/349
+	s.Run("issue349", func() {
+		lang1 := NewLanguage().SetLocale("en")
+		lang1.SetResources(map[string]string{
+			"months": "Ⅰ月|Ⅱ月|Ⅲ月|Ⅳ月|Ⅴ月|Ⅵ月|Ⅶ月|Ⅷ月|Ⅸ月|Ⅹ月|Ⅺ月|Ⅻ月",
+		})
+		s.Equal("Ⅷ月", Parse("2020-08-05").SetLanguage(lang1).ToMonthString())
+
+		// the cached resources must stay untouched for every other instance
+		lang2 := NewLanguage().SetLocale("en")
+		s.Equal("August", Parse("2020-08-05").SetLanguage(lang2).ToMonthString())
+	})
+
 	s.Run("set all resources", func() {
 		resources := map[string]string{
 			"constellations": "Aries|Taurus|Gemini|Cancer|Leo|Virgo|Libra|Scorpio|Sagittarius|Capricorn|Aquarius|Pisces",
