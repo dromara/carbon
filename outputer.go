@@ -806,8 +806,11 @@ func (c *Carbon) Format(format string, timezone ...string) string {
 		} else {
 			switch format[i] {
 			case '\\': // raw output, no parse
-				buffer.WriteByte(format[i+1])
-				i++
+				// Ensure we don't go out of bounds
+				if i+1 < len(format) {
+					buffer.WriteByte(format[i+1])
+					i++
+				}
 				continue
 			case 'W': // week number of the year, ranging from 1-52
 				week := fmt.Sprintf("%d", c.WeekOfYear())
