@@ -9,6 +9,7 @@ import (
 func (c *Carbon) Scan(src any) error {
 	switch v := src.(type) {
 	case nil:
+		*c = *NewCarbon()
 		return nil
 	case []byte:
 		*c = *Parse(string(v))

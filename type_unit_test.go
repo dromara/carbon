@@ -1,7 +1,9 @@
 package carbon
 
 import (
+	"database/sql/driver"
 	"encoding/json"
+	"fmt"
 	"testing"
 	"time"
 
@@ -1111,4 +1113,35 @@ func (s *CustomerTypeSuite) TestCustomerType_UnmarshalJSON() {
 		s.Equal("2020-08-05T13:14:15+00:00", model.CreatedAt.String())
 		s.Equal("2020-08-05T13:14:15Z", model.UpdatedAt.String())
 	})
+}
+
+func TestScanNullClearsPreviousValue(t *testing.T) {
+	initial := Parse("2024-01-02 03:04:05", UTC)
+	values := []interface {
+		Scan(any) error
+		Value() (driver.Value, error)
+	}{
+		initial.Copy(),
+		NewDateTime(initial.Copy()),
+		NewTimestamp(initial.Copy()),
+		NewFormatType[iso8601Type](initial.Copy()),
+	}
+	for _, value := range values {
+		t.Run(fmt.Sprintf("%T", value), func(t *testing.T) {
+			if err := value.Scan(nil); err != nil {
+				t.Fatal(err)
+			}
+			got, err := value.Value()
+			if err != nil || got != nil {
+				t.Fatalf("Value after SQL NULL = %v, %v; want nil, nil", got, err)
+			}
+			if err := value.Scan(initial.StdTime()); err != nil {
+				t.Fatal(err)
+			}
+			got, err = value.Value()
+			if err != nil || got == nil {
+				t.Fatalf("Value after scanning a date = %v, %v", got, err)
+			}
+		})
+	}
 }
