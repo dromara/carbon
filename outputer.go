@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"strconv"
-	"strings"
 )
 
 // GoString implements "fmt.GoStringer" interface for Carbon struct.
@@ -43,13 +42,7 @@ func (c *Carbon) ToMonthString(timezone ...string) string {
 	lang.rw.RLock()
 	defer lang.rw.RUnlock()
 
-	if resources, ok := lang.resources["months"]; ok {
-		slice := strings.Split(resources, "|")
-		if len(slice) == MonthsPerYear {
-			return slice[c.Month()-1]
-		}
-	}
-	return ""
+	return getResourceItem(lang.resources["months"], c.Month()-1, MonthsPerYear)
 }
 
 // ToShortMonthString outputs a string in short month layout like "Jan", i18n is supported.
@@ -69,13 +62,7 @@ func (c *Carbon) ToShortMonthString(timezone ...string) string {
 	lang.rw.RLock()
 	defer lang.rw.RUnlock()
 
-	if resources, ok := lang.resources["short_months"]; ok {
-		slice := strings.Split(resources, "|")
-		if len(slice) == MonthsPerYear {
-			return slice[c.Month()-1]
-		}
-	}
-	return ""
+	return getResourceItem(lang.resources["short_months"], c.Month()-1, MonthsPerYear)
 }
 
 // ToWeekString outputs a string in week layout like "Sunday", i18n is supported.
@@ -95,13 +82,7 @@ func (c *Carbon) ToWeekString(timezone ...string) string {
 	lang.rw.RLock()
 	defer lang.rw.RUnlock()
 
-	if resources, ok := lang.resources["weeks"]; ok {
-		slice := strings.Split(resources, "|")
-		if len(slice) == DaysPerWeek {
-			return slice[c.DayOfWeek()%DaysPerWeek]
-		}
-	}
-	return ""
+	return getResourceItem(lang.resources["weeks"], c.DayOfWeek()%DaysPerWeek, DaysPerWeek)
 }
 
 // ToShortWeekString outputs a string in short week layout like "Sun", i18n is supported.
@@ -121,13 +102,7 @@ func (c *Carbon) ToShortWeekString(timezone ...string) string {
 	lang.rw.RLock()
 	defer lang.rw.RUnlock()
 
-	if resources, ok := lang.resources["short_weeks"]; ok {
-		slice := strings.Split(resources, "|")
-		if len(slice) == DaysPerWeek {
-			return slice[c.DayOfWeek()%DaysPerWeek]
-		}
-	}
-	return ""
+	return getResourceItem(lang.resources["short_weeks"], c.DayOfWeek()%DaysPerWeek, DaysPerWeek)
 }
 
 // ToDayDateTimeString outputs a string in "Mon, Jan 2, 2006 3:04 PM" layout.

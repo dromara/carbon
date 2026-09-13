@@ -178,3 +178,23 @@ func BenchmarkGetAbsValue(b *testing.B) {
 		}
 	}
 }
+
+// BenchmarkGetResourceItem benchmarks the getResourceItem function
+func BenchmarkGetResourceItem(b *testing.B) {
+	monthsResource := "January|February|March|April|May|June|July|August|September|October|November|December"
+	weeksResource := "Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday"
+	seasonsResource := "Spring|Summer|Autumn|Winter"
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		for index := 0; index < MonthsPerYear; index++ {
+			_ = getResourceItem(monthsResource, index, MonthsPerYear)
+		}
+		for index := 0; index < DaysPerWeek; index++ {
+			_ = getResourceItem(weeksResource, index, DaysPerWeek)
+		}
+		for index := 0; index < QuartersPerYear; index++ {
+			_ = getResourceItem(seasonsResource, index, QuartersPerYear)
+		}
+	}
+}

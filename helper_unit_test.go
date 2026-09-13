@@ -454,3 +454,122 @@ func TestGetAbsValue(t *testing.T) {
 		})
 	}
 }
+
+// Test getResourceItem function
+func TestGetResourceItem(t *testing.T) {
+	tests := []struct {
+		name     string
+		resource string
+		index    int
+		count    int
+		expected string
+	}{
+		{
+			name:     "First item",
+			resource: "a|b|c",
+			index:    0,
+			count:    3,
+			expected: "a",
+		},
+		{
+			name:     "Middle item",
+			resource: "a|b|c",
+			index:    1,
+			count:    3,
+			expected: "b",
+		},
+		{
+			name:     "Last item",
+			resource: "a|b|c",
+			index:    2,
+			count:    3,
+			expected: "c",
+		},
+		{
+			name:     "Single item",
+			resource: "a",
+			index:    0,
+			count:    1,
+			expected: "a",
+		},
+		{
+			name:     "Empty item",
+			resource: "a||c",
+			index:    1,
+			count:    3,
+			expected: "",
+		},
+		{
+			name:     "Empty resource",
+			resource: "",
+			index:    0,
+			count:    3,
+			expected: "",
+		},
+		{
+			name:     "Too few items",
+			resource: "a|b",
+			index:    0,
+			count:    3,
+			expected: "",
+		},
+		{
+			name:     "Too many items",
+			resource: "a|b|c|d",
+			index:    0,
+			count:    3,
+			expected: "",
+		},
+		{
+			name:     "Negative index",
+			resource: "a|b|c",
+			index:    -1,
+			count:    3,
+			expected: "",
+		},
+		{
+			name:     "Index out of range",
+			resource: "a|b|c",
+			index:    3,
+			count:    3,
+			expected: "",
+		},
+		{
+			name:     "Multi-byte items",
+			resource: "Ⅰ月|Ⅱ月|Ⅲ月",
+			index:    2,
+			count:    3,
+			expected: "Ⅲ月",
+		},
+		{
+			name:     "Month resource",
+			resource: "January|February|March|April|May|June|July|August|September|October|November|December",
+			index:    7,
+			count:    MonthsPerYear,
+			expected: "August",
+		},
+		{
+			name:     "Week resource",
+			resource: "Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday",
+			index:    6,
+			count:    DaysPerWeek,
+			expected: "Saturday",
+		},
+		{
+			name:     "Season resource",
+			resource: "Spring|Summer|Autumn|Winter",
+			index:    3,
+			count:    QuartersPerYear,
+			expected: "Winter",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := getResourceItem(tt.resource, tt.index, tt.count)
+			if result != tt.expected {
+				t.Errorf("getResourceItem(%q, %d, %d) = %q, want %q", tt.resource, tt.index, tt.count, result, tt.expected)
+			}
+		})
+	}
+}

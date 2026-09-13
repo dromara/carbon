@@ -1,9 +1,5 @@
 package carbon
 
-import (
-	"strings"
-)
-
 var seasons = map[int]int{
 	// month: index
 	1:  3, // winter
@@ -34,13 +30,7 @@ func (c *Carbon) Season() string {
 	lang.rw.RLock()
 	defer lang.rw.RUnlock()
 
-	if resources, ok := lang.resources["seasons"]; ok {
-		slice := strings.Split(resources, "|")
-		if len(slice) == QuartersPerYear {
-			return slice[seasons[c.Month()]]
-		}
-	}
-	return ""
+	return getResourceItem(lang.resources["seasons"], seasons[c.Month()], QuartersPerYear)
 }
 
 // StartOfSeason returns a Carbon instance for start of the season.

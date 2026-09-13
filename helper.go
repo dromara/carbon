@@ -2,6 +2,7 @@ package carbon
 
 import (
 	"fmt"
+	"strings"
 	"sync"
 	"time"
 )
@@ -191,4 +192,19 @@ func getAbsValue(value int64) int64 {
 	// For positive numbers: value ^ 0 - 0 = value
 	// For negative numbers: value ^ -1 - (-1) = ^value + 1 = -value
 	return (value ^ (value >> 63)) - (value >> 63)
+}
+
+// gets the item at index from a resource separated by "|", returns an empty string
+// unless the resource holds exactly count items.
+func getResourceItem(resource string, index, count int) string {
+	if index < 0 || index >= count || strings.Count(resource, "|") != count-1 {
+		return ""
+	}
+	for i := 0; i < index; i++ {
+		resource = resource[strings.IndexByte(resource, '|')+1:]
+	}
+	if i := strings.IndexByte(resource, '|'); i >= 0 {
+		return resource[:i]
+	}
+	return resource
 }
