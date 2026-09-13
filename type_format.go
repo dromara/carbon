@@ -22,6 +22,7 @@ func (t *FormatType[T]) Scan(src any) error {
 	var c *Carbon
 	switch v := src.(type) {
 	case nil:
+		t.Carbon = nil
 		return nil
 	case []byte:
 		c = Parse(string(v))

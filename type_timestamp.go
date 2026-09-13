@@ -31,6 +31,7 @@ func (t *TimestampType[T]) Scan(src any) (err error) {
 	var c *Carbon
 	switch v := src.(type) {
 	case nil:
+		t.Carbon = nil
 		return nil
 	case []byte:
 		c = Parse(string(v))
