@@ -32,7 +32,7 @@ type Carbon struct {
 // NewCarbon returns a new Carbon instance.
 func NewCarbon(stdTime ...StdTime) *Carbon {
 	c := new(Carbon)
-	c.lang = NewLanguage().SetLocale(DefaultLocale)
+	c.lang = defaultLanguage(DefaultLocale)
 	c.weekStartsAt = DefaultWeekStartsAt
 	c.weekendDays = DefaultWeekendDays
 	c.currentLayout = DefaultLayout
@@ -51,14 +51,10 @@ func (c *Carbon) Copy() *Carbon {
 		return nil
 	}
 
-	// Create a deep copy of weekendDays slice to avoid shared reference
-	weekendDays := make([]Weekday, len(c.weekendDays))
-	copy(weekendDays, c.weekendDays)
-
 	return &Carbon{
 		time:          c.time,
 		weekStartsAt:  c.weekStartsAt,
-		weekendDays:   weekendDays,
+		weekendDays:   c.weekendDays,
 		loc:           c.loc,
 		lang:          c.lang,
 		currentLayout: c.currentLayout,

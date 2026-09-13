@@ -150,7 +150,7 @@ func (c *Carbon) create(year, month, day, hour, minute, second, nanosecond int) 
 		weekStartsAt:  c.weekStartsAt,
 		weekendDays:   c.weekendDays,
 		loc:           c.loc,
-		lang:          c.lang.Copy(),
+		lang:          c.lang,
 		currentLayout: c.currentLayout,
 		isEmpty:       c.isEmpty,
 		Error:         c.Error,

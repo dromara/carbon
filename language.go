@@ -22,6 +22,23 @@ type cachedResources struct {
 	err       error
 }
 
+// defaultLanguages caches one ready-to-use Language per locale. The cached
+// resources are never written to, so every Carbon can share the same instance.
+var defaultLanguages sync.Map
+
+// returns a shared Language for the given locale.
+func defaultLanguage(locale string) *Language {
+	if cached, exists := defaultLanguages.Load(locale); exists {
+		return cached.(*Language)
+	}
+	lang := NewLanguage().SetLocale(locale)
+	if lang.Error != nil {
+		return lang
+	}
+	actual, _ := defaultLanguages.LoadOrStore(locale, lang)
+	return actual.(*Language)
+}
+
 // Language defines a Language struct.
 type Language struct {
 	dir       string

@@ -1,6 +1,9 @@
 package carbon
 
-import "time"
+import (
+	"sync"
+	"time"
+)
 
 // SetLayout sets globally default layout.
 func SetLayout(layout string) *Carbon {
@@ -127,7 +130,7 @@ func (c *Carbon) SetLocale(locale string) *Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	c.lang = NewLanguage().SetLocale(locale)
+	c.lang = defaultLanguage(locale)
 	c.Error = c.lang.Error
 	return c
 }
@@ -163,10 +166,18 @@ func (c *Carbon) SetLanguage(lang *Language) *Carbon {
 		c.Error = ErrInvalidLanguage(lang)
 		return c
 	}
-	c.lang.dir = lang.dir
-	c.lang.locale = lang.locale
-	c.lang.resources = lang.resources
-	c.lang.Error = lang.Error
+	lang.rw.RLock()
+	resources := lang.resources
+	lang.rw.RUnlock()
+
+	c.lang = &Language{
+		dir:       lang.dir,
+		locale:    lang.locale,
+		resources: resources,
+		shared:    true,
+		Error:     lang.Error,
+		rw:        new(sync.RWMutex),
+	}
 	return c
 }
 

@@ -828,6 +828,20 @@ func (s *SetterSuite) TestCarbon_SetLanguage() {
 		s.True(c.HasError())
 		s.Empty(c.ToString())
 	})
+
+	// https://github.com/dromara/carbon/issues/353
+	s.Run("customizing the source language afterwards", func() {
+		lang := NewLanguage()
+		lang.SetLocale("en")
+		c := Parse("2020-08-05").SetLanguage(lang)
+		s.Equal("August", c.ToMonthString())
+
+		lang.SetResources(map[string]string{
+			"months": "Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ|Ⅵ|Ⅶ|Ⅷ|Ⅸ|Ⅹ|Ⅺ|Ⅻ",
+		})
+		s.Equal("August", c.ToMonthString())
+		s.Equal("August", Parse("2020-08-05").ToMonthString())
+	})
 }
 
 func (s *SetterSuite) TestCarbon_SetDateTime() {

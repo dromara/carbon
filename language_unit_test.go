@@ -2,6 +2,7 @@ package carbon
 
 import (
 	"fmt"
+	"sync"
 	"testing"
 
 	"github.com/stretchr/testify/suite"
@@ -45,6 +46,21 @@ func (s *LanguageSuite) TestLanguage_Copy() {
 		oldLang.locale = "en"
 		newCarbon := oldLang.Copy()
 		s.Equal(oldLang.locale, newCarbon.locale)
+	})
+
+	s.Run("copy shared resources", func() {
+		oldLang := NewLanguage()
+		oldLang.SetLocale("en")
+		newLang := oldLang.Copy()
+
+		s.True(newLang.shared)
+		s.Equal(oldLang.resources, newLang.resources)
+
+		newLang.SetResources(map[string]string{
+			"months": "Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ|Ⅵ|Ⅶ|Ⅷ|Ⅸ|Ⅹ|Ⅺ|Ⅻ",
+		})
+		s.False(newLang.shared)
+		s.NotEqual(oldLang.resources, newLang.resources)
 	})
 
 	s.Run("copy resources", func() {
@@ -373,5 +389,64 @@ func (s *LanguageSuite) TestLanguage_translate() {
 		lang.resources = make(map[string]string, 0) // Start with empty
 		result := lang.translate("month", 1)
 		s.NotEmpty(result) // Should have loaded default locale successfully
+	})
+}
+
+// https://github.com/dromara/carbon/issues/353
+func (s *LanguageSuite) TestDefaultLanguage() {
+	s.Run("same instance per locale", func() {
+		s.Same(defaultLanguage("en"), defaultLanguage("en"))
+		s.NotSame(defaultLanguage("en"), defaultLanguage("zh-CN"))
+	})
+
+	s.Run("invalid locale", func() {
+		lang := defaultLanguage("xxx")
+		s.Error(lang.Error)
+		s.NotSame(lang, defaultLanguage("xxx"))
+	})
+
+	s.Run("shared by carbon instances", func() {
+		s.Same(Now().lang, Now().lang)
+	})
+
+	s.Run("customized language does not affect other instances", func() {
+		lang := NewLanguage().SetLocale("en")
+		lang.SetResources(map[string]string{
+			"months": "Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ|Ⅵ|Ⅶ|Ⅷ|Ⅸ|Ⅹ|Ⅺ|Ⅻ",
+		})
+
+		s.Equal("Ⅷ", Parse("2020-08-05").SetLanguage(lang).ToMonthString())
+		s.Equal("August", Parse("2020-08-05").ToMonthString())
+	})
+
+	s.Run("default locale changed at runtime", func() {
+		defer ResetDefault()
+
+		SetDefault(Default{Locale: "zh-CN"})
+		s.Equal("八月", Parse("2020-08-05").ToMonthString())
+
+		ResetDefault()
+		s.Equal("August", Parse("2020-08-05").ToMonthString())
+	})
+
+	s.Run("concurrent use", func() {
+		var wg sync.WaitGroup
+		results := make([]string, 8)
+		for i := 0; i < 8; i++ {
+			wg.Add(1)
+			go func(index int) {
+				defer wg.Done()
+				result := ""
+				for k := 0; k < 100; k++ {
+					result = Parse("2020-08-05").ToMonthString()
+				}
+				results[index] = result
+			}(i)
+		}
+		wg.Wait()
+
+		for _, result := range results {
+			s.Equal("August", result)
+		}
 	})
 }

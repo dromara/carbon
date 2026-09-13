@@ -130,6 +130,22 @@ func (s *CarbonSuite) TestCarbon_Copy() {
 		s.Equal("8月", newCarbon.ToMonthString())
 	})
 
+	// https://github.com/dromara/carbon/issues/353
+	s.Run("copy lang customization", func() {
+		oldCarbon := Parse("2020-08-05")
+		newCarbon := oldCarbon.Copy()
+
+		lang := NewLanguage()
+		lang.SetLocale("en")
+		lang.SetResources(map[string]string{
+			"months": "Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ|Ⅵ|Ⅶ|Ⅷ|Ⅸ|Ⅹ|Ⅺ|Ⅻ",
+		})
+		newCarbon = newCarbon.SetLanguage(lang)
+
+		s.Equal("Ⅷ", newCarbon.ToMonthString())
+		s.Equal("August", oldCarbon.ToMonthString())
+	})
+
 	s.Run("copy error", func() {
 		oldCarbon := Parse("xxx")
 		newCarbon := oldCarbon.Copy()
