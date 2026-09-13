@@ -454,11 +454,7 @@ func getOffsetInYear(year, month int) int {
 // This represents the cumulative days across all years up to but not including the target year.
 // Returns the offset in days.
 func getOffsetInMonth(year int) int {
-	offset := 0
-	for y := minYear; y < year; y++ {
-		offset += getDaysInYear(y)
-	}
-	return offset
+	return daysBeforeYearTable[year-minYear]
 }
 
 // getDaysInYear calculates the total number of days in a lunar year.
@@ -467,6 +463,29 @@ func getOffsetInMonth(year int) int {
 // Finally adds the leap month days if the year has a leap month.
 // Returns the total number of days in the year.
 func getDaysInYear(year int) int {
+	return daysInYearTable[year-minYear]
+}
+
+// daysInYearTable holds the number of days in every supported lunar year, and
+// daysBeforeYearTable the running total of those days since minYear. Both are
+// derived from the years table once, so that walking towards a year costs a
+// lookup instead of recounting the month bits of every year in between.
+var daysInYearTable, daysBeforeYearTable = func() ([]int, []int) {
+	daysInYear := make([]int, len(years))
+	daysBeforeYear := make([]int, len(years))
+	total := 0
+	for i := range daysInYear {
+		daysBeforeYear[i] = total
+		daysInYear[i] = countDaysInYear(minYear + i)
+		total += daysInYear[i]
+	}
+	return daysInYear, daysBeforeYear
+}()
+
+// countDaysInYear counts the days of a lunar year from the lunar calendar data.
+// The base is 348 days (12 months x 29 days), then adds days for months with
+// 30 days, and finally adds the leap month days if the year has a leap month.
+func countDaysInYear(year int) int {
 	var days = 348
 	for i := 0x8000; i > 0x8; i >>= 1 {
 		if (years[year-minYear] & i) != 0 {
