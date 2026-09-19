@@ -533,3 +533,24 @@ func TestLunar_AuthorityData(t *testing.T) {
 		}
 	}
 }
+
+func TestDayTables(t *testing.T) {
+	t.Run("days in year matches the lunar calendar data", func(t *testing.T) {
+		for year := minYear; year <= maxYear; year++ {
+			assert.Equal(t, countDaysInYear(year), getDaysInYear(year), "year %d", year)
+		}
+	})
+
+	t.Run("days before year is the running total", func(t *testing.T) {
+		total := 0
+		for year := minYear; year <= maxYear; year++ {
+			assert.Equal(t, total, getOffsetInMonth(year), "year %d", year)
+			total += countDaysInYear(year)
+		}
+	})
+
+	t.Run("tables cover the whole lunar calendar data", func(t *testing.T) {
+		assert.Len(t, daysInYearTable, len(years))
+		assert.Len(t, daysBeforeYearTable, len(years))
+	})
+}
