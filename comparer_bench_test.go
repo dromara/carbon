@@ -1637,6 +1637,40 @@ func BenchmarkCarbon_IsSameSecond(b *testing.B) {
 	})
 }
 
+func BenchmarkCarbon_IsBirthday(b *testing.B) {
+	b.Run("sequential", func(b *testing.B) {
+		c := Now()
+		b.ResetTimer()
+		for i := 0; i < b.N/10; i++ {
+			c.IsBirthday(c)
+		}
+	})
+
+	b.Run("concurrent", func(b *testing.B) {
+		var wg sync.WaitGroup
+		c := Now()
+		b.ResetTimer()
+		for i := 0; i < b.N/10; i++ {
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				c.IsBirthday(c)
+			}()
+		}
+		wg.Wait()
+	})
+
+	b.Run("parallel", func(b *testing.B) {
+		c := Now()
+		b.ResetTimer()
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				c.IsBirthday(c)
+			}
+		})
+	})
+}
+
 func BenchmarkCarbon_Compare(b *testing.B) {
 	b.Run("sequential", func(b *testing.B) {
 		c := Now()
