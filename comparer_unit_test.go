@@ -1331,6 +1331,73 @@ func (s *ComparerSuite) TestCarbon_IsSameSecond() {
 	})
 }
 
+func (s *ComparerSuite) TestCarbon_IsBirthday() {
+	s.Run("nil carbon", func() {
+		var c *Carbon
+		c = nil
+		s.False(c.IsBirthday())
+		s.False(c.IsBirthday(NewCarbon()))
+		s.False(Now().IsBirthday(c))
+	})
+
+	s.Run("zero carbon", func() {
+		c := NewCarbon()
+		s.False(c.IsBirthday(Parse("2020-08-05")))
+		s.False(Parse("2020-08-05").IsBirthday(c))
+		s.True(c.IsBirthday(c))
+	})
+
+	s.Run("empty carbon", func() {
+		c := Parse("")
+		s.False(c.IsBirthday())
+		s.False(c.IsBirthday(Now()))
+		s.False(Now().IsBirthday(c))
+	})
+
+	s.Run("error carbon", func() {
+		c := Parse("xxx")
+		s.False(c.IsBirthday())
+		s.False(c.IsBirthday(Now()))
+		s.False(Now().IsBirthday(c))
+	})
+
+	s.Run("valid carbon", func() {
+		s.False(Parse("2014-09-26").IsBirthday(Parse("1987-04-23")))
+		s.True(Parse("2014-04-23").IsBirthday(Parse("1987-04-23")))
+		s.True(Parse("1987-04-23 00:00:00").IsBirthday(Parse("2014-04-23 23:59:59")))
+		s.False(Parse("1987-04-23").IsBirthday(Parse("1987-05-23")))
+		s.False(Parse("1987-04-23").IsBirthday(Parse("1987-04-24")))
+	})
+
+	s.Run("without date", func() {
+		SetTestNow(Parse("2020-08-05 13:14:15"))
+		defer ClearTestNow()
+
+		s.True(Parse("1990-08-05").IsBirthday())
+		s.False(Parse("1990-08-04").IsBirthday())
+		s.False(Parse("1990-08-06").IsBirthday())
+	})
+
+	s.Run("february 29", func() {
+		s.True(Parse("2000-02-29").IsBirthday(Parse("2024-02-29")))
+		s.False(Parse("2000-02-29").IsBirthday(Parse("2023-02-28")))
+		s.False(Parse("2000-02-29").IsBirthday(Parse("2023-03-01")))
+	})
+
+	s.Run("without date in another timezone", func() {
+		SetTestNow(Parse("2020-08-05 23:30:00", UTC))
+		defer ClearTestNow()
+
+		s.True(Parse("1990-08-06", Tokyo).IsBirthday())
+		s.False(Parse("1990-08-05", Tokyo).IsBirthday())
+	})
+
+	s.Run("dates in different timezones", func() {
+		s.False(Parse("1990-08-05", UTC).IsBirthday(Parse("2020-08-06 01:00:00", Tokyo)))
+		s.True(Parse("1990-08-06", UTC).IsBirthday(Parse("2020-08-06 01:00:00", Tokyo)))
+	})
+}
+
 func (s *ComparerSuite) TestCarbon_Compare() {
 	s.Run("nil carbon", func() {
 		var c *Carbon

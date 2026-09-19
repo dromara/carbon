@@ -365,6 +365,28 @@ func (c *Carbon) IsSameSecond(t *Carbon) bool {
 		cTime.Second() == tTime.Second()
 }
 
+// IsBirthday reports whether it is a birthday, comparing only the month and
+// the day with the given date, or with now if no date is given.
+// As in PHP Carbon, February 29 only matches February 29,
+// so it is never a birthday in a common year.
+func (c *Carbon) IsBirthday(carbon ...*Carbon) bool {
+	if c.IsInvalid() {
+		return false
+	}
+	var t *Carbon
+	if len(carbon) > 0 {
+		t = carbon[0]
+	} else {
+		t = Now().SetLocation(c.loc)
+	}
+	if t.IsInvalid() {
+		return false
+	}
+	cTime := c.StdTime()
+	tTime := t.StdTime()
+	return cTime.Month() == tTime.Month() && cTime.Day() == tTime.Day()
+}
+
 // Compare compares by an operator.
 func (c *Carbon) Compare(operator string, t *Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {

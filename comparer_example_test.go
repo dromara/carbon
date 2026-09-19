@@ -546,6 +546,24 @@ func ExampleCarbon_IsSameSecond() {
 	// false
 }
 
+func ExampleCarbon_IsBirthday() {
+	defer carbon.ClearTestNow()
+	carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+
+	fmt.Println(carbon.Parse("1990-08-05").IsBirthday())
+	fmt.Println(carbon.Parse("1990-08-06").IsBirthday())
+	fmt.Println(carbon.Parse("2014-04-23").IsBirthday(carbon.Parse("1987-04-23")))
+	fmt.Println(carbon.Parse("2014-09-26").IsBirthday(carbon.Parse("1987-04-23")))
+	fmt.Println(carbon.Parse("2000-02-29").IsBirthday(carbon.Parse("2023-02-28")))
+
+	// Output:
+	// true
+	// false
+	// true
+	// false
+	// false
+}
+
 func ExampleCarbon_Compare() {
 	fmt.Println(carbon.Parse("2020-08-05 22:00:00").Compare(">=", carbon.Parse("2020-08-05 22:00:00")))
 	fmt.Println(carbon.Parse("2020-08-05 22:00:00").Compare("<", carbon.Parse("2020-08-05 22:00:00")))
