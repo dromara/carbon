@@ -649,6 +649,56 @@ func ExampleCarbon_SubDay() {
 	// 2020-11-29
 }
 
+func ExampleCarbon_AddWeekdays() {
+	fmt.Println(carbon.Parse("2020-01-01").AddWeekdays(0).ToDateString())
+	fmt.Println(carbon.Parse("2020-01-01").AddWeekdays(1).ToDateString())
+	fmt.Println(carbon.Parse("2020-01-01").AddWeekdays(3).ToDateString())
+	fmt.Println(carbon.Parse("2020-01-01").AddWeekdays(5).ToDateString())
+	fmt.Println(carbon.Parse("2020-01-04").AddWeekdays(1).ToDateString())
+
+	// Output:
+	// 2020-01-01
+	// 2020-01-02
+	// 2020-01-06
+	// 2020-01-08
+	// 2020-01-06
+}
+
+func ExampleCarbon_AddWeekday() {
+	fmt.Println(carbon.Parse("2020-01-01").AddWeekday().ToDateString())
+	fmt.Println(carbon.Parse("2020-01-03").AddWeekday().ToDateString())
+	fmt.Println(carbon.Parse("2020-01-04").AddWeekday().ToDateString())
+
+	// Output:
+	// 2020-01-02
+	// 2020-01-06
+	// 2020-01-06
+}
+
+func ExampleCarbon_SubWeekdays() {
+	fmt.Println(carbon.Parse("2020-01-06").SubWeekdays(0).ToDateString())
+	fmt.Println(carbon.Parse("2020-01-06").SubWeekdays(1).ToDateString())
+	fmt.Println(carbon.Parse("2020-01-06").SubWeekdays(3).ToDateString())
+	fmt.Println(carbon.Parse("2020-01-06").SubWeekdays(5).ToDateString())
+	fmt.Println(carbon.Parse("2020-01-04").SubWeekdays(1).ToDateString())
+
+	// Output:
+	// 2020-01-06
+	// 2020-01-03
+	// 2020-01-01
+	// 2019-12-30
+	// 2020-01-03
+}
+
+func ExampleCarbon_SubWeekday() {
+	fmt.Println(carbon.Parse("2020-01-06").SubWeekday().ToDateString())
+	fmt.Println(carbon.Parse("2020-01-04").SubWeekday().ToDateString())
+
+	// Output:
+	// 2020-01-03
+	// 2020-01-03
+}
+
 func ExampleCarbon_AddHours() {
 	fmt.Println(carbon.Parse("2020-01-01 13:14:15").AddHours(0).ToString())
 	fmt.Println(carbon.Parse("2020-01-01 13:14:15").AddHours(1).ToString())
