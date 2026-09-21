@@ -485,6 +485,19 @@ func ExampleCarbon_IsSameQuarter() {
 	// false
 }
 
+func ExampleCarbon_IsSameWeek() {
+	fmt.Println(carbon.Parse("2021-01-04").IsSameWeek(carbon.Parse("2021-01-10")))
+	fmt.Println(carbon.Parse("2021-01-04").IsSameWeek(carbon.Parse("2021-01-11")))
+	fmt.Println(carbon.Parse("2020-12-31").IsSameWeek(carbon.Parse("2021-01-01")))
+	fmt.Println(carbon.Parse("2020-06-01").IsSameWeek(carbon.Parse("2021-06-07")))
+
+	// Output:
+	// true
+	// false
+	// true
+	// false
+}
+
 func ExampleCarbon_IsSameMonth() {
 	fmt.Println(carbon.Parse("2020-08-05").IsSameMonth(carbon.Parse("2020-08-01")))
 	fmt.Println(carbon.Parse("2020-08-05").IsSameMonth(carbon.Parse("2010-08-05")))
