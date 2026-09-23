@@ -1153,6 +1153,71 @@ func (s *ComparerSuite) TestCarbon_IsSameQuarter() {
 	})
 }
 
+func (s *ComparerSuite) TestCarbon_IsSameWeek() {
+	s.Run("nil carbon", func() {
+		var c *Carbon
+		c = nil
+		s.False(c.IsSameWeek(NewCarbon()))
+		s.False(Now().IsSameWeek(c))
+	})
+
+	s.Run("zero carbon", func() {
+		c := NewCarbon()
+		s.False(c.IsSameWeek(Now()))
+		s.False(Now().IsSameWeek(c))
+		s.True(c.IsSameWeek(c))
+	})
+
+	s.Run("empty carbon", func() {
+		c := Parse("")
+		s.False(c.IsSameWeek(Now()))
+		s.False(Now().IsSameWeek(c))
+		s.False(c.IsSameWeek(c))
+	})
+
+	s.Run("error carbon", func() {
+		c := Parse("xxx")
+		s.False(c.IsSameWeek(Now()))
+		s.False(Now().IsSameWeek(c))
+		s.False(c.IsSameWeek(c))
+	})
+
+	s.Run("valid carbon", func() {
+		// 2021-01-04 is a Monday and the default week starts on Monday
+		s.True(Parse("2021-01-04").IsSameWeek(Parse("2021-01-10")))
+		s.False(Parse("2021-01-04").IsSameWeek(Parse("2021-01-11")))
+	})
+
+	s.Run("week spanning the year boundary", func() {
+		// the week of Monday 2020-12-28 runs into 2021
+		s.True(Parse("2020-12-28").IsSameWeek(Parse("2021-01-03")))
+		s.True(Parse("2020-12-31").IsSameWeek(Parse("2021-01-01")))
+		s.False(Parse("2020-12-27").IsSameWeek(Parse("2020-12-28")))
+	})
+
+	s.Run("weeks starting on the same day of different months", func() {
+		// both 2021-02-01 and 2021-03-01 are Mondays, so each starts its own week
+		s.False(Parse("2021-02-01").IsSameWeek(Parse("2021-03-01")))
+	})
+
+	s.Run("weeks starting on the same date of different years", func() {
+		// 2016-02-01 and 2021-02-01 are both Mondays, five years apart
+		s.False(Parse("2016-02-01").IsSameWeek(Parse("2021-02-01")))
+	})
+
+	s.Run("same week number in different years", func() {
+		// both are week 23, a year apart
+		s.Equal(Parse("2020-06-01").WeekOfYear(), Parse("2021-06-07").WeekOfYear())
+		s.False(Parse("2020-06-01").IsSameWeek(Parse("2021-06-07")))
+	})
+
+	s.Run("respects the day the week starts on", func() {
+		sunday, monday := Parse("2021-01-03"), Parse("2021-01-04")
+		s.False(sunday.IsSameWeek(monday))
+		s.True(sunday.SetWeekStartsAt(Sunday).IsSameWeek(monday.SetWeekStartsAt(Sunday)))
+	})
+}
+
 func (s *ComparerSuite) TestCarbon_IsSameMonth() {
 	s.Run("nil carbon", func() {
 		var c *Carbon

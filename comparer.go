@@ -301,6 +301,18 @@ func (c *Carbon) IsSameQuarter(t *Carbon) bool {
 	return c.Year() == t.Year() && c.Quarter() == t.Quarter()
 }
 
+// IsSameWeek reports whether it is same week.
+// The week starts on the day set by SetWeekStartsAt, so two dates that share
+// a week under one setting may not share it under another.
+func (c *Carbon) IsSameWeek(t *Carbon) bool {
+	if c.IsInvalid() || t.IsInvalid() {
+		return false
+	}
+	cYear, cMonth, cDay := c.startOfWeekDate()
+	tYear, tMonth, tDay := t.startOfWeekDate()
+	return cYear == tYear && cMonth == tMonth && cDay == tDay
+}
+
 // IsSameMonth reports whether it is same month.
 func (c *Carbon) IsSameMonth(t *Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
@@ -507,6 +519,15 @@ func (c *Carbon) isMonth(month time.Month) bool {
 		return false
 	}
 	return c.StdTime().Month() == month
+}
+
+// startOfWeekDate returns the date the current week starts on, honouring the
+// weekday set by SetWeekStartsAt. It does the same arithmetic as StartOfWeek
+// without copying the instance.
+func (c *Carbon) startOfWeekDate() (int, time.Month, int) {
+	stdTime := c.StdTime()
+	offset := (DaysPerWeek + int(stdTime.Weekday()) - int(c.WeekStartsAt())) % DaysPerWeek
+	return stdTime.AddDate(0, 0, -offset).Date()
 }
 
 // isWeekday reports whether the current weekday matches the given weekday.

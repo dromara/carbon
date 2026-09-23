@@ -1467,6 +1467,42 @@ func BenchmarkCarbon_IsSameQuarter(b *testing.B) {
 	})
 }
 
+func BenchmarkCarbon_IsSameWeek(b *testing.B) {
+	b.Run("sequential", func(b *testing.B) {
+		c := Now()
+		b.ResetTimer()
+		for i := 0; i < b.N/10; i++ {
+			c.IsSameWeek(c)
+		}
+	})
+
+	b.Run("concurrent", func(b *testing.B) {
+		var wg sync.WaitGroup
+		c := Now()
+		b.ResetTimer()
+		for i := 0; i < b.N/10; i++ {
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				for n := 0; n < b.N/10; n++ {
+					c.IsSameWeek(c)
+				}
+			}()
+		}
+		wg.Wait()
+	})
+
+	b.Run("parallel", func(b *testing.B) {
+		c := Now()
+		b.ResetTimer()
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				c.IsSameWeek(c)
+			}
+		})
+	})
+}
+
 func BenchmarkCarbon_IsSameMonth(b *testing.B) {
 	b.Run("sequential", func(b *testing.B) {
 		c := Now()
