@@ -1885,6 +1885,202 @@ func (s *TravelerSuite) TestCarbon_SubDay() {
 	})
 }
 
+func (s *TravelerSuite) TestCarbon_AddWeekdays() {
+	s.Run("nil carbon", func() {
+		var c *Carbon
+		c = nil
+		c = c.AddWeekdays(2)
+		s.False(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("zero carbon", func() {
+		c := NewCarbon().AddWeekdays(2)
+		s.False(c.HasError())
+		s.Equal("0001-01-03", c.ToDateString())
+	})
+
+	s.Run("empty carbon", func() {
+		c := Parse("").AddWeekdays(2)
+		s.False(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("error carbon", func() {
+		c := Parse("xxx").AddWeekdays(2)
+		s.True(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("valid carbon", func() {
+		// 2026-09-21 is Monday, 2026-09-26 is Saturday
+		s.Equal("2026-09-22", Parse("2026-09-21").AddWeekdays(1).ToDateString())
+		s.Equal("2026-09-25", Parse("2026-09-21").AddWeekdays(4).ToDateString())
+		s.Equal("2026-09-28", Parse("2026-09-21").AddWeekdays(5).ToDateString())
+	})
+
+	s.Run("negative weekdays", func() {
+		s.Equal("2026-09-18", Parse("2026-09-21").AddWeekdays(-1).ToDateString())
+		s.Equal("2026-09-16", Parse("2026-09-21").AddWeekdays(-3).ToDateString())
+		s.Equal("2026-09-14", Parse("2026-09-21").AddWeekdays(-5).ToDateString())
+	})
+
+	s.Run("custom weekend days", func() {
+		fridayAndSaturday := []Weekday{Friday, Saturday}
+		s.Equal("2026-09-22", Parse("2026-09-21").SetWeekendDays(fridayAndSaturday).AddWeekdays(1).ToDateString())
+		s.Equal("2026-09-27", Parse("2026-09-24").SetWeekendDays(fridayAndSaturday).AddWeekdays(1).ToDateString())
+		s.Equal("2026-09-27", Parse("2026-09-25").SetWeekendDays(fridayAndSaturday).AddWeekdays(1).ToDateString())
+		s.Equal("2026-09-28", Parse("2026-09-21").SetWeekendDays(fridayAndSaturday).AddWeekdays(5).ToDateString())
+		s.Equal("2026-09-20", Parse("2026-09-21").SetWeekendDays(fridayAndSaturday).AddWeekdays(-1).ToDateString())
+		s.Equal("2026-09-14", Parse("2026-09-21").SetWeekendDays(fridayAndSaturday).AddWeekdays(-5).ToDateString())
+
+		sundayOnly := []Weekday{Sunday}
+		s.Equal("2026-09-22", Parse("2026-09-21").SetWeekendDays(sundayOnly).AddWeekdays(1).ToDateString())
+		s.Equal("2026-09-26", Parse("2026-09-25").SetWeekendDays(sundayOnly).AddWeekdays(1).ToDateString())
+		s.Equal("2026-09-26", Parse("2026-09-21").SetWeekendDays(sundayOnly).AddWeekdays(5).ToDateString())
+		s.Equal("2026-09-19", Parse("2026-09-21").SetWeekendDays(sundayOnly).AddWeekdays(-1).ToDateString())
+		s.Equal("2026-09-15", Parse("2026-09-21").SetWeekendDays(sundayOnly).AddWeekdays(-5).ToDateString())
+	})
+
+	s.Run("no weekend days", func() {
+		none := []Weekday{}
+		s.Equal("2026-09-26", Parse("2026-09-21").SetWeekendDays(none).AddWeekdays(5).ToDateString())
+		s.Equal("2026-09-16", Parse("2026-09-21").SetWeekendDays(none).AddWeekdays(-5).ToDateString())
+	})
+
+	s.Run("starting on a weekend day never lands on one", func() {
+		fridayAndSaturday := []Weekday{Friday, Saturday}
+		c := Parse("2026-09-25").SetWeekendDays(fridayAndSaturday).AddWeekdays(5)
+		s.Equal("2026-10-01", c.ToDateString())
+		s.False(c.IsWeekend())
+	})
+
+	s.Run("the time of day survives a daylight saving transition", func() {
+		// in America/New_York the clocks jump from 02:00 to 03:00 on Sunday 2026-03-08,
+		// which a step from Friday to Monday passes over
+		tz := "America/New_York"
+		s.Equal("2026-03-09 02:30:00", Parse("2026-03-06 02:30:00", tz).AddWeekdays(1).ToDateTimeString())
+		s.Equal("2026-03-09 10:00:00", Parse("2026-03-06 10:00:00", tz).AddWeekdays(1).ToDateTimeString())
+		// and on Sunday 2026-11-01 they go back from 02:00 to 01:00
+		s.Equal("2026-11-02 01:30:00", Parse("2026-10-30 01:30:00", tz).AddWeekdays(1).ToDateTimeString())
+	})
+
+	s.Run("weekend days outside the week are ignored", func() {
+		// Saturday is the only day left as a weekday, so it must stay reachable
+		weekendDays := []Weekday{Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Weekday(42)}
+		s.Equal("2026-09-26", Parse("2026-09-21").SetWeekendDays(weekendDays).AddWeekdays(1).ToDateString())
+	})
+
+	s.Run("every day is a weekend day", func() {
+		weekendDays := []Weekday{Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday}
+		s.Equal("2026-09-28", Parse("2026-09-21").SetWeekendDays(weekendDays).AddWeekdays(1).ToDateString())
+		s.Equal("2026-10-12", Parse("2026-09-21").SetWeekendDays(weekendDays).AddWeekdays(3).ToDateString())
+	})
+}
+
+func (s *TravelerSuite) TestCarbon_AddWeekday() {
+	s.Run("nil carbon", func() {
+		var c *Carbon
+		c = nil
+		c = c.AddWeekday()
+		s.False(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("zero carbon", func() {
+		c := NewCarbon().AddWeekday()
+		s.False(c.HasError())
+		s.Equal("0001-01-02", c.ToDateString())
+	})
+
+	s.Run("empty carbon", func() {
+		c := Parse("").AddWeekday()
+		s.False(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("error carbon", func() {
+		c := Parse("xxx").AddWeekday()
+		s.True(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("valid carbon", func() {
+		s.Equal("2026-09-22", Parse("2026-09-21").AddWeekday().ToDateString())
+		s.Equal("2026-09-28", Parse("2026-09-25").AddWeekday().ToDateString())
+		s.Equal("2026-09-28", Parse("2026-09-26").AddWeekday().ToDateString())
+	})
+}
+
+func (s *TravelerSuite) TestCarbon_SubWeekdays() {
+	s.Run("nil carbon", func() {
+		var c *Carbon
+		c = nil
+		c = c.SubWeekdays(2)
+		s.False(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("zero carbon", func() {
+		c := NewCarbon().SubWeekdays(2)
+		s.False(c.HasError())
+		s.Equal("0000-12-28", c.ToDateString())
+	})
+
+	s.Run("empty carbon", func() {
+		c := Parse("").SubWeekdays(2)
+		s.False(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("error carbon", func() {
+		c := Parse("xxx").SubWeekdays(2)
+		s.True(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("valid carbon", func() {
+		s.Equal("2026-09-18", Parse("2026-09-21").SubWeekdays(1).ToDateString())
+		s.Equal("2026-09-16", Parse("2026-09-21").SubWeekdays(3).ToDateString())
+		s.Equal("2026-09-14", Parse("2026-09-21").SubWeekdays(5).ToDateString())
+		s.Equal("2026-09-25", Parse("2026-09-26").SubWeekdays(1).ToDateString())
+		s.Equal("2026-09-21", Parse("2026-09-26").SubWeekdays(5).ToDateString())
+	})
+}
+
+func (s *TravelerSuite) TestCarbon_SubWeekday() {
+	s.Run("nil carbon", func() {
+		var c *Carbon
+		c = nil
+		c = c.SubWeekday()
+		s.False(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("zero carbon", func() {
+		c := NewCarbon().SubWeekday()
+		s.False(c.HasError())
+		s.Equal("0000-12-29", c.ToDateString())
+	})
+
+	s.Run("empty carbon", func() {
+		c := Parse("").SubWeekday()
+		s.False(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("error carbon", func() {
+		c := Parse("xxx").SubWeekday()
+		s.True(c.HasError())
+		s.Empty(c.ToString())
+	})
+
+	s.Run("valid carbon", func() {
+		s.Equal("2026-09-18", Parse("2026-09-21").SubWeekday().ToDateString())
+		s.Equal("2026-09-25", Parse("2026-09-26").SubWeekday().ToDateString())
+	})
+}
+
 func (s *TravelerSuite) TestCarbon_AddHours() {
 	s.Run("nil carbon", func() {
 		var c *Carbon

@@ -1880,6 +1880,148 @@ func BenchmarkCarbon_SubDay(b *testing.B) {
 	})
 }
 
+func BenchmarkCarbon_AddWeekdays(b *testing.B) {
+	c := Now()
+	weekdays := 2
+
+	b.Run("sequential", func(b *testing.B) {
+		b.ResetTimer()
+		for i := 0; i < b.N/10; i++ {
+			c.AddWeekdays(weekdays)
+		}
+	})
+
+	b.Run("concurrent", func(b *testing.B) {
+		b.ResetTimer()
+		var wg sync.WaitGroup
+		for i := 0; i < b.N/10; i++ {
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				for n := 0; n < b.N/10; n++ {
+					c.AddWeekdays(weekdays)
+				}
+			}()
+		}
+		wg.Wait()
+	})
+
+	b.Run("parallel", func(b *testing.B) {
+		b.ResetTimer()
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				c.AddWeekdays(weekdays)
+			}
+		})
+	})
+}
+
+func BenchmarkCarbon_AddWeekday(b *testing.B) {
+	c := Now()
+
+	b.Run("sequential", func(b *testing.B) {
+		b.ResetTimer()
+		for i := 0; i < b.N/10; i++ {
+			c.AddWeekday()
+		}
+	})
+
+	b.Run("concurrent", func(b *testing.B) {
+		b.ResetTimer()
+		var wg sync.WaitGroup
+		for i := 0; i < b.N/10; i++ {
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				for n := 0; n < b.N/10; n++ {
+					c.AddWeekday()
+				}
+			}()
+		}
+		wg.Wait()
+	})
+
+	b.Run("parallel", func(b *testing.B) {
+		b.ResetTimer()
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				c.AddWeekday()
+			}
+		})
+	})
+}
+
+func BenchmarkCarbon_SubWeekdays(b *testing.B) {
+	c := Now()
+	weekdays := 2
+
+	b.Run("sequential", func(b *testing.B) {
+		b.ResetTimer()
+		for i := 0; i < b.N/10; i++ {
+			c.SubWeekdays(weekdays)
+		}
+	})
+
+	b.Run("concurrent", func(b *testing.B) {
+		b.ResetTimer()
+		var wg sync.WaitGroup
+		for i := 0; i < b.N/10; i++ {
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				for n := 0; n < b.N/10; n++ {
+					c.SubWeekdays(weekdays)
+				}
+			}()
+		}
+		wg.Wait()
+	})
+
+	b.Run("parallel", func(b *testing.B) {
+		b.ResetTimer()
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				c.SubWeekdays(weekdays)
+			}
+		})
+	})
+}
+
+func BenchmarkCarbon_SubWeekday(b *testing.B) {
+	c := Now()
+
+	b.Run("sequential", func(b *testing.B) {
+		b.ResetTimer()
+		for i := 0; i < b.N/10; i++ {
+			c.SubWeekday()
+		}
+	})
+
+	b.Run("concurrent", func(b *testing.B) {
+		b.ResetTimer()
+		var wg sync.WaitGroup
+		for i := 0; i < b.N/10; i++ {
+			wg.Add(1)
+			go func() {
+				defer wg.Done()
+				for n := 0; n < b.N/10; n++ {
+					c.SubWeekday()
+				}
+			}()
+		}
+		wg.Wait()
+	})
+
+	b.Run("parallel", func(b *testing.B) {
+		b.ResetTimer()
+		b.RunParallel(func(pb *testing.PB) {
+			for pb.Next() {
+				c.SubWeekday()
+			}
+		})
+	})
+}
+
 func BenchmarkCarbon_AddHours(b *testing.B) {
 	c := Now()
 	hours := 2
