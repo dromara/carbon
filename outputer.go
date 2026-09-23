@@ -82,7 +82,7 @@ func (c *Carbon) ToWeekString(timezone ...string) string {
 	lang.rw.RLock()
 	defer lang.rw.RUnlock()
 
-	return getResourceItem(lang.resources["weeks"], c.DayOfWeek()%DaysPerWeek, DaysPerWeek)
+	return getResourceItem(lang.resources["weeks"], int(c.StdTime().Weekday()), DaysPerWeek)
 }
 
 // ToShortWeekString outputs a string in short week layout like "Sun", i18n is supported.
@@ -102,7 +102,7 @@ func (c *Carbon) ToShortWeekString(timezone ...string) string {
 	lang.rw.RLock()
 	defer lang.rw.RUnlock()
 
-	return getResourceItem(lang.resources["short_weeks"], c.DayOfWeek()%DaysPerWeek, DaysPerWeek)
+	return getResourceItem(lang.resources["short_weeks"], int(c.StdTime().Weekday()), DaysPerWeek)
 }
 
 // ToDayDateTimeString outputs a string in "Mon, Jan 2, 2006 3:04 PM" layout.

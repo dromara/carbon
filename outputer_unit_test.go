@@ -216,6 +216,15 @@ func (s *OutputerSuite) TestCarbon_ToWeekString() {
 		s.Equal(Friday.String(), Parse("2020-08-07").ToWeekString(PRC))
 	})
 
+	s.Run("week not starting on monday", func() {
+		// The weekday name is absolute and must not depend on where the week starts.
+		// 2024-03-10 is a Sunday regardless of the configured week start.
+		for _, start := range []Weekday{Monday, Sunday, Saturday, Wednesday} {
+			c := CreateFromDate(2024, 3, 10).SetWeekStartsAt(start)
+			s.Equal(Sunday.String(), c.ToWeekString())
+		}
+	})
+
 	s.Run("empty resources", func() {
 		lang := NewLanguage()
 		lang.SetResources(map[string]string{})
@@ -265,6 +274,16 @@ func (s *OutputerSuite) TestCarbon_ToShortWeekString() {
 		s.Equal("Wed", Parse("2020-08-05").ToShortWeekString())
 		s.Equal("Thu", Parse("2020-08-06").ToShortWeekString())
 		s.Equal("Fri", Parse("2020-08-07").ToShortWeekString(PRC))
+	})
+
+	s.Run("week not starting on monday", func() {
+		// The weekday name is absolute and must not depend on where the week starts.
+		// 2024-03-10 is a Sunday regardless of the configured week start.
+		for _, start := range []Weekday{Monday, Sunday, Saturday, Wednesday} {
+			c := CreateFromDate(2024, 3, 10).SetWeekStartsAt(start)
+			s.Equal("Sun", c.ToShortWeekString())
+			s.Equal("Sun", c.Format("D"))
+		}
 	})
 
 	s.Run("empty resources", func() {
