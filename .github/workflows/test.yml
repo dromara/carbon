@@ -1,7 +1,10 @@
 name: test
 
 on:
-  push
+  push:
+    branches: [ master, v1, v2 ]
+  pull_request:
+    branches: [ master, v1, v2 ]
 env:
   TZ: "UTC"
 jobs:
@@ -23,9 +26,14 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Create coverage file
-        run: go test -coverprofile='coverage.txt' -covermode=atomic
+        if: github.event_name == 'push'
+        run: go test -coverprofile='coverage.txt' -covermode=atomic ./...
+
+      - name: Test
+        run: go test -race ./...
 
       - name: Upload coverage file
+        if: github.event_name == 'push'
         uses: codecov/codecov-action@v7
         with:
           token: ${{secrets.CODECOV_TOKEN}}
