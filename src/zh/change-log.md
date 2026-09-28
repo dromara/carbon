@@ -9,6 +9,31 @@ head:
 ---
 
 # 更新日志
+## [v2.6.18](https://github.com/dromara/carbon/compare/v2.6.17...v2.6.18) (2026-09-28)
+
+- 修复 `Format` 方法处理末尾转义字符时可能发生越界访问的 bug
+- 修复设置非周一为一周开始日期时，`ToWeekString`、`ToShortWeekString` 和 `Format` 方法返回星期名称错误的 bug
+- 修复向已有时间值的数据库字段扫描 `NULL` 时未清空原值的 bug
+- 新增对`哈萨克语`的本地化语言支持(lang/kk.json)
+- 优化语言实例和语言资源的缓存与共享机制，通过写时复制减少内存分配
+- 优化月份、星期、季节和星座本地化资源查询，避免每次调用分割字符串
+- 优化农历日期转换，预计算年度天数和累计天数表，提升转换性能
+- 将 `github.com/stretchr/testify` 从 `v1.11.1` 升级到 `v1.12.1`
+- 将 `github/codeql-action` 从 `v4.37.4` 升级到 `v4.38.1`
+- 完善 `CI` 测试流程，在 `PR` 上运行完整测试和竞态检测，并仅在 `push` 时生成和上传覆盖率
+
+## [v2.6.17](https://github.com/dromara/carbon/compare/v2.6.16...v2.6.17) (2026-08-09)
+
+- 修正`伊斯兰`星期名称拼写错误，将 `Jumaat` 修改为 `Jumat`
+- 修复`公历`与`希伯来历`之间的换算计算异常问题
+- 将 `README` 文档统一替换为 `NRG` 标准化模板
+- 清理 `README` 内冗余广告外链，移除已废弃的 `Go Report Card` 状态徽章
+- 将 `github/codeql-action` 从 `v4` 升级至 `v4.37.4`
+- 将 `actions/setup-go` 从 `v6` 升级至 `v7`
+- 将 `actions/checkout` 从 `v6` 升级至 `v7`
+- 将 `codecov/codecov-action` 从 `v5` 升级至 `v6`
+- 将 `codecov/codecov-action` 从 `v6` 升级至 `v7`
+
 ## [v2.6.16](https://github.com/dromara/carbon/compare/v2.6.15...v2.6.16) (2026-01-28)
 
 - 修复 `Format` 方法中`u`、`v`、`x`符号解析错误的 bug

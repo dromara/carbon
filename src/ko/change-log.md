@@ -9,6 +9,31 @@ head:
 ---
 
 # 업데이트 로그
+## [v2.6.18](https://github.com/dromara/carbon/compare/v2.6.17...v2.6.18) (2026-09-28)
+
+- `Format` 메서드에서 마지막 이스케이프 문자를 처리할 때 발생할 수 있는 범위를 벗어난 접근 문제 수정
+- 주 시작일을 월요일이 아닌 날로 설정하면 `ToWeekString`, `ToShortWeekString`, `Format`이 잘못된 요일 이름을 반환하는 문제 수정
+- 기존 시간 값이 있는 데이터베이스 필드에 `NULL`을 스캔할 때 기존 값이 지워지지 않는 문제 수정
+- `카자흐어` 로컬라이즈 언어 지원 추가(`lang/kk.json`)
+- 카피 온 라이트를 통해 언어 인스턴스와 리소스의 캐싱 및 공유를 최적화하여 메모리 할당 감소
+- 월, 요일, 계절, 별자리 로컬라이즈 리소스 조회를 최적화하여 호출할 때마다 문자열을 분할하는 작업을 방지
+- 연도별 일수와 누적 일수 테이블을 미리 계산하여 음력 날짜 변환을 최적화하고 변환 성능 향상
+- `github.com/stretchr/testify`를 `v1.11.1`에서 `v1.12.1`로 업그레이드
+- `github/codeql-action`을 `v4.37.4`에서 `v4.38.1`로 업그레이드
+- `CI` 테스트 워크플로를 개선하여 `PR`에서 전체 테스트와 경합 상태 검사를 실행하고, `push`에서만 커버리지를 생성 및 업로드
+
+## [v2.6.17](https://github.com/dromara/carbon/compare/v2.6.16...v2.6.17) (2026-08-09)
+
+- `이슬람` 요일 이름의 철자 오류를 수정하고 `Jumaat`을 `Jumat`으로 변경 #329
+- `그레고리력`과 `히브리력` 간 변환에서 발생하는 계산 오류 수정 #338
+- `README` 문서를 `NRG` 표준 템플릿으로 통일 #331
+- `README`의 불필요한 광고 외부 링크를 정리하고 더 이상 사용되지 않는 `Go Report Card` 상태 배지 제거
+- `github/codeql-action`을 `v4`에서 `v4.37.4`로 업그레이드 #339
+- `actions/setup-go`를 `v6`에서 `v7`로 업그레이드 #337
+- `actions/checkout`을 `v6`에서 `v7`로 업그레이드 #336
+- `codecov/codecov-action`을 `v5`에서 `v6`으로 업그레이드 #330
+- `codecov/codecov-action`을 `v6`에서 `v7`으로 업그레이드 #335
+
 ## [v2.6.16](https://github.com/dromara/carbon/compare/v2.6.15...v2.6.16) (2026-01-28)
 
 - `Format` 메서드에서 `u`, `v`, `x` 기호 파싱 오류 bug 수정
@@ -206,4 +231,4 @@ head:
 - 전역 기본 시간대를 설정할 때 `time.Local`을 동기화하여 업데이트
 - `database.go`를 리팩토링하고 `carbon.DateTime`, `carbon.DateTimeMilli`, `carbon.DateTimeMicro`, `carbon.DateTimeNano`, `carbon.Date`, `carbon.DateMilli`, `carbon.DateMicro`, `carbon.DateNano`, `carbon.Time`, `carbon.TimeMilli`, `carbon.TimeMicro`, `carbon.TimeNano`, `carbon.Timestamp`, `carbon.TimestampMilli`, `carbon.TimestampMicro`, `carbon.TimestampNano` 필드 타입을 제거하고, `MarshalJSON/UnmarshalJSON`에서 사용자 정의 출력 형식을 구현하기 위해 제네릭 필드를 사용
 
-이전 버전의 업데이트 로그는 <a href="https://github.com/dromara/carbon/releases" target="_blank" rel="noreferrer">releases</a>를 참조하세요 
+이전 버전의 업데이트 로그는 <a href="https://github.com/dromara/carbon/releases" target="_blank" rel="noreferrer">releases</a>를 참조하세요

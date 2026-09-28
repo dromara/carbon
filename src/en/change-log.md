@@ -9,6 +9,31 @@ head:
 ---
 
 # Change Log
+## [v2.6.18](https://github.com/dromara/carbon/compare/v2.6.17...v2.6.18) (2026-09-28)
+
+- Fix possible out-of-bounds access when the `Format` method handles a trailing escape character
+- Fix incorrect weekday names returned by `ToWeekString`, `ToShortWeekString`, and `Format` when the week starts on a day other than Monday
+- Fix failure to clear the existing value when scanning `NULL` from a database into a field that already contains a time value
+- Add `Kazakh` localised language support (`lang/kk.json`)
+- Optimize language instance and resource caching and sharing through copy-on-write to reduce memory allocation
+- Optimize localized resource lookups for months, weekdays, seasons, and constellations to avoid splitting strings on every call
+- Optimize lunar date conversion by precomputing tables for days per year and cumulative days to improve conversion performance
+- Upgrade `github.com/stretchr/testify` from `v1.11.1` to `v1.12.1`
+- Upgrade `github/codeql-action` from `v4.37.4` to `v4.38.1`
+- Improve the `CI` test workflow to run the full test suite and race detection on `PR`s, and generate and upload coverage only on `push`
+
+## [v2.6.17](https://github.com/dromara/carbon/compare/v2.6.16...v2.6.17) (2026-08-09)
+
+- Fix spelling error in the `Islamic` weekday name, changing `Jumaat` to `Jumat` #329
+- Fix calculation error in conversion between the `Gregorian calendar` and the `Hebrew calendar` #338
+- Unify `README` documents using the `NRG` standard template #331
+- Clean up redundant advertising external links in `README` and remove the obsolete `Go Report Card` status badge
+- Upgrade `github/codeql-action` from `v4` to `v4.37.4` #339
+- Upgrade `actions/setup-go` from `v6` to `v7` #337
+- Upgrade `actions/checkout` from `v6` to `v7` #336
+- Upgrade `codecov/codecov-action` from `v5` to `v6` #330
+- Upgrade `codecov/codecov-action` from `v6` to `v7` #335
+
 ## [v2.6.16](https://github.com/dromara/carbon/compare/v2.6.15...v2.6.16) (2026-01-28)
 
 - Fix the bug in the parsing of `u`, `v`, and `x` symbols in the `Format` method #328
