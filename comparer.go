@@ -282,7 +282,7 @@ func (c *Carbon) IsSameDecade(t *Carbon) bool {
 	if c.IsInvalid() || t.IsInvalid() {
 		return false
 	}
-	return c.Decade() == t.Decade()
+	return c.Century() == t.Century() && c.Decade() == t.Decade()
 }
 
 // IsSameYear reports whether it is same year.
