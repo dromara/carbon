@@ -52,6 +52,7 @@ const (
 	Seoul      = "Asia/Seoul"
 	Pyongyang  = "Asia/Pyongyang"
 	Bangkok    = "Asia/Bangkok"
+	Jakarta    = "Asia/Jakarta"
 	Dubai      = "Asia/Dubai"
 	Qatar      = "Asia/Qatar"
 	Bangalore  = "Asia/Bangalore"
