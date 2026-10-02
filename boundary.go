@@ -1,5 +1,7 @@
 package carbon
 
+import "time"
+
 // StartOfCentury returns a Carbon instance for start of the century.
 func (c *Carbon) StartOfCentury() *Carbon {
 	if c.IsInvalid() {
@@ -169,8 +171,9 @@ func (c *Carbon) StartOfSecond() *Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	year, month, day, hour, minute, second := c.DateTime()
-	return c.create(year, month, day, hour, minute, second, MinNanosecond)
+	result := c.Copy()
+	result.time = result.time.Truncate(time.Second)
+	return result
 }
 
 // EndOfSecond returns a Carbon instance for end of the second.
@@ -178,6 +181,7 @@ func (c *Carbon) EndOfSecond() *Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	year, month, day, hour, minute, second := c.DateTime()
-	return c.create(year, month, day, hour, minute, second, MaxNanosecond)
+	result := c.Copy()
+	result.time = result.time.Truncate(time.Second).Add(time.Second - time.Nanosecond)
+	return result
 }
