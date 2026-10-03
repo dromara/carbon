@@ -357,6 +357,58 @@ func (c *Carbon) SubDay() *Carbon {
 	return c.SubDays(1)
 }
 
+// AddWeekdays adds some weekdays, skipping weekend days.
+func (c *Carbon) AddWeekdays(weekdays int) *Carbon {
+	if c.IsInvalid() {
+		return c
+	}
+	var isWeekendDay [DaysPerWeek]bool
+	weekendDayCount := 0
+	for _, weekendDay := range c.weekendDays {
+		if weekendDay < 0 || weekendDay >= DaysPerWeek || isWeekendDay[weekendDay] {
+			continue
+		}
+		isWeekendDay[weekendDay] = true
+		weekendDayCount++
+	}
+	// there is no weekday left to land on, so each weekday spans a whole week
+	if weekendDayCount == DaysPerWeek {
+		return c.AddWeeks(weekdays)
+	}
+	step, count := 1, weekdays
+	if weekdays < 0 {
+		step, count = -1, -weekdays
+	}
+	stdTime := c.StdTime()
+	// count the days to move over first, so that the shift is applied once and
+	// crossing a daylight saving transition cannot carry over to the next step
+	weekday, days := int(stdTime.Weekday()), 0
+	for i := 0; i < count; i++ {
+		weekday, days = (weekday+step+DaysPerWeek)%DaysPerWeek, days+step
+		for isWeekendDay[weekday] {
+			weekday, days = (weekday+step+DaysPerWeek)%DaysPerWeek, days+step
+		}
+	}
+	result := c.Copy()
+	result.time = stdTime.AddDate(0, 0, days)
+	return result
+}
+
+// AddWeekday adds one weekday.
+func (c *Carbon) AddWeekday() *Carbon {
+	return c.AddWeekdays(1)
+}
+
+// SubWeekdays subtracts some weekdays, skipping weekend days.
+func (c *Carbon) SubWeekdays(weekdays int) *Carbon {
+	return c.AddWeekdays(-weekdays)
+}
+
+// SubWeekday subtracts one weekday.
+func (c *Carbon) SubWeekday() *Carbon {
+	return c.SubWeekdays(1)
+}
+
 // AddHours adds some hours.
 func (c *Carbon) AddHours(hours int) *Carbon {
 	if c.IsInvalid() {
