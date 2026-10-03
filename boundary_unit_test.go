@@ -2,6 +2,7 @@ package carbon
 
 import (
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/suite"
 )
@@ -12,6 +13,39 @@ type BoundarySuite struct {
 
 func TestBoundarySuite(t *testing.T) {
 	suite.Run(t, new(BoundarySuite))
+}
+
+func (s *BoundarySuite) TestCarbon_SecondBoundariesAtOffsetTransitions() {
+	for _, test := range []struct {
+		name     string
+		zone     string
+		inputUTC time.Time
+	}{
+		{"New York first occurrence", "America/New_York", time.Date(2026, 11, 1, 5, 34, 49, 123456789, time.UTC)},
+		{"New York second occurrence", "America/New_York", time.Date(2026, 11, 1, 6, 34, 49, 123456789, time.UTC)},
+		{"Lord Howe first occurrence", "Australia/Lord_Howe", time.Date(2026, 4, 4, 14, 45, 49, 123456789, time.UTC)},
+		{"Lord Howe second occurrence", "Australia/Lord_Howe", time.Date(2026, 4, 4, 15, 15, 49, 123456789, time.UTC)},
+		{"Algiers second-offset transition", "Africa/Algiers", time.Date(1891, 3, 15, 23, 48, 22, 123456789, time.UTC)},
+		{"Monrovia forward transition", "Africa/Monrovia", time.Date(1972, 1, 7, 0, 44, 30, 123456789, time.UTC)},
+		{"UTC control", "UTC", time.Date(2026, 1, 2, 12, 34, 49, 123456789, time.UTC)},
+	} {
+		s.Run(test.name, func() {
+			loc, err := time.LoadLocation(test.zone)
+			s.Require().NoError(err)
+			input := test.inputUTC.In(loc)
+			c := NewCarbon(input).SetWeekStartsAt(Sunday)
+			start, end := c.StartOfSecond(), c.EndOfSecond()
+			s.Equal(input.Unix(), start.StdTime().Unix())
+			s.Equal(input.Unix(), end.StdTime().Unix())
+			s.Equal(0, start.Nanosecond())
+			s.Equal(MaxNanosecond, end.Nanosecond())
+			s.Same(loc, start.StdTime().Location())
+			s.Same(loc, end.StdTime().Location())
+			s.Equal(Sunday, start.WeekStartsAt())
+			s.Equal(Sunday, end.WeekStartsAt())
+			s.Equal(input, c.StdTime())
+		})
+	}
 }
 
 func (s *BoundarySuite) TestCarbon_StartOfCentury() {
