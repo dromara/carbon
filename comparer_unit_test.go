@@ -1081,7 +1081,10 @@ func (s *ComparerSuite) TestCarbon_IsSameDecade() {
 	s.Run("valid carbon", func() {
 		s.True(Parse("2020-08-05").IsSameDecade(Parse("2020-01-01")))
 		s.True(Parse("2020-08-05").IsSameDecade(Parse("2020-12-31")))
+		s.True(Parse("2020-08-05").IsSameDecade(Parse("2029-12-31")))
 		s.False(Parse("2020-08-05").IsSameDecade(Parse("2010-08-05")))
+		s.False(Parse("2020-08-05").IsSameDecade(Parse("1920-08-05")))
+		s.False(Parse("1995-08-05").IsSameDecade(Parse("2095-08-05")))
 	})
 }
 
