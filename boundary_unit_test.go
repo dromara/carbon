@@ -48,6 +48,39 @@ func (s *BoundarySuite) TestCarbon_SecondBoundariesAtOffsetTransitions() {
 	}
 }
 
+func (s *BoundarySuite) TestCarbon_MinuteBoundariesAtOffsetTransitions() {
+	for _, test := range []struct {
+		name     string
+		zone     string
+		inputUTC time.Time
+	}{
+		{"New York first occurrence", "America/New_York", time.Date(2026, 11, 1, 5, 34, 49, 123456789, time.UTC)},
+		{"New York second occurrence", "America/New_York", time.Date(2026, 11, 1, 6, 34, 49, 123456789, time.UTC)},
+		{"Lord Howe first occurrence", "Australia/Lord_Howe", time.Date(2026, 4, 4, 14, 45, 49, 123456789, time.UTC)},
+		{"Lord Howe second occurrence", "Australia/Lord_Howe", time.Date(2026, 4, 4, 15, 15, 49, 123456789, time.UTC)},
+		{"Monrovia second-based offset", "Africa/Monrovia", time.Date(1960, 6, 15, 12, 34, 49, 123456789, time.UTC)},
+		{"UTC control", "UTC", time.Date(2026, 1, 2, 12, 34, 49, 123456789, time.UTC)},
+	} {
+		s.Run(test.name, func() {
+			loc, err := time.LoadLocation(test.zone)
+			s.Require().NoError(err)
+			input := test.inputUTC.In(loc)
+			startUnix := input.Unix() - int64(input.Second())
+			c := NewCarbon(input).SetWeekStartsAt(Sunday)
+			start, end := c.StartOfMinute(), c.EndOfMinute()
+			s.Equal(startUnix, start.StdTime().Unix())
+			s.Equal(startUnix+MaxSecond, end.StdTime().Unix())
+			s.Equal(0, start.Nanosecond())
+			s.Equal(MaxNanosecond, end.Nanosecond())
+			s.Same(loc, start.StdTime().Location())
+			s.Same(loc, end.StdTime().Location())
+			s.Equal(Sunday, start.WeekStartsAt())
+			s.Equal(Sunday, end.WeekStartsAt())
+			s.Equal(input, c.StdTime())
+		})
+	}
+}
+
 func (s *BoundarySuite) TestCarbon_StartOfCentury() {
 	s.Run("nil carbon", func() {
 		var c *Carbon

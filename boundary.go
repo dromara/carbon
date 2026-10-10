@@ -153,8 +153,10 @@ func (c *Carbon) StartOfMinute() *Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	year, month, day, hour, minute, _ := c.DateTime()
-	return c.create(year, month, day, hour, minute, MinSecond, MinNanosecond)
+	elapsed := time.Duration(c.Second())*time.Second + time.Duration(c.Nanosecond())
+	result := c.Copy()
+	result.time = result.time.Add(-elapsed)
+	return result
 }
 
 // EndOfMinute returns a Carbon instance for end of the minute.
@@ -162,8 +164,10 @@ func (c *Carbon) EndOfMinute() *Carbon {
 	if c.IsInvalid() {
 		return c
 	}
-	year, month, day, hour, minute, _ := c.DateTime()
-	return c.create(year, month, day, hour, minute, MaxSecond, MaxNanosecond)
+	elapsed := time.Duration(c.Second())*time.Second + time.Duration(c.Nanosecond())
+	result := c.Copy()
+	result.time = result.time.Add(time.Minute - time.Nanosecond - elapsed)
+	return result
 }
 
 // StartOfSecond returns a Carbon instance for start of the second.
