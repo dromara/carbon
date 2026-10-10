@@ -86,7 +86,8 @@ func FromStdTime(t time.Time) *Lunar {
 	}
 	daysInYear, daysInMonth, leapMonth := 365, 30, 0
 
-	offset := int(t.Truncate(time.Hour).Sub(time.Date(minYear, 1, 31, 0, 0, 0, 0, t.Location())).Hours() / 24)
+	year, month, day := t.Date()
+	offset := int(time.Date(year, month, day, 0, 0, 0, 0, time.UTC).Sub(time.Date(minYear, 1, 31, 0, 0, 0, 0, time.UTC)).Hours() / 24)
 	for l.year = minYear; l.year <= maxYear && offset > 0; l.year++ {
 		daysInYear = getDaysInYear(l.year)
 		offset -= daysInYear
