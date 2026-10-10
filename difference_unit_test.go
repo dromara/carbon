@@ -233,6 +233,11 @@ func (s *DifferenceSuite) TestCarbon_DiffInWeeks() {
 		s.Equal(int64(-1), Parse("2020-08-05 13:14:15").DiffInWeeks(Parse("2020-07-28 13:14:00")))
 		s.Equal(int64(1), Parse("2020-08-05 13:14:15").DiffInWeeks(Parse("2020-08-12 13:14:15")))
 	})
+
+	s.Run("across dst", func() {
+		s.Equal(int64(1), Parse("2024-03-04", NewYork).DiffInWeeks(Parse("2024-03-11", NewYork)))
+		s.Equal(int64(-1), Parse("2024-03-11", NewYork).DiffInWeeks(Parse("2024-03-04", NewYork)))
+	})
 }
 
 func (s *DifferenceSuite) TestCarbon_DiffAbsInWeeks() {
@@ -316,6 +321,13 @@ func (s *DifferenceSuite) TestCarbon_DiffInDays() {
 		s.Equal(int64(0), Parse("2020-08-05 13:14:15").DiffInDays(Parse("2020-08-04 13:14:59")))
 		s.Equal(int64(1), Parse("2020-08-05 13:14:15").DiffInDays(Parse("2020-08-06 13:14:15")))
 		s.Equal(int64(-1), Parse("2020-08-05 13:14:15").DiffInDays(Parse("2020-08-04 13:00:00")))
+	})
+
+	s.Run("across dst", func() {
+		s.Equal(int64(1), Parse("2024-03-10", NewYork).DiffInDays(Parse("2024-03-11", NewYork)))
+		s.Equal(int64(-1), Parse("2024-03-11", NewYork).DiffInDays(Parse("2024-03-10", NewYork)))
+		s.Equal(int64(0), Parse("2024-11-03", NewYork).DiffInDays(Parse("2024-11-03 23:59:59", NewYork)))
+		s.Equal(int64(1), Parse("2024-11-03", NewYork).DiffInDays(Parse("2024-11-04", NewYork)))
 	})
 }
 

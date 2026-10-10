@@ -84,7 +84,7 @@ func (c *Carbon) DiffInWeeks(carbon ...*Carbon) int64 {
 	if end.IsInvalid() {
 		return 0
 	}
-	return (end.Timestamp() - c.Timestamp()) / SecondsPerWeek
+	return c.DiffInDays(end) / DaysPerWeek
 }
 
 // DiffAbsInWeeks gets the difference in weeks with absolute value.
@@ -106,7 +106,19 @@ func (c *Carbon) DiffInDays(carbon ...*Carbon) int64 {
 	if end.IsInvalid() {
 		return 0
 	}
-	return (end.Timestamp() - c.Timestamp()) / SecondsPerDay
+	sign := int64(1)
+	s, e := c, end
+	if e.Lt(s) {
+		s, e = e, s
+		sign = -1
+	}
+	days := int((e.Timestamp() - s.Timestamp()) / SecondsPerDay)
+	if !s.StdTime().AddDate(0, 0, days+1).After(e.StdTime()) {
+		days++
+	} else if s.StdTime().AddDate(0, 0, days).After(e.StdTime()) {
+		days--
+	}
+	return int64(days) * sign
 }
 
 // DiffAbsInDays gets the difference in days with absolute value.
