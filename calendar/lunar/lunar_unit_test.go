@@ -26,6 +26,16 @@ func TestFromStdTime(t *testing.T) {
 		assert.Equal(t, "2023-02-11", FromStdTime(time.Date(2023, 3, 2, 0, 0, 0, 0, loc)).String())
 		assert.Equal(t, "2023-02-11", FromStdTime(time.Date(2023, 4, 1, 0, 0, 0, 0, loc)).String())
 	})
+
+	t.Run("early hours in other time zones", func(t *testing.T) {
+		berlin, _ := time.LoadLocation("Europe/Berlin")
+		kolkata, _ := time.LoadLocation("Asia/Kolkata")
+		newYork, _ := time.LoadLocation("America/New_York")
+		assert.Equal(t, "2021-05-05", FromStdTime(time.Date(2021, 6, 14, 0, 0, 0, 0, berlin)).String())
+		assert.Equal(t, "2020-05-01", FromStdTime(time.Date(2020, 6, 21, 0, 15, 0, 0, kolkata)).String())
+		assert.Equal(t, "2020-05-05", FromStdTime(time.Date(2020, 6, 25, 0, 30, 0, 0, newYork)).String())
+		assert.Equal(t, "2020-05-05", FromStdTime(time.Date(2020, 6, 25, 23, 59, 59, 0, loc)).String())
+	})
 }
 
 func TestLunar_Gregorian(t *testing.T) {
