@@ -184,7 +184,14 @@ func (c *Carbon) DiffInSeconds(carbon ...*Carbon) int64 {
 	if end.IsInvalid() {
 		return 0
 	}
-	return end.Timestamp() - c.Timestamp()
+	seconds := end.Timestamp() - c.Timestamp()
+	nanoseconds := end.Nanosecond() - c.Nanosecond()
+	if seconds > 0 && nanoseconds < 0 {
+		seconds--
+	} else if seconds < 0 && nanoseconds > 0 {
+		seconds++
+	}
+	return seconds
 }
 
 // DiffAbsInSeconds gets the difference in seconds with absolute value.

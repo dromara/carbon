@@ -587,6 +587,14 @@ func (s *DifferenceSuite) TestCarbon_DiffInSeconds() {
 		s.Equal(int64(5), Parse("2020-08-05 13:14:15").DiffInSeconds(Parse("2020-08-05 13:14:20")))
 		s.Equal(int64(-5), Parse("2020-08-05 13:14:15").DiffInSeconds(Parse("2020-08-05 13:14:10")))
 	})
+
+	s.Run("sub second", func() {
+		s.Equal(int64(0), Parse("2020-08-05 13:14:15.9").DiffInSeconds(Parse("2020-08-05 13:14:16.1")))
+		s.Equal(int64(0), Parse("2020-08-05 13:14:16.1").DiffInSeconds(Parse("2020-08-05 13:14:15.9")))
+		s.Equal(int64(1), Parse("2020-08-05 13:14:15.5").DiffInSeconds(Parse("2020-08-05 13:14:16.5")))
+		s.Equal(int64(-1), Parse("2020-08-05 13:14:16.5").DiffInSeconds(Parse("2020-08-05 13:14:15.5")))
+		s.Equal(int64(0), Parse("2020-08-05 13:14:15.5").DiffInMinutes(Parse("2020-08-05 13:15:15.2")))
+	})
 }
 
 func (s *DifferenceSuite) TestCarbon_DiffAbsInSeconds() {
