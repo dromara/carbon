@@ -65,9 +65,14 @@ func (c *Carbon) Copy() *Carbon {
 
 // Sleep sleeps for the specified duration like time.Sleep.
 func Sleep(d time.Duration) {
-	if IsTestNow() && d > 0 {
-		frozenNow.testNow = frozenNow.testNow.AddDuration(d.String())
-		return
+	if d > 0 {
+		frozenNow.rw.Lock()
+		if IsTestNow() {
+			frozenNow.testNow = frozenNow.testNow.AddDuration(d.String())
+			frozenNow.rw.Unlock()
+			return
+		}
+		frozenNow.rw.Unlock()
 	}
 	time.Sleep(d)
 }

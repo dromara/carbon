@@ -1,6 +1,7 @@
 package carbon
 
 import (
+	"sync"
 	"testing"
 	"time"
 
@@ -37,4 +38,28 @@ func (s *FrozenSuite) TestSetTestNow() {
 	s.Equal(time.Now().In(time.UTC).Add(time.Hour*-24).Format(DateLayout), Yesterday().ToDateString())
 	s.Equal(time.Now().In(time.UTC).Add(time.Hour*24).Format(DateLayout), Tomorrow().ToDateString())
 	s.False(IsTestNow())
+}
+
+func TestSleepConcurrentFrozenClock(t *testing.T) {
+	start := time.Date(2020, time.August, 5, 0, 0, 0, 0, time.UTC)
+	SetTestNow(CreateFromStdTime(start))
+	t.Cleanup(ClearTestNow)
+	var wg sync.WaitGroup
+	ready := make(chan struct{})
+	for i := 0; i < 4; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			<-ready
+			for j := 0; j < 100; j++ {
+				Sleep(time.Second)
+				Now()
+			}
+		}()
+	}
+	close(ready)
+	wg.Wait()
+	if got := Now().StdTime(); !got.Equal(start.Add(400 * time.Second)) {
+		t.Errorf("frozen time = %s, want %s", got, start.Add(400*time.Second))
+	}
 }
