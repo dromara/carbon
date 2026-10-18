@@ -63,6 +63,15 @@ func (s *DifferenceSuite) TestCarbon_DiffInYears() {
 		s.Equal(int64(1), Parse("2020-08-05 13:14:15").DiffInYears(Parse("2021-08-28 13:14:59")))
 		s.Equal(int64(-1), Parse("2020-08-05 13:14:15").DiffInYears(Parse("2018-08-28 13:14:59")))
 	})
+
+	s.Run("across timezones", func() {
+		// 2023-12-31 20:00:00 in New York is 2024-01-01 01:00:00 in UTC
+		s.Equal(int64(1), Parse("2023-01-01 00:00:00", UTC).DiffInYears(Parse("2023-12-31 20:00:00", NewYork)))
+		s.Equal(int64(-1), Parse("2023-12-31 20:00:00", NewYork).DiffInYears(Parse("2023-01-01 00:00:00", UTC)))
+		// 2025-01-01 05:00:00 in Tokyo is 2024-12-31 20:00:00 in UTC
+		s.Equal(int64(0), Parse("2023-12-31 22:00:00", UTC).DiffInYears(Parse("2025-01-01 05:00:00", Tokyo)))
+		s.Equal(int64(0), Parse("2025-01-01 05:00:00", Tokyo).DiffInYears(Parse("2023-12-31 22:00:00", UTC)))
+	})
 }
 
 func (s *DifferenceSuite) TestCarbon_DiffAbsInYears() {
@@ -148,6 +157,15 @@ func (s *DifferenceSuite) TestCarbon_DiffInMonths() {
 		s.Equal(int64(0), Parse("2020-08-05 13:14:15").DiffInMonths(Parse("2020-07-28 13:14:00")))
 		s.Equal(int64(1), Parse("2020-08-05 13:14:15").DiffInMonths(Parse("2020-09-06 13:14:59")))
 		s.Equal(int64(-23), Parse("2020-08-05 13:14:15").DiffInMonths(Parse("2018-08-28 13:14:59")))
+	})
+
+	s.Run("across timezones", func() {
+		// 2024-02-29 20:00:00 in New York is 2024-03-01 01:00:00 in UTC
+		s.Equal(int64(1), Parse("2024-02-01 00:00:00", UTC).DiffInMonths(Parse("2024-02-29 20:00:00", NewYork)))
+		s.Equal(int64(-1), Parse("2024-02-29 20:00:00", NewYork).DiffInMonths(Parse("2024-02-01 00:00:00", UTC)))
+		// 2024-03-01 05:00:00 in Tokyo is 2024-02-29 20:00:00 in UTC
+		s.Equal(int64(0), Parse("2024-01-31 20:00:00", UTC).DiffInMonths(Parse("2024-03-01 05:00:00", Tokyo)))
+		s.Equal(int64(0), Parse("2024-03-01 05:00:00", Tokyo).DiffInMonths(Parse("2024-01-31 20:00:00", UTC)))
 	})
 }
 
