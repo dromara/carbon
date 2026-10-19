@@ -10,4 +10,4 @@ liberapay: #go-carbon
 issuehunt: #go-carbon
 otechie: # Replace with a single Otechie username
 lfx_crowdfunding: # Replace with a single LFX Crowdfunding project-name e.g., cloud-foundry
-custom: ['carbon.go-pkg.com/sponsor.html']
+custom: ['dromara.github.io/carbon/sponsor.html']

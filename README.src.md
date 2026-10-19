@@ -1,6 +1,6 @@
 <!--@nrg.languages=en,cn,ja,ko-->
 <!--@nrg.defaultLanguage=en-->
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--en-->
+<p align="center" style="margin-bottom: -10px"><a href="https://dromara.github.io/carbon/zh" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--en-->
 <!--en-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--en-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--en-->
@@ -84,7 +84,7 @@ carbon.ClearTestNow()<!--en-->
 carbon.IsTestNow() // false<!--en-->
 ```<!--en-->
 <!--en-->
-For more usage examples, please refer to <a href="https://carbon.go-pkg.com" target="_blank">official document</a>. <!--en-->
+For more usage examples, please refer to <a href="https://dromara.github.io/carbon" target="_blank">official document</a>. <!--en-->
 <!--en-->
 For performance test reports, please refer to [benchmark report](docs/BENCHMARK.en.md)<!--en-->
 <!--en-->
@@ -107,11 +107,11 @@ Thanks to all the following who contributed to `Carbon`:<!--en-->
 ## Translators<!--en-->
 Ask for help to translate `Carbon` in other localized languages<!--en-->
 <!--en-->
-[How to add new localized language support to carbon](https://carbon.go-pkg.com/appendix/contribution-guide.html)<!--en-->
+[How to add new localized language support to carbon](https://dromara.github.io/carbon/appendix/contribution-guide.html)<!--en-->
 <!--en-->
 ## Sponsors<!--en-->
 <!--en-->
-`Carbon` is a non-commercial open source project. If you want to support `Carbon`, you can [buy a cup of coffee](https://carbon.go-pkg.com/sponsor.html) for developer.<!--en-->
+`Carbon` is a non-commercial open source project. If you want to support `Carbon`, you can [buy a cup of coffee](https://dromara.github.io/carbon/sponsor.html) for developer.<!--en-->
 <!--en-->
 ## Thanks<!--en-->
 <!--en-->
@@ -123,7 +123,7 @@ thanks here.<!--en-->
 ## License<!--en-->
 <!--en-->
 `Carbon` is licensed under the `MIT` License, see the [LICENSE](./LICENSE) file for details.<!--en-->
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--cn-->
+<p align="center" style="margin-bottom: -10px"><a href="https://dromara.github.io/carbon/zh" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--cn-->
 <!--cn-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--cn-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--cn-->
@@ -209,7 +209,7 @@ carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月�
 carbon.ClearTestNow()<!--cn-->
 carbon.IsTestNow() // false<!--cn-->
 ```<!--cn-->
-更多用法示例请查看 <a href="https://carbon.go-pkg.com/zh" target="_blank">官方文档</a>，性能测试报告请查看 [分析报告](docs/BENCHMARK.cn.md)<!--cn-->
+更多用法示例请查看 <a href="https://dromara.github.io/carbon/zh" target="_blank">官方文档</a>，性能测试报告请查看 [分析报告](docs/BENCHMARK.cn.md)<!--cn-->
 <!--cn-->
 ## 参考项目<!--cn-->
 <!--cn-->
@@ -231,11 +231,11 @@ carbon.IsTestNow() // false<!--cn-->
 ## 翻译者<!--cn-->
 欢迎帮助将 `Carbon` 翻译为更多本地化语言<!--cn-->
 <!--cn-->
-[如何为 carbon 添加新的本地化语言支持](https://carbon.go-pkg.com/zh/appendix/contribution-guide.html)<!--cn-->
+[如何为 carbon 添加新的本地化语言支持](https://dromara.github.io/carbon/zh/appendix/contribution-guide.html)<!--cn-->
 <!--cn-->
 ## 赞助<!--cn-->
 `Carbon` 是一个非商业开源项目, 如果你想支持 `Carbon`,<!--cn-->
-你可以为开发者 [购买一杯咖啡](https://carbon.go-pkg.com/zh/sponsor.html) 或 点击以下赞助广告<!--cn-->
+你可以为开发者 [购买一杯咖啡](https://dromara.github.io/carbon/zh/sponsor.html) 或 点击以下赞助广告<!--cn-->
 <!--cn-->
 - **Easysearch**  <!--cn-->
   企业级的分布式搜索型数据库，ES 国产化的首选替代方案<!--cn-->
@@ -261,7 +261,7 @@ carbon.IsTestNow() // false<!--cn-->
 ## 开源协议<!--cn-->
 <!--cn-->
 `Carbon` 遵循 `MIT` 开源协议, 请参阅 [LICENSE](./LICENSE) 查看详细信息。<!--cn-->
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--ja-->
+<p align="center" style="margin-bottom: -10px"><a href="https://dromara.github.io/carbon/zh" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--ja-->
 <!--ja-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--ja-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--ja-->
@@ -341,7 +341,7 @@ carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月�
 carbon.ClearTestNow()<!--ja-->
 carbon.IsTestNow() // false<!--ja-->
 ```<!--ja-->
-より多くの使用例については、<a href="https://carbon.go-pkg.com" target="_blank">公式ドキュメント</a>をご覧ください。<!--ja-->
+より多くの使用例については、<a href="https://dromara.github.io/carbon" target="_blank">公式ドキュメント</a>をご覧ください。<!--ja-->
 <!--ja-->
 性能テストレポートについては、[ベンチマークレポート](docs/BENCHMARK.ja.md)をご参照ください<!--ja-->
 <!--ja-->
@@ -364,11 +364,11 @@ carbon.IsTestNow() // false<!--ja-->
 ## 翻訳者<!--ja-->
 `Carbon` を他のローカライズ言語に翻訳してくださる方を募集しています<!--ja-->
 <!--ja-->
-[Carbon に新しいローカライズ言語サポートを追加する方法](https://carbon.go-pkg.com/ja/appendix/contribution-guide.html)<!--ja-->
+[Carbon に新しいローカライズ言語サポートを追加する方法](https://dromara.github.io/carbon/ja/appendix/contribution-guide.html)<!--ja-->
 <!--ja-->
 ## スポンサー<!--ja-->
 <!--ja-->
-`Carbon` は非営利のオープンソースプロジェクトです，`Carbon` をサポートしたい場合は、開発者のために [コーヒーを1杯購入](https://carbon.go-pkg.com/ja/sponsor.html) できます<!--ja-->
+`Carbon` は非営利のオープンソースプロジェクトです，`Carbon` をサポートしたい場合は、開発者のために [コーヒーを1杯購入](https://dromara.github.io/carbon/ja/sponsor.html) できます<!--ja-->
 <!--ja-->
 ## 謝辞<!--ja-->
 <!--ja-->
@@ -379,7 +379,7 @@ carbon.IsTestNow() // false<!--ja-->
 ## オープンソースプロトコル<!--ja-->
 <!--ja-->
 `Carbon` は `MIT` オープンソースプロトコルに準拠しており、詳細は [LICENSE](./LICENSE) を参照してください<!--ja-->
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/ko" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--ko-->
+<p align="center" style="margin-bottom: -10px"><a href="https://dromara.github.io/carbon/ko" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--ko-->
 <!--ko-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--ko-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--ko-->
@@ -460,7 +460,7 @@ carbon.ClearTestNow()<!--ko-->
 carbon.IsTestNow() // false<!--ko-->
 ```<!--ko-->
 <!--ko-->
-더 많은 사용 예시는 <a href="https://carbon.go-pkg.com" target="_blank">공식 문서</a>를 참조하세요.<!--ko-->
+더 많은 사용 예시는 <a href="https://dromara.github.io/carbon" target="_blank">공식 문서</a>를 참조하세요.<!--ko-->
 <!--ko-->
 성능 테스트 보고서는 [벤치마크 보고서](docs/BENCHMARK.ko.md)를 참조하세요.<!--ko-->
 <!--ko-->
@@ -483,11 +483,11 @@ carbon.IsTestNow() // false<!--ko-->
 ## 번역자<!--ko-->
 `Carbon` 을 더 많은 로컬라이즈드 언어로 번역하는 데 도움을 요청드립니다<!--ko-->
 <!--ko-->
-[Carbon에 새로운 로컬라이즈드 언어 지원을 추가하는 방법](https://carbon.go-pkg.com/ko/appendix/contribution-guide.html)<!--ko-->
+[Carbon에 새로운 로컬라이즈드 언어 지원을 추가하는 방법](https://dromara.github.io/carbon/ko/appendix/contribution-guide.html)<!--ko-->
 <!--ko-->
 ## 스폰서<!--ko-->
 <!--ko-->
-`Carbon`은 비상업적 오픈소스 프로젝트입니다. `Carbon`을 지원하고 싶으시다면 개발자에게 [커피 한 잔을 사주세요](https://carbon.go-pkg.com/ko/sponsor.html).<!--ko-->
+`Carbon`은 비상업적 오픈소스 프로젝트입니다. `Carbon`을 지원하고 싶으시다면 개발자에게 [커피 한 잔을 사주세요](https://dromara.github.io/carbon/ko/sponsor.html).<!--ko-->
 <!--ko-->
 ## 감사의 말<!--ko-->
 <!--ko-->
