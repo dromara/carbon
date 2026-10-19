@@ -4,7 +4,7 @@
 <!--en-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--en-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--en-->
-[![golangci-lint](https://github.com/dromara/carbon/actions/workflows/lint.yml/badge.svg)](https://github.com/dromara/carbon/actions/workflows/lint.yml)<!--en-->
+[![golangci-lint](https://img.shields.io/badge/lint-golangci--lint-brightgreen?logo=go&logoColor=white&style=flat)](https://golangci-lint.run/)<!--en-->
 [![Go Coverage](https://codecov.io/gh/dromara/carbon/branch/master/graph/badge.svg)](https://codecov.io/gh/dromara/carbon)<!--en-->
 [![Carbon Doc](https://img.shields.io/badge/go.dev-reference-brightgreen?logo=go&logoColor=white&style=flat)](https://pkg.go.dev/github.com/dromara/carbon/v2)<!--en-->
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/avelino/awesome-go#date-and-time)<!--en-->
@@ -127,7 +127,7 @@ thanks here.<!--en-->
 <!--cn-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--cn-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--cn-->
-[![golangci-lint](https://github.com/dromara/carbon/actions/workflows/lint.yml/badge.svg)](https://github.com/dromara/carbon/actions/workflows/lint.yml)<!--cn-->
+[![golangci-lint](https://img.shields.io/badge/lint-golangci--lint-brightgreen?logo=go&logoColor=white&style=flat)](https://golangci-lint.run/)<!--cn-->
 [![Go Coverage](https://codecov.io/gh/dromara/carbon/branch/master/graph/badge.svg)](https://codecov.io/gh/dromara/carbon)<!--cn-->
 [![Carbon Doc](https://img.shields.io/badge/go.dev-reference-brightgreen?logo=go&logoColor=white&style=flat)](https://pkg.go.dev/github.com/dromara/carbon/v2)<!--cn-->
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/avelino/awesome-go#date-and-time)<!--cn-->
@@ -265,7 +265,7 @@ carbon.IsTestNow() // false<!--cn-->
 <!--ja-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--ja-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--ja-->
-[![golangci-lint](https://github.com/dromara/carbon/actions/workflows/lint.yml/badge.svg)](https://github.com/dromara/carbon/actions/workflows/lint.yml)<!--ja-->
+[![golangci-lint](https://img.shields.io/badge/lint-golangci--lint-brightgreen?logo=go&logoColor=white&style=flat)](https://golangci-lint.run/)<!--ja-->
 [![Go Coverage](https://codecov.io/gh/dromara/carbon/branch/master/graph/badge.svg)](https://codecov.io/gh/dromara/carbon)<!--ja-->
 [![Carbon Doc](https://img.shields.io/badge/go.dev-reference-brightgreen?logo=go&logoColor=white&style=flat)](https://pkg.go.dev/github.com/dromara/carbon/v2)<!--ja-->
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/avelino/awesome-go#date-and-time)<!--ja-->
@@ -383,7 +383,7 @@ carbon.IsTestNow() // false<!--ja-->
 <!--ko-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--ko-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--ko-->
-[![golangci-lint](https://github.com/dromara/carbon/actions/workflows/lint.yml/badge.svg)](https://github.com/dromara/carbon/actions/workflows/lint.yml)<!--ko-->
+[![golangci-lint](https://img.shields.io/badge/lint-golangci--lint-brightgreen?logo=go&logoColor=white&style=flat)](https://golangci-lint.run/)<!--ko-->
 [![Go Coverage](https://codecov.io/gh/dromara/carbon/branch/master/graph/badge.svg)](https://codecov.io/gh/dromara/carbon)<!--ko-->
 [![Carbon Doc](https://img.shields.io/badge/go.dev-reference-brightgreen?logo=go&logoColor=white&style=flat)](https://pkg.go.dev/github.com/dromara/carbon/v2)<!--ko-->
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/avelino/awesome-go#date-and-time)<!--ko-->
