@@ -491,7 +491,7 @@ func TestLunar_AuthorityData(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to open test data file: %v", err)
 	}
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	type lunarData struct {
 		Year        int  `json:"year"`

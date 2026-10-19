@@ -71,7 +71,7 @@ func BenchmarkString(b *testing.B) {
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		l.String()
+		_ = l.String()
 	}
 }
 

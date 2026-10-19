@@ -116,7 +116,7 @@ func BenchmarkHebrew_String(b *testing.B) {
 
 	b.Run("valid_date", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			h.String()
+			_ = h.String()
 		}
 	})
 }

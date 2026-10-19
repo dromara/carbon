@@ -17,7 +17,7 @@ func BenchmarkString(b *testing.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		g := testCases[i%len(testCases)]
-		g.String()
+		_ = g.String()
 	}
 }
 
@@ -26,7 +26,7 @@ func BenchmarkStringNil(b *testing.B) {
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		g.String()
+		_ = g.String()
 	}
 }
 
@@ -35,7 +35,7 @@ func BenchmarkStringZeroTime(b *testing.B) {
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		g.String()
+		_ = g.String()
 	}
 }
 

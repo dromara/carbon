@@ -13,8 +13,7 @@ func TestGregorian_String(t *testing.T) {
 	})
 
 	t.Run("nil time", func(t *testing.T) {
-		g := new(Gregorian)
-		g = nil
+		var g *Gregorian
 		assert.Empty(t, g.String())
 	})
 
@@ -31,8 +30,7 @@ func TestGregorian_IsLeapYear(t *testing.T) {
 	})
 
 	t.Run("nil time", func(t *testing.T) {
-		g := new(Gregorian)
-		g = nil
+		var g *Gregorian
 		assert.False(t, g.IsLeapYear())
 	})
 
