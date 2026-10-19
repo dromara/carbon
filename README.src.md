@@ -1,6 +1,6 @@
 <!--@nrg.languages=en,cn,ja,ko-->
 <!--@nrg.defaultLanguage=en-->
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="https://carbon.go-pkg.com/logo.svg?v=2.6.x" width="15%" alt="carbon" /></a></p><!--en-->
+<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--en-->
 <!--en-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--en-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--en-->
@@ -17,7 +17,7 @@ English | [简体中文](README.cn.md) | [日本語](README.ja.md) | [한국어]
 <!--en-->
 `Carbon` is a lightweight, semantic, and developer-friendly `golang` time package that doesn't depend on `any` third-party package, has `100%` unit test coverage, and has been used by [docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker") organization as well as included by [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") and [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github").<!--en-->
 <!--en-->
-<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="https://carbon.go-pkg.com/docker.jpg" width="100%" alt="docker"/></a><!--en-->
+<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="assets/docker.jpg" width="100%" alt="docker"/></a><!--en-->
 <!--en-->
 ## Repository<!--en-->
 <!--en-->
@@ -118,12 +118,12 @@ Ask for help to translate `Carbon` in other localized languages<!--en-->
 `Carbon` had been being developed with GoLand under the free JetBrains Open Source license, I would like to express my<!--en-->
 thanks here.<!--en-->
 <!--en-->
-<a href="https://www.jetbrains.com" target="_blank"><img src="https://carbon.go-pkg.com/jetbrains.svg?v=2.6.x" height="50" alt="JetBrains"/></a><!--en-->
+<a href="https://www.jetbrains.com" target="_blank"><img src="assets/jetbrains.svg" height="50" alt="JetBrains"/></a><!--en-->
 <!--en-->
 ## License<!--en-->
 <!--en-->
 `Carbon` is licensed under the `MIT` License, see the [LICENSE](./LICENSE) file for details.<!--en-->
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="https://carbon.go-pkg.com/logo.svg?v=2.6.x" width="15%" alt="carbon" /></a></p><!--cn-->
+<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--cn-->
 <!--cn-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--cn-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--cn-->
@@ -141,9 +141,9 @@ thanks here.<!--en-->
 `Carbon` 是一个轻量级、语义化、对开发者友好的 `golang` 时间处理库，不依赖于 `任何` 第三方库， `100%` 单元测试覆盖率，已被 [docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker") 组织使用以及被 [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 和 [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github") 收录，并获得<!--cn-->
 `gitee` 2024 年最有价值项目（`GVP`）和 `gitcode` 2024 年度开源摘星计划 (`G-Star`) 项目<!--cn-->
 <!--cn-->
-<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="https://carbon.go-pkg.com/docker.jpg" width="100%" alt="docker"/></a><!--cn-->
-<a href="https://gitee.com/dromara/carbon" target="_blank"><img src="https://carbon.go-pkg.com/gvp.jpg" width="100%" alt="gvp"/></a><!--cn-->
-<a href="https://gitcode.com/dromara/carbon" target="_blank"><img src="https://carbon.go-pkg.com/gstar.jpg" width="100%" alt="g-star"/></a><!--cn-->
+<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="assets/docker.jpg" width="100%" alt="docker"/></a><!--cn-->
+<a href="https://gitee.com/dromara/carbon" target="_blank"><img src="assets/gvp.jpg" width="100%" alt="gvp"/></a><!--cn-->
+<a href="https://gitcode.com/dromara/carbon" target="_blank"><img src="assets/gstar.jpg" width="100%" alt="g-star"/></a><!--cn-->
 <!--cn-->
 ## 仓库地址<!--cn-->
 <!--cn-->
@@ -256,12 +256,12 @@ carbon.IsTestNow() // false<!--cn-->
 <!--cn-->
 `Carbon`已获取免费的 JetBrains 开源许可证，在此表示感谢<!--cn-->
 <!--cn-->
-<a href="https://www.jetbrains.com" target="_blank"><img src="https://carbon.go-pkg.com/jetbrains.svg?v=2.6.x" height="50" alt="JetBrains"/></a><!--cn-->
+<a href="https://www.jetbrains.com" target="_blank"><img src="assets/jetbrains.svg" height="50" alt="JetBrains"/></a><!--cn-->
 <!--cn-->
 ## 开源协议<!--cn-->
 <!--cn-->
 `Carbon` 遵循 `MIT` 开源协议, 请参阅 [LICENSE](./LICENSE) 查看详细信息。<!--cn-->
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="https://carbon.go-pkg.com/logo.svg?v=2.6.x" width="15%" alt="carbon" /></a></p><!--ja-->
+<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/zh" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--ja-->
 <!--ja-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--ja-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--ja-->
@@ -278,7 +278,7 @@ carbon.IsTestNow() // false<!--cn-->
 <!--ja-->
 `Carbon` は軽量でセマンティックで開発者に優しい `golang` 時間処理ライブラリで、サードパーティ製ライブラリに依存せず、ユニットテストのカバー率は `100%` で、[docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker") に公式採用され、[awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") と [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github") にも収録されています。<!--ja-->
 <!--ja-->
-<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="https://carbon.go-pkg.com/docker.jpg" width="100%" alt="docker"/></a><!--ja-->
+<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="assets/docker.jpg" width="100%" alt="docker"/></a><!--ja-->
 <!--ja-->
 ## リポジトリ<!--ja-->
 <!--ja-->
@@ -374,12 +374,12 @@ carbon.IsTestNow() // false<!--ja-->
 <!--ja-->
 `Carbon` は無料の JetBrains オープンソースライセンスを取得しました，これに感謝します<!--ja-->
 <!--ja-->
-<a href="https://www.jetbrains.com" target="_blank"><img src="https://carbon.go-pkg.com/jetbrains.svg?v=2.6.x" height="50" alt="JetBrains"/></a><!--ja-->
+<a href="https://www.jetbrains.com" target="_blank"><img src="assets/jetbrains.svg" height="50" alt="JetBrains"/></a><!--ja-->
 <!--ja-->
 ## オープンソースプロトコル<!--ja-->
 <!--ja-->
 `Carbon` は `MIT` オープンソースプロトコルに準拠しており、詳細は [LICENSE](./LICENSE) を参照してください<!--ja-->
-<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/ko" target="_blank"><img src="https://carbon.go-pkg.com/logo.svg?v=2.6.x" width="15%" alt="carbon" /></a></p><!--ko-->
+<p align="center" style="margin-bottom: -10px"><a href="https://carbon.go-pkg.com/ko" target="_blank"><img src="assets/logo.svg" width="15%" alt="carbon" /></a></p><!--ko-->
 <!--ko-->
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)<!--ko-->
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)<!--ko-->
@@ -396,7 +396,7 @@ carbon.IsTestNow() // false<!--ja-->
 <!--ko-->
 `Carbon` 은 가벼우면서도 의미론적이고 개발자 친화적인 `golang` 시간 처리 라이브러리로, `어떤` 서드파티 라이브러리에도 의존하지 않으며, `100%` 단위 테스트 커버리지를 가지고 있으며, [docker](https://github.com/docker/docker-language-server/blob/main/go.mod#L10 "docker")에 공식적으로 사용되고 있고 [awesome-go](https://github.com/yinggaozhen/awesome-go-cn#日期和时间 "awesome-go-cn") 와 [hello-github](https://hellogithub.com/repository/dromara/carbon "hello-github")에도 수록되어 있습니다.<!--ko-->
 <!--ko-->
-<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="https://carbon.go-pkg.com/docker.jpg" width="100%" alt="docker"/></a><!--ko-->
+<a href="https://github.com/docker/docker-language-server/blob/main/go.mod#L10" target="_blank"><img src="assets/docker.jpg" width="100%" alt="docker"/></a><!--ko-->
 <!--ko-->
 ## 저장소<!--ko-->
 <!--ko-->
@@ -493,7 +493,7 @@ carbon.IsTestNow() // false<!--ko-->
 <!--ko-->
 `Carbon`은 JetBrains 오픈소스 라이선스의 무료 GoLand로 개발되었습니다. 여기서 감사의 말을 전하고 싶습니다.<!--ko-->
 <!--ko-->
-<a href="https://www.jetbrains.com" target="_blank"><img src="https://carbon.go-pkg.com/jetbrains.svg?v=2.6.x" height="50" alt="JetBrains"/></a><!--ko-->
+<a href="https://www.jetbrains.com" target="_blank"><img src="assets/jetbrains.svg" height="50" alt="JetBrains"/></a><!--ko-->
 <!--ko-->
 ## 라이선스<!--ko-->
 <!--ko-->
