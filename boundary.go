@@ -136,7 +136,7 @@ func (c *Carbon) StartOfHour() *Carbon {
 		return c
 	}
 	year, month, day := c.Date()
-	return c.create(year, month, day, c.Hour(), MinMinute, MinSecond, MinNanosecond)
+	return c.hourBoundary(year, month, day, MinMinute, MinSecond, MinNanosecond)
 }
 
 // EndOfHour returns a Carbon instance for end of the hour.
@@ -145,7 +145,23 @@ func (c *Carbon) EndOfHour() *Carbon {
 		return c
 	}
 	year, month, day := c.Date()
-	return c.create(year, month, day, c.Hour(), MaxMinute, MaxSecond, MaxNanosecond)
+	return c.hourBoundary(year, month, day, MaxMinute, MaxSecond, MaxNanosecond)
+}
+
+// hourBoundary selects the receiver's occurrence when the boundary is ambiguous.
+func (c *Carbon) hourBoundary(year, month, day, minute, second, nanosecond int) *Carbon {
+	result := c.create(year, month, day, c.Hour(), minute, second, nanosecond)
+	_, offset := c.StdTime().Zone()
+	_, boundaryOffset := result.time.Zone()
+	alternative := result.time.Add(time.Duration(boundaryOffset-offset) * time.Second)
+	_, alternativeOffset := alternative.Zone()
+	// An equal offset means the alternative has the same local date and clock
+	// fields as the original boundary. Otherwise that occurrence does not exist
+	// (for example, 01:00 after Lord Howe's half-hour rollback).
+	if alternativeOffset == offset {
+		result.time = alternative
+	}
+	return result
 }
 
 // StartOfMinute returns a Carbon instance for start of the minute.
