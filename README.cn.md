@@ -4,6 +4,7 @@
 
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dromara/carbon/v2)](https://goreportcard.com/report/github.com/dromara/carbon/v2)
 [![Go Coverage](https://codecov.io/gh/dromara/carbon/branch/master/graph/badge.svg)](https://codecov.io/gh/dromara/carbon)
 [![Carbon Doc](https://img.shields.io/badge/go.dev-reference-brightgreen?logo=go&logoColor=white&style=flat)](https://pkg.go.dev/github.com/dromara/carbon/v2)
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/avelino/awesome-go#date-and-time)
@@ -115,13 +116,19 @@ carbon.IsTestNow() // false
 
 - **Easysearch**  
   企业级的分布式搜索型数据库，ES 国产化的首选替代方案
-
-  <a href="https://easysearch.cn/" target="_blank"><img src="https://easysearch.cn/img/header/logo.svg" height="50" alt="Easysearch"/></a>
+ <a href="https://easysearch.cn/" target="_blank"><img src="https://easysearch.cn/img/header/logo.svg" height="50" alt="Easysearch"/></a>
 
 - **雨云**  
   KVM高配版，4核 8G 300M，仅需68元/月起，半年付八折，年付七折，七天无理由退订（送5折券）  
   [点击购买](https://www.rainyun.com/gopkg_?s=github)
 
+- **林枫云**  
+  9950X高防，4核 8G 10M，仅需168元/月，续费同价  
+  [点击购买](https://www.dkdun.cn/aff/NVHPHCEF)
+
+- **莱卡云**  
+  浙江电信云，2核 4G 10M，仅需38元/月，续费同价  
+  [点击购买](https://www.lcayun.com/aff/MBVNVNFX)
 ## 致谢
 
 `Carbon`已获取免费的 JetBrains 开源许可证，在此表示感谢
