@@ -2,4 +2,4 @@
 
 docs for carbon, build in vitepress
 
-website: https://carbon.go-pkg.com
+website: https://dromara.github.io/carbon
