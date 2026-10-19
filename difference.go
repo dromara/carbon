@@ -26,8 +26,11 @@ func (c *Carbon) DiffInYears(carbon ...*Carbon) int64 {
 		sign = -1
 	}
 
-	years := e.Year() - s.Year()
-	if s.StdTime().AddDate(years, 0, 0).After(e.StdTime()) {
+	// read both dates in the same location so the year fields are comparable
+	st := s.StdTime()
+	et := e.StdTime().In(st.Location())
+	years := et.Year() - st.Year()
+	if st.AddDate(years, 0, 0).After(et) {
 		years--
 	}
 	return int64(years) * sign
@@ -58,8 +61,11 @@ func (c *Carbon) DiffInMonths(carbon ...*Carbon) int64 {
 		s, e = e, s
 		sign = -1
 	}
-	months := (e.Year()-s.Year())*12 + (e.Month() - s.Month())
-	if s.StdTime().AddDate(0, months, 0).After(e.StdTime()) {
+	// read both dates in the same location so the month fields are comparable
+	st := s.StdTime()
+	et := e.StdTime().In(st.Location())
+	months := (et.Year()-st.Year())*12 + int(et.Month()-st.Month())
+	if st.AddDate(0, months, 0).After(et) {
 		months--
 	}
 	return int64(months) * sign
