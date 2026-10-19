@@ -53,7 +53,6 @@ func (s *ExtremumSuite) TestMax() {
 
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Nil(Max(c, c1, c2, c3))
 		s.Nil(Max(c1, c, c2, c3))
 		s.Nil(Max(c2, c1, c, c3))
@@ -98,7 +97,6 @@ func (s *ExtremumSuite) TestMin() {
 
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Nil(Min(c, c1, c2, c3))
 		s.Nil(Min(c1, c, c2, c3))
 		s.Nil(Min(c2, c1, c, c3))
@@ -143,7 +141,6 @@ func (s *ExtremumSuite) TestCarbon_Closest() {
 
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Equal(c, c.Closest(c1, c2, c3))
 		s.Equal(c, c1.Closest(c, c2, c3))
 		s.Equal(c, c2.Closest(c1, c, c3))
@@ -194,7 +191,6 @@ func (s *ExtremumSuite) TestCarbon_Farthest() {
 
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Equal(c, c.Farthest(c1, c2, c3))
 		s.Equal(c, c1.Farthest(c, c2, c3))
 		s.Equal(c, c2.Farthest(c1, c, c3))

@@ -25,8 +25,7 @@ func ExampleCarbon_IsNil() {
 	fmt.Println(carbon.Now().IsNil())
 	fmt.Println(carbon.Parse("").IsNil())
 
-	c := carbon.NewCarbon()
-	c = nil
+	var c *carbon.Carbon
 	fmt.Println(c.IsNil())
 
 	// Output:
@@ -39,7 +38,6 @@ func ExampleCarbon_IsNil() {
 
 func ExampleCarbon_IsEmpty() {
 	var c *carbon.Carbon
-	c = nil
 	fmt.Println(c.IsEmpty())
 
 	fmt.Println(carbon.NewCarbon().IsEmpty())

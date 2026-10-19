@@ -29,8 +29,7 @@ func TestJulian_ToGregorian(t *testing.T) {
 	})
 
 	t.Run("nil julian", func(t *testing.T) {
-		j := new(Julian)
-		j = nil
+		var j *Julian
 		assert.Nil(t, j.ToGregorian())
 		assert.Empty(t, j.ToGregorian().String())
 	})
@@ -65,8 +64,7 @@ func TestJulian_ToGregorian(t *testing.T) {
 
 func TestJulian_JD(t *testing.T) {
 	t.Run("nil julian", func(t *testing.T) {
-		j := new(Julian)
-		j = nil
+		var j *Julian
 		assert.Zero(t, j.JD())
 	})
 
@@ -86,8 +84,7 @@ func TestJulian_JD(t *testing.T) {
 
 func TestJulian_MJD(t *testing.T) {
 	t.Run("nil julian", func(t *testing.T) {
-		j := new(Julian)
-		j = nil
+		var j *Julian
 		assert.Zero(t, j.MJD())
 	})
 

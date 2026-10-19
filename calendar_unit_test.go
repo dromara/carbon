@@ -17,7 +17,6 @@ func TestCalendarSuite(t *testing.T) {
 func (s *CalendarSuite) TestCarbon_Julian() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Nil(c.Julian())
 	})
 
@@ -74,7 +73,6 @@ func (s *CalendarSuite) TestCreateFromJulian() {
 func (s *CalendarSuite) TestCarbon_Lunar() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Nil(c.Lunar())
 	})
 
@@ -118,7 +116,6 @@ func (s *CalendarSuite) TestCreateFromLunar() {
 func (s *CalendarSuite) TestCarbon_Persian() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Nil(c.Persian())
 	})
 
@@ -162,7 +159,6 @@ func (s *CalendarSuite) TestCreateFromPersian() {
 func (s *CalendarSuite) TestCarbon_Hebrew() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Nil(c.Hebrew())
 	})
 

@@ -18,7 +18,6 @@ func TestGetterSuite(t *testing.T) {
 func (s *GetterSuite) TestCarbon_StdTime() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Equal(time.Time{}, c.StdTime())
 	})
 
@@ -57,7 +56,6 @@ func (s *GetterSuite) TestCarbon_StdTime() {
 func (s *GetterSuite) TestCarbon_DaysInYear() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DaysInYear())
 	})
 
@@ -82,7 +80,6 @@ func (s *GetterSuite) TestCarbon_DaysInYear() {
 func (s *GetterSuite) TestCarbon_DaysInMonth() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DaysInMonth())
 	})
 
@@ -109,7 +106,6 @@ func (s *GetterSuite) TestCarbon_DaysInMonth() {
 func (s *GetterSuite) TestCarbon_MonthOfYear() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.MonthOfYear())
 	})
 
@@ -136,7 +132,6 @@ func (s *GetterSuite) TestCarbon_MonthOfYear() {
 func (s *GetterSuite) TestCarbon_DayOfYear() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DayOfYear())
 	})
 
@@ -163,7 +158,6 @@ func (s *GetterSuite) TestCarbon_DayOfYear() {
 func (s *GetterSuite) TestCarbon_DayOfMonth() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DayOfMonth())
 	})
 
@@ -189,7 +183,6 @@ func (s *GetterSuite) TestCarbon_DayOfMonth() {
 func (s *GetterSuite) TestCarbon_DayOfWeek() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DayOfWeek())
 	})
 
@@ -216,7 +209,6 @@ func (s *GetterSuite) TestCarbon_DayOfWeek() {
 func (s *GetterSuite) TestCarbon_WeekOfYear() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.WeekOfYear())
 	})
 
@@ -243,7 +235,6 @@ func (s *GetterSuite) TestCarbon_WeekOfYear() {
 func (s *GetterSuite) TestCarbon_WeekOfMonth() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.WeekOfMonth())
 	})
 
@@ -272,7 +263,6 @@ func (s *GetterSuite) TestCarbon_WeekOfMonth() {
 func (s *GetterSuite) TestCarbon_DateTime() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DateTime())
 	})
 
@@ -304,7 +294,6 @@ func (s *GetterSuite) TestCarbon_DateTime() {
 func (s *GetterSuite) TestCarbon_DateTimeMilli() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DateTimeMilli())
 	})
 
@@ -337,7 +326,6 @@ func (s *GetterSuite) TestCarbon_DateTimeMilli() {
 func (s *GetterSuite) TestCarbon_DateTimeMicro() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DateTimeMicro())
 	})
 
@@ -370,7 +358,6 @@ func (s *GetterSuite) TestCarbon_DateTimeMicro() {
 func (s *GetterSuite) TestCarbon_DateTimeNano() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DateTimeNano())
 	})
 
@@ -403,7 +390,6 @@ func (s *GetterSuite) TestCarbon_DateTimeNano() {
 func (s *GetterSuite) TestCarbon_Date() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Date())
 	})
 
@@ -431,7 +417,6 @@ func (s *GetterSuite) TestCarbon_Date() {
 func (s *GetterSuite) TestCarbon_DateMilli() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DateMilli())
 	})
 
@@ -461,7 +446,6 @@ func (s *GetterSuite) TestCarbon_DateMilli() {
 func (s *GetterSuite) TestCarbon_DateMicro() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DateMicro())
 	})
 
@@ -491,7 +475,6 @@ func (s *GetterSuite) TestCarbon_DateMicro() {
 func (s *GetterSuite) TestCarbon_DateNano() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DateNano())
 	})
 
@@ -521,7 +504,6 @@ func (s *GetterSuite) TestCarbon_DateNano() {
 func (s *GetterSuite) TestCarbon_Time() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Time())
 	})
 
@@ -548,7 +530,6 @@ func (s *GetterSuite) TestCarbon_Time() {
 func (s *GetterSuite) TestCarbon_TimeMilli() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.TimeMilli())
 	})
 
@@ -575,7 +556,6 @@ func (s *GetterSuite) TestCarbon_TimeMilli() {
 
 func (s *GetterSuite) TestCarbon_TimeMicro() {
 	var c *Carbon
-	c = nil
 	s.Run("nil carbon", func() {
 		s.Zero(c.TimeMicro())
 	})
@@ -604,7 +584,6 @@ func (s *GetterSuite) TestCarbon_TimeMicro() {
 func (s *GetterSuite) TestCarbon_TimeNano() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.TimeNano())
 	})
 
@@ -632,7 +611,6 @@ func (s *GetterSuite) TestCarbon_TimeNano() {
 func (s *GetterSuite) TestCarbon_Century() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Century())
 	})
 
@@ -657,7 +635,6 @@ func (s *GetterSuite) TestCarbon_Century() {
 func (s *GetterSuite) TestCarbon_Decade() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Decade())
 	})
 
@@ -684,7 +661,6 @@ func (s *GetterSuite) TestCarbon_Decade() {
 func (s *GetterSuite) TestCarbon_Year() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Year())
 	})
 
@@ -711,7 +687,6 @@ func (s *GetterSuite) TestCarbon_Year() {
 func (s *GetterSuite) TestCarbon_Quarter() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Quarter())
 	})
 
@@ -738,7 +713,6 @@ func (s *GetterSuite) TestCarbon_Quarter() {
 func (s *GetterSuite) TestCarbon_Month() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Month())
 	})
 
@@ -765,7 +739,6 @@ func (s *GetterSuite) TestCarbon_Month() {
 func (s *GetterSuite) TestCarbon_Week() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Equal(-1, c.Week())
 	})
 
@@ -792,7 +765,6 @@ func (s *GetterSuite) TestCarbon_Week() {
 func (s *GetterSuite) TestCarbon_Day() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Day())
 	})
 
@@ -819,7 +791,6 @@ func (s *GetterSuite) TestCarbon_Day() {
 func (s *GetterSuite) TestCarbon_Hour() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Hour())
 	})
 
@@ -843,7 +814,6 @@ func (s *GetterSuite) TestCarbon_Hour() {
 func (s *GetterSuite) TestCarbon_Minute() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Minute())
 	})
 
@@ -867,7 +837,6 @@ func (s *GetterSuite) TestCarbon_Minute() {
 func (s *GetterSuite) TestCarbon_Second() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Second())
 	})
 
@@ -891,7 +860,6 @@ func (s *GetterSuite) TestCarbon_Second() {
 func (s *GetterSuite) TestCarbon_Millisecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Millisecond())
 	})
 
@@ -915,7 +883,6 @@ func (s *GetterSuite) TestCarbon_Millisecond() {
 func (s *GetterSuite) TestCarbon_Microsecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Microsecond())
 	})
 
@@ -939,7 +906,6 @@ func (s *GetterSuite) TestCarbon_Microsecond() {
 func (s *GetterSuite) TestCarbon_Nanosecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Nanosecond())
 	})
 
@@ -963,7 +929,6 @@ func (s *GetterSuite) TestCarbon_Nanosecond() {
 func (s *GetterSuite) TestCarbon_Timestamp() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Timestamp())
 	})
 
@@ -988,7 +953,6 @@ func (s *GetterSuite) TestCarbon_Timestamp() {
 func (s *GetterSuite) TestCarbon_TimestampMilli() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.TimestampMilli())
 	})
 
@@ -1013,7 +977,6 @@ func (s *GetterSuite) TestCarbon_TimestampMilli() {
 func (s *GetterSuite) TestCarbon_TimestampMicro() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.TimestampMicro())
 	})
 
@@ -1038,7 +1001,6 @@ func (s *GetterSuite) TestCarbon_TimestampMicro() {
 func (s *GetterSuite) TestCarbon_TimestampNano() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.TimestampNano())
 	})
 
@@ -1063,7 +1025,6 @@ func (s *GetterSuite) TestCarbon_TimestampNano() {
 func (s *GetterSuite) TestCarbon_Timezone() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Empty(c.Timezone())
 	})
 
@@ -1089,7 +1050,6 @@ func (s *GetterSuite) TestCarbon_Timezone() {
 func (s *GetterSuite) TestCarbon_ZoneName() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Empty(c.ZoneName())
 	})
 
@@ -1115,7 +1075,6 @@ func (s *GetterSuite) TestCarbon_ZoneName() {
 func (s *GetterSuite) TestCarbon_ZoneOffset() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.ZoneOffset())
 	})
 
@@ -1141,7 +1100,6 @@ func (s *GetterSuite) TestCarbon_ZoneOffset() {
 func (s *GetterSuite) TestCarbon_Locale() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Empty(c.Locale())
 	})
 
@@ -1173,7 +1131,6 @@ func (s *GetterSuite) TestCarbon_Locale() {
 func (s *GetterSuite) TestCarbon_WeekStartsAt() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Empty(c.WeekStartsAt())
 	})
 
@@ -1198,7 +1155,6 @@ func (s *GetterSuite) TestCarbon_WeekStartsAt() {
 func (s *GetterSuite) TestCarbon_WeekEndsAt() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Empty(c.WeekEndsAt())
 	})
 
@@ -1223,7 +1179,6 @@ func (s *GetterSuite) TestCarbon_WeekEndsAt() {
 func (s *GetterSuite) TestCarbon_CurrentLayout() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Empty(c.CurrentLayout())
 	})
 
@@ -1249,7 +1204,6 @@ func (s *GetterSuite) TestCarbon_CurrentLayout() {
 func (s *GetterSuite) TestCarbon_Age() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.Age())
 	})
 

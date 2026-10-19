@@ -84,7 +84,6 @@ func (s *BoundarySuite) TestCarbon_MinuteBoundariesAtOffsetTransitions() {
 func (s *BoundarySuite) TestCarbon_StartOfCentury() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.StartOfCentury()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -118,7 +117,6 @@ func (s *BoundarySuite) TestCarbon_StartOfCentury() {
 func (s *BoundarySuite) TestCarbon_EndOfCentury() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.EndOfCentury()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -152,7 +150,6 @@ func (s *BoundarySuite) TestCarbon_EndOfCentury() {
 func (s *BoundarySuite) TestCarbon_StartOfDecade() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.StartOfDecade()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -186,7 +183,6 @@ func (s *BoundarySuite) TestCarbon_StartOfDecade() {
 func (s *BoundarySuite) TestCarbon_EndOfDecade() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.EndOfDecade()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -220,7 +216,6 @@ func (s *BoundarySuite) TestCarbon_EndOfDecade() {
 func (s *BoundarySuite) TestCarbon_StartOfYear() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.StartOfYear()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -254,7 +249,6 @@ func (s *BoundarySuite) TestCarbon_StartOfYear() {
 func (s *BoundarySuite) TestCarbon_EndOfYear() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.EndOfYear()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -288,7 +282,6 @@ func (s *BoundarySuite) TestCarbon_EndOfYear() {
 func (s *BoundarySuite) TestCarbon_StartOfQuarter() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.StartOfQuarter()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -322,7 +315,6 @@ func (s *BoundarySuite) TestCarbon_StartOfQuarter() {
 func (s *BoundarySuite) TestCarbon_EndOfQuarter() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.EndOfQuarter()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -356,7 +348,6 @@ func (s *BoundarySuite) TestCarbon_EndOfQuarter() {
 func (s *BoundarySuite) TestCarbon_StartOfMonth() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.StartOfMonth()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -390,7 +381,6 @@ func (s *BoundarySuite) TestCarbon_StartOfMonth() {
 func (s *BoundarySuite) TestCarbon_EndOfMonth() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.EndOfMonth()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -424,7 +414,6 @@ func (s *BoundarySuite) TestCarbon_EndOfMonth() {
 func (s *BoundarySuite) TestCarbon_StartOfWeek() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.StartOfWeek()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -459,7 +448,6 @@ func (s *BoundarySuite) TestCarbon_StartOfWeek() {
 func (s *BoundarySuite) TestCarbon_EndOfWeek() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.EndOfWeek()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -494,7 +482,6 @@ func (s *BoundarySuite) TestCarbon_EndOfWeek() {
 func (s *BoundarySuite) TestCarbon_StartOfDay() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.StartOfDay()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -528,7 +515,6 @@ func (s *BoundarySuite) TestCarbon_StartOfDay() {
 func (s *BoundarySuite) TestCarbon_EndOfDay() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.EndOfDay()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -562,7 +548,6 @@ func (s *BoundarySuite) TestCarbon_EndOfDay() {
 func (s *BoundarySuite) TestCarbon_StartOfHour() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.StartOfHour()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -596,7 +581,6 @@ func (s *BoundarySuite) TestCarbon_StartOfHour() {
 func (s *BoundarySuite) TestCarbon_EndOfHour() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.EndOfHour()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -630,7 +614,6 @@ func (s *BoundarySuite) TestCarbon_EndOfHour() {
 func (s *BoundarySuite) TestCarbon_StartOfMinute() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.StartOfMinute()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -664,7 +647,6 @@ func (s *BoundarySuite) TestCarbon_StartOfMinute() {
 func (s *BoundarySuite) TestCarbon_EndOfMinute() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.EndOfMinute()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -698,7 +680,6 @@ func (s *BoundarySuite) TestCarbon_EndOfMinute() {
 func (s *BoundarySuite) TestCarbon_StartOfSecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.StartOfSecond()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -732,7 +713,6 @@ func (s *BoundarySuite) TestCarbon_StartOfSecond() {
 func (s *BoundarySuite) TestCarbon_EndOfSecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.EndOfSecond()
 		s.False(c.HasError())
 		s.Empty(c.ToString())

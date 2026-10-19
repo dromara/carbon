@@ -55,11 +55,8 @@ func FromStdTime(t time.Time) *Julian {
 	m := int(t.Month())
 	d := float64(t.Day()) + ((float64(t.Second())/60+float64(t.Minute()))/60+float64(t.Hour()))/24
 	n := 0
-	f := false
 	// Check if date is on or after Gregorian reform (October 15, 1582)
-	if (y > 1582) || (y == 1582 && m > 10) || (y == 1582 && m == 10 && int(d) >= 15) {
-		f = true
-	}
+	f := (y > 1582) || (y == 1582 && m > 10) || (y == 1582 && m == 10 && int(d) >= 15)
 	if m <= 2 {
 		m += 12
 		y--

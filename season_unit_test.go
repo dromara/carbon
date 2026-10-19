@@ -17,7 +17,6 @@ func TestSeasonSuite(t *testing.T) {
 func (s *SeasonSuite) TestSeason() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Empty(c.Season())
 	})
 
@@ -67,7 +66,6 @@ func (s *SeasonSuite) TestSeason() {
 func (s *SeasonSuite) TestStartOfSeason() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Nil(c.StartOfSeason())
 	})
 
@@ -102,7 +100,6 @@ func (s *SeasonSuite) TestStartOfSeason() {
 func (s *SeasonSuite) TestEndOfSeason() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Nil(c.EndOfSeason())
 	})
 
@@ -137,7 +134,6 @@ func (s *SeasonSuite) TestEndOfSeason() {
 func (s *SeasonSuite) TestIsSpring() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSpring())
 	})
 
@@ -162,7 +158,6 @@ func (s *SeasonSuite) TestIsSpring() {
 func (s *SeasonSuite) TestIsSummer() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSummer())
 	})
 
@@ -187,7 +182,6 @@ func (s *SeasonSuite) TestIsSummer() {
 func (s *SeasonSuite) TestIsAutumn() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsAutumn())
 	})
 
@@ -212,7 +206,6 @@ func (s *SeasonSuite) TestIsAutumn() {
 func (s *SeasonSuite) TestIsWinter() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsWinter())
 	})
 

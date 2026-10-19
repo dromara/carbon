@@ -118,7 +118,6 @@ func (s *TravelerSuite) TestYesterday() {
 func (s *TravelerSuite) TestCarbon_AddDuration() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddDuration("10h")
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -166,7 +165,6 @@ func (s *TravelerSuite) TestCarbon_AddDuration() {
 func (s *TravelerSuite) TestCarbon_SubDuration() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubDuration("10h")
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -207,7 +205,6 @@ func (s *TravelerSuite) TestCarbon_SubDuration() {
 func (s *TravelerSuite) TestCarbon_AddCenturies() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddCenturies(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -241,7 +238,6 @@ func (s *TravelerSuite) TestCarbon_AddCenturies() {
 func (s *TravelerSuite) TestCarbon_AddCenturiesNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddCenturiesNoOverflow(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -275,7 +271,6 @@ func (s *TravelerSuite) TestCarbon_AddCenturiesNoOverflow() {
 func (s *TravelerSuite) TestCarbon_AddCentury() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddCentury()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -309,7 +304,6 @@ func (s *TravelerSuite) TestCarbon_AddCentury() {
 func (s *TravelerSuite) TestCarbon_AddCenturyNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddCenturyNoOverflow()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -343,7 +337,6 @@ func (s *TravelerSuite) TestCarbon_AddCenturyNoOverflow() {
 func (s *TravelerSuite) TestCarbon_SubCenturies() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubCenturies(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -377,7 +370,6 @@ func (s *TravelerSuite) TestCarbon_SubCenturies() {
 func (s *TravelerSuite) TestCarbon_SubCenturiesNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubCenturiesNoOverflow(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -411,7 +403,6 @@ func (s *TravelerSuite) TestCarbon_SubCenturiesNoOverflow() {
 func (s *TravelerSuite) TestCarbon_SubCentury() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubCentury()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -445,7 +436,6 @@ func (s *TravelerSuite) TestCarbon_SubCentury() {
 func (s *TravelerSuite) TestCarbon_SubCenturyNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubCenturyNoOverflow()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -479,7 +469,6 @@ func (s *TravelerSuite) TestCarbon_SubCenturyNoOverflow() {
 func (s *TravelerSuite) TestCarbon_AddDecades() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddDecades(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -513,7 +502,6 @@ func (s *TravelerSuite) TestCarbon_AddDecades() {
 func (s *TravelerSuite) TestCarbon_AddDecadesNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddDecadesNoOverflow(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -547,7 +535,6 @@ func (s *TravelerSuite) TestCarbon_AddDecadesNoOverflow() {
 func (s *TravelerSuite) TestCarbon_AddDecade() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddDecade()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -581,7 +568,6 @@ func (s *TravelerSuite) TestCarbon_AddDecade() {
 func (s *TravelerSuite) TestCarbon_AddDecadeNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddDecadeNoOverflow()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -615,7 +601,6 @@ func (s *TravelerSuite) TestCarbon_AddDecadeNoOverflow() {
 func (s *TravelerSuite) TestCarbon_SubDecades() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubDecades(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -649,7 +634,6 @@ func (s *TravelerSuite) TestCarbon_SubDecades() {
 func (s *TravelerSuite) TestCarbon_SubDecadesNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubDecadesNoOverflow(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -683,7 +667,6 @@ func (s *TravelerSuite) TestCarbon_SubDecadesNoOverflow() {
 func (s *TravelerSuite) TestCarbon_SubDecade() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubDecade()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -717,7 +700,6 @@ func (s *TravelerSuite) TestCarbon_SubDecade() {
 func (s *TravelerSuite) TestCarbon_SubDecadeNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubDecadeNoOverflow()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -751,7 +733,6 @@ func (s *TravelerSuite) TestCarbon_SubDecadeNoOverflow() {
 func (s *TravelerSuite) TestCarbon_AddYears() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddYears(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -786,7 +767,6 @@ func (s *TravelerSuite) TestCarbon_AddYears() {
 func (s *TravelerSuite) TestCarbon_AddYearsNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddYearsNoOverflow(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -821,7 +801,6 @@ func (s *TravelerSuite) TestCarbon_AddYearsNoOverflow() {
 func (s *TravelerSuite) TestCarbon_AddYear() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddYear()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -855,7 +834,6 @@ func (s *TravelerSuite) TestCarbon_AddYear() {
 func (s *TravelerSuite) TestCarbon_AddYearNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddYearNoOverflow()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -889,7 +867,6 @@ func (s *TravelerSuite) TestCarbon_AddYearNoOverflow() {
 func (s *TravelerSuite) TestCarbon_SubYears() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubYears(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -924,7 +901,6 @@ func (s *TravelerSuite) TestCarbon_SubYears() {
 func (s *TravelerSuite) TestCarbon_SubYearsNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubYearsNoOverflow(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -959,7 +935,6 @@ func (s *TravelerSuite) TestCarbon_SubYearsNoOverflow() {
 func (s *TravelerSuite) TestCarbon_SubYear() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubYear()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -993,7 +968,6 @@ func (s *TravelerSuite) TestCarbon_SubYear() {
 func (s *TravelerSuite) TestCarbon_SubYearNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubYearNoOverflow()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1027,7 +1001,6 @@ func (s *TravelerSuite) TestCarbon_SubYearNoOverflow() {
 func (s *TravelerSuite) TestCarbon_AddQuarters() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddQuarters(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1063,7 +1036,6 @@ func (s *TravelerSuite) TestCarbon_AddQuarters() {
 func (s *TravelerSuite) TestCarbon_AddQuartersNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddQuartersNoOverflow(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1099,7 +1071,6 @@ func (s *TravelerSuite) TestCarbon_AddQuartersNoOverflow() {
 func (s *TravelerSuite) TestCarbon_AddQuarter() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddQuarter()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1134,7 +1105,6 @@ func (s *TravelerSuite) TestCarbon_AddQuarter() {
 func (s *TravelerSuite) TestCarbon_AddQuarterNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddQuarterNoOverflow()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1169,7 +1139,6 @@ func (s *TravelerSuite) TestCarbon_AddQuarterNoOverflow() {
 func (s *TravelerSuite) TestCarbon_SubQuarters() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubQuarters(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1205,7 +1174,6 @@ func (s *TravelerSuite) TestCarbon_SubQuarters() {
 func (s *TravelerSuite) TestCarbon_SubQuartersNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubQuartersNoOverflow(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1241,7 +1209,6 @@ func (s *TravelerSuite) TestCarbon_SubQuartersNoOverflow() {
 func (s *TravelerSuite) TestCarbon_SubQuarter() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubQuarter()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1276,7 +1243,6 @@ func (s *TravelerSuite) TestCarbon_SubQuarter() {
 func (s *TravelerSuite) TestCarbon_SubQuarterNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubQuarterNoOverflow()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1311,7 +1277,6 @@ func (s *TravelerSuite) TestCarbon_SubQuarterNoOverflow() {
 func (s *TravelerSuite) TestCarbon_AddMonths() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddMonths(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1347,7 +1312,6 @@ func (s *TravelerSuite) TestCarbon_AddMonths() {
 func (s *TravelerSuite) TestCarbon_AddMonthsNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddMonthsNoOverflow(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1392,7 +1356,6 @@ func (s *TravelerSuite) TestCarbon_AddMonthsNoOverflow() {
 func (s *TravelerSuite) TestCarbon_AddMonth() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddMonth()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1427,7 +1390,6 @@ func (s *TravelerSuite) TestCarbon_AddMonth() {
 func (s *TravelerSuite) TestCarbon_AddMonthNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddMonthNoOverflow()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1462,7 +1424,6 @@ func (s *TravelerSuite) TestCarbon_AddMonthNoOverflow() {
 func (s *TravelerSuite) TestCarbon_SubMonths() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubMonths(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1498,7 +1459,6 @@ func (s *TravelerSuite) TestCarbon_SubMonths() {
 func (s *TravelerSuite) TestCarbon_SubMonthsNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubMonthsNoOverflow(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1534,7 +1494,6 @@ func (s *TravelerSuite) TestCarbon_SubMonthsNoOverflow() {
 func (s *TravelerSuite) TestCarbon_SubMonth() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubMonth()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1569,7 +1528,6 @@ func (s *TravelerSuite) TestCarbon_SubMonth() {
 func (s *TravelerSuite) TestCarbon_SubMonthNoOverflow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubMonthNoOverflow()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1604,7 +1562,6 @@ func (s *TravelerSuite) TestCarbon_SubMonthNoOverflow() {
 func (s *TravelerSuite) TestCarbon_AddWeeks() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddWeeks(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1640,7 +1597,6 @@ func (s *TravelerSuite) TestCarbon_AddWeeks() {
 func (s *TravelerSuite) TestCarbon_AddWeek() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddWeek()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1675,7 +1631,6 @@ func (s *TravelerSuite) TestCarbon_AddWeek() {
 func (s *TravelerSuite) TestCarbon_SubWeeks() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubWeeks(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1711,7 +1666,6 @@ func (s *TravelerSuite) TestCarbon_SubWeeks() {
 func (s *TravelerSuite) TestCarbon_SubWeek() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubWeek()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1746,7 +1700,6 @@ func (s *TravelerSuite) TestCarbon_SubWeek() {
 func (s *TravelerSuite) TestCarbon_AddDays() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddDays(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1782,7 +1735,6 @@ func (s *TravelerSuite) TestCarbon_AddDays() {
 func (s *TravelerSuite) TestCarbon_AddDay() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddDay()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1817,7 +1769,6 @@ func (s *TravelerSuite) TestCarbon_AddDay() {
 func (s *TravelerSuite) TestCarbon_SubDays() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubDays(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1853,7 +1804,6 @@ func (s *TravelerSuite) TestCarbon_SubDays() {
 func (s *TravelerSuite) TestCarbon_SubDay() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubDay()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1888,7 +1838,6 @@ func (s *TravelerSuite) TestCarbon_SubDay() {
 func (s *TravelerSuite) TestCarbon_AddWeekdays() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddWeekdays(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -1981,7 +1930,6 @@ func (s *TravelerSuite) TestCarbon_AddWeekdays() {
 func (s *TravelerSuite) TestCarbon_AddWeekday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddWeekday()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2015,7 +1963,6 @@ func (s *TravelerSuite) TestCarbon_AddWeekday() {
 func (s *TravelerSuite) TestCarbon_SubWeekdays() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubWeekdays(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2051,7 +1998,6 @@ func (s *TravelerSuite) TestCarbon_SubWeekdays() {
 func (s *TravelerSuite) TestCarbon_SubWeekday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubWeekday()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2084,7 +2030,6 @@ func (s *TravelerSuite) TestCarbon_SubWeekday() {
 func (s *TravelerSuite) TestCarbon_AddHours() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddHours(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2118,7 +2063,6 @@ func (s *TravelerSuite) TestCarbon_AddHours() {
 func (s *TravelerSuite) TestCarbon_AddHour() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddHour()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2152,7 +2096,6 @@ func (s *TravelerSuite) TestCarbon_AddHour() {
 func (s *TravelerSuite) TestCarbon_SubHours() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubHours(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2186,7 +2129,6 @@ func (s *TravelerSuite) TestCarbon_SubHours() {
 func (s *TravelerSuite) TestCarbon_SubHour() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubHour()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2220,7 +2162,6 @@ func (s *TravelerSuite) TestCarbon_SubHour() {
 func (s *TravelerSuite) TestCarbon_AddMinutes() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddMinutes(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2254,7 +2195,6 @@ func (s *TravelerSuite) TestCarbon_AddMinutes() {
 func (s *TravelerSuite) TestCarbon_AddMinute() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddMinute()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2288,7 +2228,6 @@ func (s *TravelerSuite) TestCarbon_AddMinute() {
 func (s *TravelerSuite) TestCarbon_SubMinutes() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubMinutes(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2322,7 +2261,6 @@ func (s *TravelerSuite) TestCarbon_SubMinutes() {
 func (s *TravelerSuite) TestCarbon_SubMinute() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubMinute()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2356,7 +2294,6 @@ func (s *TravelerSuite) TestCarbon_SubMinute() {
 func (s *TravelerSuite) TestCarbon_AddSeconds() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddSeconds(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2390,7 +2327,6 @@ func (s *TravelerSuite) TestCarbon_AddSeconds() {
 func (s *TravelerSuite) TestCarbon_AddSecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddSecond()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2424,7 +2360,6 @@ func (s *TravelerSuite) TestCarbon_AddSecond() {
 func (s *TravelerSuite) TestCarbon_SubSeconds() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubSeconds(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2458,7 +2393,6 @@ func (s *TravelerSuite) TestCarbon_SubSeconds() {
 func (s *TravelerSuite) TestCarbon_SubSecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubSecond()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2492,7 +2426,6 @@ func (s *TravelerSuite) TestCarbon_SubSecond() {
 func (s *TravelerSuite) TestCarbon_AddMilliseconds() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddMilliseconds(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2526,7 +2459,6 @@ func (s *TravelerSuite) TestCarbon_AddMilliseconds() {
 func (s *TravelerSuite) TestCarbon_AddMillisecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddMillisecond()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2560,7 +2492,6 @@ func (s *TravelerSuite) TestCarbon_AddMillisecond() {
 func (s *TravelerSuite) TestCarbon_SubMilliseconds() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubMilliseconds(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2594,7 +2525,6 @@ func (s *TravelerSuite) TestCarbon_SubMilliseconds() {
 func (s *TravelerSuite) TestCarbon_SubMillisecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubMillisecond()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2628,7 +2558,6 @@ func (s *TravelerSuite) TestCarbon_SubMillisecond() {
 func (s *TravelerSuite) TestCarbon_AddMicroseconds() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddMicroseconds(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2662,7 +2591,6 @@ func (s *TravelerSuite) TestCarbon_AddMicroseconds() {
 func (s *TravelerSuite) TestCarbon_AddMicrosecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddMicrosecond()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2696,7 +2624,6 @@ func (s *TravelerSuite) TestCarbon_AddMicrosecond() {
 func (s *TravelerSuite) TestCarbon_SubMicroseconds() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubMicroseconds(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2728,7 +2655,6 @@ func (s *TravelerSuite) TestCarbon_SubMicroseconds() {
 func (s *TravelerSuite) TestCarbon_SubMicrosecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubMicrosecond()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2762,7 +2688,6 @@ func (s *TravelerSuite) TestCarbon_SubMicrosecond() {
 func (s *TravelerSuite) TestCarbon_AddNanoseconds() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddNanoseconds(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2796,7 +2721,6 @@ func (s *TravelerSuite) TestCarbon_AddNanoseconds() {
 func (s *TravelerSuite) TestCarbon_AddNanosecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.AddNanosecond()
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2830,7 +2754,6 @@ func (s *TravelerSuite) TestCarbon_AddNanosecond() {
 func (s *TravelerSuite) TestCarbon_SubNanoseconds() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubNanoseconds(2)
 		s.False(c.HasError())
 		s.Empty(c.ToString())
@@ -2864,7 +2787,6 @@ func (s *TravelerSuite) TestCarbon_SubNanoseconds() {
 func (s *TravelerSuite) TestCarbon_SubNanosecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		c = c.SubNanosecond()
 		s.False(c.HasError())
 		s.Empty(c.ToString())

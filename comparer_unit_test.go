@@ -18,7 +18,6 @@ func TestComparerSuite(t *testing.T) {
 func (s *ComparerSuite) TestCarbon_HasError() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.HasError())
 	})
 
@@ -42,7 +41,6 @@ func (s *ComparerSuite) TestCarbon_HasError() {
 func (s *ComparerSuite) TestCarbon_IsNil() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.True(c.IsNil())
 	})
 
@@ -66,7 +64,6 @@ func (s *ComparerSuite) TestCarbon_IsNil() {
 func (s *ComparerSuite) TestCarbon_IsEmpty() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsEmpty())
 	})
 
@@ -90,7 +87,6 @@ func (s *ComparerSuite) TestCarbon_IsEmpty() {
 func (s *ComparerSuite) TestCarbon_IsZero() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsZero())
 	})
 
@@ -126,7 +122,6 @@ func (s *ComparerSuite) TestCarbon_IsZero() {
 func (s *ComparerSuite) TestCarbon_IsEpoch() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsEpoch())
 	})
 
@@ -153,7 +148,6 @@ func (s *ComparerSuite) TestCarbon_IsEpoch() {
 func (s *ComparerSuite) TestCarbon_IsValid() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsValid())
 	})
 
@@ -177,7 +171,6 @@ func (s *ComparerSuite) TestCarbon_IsValid() {
 func (s *ComparerSuite) TestCarbon_IsInvalid() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.True(c.IsInvalid())
 	})
 
@@ -201,7 +194,6 @@ func (s *ComparerSuite) TestCarbon_IsInvalid() {
 func (s *ComparerSuite) TestCarbon_IsDST() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsDST())
 	})
 
@@ -228,7 +220,6 @@ func (s *ComparerSuite) TestCarbon_IsDST() {
 func (s *ComparerSuite) TestCarbon_IsAM() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsAM())
 	})
 
@@ -254,7 +245,6 @@ func (s *ComparerSuite) TestCarbon_IsAM() {
 func (s *ComparerSuite) TestCarbon_IsPM() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsPM())
 	})
 
@@ -280,7 +270,6 @@ func (s *ComparerSuite) TestCarbon_IsPM() {
 func (s *ComparerSuite) TestCarbon_IsLeapYear() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsLeapYear())
 	})
 
@@ -305,7 +294,6 @@ func (s *ComparerSuite) TestCarbon_IsLeapYear() {
 func (s *ComparerSuite) TestCarbon_IsLongYear() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsLongYear())
 	})
 
@@ -330,7 +318,6 @@ func (s *ComparerSuite) TestCarbon_IsLongYear() {
 func (s *ComparerSuite) TestCarbon_IsJanuary() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsJanuary())
 	})
 
@@ -355,7 +342,6 @@ func (s *ComparerSuite) TestCarbon_IsJanuary() {
 func (s *ComparerSuite) TestCarbon_IsFebruary() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsFebruary())
 	})
 
@@ -380,7 +366,6 @@ func (s *ComparerSuite) TestCarbon_IsFebruary() {
 func (s *ComparerSuite) TestCarbon_IsMarch() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsMarch())
 	})
 
@@ -405,7 +390,6 @@ func (s *ComparerSuite) TestCarbon_IsMarch() {
 func (s *ComparerSuite) TestCarbon_IsApril() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsApril())
 	})
 
@@ -430,7 +414,6 @@ func (s *ComparerSuite) TestCarbon_IsApril() {
 func (s *ComparerSuite) TestCarbon_IsMay() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsMay())
 	})
 
@@ -455,7 +438,6 @@ func (s *ComparerSuite) TestCarbon_IsMay() {
 func (s *ComparerSuite) TestCarbon_IsJune() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsJune())
 	})
 
@@ -480,7 +462,6 @@ func (s *ComparerSuite) TestCarbon_IsJune() {
 func (s *ComparerSuite) TestCarbon_IsJuly() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsJuly())
 	})
 
@@ -505,7 +486,6 @@ func (s *ComparerSuite) TestCarbon_IsJuly() {
 func (s *ComparerSuite) TestCarbon_IsAugust() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsAugust())
 	})
 
@@ -530,7 +510,6 @@ func (s *ComparerSuite) TestCarbon_IsAugust() {
 func (s *ComparerSuite) TestCarbon_IsSeptember() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSeptember())
 	})
 
@@ -555,7 +534,6 @@ func (s *ComparerSuite) TestCarbon_IsSeptember() {
 func (s *ComparerSuite) TestCarbon_IsOctober() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsOctober())
 	})
 
@@ -580,7 +558,6 @@ func (s *ComparerSuite) TestCarbon_IsOctober() {
 func (s *ComparerSuite) TestCarbon_IsNovember() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsNovember())
 	})
 
@@ -606,7 +583,6 @@ func (s *ComparerSuite) TestCarbon_IsNovember() {
 func (s *ComparerSuite) TestCarbon_IsDecember() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsDecember())
 	})
 
@@ -631,7 +607,6 @@ func (s *ComparerSuite) TestCarbon_IsDecember() {
 func (s *ComparerSuite) TestCarbon_IsMonday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsMonday())
 	})
 
@@ -656,7 +631,6 @@ func (s *ComparerSuite) TestCarbon_IsMonday() {
 func (s *ComparerSuite) TestCarbon_IsTuesday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsTuesday())
 	})
 
@@ -681,7 +655,6 @@ func (s *ComparerSuite) TestCarbon_IsTuesday() {
 func (s *ComparerSuite) TestCarbon_IsWednesday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsWednesday())
 	})
 
@@ -706,7 +679,6 @@ func (s *ComparerSuite) TestCarbon_IsWednesday() {
 func (s *ComparerSuite) TestCarbon_IsThursday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsThursday())
 	})
 
@@ -731,7 +703,6 @@ func (s *ComparerSuite) TestCarbon_IsThursday() {
 func (s *ComparerSuite) TestCarbon_IsFriday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsFriday())
 	})
 
@@ -756,7 +727,6 @@ func (s *ComparerSuite) TestCarbon_IsFriday() {
 func (s *ComparerSuite) TestCarbon_IsSaturday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSaturday())
 	})
 
@@ -781,7 +751,6 @@ func (s *ComparerSuite) TestCarbon_IsSaturday() {
 func (s *ComparerSuite) TestCarbon_IsSunday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSunday())
 	})
 
@@ -806,7 +775,6 @@ func (s *ComparerSuite) TestCarbon_IsSunday() {
 func (s *ComparerSuite) TestCarbon_IsWeekday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsWeekday())
 	})
 
@@ -832,7 +800,6 @@ func (s *ComparerSuite) TestCarbon_IsWeekday() {
 func (s *ComparerSuite) TestCarbon_IsWeekend() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsWeekend())
 	})
 
@@ -858,7 +825,6 @@ func (s *ComparerSuite) TestCarbon_IsWeekend() {
 func (s *ComparerSuite) TestCarbon_IsNow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsNow())
 	})
 
@@ -885,7 +851,6 @@ func (s *ComparerSuite) TestCarbon_IsNow() {
 func (s *ComparerSuite) TestCarbon_IsFuture() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsFuture())
 	})
 
@@ -912,7 +877,6 @@ func (s *ComparerSuite) TestCarbon_IsFuture() {
 func (s *ComparerSuite) TestCarbon_IsPast() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsPast())
 	})
 
@@ -939,7 +903,6 @@ func (s *ComparerSuite) TestCarbon_IsPast() {
 func (s *ComparerSuite) TestCarbon_IsYesterday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsYesterday())
 	})
 
@@ -966,7 +929,6 @@ func (s *ComparerSuite) TestCarbon_IsYesterday() {
 func (s *ComparerSuite) TestCarbon_IsToday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsToday())
 	})
 
@@ -993,7 +955,6 @@ func (s *ComparerSuite) TestCarbon_IsToday() {
 func (s *ComparerSuite) TestCarbon_IsTomorrow() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsTomorrow())
 	})
 
@@ -1020,7 +981,6 @@ func (s *ComparerSuite) TestCarbon_IsTomorrow() {
 func (s *ComparerSuite) TestCarbon_IsSameCentury() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSameCentury(NewCarbon()))
 		s.False(Now().IsSameCentury(c))
 	})
@@ -1054,7 +1014,6 @@ func (s *ComparerSuite) TestCarbon_IsSameCentury() {
 func (s *ComparerSuite) TestCarbon_IsSameDecade() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSameDecade(NewCarbon()))
 		s.False(Now().IsSameDecade(c))
 	})
@@ -1091,7 +1050,6 @@ func (s *ComparerSuite) TestCarbon_IsSameDecade() {
 func (s *ComparerSuite) TestCarbon_IsSameYear() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSameYear(NewCarbon()))
 		s.False(Now().IsSameYear(c))
 	})
@@ -1125,7 +1083,6 @@ func (s *ComparerSuite) TestCarbon_IsSameYear() {
 func (s *ComparerSuite) TestCarbon_IsSameQuarter() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSameQuarter(NewCarbon()))
 		s.False(Now().IsSameQuarter(c))
 	})
@@ -1159,7 +1116,6 @@ func (s *ComparerSuite) TestCarbon_IsSameQuarter() {
 func (s *ComparerSuite) TestCarbon_IsSameWeek() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSameWeek(NewCarbon()))
 		s.False(Now().IsSameWeek(c))
 	})
@@ -1224,7 +1180,6 @@ func (s *ComparerSuite) TestCarbon_IsSameWeek() {
 func (s *ComparerSuite) TestCarbon_IsSameMonth() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSameMonth(NewCarbon()))
 		s.False(Now().IsSameMonth(c))
 	})
@@ -1258,7 +1213,6 @@ func (s *ComparerSuite) TestCarbon_IsSameMonth() {
 func (s *ComparerSuite) TestCarbon_IsSameDay() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSameDay(NewCarbon()))
 		s.False(Now().IsSameDay(c))
 	})
@@ -1292,7 +1246,6 @@ func (s *ComparerSuite) TestCarbon_IsSameDay() {
 func (s *ComparerSuite) TestCarbon_IsSameHour() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSameHour(NewCarbon()))
 		s.False(Now().IsSameHour(c))
 	})
@@ -1328,7 +1281,6 @@ func (s *ComparerSuite) TestCarbon_IsSameHour() {
 func (s *ComparerSuite) TestCarbon_IsSameMinute() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSameMinute(NewCarbon()))
 		s.False(Now().IsSameMinute(c))
 	})
@@ -1364,7 +1316,6 @@ func (s *ComparerSuite) TestCarbon_IsSameMinute() {
 func (s *ComparerSuite) TestCarbon_IsSameSecond() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSameSecond(NewCarbon()))
 		s.False(Now().IsSameSecond(c))
 	})
@@ -1402,7 +1353,6 @@ func (s *ComparerSuite) TestCarbon_IsSameSecond() {
 func (s *ComparerSuite) TestCarbon_IsBirthday() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsBirthday())
 		s.False(c.IsBirthday(NewCarbon()))
 		s.False(Now().IsBirthday(c))
@@ -1469,7 +1419,6 @@ func (s *ComparerSuite) TestCarbon_IsBirthday() {
 func (s *ComparerSuite) TestCarbon_Compare() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.Compare("<", Now()))
 		s.False(Now().Compare("<", c))
 	})
@@ -1519,7 +1468,6 @@ func (s *ComparerSuite) TestCarbon_Compare() {
 func (s *ComparerSuite) TestCarbon_Gt() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.Gt(Now()))
 		s.False(Now().Gt(c))
 	})
@@ -1555,7 +1503,6 @@ func (s *ComparerSuite) TestCarbon_Gt() {
 func (s *ComparerSuite) TestCarbon_Lt() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.Lt(Now()))
 		s.False(Now().Lt(c))
 	})
@@ -1591,7 +1538,6 @@ func (s *ComparerSuite) TestCarbon_Lt() {
 func (s *ComparerSuite) TestCarbon_Eq() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.Eq(Now()))
 		s.False(Now().Eq(c))
 	})
@@ -1627,7 +1573,6 @@ func (s *ComparerSuite) TestCarbon_Eq() {
 func (s *ComparerSuite) TestCarbon_Ne() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.Ne(Now()))
 		s.False(Now().Ne(c))
 	})
@@ -1663,7 +1608,6 @@ func (s *ComparerSuite) TestCarbon_Ne() {
 func (s *ComparerSuite) TestCarbon_Gte() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.Gte(Now()))
 		s.False(Now().Gte(c))
 	})
@@ -1699,7 +1643,6 @@ func (s *ComparerSuite) TestCarbon_Gte() {
 func (s *ComparerSuite) TestCarbon_Lte() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.Lte(Now()))
 		s.False(Now().Lte(c))
 	})
@@ -1735,7 +1678,6 @@ func (s *ComparerSuite) TestCarbon_Lte() {
 func (s *ComparerSuite) TestCarbon_Between() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.Between(Now(), Tomorrow()))
 		s.False(Now().Between(c, Tomorrow()))
 		s.False(Yesterday().Between(Now(), c))
@@ -1787,7 +1729,6 @@ func (s *ComparerSuite) TestCarbon_Between() {
 func (s *ComparerSuite) TestCarbon_BetweenIncludedStart() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.BetweenIncludedStart(Now(), Tomorrow()))
 		s.False(Now().BetweenIncludedStart(c, Tomorrow()))
 		s.False(Yesterday().BetweenIncludedStart(Now(), c))
@@ -1839,7 +1780,6 @@ func (s *ComparerSuite) TestCarbon_BetweenIncludedStart() {
 func (s *ComparerSuite) TestCarbon_BetweenIncludedEnd() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.BetweenIncludedEnd(Now(), Tomorrow()))
 		s.False(Now().BetweenIncludedEnd(c, Tomorrow()))
 		s.False(Yesterday().BetweenIncludedEnd(Now(), c))
@@ -1891,7 +1831,6 @@ func (s *ComparerSuite) TestCarbon_BetweenIncludedEnd() {
 func (s *ComparerSuite) TestCarbon_BetweenIncludedBoth() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.BetweenIncludedBoth(Now(), Tomorrow()))
 		s.False(Now().BetweenIncludedBoth(c, Tomorrow()))
 		s.False(Yesterday().BetweenIncludedBoth(Now(), c))

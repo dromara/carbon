@@ -216,7 +216,7 @@ func (l *Lunar) ToYearString() (year string) {
 	}
 	year = fmt.Sprintf("%d", l.year)
 	for k, v := range numbers {
-		year = strings.Replace(year, fmt.Sprintf("%d", k), v, -1)
+		year = strings.ReplaceAll(year, fmt.Sprintf("%d", k), v)
 	}
 	return year
 }

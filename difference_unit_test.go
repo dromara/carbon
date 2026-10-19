@@ -25,7 +25,6 @@ func (s *DifferenceSuite) TearDownTest() {
 func (s *DifferenceSuite) TestCarbon_DiffInYears() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffInYears())
 		s.Zero(Now().DiffInYears(c))
 		s.Zero(c.DiffInYears(c))
@@ -77,7 +76,6 @@ func (s *DifferenceSuite) TestCarbon_DiffInYears() {
 func (s *DifferenceSuite) TestCarbon_DiffAbsInYears() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffAbsInYears())
 		s.Zero(Now().DiffAbsInYears(c))
 		s.Zero(c.DiffAbsInYears(c))
@@ -120,7 +118,6 @@ func (s *DifferenceSuite) TestCarbon_DiffAbsInYears() {
 func (s *DifferenceSuite) TestCarbon_DiffInMonths() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffInMonths())
 		s.Zero(Now().DiffInMonths(c))
 		s.Zero(c.DiffInMonths(c))
@@ -172,7 +169,6 @@ func (s *DifferenceSuite) TestCarbon_DiffInMonths() {
 func (s *DifferenceSuite) TestCarbon_DiffAbsInMonths() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffAbsInMonths())
 		s.Zero(Now().DiffAbsInMonths(c))
 		s.Zero(c.DiffAbsInMonths(c))
@@ -215,7 +211,6 @@ func (s *DifferenceSuite) TestCarbon_DiffAbsInMonths() {
 func (s *DifferenceSuite) TestCarbon_DiffInWeeks() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffInWeeks())
 		s.Zero(Now().DiffInWeeks(c))
 		s.Zero(c.DiffInWeeks(c))
@@ -261,7 +256,6 @@ func (s *DifferenceSuite) TestCarbon_DiffInWeeks() {
 func (s *DifferenceSuite) TestCarbon_DiffAbsInWeeks() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffAbsInWeeks())
 		s.Zero(Now().DiffAbsInWeeks(c))
 		s.Zero(c.DiffAbsInWeeks(c))
@@ -302,7 +296,6 @@ func (s *DifferenceSuite) TestCarbon_DiffAbsInWeeks() {
 func (s *DifferenceSuite) TestCarbon_DiffInDays() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffInDays())
 		s.Zero(Now().DiffInDays(c))
 		s.Zero(c.DiffInDays(c))
@@ -352,7 +345,6 @@ func (s *DifferenceSuite) TestCarbon_DiffInDays() {
 func (s *DifferenceSuite) TestCarbon_DiffAbsInDays() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffAbsInDays())
 		s.Zero(Now().DiffAbsInDays(c))
 		s.Zero(c.DiffAbsInDays(c))
@@ -395,7 +387,6 @@ func (s *DifferenceSuite) TestCarbon_DiffAbsInDays() {
 func (s *DifferenceSuite) TestCarbon_DiffInHours() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffInHours())
 		s.Zero(Now().DiffInHours(c))
 		s.Zero(c.DiffInHours(c))
@@ -438,7 +429,6 @@ func (s *DifferenceSuite) TestCarbon_DiffInHours() {
 func (s *DifferenceSuite) TestCarbon_DiffAbsInHours() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffAbsInHours())
 		s.Zero(Now().DiffAbsInHours(c))
 		s.Zero(c.DiffAbsInHours(c))
@@ -481,7 +471,6 @@ func (s *DifferenceSuite) TestCarbon_DiffAbsInHours() {
 func (s *DifferenceSuite) TestCarbon_DiffInMinutes() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffAbsInHours())
 		s.Zero(Now().DiffAbsInHours(c))
 		s.Zero(c.DiffAbsInHours(c))
@@ -524,7 +513,6 @@ func (s *DifferenceSuite) TestCarbon_DiffInMinutes() {
 func (s *DifferenceSuite) TestCarbon_DiffAbsInMinutes() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffAbsInMinutes())
 		s.Zero(Now().DiffAbsInMinutes(c))
 		s.Zero(c.DiffAbsInMinutes(c))
@@ -567,7 +555,6 @@ func (s *DifferenceSuite) TestCarbon_DiffAbsInMinutes() {
 func (s *DifferenceSuite) TestCarbon_DiffInSeconds() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffInSeconds())
 		s.Zero(Now().DiffInSeconds(c))
 		s.Zero(c.DiffInSeconds(c))
@@ -618,7 +605,6 @@ func (s *DifferenceSuite) TestCarbon_DiffInSeconds() {
 func (s *DifferenceSuite) TestCarbon_DiffAbsInSeconds() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffAbsInSeconds())
 		s.Zero(Now().DiffAbsInSeconds(c))
 		s.Zero(c.DiffAbsInSeconds(c))
@@ -661,7 +647,6 @@ func (s *DifferenceSuite) TestCarbon_DiffAbsInSeconds() {
 func (s *DifferenceSuite) TestCarbon_DiffInString() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffInString())
 		s.Zero(Now().DiffInString(c))
 		s.Zero(c.DiffInString(c))
@@ -726,7 +711,6 @@ func (s *DifferenceSuite) TestCarbon_DiffInString() {
 func (s *DifferenceSuite) TestCarbon_DiffAbsInString() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffAbsInString())
 		s.Zero(Now().DiffAbsInString(c))
 		s.Zero(c.DiffAbsInString(c))
@@ -787,7 +771,6 @@ func (s *DifferenceSuite) TestCarbon_DiffAbsInString() {
 func (s *DifferenceSuite) TestCarbon_DiffInDuration() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffInDuration())
 		s.Zero(Now().DiffInDuration(c))
 		s.Zero(c.DiffInDuration(c))
@@ -836,7 +819,6 @@ func (s *DifferenceSuite) TestCarbon_DiffInDuration() {
 func (s *DifferenceSuite) TestCarbon_DiffAbsInDuration() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(c.DiffAbsInDuration())
 		s.Zero(Now().DiffAbsInDuration(c))
 		s.Zero(c.DiffAbsInDuration(c))
@@ -885,7 +867,6 @@ func (s *DifferenceSuite) TestCarbon_DiffAbsInDuration() {
 func (s *DifferenceSuite) TestCarbon_DiffForHumans() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Empty(c.DiffForHumans())
 		s.Empty(Now().DiffForHumans(c))
 		s.Empty(c.DiffForHumans(c))
@@ -944,7 +925,6 @@ func (s *DifferenceSuite) TestCarbon_DiffForHumans() {
 func (s *DifferenceSuite) TestCarbon_getDiffInMonths() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Zero(getDiffInMonths(Now(), c))
 		s.Zero(getDiffInMonths(c, Now()))
 		s.Zero(getDiffInMonths(c, c))

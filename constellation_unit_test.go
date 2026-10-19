@@ -17,7 +17,6 @@ func TestConstellationSuite(t *testing.T) {
 func (s *ConstellationSuite) TestCarbon_Constellation() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.Empty(c.Constellation())
 	})
 
@@ -133,7 +132,6 @@ func (s *ConstellationSuite) TestCarbon_Constellation() {
 func (s *ConstellationSuite) TestCarbon_IsAries() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsAries())
 	})
 
@@ -159,7 +157,6 @@ func (s *ConstellationSuite) TestCarbon_IsAries() {
 func (s *ConstellationSuite) TestCarbon_IsTaurus() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsTaurus())
 	})
 
@@ -185,7 +182,6 @@ func (s *ConstellationSuite) TestCarbon_IsTaurus() {
 func (s *ConstellationSuite) TestCarbon_IsGemini() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsGemini())
 	})
 
@@ -211,7 +207,6 @@ func (s *ConstellationSuite) TestCarbon_IsGemini() {
 func (s *ConstellationSuite) TestCarbon_IsCancer() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsCancer())
 	})
 
@@ -237,7 +232,6 @@ func (s *ConstellationSuite) TestCarbon_IsCancer() {
 func (s *ConstellationSuite) TestCarbon_IsLeo() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsLeo())
 	})
 
@@ -263,7 +257,6 @@ func (s *ConstellationSuite) TestCarbon_IsLeo() {
 func (s *ConstellationSuite) TestCarbon_IsVirgo() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsVirgo())
 	})
 
@@ -289,7 +282,6 @@ func (s *ConstellationSuite) TestCarbon_IsVirgo() {
 func (s *ConstellationSuite) TestCarbon_IsLibra() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsLibra())
 	})
 
@@ -315,7 +307,6 @@ func (s *ConstellationSuite) TestCarbon_IsLibra() {
 func (s *ConstellationSuite) TestCarbon_IsScorpio() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsScorpio())
 	})
 
@@ -341,7 +332,6 @@ func (s *ConstellationSuite) TestCarbon_IsScorpio() {
 func (s *ConstellationSuite) TestCarbon_IsSagittarius() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsSagittarius())
 	})
 
@@ -367,7 +357,6 @@ func (s *ConstellationSuite) TestCarbon_IsSagittarius() {
 func (s *ConstellationSuite) TestCarbon_IsCapricorn() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsCapricorn())
 	})
 
@@ -403,7 +392,6 @@ func (s *ConstellationSuite) TestCarbon_IsCapricorn() {
 func (s *ConstellationSuite) TestCarbon_IsAquarius() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsAquarius())
 	})
 
@@ -438,7 +426,6 @@ func (s *ConstellationSuite) TestCarbon_IsAquarius() {
 func (s *ConstellationSuite) TestCarbon_IsPisces() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
-		c = nil
 		s.False(c.IsPisces())
 	})
 

@@ -18,8 +18,7 @@ func TestLanguageSuite(t *testing.T) {
 
 func (s *LanguageSuite) TestLanguage_Copy() {
 	s.Run("copy nil language", func() {
-		oldLang := NewLanguage()
-		oldLang = nil
+		var oldLang *Language
 		newCarbon := oldLang.Copy()
 
 		s.Nil(oldLang)
@@ -76,8 +75,7 @@ func (s *LanguageSuite) TestLanguage_Copy() {
 
 func (s *LanguageSuite) TestLanguage_SetLocale() {
 	s.Run("nil language", func() {
-		lang := NewLanguage()
-		lang = nil
+		var lang *Language
 		lang.SetLocale("en")
 		s.Empty(Parse("2020-08-05 13:14:15").SetLanguage(lang).ToMonthString())
 	})
@@ -167,8 +165,7 @@ func (s *LanguageSuite) TestLanguage_SetLocale() {
 
 func (s *LanguageSuite) TestLanguage_SetResources() {
 	s.Run("nil language", func() {
-		lang := NewLanguage()
-		lang = nil
+		var lang *Language
 		lang.SetResources(map[string]string{
 			"months":       "Ⅰ月|Ⅱ月|Ⅲ月|Ⅳ月|Ⅴ月|Ⅵ月|Ⅶ月|Ⅷ月|Ⅸ月|Ⅹ月|Ⅺ月|Ⅻ月",
 			"short_months": "Ⅰ|Ⅱ|Ⅲ|Ⅳ|Ⅴ|Ⅵ|Ⅶ|Ⅷ|Ⅸ|Ⅹ|Ⅺ|Ⅻ",
@@ -265,8 +262,7 @@ func (s *LanguageSuite) TestLanguage_SetResources() {
 
 func (s *LanguageSuite) TestLanguage_translate() {
 	s.Run("nil language", func() {
-		lang := NewLanguage()
-		lang = nil
+		var lang *Language
 		s.Empty(lang.translate("month", 1))
 	})
 

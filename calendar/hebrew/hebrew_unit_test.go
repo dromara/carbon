@@ -119,8 +119,7 @@ func TestHebrew_Day(t *testing.T) {
 
 func TestHebrew_ToMonthString(t *testing.T) {
 	t.Run("nil hebrew", func(t *testing.T) {
-		hebrew := new(Hebrew)
-		hebrew = nil
+		var hebrew *Hebrew
 		assert.Empty(t, hebrew.ToMonthString())
 	})
 
