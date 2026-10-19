@@ -60,6 +60,7 @@ carbon.Saigon     // Asia/Saigon
 carbon.Seoul      // Asia/Seoul
 carbon.Pyongyang  // Asia/Pyongyang
 carbon.Bangkok    // Asia/Bangkok
+carbon.Jakarta    // Asia/Jakarta
 carbon.Dubai      // Asia/Dubai
 carbon.Qatar      // Asia/Qatar
 carbon.Bangalore  // Asia/Bangalore

@@ -25,6 +25,9 @@ carbon.Parse("2020-08-05").HasError() // false
 
 ## 여부 판단
 ```go
+// 테스트 시간을 고정하여 "오늘/어제/내일" 등의 예제를 재현 가능하게 함
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+
 // 영값 시간인지(0001-01-01 00:00:00 +0000 UTC)
 carbon.NewCarbon().IsZero() // true
 carbon.ZeroValue().IsZero() // true
@@ -65,7 +68,7 @@ carbon.Parse("0").IsValid() // false
 carbon.Parse("xxx").IsValid() // false
 carbon.Parse("0000-00-00 00:00:00").IsValid() // false
 carbon.Parse("0000-00-00").IsValid() // false
-carbon.Parse("00:00:00").IsValid() // false
+carbon.Parse("00:00:00").IsValid() // true
 carbon.Parse("2020-08-05 00:00:00").IsValid() // true
 carbon.Parse("2020-08-05").IsValid() // true
 
@@ -74,12 +77,12 @@ carbon.NewCarbon().IsInvalid() // false
 carbon.ZeroValue().IsInvalid() // false
 carbon.EpochValue().IsInvalid() // false
 carbon.CreateFromTimestamp(0).IsInvalid() // false
-carbon.Parse("").IsInvalid() // false
+carbon.Parse("").IsInvalid() // true
 carbon.Parse("0").IsInvalid() // true
 carbon.Parse("xxx").IsInvalid() // true
 carbon.Parse("0000-00-00 00:00:00").IsInvalid() // true
 carbon.Parse("0000-00-00").IsInvalid() // true
-carbon.Parse("00:00:00").IsInvalid() // true
+carbon.Parse("00:00:00").IsInvalid() // false
 carbon.Parse("2020-08-05 00:00:00").IsInvalid() // false
 carbon.Parse("2020-08-05").IsInvalid() // false
 
@@ -131,9 +134,9 @@ carbon.Parse("2020-08-05 13:14:15").IsJune() // false
 // 7월인지
 carbon.Parse("2020-08-05 13:14:15").IsJuly() // false
 // 8월인지
-carbon.Parse("2020-08-05 13:14:15").IsAugust() // false
+carbon.Parse("2020-08-05 13:14:15").IsAugust() // true
 // 9월인지
-carbon.Parse("2020-08-05 13:14:15").IsSeptember() // true
+carbon.Parse("2020-08-05 13:14:15").IsSeptember() // false
 // 10월인지
 carbon.Parse("2020-08-05 13:14:15").IsOctober() // false
 // 11월인지
@@ -144,9 +147,9 @@ carbon.Parse("2020-08-05 13:14:15").IsDecember() // false
 // 월요일인지
 carbon.Parse("2020-08-05 13:14:15").IsMonday() // false
 // 화요일인지
-carbon.Parse("2020-08-05 13:14:15").IsTuesday() // true
+carbon.Parse("2020-08-05 13:14:15").IsTuesday() // false
 // 수요일인지
-carbon.Parse("2020-08-05 13:14:15").IsWednesday() // false
+carbon.Parse("2020-08-05 13:14:15").IsWednesday() // true
 // 목요일인지
 carbon.Parse("2020-08-05 13:14:15").IsThursday() // false
 // 금요일인지
@@ -157,9 +160,9 @@ carbon.Parse("2020-08-05 13:14:15").IsSaturday() // false
 carbon.Parse("2020-08-05 13:14:15").IsSunday() // false
 
 // 평일인지
-carbon.Parse("2020-08-05 13:14:15").IsWeekday() // false
+carbon.Parse("2020-08-05 13:14:15").IsWeekday() // true
 // 주말인지
-carbon.Parse("2020-08-05 13:14:15").IsWeekend() // true
+carbon.Parse("2020-08-05 13:14:15").IsWeekend() // false
 
 // 어제인지
 carbon.Parse("2020-08-04 13:14:15").IsYesterday() // true
@@ -177,15 +180,20 @@ carbon.Parse("2020-08-06").IsTomorrow() // true
 // 같은 세기인지
 carbon.Parse("2020-08-05 13:14:15").IsSameCentury(carbon.Parse("3020-08-05 13:14:15")) // false
 carbon.Parse("2020-08-05 13:14:15").IsSameCentury(carbon.Parse("2099-08-05 13:14:15")) // true
-// 같은 연대인지
+// 같은 연대인지(같은 세기에 속해야 함)
 carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2030-08-05 13:14:15")) // false
-carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2120-08-05 13:14:15")) // true
+carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2029-08-05 13:14:15")) // true
+carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2120-08-05 13:14:15")) // false
 // 같은 연도인지
 carbon.Parse("2020-08-05 00:00:00").IsSameYear(carbon.Parse("2021-08-05 13:14:15")) // false
 carbon.Parse("2020-01-01 00:00:00").IsSameYear(carbon.Parse("2020-12-31 13:14:15")) // true
 // 같은 분기인지
-carbon.Parse("2020-08-05 00:00:00").IsSameQuarter(carbon.Parse("2020-09-05 13:14:15")) // false
-carbon.Parse("2020-01-01 00:00:00").IsSameQuarter(carbon.Parse("2021-01-31 13:14:15")) // true
+carbon.Parse("2020-08-05 00:00:00").IsSameQuarter(carbon.Parse("2020-09-05 13:14:15")) // true
+carbon.Parse("2020-01-01 00:00:00").IsSameQuarter(carbon.Parse("2021-01-31 13:14:15")) // false
+// 같은 주인지(SetWeekStartsAt 의 영향을 받음)
+carbon.Parse("2020-08-03 00:00:00").IsSameWeek(carbon.Parse("2020-08-09 13:14:15")) // true
+carbon.Parse("2020-08-02 00:00:00").IsSameWeek(carbon.Parse("2020-08-03 13:14:15")) // false
+carbon.Parse("2020-08-02 00:00:00").SetWeekStartsAt(carbon.Sunday).IsSameWeek(carbon.Parse("2020-08-03 13:14:15").SetWeekStartsAt(carbon.Sunday)) // true
 // 같은 월인지
 carbon.Parse("2020-01-01 00:00:00").IsSameMonth(carbon.Parse("2021-01-31 13:14:15")) // false
 carbon.Parse("2020-01-01 00:00:00").IsSameMonth(carbon.Parse("2020-01-31 13:14:15")) // true
@@ -201,6 +209,13 @@ carbon.Parse("2020-08-05 13:14:00").IsSameMinute(carbon.Parse("2020-08-05 13:14:
 // 같은 초인지
 carbon.Parse("2020-08-05 13:14:15").IsSameSecond(carbon.Parse("2021-08-05 13:14:15")) // false
 carbon.Parse("2020-08-05 13:14:15").IsSameSecond(carbon.Parse("2020-08-05 13:14:15")) // true
+
+// 생일인지(월과 일만 비교하고 연도는 무시, 인수를 전달하지 않으면 현재 시간과 비교)
+carbon.Parse("1990-08-05 13:14:15").IsBirthday(carbon.Parse("2020-08-05 13:14:15")) // true
+carbon.Parse("1990-08-06 13:14:15").IsBirthday(carbon.Parse("2020-08-05 13:14:15")) // false
+carbon.Parse("2020-08-05").IsBirthday() // true
+// 2월 29일은 2월 29일과만 일치하며, 평년은 생일로 간주하지 않음
+carbon.Parse("2000-02-29 13:14:15").IsBirthday(carbon.Parse("2021-02-28 13:14:15")) // false
 ```
 
 ## 수학 판단

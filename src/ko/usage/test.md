@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: "Carbon 테스트 기능 상세 설명, SetTestNow/IsTestNow/ClearTestNow 메서드 제공, 단위 테스트용 고정 시간 동결 지원, 시간 관련 동작을 시뮬레이션 시간 기준으로 실행, 시간 의존 코드 테스트에 편리"
+      content: "Carbon 테스트 기능 상세 설명, SetTestNow/IsTestNow/ClearTestNow/Sleep 메서드 제공, 단위 테스트용 고정 시간 동결 지원, 시간 관련 동작을 시뮬레이션 시간 기준으로 실행, 시간 의존 코드 테스트에 편리"
   - - meta
     - name: keywords
-      content: "carbon, go-carbon, 테스트 시간, 동결 시간, 시뮬레이션 시간, SetTestNow, IsTestNow, ClearTestNow, 단위 테스트, 시간 테스트, 테스트 도구"
+      content: "carbon, go-carbon, 테스트 시간, 동결 시간, 시뮬레이션 시간, SetTestNow, IsTestNow, ClearTestNow, Sleep, 단위 테스트, 시간 테스트, 테스트 도구"
 ---
 
 # 테스트
@@ -18,7 +18,7 @@ carbon.SetTestNow(now)
 
 carbon.Now().ToDateString() // 2020-08-05
 carbon.Yesterday().ToDateString() // 2020-08-04
-carbon.Tomorrow().ToDateString() // 2020-08-05
+carbon.Tomorrow().ToDateString() // 2020-08-06
 carbon.Now().DiffForHumans() // just now
 carbon.Yesterday().DiffForHumans() // 1 day ago
 carbon.Tomorrow().DiffForHumans() // 1 day from now
@@ -34,4 +34,14 @@ carbon.IsTestNow()
 ## 테스트 시간 지우기
 ```go
 carbon.ClearTestNow()
-``` 
+```
+
+## 슬립
+시간이 동결된 상태에서 `Sleep` 은 실제 시간을 기다리지 않고 동결된 현재 시간을 직접 진행합니다. 동결되지 않은 경우 `time.Sleep` 과 동일하게 동작합니다.
+
+```go
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+carbon.Sleep(2 * time.Hour)
+
+carbon.Now().ToDateTimeString() // 2020-08-05 15:14:15
+```

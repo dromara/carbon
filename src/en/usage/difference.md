@@ -10,9 +10,9 @@ head:
 
 # Difference
 
-Assuming the current time is `2020-08-05 13:14:15.999999999 +0000 UTC`
+Assuming the current time is `2020-08-05 13:14:15 +0000 UTC`
 ```go
-carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15.999999999 +0000 UTC"))
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15 +0000 UTC"))
 ```
 
 ## Relative difference
@@ -46,8 +46,8 @@ carbon.Now().SubYearsNoOverflow(1).DiffInString() // 1 year
 // Difference in duration
 now := carbon.Now()
 now.DiffInDuration(now).String() // 0s
-now.AddHour().DiffInDuration(now).String() // 1h0m0s
-now.SubHour().DiffInDuration(now).String() // -1h0m0s
+now.AddHour().DiffInDuration(now).String() // -1h0m0s
+now.SubHour().DiffInDuration(now).String() // 1h0m0s
 ```
 
 ## Absolute difference

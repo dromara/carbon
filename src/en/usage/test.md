@@ -2,10 +2,10 @@
 head:
   - - meta
     - name: description
-      content: "Carbon testing feature detailed explanation, provides SetTestNow/IsTestNow/ClearTestNow methods, supports freezing fixed time for unit tests, making time-related operations run based on simulated time, convenient for testing time-dependent code"
+      content: "Carbon testing feature detailed explanation, provides SetTestNow/IsTestNow/ClearTestNow/Sleep methods, supports freezing fixed time for unit tests, making time-related operations run based on simulated time, convenient for testing time-dependent code"
   - - meta
     - name: keywords
-      content: "carbon, go-carbon, test time, freeze time, simulated time, SetTestNow, IsTestNow, ClearTestNow, unit test, time testing, testing tool"
+      content: "carbon, go-carbon, test time, freeze time, simulated time, SetTestNow, IsTestNow, ClearTestNow, Sleep, unit test, time testing, testing tool"
 ---
 
 # Testing
@@ -18,7 +18,7 @@ carbon.SetTestNow(now)
 
 carbon.Now().ToDateString() // 2020-08-05
 carbon.Yesterday().ToDateString() // 2020-08-04
-carbon.Tomorrow().ToDateString() // 2020-08-05
+carbon.Tomorrow().ToDateString() // 2020-08-06
 carbon.Now().DiffForHumans() // just now
 carbon.Yesterday().DiffForHumans() // 1 day ago
 carbon.Tomorrow().DiffForHumans() // 1 day from now
@@ -34,4 +34,14 @@ carbon.IsTestNow()
 ## Clear test now
 ```go
 carbon.ClearTestNow()
+```
+
+## Sleep
+When time is frozen, `Sleep` does not wait for real time but directly advances the frozen current time; when not frozen, it behaves the same as `time.Sleep`.
+
+```go
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+carbon.Sleep(2 * time.Hour)
+
+carbon.Now().ToDateTimeString() // 2020-08-05 15:14:15
 ```

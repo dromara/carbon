@@ -10,9 +10,9 @@ head:
 
 # 時間差
 
-現在時刻が `2020-08-05 13:14:15.999999999 +0000 UTC` であると仮定します
+現在時刻が `2020-08-05 13:14:15 +0000 UTC` であると仮定します
 ```go
-carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15.999999999 +0000 UTC"))
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15 +0000 UTC"))
 ```
 
 ## 相対差
@@ -31,8 +31,8 @@ carbon.Now().SubYearsNoOverflow(1).DiffInString() // 1 year
 
 now := carbon.Now()
 now.DiffInDuration(now).String() // 0s
-now.AddHour().DiffInDuration(now).String() // 1h0m0s
-now.SubHour().DiffInDuration(now).String() // -1h0m0s
+now.AddHour().DiffInDuration(now).String() // -1h0m0s
+now.SubHour().DiffInDuration(now).String() // 1h0m0s
 ```
 
 ## 絶対差
@@ -56,6 +56,8 @@ now.SubHour().DiffAbsInDuration(now).String() // 1h0m0s
 
 ## ヒューマナイズ差
 ```go
+carbon.SetLocale("ja")
+
 carbon.Parse("2020-08-05 13:14:15").DiffForHumans() // 現在
 carbon.Parse("2019-08-05 13:14:15").DiffForHumans() // 1 年前
 carbon.Parse("2018-08-05 13:14:15").DiffForHumans() // 2 年前
@@ -66,6 +68,6 @@ carbon.SetLocale("zh-CN")
 carbon.Parse("2020-08-05 13:14:15").DiffForHumans() // 刚刚
 carbon.Parse("2019-08-05 13:14:15").DiffForHumans() // 1 年前
 carbon.Parse("2018-08-05 13:14:15").DiffForHumans() // 2 年前
-carbon.Parse("2021-08-05 13:14:15").DiffForHumans() // 1 年後
-carbon.Parse("2022-08-05 13:14:15").DiffForHumans() // 2 年後
+carbon.Parse("2021-08-05 13:14:15").DiffForHumans() // 1 年后
+carbon.Parse("2022-08-05 13:14:15").DiffForHumans() // 2 年后
 ```

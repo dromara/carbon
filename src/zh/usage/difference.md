@@ -10,9 +10,9 @@ head:
 
 # 时间差值
 
-假设当前时间为 `2020-08-05 13:14:15.999999999 +0000 UTC`
+假设当前时间为 `2020-08-05 13:14:15 +0000 UTC`
 ```go
-carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15.999999999 +0000 UTC"))
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15 +0000 UTC"))
 ```
 	
 ## 相对差值
@@ -31,8 +31,8 @@ carbon.Now().SubYearsNoOverflow(1).DiffInString() // 1 year
 
 now := carbon.Now()
 now.DiffInDuration(now).String() // 0s
-now.AddHour().DiffInDuration(now).String() // 1h0m0s
-now.SubHour().DiffInDuration(now).String() // -1h0m0s
+now.AddHour().DiffInDuration(now).String() // -1h0m0s
+now.SubHour().DiffInDuration(now).String() // 1h0m0s
 ```
 
 ## 绝对差值

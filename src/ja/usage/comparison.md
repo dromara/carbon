@@ -25,6 +25,9 @@ carbon.Parse("2020-08-05").HasError() // false
 
 ## 判定
 ```go
+// テスト時間を固定し、「今日/昨日/明日」などの例を再現可能にする
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+
 // ゼロ値の時間かどうか(0001-01-01 00:00:00 +0000 UTC)
 carbon.NewCarbon().IsZero() // true
 carbon.ZeroValue().IsZero() // true
@@ -65,7 +68,7 @@ carbon.Parse("0").IsValid() // false
 carbon.Parse("xxx").IsValid() // false
 carbon.Parse("0000-00-00 00:00:00").IsValid() // false
 carbon.Parse("0000-00-00").IsValid() // false
-carbon.Parse("00:00:00").IsValid() // false
+carbon.Parse("00:00:00").IsValid() // true
 carbon.Parse("2020-08-05 00:00:00").IsValid() // true
 carbon.Parse("2020-08-05").IsValid() // true
 
@@ -74,12 +77,12 @@ carbon.NewCarbon().IsInvalid() // false
 carbon.ZeroValue().IsInvalid() // false
 carbon.EpochValue().IsInvalid() // false
 carbon.CreateFromTimestamp(0).IsInvalid() // false
-carbon.Parse("").IsInvalid() // false
+carbon.Parse("").IsInvalid() // true
 carbon.Parse("0").IsInvalid() // true
 carbon.Parse("xxx").IsInvalid() // true
 carbon.Parse("0000-00-00 00:00:00").IsInvalid() // true
 carbon.Parse("0000-00-00").IsInvalid() // true
-carbon.Parse("00:00:00").IsInvalid() // true
+carbon.Parse("00:00:00").IsInvalid() // false
 carbon.Parse("2020-08-05 00:00:00").IsInvalid() // false
 carbon.Parse("2020-08-05").IsInvalid() // false
 
@@ -131,9 +134,9 @@ carbon.Parse("2020-08-05 13:14:15").IsJune() // false
 // 7月かどうか
 carbon.Parse("2020-08-05 13:14:15").IsJuly() // false
 // 8月かどうか
-carbon.Parse("2020-08-05 13:14:15").IsAugust() // false
+carbon.Parse("2020-08-05 13:14:15").IsAugust() // true
 // 9月かどうか
-carbon.Parse("2020-08-05 13:14:15").IsSeptember() // true
+carbon.Parse("2020-08-05 13:14:15").IsSeptember() // false
 // 10月かどうか
 carbon.Parse("2020-08-05 13:14:15").IsOctober() // false
 // 11月かどうか
@@ -144,9 +147,9 @@ carbon.Parse("2020-08-05 13:14:15").IsDecember() // false
 // 月曜日かどうか
 carbon.Parse("2020-08-05 13:14:15").IsMonday() // false
 // 火曜日かどうか
-carbon.Parse("2020-08-05 13:14:15").IsTuesday() // true
+carbon.Parse("2020-08-05 13:14:15").IsTuesday() // false
 // 水曜日かどうか
-carbon.Parse("2020-08-05 13:14:15").IsWednesday() // false
+carbon.Parse("2020-08-05 13:14:15").IsWednesday() // true
 // 木曜日かどうか
 carbon.Parse("2020-08-05 13:14:15").IsThursday() // false
 // 金曜日かどうか
@@ -157,9 +160,9 @@ carbon.Parse("2020-08-05 13:14:15").IsSaturday() // false
 carbon.Parse("2020-08-05 13:14:15").IsSunday() // false
 
 // 平日かどうか
-carbon.Parse("2020-08-05 13:14:15").IsWeekday() // false
+carbon.Parse("2020-08-05 13:14:15").IsWeekday() // true
 // 週末かどうか
-carbon.Parse("2020-08-05 13:14:15").IsWeekend() // true
+carbon.Parse("2020-08-05 13:14:15").IsWeekend() // false
 
 // 昨日かどうか
 carbon.Parse("2020-08-04 13:14:15").IsYesterday() // true
@@ -177,15 +180,20 @@ carbon.Parse("2020-08-06").IsTomorrow() // true
 // 同世紀かどうか
 carbon.Parse("2020-08-05 13:14:15").IsSameCentury(carbon.Parse("3020-08-05 13:14:15")) // false
 carbon.Parse("2020-08-05 13:14:15").IsSameCentury(carbon.Parse("2099-08-05 13:14:15")) // true
-// 同十年紀かどうか
+// 同十年紀かどうか(同一世紀であることも必要)
 carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2030-08-05 13:14:15")) // false
-carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2120-08-05 13:14:15")) // true
+carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2029-08-05 13:14:15")) // true
+carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2120-08-05 13:14:15")) // false
 // 同年かどうか
 carbon.Parse("2020-08-05 00:00:00").IsSameYear(carbon.Parse("2021-08-05 13:14:15")) // false
 carbon.Parse("2020-01-01 00:00:00").IsSameYear(carbon.Parse("2020-12-31 13:14:15")) // true
 // 同四半期かどうか
-carbon.Parse("2020-08-05 00:00:00").IsSameQuarter(carbon.Parse("2020-09-05 13:14:15")) // false
-carbon.Parse("2020-01-01 00:00:00").IsSameQuarter(carbon.Parse("2021-01-31 13:14:15")) // true
+carbon.Parse("2020-08-05 00:00:00").IsSameQuarter(carbon.Parse("2020-09-05 13:14:15")) // true
+carbon.Parse("2020-01-01 00:00:00").IsSameQuarter(carbon.Parse("2021-01-31 13:14:15")) // false
+// 同じ週かどうか(SetWeekStartsAt の影響を受ける)
+carbon.Parse("2020-08-03 00:00:00").IsSameWeek(carbon.Parse("2020-08-09 13:14:15")) // true
+carbon.Parse("2020-08-02 00:00:00").IsSameWeek(carbon.Parse("2020-08-03 13:14:15")) // false
+carbon.Parse("2020-08-02 00:00:00").SetWeekStartsAt(carbon.Sunday).IsSameWeek(carbon.Parse("2020-08-03 13:14:15").SetWeekStartsAt(carbon.Sunday)) // true
 // 同月かどうか
 carbon.Parse("2020-01-01 00:00:00").IsSameMonth(carbon.Parse("2021-01-31 13:14:15")) // false
 carbon.Parse("2020-01-01 00:00:00").IsSameMonth(carbon.Parse("2020-01-31 13:14:15")) // true
@@ -201,6 +209,13 @@ carbon.Parse("2020-08-05 13:14:00").IsSameMinute(carbon.Parse("2020-08-05 13:14:
 // 同秒かどうか
 carbon.Parse("2020-08-05 13:14:15").IsSameSecond(carbon.Parse("2021-08-05 13:14:15")) // false
 carbon.Parse("2020-08-05 13:14:15").IsSameSecond(carbon.Parse("2020-08-05 13:14:15")) // true
+
+// 誕生日かどうか(月と日のみを比較し、年は無視。引数を渡さない場合は現在時刻と比較)
+carbon.Parse("1990-08-05 13:14:15").IsBirthday(carbon.Parse("2020-08-05 13:14:15")) // true
+carbon.Parse("1990-08-06 13:14:15").IsBirthday(carbon.Parse("2020-08-05 13:14:15")) // false
+carbon.Parse("2020-08-05").IsBirthday() // true
+// 2月29日は2月29日とのみ一致し、平年は誕生日とみなさない
+carbon.Parse("2000-02-29 13:14:15").IsBirthday(carbon.Parse("2021-02-28 13:14:15")) // false
 ```
 
 ## 数学判定

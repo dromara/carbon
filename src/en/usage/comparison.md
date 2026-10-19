@@ -25,6 +25,9 @@ carbon.Parse("2020-08-05").HasError() // false
 
 ## Is compare
 ```go
+// Fix the test time so that examples such as "today/yesterday/tomorrow" are reproducible
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+
 // Whether is a zero time(0001-01-01 00:00:00 +0000 UTC)
 carbon.NewCarbon().IsZero() // true
 carbon.ZeroValue().IsZero() // true
@@ -65,7 +68,7 @@ carbon.Parse("0").IsValid() // false
 carbon.Parse("xxx").IsValid() // false
 carbon.Parse("0000-00-00 00:00:00").IsValid() // false
 carbon.Parse("0000-00-00").IsValid() // false
-carbon.Parse("00:00:00").IsValid() // false
+carbon.Parse("00:00:00").IsValid() // true
 carbon.Parse("2020-08-05 00:00:00").IsValid() // true
 carbon.Parse("2020-08-05").IsValid() // true
 
@@ -74,12 +77,12 @@ carbon.NewCarbon().IsInvalid() // false
 carbon.ZeroValue().IsInvalid() // false
 carbon.EpochValue().IsInvalid() // false
 carbon.CreateFromTimestamp(0).IsInvalid() // false
-carbon.Parse("").IsInvalid() // false
+carbon.Parse("").IsInvalid() // true
 carbon.Parse("0").IsInvalid() // true
 carbon.Parse("xxx").IsInvalid() // true
 carbon.Parse("0000-00-00 00:00:00").IsInvalid() // true
 carbon.Parse("0000-00-00").IsInvalid() // true
-carbon.Parse("00:00:00").IsInvalid() // true
+carbon.Parse("00:00:00").IsInvalid() // false
 carbon.Parse("2020-08-05 00:00:00").IsInvalid() // false
 carbon.Parse("2020-08-05").IsInvalid() // false
 
@@ -131,9 +134,9 @@ carbon.Parse("2020-08-05 13:14:15").IsJune() // false
 // Whether is July
 carbon.Parse("2020-08-05 13:14:15").IsJuly() // false
 // Whether is August
-carbon.Parse("2020-08-05 13:14:15").IsAugust() // false
+carbon.Parse("2020-08-05 13:14:15").IsAugust() // true
 // Whether is September
-carbon.Parse("2020-08-05 13:14:15").IsSeptember() // true
+carbon.Parse("2020-08-05 13:14:15").IsSeptember() // false
 // Whether is October
 carbon.Parse("2020-08-05 13:14:15").IsOctober() // false
 // Whether is November
@@ -144,9 +147,9 @@ carbon.Parse("2020-08-05 13:14:15").IsDecember() // false
 // Whether is Monday
 carbon.Parse("2020-08-05 13:14:15").IsMonday() // false
 // Whether is Tuesday
-carbon.Parse("2020-08-05 13:14:15").IsTuesday() // true
+carbon.Parse("2020-08-05 13:14:15").IsTuesday() // false
 // Whether is Wednesday
-carbon.Parse("2020-08-05 13:14:15").IsWednesday() // false
+carbon.Parse("2020-08-05 13:14:15").IsWednesday() // true
 // Whether is Thursday
 carbon.Parse("2020-08-05 13:14:15").IsThursday() // false
 // Whether is Friday
@@ -156,9 +159,9 @@ carbon.Parse("2020-08-05 13:14:15").IsSaturday() // false
 // Whether is Sunday
 carbon.Parse("2020-08-05 13:14:15").IsSunday() // false
 // Whether is weekday
-carbon.Parse("2020-08-05 13:14:15").IsWeekday() // false
+carbon.Parse("2020-08-05 13:14:15").IsWeekday() // true
 // Whether is weekend
-carbon.Parse("2020-08-05 13:14:15").IsWeekend() // true
+carbon.Parse("2020-08-05 13:14:15").IsWeekend() // false
 
 // Whether is yesterday
 carbon.Parse("2020-08-04 13:14:15").IsYesterday() // true
@@ -176,15 +179,20 @@ carbon.Parse("2020-08-06").IsTomorrow() // true
 // Whether is the same century
 carbon.Parse("2020-08-05 13:14:15").IsSameCentury(carbon.Parse("3020-08-05 13:14:15")) // false
 carbon.Parse("2020-08-05 13:14:15").IsSameCentury(carbon.Parse("2099-08-05 13:14:15")) // true
-// Whether is the same decade
+// Whether is the same decade (must also be in the same century)
 carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2030-08-05 13:14:15")) // false
-carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2120-08-05 13:14:15")) // true
+carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2029-08-05 13:14:15")) // true
+carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2120-08-05 13:14:15")) // false
 // Whether is the same year
 carbon.Parse("2020-08-05 00:00:00").IsSameYear(carbon.Parse("2021-08-05 13:14:15")) // false
 carbon.Parse("2020-01-01 00:00:00").IsSameYear(carbon.Parse("2020-12-31 13:14:15")) // true
 // Whether is the same quarter
-carbon.Parse("2020-08-05 00:00:00").IsSameQuarter(carbon.Parse("2020-09-05 13:14:15")) // false
-carbon.Parse("2020-01-01 00:00:00").IsSameQuarter(carbon.Parse("2021-01-31 13:14:15")) // true
+carbon.Parse("2020-08-05 00:00:00").IsSameQuarter(carbon.Parse("2020-09-05 13:14:15")) // true
+carbon.Parse("2020-01-01 00:00:00").IsSameQuarter(carbon.Parse("2021-01-31 13:14:15")) // false
+// Whether is the same week (affected by SetWeekStartsAt)
+carbon.Parse("2020-08-03 00:00:00").IsSameWeek(carbon.Parse("2020-08-09 13:14:15")) // true
+carbon.Parse("2020-08-02 00:00:00").IsSameWeek(carbon.Parse("2020-08-03 13:14:15")) // false
+carbon.Parse("2020-08-02 00:00:00").SetWeekStartsAt(carbon.Sunday).IsSameWeek(carbon.Parse("2020-08-03 13:14:15").SetWeekStartsAt(carbon.Sunday)) // true
 // Whether is the same month
 carbon.Parse("2020-01-01 00:00:00").IsSameMonth(carbon.Parse("2021-01-31 13:14:15")) // false
 carbon.Parse("2020-01-01 00:00:00").IsSameMonth(carbon.Parse("2020-01-31 13:14:15")) // true
@@ -200,6 +208,13 @@ carbon.Parse("2020-08-05 13:14:00").IsSameMinute(carbon.Parse("2020-08-05 13:14:
 // Whether is the same second
 carbon.Parse("2020-08-05 13:14:15").IsSameSecond(carbon.Parse("2021-08-05 13:14:15")) // false
 carbon.Parse("2020-08-05 13:14:15").IsSameSecond(carbon.Parse("2020-08-05 13:14:15")) // true
+
+// Whether is a birthday (compares only month and day, ignoring the year; compares with the current time when no argument is passed)
+carbon.Parse("1990-08-05 13:14:15").IsBirthday(carbon.Parse("2020-08-05 13:14:15")) // true
+carbon.Parse("1990-08-06 13:14:15").IsBirthday(carbon.Parse("2020-08-05 13:14:15")) // false
+carbon.Parse("2020-08-05").IsBirthday() // true
+// February 29 only matches February 29, a common year is not a birthday
+carbon.Parse("2000-02-29 13:14:15").IsBirthday(carbon.Parse("2021-02-28 13:14:15")) // false
 ```
 
 ## Maths compare

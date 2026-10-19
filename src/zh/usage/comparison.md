@@ -25,6 +25,9 @@ carbon.Parse("2020-08-05").HasError() // false
 
 ## 是否判断
 ```go
+// 固定测试时间，使“今天/昨天/明天”等示例可复现
+carbon.SetTestNow(carbon.Parse("2020-08-05 13:14:15"))
+
 // 是否是零值时间(0001-01-01 00:00:00 +0000 UTC)
 carbon.NewCarbon().IsZero() // true
 carbon.ZeroValue().IsZero() // true
@@ -65,7 +68,7 @@ carbon.Parse("0").IsValid() // false
 carbon.Parse("xxx").IsValid() // false
 carbon.Parse("0000-00-00 00:00:00").IsValid() // false
 carbon.Parse("0000-00-00").IsValid() // false
-carbon.Parse("00:00:00").IsValid() // false
+carbon.Parse("00:00:00").IsValid() // true
 carbon.Parse("2020-08-05 00:00:00").IsValid() // true
 carbon.Parse("2020-08-05").IsValid() // true
 
@@ -74,12 +77,12 @@ carbon.NewCarbon().IsInvalid() // false
 carbon.ZeroValue().IsInvalid() // false
 carbon.EpochValue().IsInvalid() // false
 carbon.CreateFromTimestamp(0).IsInvalid() // false
-carbon.Parse("").IsInvalid() // false
+carbon.Parse("").IsInvalid() // true
 carbon.Parse("0").IsInvalid() // true
 carbon.Parse("xxx").IsInvalid() // true
 carbon.Parse("0000-00-00 00:00:00").IsInvalid() // true
 carbon.Parse("0000-00-00").IsInvalid() // true
-carbon.Parse("00:00:00").IsInvalid() // true
+carbon.Parse("00:00:00").IsInvalid() // false
 carbon.Parse("2020-08-05 00:00:00").IsInvalid() // false
 carbon.Parse("2020-08-05").IsInvalid() // false
 
@@ -131,9 +134,9 @@ carbon.Parse("2020-08-05 13:14:15").IsJune() // false
 // 是否是七月
 carbon.Parse("2020-08-05 13:14:15").IsJuly() // false
 // 是否是八月
-carbon.Parse("2020-08-05 13:14:15").IsAugust() // false
+carbon.Parse("2020-08-05 13:14:15").IsAugust() // true
 // 是否是九月
-carbon.Parse("2020-08-05 13:14:15").IsSeptember() // true
+carbon.Parse("2020-08-05 13:14:15").IsSeptember() // false
 // 是否是十月
 carbon.Parse("2020-08-05 13:14:15").IsOctober() // false
 // 是否是十一月
@@ -144,9 +147,9 @@ carbon.Parse("2020-08-05 13:14:15").IsDecember() // false
 // 是否是周一
 carbon.Parse("2020-08-05 13:14:15").IsMonday() // false
 // 是否是周二
-carbon.Parse("2020-08-05 13:14:15").IsTuesday() // true
+carbon.Parse("2020-08-05 13:14:15").IsTuesday() // false
 // 是否是周三
-carbon.Parse("2020-08-05 13:14:15").IsWednesday() // false
+carbon.Parse("2020-08-05 13:14:15").IsWednesday() // true
 // 是否是周四
 carbon.Parse("2020-08-05 13:14:15").IsThursday() // false
 // 是否是周五
@@ -157,9 +160,9 @@ carbon.Parse("2020-08-05 13:14:15").IsSaturday() // false
 carbon.Parse("2020-08-05 13:14:15").IsSunday() // false
 
 // 是否是工作日
-carbon.Parse("2020-08-05 13:14:15").IsWeekday() // false
+carbon.Parse("2020-08-05 13:14:15").IsWeekday() // true
 // 是否是周末
-carbon.Parse("2020-08-05 13:14:15").IsWeekend() // true
+carbon.Parse("2020-08-05 13:14:15").IsWeekend() // false
 
 // 是否是昨天
 carbon.Parse("2020-08-04 13:14:15").IsYesterday() // true
@@ -177,15 +180,20 @@ carbon.Parse("2020-08-06").IsTomorrow() // true
 // 是否是同一世纪
 carbon.Parse("2020-08-05 13:14:15").IsSameCentury(carbon.Parse("3020-08-05 13:14:15")) // false
 carbon.Parse("2020-08-05 13:14:15").IsSameCentury(carbon.Parse("2099-08-05 13:14:15")) // true
-// 是否是同一年代
+// 是否是同一年代(还需属于同一世纪)
 carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2030-08-05 13:14:15")) // false
-carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2120-08-05 13:14:15")) // true
+carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2029-08-05 13:14:15")) // true
+carbon.Parse("2020-08-05 13:14:15").IsSameDecade(carbon.Parse("2120-08-05 13:14:15")) // false
 // 是否是同一年
 carbon.Parse("2020-08-05 00:00:00").IsSameYear(carbon.Parse("2021-08-05 13:14:15")) // false
 carbon.Parse("2020-01-01 00:00:00").IsSameYear(carbon.Parse("2020-12-31 13:14:15")) // true
-// 是否是同一季节
-carbon.Parse("2020-08-05 00:00:00").IsSameQuarter(carbon.Parse("2020-09-05 13:14:15")) // false
-carbon.Parse("2020-01-01 00:00:00").IsSameQuarter(carbon.Parse("2021-01-31 13:14:15")) // true
+// 是否是同一季度
+carbon.Parse("2020-08-05 00:00:00").IsSameQuarter(carbon.Parse("2020-09-05 13:14:15")) // true
+carbon.Parse("2020-01-01 00:00:00").IsSameQuarter(carbon.Parse("2021-01-31 13:14:15")) // false
+// 是否是同一周(受 SetWeekStartsAt 影响)
+carbon.Parse("2020-08-03 00:00:00").IsSameWeek(carbon.Parse("2020-08-09 13:14:15")) // true
+carbon.Parse("2020-08-02 00:00:00").IsSameWeek(carbon.Parse("2020-08-03 13:14:15")) // false
+carbon.Parse("2020-08-02 00:00:00").SetWeekStartsAt(carbon.Sunday).IsSameWeek(carbon.Parse("2020-08-03 13:14:15").SetWeekStartsAt(carbon.Sunday)) // true
 // 是否是同一月
 carbon.Parse("2020-01-01 00:00:00").IsSameMonth(carbon.Parse("2021-01-31 13:14:15")) // false
 carbon.Parse("2020-01-01 00:00:00").IsSameMonth(carbon.Parse("2020-01-31 13:14:15")) // true
@@ -201,6 +209,13 @@ carbon.Parse("2020-08-05 13:14:00").IsSameMinute(carbon.Parse("2020-08-05 13:14:
 // 是否是同一秒
 carbon.Parse("2020-08-05 13:14:15").IsSameSecond(carbon.Parse("2021-08-05 13:14:15")) // false
 carbon.Parse("2020-08-05 13:14:15").IsSameSecond(carbon.Parse("2020-08-05 13:14:15")) // true
+
+// 是否是生日(只比较月和日，忽略年份；不传参数时与当前时间比较)
+carbon.Parse("1990-08-05 13:14:15").IsBirthday(carbon.Parse("2020-08-05 13:14:15")) // true
+carbon.Parse("1990-08-06 13:14:15").IsBirthday(carbon.Parse("2020-08-05 13:14:15")) // false
+carbon.Parse("2020-08-05").IsBirthday() // true
+// 2 月 29 日只与 2 月 29 日匹配，平年不算生日
+carbon.Parse("2000-02-29 13:14:15").IsBirthday(carbon.Parse("2021-02-28 13:14:15")) // false
 ```
 
 ## 数学判断
