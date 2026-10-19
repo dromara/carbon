@@ -68,7 +68,7 @@ function nav(): DefaultTheme.NavItem[] {
     },
     {
       text: 'Dongle',
-      link: 'https://dongle.go-pkg.com/',
+      link: 'https://dromara.github.io/dongle/ ',
     },
   ]
 }
