@@ -4,7 +4,7 @@
 
 [![Carbon Release](https://img.shields.io/github/release/dromara/carbon.svg)](https://github.com/dromara/carbon/releases)
 [![Go Test](https://github.com/dromara/carbon/actions/workflows/test.yml/badge.svg)](https://github.com/dromara/carbon/actions)
-[![golangci-lint](https://github.com/dromara/carbon/actions/workflows/lint.yml/badge.svg)](https://github.com/dromara/carbon/actions/workflows/lint.yml)
+[![golangci-lint](https://img.shields.io/badge/lint-golangci--lint-brightgreen?logo=go&logoColor=white&style=flat)](https://golangci-lint.run/)
 [![Go Coverage](https://codecov.io/gh/dromara/carbon/branch/master/graph/badge.svg)](https://codecov.io/gh/dromara/carbon)
 [![Carbon Doc](https://img.shields.io/badge/go.dev-reference-brightgreen?logo=go&logoColor=white&style=flat)](https://pkg.go.dev/github.com/dromara/carbon/v2)
 [![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/avelino/awesome-go#date-and-time)
