@@ -134,6 +134,26 @@ carbon.Parse("2020-08-05 13:14:15").SubDays(3).ToDateTimeString() // 2020-08-02 
 carbon.Parse("2020-08-05 13:14:15").SubDay().ToDateTimeString() // 2020-08-04 13:14:15
 ```
 
+## 평일 여행
+```go
+// 평일 3일 후 (주말 건너뜀)
+carbon.Parse("2020-08-05 13:14:15").AddWeekdays(3).ToDateTimeString() // 2020-08-10 13:14:15
+// 평일 1일 후
+carbon.Parse("2020-08-05 13:14:15").AddWeekday().ToDateTimeString() // 2020-08-06 13:14:15
+// 평일 3일 전
+carbon.Parse("2020-08-05 13:14:15").SubWeekdays(3).ToDateTimeString() // 2020-07-31 13:14:15
+// 평일 1일 전
+carbon.Parse("2020-08-05 13:14:15").SubWeekday().ToDateTimeString() // 2020-08-04 13:14:15
+// 토요일부터 평일 1일 후
+carbon.Parse("2020-08-08 13:14:15").AddWeekday().ToDateTimeString() // 2020-08-10 13:14:15
+
+// 금요일과 토요일을 주말로 설정하고 평일 2일 후
+wd := []carbon.Weekday{
+  carbon.Friday, carbon.Saturday,
+}
+carbon.Parse("2020-08-05 13:14:15").SetWeekendDays(wd).AddWeekdays(2).ToDateTimeString() // 2020-08-09 13:14:15
+```
+
 ## 시간 여행
 ```go
 // 3시간 후

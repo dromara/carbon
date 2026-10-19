@@ -134,6 +134,26 @@ carbon.Parse("2020-08-05 13:14:15").SubDays(3).ToDateTimeString() // 2020-08-02 
 carbon.Parse("2020-08-05 13:14:15").SubDay().ToDateTimeString() // 2020-08-04 13:14:15
 ```
 
+## 工作日旅行
+```go
+// 三个工作日后（跳过周末）
+carbon.Parse("2020-08-05 13:14:15").AddWeekdays(3).ToDateTimeString() // 2020-08-10 13:14:15
+// 一个工作日后
+carbon.Parse("2020-08-05 13:14:15").AddWeekday().ToDateTimeString() // 2020-08-06 13:14:15
+// 三个工作日前
+carbon.Parse("2020-08-05 13:14:15").SubWeekdays(3).ToDateTimeString() // 2020-07-31 13:14:15
+// 一个工作日前
+carbon.Parse("2020-08-05 13:14:15").SubWeekday().ToDateTimeString() // 2020-08-04 13:14:15
+// 从周六开始，一个工作日后
+carbon.Parse("2020-08-08 13:14:15").AddWeekday().ToDateTimeString() // 2020-08-10 13:14:15
+
+// 以周五和周六为周末，两个工作日后
+wd := []carbon.Weekday{
+  carbon.Friday, carbon.Saturday,
+}
+carbon.Parse("2020-08-05 13:14:15").SetWeekendDays(wd).AddWeekdays(2).ToDateTimeString() // 2020-08-09 13:14:15
+```
+
 ## 小时旅行
 ```go
 // 三小时后

@@ -134,6 +134,26 @@ carbon.Parse("2020-08-05 13:14:15").SubDays(3).ToDateTimeString() // 2020-08-02 
 carbon.Parse("2020-08-05 13:14:15").SubDay().ToDateTimeString() // 2020-08-04 13:14:15
 ```
 
+## Weekday travel
+```go
+// Add three weekdays, skipping weekend days
+carbon.Parse("2020-08-05 13:14:15").AddWeekdays(3).ToDateTimeString() // 2020-08-10 13:14:15
+// Add one weekday
+carbon.Parse("2020-08-05 13:14:15").AddWeekday().ToDateTimeString() // 2020-08-06 13:14:15
+// Subtract three weekdays
+carbon.Parse("2020-08-05 13:14:15").SubWeekdays(3).ToDateTimeString() // 2020-07-31 13:14:15
+// Subtract one weekday
+carbon.Parse("2020-08-05 13:14:15").SubWeekday().ToDateTimeString() // 2020-08-04 13:14:15
+// Add one weekday from a Saturday
+carbon.Parse("2020-08-08 13:14:15").AddWeekday().ToDateTimeString() // 2020-08-10 13:14:15
+
+// Add two weekdays with Friday and Saturday as weekend days
+wd := []carbon.Weekday{
+  carbon.Friday, carbon.Saturday,
+}
+carbon.Parse("2020-08-05 13:14:15").SetWeekendDays(wd).AddWeekdays(2).ToDateTimeString() // 2020-08-09 13:14:15
+```
+
 ## Hour travel
 ```go
 // Add three hours

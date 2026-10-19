@@ -134,6 +134,26 @@ carbon.Parse("2020-08-05 13:14:15").SubDays(3).ToDateTimeString() // 2020-08-02 
 carbon.Parse("2020-08-05 13:14:15").SubDay().ToDateTimeString() // 2020-08-04 13:14:15
 ```
 
+## 平日旅行
+```go
+// 平日を3日追加（週末をスキップ）
+carbon.Parse("2020-08-05 13:14:15").AddWeekdays(3).ToDateTimeString() // 2020-08-10 13:14:15
+// 平日を1日追加
+carbon.Parse("2020-08-05 13:14:15").AddWeekday().ToDateTimeString() // 2020-08-06 13:14:15
+// 平日を3日減らす
+carbon.Parse("2020-08-05 13:14:15").SubWeekdays(3).ToDateTimeString() // 2020-07-31 13:14:15
+// 平日を1日減らす
+carbon.Parse("2020-08-05 13:14:15").SubWeekday().ToDateTimeString() // 2020-08-04 13:14:15
+// 土曜日から平日を1日追加
+carbon.Parse("2020-08-08 13:14:15").AddWeekday().ToDateTimeString() // 2020-08-10 13:14:15
+
+// 金曜日と土曜日を週末として平日を2日追加
+wd := []carbon.Weekday{
+  carbon.Friday, carbon.Saturday,
+}
+carbon.Parse("2020-08-05 13:14:15").SetWeekendDays(wd).AddWeekdays(2).ToDateTimeString() // 2020-08-09 13:14:15
+```
+
 ## 時間旅行
 ```go
 // 3時間追加
