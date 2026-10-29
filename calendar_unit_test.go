@@ -99,6 +99,16 @@ func (s *CalendarSuite) TestCarbon_Lunar() {
 		s.Equal("2023-12-11", Parse("2024-01-21", PRC).Lunar().String())
 		s.Equal("2023-12-14", Parse("2024-01-24", PRC).Lunar().String())
 	})
+
+	s.Run("out of range carbon", func() {
+		l := Parse("1800-08-05", PRC).Lunar()
+		s.Error(l.Error)
+		s.Empty(l.String())
+
+		l = Parse("2200-08-05", PRC).Lunar()
+		s.Error(l.Error)
+		s.Empty(l.String())
+	})
 }
 
 func (s *CalendarSuite) TestCreateFromLunar() {
