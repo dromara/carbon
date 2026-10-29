@@ -36,6 +36,24 @@ func TestFromStdTime(t *testing.T) {
 		assert.Equal(t, "2020-05-05", FromStdTime(time.Date(2020, 6, 25, 0, 30, 0, 0, newYork)).String())
 		assert.Equal(t, "2020-05-05", FromStdTime(time.Date(2020, 6, 25, 23, 59, 59, 0, loc)).String())
 	})
+
+	t.Run("out of range time", func(t *testing.T) {
+		// The supported range is 1900-01-31 (1900-01-01) to 2101-01-28 (2100-12-29)
+		assert.Equal(t, "1900-01-01", FromStdTime(time.Date(1900, 1, 31, 0, 0, 0, 0, loc)).String())
+		assert.Equal(t, "2100-12-29", FromStdTime(time.Date(2101, 1, 28, 0, 0, 0, 0, loc)).String())
+
+		for _, d := range []time.Time{
+			time.Date(1900, 1, 30, 0, 0, 0, 0, loc),
+			time.Date(1800, 8, 5, 0, 0, 0, 0, loc),
+			time.Date(2101, 1, 29, 0, 0, 0, 0, loc),
+			time.Date(2200, 8, 5, 0, 0, 0, 0, loc),
+		} {
+			l := FromStdTime(d)
+			assert.Error(t, l.Error)
+			assert.False(t, l.IsValid())
+			assert.Empty(t, l.String())
+		}
+	})
 }
 
 func TestLunar_Gregorian(t *testing.T) {

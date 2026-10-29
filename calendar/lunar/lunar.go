@@ -96,6 +96,10 @@ func FromStdTime(t time.Time) *Lunar {
 		offset += daysInYear
 		l.year--
 	}
+	if l.year < minYear || l.year > maxYear {
+		l.Error = fmt.Errorf("date %s is out of the supported lunar range", t.Format("2006-01-02"))
+		return l
+	}
 	leapMonth = getLeapMonth(l.year)
 	for l.month = 1; l.month <= 12 && offset > 0; l.month++ {
 		if leapMonth > 0 && l.month == (leapMonth+1) && !l.isLeapMonth {
