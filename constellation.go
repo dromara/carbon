@@ -173,7 +173,7 @@ func (c *Carbon) IsSagittarius() bool {
 		return false
 	}
 	_, month, day := c.Date()
-	if month == 11 && day >= 22 {
+	if month == 11 && day >= 23 {
 		return true
 	}
 	if month == 12 && day <= 21 {
