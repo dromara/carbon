@@ -348,6 +348,7 @@ func (s *ConstellationSuite) TestCarbon_IsSagittarius() {
 	})
 
 	s.Run("valid carbon", func() {
+		s.False(Parse("2020-11-22").IsSagittarius())
 		s.True(Parse("2020-11-23").IsSagittarius())
 		s.True(Parse("2020-12-21").IsSagittarius())
 		s.False(Parse("2020-08-05").IsSagittarius())
