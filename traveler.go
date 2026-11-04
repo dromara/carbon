@@ -44,15 +44,15 @@ func (c *Carbon) AddDuration(duration string) *Carbon {
 	if c.IsInvalid() {
 		return c
 	}
+	result := c.Copy()
 	var (
 		td  Duration
 		err error
 	)
 	if td, err = parseDuration(duration); err != nil {
-		c.Error = err
-		return c
+		result.Error = err
+		return result
 	}
-	result := c.Copy()
 	result.time = c.StdTime().Add(td)
 	return result
 }
@@ -62,15 +62,15 @@ func (c *Carbon) SubDuration(duration string) *Carbon {
 	if c.IsInvalid() {
 		return c
 	}
+	result := c.Copy()
 	var (
 		td  Duration
 		err error
 	)
 	if td, err = parseDuration(duration); err != nil {
-		c.Error = err
-		return c
+		result.Error = err
+		return result
 	}
-	result := c.Copy()
 	result.time = c.StdTime().Add(-td)
 	return result
 }
