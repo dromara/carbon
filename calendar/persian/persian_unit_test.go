@@ -211,7 +211,7 @@ func TestPersian_ToWeekString(t *testing.T) {
 
 	t.Run("persian locale", func(t *testing.T) {
 		p := NewPersian(1400, 1, 1)
-		assert.Equal(t, "نجشنبه", p.ToWeekString(FaLocale))
+		assert.Equal(t, "یکشنبه", p.ToWeekString(FaLocale))
 	})
 
 	t.Run("default locale", func(t *testing.T) {
