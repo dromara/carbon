@@ -10,6 +10,26 @@ head:
 
 # Change Log
 
+## [v2.7.1](https://github.com/dromara/carbon/compare/v2.7.0...v2.7.1) (2026-11-06)
+
+### ✨ Features
+
+- **Add Bengali (`bn`) language support**: adds localized month and weekday names, relative time expressions, seasons, and constellations (by [@Goldloli](https://github.com/Goldloli) in [#390](https://github.com/dromara/carbon/pull/390)).
+
+### 🐛 Fixes
+
+- **Fix a panic when converting dates outside the supported lunar calendar range**: dates outside `1900-01-31` through `2101-01-28` now produce an invalid `Lunar` value with an error instead of causing an index-out-of-range panic (by [@ybai08](https://github.com/ybai08) in [#389](https://github.com/dromara/carbon/pull/389)).
+- **Fix the start date of Sagittarius**: `IsSagittarius` now starts on November 23, so November 22 is no longer classified as both Scorpio and Sagittarius (by [@ChandraChaan](https://github.com/ChandraChaan) in [#391](https://github.com/dromara/carbon/pull/391)).
+- **Fix the Persian name for Sunday**: corrects the value returned by `ToWeekString(FaLocale)` (by [@ChandraChaan](https://github.com/ChandraChaan) in [#392](https://github.com/dromara/carbon/pull/392)).
+- **Fix `AddDuration` and `SubDuration` modifying the receiver on a parse error**: the returned value carries the error while the original instance remains unchanged (by [@simpleqt](https://github.com/simpleqt) in [#393](https://github.com/dromara/carbon/pull/393)).
+
+### 🔧 Dependencies
+
+- Upgrade `actions/checkout` from `v4` to `v7` (by [@dependabot[bot]](https://github.com/dependabot) in [#385](https://github.com/dromara/carbon/pull/385)).
+- Upgrade `github/codeql-action` from `v4.38.3` to `v4.39.1` (by [@dependabot[bot]](https://github.com/dependabot) in [#386](https://github.com/dromara/carbon/pull/386) and [#388](https://github.com/dromara/carbon/pull/388)).
+- Upgrade `actions/setup-go` from `v5` to `v7` (by [@dependabot[bot]](https://github.com/dependabot) in [#387](https://github.com/dromara/carbon/pull/387)).
+- Upgrade the `github.com/stretchr/testify` test dependency to `v1.12.1`.
+
 ## [v2.7.0](https://github.com/dromara/carbon/compare/v2.6.18...v2.7.0) (2026-10-19)
 
 ### ✨ Features

@@ -10,6 +10,26 @@ head:
 
 # 変更履歴
 
+## [v2.7.1](https://github.com/dromara/carbon/compare/v2.7.0...v2.7.1) (2026-11-06)
+
+### ✨ 新機能
+
+- **ベンガル語（`bn`）のローカライズ対応を追加**：月、曜日、相対時間、季節、星座のローカライズ文字列を追加（by [@Goldloli](https://github.com/Goldloli) in [#390](https://github.com/dromara/carbon/pull/390)）。
+
+### 🐛 修正
+
+- **サポート範囲外の農暦変換で panic が発生する問題を修正**：`1900-01-31` から `2101-01-28` の範囲外の日付では、配列の範囲外アクセスを起こさず、エラーを持つ無効な `Lunar` 値を返すように修正（by [@ybai08](https://github.com/ybai08) in [#389](https://github.com/dromara/carbon/pull/389)）。
+- **射手座の開始日を修正**：`IsSagittarius` の判定開始日を 11 月 23 日に変更し、11 月 22 日が蠍座と射手座の両方に分類されないように修正（by [@ChandraChaan](https://github.com/ChandraChaan) in [#391](https://github.com/dromara/carbon/pull/391)）。
+- **ペルシャ語の曜日名で日曜日が誤っていた問題を修正**：`ToWeekString(FaLocale)` が返す日曜日の名前を修正（by [@ChandraChaan](https://github.com/ChandraChaan) in [#392](https://github.com/dromara/carbon/pull/392)）。
+- **解析エラー時に `AddDuration` と `SubDuration` がレシーバーを変更する問題を修正**：返り値にエラーを保持し、元のインスタンスは変更しないように修正（by [@simpleqt](https://github.com/simpleqt) in [#393](https://github.com/dromara/carbon/pull/393)）。
+
+### 🔧 依存関係のアップグレード
+
+- `actions/checkout` を `v4` から `v7` にアップグレード（by [@dependabot[bot]](https://github.com/dependabot) in [#385](https://github.com/dromara/carbon/pull/385)）。
+- `github/codeql-action` を `v4.38.3` から `v4.39.1` にアップグレード（by [@dependabot[bot]](https://github.com/dependabot) in [#386](https://github.com/dromara/carbon/pull/386) および [#388](https://github.com/dromara/carbon/pull/388)）。
+- `actions/setup-go` を `v5` から `v7` にアップグレード（by [@dependabot[bot]](https://github.com/dependabot) in [#387](https://github.com/dromara/carbon/pull/387)）。
+- テスト依存関係 `github.com/stretchr/testify` を `v1.12.1` にアップグレード。
+
 ## [v2.7.0](https://github.com/dromara/carbon/compare/v2.6.18...v2.7.0) (2026-10-19)
 
 ### ✨ 新機能

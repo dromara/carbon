@@ -10,6 +10,26 @@ head:
 
 # 更新日志
 
+## [v2.7.1](https://github.com/dromara/carbon/compare/v2.7.0...v2.7.1) (2026-11-06)
+
+### ✨ 新功能
+
+- **新增孟加拉语（`bn`）支持**：增加月份、星期、相对时间、季节和星座等本地化文本（by [@Goldloli](https://github.com/Goldloli) in [#390](https://github.com/dromara/carbon/pull/390)）。
+
+### 🐛 修复
+
+- **修复超出农历支持范围时发生 panic 的问题**：公历日期超出 `1900-01-31` 至 `2101-01-28` 时，返回携带错误的无效 `Lunar` 值，避免数组越界（by [@ybai08](https://github.com/ybai08) in [#389](https://github.com/dromara/carbon/pull/389)）。
+- **修复射手座起始日期错误的问题**：`IsSagittarius` 从 11 月 23 日开始判定，避免将 11 月 22 日同时判定为天蝎座和射手座（by [@ChandraChaan](https://github.com/ChandraChaan) in [#391](https://github.com/dromara/carbon/pull/391)）。
+- **修复波斯语星期日名称拼写错误的问题**：更正 `ToWeekString(FaLocale)` 返回的星期日名称（by [@ChandraChaan](https://github.com/ChandraChaan) in [#392](https://github.com/dromara/carbon/pull/392)）。
+- **修复 `AddDuration` 和 `SubDuration` 解析失败时修改原实例的问题**：错误保留在返回值中，原实例保持不变（by [@simpleqt](https://github.com/simpleqt) in [#393](https://github.com/dromara/carbon/pull/393)）。
+
+### 🔧 依赖升级
+
+- 将 `actions/checkout` 从 `v4` 升级到 `v7`（by [@dependabot[bot]](https://github.com/dependabot) in [#385](https://github.com/dromara/carbon/pull/385)）。
+- 将 `github/codeql-action` 从 `v4.38.3` 升级到 `v4.39.1`（by [@dependabot[bot]](https://github.com/dependabot) in [#386](https://github.com/dromara/carbon/pull/386) 和 [#388](https://github.com/dromara/carbon/pull/388)）。
+- 将 `actions/setup-go` 从 `v5` 升级到 `v7`（by [@dependabot[bot]](https://github.com/dependabot) in [#387](https://github.com/dromara/carbon/pull/387)）。
+- 将测试依赖 `github.com/stretchr/testify` 升级到 `v1.12.1`。
+
 ## [v2.7.0](https://github.com/dromara/carbon/compare/v2.6.18...v2.7.0) (2026-10-19)
 
 ### ✨ 新功能

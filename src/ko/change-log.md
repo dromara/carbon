@@ -10,6 +10,26 @@ head:
 
 # 업데이트 로그
 
+## [v2.7.1](https://github.com/dromara/carbon/compare/v2.7.0...v2.7.1) (2026-11-06)
+
+### ✨ 새로운 기능
+
+- **벵골어(`bn`) 현지화 언어 지원 추가**: 월, 요일, 상대 시간, 계절 및 별자리 현지화 문자열 추가 (by [@Goldloli](https://github.com/Goldloli) in [#390](https://github.com/dromara/carbon/pull/390)).
+
+### 🐛 버그 수정
+
+- **지원 범위를 벗어난 음력 변환에서 panic이 발생하는 문제 수정**: `1900-01-31`부터 `2101-01-28`까지의 범위를 벗어난 날짜는 배열 범위를 벗어나지 않고 오류가 포함된 유효하지 않은 `Lunar` 값을 반환 (by [@ybai08](https://github.com/ybai08) in [#389](https://github.com/dromara/carbon/pull/389)).
+- **사수자리 시작 날짜 수정**: `IsSagittarius`가 11월 23일부터 시작하도록 수정하여 11월 22일이 전갈자리와 사수자리로 동시에 분류되지 않도록 함 (by [@ChandraChaan](https://github.com/ChandraChaan) in [#391](https://github.com/dromara/carbon/pull/391)).
+- **페르시아어 일요일 이름 오류 수정**: `ToWeekString(FaLocale)`이 반환하는 일요일 이름을 수정 (by [@ChandraChaan](https://github.com/ChandraChaan) in [#392](https://github.com/dromara/carbon/pull/392)).
+- **파싱 오류 시 `AddDuration` 및 `SubDuration`이 수신자를 변경하는 문제 수정**: 반환값에 오류를 유지하고 원본 인스턴스는 변경하지 않도록 수정 (by [@simpleqt](https://github.com/simpleqt) in [#393](https://github.com/dromara/carbon/pull/393)).
+
+### 🔧 의존성 업그레이드
+
+- `actions/checkout`을 `v4`에서 `v7`로 업그레이드 (by [@dependabot[bot]](https://github.com/dependabot) in [#385](https://github.com/dromara/carbon/pull/385)).
+- `github/codeql-action`을 `v4.38.3`에서 `v4.39.1`로 업그레이드 (by [@dependabot[bot]](https://github.com/dependabot) in [#386](https://github.com/dromara/carbon/pull/386) 및 [#388](https://github.com/dromara/carbon/pull/388)).
+- `actions/setup-go`를 `v5`에서 `v7`로 업그레이드 (by [@dependabot[bot]](https://github.com/dependabot) in [#387](https://github.com/dromara/carbon/pull/387)).
+- 테스트 의존성 `github.com/stretchr/testify`를 `v1.12.1`로 업그레이드.
+
 ## [v2.7.0](https://github.com/dromara/carbon/compare/v2.6.18...v2.7.0) (2026-10-19)
 
 ### ✨ 새로운 기능
