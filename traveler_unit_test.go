@@ -148,9 +148,13 @@ func (s *TravelerSuite) TestCarbon_AddDuration() {
 	})
 
 	s.Run("error duration", func() {
-		c := Parse("2020-08-05").AddDuration("xxx")
-		s.True(c.HasError())
-		s.Empty(c.ToString())
+		c := Parse("2020-08-05")
+		result := c.AddDuration("xxx")
+		s.True(result.HasError())
+		s.Empty(result.ToString())
+		s.False(c.IsInvalid())
+		s.False(c.HasError())
+		s.Equal("2020-08-05 00:00:00 +0000 UTC", c.ToString())
 	})
 
 	s.Run("valid carbon", func() {
@@ -189,9 +193,13 @@ func (s *TravelerSuite) TestCarbon_SubDuration() {
 	})
 
 	s.Run("error duration", func() {
-		c := Parse("2020-08-05").SubDuration("xxx")
-		s.True(c.HasError())
-		s.Empty(c.ToString())
+		c := Parse("2020-08-05")
+		result := c.SubDuration("xxx")
+		s.True(result.HasError())
+		s.Empty(result.ToString())
+		s.False(c.IsInvalid())
+		s.False(c.HasError())
+		s.Equal("2020-08-05 00:00:00 +0000 UTC", c.ToString())
 	})
 
 	s.Run("valid carbon", func() {
