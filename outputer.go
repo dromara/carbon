@@ -776,7 +776,8 @@ func (c *Carbon) Format(format string, timezone ...string) string {
 			case 'x':
 				fmt.Fprintf(buffer, "%09d", c.Nanosecond())
 			default: // common symbols
-				buffer.WriteString(c.StdTime().Format(layout))
+				var b [32]byte
+				buffer.Write(c.StdTime().AppendFormat(b[:0], layout))
 			}
 		} else {
 			switch format[i] {
