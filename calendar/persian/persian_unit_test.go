@@ -463,3 +463,10 @@ func TestPersianWithAuthorityData(t *testing.T) {
 		})
 	}
 }
+
+func TestPersian_OfficialLeapYears(t *testing.T) {
+	assert.True(t, NewPersian(1403, 12, 30).IsValid())
+	assert.True(t, NewPersian(1403, 1, 1).IsLeapYear())
+	assert.False(t, NewPersian(1404, 1, 1).IsLeapYear())
+	assert.Equal(t, "1404-01-01", FromStdTime(time.Date(2025, 3, 21, 0, 0, 0, 0, time.UTC)).String()[:10])
+}

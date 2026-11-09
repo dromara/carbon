@@ -19,6 +19,9 @@ const (
 )
 
 var (
+	// persianBreaks are the years where the 33-year leap cycle restarts.
+	persianBreaks = []int{-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178}
+
 	EnMonths = []string{"Farvardin", "Ordibehesht", "Khordad", "Tir", "Mordad", "Shahrivar", "Mehr", "Aban", "Azar", "Dey", "Bahman", "Esfand"}
 	FaMonths = []string{"فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"}
 
@@ -210,18 +213,46 @@ func getPersianYear(jdn int) int {
 
 // getPersianJdn gets the Julian day number in the Persian calendar.
 func getPersianJdn(year, month, day int) int {
-	yearOffset := year - 474
-	if yearOffset < 0 {
-		yearOffset--
-	}
-	cycleYear := 474 + (yearOffset % 2820)
 	var monthDays int
 	if month <= 7 {
 		monthDays = (month - 1) * 31
 	} else {
 		monthDays = (month-1)*30 + 6
 	}
+	if year >= 1 && year < persianBreaks[len(persianBreaks)-1] {
+		return nowruzJdn(year) + monthDays + day - 1
+	}
+	yearOffset := year - 474
+	if yearOffset < 0 {
+		yearOffset--
+	}
+	cycleYear := 474 + (yearOffset % 2820)
 	return day + monthDays + (cycleYear*682-110)/2816 + (cycleYear-1)*365 + yearOffset/2820*1029983 + persianEpoch
+}
+
+// nowruzJdn gets the Julian day number of 1 Farvardin. Leap years follow the
+// 33-year rule between the years in persianBreaks, as the official calendar does.
+func nowruzJdn(year int) int {
+	leaps := -14
+	start := persianBreaks[0]
+	jump := 0
+	for _, next := range persianBreaks[1:] {
+		jump = next - start
+		if year < next {
+			break
+		}
+		leaps += jump/33*8 + jump%33/4
+		start = next
+	}
+	n := year - start
+	leaps += n/33*8 + (n%33+3)/4
+	if jump%33 == 4 && jump-n == 4 {
+		leaps++
+	}
+	gYear := year + 621
+	gLeaps := gYear/4 - (gYear/100+1)*3/4 - 150
+	march := 20 + leaps - gLeaps
+	return 1461*(gYear+4800)/4 + 30 - 3*((gYear+4900)/100)/4 + march - 32075
 }
 
 // jdn2persian converts Julian Day Number to Persian date (year, month, day).
