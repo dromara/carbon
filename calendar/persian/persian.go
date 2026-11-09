@@ -19,7 +19,9 @@ const (
 )
 
 var (
-	// persianBreaks are the years where the 33-year leap cycle restarts.
+	// persianBreaks are the years where the 33-year leap cycle restarts, taken
+	// from Kazimierz Borkowski's algorithm as implemented in jalaali-js. It
+	// covers Persian years -61 to 3177.
 	persianBreaks = []int{-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178}
 
 	EnMonths = []string{"Farvardin", "Ordibehesht", "Khordad", "Tir", "Mordad", "Shahrivar", "Mehr", "Aban", "Azar", "Dey", "Bahman", "Esfand"}
@@ -230,8 +232,10 @@ func getPersianJdn(year, month, day int) int {
 	return day + monthDays + (cycleYear*682-110)/2816 + (cycleYear-1)*365 + yearOffset/2820*1029983 + persianEpoch
 }
 
-// nowruzJdn gets the Julian day number of 1 Farvardin. Leap years follow the
-// 33-year rule between the years in persianBreaks, as the official calendar does.
+// nowruzJdn gets the Julian day number of 1 Farvardin with Borkowski's algorithm:
+// leap years follow the 33-year rule between the years in persianBreaks. It is
+// an arithmetic model, not astronomical data. getPersianJdn uses it for years 1
+// to 3177 and keeps the 2820-year formula from 3178 on.
 func nowruzJdn(year int) int {
 	leaps := -14
 	start := persianBreaks[0]
