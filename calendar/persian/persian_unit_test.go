@@ -463,3 +463,56 @@ func TestPersianWithAuthorityData(t *testing.T) {
 		})
 	}
 }
+
+func TestPersian_OfficialLeapYears(t *testing.T) {
+	assert.True(t, NewPersian(1403, 12, 30).IsValid())
+	assert.True(t, NewPersian(1403, 1, 1).IsLeapYear())
+	assert.False(t, NewPersian(1404, 1, 1).IsLeapYear())
+	assert.Equal(t, "1404-01-01", FromStdTime(time.Date(2025, 3, 21, 0, 0, 0, 0, time.UTC)).String()[:10])
+}
+
+// The expected values come from jalaali-js.
+func TestPersian_BreakYears(t *testing.T) {
+	tests := []struct {
+		year   int
+		isLeap bool
+		nowruz string
+	}{
+		{1110, false, "1731-03-21"},
+		{1111, true, "1732-03-20"},
+		{1180, false, "1801-03-21"},
+		{1181, true, "1802-03-21"},
+		{1209, false, "1830-03-21"},
+		{1210, true, "1831-03-21"},
+		{1634, false, "2255-03-21"},
+		{1635, true, "2256-03-20"},
+		{2059, false, "2680-03-20"},
+		{2060, true, "2681-03-20"},
+		{2096, false, "2717-03-21"},
+		{2097, true, "2718-03-21"},
+		{2191, false, "2812-03-20"},
+		{2192, true, "2813-03-20"},
+		{2261, false, "2882-03-20"},
+		{2262, true, "2883-03-20"},
+		{2323, false, "2944-03-20"},
+		{2324, true, "2945-03-20"},
+		{2393, false, "3014-03-21"},
+		{2394, true, "3015-03-21"},
+		{2455, false, "3076-03-20"},
+		{2456, true, "3077-03-20"},
+		{3177, false, "3798-03-20"},
+	}
+	for _, tt := range tests {
+		p := NewPersian(tt.year, 1, 1)
+		assert.Equal(t, tt.isLeap, p.IsLeapYear(), tt.year)
+		assert.Equal(t, tt.nowruz, p.ToGregorian().Time.Format("2006-01-02"), tt.year)
+	}
+}
+
+func TestPersian_AlgorithmChangeAt3178(t *testing.T) {
+	last := NewPersian(3177, 12, 29).ToGregorian()
+	first := NewPersian(3178, 1, 1).ToGregorian()
+	assert.Equal(t, "3799-03-19", last.Time.Format("2006-01-02"))
+	assert.Equal(t, last.Time.AddDate(0, 0, 1).Format("2006-01-02"), first.Time.Format("2006-01-02"))
+	assert.Equal(t, "3178-01-01", FromStdTime(first.Time).String()[:10])
+}
