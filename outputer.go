@@ -757,6 +757,8 @@ func (c *Carbon) Format(format string, timezone ...string) string {
 			switch format[i] {
 			case 'D': // short week, such as Mon
 				buffer.WriteString(c.ToShortWeekString())
+			case 'l': // full week, such as Monday
+				buffer.WriteString(c.ToWeekString())
 			case 'F': // month, such as January
 				buffer.WriteString(c.ToMonthString())
 			case 'M': // short month, such as Jan
