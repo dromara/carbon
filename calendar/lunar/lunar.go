@@ -71,9 +71,7 @@ func NewLunar(year, month, day int, isLeapMonth bool) *Lunar {
 	l := new(Lunar)
 	l.year, l.month, l.day, l.isLeapMonth = year, month, day, isLeapMonth
 	if !l.IsValid() {
-		if !l.IsValid() {
-			l.Error = fmt.Errorf("invalid persian date: %04d-%02d-%02d", year, month, day)
-		}
+		l.Error = fmt.Errorf("invalid lunar date: %04d-%02d-%02d", year, month, day)
 	}
 	return l
 }
@@ -282,10 +280,16 @@ func (l *Lunar) IsValid() bool {
 	if l == nil || l.Error != nil {
 		return false
 	}
-	if l.year >= minYear && l.year <= maxYear {
-		return true
+	if l.year < minYear || l.year > maxYear {
+		return false
 	}
-	return false
+	if l.month < 1 || l.month > 12 || l.day < 1 {
+		return false
+	}
+	if l.isLeapMonth {
+		return l.month == getLeapMonth(l.year) && l.day <= getDaysInLeapMonth(l.year)
+	}
+	return l.day <= getDaysInMonth(l.year, l.month)
 }
 
 // IsLeapYear reports whether is a lunar leap year.

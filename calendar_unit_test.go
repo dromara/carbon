@@ -114,6 +114,9 @@ func (s *CalendarSuite) TestCarbon_Lunar() {
 func (s *CalendarSuite) TestCreateFromLunar() {
 	s.Run("error lunar", func() {
 		s.Empty(CreateFromLunar(2200, 12, 14, false).ToString())
+		s.Error(CreateFromLunar(2023, 13, 1, false).Error)
+		s.Error(CreateFromLunar(2023, 1, 30, false).Error)
+		s.Error(CreateFromLunar(2024, 1, 1, true).Error)
 	})
 
 	s.Run("valid lunar", func() {
