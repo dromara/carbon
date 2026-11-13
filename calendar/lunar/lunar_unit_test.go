@@ -291,10 +291,36 @@ func TestLunar_IsValid(t *testing.T) {
 		assert.False(t, NewLunar(1800, 1, 1, true).IsValid())
 	})
 
+	t.Run("invalid month", func(t *testing.T) {
+		assert.False(t, NewLunar(2023, 0, 1, false).IsValid())
+		assert.False(t, NewLunar(2023, 13, 1, false).IsValid())
+	})
+
+	t.Run("invalid day", func(t *testing.T) {
+		assert.False(t, NewLunar(2023, 1, 0, false).IsValid())
+		// the first month of 2023 has 29 days, the second one 30
+		assert.False(t, NewLunar(2023, 1, 30, false).IsValid())
+		assert.False(t, NewLunar(2023, 2, 31, false).IsValid())
+		// the leap second month of 2023 has 29 days
+		assert.False(t, NewLunar(2023, 2, 30, true).IsValid())
+	})
+
+	t.Run("invalid leap month", func(t *testing.T) {
+		// 2023 has a leap second month, 2024 has no leap month
+		assert.False(t, NewLunar(2023, 5, 1, true).IsValid())
+		assert.False(t, NewLunar(2024, 1, 1, true).IsValid())
+		assert.EqualError(t, NewLunar(2024, 1, 1, true).Error, "invalid lunar date: 2024-01-01")
+		assert.Empty(t, NewLunar(2024, 1, 1, true).ToGregorian("PRC").String())
+	})
+
 	t.Run("valid time", func(t *testing.T) {
 		l1 := FromStdTime(time.Date(2020, 8, 5, 0, 0, 0, 0, loc))
 		assert.Equal(t, "2020-06-16", l1.String())
 		assert.True(t, l1.IsValid())
+
+		assert.True(t, NewLunar(2023, 1, 29, false).IsValid())
+		assert.True(t, NewLunar(2023, 2, 30, false).IsValid())
+		assert.True(t, NewLunar(2023, 2, 29, true).IsValid())
 	})
 }
 
