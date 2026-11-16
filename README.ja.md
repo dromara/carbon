@@ -43,7 +43,7 @@ import "gitee.com/dromara/carbon/v2"
 
 // gitcode から使う
 go get -u gitcode.com/dromara/carbon/v2
-import "gitcode.com/dromara/gitcode/v2"
+import "gitcode.com/dromara/carbon/v2"
 ```
 
 `Carbon` は [dromara](https://dromara.org/ "dromara") 組織に寄付されたためリポジトリのURLが変更されました。以前のリポジトリ `golang-module/carbon` を使用している場合は`go.mod`で新しいリポジトリURLに変更するか下記コマンドを実行します
@@ -74,8 +74,8 @@ carbon.CreateFromTime(13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC
 carbon.CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC
 carbon.CreateFromTimestamp(1596633255).ToString() // 2020-08-05 13:14:15 +0000 UTC
 
-carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month before
-carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月前
+carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month ago
+carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 个月前
 
 carbon.ClearTestNow()
 carbon.IsTestNow() // false
