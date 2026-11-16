@@ -43,7 +43,7 @@ import "gitee.com/dromara/carbon/v2"
 
 // GitCode를 통해
 go get -u gitcode.com/dromara/carbon/v2
-import "gitcode.com/dromara/gitcode/v2"
+import "gitcode.com/dromara/carbon/v2"
 ```
 
 `Carbon`은 [dromara](https://dromara.org/ "dromara") 조직에 기부되었으며, 저장소 URL이 변경되었습니다. 이전에 사용하던 저장소가 `golang-module/carbon`이었다면, `go.mod`에서 원래 저장소를 새 저장소로 교체하거나 다음 명령을 실행하세요:
@@ -74,8 +74,8 @@ carbon.CreateFromTime(13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC
 carbon.CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC
 carbon.CreateFromTimestamp(1596633255).ToString() // 2020-08-05 13:14:15 +0000 UTC
 
-carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month before
-carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月前
+carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month ago
+carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 个月前
 
 carbon.ClearTestNow()
 carbon.IsTestNow() // false

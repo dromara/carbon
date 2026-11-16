@@ -43,7 +43,7 @@ import "gitee.com/dromara/carbon/v2"<!--en-->
 <!--en-->
 // Via gitcode<!--en-->
 go get -u gitcode.com/dromara/carbon/v2<!--en-->
-import "gitcode.com/dromara/gitcode/v2"<!--en-->
+import "gitcode.com/dromara/carbon/v2"<!--en-->
 ```<!--en-->
 <!--en-->
 `Carbon` was donated to the [dromara](https://dromara.org/ "dromara") organization, the repository URL has changed. If<!--en-->
@@ -77,8 +77,8 @@ carbon.CreateFromTime(13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC<!-
 carbon.CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC<!--en-->
 carbon.CreateFromTimestamp(1596633255).ToString() // 2020-08-05 13:14:15 +0000 UTC<!--en-->
 <!--en-->
-carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month before<!--en-->
-carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月前<!--en-->
+carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month ago<!--en-->
+carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 个月前<!--en-->
 <!--en-->
 carbon.ClearTestNow()<!--en-->
 carbon.IsTestNow() // false<!--en-->
@@ -203,8 +203,8 @@ carbon.CreateFromTime(13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC<!-
 carbon.CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC<!--cn-->
 carbon.CreateFromTimestamp(1596633255).ToString() // 2020-08-05 13:14:15 +0000 UTC<!--cn-->
 <!--cn-->
-carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month before<!--cn-->
-carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月前<!--cn-->
+carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month ago<!--cn-->
+carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 个月前<!--cn-->
 <!--cn-->
 carbon.ClearTestNow()<!--cn-->
 carbon.IsTestNow() // false<!--cn-->
@@ -304,7 +304,7 @@ import "gitee.com/dromara/carbon/v2"<!--ja-->
 <!--ja-->
 // gitcode から使う<!--ja-->
 go get -u gitcode.com/dromara/carbon/v2<!--ja-->
-import "gitcode.com/dromara/gitcode/v2"<!--ja-->
+import "gitcode.com/dromara/carbon/v2"<!--ja-->
 ```<!--ja-->
 <!--ja-->
 `Carbon` は [dromara](https://dromara.org/ "dromara") 組織に寄付されたためリポジトリのURLが変更されました。以前のリポジトリ `golang-module/carbon` を使用している場合は`go.mod`で新しいリポジトリURLに変更するか下記コマンドを実行します<!--ja-->
@@ -335,8 +335,8 @@ carbon.CreateFromTime(13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC<!-
 carbon.CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC<!--ja-->
 carbon.CreateFromTimestamp(1596633255).ToString() // 2020-08-05 13:14:15 +0000 UTC<!--ja-->
 <!--ja-->
-carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month before<!--ja-->
-carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月前<!--ja-->
+carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month ago<!--ja-->
+carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 个月前<!--ja-->
 <!--ja-->
 carbon.ClearTestNow()<!--ja-->
 carbon.IsTestNow() // false<!--ja-->
@@ -422,7 +422,7 @@ import "gitee.com/dromara/carbon/v2"<!--ko-->
 <!--ko-->
 // GitCode를 통해<!--ko-->
 go get -u gitcode.com/dromara/carbon/v2<!--ko-->
-import "gitcode.com/dromara/gitcode/v2"<!--ko-->
+import "gitcode.com/dromara/carbon/v2"<!--ko-->
 ```<!--ko-->
 <!--ko-->
 `Carbon`은 [dromara](https://dromara.org/ "dromara") 조직에 기부되었으며, 저장소 URL이 변경되었습니다. 이전에 사용하던 저장소가 `golang-module/carbon`이었다면, `go.mod`에서 원래 저장소를 새 저장소로 교체하거나 다음 명령을 실행하세요:<!--ko-->
@@ -453,8 +453,8 @@ carbon.CreateFromTime(13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC<!-
 carbon.CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC<!--ko-->
 carbon.CreateFromTimestamp(1596633255).ToString() // 2020-08-05 13:14:15 +0000 UTC<!--ko-->
 <!--ko-->
-carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month before<!--ko-->
-carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月前<!--ko-->
+carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month ago<!--ko-->
+carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 个月前<!--ko-->
 <!--ko-->
 carbon.ClearTestNow()<!--ko-->
 carbon.IsTestNow() // false<!--ko-->

@@ -80,8 +80,8 @@ carbon.CreateFromTime(13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC
 carbon.CreateFromDateTime(2020, 8, 5, 13, 14, 15).ToString() // 2020-08-05 13:14:15 +0000 UTC
 carbon.CreateFromTimestamp(1596633255).ToString() // 2020-08-05 13:14:15 +0000 UTC
 
-carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month before
-carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 月前
+carbon.Parse("2020-07-05 13:14:15").DiffForHumans() // 1 month ago
+carbon.Parse("2020-07-05 13:14:15").SetLocale("zh-CN").DiffForHumans() // 1 个月前
 
 carbon.ClearTestNow()
 carbon.IsTestNow() // false
