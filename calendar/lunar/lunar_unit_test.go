@@ -359,6 +359,16 @@ func TestLunar_IsLeapMonth(t *testing.T) {
 		l2 := FromStdTime(time.Date(2023, 4, 1, 0, 0, 0, 0, loc))
 		assert.Equal(t, 2, l2.LeapMonth())
 		assert.True(t, l2.IsLeapMonth())
+
+		// 2033 has a leap eleventh month, not a leap seventh month
+		l3 := FromStdTime(time.Date(2033, 8, 25, 0, 0, 0, 0, loc))
+		assert.Equal(t, 11, l3.LeapMonth())
+		assert.Equal(t, 8, l3.Month())
+		assert.False(t, l3.IsLeapMonth())
+
+		l4 := FromStdTime(time.Date(2033, 12, 22, 0, 0, 0, 0, loc))
+		assert.Equal(t, 11, l4.Month())
+		assert.True(t, l4.IsLeapMonth())
 	})
 }
 

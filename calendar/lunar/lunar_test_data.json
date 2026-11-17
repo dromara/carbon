@@ -2308,5 +2308,117 @@
       "month": 12,
       "day": 25
     }
+  },
+  {
+    "description": "1954年十一月初一（香港天文台）",
+    "lunar": {
+      "year": 1954,
+      "month": 11,
+      "day": 1,
+      "isLeapMonth": false
+    },
+    "gregorian": {
+      "year": 1954,
+      "month": 11,
+      "day": 25
+    }
+  },
+  {
+    "description": "1956年十一月初一（香港天文台）",
+    "lunar": {
+      "year": 1956,
+      "month": 11,
+      "day": 1,
+      "isLeapMonth": false
+    },
+    "gregorian": {
+      "year": 1956,
+      "month": 12,
+      "day": 2
+    }
+  },
+  {
+    "description": "1978年八月初一（香港天文台）",
+    "lunar": {
+      "year": 1978,
+      "month": 8,
+      "day": 1,
+      "isLeapMonth": false
+    },
+    "gregorian": {
+      "year": 1978,
+      "month": 9,
+      "day": 3
+    }
+  },
+  {
+    "description": "2033年八月初一（香港天文台）",
+    "lunar": {
+      "year": 2033,
+      "month": 8,
+      "day": 1,
+      "isLeapMonth": false
+    },
+    "gregorian": {
+      "year": 2033,
+      "month": 8,
+      "day": 25
+    }
+  },
+  {
+    "description": "2033年十一月初一（香港天文台）",
+    "lunar": {
+      "year": 2033,
+      "month": 11,
+      "day": 1,
+      "isLeapMonth": false
+    },
+    "gregorian": {
+      "year": 2033,
+      "month": 11,
+      "day": 22
+    }
+  },
+  {
+    "description": "2033年闰十一月初一（香港天文台）",
+    "lunar": {
+      "year": 2033,
+      "month": 11,
+      "day": 1,
+      "isLeapMonth": true
+    },
+    "gregorian": {
+      "year": 2033,
+      "month": 12,
+      "day": 22
+    }
+  },
+  {
+    "description": "2034年正月初一（香港天文台）",
+    "lunar": {
+      "year": 2034,
+      "month": 1,
+      "day": 1,
+      "isLeapMonth": false
+    },
+    "gregorian": {
+      "year": 2034,
+      "month": 2,
+      "day": 19
+    }
+  },
+  {
+    "description": "2060年四月初一（香港天文台）",
+    "lunar": {
+      "year": 2060,
+      "month": 4,
+      "day": 1,
+      "isLeapMonth": false
+    },
+    "gregorian": {
+      "year": 2060,
+      "month": 4,
+      "day": 30
+    }
   }
 ]
