@@ -128,29 +128,33 @@ func (c *Carbon) EndOfDay() *Carbon {
 	return c.endBoundary(year, month, day)
 }
 
+// clockChangeWindow is how far around a boundary to look for a clock change.
+// It is longer than any clock change in the time zone database (the biggest
+// ones move clocks by a whole day).
+const clockChangeWindow = 48 * time.Hour
+
 // startBoundary returns the first instant of the given local date.
 // time.Date may not pick it when a clock change happens at midnight:
 //   - where clocks jump from 00:00 to 01:00 (Chile, Cuba and the Azores do
 //     this), midnight does not exist and time.Date may resolve it to 23:00 of
-//     the day before. The first instant is then the transition itself, which is
-//     where the zone period holding that result ends;
+//     the day before. The first instant is then the clock change itself;
 //   - where clocks go back from 01:00 to 00:00, midnight happens twice and
 //     time.Date may pick the second occurrence. Use the earlier one.
 func (c *Carbon) startBoundary(year, month, day int) *Carbon {
 	result := c.create(year, month, day, MinHour, MinMinute, MinSecond, MinNanosecond)
-	if wallClock(result.time).Before(time.Date(year, time.Month(month), day, MinHour, MinMinute, MinSecond, MinNanosecond, time.UTC)) {
-		if _, end := result.time.ZoneBounds(); !end.IsZero() {
-			result.time = end
-		}
+	midnight := time.Date(year, time.Month(month), day, MinHour, MinMinute, MinSecond, MinNanosecond, time.UTC)
+	_, offset := result.time.Zone()
+	if wallClock(result.time).Before(midnight) {
+		// the clock change comes after result and no later than the moment
+		// result's offset would show midnight
+		limit := midnight.Add(-time.Duration(offset) * time.Second).In(result.time.Location())
+		result.time = firstOffsetChange(result.time, limit)
 		return result
 	}
-	if start, _ := result.time.ZoneBounds(); !start.IsZero() {
-		_, offset := result.time.Zone()
-		_, previousOffset := start.Add(-time.Nanosecond).Zone()
-		alternative := result.time.Add(time.Duration(offset-previousOffset) * time.Second)
-		if alternative.Before(result.time) && wallClock(alternative).Equal(wallClock(result.time)) {
-			result.time = alternative
-		}
+	_, previousOffset := result.time.Add(-clockChangeWindow).Zone()
+	earlier := result.time.Add(time.Duration(offset-previousOffset) * time.Second)
+	if earlier.Before(result.time) && wallClock(earlier).Equal(wallClock(result.time)) {
+		result.time = earlier
 	}
 	return result
 }
@@ -161,15 +165,36 @@ func (c *Carbon) startBoundary(year, month, day int) *Carbon {
 // hour before the date really ends. Use the later occurrence when there is one.
 func (c *Carbon) endBoundary(year, month, day int) *Carbon {
 	result := c.create(year, month, day, MaxHour, MaxMinute, MaxSecond, MaxNanosecond)
-	if _, end := result.time.ZoneBounds(); !end.IsZero() {
-		_, offset := result.time.Zone()
-		_, nextOffset := end.Zone()
-		alternative := result.time.Add(time.Duration(offset-nextOffset) * time.Second)
-		if alternative.After(result.time) && wallClock(alternative).Equal(wallClock(result.time)) {
-			result.time = alternative
-		}
+	_, offset := result.time.Zone()
+	_, nextOffset := result.time.Add(clockChangeWindow).Zone()
+	later := result.time.Add(time.Duration(offset-nextOffset) * time.Second)
+	if later.After(result.time) && wallClock(later).Equal(wallClock(result.time)) {
+		result.time = later
 	}
 	return result
+}
+
+// firstOffsetChange returns the first instant after from, up to to, whose UTC
+// offset differs from the offset of from. Clock changes happen on whole
+// seconds, so it searches whole seconds. It returns from when the offset of to
+// is the same as the offset of from.
+// It does the job of time.Time.ZoneBounds, which needs Go 1.19.
+func firstOffsetChange(from, to time.Time) time.Time {
+	_, want := from.Zone()
+	if _, got := to.Zone(); got == want {
+		return from
+	}
+	loc := from.Location()
+	low, high := from.Unix(), to.Unix()
+	for high-low > 1 {
+		mid := low + (high-low)/2
+		if _, got := time.Unix(mid, 0).In(loc).Zone(); got == want {
+			low = mid
+		} else {
+			high = mid
+		}
+	}
+	return time.Unix(high, 0).In(loc)
 }
 
 // wallClock returns the local date and clock fields of t as a UTC time, so two
