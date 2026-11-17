@@ -118,7 +118,7 @@ func (lang *Language) SetLocale(locale string) *Language {
 	entry.once.Do(func() {
 		bs, err := fs.ReadFile(fileName)
 		if err != nil {
-			entry.err = fmt.Errorf("%w: %w", ErrNotExistLocale(fileName), err)
+			entry.err = fmt.Errorf("%v: %w", ErrNotExistLocale(fileName), err)
 			return
 		}
 

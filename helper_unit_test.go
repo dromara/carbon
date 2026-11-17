@@ -1,6 +1,8 @@
 package carbon
 
 import (
+	"errors"
+	iofs "io/fs"
 	"testing"
 	"time"
 )
@@ -572,4 +574,59 @@ func TestGetResourceItem(t *testing.T) {
 			}
 		})
 	}
+}
+
+// Go 1.18 and 1.19 allow only one %w in fmt.Errorf: a second one prints as
+// "%!w(...)" and is not wrapped. The cause must still show in the message and
+// be reachable with errors.Is / errors.As on every supported Go version.
+func TestWrappedErrors(t *testing.T) {
+	check := func(t *testing.T, err, outer error, cause string) {
+		t.Helper()
+		if err == nil {
+			t.Fatal("expected an error, got nil")
+		}
+		if want := outer.Error() + ": " + cause; err.Error() != want {
+			t.Errorf("error = %q, want %q", err.Error(), want)
+		}
+	}
+
+	t.Run("invalid timezone", func(t *testing.T) {
+		_, cause := time.LoadLocation("Invalid/Timezone")
+		_, err := parseTimezone("Invalid/Timezone")
+		check(t, err, ErrInvalidTimezone("Invalid/Timezone"), cause.Error())
+	})
+
+	t.Run("invalid duration", func(t *testing.T) {
+		_, cause := time.ParseDuration("10x")
+		_, err := parseDuration("10x")
+		check(t, err, ErrInvalidDuration("10x"), cause.Error())
+	})
+
+	t.Run("not exist locale", func(t *testing.T) {
+		err := NewLanguage().SetLocale("xxx").Error
+		check(t, err, ErrNotExistLocale("lang/xxx.json"), "open lang/xxx.json: file does not exist")
+		if !errors.Is(err, iofs.ErrNotExist) {
+			t.Errorf("errors.Is(%v, iofs.ErrNotExist) = false, want true", err)
+		}
+	})
+
+	t.Run("mismatched layout", func(t *testing.T) {
+		_, cause := time.Parse(DateLayout, "2020-13-01")
+		err := ParseByLayout("2020-13-01", DateLayout).Error
+		check(t, err, ErrMismatchedLayout("2020-13-01", DateLayout), cause.Error())
+		var pe *time.ParseError
+		if !errors.As(err, &pe) {
+			t.Errorf("errors.As(%v, *time.ParseError) = false, want true", err)
+		}
+	})
+
+	t.Run("mismatched format", func(t *testing.T) {
+		_, cause := time.Parse(DateLayout, "2020-13-01")
+		err := ParseByFormat("2020-13-01", "Y-m-d").Error
+		check(t, err, ErrMismatchedFormat("2020-13-01", "Y-m-d"), cause.Error())
+		var pe *time.ParseError
+		if !errors.As(err, &pe) {
+			t.Errorf("errors.As(%v, *time.ParseError) = false, want true", err)
+		}
+	})
 }

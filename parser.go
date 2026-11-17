@@ -56,7 +56,7 @@ func ParseByLayout(value, layout string, timezone ...string) *Carbon {
 
 	tt, err := time.ParseInLocation(layout, value, loc)
 	if err != nil {
-		return &Carbon{Error: fmt.Errorf("%w: %w", ErrMismatchedLayout(value, layout), err)}
+		return &Carbon{Error: fmt.Errorf("%v: %w", ErrMismatchedLayout(value, layout), err)}
 	}
 
 	c := NewCarbon()
@@ -84,7 +84,7 @@ func ParseByFormat(value, format string, timezone ...string) *Carbon {
 	layout := format2layout(format)
 	tt, err := time.ParseInLocation(layout, value, loc)
 	if err != nil {
-		return &Carbon{Error: fmt.Errorf("%w: %w", ErrMismatchedFormat(value, format), err)}
+		return &Carbon{Error: fmt.Errorf("%v: %w", ErrMismatchedFormat(value, format), err)}
 	}
 
 	c := NewCarbon()
