@@ -123,6 +123,21 @@ func TestLunar_Festival(t *testing.T) {
 		assert.Equal(t, "下元节", FromStdTime(time.Date(2021, 11, 19, 0, 0, 0, 0, loc)).Festival())
 		assert.Equal(t, "腊八节", FromStdTime(time.Date(2022, 1, 10, 0, 0, 0, 0, loc)).Festival())
 	})
+
+	t.Run("leap month", func(t *testing.T) {
+		// the festival is in the regular month, the leap month with the same number has none
+		assert.Equal(t, "龙抬头", FromStdTime(time.Date(2023, 2, 21, 0, 0, 0, 0, loc)).Festival())
+		assert.Empty(t, FromStdTime(time.Date(2023, 3, 23, 0, 0, 0, 0, loc)).Festival())
+		assert.Equal(t, "中秋节", FromStdTime(time.Date(1995, 9, 9, 0, 0, 0, 0, loc)).Festival())
+		assert.Empty(t, FromStdTime(time.Date(1995, 10, 9, 0, 0, 0, 0, loc)).Festival())
+		assert.Equal(t, "七夕节", FromStdTime(time.Date(2006, 7, 31, 0, 0, 0, 0, loc)).Festival())
+		assert.Empty(t, FromStdTime(time.Date(2006, 8, 30, 0, 0, 0, 0, loc)).Festival())
+		assert.Empty(t, FromStdTime(time.Date(2006, 9, 7, 0, 0, 0, 0, loc)).Festival())
+		assert.Equal(t, "端午节", FromStdTime(time.Date(2028, 5, 28, 0, 0, 0, 0, loc)).Festival())
+		assert.Empty(t, FromStdTime(time.Date(2028, 6, 27, 0, 0, 0, 0, loc)).Festival())
+		assert.Empty(t, NewLunar(2023, 2, 2, true).Festival())
+		assert.Equal(t, "龙抬头", NewLunar(2023, 2, 2, false).Festival())
+	})
 }
 
 func TestLunar_Year(t *testing.T) {

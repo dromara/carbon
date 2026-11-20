@@ -164,8 +164,9 @@ func (l *Lunar) Animal() string {
 }
 
 // Festival gets lunar festival name like "春节".
+// Festivals fall in the regular month only, never in a leap month of the same number.
 func (l *Lunar) Festival() string {
-	if !l.IsValid() {
+	if !l.IsValid() || l.isLeapMonth {
 		return ""
 	}
 	return festivals[fmt.Sprintf("%d-%d", l.month, l.day)]
