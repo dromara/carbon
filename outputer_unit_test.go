@@ -1759,6 +1759,12 @@ func (s *OutputerSuite) TestCarbon_Format() {
 		s.Equal("2020年08月05日", Parse("2020-08-05 13:14:15").Format("Y年m月d日"))
 		s.Equal("Wed", Parse("2020-08-05 13:14:15").Format("D"))
 		s.Equal("Wednesday", Parse("2020-08-05 13:14:15").Format("l"))
+		s.Run("l follows the locale like D does", func() {
+			c := Parse("2020-08-05 13:14:15").SetLocale("zh-CN")
+			s.Equal(c.ToWeekString(), c.Format("l"))
+			s.Equal(c.ToShortWeekString(), c.Format("D"))
+			s.Equal("Wednesday", Parse("2020-08-05 13:14:15").SetLocale("en").Format("l"))
+		})
 		s.Equal("August", Parse("2020-08-05 13:14:15").Format("F"))
 		s.Equal("Aug", Parse("2020-08-05 13:14:15").Format("M"))
 		s.Equal("5", Parse("2020-08-05 13:14:15").Format("j"))
