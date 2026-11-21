@@ -488,11 +488,11 @@ func (c *Carbon) BetweenIncludedStart(start *Carbon, end *Carbon) bool {
 	if start.Gt(end) {
 		return false
 	}
-	if c.IsZero() && start.IsZero() {
-		return true
-	}
 	if c.IsInvalid() || start.IsInvalid() || end.IsInvalid() {
 		return false
+	}
+	if c.IsZero() && start.IsZero() {
+		return true
 	}
 	if c.Gte(start) && c.Lt(end) {
 		return true
@@ -505,11 +505,11 @@ func (c *Carbon) BetweenIncludedEnd(start *Carbon, end *Carbon) bool {
 	if start.Gt(end) {
 		return false
 	}
-	if c.IsZero() && end.IsZero() {
-		return true
-	}
 	if c.IsInvalid() || start.IsInvalid() || end.IsInvalid() {
 		return false
+	}
+	if c.IsZero() && end.IsZero() {
+		return true
 	}
 	if c.Gt(start) && c.Lte(end) {
 		return true
@@ -522,11 +522,11 @@ func (c *Carbon) BetweenIncludedBoth(start *Carbon, end *Carbon) bool {
 	if start.Gt(end) {
 		return false
 	}
-	if (c.IsZero() && start.IsZero()) || (c.IsZero() && end.IsZero()) {
-		return true
-	}
 	if c.IsInvalid() || start.IsInvalid() || end.IsInvalid() {
 		return false
+	}
+	if (c.IsZero() && start.IsZero()) || (c.IsZero() && end.IsZero()) {
+		return true
 	}
 	if c.Gte(start) && c.Lte(end) {
 		return true
