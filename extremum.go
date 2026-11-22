@@ -112,7 +112,7 @@ func (c *Carbon) Closest(c1 *Carbon, c2 ...*Carbon) *Carbon {
 
 	// Find the closest among all instances
 	closest := c1
-	minDiff := c.DiffAbsInSeconds(closest)
+	minSeconds, minNanoseconds := getAbsTimeDiff(c.StdTime(), closest.StdTime())
 
 	// Check all additional arguments
 	for _, arg := range c2 {
@@ -122,8 +122,9 @@ func (c *Carbon) Closest(c1 *Carbon, c2 ...*Carbon) *Carbon {
 		}
 
 		// Calculate difference and update if closer
-		if diff := c.DiffAbsInSeconds(arg); diff < minDiff {
-			minDiff = diff
+		seconds, nanoseconds := getAbsTimeDiff(c.StdTime(), arg.StdTime())
+		if seconds < minSeconds || seconds == minSeconds && nanoseconds < minNanoseconds {
+			minSeconds, minNanoseconds = seconds, nanoseconds
 			closest = arg
 		}
 	}
@@ -149,7 +150,7 @@ func (c *Carbon) Farthest(c1 *Carbon, c2 ...*Carbon) *Carbon {
 
 	// Find the farthest among all instances
 	farthest := c1
-	maxDiff := c.DiffAbsInSeconds(farthest)
+	maxSeconds, maxNanoseconds := getAbsTimeDiff(c.StdTime(), farthest.StdTime())
 
 	// Check all additional arguments
 	for _, arg := range c2 {
@@ -159,10 +160,27 @@ func (c *Carbon) Farthest(c1 *Carbon, c2 ...*Carbon) *Carbon {
 		}
 
 		// Calculate difference and update if farther
-		if diff := c.DiffAbsInSeconds(arg); diff > maxDiff {
-			maxDiff = diff
+		seconds, nanoseconds := getAbsTimeDiff(c.StdTime(), arg.StdTime())
+		if seconds > maxSeconds || seconds == maxSeconds && nanoseconds > maxNanoseconds {
+			maxSeconds, maxNanoseconds = seconds, nanoseconds
 			farthest = arg
 		}
 	}
 	return farthest
+}
+
+// getAbsTimeDiff compares wall-clock distances without time.Duration saturation.
+func getAbsTimeDiff(a, b time.Time) (uint64, int) {
+	a, b = a.Round(0), b.Round(0)
+	if a.Before(b) {
+		a, b = b, a
+	}
+	// Unsigned subtraction also represents distances larger than MaxInt64 seconds.
+	seconds := uint64(a.Unix()) - uint64(b.Unix())
+	nanoseconds := a.Nanosecond() - b.Nanosecond()
+	if nanoseconds < 0 {
+		seconds--
+		nanoseconds += 1e9
+	}
+	return seconds, nanoseconds
 }
