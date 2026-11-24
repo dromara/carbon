@@ -1,9 +1,12 @@
 package carbon
 
 import (
+	"encoding/json"
 	"fmt"
+	"strings"
 	"sync"
 	"testing"
+	"unicode"
 
 	"github.com/stretchr/testify/suite"
 )
@@ -445,4 +448,26 @@ func (s *LanguageSuite) TestDefaultLanguage() {
 			s.Equal("August", result)
 		}
 	})
+}
+
+// A word that mixes Latin letters with Cyrillic or Greek ones is a typo: the lookalike letter breaks
+// search, sorting and spell checking, and parsing the text back.
+func (s *LanguageSuite) TestLanguage_noMixedScriptWords() {
+	entries, err := fs.ReadDir("lang")
+	s.Require().NoError(err)
+	for _, entry := range entries {
+		bs, err := fs.ReadFile("lang/" + entry.Name())
+		s.Require().NoError(err)
+		resources := make(map[string]string)
+		s.Require().NoError(json.Unmarshal(bs, &resources), entry.Name())
+		for key, value := range resources {
+			for _, word := range strings.FieldsFunc(value, func(r rune) bool { return !unicode.IsLetter(r) }) {
+				hasLatin := strings.IndexFunc(word, func(r rune) bool { return unicode.Is(unicode.Latin, r) }) >= 0
+				hasOther := strings.IndexFunc(word, func(r rune) bool {
+					return unicode.Is(unicode.Cyrillic, r) || unicode.Is(unicode.Greek, r)
+				}) >= 0
+				s.False(hasLatin && hasOther, "%s %s: %q mixes Latin with Cyrillic or Greek letters", entry.Name(), key, word)
+			}
+		}
+	}
 }
