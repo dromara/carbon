@@ -922,6 +922,18 @@ func (s *DifferenceSuite) TestCarbon_DiffForHumans() {
 	})
 }
 
+func (s *DifferenceSuite) TestCarbon_DiffForHumans_UkrainianWeek() {
+	reference := Parse("2020-08-05 13:14:15", UTC)
+	SetTestNow(reference)
+	before := Parse("2020-07-29 13:14:15", UTC).SetLocale("uk")
+	after := Parse("2020-08-12 13:14:15", UTC).SetLocale("uk")
+
+	s.Equal("тиждень тому", before.DiffForHumans())
+	s.Equal("за тиждень", after.DiffForHumans())
+	s.Equal("тиждень до", before.DiffForHumans(reference))
+	s.Equal("тиждень після", after.DiffForHumans(reference))
+}
+
 func (s *DifferenceSuite) TestCarbon_getDiffInMonths() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
