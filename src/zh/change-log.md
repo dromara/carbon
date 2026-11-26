@@ -10,6 +10,35 @@ head:
 
 # 更新日志
 
+## [v2.7.2](https://github.com/dromara/carbon/compare/v2.7.1...v2.7.2) (2026-11-26)
+
+### 🚀 性能优化
+
+- **优化 `Format` 常用格式符的处理**：减少临时字符串分配，同时保持现有输出不变（by [@g4lb](https://github.com/g4lb) in [#394](https://github.com/dromara/carbon/pull/394)）。
+
+### 🐛 修复
+
+- **修复波斯历闰年计算错误**：对支持的年份采用 33 年闰年规则，修正日期转换和闰日校验（by [@jayhemnani9910](https://github.com/jayhemnani9910) in [#395](https://github.com/dromara/carbon/pull/395)）。
+- **修复无效农历日期被接受的问题**：`lunar.NewLunar` 和 `carbon.CreateFromLunar` 现在会校验月份、日期和闰月，避免将不存在的农历日期转换为公历日期（by [@Kernel-Hunter](https://github.com/Kernel-Hunter) in [#397](https://github.com/dromara/carbon/pull/397)）。
+- **修复 `Format("l")` 忽略语言设置的问题**：完整星期名称现在会遵循当前语言设置，与 `ToWeekString()` 保持一致（by [@shounakjoshi88-a11y](https://github.com/shounakjoshi88-a11y) in [#398](https://github.com/dromara/carbon/pull/398)）。
+- **修复午夜时钟调整导致日期边界错误的问题**：在时区于午夜调整时钟时，确保日、周、月、季度、年和季节边界位于正确的本地日期（by [@bardrop](https://github.com/bardrop) in [#401](https://github.com/dromara/carbon/pull/401)）。
+- **修复 Go 1.18 和 1.19 下的错误包装问题**：在解析或设置语言时保留底层错误原因，避免错误信息格式异常（by [@bardrop](https://github.com/bardrop) in [#402](https://github.com/dromara/carbon/pull/402)）。
+- **修复 1954、1956、1978、2033 和 2060 年的农历数据**：修正受影响的农历与公历日期转换，包括 2033 年的闰月（by [@bardrop](https://github.com/bardrop) in [#404](https://github.com/dromara/carbon/pull/404)）。
+- **修复闰月重复显示农历节日的问题**：`Lunar.Festival()` 现在仅在普通月份返回对应节日（by [@bardrop](https://github.com/bardrop) in [#405](https://github.com/dromara/carbon/pull/405)）。
+- **修复区间边界无效时比较结果错误的问题**：`BetweenIncludedStart`、`BetweenIncludedEnd` 和 `BetweenIncludedBoth` 现在会在处理零时间之前校验输入（by [@anishpentyala](https://github.com/anishpentyala) in [#406](https://github.com/dromara/carbon/pull/406)）。
+- **修复 `Closest` 和 `Farthest` 的亚秒精度问题**：使用秒和纳秒比较时间距离，正确区分不足一秒的距离差异（by [@anishpentyala](https://github.com/anishpentyala) in [#407](https://github.com/dromara/carbon/pull/407)）。
+- **修复乌克兰语中“一周”的拼写**：将本地化文本中的拉丁字母替换为正确的西里尔字母（by [@bardrop](https://github.com/bardrop) in [#409](https://github.com/dromara/carbon/pull/409)）。
+- **修复波兰语翻译**：更正数量为 3 和 4 时的复数形式、未来相对时间表达和春季名称（by [@mansur-akhmadi](https://github.com/mansur-akhmadi) in [#411](https://github.com/dromara/carbon/pull/411)）。
+
+### 📝 文档
+
+- **修正 README 示例**：更正 `DiffForHumans` 的输出和 GitCode 导入路径（by [@Kernel-Hunter](https://github.com/Kernel-Hunter) in [#399](https://github.com/dromara/carbon/pull/399)）。
+- **更新性能测试报告**：根据实际测试结果重写性能报告。
+
+### 🔧 依赖升级
+
+- 将 `github/codeql-action` 从 `v4.39.1` 升级到 `v4.39.4`（by [@dependabot[bot]](https://github.com/dependabot) in [#396](https://github.com/dromara/carbon/pull/396) 和 [#408](https://github.com/dromara/carbon/pull/408)）。
+
 ## [v2.7.1](https://github.com/dromara/carbon/compare/v2.7.0...v2.7.1) (2026-11-06)
 
 ### ✨ 新功能

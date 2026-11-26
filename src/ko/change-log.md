@@ -10,6 +10,35 @@ head:
 
 # 업데이트 로그
 
+## [v2.7.2](https://github.com/dromara/carbon/compare/v2.7.1...v2.7.2) (2026-11-26)
+
+### 🚀 성능 최적화
+
+- **일반적인 형식 기호에 대한 `Format` 최적화**: 기존 출력은 유지하면서 임시 문자열 할당을 줄임 (by [@g4lb](https://github.com/g4lb) in [#394](https://github.com/dromara/carbon/pull/394)).
+
+### 🐛 버그 수정
+
+- **페르시아력 윤년 계산 오류 수정**: 지원되는 연도에 33년 윤년 규칙을 사용하여 날짜 변환과 윤일 검증을 수정 (by [@jayhemnani9910](https://github.com/jayhemnani9910) in [#395](https://github.com/dromara/carbon/pull/395)).
+- **잘못된 음력 날짜 거부**: `lunar.NewLunar` 및 `carbon.CreateFromLunar`에서 월, 일, 윤달을 검증하여 존재하지 않는 날짜를 변환하지 않도록 수정 (by [@Kernel-Hunter](https://github.com/Kernel-Hunter) in [#397](https://github.com/dromara/carbon/pull/397)).
+- **`Format("l")`이 로케일을 무시하는 문제 수정**: 전체 요일 이름이 설정된 로케일을 따르도록 수정하여 `ToWeekString()`과 일치 (by [@shounakjoshi88-a11y](https://github.com/shounakjoshi88-a11y) in [#398](https://github.com/dromara/carbon/pull/398)).
+- **자정 시계 변경 전후의 날짜 경계 오류 수정**: 자정에 시계가 변경될 때 일, 주, 월, 분기, 연도 및 계절 경계가 올바른 현지 날짜를 유지하도록 수정 (by [@bardrop](https://github.com/bardrop) in [#401](https://github.com/dromara/carbon/pull/401)).
+- **Go 1.18 및 1.19에서 오류 래핑 문제 수정**: 파싱 또는 로케일 설정 시 원래 원인을 유지하고 잘못된 오류 형식을 방지 (by [@bardrop](https://github.com/bardrop) in [#402](https://github.com/dromara/carbon/pull/402)).
+- **1954년, 1956년, 1978년, 2033년 및 2060년의 음력 데이터 수정**: 영향을 받는 음력 및 그레고리력 날짜 변환을 수정하고 2033년 윤달도 수정 (by [@bardrop](https://github.com/bardrop) in [#404](https://github.com/dromara/carbon/pull/404)).
+- **윤달에 음력 명절이 표시되는 문제 수정**: `Lunar.Festival()`이 평달에서만 명절을 반환하도록 수정 (by [@bardrop](https://github.com/bardrop) in [#405](https://github.com/dromara/carbon/pull/405)).
+- **잘못된 경계를 가진 구간 비교 오류 수정**: `BetweenIncludedStart`, `BetweenIncludedEnd`, `BetweenIncludedBoth`가 0시간 값을 처리하기 전에 입력을 검증하도록 수정 (by [@anishpentyala](https://github.com/anishpentyala) in [#406](https://github.com/dromara/carbon/pull/406)).
+- **`Closest` 및 `Farthest`의 나노초 이하 정밀도 수정**: 초와 나노초를 사용해 거리를 비교하여 서로 다른 소수 초 단위 거리를 올바르게 정렬 (by [@anishpentyala](https://github.com/anishpentyala) in [#407](https://github.com/dromara/carbon/pull/407)).
+- **우크라이나어 ‘1주일’ 표기 수정**: 현지화 텍스트의 라틴 문자를 올바른 키릴 문자로 교체 (by [@bardrop](https://github.com/bardrop) in [#409](https://github.com/dromara/carbon/pull/409)).
+- **폴란드어 번역 수정**: 3과 4의 복수형, 미래 상대 시간 표현 및 봄 이름을 수정 (by [@mansur-akhmadi](https://github.com/mansur-akhmadi) in [#411](https://github.com/dromara/carbon/pull/411)).
+
+### 📝 문서
+
+- **README 예제 수정**: `DiffForHumans` 출력과 GitCode 가져오기 경로를 수정 (by [@Kernel-Hunter](https://github.com/Kernel-Hunter) in [#399](https://github.com/dromara/carbon/pull/399)).
+- **벤치마크 보고서 업데이트**: 실제 테스트 결과를 사용하여 보고서를 다시 작성.
+
+### 🔧 의존성 업그레이드
+
+- `github/codeql-action`을 `v4.39.1`에서 `v4.39.4`로 업그레이드 (by [@dependabot[bot]](https://github.com/dependabot) in [#396](https://github.com/dromara/carbon/pull/396) 및 [#408](https://github.com/dromara/carbon/pull/408)).
+
 ## [v2.7.1](https://github.com/dromara/carbon/compare/v2.7.0...v2.7.1) (2026-11-06)
 
 ### ✨ 새로운 기능

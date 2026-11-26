@@ -10,6 +10,35 @@ head:
 
 # Change Log
 
+## [v2.7.2](https://github.com/dromara/carbon/compare/v2.7.1...v2.7.2) (2026-11-26)
+
+### 🚀 Performance
+
+- **Optimize `Format` for common format symbols**: reduce temporary string allocations while preserving the existing output (by [@g4lb](https://github.com/g4lb) in [#394](https://github.com/dromara/carbon/pull/394)).
+
+### 🐛 Fixes
+
+- **Fix Persian calendar leap-year calculation**: use the 33-year leap-year rule for supported years, correcting date conversion and leap-day validation (by [@jayhemnani9910](https://github.com/jayhemnani9910) in [#395](https://github.com/dromara/carbon/pull/395)).
+- **Reject invalid lunar dates**: validate the month, day, and leap month in `lunar.NewLunar` and `carbon.CreateFromLunar` instead of converting nonexistent dates (by [@Kernel-Hunter](https://github.com/Kernel-Hunter) in [#397](https://github.com/dromara/carbon/pull/397)).
+- **Fix `Format("l")` ignoring the locale**: the full weekday name now follows the configured locale, consistent with `ToWeekString()` (by [@shounakjoshi88-a11y](https://github.com/shounakjoshi88-a11y) in [#398](https://github.com/dromara/carbon/pull/398)).
+- **Fix date boundaries around midnight clock changes**: keep day, week, month, quarter, year, and season boundaries on the correct local dates when clocks change at midnight (by [@bardrop](https://github.com/bardrop) in [#401](https://github.com/dromara/carbon/pull/401)).
+- **Fix error wrapping on Go 1.18 and 1.19**: preserve the underlying cause and avoid invalid error formatting when parsing or setting a locale (by [@bardrop](https://github.com/bardrop) in [#402](https://github.com/dromara/carbon/pull/402)).
+- **Correct lunar calendar data for 1954, 1956, 1978, 2033, and 2060**: fix affected lunar and Gregorian date conversions, including the leap month in 2033 (by [@bardrop](https://github.com/bardrop) in [#404](https://github.com/dromara/carbon/pull/404)).
+- **Fix lunar festivals being reported in leap months**: `Lunar.Festival()` now reports festivals only in the regular month (by [@bardrop](https://github.com/bardrop) in [#405](https://github.com/dromara/carbon/pull/405)).
+- **Fix interval comparisons with invalid bounds**: `BetweenIncludedStart`, `BetweenIncludedEnd`, and `BetweenIncludedBoth` now validate their inputs before handling zero-time values (by [@anishpentyala](https://github.com/anishpentyala) in [#406](https://github.com/dromara/carbon/pull/406)).
+- **Fix subsecond precision in `Closest` and `Farthest`**: compare distances using seconds and nanoseconds so that distinct fractional-second distances are ordered correctly (by [@anishpentyala](https://github.com/anishpentyala) in [#407](https://github.com/dromara/carbon/pull/407)).
+- **Fix the Ukrainian word for one week**: replace a Latin character with the correct Cyrillic character in the localized text (by [@bardrop](https://github.com/bardrop) in [#409](https://github.com/dromara/carbon/pull/409)).
+- **Fix Polish translations**: correct plural forms for counts of 3 and 4, the expression for future relative time, and the name of spring (by [@mansur-akhmadi](https://github.com/mansur-akhmadi) in [#411](https://github.com/dromara/carbon/pull/411)).
+
+### 📝 Documentation
+
+- **Correct the README examples**: fix the `DiffForHumans` output and the GitCode import path (by [@Kernel-Hunter](https://github.com/Kernel-Hunter) in [#399](https://github.com/dromara/carbon/pull/399)).
+- **Update the benchmark reports**: rewrite the reports using actual test results.
+
+### 🔧 Dependencies
+
+- Upgrade `github/codeql-action` from `v4.39.1` to `v4.39.4` (by [@dependabot[bot]](https://github.com/dependabot) in [#396](https://github.com/dromara/carbon/pull/396) and [#408](https://github.com/dromara/carbon/pull/408)).
+
 ## [v2.7.1](https://github.com/dromara/carbon/compare/v2.7.0...v2.7.1) (2026-11-06)
 
 ### ✨ Features

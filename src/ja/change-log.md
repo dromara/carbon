@@ -10,6 +10,35 @@ head:
 
 # 変更履歴
 
+## [v2.7.2](https://github.com/dromara/carbon/compare/v2.7.1...v2.7.2) (2026-11-26)
+
+### 🚀 パフォーマンス
+
+- **一般的なフォーマット記号に対する `Format` を最適化**：既存の出力を維持しながら、一時的な文字列の割り当てを削減（by [@g4lb](https://github.com/g4lb) in [#394](https://github.com/dromara/carbon/pull/394)）。
+
+### 🐛 修正
+
+- **ペルシャ暦のうるう年計算を修正**：サポート対象年に 33 年周期のうるう年規則を使用し、日付変換とうるう日の検証を修正（by [@jayhemnani9910](https://github.com/jayhemnani9910) in [#395](https://github.com/dromara/carbon/pull/395)）。
+- **無効な農暦日付を拒否**：`lunar.NewLunar` と `carbon.CreateFromLunar` で月、日、うるう月を検証し、存在しない日付を変換しないように修正（by [@Kernel-Hunter](https://github.com/Kernel-Hunter) in [#397](https://github.com/dromara/carbon/pull/397)）。
+- **`Format("l")` がロケールを無視する問題を修正**：完全な曜日名が設定されたロケールに従うようになり、`ToWeekString()` と一致（by [@shounakjoshi88-a11y](https://github.com/shounakjoshi88-a11y) in [#398](https://github.com/dromara/carbon/pull/398)）。
+- **深夜の時刻変更前後で日付境界が誤る問題を修正**：深夜に時計が変更される場合でも、日、週、月、四半期、年、季節の境界を正しいローカル日付に保持（by [@bardrop](https://github.com/bardrop) in [#401](https://github.com/dromara/carbon/pull/401)）。
+- **Go 1.18 および 1.19 でのエラーラッピングを修正**：解析またはロケール設定時に元の原因を保持し、不正なエラー形式を回避（by [@bardrop](https://github.com/bardrop) in [#402](https://github.com/dromara/carbon/pull/402)）。
+- **1954 年、1956 年、1978 年、2033 年、2060 年の農暦データを修正**：影響を受ける農暦とグレゴリオ暦の日付変換を修正し、2033 年のうるう月も修正（by [@bardrop](https://github.com/bardrop) in [#404](https://github.com/dromara/carbon/pull/404)）。
+- **うるう月に農暦の祝日が報告される問題を修正**：`Lunar.Festival()` が通常の月でのみ祝日を返すように修正（by [@bardrop](https://github.com/bardrop) in [#405](https://github.com/dromara/carbon/pull/405)）。
+- **無効な境界を持つ区間比較を修正**：`BetweenIncludedStart`、`BetweenIncludedEnd`、`BetweenIncludedBoth` がゼロ時刻を処理する前に入力を検証するように修正（by [@anishpentyala](https://github.com/anishpentyala) in [#406](https://github.com/dromara/carbon/pull/406)）。
+- **`Closest` と `Farthest` のサブ秒精度を修正**：秒とナノ秒を使って距離を比較し、異なる小数秒の距離を正しく順序付け（by [@anishpentyala](https://github.com/anishpentyala) in [#407](https://github.com/dromara/carbon/pull/407)）。
+- **ウクライナ語の「1 週間」の表記を修正**：ローカライズされたテキストのラテン文字を正しいキリル文字に置換（by [@bardrop](https://github.com/bardrop) in [#409](https://github.com/dromara/carbon/pull/409)）。
+- **ポーランド語翻訳を修正**：3 と 4 の数量に対する複数形、未来の相対時間表現、春の名称を修正（by [@mansur-akhmadi](https://github.com/mansur-akhmadi) in [#411](https://github.com/dromara/carbon/pull/411)）。
+
+### 📝 ドキュメント
+
+- **README の例を修正**：`DiffForHumans` の出力と GitCode のインポートパスを修正（by [@Kernel-Hunter](https://github.com/Kernel-Hunter) in [#399](https://github.com/dromara/carbon/pull/399)）。
+- **ベンチマークレポートを更新**：実際のテスト結果に基づいてレポートを書き直し。
+
+### 🔧 依存関係のアップグレード
+
+- `github/codeql-action` を `v4.39.1` から `v4.39.4` にアップグレード（by [@dependabot[bot]](https://github.com/dependabot) in [#396](https://github.com/dromara/carbon/pull/396) および [#408](https://github.com/dromara/carbon/pull/408)）。
+
 ## [v2.7.1](https://github.com/dromara/carbon/compare/v2.7.0...v2.7.1) (2026-11-06)
 
 ### ✨ 新機能
