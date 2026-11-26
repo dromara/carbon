@@ -934,6 +934,27 @@ func (s *DifferenceSuite) TestCarbon_DiffForHumans_UkrainianWeek() {
 	s.Equal("тиждень після", after.DiffForHumans(reference))
 }
 
+func (s *DifferenceSuite) TestCarbon_DiffForHumans_Polish() {
+	reference := Parse("2020-08-05 13:14:15", UTC)
+	SetTestNow(reference)
+
+	s.Equal("2 lata temu", reference.Copy().SubYears(2).SetLocale("pl").DiffForHumans())
+	s.Equal("3 lata temu", reference.Copy().SubYears(3).SetLocale("pl").DiffForHumans())
+	s.Equal("4 lata temu", reference.Copy().SubYears(4).SetLocale("pl").DiffForHumans())
+	s.Equal("5 lat temu", reference.Copy().SubYears(5).SetLocale("pl").DiffForHumans())
+	s.Equal("3 miesiące temu", reference.Copy().SubMonths(3).SetLocale("pl").DiffForHumans())
+	s.Equal("3 tygodnie temu", reference.Copy().SubWeeks(3).SetLocale("pl").DiffForHumans())
+	s.Equal("4 godziny temu", reference.Copy().SubHours(4).SetLocale("pl").DiffForHumans())
+	s.Equal("3 minuty temu", reference.Copy().SubMinutes(3).SetLocale("pl").DiffForHumans())
+	s.Equal("4 sekundy temu", reference.Copy().SubSeconds(4).SetLocale("pl").DiffForHumans())
+	s.Equal("5 sekund temu", reference.Copy().SubSeconds(5).SetLocale("pl").DiffForHumans())
+
+	after := reference.Copy().AddDays(3).SetLocale("pl")
+	s.Equal("za 3 dni", after.DiffForHumans())
+	s.Equal("3 dni po", after.DiffForHumans(reference))
+	s.Equal("3 dni przed", reference.Copy().SubDays(3).SetLocale("pl").DiffForHumans(reference))
+}
+
 func (s *DifferenceSuite) TestCarbon_getDiffInMonths() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
