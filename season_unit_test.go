@@ -61,6 +61,13 @@ func (s *SeasonSuite) TestSeason() {
 		s.Equal(Autumn, Parse("2020-11-05").Season())
 		s.Equal(Winter, Parse("2020-12-05").Season())
 	})
+
+	s.Run("polish locale", func() {
+		s.Equal("wiosna", Parse("2020-03-05").SetLocale("pl").Season())
+		s.Equal("lato", Parse("2020-06-05").SetLocale("pl").Season())
+		s.Equal("jesień", Parse("2020-09-05").SetLocale("pl").Season())
+		s.Equal("zima", Parse("2020-12-05").SetLocale("pl").Season())
+	})
 }
 
 func (s *SeasonSuite) TestStartOfSeason() {
