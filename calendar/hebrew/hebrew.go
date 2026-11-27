@@ -129,7 +129,7 @@ func (h *Hebrew) String() string {
 	if !h.IsValid() {
 		return ""
 	}
-	return fmt.Sprintf("%04d-%02d-%02d", h.year, h.month, h.day)
+	return formatDate(h.year, h.month, h.day)
 }
 
 // ToMonthString returns the Hebrew month name in the specified locale
@@ -330,4 +330,14 @@ func getDaysInMonth(year, month int) int {
 
 	// Other months are 30 days
 	return 30
+}
+
+// formatDate formats a valid date as YYYY-MM-DD without fmt.
+func formatDate(year, month, day int) string {
+	b := [10]byte{
+		byte('0' + year/1000), byte('0' + year/100%10), byte('0' + year/10%10), byte('0' + year%10), '-',
+		byte('0' + month/10), byte('0' + month%10), '-',
+		byte('0' + day/10), byte('0' + day%10),
+	}
+	return string(b[:])
 }

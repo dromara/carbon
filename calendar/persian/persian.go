@@ -115,7 +115,7 @@ func (p *Persian) String() string {
 	if !p.IsValid() {
 		return ""
 	}
-	return fmt.Sprintf("%04d-%02d-%02d", p.year, p.month, p.day)
+	return formatDate(p.year, p.month, p.day)
 }
 
 // ToMonthString outputs a string in Persian month format like "فروردین".
@@ -270,4 +270,14 @@ func jdn2persian(jdn int) (year, month, day int) {
 	}
 	day = jdn - getPersianJdn(year, month, 1) + 1
 	return
+}
+
+// formatDate formats a valid date as YYYY-MM-DD without fmt.
+func formatDate(year, month, day int) string {
+	b := [10]byte{
+		byte('0' + year/1000), byte('0' + year/100%10), byte('0' + year/10%10), byte('0' + year%10), '-',
+		byte('0' + month/10), byte('0' + month%10), '-',
+		byte('0' + day/10), byte('0' + day%10),
+	}
+	return string(b[:])
 }
