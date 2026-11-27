@@ -955,6 +955,21 @@ func (s *DifferenceSuite) TestCarbon_DiffForHumans_Polish() {
 	s.Equal("3 dni przed", reference.Copy().SubDays(3).SetLocale("pl").DiffForHumans(reference))
 }
 
+func (s *DifferenceSuite) TestCarbon_DiffForHumans_Bulgarian() {
+	reference := Parse("2020-08-05 13:14:15", UTC)
+	SetTestNow(reference)
+
+	s.Equal("преди 3 дни", reference.Copy().SubDays(3).SetLocale("bg").DiffForHumans())
+	s.Equal("преди 1 година", reference.Copy().SubYears(1).SetLocale("bg").DiffForHumans())
+	s.Equal("преди 2 часа", reference.Copy().SubHours(2).SetLocale("bg").DiffForHumans())
+
+	after := reference.Copy().AddDays(3).SetLocale("bg")
+	s.Equal("след 3 дни", after.DiffForHumans())
+	s.Equal("след 5 минути", reference.Copy().AddMinutes(5).SetLocale("bg").DiffForHumans())
+	s.Equal("3 дни след", after.DiffForHumans(reference))
+	s.Equal("3 дни преди", reference.Copy().SubDays(3).SetLocale("bg").DiffForHumans(reference))
+}
+
 func (s *DifferenceSuite) TestCarbon_getDiffInMonths() {
 	s.Run("nil carbon", func() {
 		var c *Carbon
